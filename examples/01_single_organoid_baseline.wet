@@ -1,0 +1,18 @@
+// Example 01: Single Cortical Organoid Baseline
+// Demonstrates organoid declaration, biphasic stimulation, and spike readout.
+
+organoid CorticalUnit {
+    radius: 180um;
+    perfusion: 1.2uL/min;
+}
+
+fn main() {
+    // Deliver 0.4V charge-balanced biphasic pulse on channel 0
+    stim_biphasic(0, 0.4V, 0.2ms, 0.2ms);
+
+    // Read action potentials emitted in the preceding 10 ms window
+    let spikes = read_spikes(0, 10.0ms);
+
+    // Advance biological time by 1 tick (0.1 ms)
+    sync_tick();
+}

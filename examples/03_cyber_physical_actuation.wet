@@ -1,0 +1,30 @@
+// Example 03: Cyber-Physical Actuator Control
+// Demonstrates real-time closed-loop coupling of microfluidic pumps, valves, and stepper motors.
+
+organoid BrainCulture {
+    radius: 190um;
+    perfusion: 1.5uL/min;
+}
+
+fn main() {
+    // 1. Actuate life-support perfusion pump on port 0
+    pump_set_rate(0, 1.8uL/min);
+
+    // 2. Open nutrient media valve on port 0
+    valve_open(0);
+
+    // 3. Step optical microscope focus motor on port 2 (+100 steps at 60 RPM)
+    motor_step(2, 100, 60.0rpm);
+
+    // 4. Read global population firing rate across 50 ms window
+    let rate = read_population_rate(50.0ms);
+
+    // 5. Dynamic throttling: if metabolic firing rate increases, pump more oxygenated media
+    if (rate > 30.0) {
+        pump_set_rate(0, 3.5uL/min);
+    }
+
+    // 6. Stimulate network and synchronize
+    stim_biphasic(0, 0.4V, 0.2ms, 0.2ms);
+    sync_tick();
+}

@@ -1,0 +1,19 @@
+// Example 02: Krogh Cylinder Perfusion & Oxygen Diffusion
+// Large organoids (>200 um radius) require active microfluidic perfusion to prevent core necrosis.
+
+organoid MacroOrganoid {
+    radius: 250um;
+    perfusion: 2.0uL/min; // Meets Krogh threshold (>= 0.8 uL/min)
+}
+
+fn main() {
+    // Monitor chamber incubator pressure (standard: 101.3 kPa)
+    let pressure = read_pressure(0);
+
+    // Read ambient temperature (standard: 37.0 C)
+    let temp = read_temperature();
+
+    // Deliver stimulation pulse across active electrode
+    stim_biphasic(5, 0.5V, 0.2ms, 0.2ms);
+    sync_tick();
+}

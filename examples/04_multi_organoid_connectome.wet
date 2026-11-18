@@ -1,0 +1,24 @@
+// Example 04: Multi-Organoid Connectome Topology
+// Demonstrates scaling to multiple distinct organoids with physical axonal delay queues.
+
+organoid SensoryCluster {
+    radius: 150um;
+    perfusion: 1.0uL/min;
+}
+
+organoid MotorCluster {
+    radius: 150um;
+    perfusion: 1.0uL/min;
+}
+
+// Connect sensory organoid to motor organoid with a 5.0 ms biological conduction delay
+connect SensoryCluster[0] -> MotorCluster[0] with {
+    delay: 5.0ms;
+    weight: 1.2;
+};
+
+fn main() {
+    // Deliver sensory input pulse
+    stim_biphasic(0, 0.4V, 0.2ms, 0.2ms);
+    sync_tick();
+}

@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wetlang"
+version = "1.0.0"
+description = "Domain-Specific Programming Language & Cyber-Physical Engine for Neural Organoid Computing"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Anikesh Tiwari", email = "anikesh@wetworld.org" }
+]
+keywords = [
+    "neural-organoids",
+    "wetware-computing",
+    "microelectrode-arrays",
+    "microfluidics",
+    "spiking-neural-networks",
+    "active-inference",
+    "biophysics",
+    "compiler"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: C",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.22.0",
+]
+
+[project.optional-dependencies]
+ai = [
+    "torch>=2.0.0",
+    "snntorch>=0.9.0",
+    "gymnasium>=0.29.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "reportlab>=4.0.0",
+    "pymupdf>=1.23.0",
+]
+
+[project.scripts]
+wetlang = "wetlang.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/wetworld/wetlang"
+Documentation = "https://github.com/wetworld/wetlang/tree/main/docs"
+Repository = "https://github.com/wetworld/wetlang.git"

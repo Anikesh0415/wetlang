@@ -1,0 +1,1349 @@
+#include "../include/wet_crt.h"
+#include "../include/wetvm_types.h"
+#include "../include/wetvm_api.h"
+#include "../include/wetvm_vm.h"
+
+/* Unaligned Little-Endian Memory Readers (prevents hardware faults on ARM/RISC-V) */
+static inline uint16_t wet_read_u16_le(const void* p) {
+    uint16_t val;
+    memcpy(&val, p, sizeof(val));
+    return val;
+}
+static inline int16_t wet_read_i16_le(const void* p) {
+    int16_t val;
+    memcpy(&val, p, sizeof(val));
+    return val;
+}
+static inline uint32_t wet_read_u32_le(const void* p) {
+    uint32_t val;
+    memcpy(&val, p, sizeof(val));
+    return val;
+}
+static inline int32_t wet_read_i32_le(const void* p) {
+    int32_t val;
+    memcpy(&val, p, sizeof(val));
+    return val;
+}
+static inline float wet_read_f32_le(const void* p) {
+    float val;
+    memcpy(&val, p, sizeof(val));
+    return val;
+}
+
+/* =========================================================================
+ * IEEE 802.3 CRC32 Implementation
+ * ========================================================================= */
+
+uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc) {
+    uint32_t crc = ~initial_crc;
+    for (size_t i = 0; i < length; ++i) {
+        crc ^= data[i];
+        for (int k = 0; k < 8; ++k) {
+            crc = (crc >> 1) ^ (0xEDB88320u & -(int32_t)(crc & 1));
+        }
+    }
+    return ~crc;
+}
+
+/* =========================================================================
+ * Stack Management Helpers
+ * ========================================================================= */
+
+static inline wet_status_t push_val(struct wet_vm_instance* vm, wet_value_t val) {
+    if (vm->sp >= vm->max_stack) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Operand stack overflow (limit %u reached)", (unsigned)vm->max_stack);
+        return WET_ERR_STACK_OVERFLOW;
+    }
+    vm->stack[vm->sp++] = val;
+    return WET_OK;
+}
+
+static inline wet_status_t pop_val(struct wet_vm_instance* vm, wet_value_t* out_val) {
+    if (vm->sp == 0) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow");
+        return WET_ERR_STACK_UNDERFLOW;
+    }
+    *out_val = vm->stack[--vm->sp];
+    return WET_OK;
+}
+
+static inline float to_float(const wet_value_t* v) {
+    if (v->type == WET_VAL_FLOAT) {
+        return v->as.f_val;
+    }
+    if (v->type == WET_VAL_INT) {
+        return (float)v->as.i_val;
+    }
+    return 0.0f;
+}
+
+static inline int32_t to_int(const wet_value_t* v) {
+    if (v->type == WET_VAL_INT) {
+        return v->as.i_val;
+    }
+    if (v->type == WET_VAL_FLOAT) {
+        return (int32_t)v->as.f_val;
+    }
+    return 0;
+}
+
+static inline int is_truthy(const wet_value_t* v) {
+    if (v->type == WET_VAL_INT) {
+        return v->as.i_val != 0;
+    }
+    if (v->type == WET_VAL_FLOAT) {
+        return v->as.f_val != 0.0f;
+    }
+    if (v->type == WET_VAL_STRING) {
+        return v->as.s_val.len > 0;
+    }
+    return 0;
+}
+
+/* =========================================================================
+ * Bytecode Loading and Verification
+ * ========================================================================= */
+
+static void cleanup_constants(struct wet_vm_instance* vm) {
+    if (vm->constants) {
+        for (size_t i = 0; i < vm->num_constants; ++i) {
+            if (vm->constants[i].str_alloc) {
+                free(vm->constants[i].str_alloc);
+                vm->constants[i].str_alloc = NULL;
+            }
+        }
+        free(vm->constants);
+        vm->constants = NULL;
+        vm->num_constants = 0;
+    }
+}
+
+static void cleanup_bytecode(struct wet_vm_instance* vm) {
+    cleanup_constants(vm);
+    if (vm->bytecode_raw) {
+        free(vm->bytecode_raw);
+        vm->bytecode_raw = NULL;
+        vm->bytecode_size = 0;
+    }
+    vm->code = NULL;
+    vm->code_size = 0;
+}
+
+wet_status_t wet_vm_load_bytecode_internal(
+    struct wet_vm_instance* vm,
+    const uint8_t* code_bytes,
+    size_t size,
+    char* err_buf,
+    size_t err_buf_len
+) {
+    if (!vm || !code_bytes) {
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "Null pointer argument to wet_load_bytecode");
+        }
+        return WET_ERR_NULL_PTR;
+    }
+
+    if (size < WET_HEADER_SIZE) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Bytecode binary truncated: size %zu < header size %d", size, WET_HEADER_SIZE);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_MALFORMED_SECTION;
+    }
+
+    const wet_bytecode_header_t* hdr = (const wet_bytecode_header_t*)code_bytes;
+
+    /* 1. Verify Magic "WETB" */
+    if (hdr->magic[0] != 'W' || hdr->magic[1] != 'E' ||
+        hdr->magic[2] != 'T' || hdr->magic[3] != 'B') {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Invalid magic 0x%02X%02X%02X%02X (expected 'WETB')",
+                 hdr->magic[0], hdr->magic[1], hdr->magic[2], hdr->magic[3]);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_INVALID_MAGIC;
+    }
+
+    /* 2. Verify Version */
+    if (hdr->version_major != WET_VERSION_MAJOR || hdr->version_minor != WET_VERSION_MINOR) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Unsupported bytecode version %u.%u (expected %u.%u)",
+                 hdr->version_major, hdr->version_minor,
+                 WET_VERSION_MAJOR, WET_VERSION_MINOR);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_UNSUPPORTED_VERSION;
+    }
+
+    /* 3. Verify File Size */
+    if (hdr->file_size != size) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "File size mismatch: header reports %u bytes, got %zu bytes",
+                 hdr->file_size, size);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_MALFORMED_SECTION;
+    }
+
+    /* 4. Verify CRC32 Checksum (computed with CRC field at offset 12 zeroed) */
+    uint32_t expected_crc = hdr->checksum_crc32;
+    uint32_t calc_crc = wet_compute_crc32(code_bytes, 12, 0);
+    uint8_t zero_field[4] = {0, 0, 0, 0};
+    calc_crc = wet_compute_crc32(zero_field, 4, calc_crc);
+    if (size > 16) {
+        calc_crc = wet_compute_crc32(code_bytes + 16, size - 16, calc_crc);
+    }
+
+    if (calc_crc != expected_crc) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "CRC32 mismatch: header has 0x%08X, calculated 0x%08X",
+                 expected_crc, calc_crc);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_CRC_MISMATCH;
+    }
+
+    /* 5. Validate Section Table Bounds */
+    size_t sec_table_size = (size_t)hdr->num_sections * WET_SECTION_ENTRY_SIZE;
+    if (WET_HEADER_SIZE + sec_table_size > size) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Section table exceeds file boundary (%u sections)", hdr->num_sections);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_MALFORMED_SECTION;
+    }
+
+    /* Clean up previous bytecode and allocate buffer for new bytecode */
+    cleanup_bytecode(vm);
+    vm->bytecode_raw = (uint8_t*)malloc(size);
+    if (!vm->bytecode_raw) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "Memory allocation failed for bytecode");
+        return WET_ERR_ALLOC_FAILED;
+    }
+    memcpy(vm->bytecode_raw, code_bytes, size);
+    vm->bytecode_size = size;
+
+    /* Parse Section Table */
+    const wet_section_header_t* sections =
+        (const wet_section_header_t*)(vm->bytecode_raw + WET_HEADER_SIZE);
+
+    const uint8_t* code_ptr = NULL;
+    size_t code_len = 0;
+
+    for (uint32_t i = 0; i < hdr->num_sections; ++i) {
+        uint16_t stype = sections[i].section_type;
+        uint32_t off = sections[i].offset;
+        uint32_t s_size = sections[i].size;
+
+        if ((size_t)off + s_size > size) {
+            snprintf(vm->last_error, sizeof(vm->last_error),
+                     "Section %u (type %u) extends beyond file boundary", i, stype);
+            cleanup_bytecode(vm);
+            return WET_ERR_MALFORMED_SECTION;
+        }
+
+        const uint8_t* sec_data = vm->bytecode_raw + off;
+
+        if (stype == WET_SEC_CONSTANT_POOL) {
+            /* Unpack Constant Pool */
+            if (s_size < 4) {
+                snprintf(vm->last_error, sizeof(vm->last_error), "Constant pool truncated");
+                cleanup_bytecode(vm);
+                return WET_ERR_MALFORMED_SECTION;
+            }
+            uint32_t num_consts = wet_read_u32_le(sec_data);
+            size_t c_pos = 4;
+
+            vm->constants = (wet_constant_entry_t*)calloc(num_consts, sizeof(wet_constant_entry_t));
+            if (!vm->constants && num_consts > 0) {
+                cleanup_bytecode(vm);
+                return WET_ERR_ALLOC_FAILED;
+            }
+            vm->num_constants = num_consts;
+
+            for (uint32_t c = 0; c < num_consts; ++c) {
+                if (c_pos >= s_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Constant pool out of data");
+                    cleanup_bytecode(vm);
+                    return WET_ERR_MALFORMED_SECTION;
+                }
+                uint8_t tag = sec_data[c_pos++];
+                vm->constants[c].val.type = tag;
+
+                if (tag == WET_VAL_INT) {
+                    if (c_pos + 4 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+                    vm->constants[c].val.as.i_val = wet_read_i32_le(sec_data + c_pos);
+                    c_pos += 4;
+                } else if (tag == WET_VAL_FLOAT) {
+                    if (c_pos + 4 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+                    vm->constants[c].val.as.f_val = wet_read_f32_le(sec_data + c_pos);
+                    c_pos += 4;
+                } else if (tag == WET_VAL_STRING) {
+                    if (c_pos + 2 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+                    uint16_t str_len = wet_read_u16_le(sec_data + c_pos);
+                    c_pos += 2;
+                    if (c_pos + str_len > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+                    char* sbuf = (char*)malloc(str_len + 1);
+                    if (!sbuf) { cleanup_bytecode(vm); return WET_ERR_ALLOC_FAILED; }
+                    memcpy(sbuf, sec_data + c_pos, str_len);
+                    sbuf[str_len] = '\0';
+                    vm->constants[c].str_alloc = sbuf;
+                    vm->constants[c].val.as.s_val.str = sbuf;
+                    vm->constants[c].val.as.s_val.len = str_len;
+                    c_pos += str_len;
+                }
+            }
+        } else if (stype == WET_SEC_TOPOLOGY_CONFIG) {
+            if (s_size >= 8) {
+                /* struct: channels (uint32), rows (uint16), cols (uint16) */
+                vm->grid_rows = (uint8_t)wet_read_u16_le(sec_data + 4);
+                vm->grid_cols = (uint8_t)wet_read_u16_le(sec_data + 6);
+            }
+        } else if (stype == WET_SEC_BYTECODE_STREAM) {
+            code_ptr = sec_data;
+            code_len = s_size;
+        }
+    }
+
+    if (!code_ptr && code_len == 0) {
+        /* Bytecode section might be empty */
+        vm->code = vm->bytecode_raw;
+        vm->code_size = 0;
+    } else {
+        vm->code = code_ptr;
+        vm->code_size = code_len;
+    }
+
+    /* Reset registers and runtime state */
+    vm->pc = 0;
+    vm->sp = 0;
+    vm->call_sp = 0;
+    vm->is_halted = 0;
+    vm->is_finished = 0;
+    vm->sleep_ticks_remaining = 0;
+    vm->current_tick = 0;
+    vm->sim_time_ms = 0.0;
+    vm->last_error[0] = '\0';
+
+    vm->loaded_capabilities = hdr->capabilities;
+    biophysics_reset(&vm->bio);
+    interlocks_init(&vm->interlocks);
+    interlocks_set_capabilities(&vm->interlocks, hdr->capabilities, hdr->channel_count);
+    memset(vm->discharge_charge_nc, 0, sizeof(vm->discharge_charge_nc));
+
+    /* Clear local variables */
+    if (vm->locals) {
+        memset(vm->locals, 0, sizeof(wet_value_t) * vm->max_locals);
+    }
+
+    /* Clear channel outputs */
+    memset(vm->voltages, 0, sizeof(vm->voltages));
+    memset(vm->spikes, 0, sizeof(vm->spikes));
+    memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
+    vm->population_rate_hz = 0.0f;
+
+    return WET_OK;
+}
+
+/* =========================================================================
+ * Telemetry Snapshot Population
+ * ========================================================================= */
+
+static void populate_telemetry(const struct wet_vm_instance* vm, wet_telemetry_t* telem) {
+    if (!telem) return;
+    telem->current_tick = vm->current_tick;
+    telem->sim_time_ms = vm->sim_time_ms;
+    telem->population_rate_hz = vm->population_rate_hz;
+    memcpy(telem->voltages, vm->voltages, sizeof(float) * 64);
+    memcpy(telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
+    memcpy(telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
+}
+
+static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_telemetry_t* out_telem) {
+    if (vm->interlocks.locked) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return WET_ERR_INTERLOCK_LOCKED;
+    }
+
+    /* 1. Advance in-silico biophysics by 1 tick (dt = 0.1 ms) */
+    biophysics_step_tick(&vm->bio);
+    for (int ch = 0; ch < 64; ++ch) {
+        if (vm->discharge_charge_nc[ch] != 0.0f) {
+            vm->bio.tick_charge_nc[ch] += vm->discharge_charge_nc[ch];
+            vm->discharge_charge_nc[ch] = 0.0f;
+        }
+    }
+    vm->current_tick++;
+    vm->sim_time_ms = (double)vm->current_tick * vm->config.dt_ms;
+
+    /* 2. Check sliding charge balance watchdog */
+    wet_status_t il_st = interlocks_record_charge_tick(
+        &vm->interlocks, vm->current_tick, vm->bio.tick_charge_nc
+    );
+    if (il_st != WET_OK) {
+        biophysics_zero_all_stim(&vm->bio);
+        memset(vm->voltages, 0, sizeof(vm->voltages));
+        memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
+        memset(vm->bio.ext_stim_v, 0, sizeof(vm->bio.ext_stim_v));
+        memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
+        memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
+        vm->is_halted = 1;
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        populate_telemetry(vm, out_telem);
+        return il_st;
+    }
+
+    /* 3. Check epileptiform runaway breaker */
+    il_st = interlocks_check_epileptiform(
+        &vm->interlocks, vm->current_tick, vm->bio.channel_rate_hz
+    );
+    if (il_st != WET_OK) {
+        biophysics_zero_all_stim(&vm->bio);
+        memset(vm->voltages, 0, sizeof(vm->voltages));
+        memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
+        memset(vm->bio.ext_stim_v, 0, sizeof(vm->bio.ext_stim_v));
+        memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
+        memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
+        vm->is_halted = 1;
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        populate_telemetry(vm, out_telem);
+        return il_st;
+    }
+
+    /* 4. Sync outputs to VM registers & telemetry snapshot */
+    memcpy(vm->voltages, vm->bio.mea_voltage_v, sizeof(float) * 64);
+    memcpy(vm->spikes, vm->bio.spikes_now, sizeof(uint8_t) * 64);
+    memcpy(vm->last_charge_nc, vm->bio.tick_charge_nc, sizeof(float) * 64);
+    vm->population_rate_hz = vm->bio.population_rate_hz;
+
+    populate_telemetry(vm, out_telem);
+    return WET_OK;
+}
+
+/* =========================================================================
+ * Cycle-Accurate Execution Stepper
+ * ========================================================================= */
+
+wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem) {
+    if (!vm) return WET_ERR_NULL_PTR;
+
+    if (vm->interlocks.locked) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return WET_ERR_INTERLOCK_LOCKED;
+    }
+
+    if (vm->is_halted) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "VM is halted");
+        return WET_ERR_HALTED;
+    }
+
+    /* If bytecode execution has finished or reached end, continue free-running biological stepping */
+    if (vm->is_finished || vm->pc >= vm->code_size) {
+        return advance_simulation_tick(vm, out_telem);
+    }
+
+    /* Handle ongoing SLEEP_TICKS decrement */
+    if (vm->sleep_ticks_remaining > 0) {
+        vm->sleep_ticks_remaining--;
+        return advance_simulation_tick(vm, out_telem);
+    }
+
+    /* Dispatch instructions until a tick yield (SYNC_TICK, SLEEP_TICKS, HALT) */
+    uint32_t instr_count = 0;
+    while (!vm->is_halted && !vm->is_finished) {
+        if (++instr_count > 100000U) {
+            biophysics_zero_all_stim(&vm->bio);
+            vm->interlocks.locked = 1;
+            vm->interlocks.trip_reason = INTERLOCK_TRIP_CAPABILITY_VIOLATION;
+            snprintf(vm->last_error, sizeof(vm->last_error),
+                     "WET_ERR_WATCHDOG_TIMEOUT: Exceeded 100,000 instructions in a single tick");
+            return WET_ERR_WATCHDOG_TIMEOUT;
+        }
+
+        if (vm->pc >= vm->code_size) {
+            /* End of bytecode reached: advance simulation tick */
+            vm->is_finished = 1;
+            return advance_simulation_tick(vm, out_telem);
+        }
+
+        size_t instr_pc = vm->pc;
+        uint8_t op = vm->code[instr_pc];
+
+        switch ((wet_opcode_t)op) {
+            case WET_OP_NOP: {
+                vm->pc = instr_pc + 1;
+                break;
+            }
+
+            case WET_OP_HALT: {
+                vm->is_finished = 1;
+                vm->pc = instr_pc + 1;
+                return advance_simulation_tick(vm, out_telem);
+            }
+
+            case WET_OP_SYNC_TICK: {
+                vm->pc = instr_pc + 1;
+                return advance_simulation_tick(vm, out_telem);
+            }
+
+            case WET_OP_SLEEP_TICKS: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated SLEEP_TICKS operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint16_t ticks = wet_read_u16_le(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 3;
+
+                if (ticks > 1) {
+                    vm->sleep_ticks_remaining = ticks - 1;
+                }
+                return advance_simulation_tick(vm, out_telem);
+            }
+
+            case WET_OP_PUSH_CONST: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_CONST operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint16_t idx = wet_read_u16_le(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 3;
+                if (idx >= vm->num_constants) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Constant pool index %u out of range (%zu)", idx, vm->num_constants);
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                wet_status_t st = push_val(vm, vm->constants[idx].val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_PUSH_INT: {
+                if (instr_pc + 5 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_INT operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                int32_t val = wet_read_i32_le(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 5;
+                wet_value_t v;
+                v.type = WET_VAL_INT;
+                v.as.i_val = val;
+                wet_status_t st = push_val(vm, v);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_PUSH_FLOAT: {
+                if (instr_pc + 5 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_FLOAT operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                float val = wet_read_f32_le(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 5;
+                wet_value_t v;
+                v.type = WET_VAL_FLOAT;
+                v.as.f_val = val;
+                wet_status_t st = push_val(vm, v);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_POP: {
+                vm->pc = instr_pc + 1;
+                wet_value_t dummy;
+                wet_status_t st = pop_val(vm, &dummy);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_DUP: {
+                vm->pc = instr_pc + 1;
+                if (vm->sp == 0) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow on DUP");
+                    return WET_ERR_STACK_UNDERFLOW;
+                }
+                wet_value_t top = vm->stack[vm->sp - 1];
+                wet_status_t st = push_val(vm, top);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_SWAP: {
+                vm->pc = instr_pc + 1;
+                if (vm->sp < 2) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow on SWAP");
+                    return WET_ERR_STACK_UNDERFLOW;
+                }
+                wet_value_t a = vm->stack[vm->sp - 1];
+                vm->stack[vm->sp - 1] = vm->stack[vm->sp - 2];
+                vm->stack[vm->sp - 2] = a;
+                break;
+            }
+
+            case WET_OP_LOAD_LOCAL: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated LOAD_LOCAL operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint16_t slot = wet_read_u16_le(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 3;
+                if (slot >= vm->max_locals) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Local slot %u out of bounds (%zu)", slot, vm->max_locals);
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                wet_status_t st = push_val(vm, vm->locals[slot]);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_STORE_LOCAL: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STORE_LOCAL operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint16_t slot = wet_read_u16_le(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 3;
+                if (slot >= vm->max_locals) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Local slot %u out of bounds (%zu)", slot, vm->max_locals);
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                wet_value_t val;
+                wet_status_t st = pop_val(vm, &val);
+                if (st != WET_OK) return st;
+                vm->locals[slot] = val;
+                break;
+            }
+
+            case WET_OP_ADD_I: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                res.type = WET_VAL_INT;
+                res.as.i_val = to_int(&a) + to_int(&b);
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_SUB_I: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                res.type = WET_VAL_INT;
+                res.as.i_val = to_int(&a) - to_int(&b);
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_MUL_I: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                res.type = WET_VAL_INT;
+                res.as.i_val = to_int(&a) * to_int(&b);
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_DIV_I: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                int32_t b_val = to_int(&b);
+                if (b_val == 0) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Integer division by zero");
+                    return WET_ERR_DIVISION_BY_ZERO;
+                }
+                wet_value_t res;
+                res.type = WET_VAL_INT;
+                res.as.i_val = to_int(&a) / b_val;
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_ADD_F: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                res.type = WET_VAL_FLOAT;
+                res.as.f_val = to_float(&a) + to_float(&b);
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_SUB_F: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                res.type = WET_VAL_FLOAT;
+                res.as.f_val = to_float(&a) - to_float(&b);
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_MUL_F: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                res.type = WET_VAL_FLOAT;
+                res.as.f_val = to_float(&a) * to_float(&b);
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_DIV_F: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                float b_val = to_float(&b);
+                if (fabsf(b_val) < 1e-15f) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Floating point division by zero");
+                    return WET_ERR_DIVISION_BY_ZERO;
+                }
+                wet_value_t res;
+                res.type = WET_VAL_FLOAT;
+                res.as.f_val = to_float(&a) / b_val;
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_NEG: {
+                vm->pc = instr_pc + 1;
+                wet_value_t a;
+                wet_status_t st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                wet_value_t res;
+                if (a.type == WET_VAL_FLOAT) {
+                    res.type = WET_VAL_FLOAT;
+                    res.as.f_val = -a.as.f_val;
+                } else {
+                    res.type = WET_VAL_INT;
+                    res.as.i_val = -to_int(&a);
+                }
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_MOD_I: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+                int32_t b_val = to_int(&b);
+                if (b_val == 0) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Integer modulo by zero");
+                    return WET_ERR_DIVISION_BY_ZERO;
+                }
+                wet_value_t res;
+                res.type = WET_VAL_INT;
+                res.as.i_val = to_int(&a) % b_val;
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_CMP_EQ:
+            case WET_OP_CMP_NE:
+            case WET_OP_CMP_LT:
+            case WET_OP_CMP_LE:
+            case WET_OP_CMP_GT:
+            case WET_OP_CMP_GE: {
+                vm->pc = instr_pc + 1;
+                wet_value_t b, a;
+                wet_status_t st = pop_val(vm, &b);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &a);
+                if (st != WET_OK) return st;
+
+                int cmp_res = 0;
+                if (a.type == WET_VAL_FLOAT || b.type == WET_VAL_FLOAT) {
+                    float fa = to_float(&a);
+                    float fb = to_float(&b);
+                    switch ((wet_opcode_t)op) {
+                        case WET_OP_CMP_EQ: cmp_res = (fa == fb); break;
+                        case WET_OP_CMP_NE: cmp_res = (fa != fb); break;
+                        case WET_OP_CMP_LT: cmp_res = (fa <  fb); break;
+                        case WET_OP_CMP_LE: cmp_res = (fa <= fb); break;
+                        case WET_OP_CMP_GT: cmp_res = (fa >  fb); break;
+                        case WET_OP_CMP_GE: cmp_res = (fa >= fb); break;
+                        default: break;
+                    }
+                } else {
+                    int32_t ia = to_int(&a);
+                    int32_t ib = to_int(&b);
+                    switch ((wet_opcode_t)op) {
+                        case WET_OP_CMP_EQ: cmp_res = (ia == ib); break;
+                        case WET_OP_CMP_NE: cmp_res = (ia != ib); break;
+                        case WET_OP_CMP_LT: cmp_res = (ia <  ib); break;
+                        case WET_OP_CMP_LE: cmp_res = (ia <= ib); break;
+                        case WET_OP_CMP_GT: cmp_res = (ia >  ib); break;
+                        case WET_OP_CMP_GE: cmp_res = (ia >= ib); break;
+                        default: break;
+                    }
+                }
+
+                wet_value_t res;
+                res.type = WET_VAL_INT;
+                res.as.i_val = cmp_res ? 1 : 0;
+                st = push_val(vm, res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_JMP: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
+                int64_t target = (int64_t)instr_pc + offset;
+                if (target < 0 || (size_t)target > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "JMP target %lld out of range", (long long)target);
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                vm->pc = (size_t)target;
+                break;
+            }
+
+            case WET_OP_JMP_IF_TRUE: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP_IF_TRUE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
+                wet_value_t cond;
+                wet_status_t st = pop_val(vm, &cond);
+                if (st != WET_OK) return st;
+
+                if (is_truthy(&cond)) {
+                    int64_t target = (int64_t)instr_pc + offset;
+                    if (target < 0 || (size_t)target > vm->code_size) {
+                        snprintf(vm->last_error, sizeof(vm->last_error), "JMP_IF_TRUE target %lld out of range", (long long)target);
+                        return WET_ERR_INVALID_OPCODE;
+                    }
+                    vm->pc = (size_t)target;
+                } else {
+                    vm->pc = instr_pc + 3;
+                }
+                break;
+            }
+
+            case WET_OP_JMP_IF_FALSE: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP_IF_FALSE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
+                wet_value_t cond;
+                wet_status_t st = pop_val(vm, &cond);
+                if (st != WET_OK) return st;
+
+                if (!is_truthy(&cond)) {
+                    int64_t target = (int64_t)instr_pc + offset;
+                    if (target < 0 || (size_t)target > vm->code_size) {
+                        snprintf(vm->last_error, sizeof(vm->last_error), "JMP_IF_FALSE target %lld out of range", (long long)target);
+                        return WET_ERR_INVALID_OPCODE;
+                    }
+                    vm->pc = (size_t)target;
+                } else {
+                    vm->pc = instr_pc + 3;
+                }
+                break;
+            }
+
+            case WET_OP_CALL: {
+                if (instr_pc + 4 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated CALL operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint16_t fn_idx = wet_read_u16_le(vm->code + instr_pc + 1);
+                uint8_t argc = *(const uint8_t*)(vm->code + instr_pc + 3);
+
+                if (fn_idx > 0 && fn_idx < vm->code_size) {
+                    /* User-defined function call */
+                    if (vm->call_sp >= vm->max_call_depth) {
+                        snprintf(vm->last_error, sizeof(vm->last_error), "Call stack overflow (depth %zu)", vm->call_sp);
+                        return WET_ERR_STACK_OVERFLOW;
+                    }
+                    vm->call_stack[vm->call_sp++].return_pc = instr_pc + 4;
+                    vm->pc = fn_idx;
+                } else {
+                    /* Handle builtin / external function call: pop arguments, push default 0 */
+                    vm->pc = instr_pc + 4;
+                    for (uint8_t a = 0; a < argc; ++a) {
+                        wet_value_t dummy;
+                        pop_val(vm, &dummy);
+                    }
+                    wet_value_t ret_val;
+                    ret_val.type = WET_VAL_INT;
+                    ret_val.as.i_val = 0;
+                    push_val(vm, ret_val);
+                }
+                break;
+            }
+
+            case WET_OP_RET: {
+                if (vm->call_sp > 0) {
+                    vm->call_sp--;
+                    vm->pc = vm->call_stack[vm->call_sp].return_pc;
+                } else {
+                    vm->pc = instr_pc + 1;
+                }
+                break;
+            }
+
+            case WET_OP_STIM_BIPHASIC: {
+                if (instr_pc + 2 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STIM_BIPHASIC operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 2;
+
+                /* Pop arguments: interphase, phase2, phase1, voltage */
+                wet_value_t v_interphase, v_p2, v_p1, v_volt;
+                wet_status_t st = pop_val(vm, &v_interphase);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &v_p2);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &v_p1);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &v_volt);
+                if (st != WET_OK) return st;
+
+                if (channel == 0xFF) {
+                    /* Dynamic channel index popped from stack */
+                    wet_value_t v_ch;
+                    st = pop_val(vm, &v_ch);
+                    if (st != WET_OK) return st;
+                    int32_t c_idx = to_int(&v_ch);
+                    if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "Electrode channel %d out of bounds (max %u)",
+                                 c_idx, vm->config.channel_count);
+                        return WET_ERR_OUT_OF_BOUNDS_CH;
+                    }
+                    channel = (uint8_t)c_idx;
+                } else if (channel >= vm->config.channel_count) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Electrode channel %u out of bounds (max %u)",
+                             channel, vm->config.channel_count);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                float voltage = to_float(&v_volt);
+                float p1_ms = to_float(&v_p1);
+                float p2_ms = to_float(&v_p2);
+                float ip_ms = to_float(&v_interphase);
+
+                if (vm->interlocks.locked) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                    return WET_ERR_INTERLOCK_LOCKED;
+                }
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage, channel)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for STIM_BIPHASIC on ch %u (req %.2fV)", channel, voltage);
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
+                if (p1_ms > 0.0f && p2_ms > 0.0f) {
+                    float q_phase1 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p1_ms;
+                    float q_phase2 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p2_ms;
+                    if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+                        vm->interlocks.locked = 1;
+                        vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+                        vm->interlocks.tripped_channel = channel;
+                        vm->interlocks.trip_tick = vm->current_tick;
+                        vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+                        snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                                 "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+                                 channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+                        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                        return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+                    }
+                }
+
+                /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
+                bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
+                if (prev_p->active && prev_p->phase2_ticks_left > 0) {
+                    float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
+                    vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+                }
+
+                float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage);
+                biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
+                vm->voltages[channel] = clamped_v;
+                /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
+                float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
+                vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
+                break;
+            }
+
+            case WET_OP_READ_SPIKES: {
+                if (instr_pc + 2 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_SPIKES operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 2;
+
+                wet_value_t window;
+                wet_status_t st = pop_val(vm, &window);
+                if (st != WET_OK) return st;
+
+                if (channel == 0xFF) {
+                    /* Dynamic channel index popped from stack */
+                    wet_value_t v_ch;
+                    st = pop_val(vm, &v_ch);
+                    if (st != WET_OK) return st;
+                    int32_t c_idx = to_int(&v_ch);
+                    if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "Electrode channel %d out of bounds (max %u)",
+                                 c_idx, vm->config.channel_count);
+                        return WET_ERR_OUT_OF_BOUNDS_CH;
+                    }
+                    channel = (uint8_t)c_idx;
+                } else if (channel >= vm->config.channel_count) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Electrode channel %u out of bounds (max %u)",
+                             channel, vm->config.channel_count);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                float window_ms = to_float(&window);
+                uint32_t cnt = biophysics_get_spikes_window(&vm->bio, channel, window_ms);
+
+                wet_value_t spike_res;
+                spike_res.type = WET_VAL_INT;
+                spike_res.as.i_val = (int32_t)cnt;
+                st = push_val(vm, spike_res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_READ_VOLTAGE: {
+                if (instr_pc + 2 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_VOLTAGE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 2;
+
+                if (channel == 0xFF) {
+                    /* Dynamic channel index popped from stack */
+                    wet_value_t v_ch;
+                    wet_status_t st = pop_val(vm, &v_ch);
+                    if (st != WET_OK) return st;
+                    int32_t c_idx = to_int(&v_ch);
+                    if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "Electrode channel %d out of bounds (max %u)",
+                                 c_idx, vm->config.channel_count);
+                        return WET_ERR_OUT_OF_BOUNDS_CH;
+                    }
+                    channel = (uint8_t)c_idx;
+                } else if (channel >= vm->config.channel_count) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Electrode channel %u out of bounds (max %u)",
+                             channel, vm->config.channel_count);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                wet_value_t volt_res;
+                volt_res.type = WET_VAL_FLOAT;
+                volt_res.as.f_val = vm->bio.mea_voltage_v[channel];
+                wet_status_t st = push_val(vm, volt_res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_MODULATE_STDP: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MODULATE_STDP operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t pre = *(const uint8_t*)(vm->code + instr_pc + 1);
+                uint8_t post = *(const uint8_t*)(vm->code + instr_pc + 2);
+                vm->pc = instr_pc + 3;
+
+                wet_value_t delta_w;
+                wet_status_t st = pop_val(vm, &delta_w);
+                if (st != WET_OK) return st;
+
+                if (pre == 0xFF && post == 0xFF) {
+                    /* Dynamic pre/post channels popped from stack */
+                    wet_value_t v_post, v_pre;
+                    st = pop_val(vm, &v_post);
+                    if (st != WET_OK) return st;
+                    st = pop_val(vm, &v_pre);
+                    if (st != WET_OK) return st;
+                    int32_t pre_idx = to_int(&v_pre);
+                    int32_t post_idx = to_int(&v_post);
+                    if (pre_idx < 0 || (uint32_t)pre_idx >= vm->config.channel_count ||
+                        post_idx < 0 || (uint32_t)post_idx >= vm->config.channel_count) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "STDP dynamic channels (%d, %d) out of bounds (max %u)",
+                                 pre_idx, post_idx, vm->config.channel_count);
+                        return WET_ERR_OUT_OF_BOUNDS_CH;
+                    }
+                    pre = (uint8_t)pre_idx;
+                    post = (uint8_t)post_idx;
+                } else if (pre >= vm->config.channel_count || post >= vm->config.channel_count) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "STDP channels (%u, %u) out of bounds (max %u)",
+                             pre, post, vm->config.channel_count);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                if (vm->interlocks.locked) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                    return WET_ERR_INTERLOCK_LOCKED;
+                }
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_MODULATE_STDP, 0.0f, pre)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for MODULATE_STDP");
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                float dw = to_float(&delta_w);
+                if (pre == 0 && post == 0) {
+                    vm->bio.stdp_lr_scale = dw;
+                } else if (pre != post) {
+                    biophysics_modulate_stdp(&vm->bio, pre, post, dw);
+                }
+                break;
+            }
+
+            case WET_OP_GET_POP_RATE: {
+                vm->pc = instr_pc + 1;
+                wet_value_t window;
+                wet_status_t st = pop_val(vm, &window);
+                if (st != WET_OK) return st;
+
+                wet_value_t rate_res;
+                rate_res.type = WET_VAL_FLOAT;
+                rate_res.as.f_val = vm->bio.population_rate_hz;
+                st = push_val(vm, rate_res);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_MEA_CONFIG: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MEA_CONFIG operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t rows = *(const uint8_t*)(vm->code + instr_pc + 1);
+                uint8_t cols = *(const uint8_t*)(vm->code + instr_pc + 2);
+                vm->pc = instr_pc + 3;
+                vm->grid_rows = rows;
+                vm->grid_cols = cols;
+                break;
+            }
+
+            case WET_OP_PUMP_SET_RATE: {
+                if (instr_pc + 6 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUMP_SET_RATE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t pump_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                float rate_ul_min;
+                memcpy(&rate_ul_min, vm->code + instr_pc + 2, sizeof(float));
+                vm->pc = instr_pc + 6;
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_PUMP_SET_RATE, 0.0f, pump_id)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for PUMP_SET_RATE (requires CAP_MICROFLUIDICS)");
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                if (pump_id >= 8) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Pump ID %u out of bounds (max 7)", pump_id);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                if (rate_ul_min < 0.0f || rate_ul_min > 15.0f) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "ERR_SHEAR_STRESS_EXCEEDED: Requested pump rate %.2f uL/min exceeds safe hydrodynamic limit (0..15.0 uL/min)",
+                             (double)rate_ul_min);
+                    return WET_ERR_SHEAR_STRESS_EXCEEDED;
+                }
+
+                vm->pump_rates_ul_min[pump_id] = rate_ul_min;
+                break;
+            }
+
+            case WET_OP_PUMP_DISPENSE: {
+                if (instr_pc + 6 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUMP_DISPENSE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t pump_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                float volume_ul;
+                memcpy(&volume_ul, vm->code + instr_pc + 2, sizeof(float));
+                vm->pc = instr_pc + 6;
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_PUMP_DISPENSE, 0.0f, pump_id)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for PUMP_DISPENSE (requires CAP_MICROFLUIDICS)");
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                if (pump_id >= 8) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Pump ID %u out of bounds (max 7)", pump_id);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                if (volume_ul <= 0.0f || volume_ul > 500.0f) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "ERR_ACTUATOR_FAULT: Invalid dispense volume %.2f uL (allowed: 0.1..500.0 uL)",
+                             (double)volume_ul);
+                    return WET_ERR_ACTUATOR_FAULT;
+                }
+
+                vm->pump_dispensed_ul[pump_id] += volume_ul;
+                break;
+            }
+
+            case WET_OP_VALVE_SET: {
+                if (instr_pc + 3 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated VALVE_SET operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t valve_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                uint8_t state = *(const uint8_t*)(vm->code + instr_pc + 2);
+                vm->pc = instr_pc + 3;
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_VALVE_SET, 0.0f, valve_id)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for VALVE_SET (requires CAP_MICROFLUIDICS)");
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                if (valve_id >= 8) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Valve ID %u out of bounds (max 7)", valve_id);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                vm->valve_states[valve_id] = (state != 0) ? 1 : 0;
+                break;
+            }
+
+            case WET_OP_MOTOR_STEP: {
+                if (instr_pc + 10 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MOTOR_STEP operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t motor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                int32_t steps;
+                float speed_rpm;
+                memcpy(&steps, vm->code + instr_pc + 2, sizeof(int32_t));
+                memcpy(&speed_rpm, vm->code + instr_pc + 6, sizeof(float));
+                vm->pc = instr_pc + 10;
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_MOTOR_STEP, 0.0f, motor_id)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for MOTOR_STEP (requires CAP_MOTOR_ACTUATION)");
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                if (motor_id >= 4) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Motor ID %u out of bounds (max 3)", motor_id);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                vm->motor_positions[motor_id] += steps;
+                vm->motor_speeds_rpm[motor_id] = speed_rpm;
+                break;
+            }
+
+            case WET_OP_READ_PRESSURE: {
+                if (instr_pc + 2 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_PRESSURE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t port_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 2;
+
+                if (port_id >= 4) port_id = 0;
+                wet_value_t p_val;
+                p_val.type = WET_VAL_FLOAT;
+                p_val.as.f_val = vm->fluid_pressure_kpa[port_id];
+                wet_status_t st = push_val(vm, p_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_READ_TEMPERATURE: {
+                vm->pc = instr_pc + 1;
+                wet_value_t t_val;
+                t_val.type = WET_VAL_FLOAT;
+                t_val.as.f_val = vm->ambient_temperature_c;
+                wet_status_t st = push_val(vm, t_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            default: {
+                snprintf(vm->last_error, sizeof(vm->last_error),
+                         "Unrecognized or invalid opcode 0x%02X at pc %zu", op, instr_pc);
+                return WET_ERR_INVALID_OPCODE;
+            }
+        }
+    }
+
+    populate_telemetry(vm, out_telem);
+    return WET_OK;
+}

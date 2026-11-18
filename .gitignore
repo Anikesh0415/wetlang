@@ -1,0 +1,33 @@
+# Bytecode & Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs & Environment
+*.log
+.env
+.venv
+env/
+venv/
+
+# C / Native build artifacts
+*.o
+*.obj
+*.so
+*.dylib
+!native/bin/wetvm.dll
+native/bin/*.lib
+native/bin/*.exp
+native/bin/*.def

@@ -1,0 +1,123 @@
+"""
+WetLang Compiler Package
+Complete domain-specific programming language compiler for neural organoids.
+Zero external compiler framework dependencies.
+"""
+
+from compiler.token import (
+    Token,
+    TokenType,
+    Dimension,
+    UNIT_SUFFIXES,
+)
+from compiler.lexer import (
+    Lexer,
+    LexerError,
+)
+from compiler.ast_nodes import (
+    ASTNode,
+    ASTVisitor,
+    ProgramNode,
+    GridDeclNode,
+    ChannelDeclNode,
+    FnDeclNode,
+    ParamNode,
+    StreamDeclNode,
+    StreamItemNode,
+    BlockNode,
+    LetStmtNode,
+    AssignStmtNode,
+    StimStmtNode,
+    ModulateStmtNode,
+    SyncTickStmtNode,
+    IfStmtNode,
+    WhileStmtNode,
+    ForStmtNode,
+    ReturnStmtNode,
+    ExprStmtNode,
+    BinaryOpNode,
+    UnaryOpNode,
+    LiteralNode,
+    PhysicalLiteralNode,
+    IdentifierNode,
+    CallNode,
+    IndexNode,
+    RangeNode,
+    DomainCallNode,
+)
+from compiler.parser import (
+    Parser,
+    ParseError,
+)
+from compiler.semantic import (
+    SemanticAnalyzer,
+    SemanticError,
+)
+from compiler.isa import (
+    Opcode,
+    Capability,
+    SectionType,
+    HEADER_MAGIC,
+    HEADER_SIZE,
+    VERSION_MAJOR,
+    VERSION_MINOR,
+    OPCODE_NAMES,
+)
+from compiler.emitter import (
+    BytecodeEmitter,
+    disassemble,
+    compile_source,
+)
+
+__all__ = [
+    "Token",
+    "TokenType",
+    "Dimension",
+    "UNIT_SUFFIXES",
+    "Lexer",
+    "LexerError",
+    "Parser",
+    "ParseError",
+    "ASTNode",
+    "ASTVisitor",
+    "ProgramNode",
+    "GridDeclNode",
+    "ChannelDeclNode",
+    "FnDeclNode",
+    "ParamNode",
+    "StreamDeclNode",
+    "StreamItemNode",
+    "BlockNode",
+    "LetStmtNode",
+    "AssignStmtNode",
+    "StimStmtNode",
+    "ModulateStmtNode",
+    "SyncTickStmtNode",
+    "IfStmtNode",
+    "WhileStmtNode",
+    "ForStmtNode",
+    "ReturnStmtNode",
+    "ExprStmtNode",
+    "BinaryOpNode",
+    "UnaryOpNode",
+    "LiteralNode",
+    "PhysicalLiteralNode",
+    "IdentifierNode",
+    "CallNode",
+    "IndexNode",
+    "RangeNode",
+    "DomainCallNode",
+    "SemanticAnalyzer",
+    "SemanticError",
+    "Opcode",
+    "Capability",
+    "SectionType",
+    "HEADER_MAGIC",
+    "HEADER_SIZE",
+    "VERSION_MAJOR",
+    "VERSION_MINOR",
+    "OPCODE_NAMES",
+    "BytecodeEmitter",
+    "disassemble",
+    "compile_source",
+]
