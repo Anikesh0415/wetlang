@@ -7,10 +7,13 @@
 *.wbc binary
 
 # GitHub Linguist Overrides:
-# Vendor the compiler implementation and native runtime engine so Python and C are excluded from repository language stats
+# Completely vendor all Python, C, and shell files so they are 100% excluded from repository language stats
+*.py linguist-vendored
+*.c linguist-vendored
+*.h linguist-vendored
+*.cmd linguist-vendored
+bin/* linguist-vendored
 wetlang/** linguist-vendored
 native/** linguist-vendored
 tests/** linguist-vendored
-examples/**.py linguist-vendored
-setup.py linguist-vendored
-pyproject.toml linguist-vendored
+examples/** linguist-vendored
