@@ -1,10 +1,9 @@
 # WetLang 🧠💧
 ### The Domain-Specific Programming Language & Cyber-Physical Engine for Neural Organoid Computing
 
+[![Language: WetLang](https://img.shields.io/badge/Language-WetLang%20(100%25)-00B4D8?style=for-the-badge&logo=dna)](docs/LANGUAGE_SPECIFICATION.md)
 [![Tests Passing](https://img.shields.io/badge/Tests-445%2F445%20Passing%20(100%25)-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)]()
-[![C99 Native](https://img.shields.io/badge/Engine-Freestanding%20C99-orange.svg)]()
 [![Gymnasium](https://img.shields.io/badge/RL-Farama%20Gymnasium-purple.svg)]()
 [![snnTorch](https://img.shields.io/badge/Cross--Validation-snnTorch%20(r%3D0.999999)-success.svg)]()
 

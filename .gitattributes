@@ -1,0 +1,16 @@
+# Git line endings & binary preservation
+* text=auto
+*.dll binary
+*.so binary
+*.dylib binary
+*.pdf binary
+*.wbc binary
+
+# GitHub Linguist Overrides:
+# Vendor the compiler implementation and native runtime engine so Python and C are excluded from repository language stats
+wetlang/** linguist-vendored
+native/** linguist-vendored
+tests/** linguist-vendored
+examples/**.py linguist-vendored
+setup.py linguist-vendored
+pyproject.toml linguist-vendored
