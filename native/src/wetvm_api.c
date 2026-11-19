@@ -31,11 +31,13 @@ WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
         vm->config.max_locals = (config->max_locals > 0) ? config->max_locals : 256;
         vm->config.channel_count = (config->channel_count > 0 && config->channel_count <= 64)
                                     ? config->channel_count : 64;
+        vm->config.max_ops_per_tick = (config->max_ops_per_tick > 0) ? config->max_ops_per_tick : 100000U;
     } else {
         vm->config.dt_ms = 0.1;
         vm->config.max_stack_depth = 1024;
         vm->config.max_locals = 256;
         vm->config.channel_count = 64;
+        vm->config.max_ops_per_tick = 100000U;
     }
 
     vm->max_stack = vm->config.max_stack_depth;
@@ -72,6 +74,83 @@ WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
         vm->fluid_pressure_kpa[p] = 101.325f;
     }
 
+    /* Ring-0 Life Support Supervisor Initialization */
+    vm->life_supervisor.supervisor_active = 1;
+    vm->life_supervisor.maintenance_temperature_c = 37.0f;
+    for (int i = 0; i < 8; ++i) {
+        vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
+    }
+
+    biophysics_init(&vm->bio, vm->config.dt_ms, 0);
+    interlocks_init(&vm->interlocks);
+
+    return vm;
+}
+
+WET_EXPORT wet_vm_t* wet_create_vm_arena(
+    void* arena_buf,
+    size_t arena_bytes,
+    const wet_vm_config_t* config
+) {
+    if (!arena_buf) return NULL;
+
+    uint32_t stack_depth = (config && config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
+    uint32_t max_locals = (config && config->max_locals > 0) ? config->max_locals : 256;
+    uint32_t call_depth = 64;
+
+    size_t needed = sizeof(struct wet_vm_instance)
+                  + (size_t)stack_depth * sizeof(wet_value_t)
+                  + (size_t)max_locals * sizeof(wet_value_t)
+                  + (size_t)call_depth * sizeof(wet_call_frame_t);
+
+    if (arena_bytes < needed) return NULL;
+
+    uint8_t* ptr = (uint8_t*)arena_buf;
+    struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
+    ptr += sizeof(struct wet_vm_instance);
+    memset(vm, 0, sizeof(struct wet_vm_instance));
+
+    vm->arena_allocated = 1;
+    if (config) {
+        vm->config = *config;
+        if (vm->config.dt_ms <= 0.0) vm->config.dt_ms = 0.1;
+        if (vm->config.max_stack_depth == 0) vm->config.max_stack_depth = stack_depth;
+        if (vm->config.max_locals == 0) vm->config.max_locals = max_locals;
+        if (vm->config.channel_count == 0) vm->config.channel_count = 64;
+        if (vm->config.max_ops_per_tick == 0) vm->config.max_ops_per_tick = 100000U;
+    } else {
+        vm->config.dt_ms = 0.1;
+        vm->config.max_stack_depth = stack_depth;
+        vm->config.max_locals = max_locals;
+        vm->config.channel_count = 64;
+        vm->config.max_ops_per_tick = 100000U;
+    }
+
+    vm->max_stack = stack_depth;
+    vm->stack = (wet_value_t*)ptr;
+    ptr += (size_t)stack_depth * sizeof(wet_value_t);
+
+    vm->max_locals = max_locals;
+    vm->locals = (wet_value_t*)ptr;
+    ptr += (size_t)max_locals * sizeof(wet_value_t);
+
+    vm->max_call_depth = call_depth;
+    vm->call_stack = (wet_call_frame_t*)ptr;
+
+    vm->grid_rows = 8;
+    vm->grid_cols = 8;
+    vm->last_error[0] = '\0';
+    vm->ambient_temperature_c = 37.0f;
+    for (int p = 0; p < 4; ++p) {
+        vm->fluid_pressure_kpa[p] = 101.325f;
+    }
+
+    vm->life_supervisor.supervisor_active = 1;
+    vm->life_supervisor.maintenance_temperature_c = 37.0f;
+    for (int i = 0; i < 8; ++i) {
+        vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
+    }
+
     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
     interlocks_init(&vm->interlocks);
 
@@ -97,22 +176,24 @@ WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
         vm->bytecode_raw = NULL;
     }
 
-    if (vm->stack) {
-        free(vm->stack);
-        vm->stack = NULL;
-    }
+    if (!vm->arena_allocated) {
+        if (vm->stack) {
+            free(vm->stack);
+            vm->stack = NULL;
+        }
 
-    if (vm->locals) {
-        free(vm->locals);
-        vm->locals = NULL;
-    }
+        if (vm->locals) {
+            free(vm->locals);
+            vm->locals = NULL;
+        }
 
-    if (vm->call_stack) {
-        free(vm->call_stack);
-        vm->call_stack = NULL;
-    }
+        if (vm->call_stack) {
+            free(vm->call_stack);
+            vm->call_stack = NULL;
+        }
 
-    free(vm);
+        free(vm);
+    }
 }
 
 WET_EXPORT wet_status_t wet_load_bytecode(
@@ -311,5 +392,37 @@ WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
             return "WET_ERR_ACTUATOR_FAULT: Cyber-physical actuator execution fault or invalid parameter";
         default:
             return "WET_ERR_UNKNOWN: Unknown error status";
+    }
+}
+
+/* =========================================================================
+ * Phase 3 Hardware Readiness & Safety Implementations
+ * ========================================================================= */
+
+WET_EXPORT void wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2) {
+    if (!vm) return;
+    interlocks_configure_electrode(&vm->interlocks, material, area_um2);
+}
+
+WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
+    if (!vm) return;
+    interlocks_active_discharge(&vm->interlocks, channel);
+}
+
+WET_EXPORT void wet_active_discharge_all(wet_vm_t* vm) {
+    if (!vm) return;
+    interlocks_active_discharge_all(&vm->interlocks);
+}
+
+WET_EXPORT void wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable) {
+    if (!vm) return;
+    interlocks_enable_dead_head_protection(&vm->interlocks, enable);
+}
+
+WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
+    if (!vm) return;
+    vm->life_supervisor.supervisor_active = 0;
+    for (int p = 0; p < 8; ++p) {
+        vm->pump_rates_ul_min[p] = 0.0f;
     }
 }

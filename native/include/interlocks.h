@@ -44,6 +44,15 @@ extern "C" {
 #define INTERLOCK_DUTY_CYCLE_LIMIT      0.05f   /* 5% max stimulation duty cycle */
 #define INTERLOCK_DUTY_CYCLE_DECAY      0.9999f /* tau = 1.0 s (10,000 ticks) */
 
+/* Phase 3 Electrochemical Water-Window & Material CIC Limits */
+typedef enum {
+    WET_ELEC_PLATINUM = 0,  /* 0.10 mC/cm^2 (water-window limit: 0.05..0.15 mC/cm^2) */
+    WET_ELEC_TIN      = 1,  /* 0.90 mC/cm^2 (Titanium Nitride) */
+    WET_ELEC_IROX     = 2,  /* 2.00 mC/cm^2 (Iridium Oxide / SIROF) */
+    WET_ELEC_PEDOT    = 3,  /* 5.00 mC/cm^2 (Conductive Polymer PEDOT:PSS) */
+    WET_ELEC_CUSTOM   = 4
+} wet_electrode_material_t;
+
 typedef enum {
     INTERLOCK_TRIP_NONE                = 0,
     INTERLOCK_TRIP_CHARGE_IMBALANCE    = 1,
@@ -52,7 +61,8 @@ typedef enum {
     INTERLOCK_TRIP_VOLTAGE_OVERRIDE    = 4,
     INTERLOCK_TRIP_DC_DRIFT            = 5,
     INTERLOCK_TRIP_CHARGE_DENSITY      = 6,
-    INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY= 7
+    INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY= 7,
+    INTERLOCK_TRIP_DEAD_HEAD_PRESSURE  = 8
 } interlock_trip_reason_t;
 
 typedef struct {
@@ -75,6 +85,19 @@ typedef struct {
     /* Long-horizon leaky DC charge integrator (10.0 s bleed time constant) */
     float    q_dc[INTERLOCK_NUM_CHANNELS];
 
+    /* Phase 3: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
+    float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
+
+    /* Phase 3: Electrode Material & Area Parameterization */
+    uint8_t  electrode_material;   /* wet_electrode_material_t */
+    float    electrode_area_um2;   /* e.g. 132.25 um^2 for MaxOne, or 5000 um^2 for macro */
+    float    max_charge_per_phase_nc; /* Dynamic limit = CIC * Area */
+    float    max_cumulative_dc_nc;    /* Dynamic persistent DC limit */
+
+    /* Phase 3: Microfluidic Dead-Heading Pressure Interlock */
+    uint8_t  dead_head_protection_enabled;
+    uint8_t  pump_valve_mapping[8]; /* Maps pump ID to downstream pinch valve ID */
+
     /* 50.0 ms (500-tick) sustained epileptiform runaway counter */
     uint32_t hyperactive_consecutive_ticks;
     uint32_t last_hyperactive_channel_count;
@@ -91,6 +114,12 @@ typedef struct {
 /* Initialize / reset watchdog state */
 void interlocks_init(interlock_state_t* il);
 void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count);
+
+/* Phase 3 Electrochemical & Hardware Interlock API */
+void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
+void interlocks_active_discharge(interlock_state_t* il, uint8_t channel);
+void interlocks_active_discharge_all(interlock_state_t* il);
+void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable);
 
 /* Static authorization check for an opcode against loaded bytecode capabilities */
 int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel);

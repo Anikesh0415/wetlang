@@ -6,6 +6,56 @@ void interlocks_init(interlock_state_t* il) {
     memset(il, 0, sizeof(interlock_state_t));
     il->authorized_capabilities = 0xFFFF; /* Default permissive until bytecode loaded */
     il->authorized_channels = INTERLOCK_NUM_CHANNELS;
+    il->electrode_material = (uint8_t)WET_ELEC_PLATINUM;
+    il->electrode_area_um2 = 5000.0f; /* Default macro-electrode area (5000 um^2) */
+    il->max_charge_per_phase_nc = INTERLOCK_CHARGE_LIMIT_NC; /* Default 0.5 nC */
+    il->max_cumulative_dc_nc = INTERLOCK_DC_DRIFT_LIMIT_NC;  /* Default 1.0 nC */
+    for (int p = 0; p < 8; ++p) {
+        il->pump_valve_mapping[p] = (uint8_t)p;
+    }
+}
+
+void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2) {
+    if (!il) return;
+    il->electrode_material = material;
+    il->electrode_area_um2 = area_um2;
+
+    /* Charge Injection Capacity (CIC) in mC/cm^2:
+     * Area in cm^2 = area_um2 * 1e-8 cm^2/um^2
+     * Max charge in nC = CIC (mC/cm^2) * Area (cm^2) * 1e6 nC/mC = CIC * area_um2 * 0.01 nC
+     */
+    float cic_mc_cm2 = 0.10f;
+    switch ((wet_electrode_material_t)material) {
+        case WET_ELEC_PLATINUM: cic_mc_cm2 = 0.10f; break; /* 0.05..0.15 mC/cm^2 water window */
+        case WET_ELEC_TIN:      cic_mc_cm2 = 0.90f; break; /* Titanium Nitride */
+        case WET_ELEC_IROX:     cic_mc_cm2 = 2.00f; break; /* Iridium Oxide */
+        case WET_ELEC_PEDOT:    cic_mc_cm2 = 5.00f; break; /* Conductive polymer */
+        default:                cic_mc_cm2 = 0.10f; break;
+    }
+
+    float limit_nc = cic_mc_cm2 * area_um2 * 0.01f;
+    if (limit_nc < 0.01f) limit_nc = 0.01f;
+    il->max_charge_per_phase_nc = limit_nc;
+    il->max_cumulative_dc_nc = limit_nc * 2.0f;
+}
+
+void interlocks_active_discharge(interlock_state_t* il, uint8_t channel) {
+    if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
+    il->cumulative_unbounded_dc_nc[channel] = 0.0f;
+    il->q_dc[channel] = 0.0f;
+}
+
+void interlocks_active_discharge_all(interlock_state_t* il) {
+    if (!il) return;
+    for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
+        il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+        il->q_dc[ch] = 0.0f;
+    }
+}
+
+void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable) {
+    if (!il) return;
+    il->dead_head_protection_enabled = enable;
 }
 
 void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count) {
@@ -99,28 +149,37 @@ wet_status_t interlocks_record_charge_tick(
         il->q_dc[ch] = il->q_dc[ch] * INTERLOCK_BLEED_DECAY_PER_TICK + new_q;
         if (wet_fabsf(il->q_dc[ch]) < 1e-7f) il->q_dc[ch] = 0.0f;
 
-        if (wet_fabsf(accum) >= INTERLOCK_CHARGE_LIMIT_NC) {
+        /* Phase 3: Persistent unbounded cumulative DC charge accumulator (zero decay) */
+        il->cumulative_unbounded_dc_nc[ch] += new_q;
+        if (wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) < 1e-7f) {
+            il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+        }
+
+        float charge_limit = il->max_charge_per_phase_nc > 0.0f ? il->max_charge_per_phase_nc : INTERLOCK_CHARGE_LIMIT_NC;
+        float dc_limit = il->max_cumulative_dc_nc > 0.0f ? il->max_cumulative_dc_nc : INTERLOCK_DC_DRIFT_LIMIT_NC;
+
+        if (wet_fabsf(accum) >= charge_limit) {
             il->locked = 1;
             il->trip_reason = INTERLOCK_TRIP_CHARGE_IMBALANCE;
             il->tripped_channel = (uint8_t)ch;
             il->trip_tick = current_tick;
             il->trip_value = accum;
             snprintf(il->diagnostic, sizeof(il->diagnostic),
-                     "ERR_CHARGE_IMBALANCE: ch=%d net_q=%.4f nC >= %.2f nC over 10.0 ms at tick %llu",
-                     ch, (double)accum, (double)INTERLOCK_CHARGE_LIMIT_NC, (unsigned long long)current_tick);
+                     "ERR_CHARGE_IMBALANCE: ch=%d net_q=%.4f nC >= %.2f nC (CIC limit for material %u, area %.1f um2) at tick %llu",
+                     ch, (double)accum, (double)charge_limit, il->electrode_material, (double)il->electrode_area_um2, (unsigned long long)current_tick);
             status = WET_ERR_CHARGE_IMBALANCE;
             break;
         }
 
-        if (wet_fabsf(il->q_dc[ch]) >= INTERLOCK_DC_DRIFT_LIMIT_NC) {
+        if (wet_fabsf(il->q_dc[ch]) >= dc_limit || wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) >= dc_limit) {
             il->locked = 1;
             il->trip_reason = INTERLOCK_TRIP_DC_DRIFT;
             il->tripped_channel = (uint8_t)ch;
             il->trip_tick = current_tick;
-            il->trip_value = il->q_dc[ch];
+            il->trip_value = wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) >= dc_limit ? il->cumulative_unbounded_dc_nc[ch] : il->q_dc[ch];
             snprintf(il->diagnostic, sizeof(il->diagnostic),
-                     "ERR_DC_DRIFT: ch=%d cumulative leaky DC charge=%.4f nC >= %.2f nC at tick %llu",
-                     ch, (double)il->q_dc[ch], (double)INTERLOCK_DC_DRIFT_LIMIT_NC, (unsigned long long)current_tick);
+                     "ERR_DC_DRIFT: ch=%d cumulative DC charge=%.4f nC >= %.2f nC at tick %llu",
+                     ch, (double)il->trip_value, (double)dc_limit, (unsigned long long)current_tick);
             status = WET_ERR_DC_DRIFT;
             break;
         }
@@ -156,11 +215,6 @@ wet_status_t interlocks_check_epileptiform(
             }
         } else {
             il->focal_hyperactive_ticks[ch] = 0U;
-        }
-    }
-    for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
-        if (channel_rates_hz[ch] >= INTERLOCK_EPILEPSY_RATE_HZ) {
-            hyper_count++;
         }
     }
 

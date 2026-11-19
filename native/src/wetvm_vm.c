@@ -372,6 +372,23 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
         return WET_ERR_INTERLOCK_LOCKED;
     }
 
+    /* Dead-heading valve-pump overpressure check */
+    if (vm->interlocks.dead_head_protection_enabled) {
+        for (int p = 0; p < 8; ++p) {
+            if (vm->pump_rates_ul_min[p] > 0.0f) {
+                uint8_t v = vm->interlocks.pump_valve_mapping[p];
+                if (v < 8 && vm->valve_states[v] == 0) {
+                    vm->interlocks.locked = 1;
+                    vm->interlocks.trip_reason = INTERLOCK_TRIP_DEAD_HEAD_PRESSURE;
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "ERR_DEAD_HEAD_OVERPRESSURE: Pump %d active at %.2f uL/min while downstream valve %d is closed",
+                             p, (double)vm->pump_rates_ul_min[p], v);
+                    return WET_ERR_ACTUATOR_FAULT;
+                }
+            }
+        }
+    }
+
     /* 1. Advance in-silico biophysics by 1 tick (dt = 0.1 ms) */
     biophysics_step_tick(&vm->bio);
     for (int ch = 0; ch < 64; ++ch) {
@@ -382,6 +399,7 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
     }
     vm->current_tick++;
     vm->sim_time_ms = (double)vm->current_tick * vm->config.dt_ms;
+    vm->sim_time_us = (int64_t)((double)vm->current_tick * vm->config.dt_ms * 1000.0 + 0.5);
 
     /* 2. Check sliding charge balance watchdog */
     wet_status_t il_st = interlocks_record_charge_tick(
@@ -440,12 +458,31 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
     }
 
     if (vm->is_halted) {
+        if (vm->life_supervisor.supervisor_active) {
+            /* Ring-0 Life Support Supervisor: Maintain baseline nutrient perfusion & temperature */
+            for (int p = 0; p < 8; ++p) {
+                if (vm->pump_rates_ul_min[p] == 0.0f) {
+                    vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
+                }
+            }
+            vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
+            vm->life_supervisor.ticks_under_supervisor++;
+        }
         snprintf(vm->last_error, sizeof(vm->last_error), "VM is halted");
         return WET_ERR_HALTED;
     }
 
     /* If bytecode execution has finished or reached end, continue free-running biological stepping */
     if (vm->is_finished || vm->pc >= vm->code_size) {
+        if (vm->life_supervisor.supervisor_active) {
+            for (int p = 0; p < 8; ++p) {
+                if (vm->pump_rates_ul_min[p] == 0.0f) {
+                    vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
+                }
+            }
+            vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
+            vm->life_supervisor.ticks_under_supervisor++;
+        }
         return advance_simulation_tick(vm, out_telem);
     }
 
@@ -457,13 +494,19 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
 
     /* Dispatch instructions until a tick yield (SYNC_TICK, SLEEP_TICKS, HALT) */
     uint32_t instr_count = 0;
+    uint32_t max_ops = vm->config.max_ops_per_tick ? vm->config.max_ops_per_tick : 100000U;
     while (!vm->is_halted && !vm->is_finished) {
-        if (++instr_count > 100000U) {
+        if (++instr_count > max_ops) {
             biophysics_zero_all_stim(&vm->bio);
             vm->interlocks.locked = 1;
             vm->interlocks.trip_reason = INTERLOCK_TRIP_CAPABILITY_VIOLATION;
-            snprintf(vm->last_error, sizeof(vm->last_error),
-                     "WET_ERR_WATCHDOG_TIMEOUT: Exceeded 100,000 instructions in a single tick");
+            if (max_ops == 100000U) {
+                snprintf(vm->last_error, sizeof(vm->last_error),
+                         "WET_ERR_WATCHDOG_TIMEOUT: Exceeded 100,000 instructions in a single tick");
+            } else {
+                snprintf(vm->last_error, sizeof(vm->last_error),
+                         "WET_ERR_WATCHDOG_TIMEOUT: Exceeded %u instructions in a single tick", max_ops);
+            }
             return WET_ERR_WATCHDOG_TIMEOUT;
         }
 
@@ -485,6 +528,15 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
             case WET_OP_HALT: {
                 vm->is_finished = 1;
                 vm->pc = instr_pc + 1;
+                if (vm->life_supervisor.supervisor_active) {
+                    for (int p = 0; p < 8; ++p) {
+                        if (vm->pump_rates_ul_min[p] == 0.0f) {
+                            vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
+                        }
+                    }
+                    vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
+                    vm->life_supervisor.ticks_under_supervisor++;
+                }
                 return advance_simulation_tick(vm, out_telem);
             }
 

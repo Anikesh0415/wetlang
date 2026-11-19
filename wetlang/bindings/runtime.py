@@ -317,6 +317,32 @@ class WetVM:
     def is_halted(self) -> bool:
         return self._is_halted
 
+    # Phase 3 Hardware Readiness Methods
+    def configure_electrode(self, material: int, area_um2: float) -> None:
+        """Configures electrode material and physical geometric surface area."""
+        self._check_alive()
+        self._lib.wet_configure_electrode(self._handle, ctypes.c_uint8(material), ctypes.c_float(area_um2))
+
+    def active_discharge(self, channel: int) -> None:
+        """Actuates hardware discharge switch on designated channel to clear accumulated DC charge."""
+        self._check_alive()
+        self._lib.wet_active_discharge(self._handle, ctypes.c_uint8(channel))
+
+    def active_discharge_all(self) -> None:
+        """Actuates hardware discharge switch on all 64 channels."""
+        self._check_alive()
+        self._lib.wet_active_discharge_all(self._handle)
+
+    def enable_dead_head_protection(self, enable: bool = True) -> None:
+        """Enables microfluidic valve-pump dead-head overpressure interlock."""
+        self._check_alive()
+        self._lib.wet_enable_dead_head_protection(self._handle, ctypes.c_uint8(1 if enable else 0))
+
+    def life_supervisor_shutdown(self) -> None:
+        """Terminates Ring-0 Life Support Supervisor autonomous baseline perfusion."""
+        self._check_alive()
+        self._lib.wet_life_supervisor_shutdown(self._handle)
+
 
 class WetRuntime(WetVM):
     """Alias / Subclass of WetVM providing E2E test-suite compatibility."""

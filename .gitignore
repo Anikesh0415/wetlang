@@ -28,6 +28,7 @@ venv/
 *.so
 *.dylib
 !native/bin/wetvm.dll
+!bin/wetvm.dll
 native/bin/*.lib
 native/bin/*.exp
 native/bin/*.def

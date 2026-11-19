@@ -2,10 +2,10 @@
 ### The Domain-Specific Programming Language & Cyber-Physical Engine for Neural Organoid Computing
 
 [![Language: WetLang](https://img.shields.io/badge/Language-WetLang%20(100%25)-00B4D8?style=for-the-badge&logo=dna)](docs/LANGUAGE_SPECIFICATION.md)
-[![Tests Passing](https://img.shields.io/badge/Tests-445%2F445%20Passing%20(100%25)-brightgreen.svg)]()
+[![Tests Passing](https://img.shields.io/badge/Tests-454%2F454%20Passing%20(100%25)-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Gymnasium](https://img.shields.io/badge/RL-Farama%20Gymnasium-purple.svg)]()
-[![snnTorch](https://img.shields.io/badge/Cross--Validation-snnTorch%20(r%3D0.999999)-success.svg)]()
+[![snnTorch](https://img.shields.io/badge/ODE--Verification-snnTorch%20(r%3D0.999999)-success.svg)]()
 
 > **WetLang** is the first production-grade programming language, compiler toolchain, freestanding virtual machine runtime, and biocybersecurity interlock system designed for **biological neural wetware computing**. It executes on Microelectrode Arrays (MEAs) and orchestrates cyber-physical life-support robotics (microfluidic pumps, pinch valves, stepper motors).
 
@@ -19,9 +19,12 @@ WetLang treats **living neural tissue and robotic life support as a single, unif
 * **Universal Multi-Organoid Scale:** Scales dynamically from a **single organoid** to **$10^3+$ interconnected organoid clusters** with biological axonal conduction delay queues.
 * **Dimensional Physical Type Safety:** Physical units (`0.4V`, `0.2ms`, `1.5uL/min`, `101.3kPa`, `150um`) are first-class language types checked at compile time.
 * **Cyber-Physical Actuator Control:** Directly drives microfluidic peristaltic/syringe pumps, micro-pinch valves, and stepper motors in cycle-accurate ($0.1\text{ ms}$) synchrony with electrical stimulation.
-* **Compile-Time Krogh Cylinder Anoxia Check:** Rejects unperfused organoids exceeding the oxygen diffusion limit ($r > 200\,\mu\text{m}$) before code ever reaches biological hardware.
-* **Biocybersecurity Hardware Interlocks:** Hard water-window voltage clamp ($\pm 1.2\text{ V}$), sliding 10 ms charge balance ring buffer ($< 0.5\text{ nC}$), and 50 ms epileptiform runaway breaker ($> 150\text{ Hz}$).
-* **Standard AI & SNN Integration:** Conforms to the Farama Foundation Gymnasium standard (`gymnasium.Env`) and cross-validated against Columbia University's `snnTorch` ($r = 0.9999999999996$).
+* **Spherical Reaction-Diffusion Thiele Anoxia Check:** Rejects unperfused organoids exceeding $r > 200\,\mu\text{m}$ and strictly forbids avascular organoids exceeding $r > 250\,\mu\text{m}$ (`ERR_AVASCULAR_CORE_NECROSIS`) even with perfusion, unless structurally vascularized or sliced.
+* **Geometry-Aware Hydrodynamic Shear Stress Clamp:** Enforces $\tau_w = 1.2 \frac{6\mu Q}{w h^2} \le 0.05\text{ Pa}$ and dead-head valve-pump interlocks to prevent neurite shear lysis and microfluidic backpressure blowout.
+* **Electrochemical Water-Window Interlocks:** Parameterized by electrode material (Pt, TiN, IrOx, PEDOT) and geometric surface area, backed by an unbounded cumulative DC charge accumulator and active hardware discharge switch.
+* **Ring-0 Life Support Supervisor (`wetlife`):** Autonomous life-support daemon maintaining baseline nutrient perfusion ($1.5\,\mu\text{L/min}$) and $37^\circ\text{C}$ incubator thermal setpoints even if experimental user code halts or throws errors.
+* **Asymmetric Cryptographic Provenance:** Signed via Ed25519; bioreactor nodes only need the 32-byte public verifying key to execute authentic wetware binaries.
+* **Standard AI & Numerical Cross-Verification:** Conforms to the Farama Foundation Gymnasium standard (`gymnasium.Env`) and cross-verified against Columbia University's `snnTorch` ODE integrator ($r = 0.9999999999996$).
 
 ---
 

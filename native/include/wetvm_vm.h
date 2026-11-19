@@ -41,6 +41,14 @@ typedef struct {
     size_t return_pc;
 } wet_call_frame_t;
 
+/* Ring-0 Life Support Supervisor (M6 Life Support Subsystem) */
+typedef struct {
+    uint8_t  supervisor_active;            /* 1 = Ring-0 supervisor autonomous maintenance active */
+    float    maintenance_perfusion_ul_min[8]; /* Baseline nutrient flow rates */
+    float    maintenance_temperature_c;      /* Target incubator temperature (37.0 C) */
+    uint64_t ticks_under_supervisor;
+} wet_life_supervisor_t;
+
 /* Internal VM instance structure */
 struct wet_vm_instance {
     wet_vm_config_t config;
@@ -75,9 +83,11 @@ struct wet_vm_instance {
     /* Execution State */
     uint64_t current_tick;
     double   sim_time_ms;
+    int64_t  sim_time_us;        /* Microsecond monotonic time (avoids float32 loss) */
     int      is_halted;
     int      is_finished;
     uint16_t sleep_ticks_remaining;
+    uint8_t  arena_allocated;    /* 1 if created in static arena memory */
 
     /* Channel States (64 channels) */
     float    voltages[64];
@@ -94,6 +104,9 @@ struct wet_vm_instance {
     bio_state_t       bio;
     interlock_state_t interlocks;
     uint16_t          loaded_capabilities;
+
+    /* Ring-0 Autonomous Life Support Supervisor */
+    wet_life_supervisor_t life_supervisor;
 
     /* Cyber-Physical Hardware Actuator State (M5 HAL) */
     float    pump_rates_ul_min[8];

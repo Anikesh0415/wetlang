@@ -332,6 +332,25 @@ class _Pass1Visitor(ASTVisitor):
                         f"Requested pump rate {val:.2f} uL/min exceeds safe hydrodynamic shear limit (0..15.0 uL/min)",
                         node.line, node.column, "ERR_SHEAR_STRESS_EXCEEDED"
                     )
+
+                # Geometry-Aware Shear Stress Check: tau_w = 1.2 * (6 * mu * Q) / (w * h^2)
+                # If optional channel dimensions are passed as args: pump_set_rate(ch, rate, width, height)
+                if len(node.args) >= 4:
+                    w_node, h_node = node.args[2], node.args[3]
+                    w_um = getattr(w_node, "magnitude", 1000.0) if isinstance(w_node, PhysicalLiteralNode) else 1000.0
+                    h_um = getattr(h_node, "magnitude", 200.0) if isinstance(h_node, PhysicalLiteralNode) else 200.0
+                    # Convert Q to m^3/s: val uL/min * 1e-9 m^3/uL / 60 s/min
+                    q_m3_s = (val * 1e-9) / 60.0
+                    w_m = float(w_um) * 1e-6
+                    h_m = float(h_um) * 1e-6
+                    mu = 0.001 # Pa*s (viscosity of aqueous culture medium)
+                    tau_w = 1.2 * (6.0 * mu * q_m3_s) / (w_m * (h_m ** 2))
+                    if tau_w > 0.05: # 0.05 Pa maximum safe shear stress for neurites
+                        raise SemanticError(
+                            f"Hydrodynamic Shear Stress Exceeded: Wall shear stress tau_w = {tau_w:.3f} Pa "
+                            f"exceeds physiological threshold (0.05 Pa) in {w_um:.0f}x{h_um:.0f} um channel at {val:.2f} uL/min",
+                            node.line, node.column, "ERR_SHEAR_STRESS_EXCEEDED"
+                        )
         for arg in node.args:
             self.visit(arg)
 
@@ -451,14 +470,48 @@ class _Pass2Visitor(ASTVisitor):
             self.visit(decl)
 
     def visit_OrganoidDeclNode(self, node: OrganoidDeclNode) -> None:
-        # Krogh Cylinder Anoxia Check: radius > 200 um without perfusion causes core necrosis
-        if node.radius is not None and getattr(node.radius, "si_value", 0.0) > 0.000200:
-            if node.perfusion is None:
+        # Phase 3 Biophysics: Spherical Reaction-Diffusion (Thiele Modulus) Anoxia Model.
+        # Living neural organoids in culture baths are avascular spheres.
+        # Steady-state spherical diffusion equation with zero-order oxygen consumption R0:
+        #   (1/r^2) d/dr (r^2 dC/dr) = R0 / D_eff
+        # Solving with C(R) = C_surface and dC/dr(0) = 0 yields:
+        #   C(r) = C_surface - (R0 / 6 D_eff) * (R^2 - r^2)
+        # Critical penetration depth before core anoxia C(0) <= 0:
+        #   R_crit = sqrt(6 * D_eff * C_surface / R0) ~= 200..250 um.
+        if node.radius is not None:
+            r_val = getattr(node.radius, "si_value", 0.0)
+            r_um = r_val * 1e6
+
+            # 1. Unperfused threshold: R > 200 um without perfusion causes core necrosis
+            if r_val > 0.000200 and node.perfusion is None:
                 raise SemanticError(
-                    f"Krogh Cylinder Anoxia Violation: organoid '{node.name}' has radius > 200 um "
-                    f"({node.radius.si_value * 1e6:.1f} um) requiring active microfluidic perfusion",
+                    f"Spherical Diffusion Anoxia Violation: organoid '{node.name}' has radius > 200 um "
+                    f"({r_um:.1f} um) requiring active microfluidic perfusion",
                     node.line, node.column, "ERR_KROGH_ANOXIA_VIOLATION"
                 )
+
+            # 2. Avascular physical diffusion limit: R > 250 um causes central necrosis
+            # even with 100% saturated external perfusion, due to internal diffusion limits
+            # unless structural micro-channels, air-liquid interface slicing, or vascularization exist.
+            if r_val > 0.000250 and node.perfusion is not None:
+                props = getattr(node, "properties", {})
+                is_vascularized = False
+                for key in ("vascularized", "sliced_ali", "internal_channel", "slice"):
+                    if key in props:
+                        val = props[key]
+                        val_str = str(getattr(val, "value", getattr(val, "name", str(val)))).lower()
+                        if val_str in ("true", "1"):
+                            is_vascularized = True
+                            break
+
+                if not is_vascularized:
+                    raise SemanticError(
+                        f"Avascular Core Necrosis Violation: organoid '{node.name}' radius {r_um:.1f} um "
+                        f"exceeds the avascular spherical diffusion limit (250 um). External perfusion cannot "
+                        f"prevent central anoxia due to internal tissue diffusion limits (D_eff = 1.07e-9 m^2/s). "
+                        f"Requires 'vascularized: true', 'sliced_ali: true', or 'internal_channel: true'.",
+                        node.line, node.column, "ERR_AVASCULAR_CORE_NECROSIS"
+                    )
 
     def visit_ConnectDeclNode(self, node: ConnectDeclNode) -> None:
         src_name = getattr(node.source, "name", None)

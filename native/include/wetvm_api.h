@@ -33,6 +33,7 @@ typedef struct {
     uint32_t max_stack_depth;  /* Max operand stack capacity (default: 1024) */
     uint32_t max_locals;       /* Max local variable slots (default: 256) */
     uint32_t channel_count;    /* Number of MEA channels (default: 64) */
+    uint32_t max_ops_per_tick; /* Per-tick watchdog instruction limit (default: 100,000 / 2,000 for MCU) */
 } wet_vm_config_t;
 
 /* Cycle-Accurate Telemetry Output */
@@ -67,9 +68,57 @@ typedef struct {
 WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config);
 
 /**
+ * Creates a WetVM instance using caller-supplied static arena memory (zero dynamic malloc).
+ */
+WET_EXPORT wet_vm_t* wet_create_vm_arena(
+    void* arena_buf,
+    size_t arena_bytes,
+    const wet_vm_config_t* config
+);
+
+/**
  * Destroys the VM instance and releases all associated memory.
  */
 WET_EXPORT void wet_free_vm(wet_vm_t* vm);
+
+/**
+ * Phase 3: Configures electrode material and physical geometric surface area.
+ */
+WET_EXPORT void wet_configure_electrode(
+    wet_vm_t* vm,
+    uint8_t material,
+    float area_um2
+);
+
+/**
+ * Phase 3: Actuates hardware charge-recovery switch to discharge residual DC Faradaic charge.
+ */
+WET_EXPORT void wet_active_discharge(
+    wet_vm_t* vm,
+    uint8_t channel
+);
+
+/**
+ * Phase 3: Actuates hardware charge-recovery switch on all channels.
+ */
+WET_EXPORT void wet_active_discharge_all(
+    wet_vm_t* vm
+);
+
+/**
+ * Phase 3: Enables microfluidic valve-pump dead-head overpressure interlock.
+ */
+WET_EXPORT void wet_enable_dead_head_protection(
+    wet_vm_t* vm,
+    uint8_t enable
+);
+
+/**
+ * Phase 3: Ring-0 Life Support Supervisor shutdown (terminates baseline life support).
+ */
+WET_EXPORT void wet_life_supervisor_shutdown(
+    wet_vm_t* vm
+);
 
 /**
  * Validates, loads, and parses WBC binary bytecode into the VM.

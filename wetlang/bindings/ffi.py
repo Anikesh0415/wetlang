@@ -49,12 +49,13 @@ class WetStatus(IntEnum):
 # =========================================================================
 
 class WetVMConfig(ctypes.Structure):
-    """Mirror of C wet_vm_config_t (24 bytes)."""
+    """Mirror of C wet_vm_config_t (28 bytes)."""
     _fields_ = [
         ("dt_ms", c_double),
         ("max_stack_depth", c_uint32),
         ("max_locals", c_uint32),
         ("channel_count", c_uint32),
+        ("max_ops_per_tick", c_uint32),
     ]
 
     def __init__(
@@ -62,13 +63,15 @@ class WetVMConfig(ctypes.Structure):
         dt_ms: float = 0.1,
         max_stack_depth: int = 1024,
         max_locals: int = 256,
-        channel_count: int = 64
+        channel_count: int = 64,
+        max_ops_per_tick: int = 100000
     ):
         super().__init__(
             dt_ms=dt_ms,
             max_stack_depth=max_stack_depth,
             max_locals=max_locals,
-            channel_count=channel_count
+            channel_count=channel_count,
+            max_ops_per_tick=max_ops_per_tick
         )
 
 
@@ -153,12 +156,14 @@ def _find_library_path() -> Path:
     # Search candidates
     curr_dir = Path(__file__).resolve().parent
     candidates = [
+        curr_dir.parent / "bin" / lib_name,
         curr_dir.parent / "native" / "bin" / lib_name,
-        curr_dir.parent / "native" / lib_name,
+        curr_dir.parent.parent / "bin" / lib_name,
+        curr_dir.parent.parent / "native" / "bin" / lib_name,
+        curr_dir / lib_name,
         Path.cwd() / "native" / "bin" / lib_name,
+        Path.cwd() / "bin" / lib_name,
         Path.cwd() / "native" / lib_name,
-        Path.cwd() / "wetworld_language" / "native" / "bin" / lib_name,
-        Path.cwd() / "wetworld_language" / "native" / lib_name,
     ]
 
     for cand in candidates:
@@ -224,6 +229,31 @@ def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
     if hasattr(lib, "wet_get_actuator_telemetry"):
         lib.wet_get_actuator_telemetry.restype = c_int
         lib.wet_get_actuator_telemetry.argtypes = [c_void_p, POINTER(WetActuatorTelemetry)]
+
+    # Phase 3 C-ABI Functions
+    if hasattr(lib, "wet_create_vm_arena"):
+        lib.wet_create_vm_arena.restype = c_void_p
+        lib.wet_create_vm_arena.argtypes = [c_void_p, c_size_t, POINTER(WetVMConfig)]
+
+    if hasattr(lib, "wet_configure_electrode"):
+        lib.wet_configure_electrode.restype = None
+        lib.wet_configure_electrode.argtypes = [c_void_p, c_uint8, c_float]
+
+    if hasattr(lib, "wet_active_discharge"):
+        lib.wet_active_discharge.restype = None
+        lib.wet_active_discharge.argtypes = [c_void_p, c_uint8]
+
+    if hasattr(lib, "wet_active_discharge_all"):
+        lib.wet_active_discharge_all.restype = None
+        lib.wet_active_discharge_all.argtypes = [c_void_p]
+
+    if hasattr(lib, "wet_enable_dead_head_protection"):
+        lib.wet_enable_dead_head_protection.restype = None
+        lib.wet_enable_dead_head_protection.argtypes = [c_void_p, c_uint8]
+
+    if hasattr(lib, "wet_life_supervisor_shutdown"):
+        lib.wet_life_supervisor_shutdown.restype = None
+        lib.wet_life_supervisor_shutdown.argtypes = [c_void_p]
 
     return lib
 
@@ -295,3 +325,25 @@ class WetVMFFI:
     def get_telemetry(self, vm: ctypes.c_void_p, telem: WetTelemetry) -> int:
         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
         return self.lib.wet_get_telemetry(vm, telem_ptr)
+
+    def create_vm_arena(self, arena_bytes: int, config: Optional[WetVMConfig] = None) -> Tuple[ctypes.c_void_p, ctypes.Array]:
+        """Creates a VM using a pre-allocated static ctypes byte buffer (zero heap malloc)."""
+        buf = (ctypes.c_uint8 * arena_bytes)()
+        cfg_ptr = ctypes.byref(config) if config is not None else None
+        vm = self.lib.wet_create_vm_arena(ctypes.byref(buf), ctypes.c_size_t(arena_bytes), cfg_ptr)
+        return vm, buf
+
+    def configure_electrode(self, vm: ctypes.c_void_p, material: int, area_um2: float) -> None:
+        self.lib.wet_configure_electrode(vm, ctypes.c_uint8(material), ctypes.c_float(area_um2))
+
+    def active_discharge(self, vm: ctypes.c_void_p, channel: int) -> None:
+        self.lib.wet_active_discharge(vm, ctypes.c_uint8(channel))
+
+    def active_discharge_all(self, vm: ctypes.c_void_p) -> None:
+        self.lib.wet_active_discharge_all(vm)
+
+    def enable_dead_head_protection(self, vm: ctypes.c_void_p, enable: bool) -> None:
+        self.lib.wet_enable_dead_head_protection(vm, ctypes.c_uint8(1 if enable else 0))
+
+    def life_supervisor_shutdown(self, vm: ctypes.c_void_p) -> None:
+        self.lib.wet_life_supervisor_shutdown(vm)
