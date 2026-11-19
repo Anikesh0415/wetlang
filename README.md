@@ -2,7 +2,7 @@
 ### The Domain-Specific Programming Language & Cyber-Physical Engine for Neural Organoid Computing
 
 [![Language: WetLang](https://img.shields.io/badge/Language-WetLang%20(100%25)-00B4D8?style=for-the-badge&logo=dna)](docs/LANGUAGE_SPECIFICATION.md)
-[![Tests Passing](https://img.shields.io/badge/Tests-454%2F454%20Passing%20(100%25)-brightgreen.svg)]()
+[![Tests Passing](https://img.shields.io/badge/Tests-463%2F463%20Passing%20(100%25)-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Gymnasium](https://img.shields.io/badge/RL-Farama%20Gymnasium-purple.svg)]()
 [![snnTorch](https://img.shields.io/badge/ODE--Verification-snnTorch%20(r%3D0.999999)-success.svg)]()
@@ -21,7 +21,10 @@ WetLang treats **living neural tissue and robotic life support as a single, unif
 * **Cyber-Physical Actuator Control:** Directly drives microfluidic peristaltic/syringe pumps, micro-pinch valves, and stepper motors in cycle-accurate ($0.1\text{ ms}$) synchrony with electrical stimulation.
 * **Spherical Reaction-Diffusion Thiele Anoxia Check:** Rejects unperfused organoids exceeding $r > 200\,\mu\text{m}$ and strictly forbids avascular organoids exceeding $r > 250\,\mu\text{m}$ (`ERR_AVASCULAR_CORE_NECROSIS`) even with perfusion, unless structurally vascularized or sliced.
 * **Geometry-Aware Hydrodynamic Shear Stress Clamp:** Enforces $\tau_w = 1.2 \frac{6\mu Q}{w h^2} \le 0.05\text{ Pa}$ and dead-head valve-pump interlocks to prevent neurite shear lysis and microfluidic backpressure blowout.
-* **Electrochemical Water-Window Interlocks:** Parameterized by electrode material (Pt, TiN, IrOx, PEDOT) and geometric surface area, backed by an unbounded cumulative DC charge accumulator and active hardware discharge switch.
+* **Electrochemical Water-Window & Randles Model:** Parameterized by electrode material (Pt, TiN, IrOx, PEDOT) and geometric area, modeling equivalent Randles cell impedance ($R_s + (R_{ct} \parallel C_{dl})$), constant-current stimulation (`stim_current`), $\pm 7.0\text{ V}$ compliance rail interlocks, and active hardware discharge.
+* **Configurable Blanking & Spatial Crosstalk Suppression:** Suppresses stimulation artifacts on active and 8-way spatial neighbor electrodes, preventing false spike detections.
+* **Environmental Sensor ISA & Thermal/Bubble Interlocks:** Real-time acquisition of pH (`read_ph`), dissolved oxygen (`read_do`), dissolved CO2 (`read_co2`), optical bubble detection (`read_bubble`), and microfluidic flow rate (`read_flow`), with automated thermal duty-cycle ($>38.0^\circ\text{C}$) and bubble pump cut-off safety interlocks.
+* **Freestanding C99 Bytecode Verifier & Live State Checkpointing:** Load-time structural and branch-target verifier (`wet_verify_bytecode`) and non-destructive live state hot-swapping (`wet_vm_snapshot` / `wet_vm_restore`, `WETS` format) preserving 64-neuron plasticity and STP dynamics.
 * **Ring-0 Life Support Supervisor (`wetlife`):** Autonomous life-support daemon maintaining baseline nutrient perfusion ($1.5\,\mu\text{L/min}$) and $37^\circ\text{C}$ incubator thermal setpoints even if experimental user code halts or throws errors.
 * **Asymmetric Cryptographic Provenance:** Signed via Ed25519; bioreactor nodes only need the 32-byte public verifying key to execute authentic wetware binaries.
 * **Standard AI & Numerical Cross-Verification:** Conforms to the Farama Foundation Gymnasium standard (`gymnasium.Env`) and cross-verified against Columbia University's `snnTorch` ODE integrator ($r = 0.9999999999996$).

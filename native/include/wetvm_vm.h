@@ -117,6 +117,13 @@ struct wet_vm_instance {
     float    ambient_temperature_c;
     float    fluid_pressure_kpa[4];
 
+    /* Phase 3 Environmental & Cyber-Physical Sensors */
+    float    ph_level;              /* e.g. 7.40 */
+    float    dissolved_oxygen_pct;  /* e.g. 95.0 % */
+    float    dissolved_co2_pct;     /* e.g. 5.0 % */
+    uint8_t  bubble_detected[8];    /* 1 if bubble detected on tubing line */
+    float    fluid_flow_rate_ul_min[8]; /* flow sensor readouts */
+
     /* Error reporting buffer */
     char     last_error[256];
 };
@@ -124,6 +131,7 @@ struct wet_vm_instance {
 /* Internal VM execution and validation declarations */
 uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc);
 wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem);
+wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len);
 
 #ifdef __cplusplus
 }

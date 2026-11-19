@@ -65,19 +65,38 @@ void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t 
                               ? channel_count : INTERLOCK_NUM_CHANNELS;
 }
 
+void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask) {
+    if (!il) return;
+    il->reference_channels_mask = ref_mask;
+    il->recording_only_channels_mask = rec_mask;
+}
+
 int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel) {
     if (!il) return 0;
     if (il->locked) return 0;
 
     /* Bounds check for channel-addressed opcodes */
-    if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_READ_SPIKES || opcode == WET_OP_READ_VOLTAGE) {
+    if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_STIM_CURRENT ||
+        opcode == WET_OP_READ_SPIKES || opcode == WET_OP_READ_VOLTAGE) {
         if ((uint32_t)channel >= il->authorized_channels) {
             return 0;
         }
     }
 
+    /* Typed Channel Banks: Disallow stimulation on reference or recording-only electrodes */
+    if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_STIM_CURRENT) {
+        if (channel < 64) {
+            uint64_t ch_bit = 1ULL << channel;
+            if ((il->reference_channels_mask & ch_bit) != 0ULL ||
+                (il->recording_only_channels_mask & ch_bit) != 0ULL) {
+                return 0; /* Capability Denied: Channel restricted to reference or recording */
+            }
+        }
+    }
+
     switch ((wet_opcode_t)opcode) {
         case WET_OP_STIM_BIPHASIC:
+        case WET_OP_STIM_CURRENT:
             if ((il->authorized_capabilities & WET_CAP_STIMULATION) == 0) {
                 return 0;
             }
@@ -237,5 +256,59 @@ wet_status_t interlocks_check_epileptiform(
         il->hyperactive_consecutive_ticks = 0U;
     }
 
+    return WET_OK;
+}
+
+wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c) {
+    if (!il) return WET_ERR_NULL_PTR;
+    if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+
+    if (temp_c > INTERLOCK_THERMAL_LIMIT_C) {
+        il->locked = 1;
+        il->trip_reason = INTERLOCK_TRIP_THERMAL_LIMIT;
+        il->tripped_channel = 0xFF;
+        il->trip_tick = current_tick;
+        il->trip_value = temp_c;
+        snprintf(il->diagnostic, sizeof(il->diagnostic),
+                 "ERR_THERMAL_LIMIT: Temperature %.2f C exceeds incubator threshold (38.00 C) at tick %llu",
+                 (double)temp_c, (unsigned long long)current_tick);
+        return WET_ERR_THERMAL_LIMIT;
+    }
+    return WET_OK;
+}
+
+wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id) {
+    if (!il) return WET_ERR_NULL_PTR;
+    if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+
+    if (bubble_detected) {
+        il->locked = 1;
+        il->trip_reason = INTERLOCK_TRIP_BUBBLE_DETECTED;
+        il->tripped_channel = sensor_id;
+        il->trip_tick = current_tick;
+        il->trip_value = 1.0f;
+        snprintf(il->diagnostic, sizeof(il->diagnostic),
+                 "ERR_BUBBLE_DETECTED: Optical bubble sensor %u triggered (fluid line cavitation risk) at tick %llu",
+                 sensor_id, (unsigned long long)current_tick);
+        return WET_ERR_BUBBLE_DETECTED;
+    }
+    return WET_OK;
+}
+
+wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v) {
+    if (!il) return WET_ERR_NULL_PTR;
+    if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+
+    if (wet_fabsf(v_elec_v) > INTERLOCK_COMPLIANCE_LIMIT_V) {
+        il->locked = 1;
+        il->trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
+        il->tripped_channel = channel;
+        il->trip_tick = current_tick;
+        il->trip_value = v_elec_v;
+        snprintf(il->diagnostic, sizeof(il->diagnostic),
+                 "ERR_COMPLIANCE_RAILED: ch=%u electrode potential %.3f V exceeded compliance rail (+/-7.0 V) at tick %llu",
+                 channel, (double)v_elec_v, (unsigned long long)current_tick);
+        return WET_ERR_COMPLIANCE_RAILED;
+    }
     return WET_OK;
 }

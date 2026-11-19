@@ -116,6 +116,14 @@ class Opcode(IntEnum):
     READ_PRESSURE = 0x5A
     READ_TEMPERATURE = 0x5B
 
+    # Phase 3 Electrophysiology & Environmental Sensors
+    STIM_CURRENT = 0x5C
+    READ_PH = 0x5D
+    READ_DO = 0x5E
+    READ_CO2 = 0x5F
+    READ_BUBBLE = 0x60
+    READ_FLOW = 0x61
+
 
 # Opcode metadata: format strings for operands (little-endian)
 # Empty string means no operands.
@@ -165,6 +173,12 @@ OPCODE_OPERAND_FORMATS: Dict[Opcode, str] = {
     Opcode.MOTOR_STEP: "<Bif",         # uint8 motor_id, int32 steps, float32 speed_rpm
     Opcode.READ_PRESSURE: "<B",        # uint8 port_id
     Opcode.READ_TEMPERATURE: "",
+    Opcode.STIM_CURRENT: "<Bf",        # uint8 channel, float32 current_ua
+    Opcode.READ_PH: "",
+    Opcode.READ_DO: "",
+    Opcode.READ_CO2: "",
+    Opcode.READ_BUBBLE: "<B",          # uint8 sensor_id
+    Opcode.READ_FLOW: "<B",            # uint8 sensor_id
 }
 
 OPCODE_NAMES: Dict[int, str] = {op.value: op.name for op in Opcode}

@@ -193,6 +193,87 @@ WET_EXPORT const char* wet_get_last_error(wet_vm_t* vm);
  */
 WET_EXPORT const char* wet_status_to_string(wet_status_t status);
 
+/**
+ * Phase 3: Configures post-stimulus amplifier artifact blanking window in ms.
+ */
+WET_EXPORT void wet_configure_blanking(
+    wet_vm_t* vm,
+    float blanking_ms,
+    uint8_t enable_spatial
+);
+
+/**
+ * Phase 3: Injects constant-current electrical stimulus (uA) into MEA channel.
+ */
+WET_EXPORT wet_status_t wet_inject_current_stimulus(
+    wet_vm_t* vm,
+    uint8_t channel,
+    float current_ua,
+    float phase1_ms,
+    float phase2_ms
+);
+
+/**
+ * Phase 3: Standalone C99 Load-Time Bytecode Verifier.
+ * Validates magic, CRC32, section boundaries, opcode validity, and branch target alignment.
+ */
+WET_EXPORT wet_status_t wet_verify_bytecode(
+    const uint8_t* bytecode,
+    size_t size,
+    char* err_buf,
+    size_t err_buf_len
+);
+
+/**
+ * Phase 3: Live State Checkpointing.
+ * Serializes complete dynamic neural state, synaptic weights, and clocks into buffer.
+ */
+WET_EXPORT wet_status_t wet_vm_snapshot(
+    const wet_vm_t* vm,
+    uint8_t* buffer,
+    size_t* inout_len
+);
+
+/**
+ * Phase 3: Live State Hot-Swap Restoration.
+ * Deserializes neural state and synaptic weights without rebooting the VM.
+ */
+WET_EXPORT wet_status_t wet_vm_restore(
+    wet_vm_t* vm,
+    const uint8_t* buffer,
+    size_t len
+);
+
+/**
+ * Phase 3: Sets environmental sensor readings (pH, DO %, CO2 %, bubble detectors, flow rate).
+ */
+WET_EXPORT void wet_set_environmental_sensors(
+    wet_vm_t* vm,
+    float ph,
+    float do_pct,
+    float co2_pct,
+    uint8_t bubble_sensor_id,
+    uint8_t bubble_state,
+    float flow_rate_ul_min
+);
+
+/**
+ * Phase 3: Sets ambient incubator / CMOS die temperature (C).
+ */
+WET_EXPORT void wet_set_temperature(
+    wet_vm_t* vm,
+    float temp_c
+);
+
+/**
+ * Phase 3: Sets typed channel banks (reference and recording-only masks).
+ */
+WET_EXPORT void wet_set_channel_banks(
+    wet_vm_t* vm,
+    uint64_t ref_mask,
+    uint64_t rec_mask
+);
+
 #ifdef __cplusplus
 }
 #endif

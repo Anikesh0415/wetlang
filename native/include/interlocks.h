@@ -43,6 +43,8 @@ extern "C" {
 #define INTERLOCK_FOCAL_SUSTAIN_TICKS   2500    /* 250.0 ms sustained focal hyperactivity */
 #define INTERLOCK_DUTY_CYCLE_LIMIT      0.05f   /* 5% max stimulation duty cycle */
 #define INTERLOCK_DUTY_CYCLE_DECAY      0.9999f /* tau = 1.0 s (10,000 ticks) */
+#define INTERLOCK_THERMAL_LIMIT_C       38.0f   /* 38.0 C max incubator / CMOS die temperature */
+#define INTERLOCK_COMPLIANCE_LIMIT_V    7.0f    /* 7.0 V Intan RHS2116 compliance rail */
 
 /* Phase 3 Electrochemical Water-Window & Material CIC Limits */
 typedef enum {
@@ -62,7 +64,10 @@ typedef enum {
     INTERLOCK_TRIP_DC_DRIFT            = 5,
     INTERLOCK_TRIP_CHARGE_DENSITY      = 6,
     INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY= 7,
-    INTERLOCK_TRIP_DEAD_HEAD_PRESSURE  = 8
+    INTERLOCK_TRIP_DEAD_HEAD_PRESSURE  = 8,
+    INTERLOCK_TRIP_THERMAL_LIMIT       = 9,
+    INTERLOCK_TRIP_BUBBLE_DETECTED     = 10,
+    INTERLOCK_TRIP_COMPLIANCE_RAILED   = 11
 } interlock_trip_reason_t;
 
 typedef struct {
@@ -109,17 +114,27 @@ typedef struct {
     /* Authorized bytecode capabilities */
     uint16_t authorized_capabilities;
     uint32_t authorized_channels;
+
+    /* Typed Channel Banks / Capabilities (Bug C-05 Remediation) */
+    uint64_t reference_channels_mask;      /* Cannot be stimulated */
+    uint64_t recording_only_channels_mask; /* Cannot be stimulated */
 } interlock_state_t;
 
 /* Initialize / reset watchdog state */
 void interlocks_init(interlock_state_t* il);
 void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count);
+void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask);
 
 /* Phase 3 Electrochemical & Hardware Interlock API */
 void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
 void interlocks_active_discharge(interlock_state_t* il, uint8_t channel);
 void interlocks_active_discharge_all(interlock_state_t* il);
 void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable);
+
+/* Environmental & Compliance Safety Checks */
+wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c);
+wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id);
+wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v);
 
 /* Static authorization check for an opcode against loaded bytecode capabilities */
 int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel);

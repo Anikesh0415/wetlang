@@ -389,6 +389,32 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
         }
     }
 
+    /* Phase 3 Environmental Checks: Thermal Limit (CMOS heating) & Bubble Detection */
+    if (vm->ambient_temperature_c > INTERLOCK_THERMAL_LIMIT_C) {
+        wet_status_t th_st = interlocks_check_thermal(&vm->interlocks, vm->current_tick, vm->ambient_temperature_c);
+        if (th_st != WET_OK) {
+            biophysics_zero_all_stim(&vm->bio);
+            vm->is_halted = 1;
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            populate_telemetry(vm, out_telem);
+            return th_st;
+        }
+    }
+
+    for (int b = 0; b < 8; ++b) {
+        if (vm->bubble_detected[b]) {
+            wet_status_t bub_st = interlocks_check_bubble(&vm->interlocks, vm->current_tick, 1, (uint8_t)b);
+            if (bub_st != WET_OK) {
+                for (int p = 0; p < 8; ++p) vm->pump_rates_ul_min[p] = 0.0f;
+                biophysics_zero_all_stim(&vm->bio);
+                vm->is_halted = 1;
+                snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                populate_telemetry(vm, out_telem);
+                return bub_st;
+            }
+        }
+    }
+
     /* 1. Advance in-silico biophysics by 1 tick (dt = 0.1 ms) */
     biophysics_step_tick(&vm->bio);
     for (int ch = 0; ch < 64; ++ch) {
@@ -1388,6 +1414,153 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 break;
             }
 
+            case WET_OP_STIM_CURRENT: {
+                if (instr_pc + 6 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STIM_CURRENT operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+                float current_ua;
+                memcpy(&current_ua, vm->code + instr_pc + 2, sizeof(float));
+                vm->pc = instr_pc + 6;
+
+                /* Pop duration arguments: interphase, phase2, phase1 */
+                wet_value_t v_interphase, v_p2, v_p1;
+                wet_status_t st = pop_val(vm, &v_interphase);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &v_p2);
+                if (st != WET_OK) return st;
+                st = pop_val(vm, &v_p1);
+                if (st != WET_OK) return st;
+
+                if (channel == 0xFF) {
+                    wet_value_t v_ch;
+                    st = pop_val(vm, &v_ch);
+                    if (st != WET_OK) return st;
+                    int32_t c_idx = to_int(&v_ch);
+                    if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "Electrode channel %d out of bounds (max %u)",
+                                 c_idx, vm->config.channel_count);
+                        return WET_ERR_OUT_OF_BOUNDS_CH;
+                    }
+                    channel = (uint8_t)c_idx;
+                } else if (channel >= vm->config.channel_count) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Electrode channel %u out of bounds (max %u)",
+                             channel, vm->config.channel_count);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                if (vm->interlocks.locked) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                    return WET_ERR_INTERLOCK_LOCKED;
+                }
+
+                if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Capability denied for STIM_CURRENT on ch %u (ref/rec bank restricted or missing CAP_STIMULATION)", channel);
+                    return WET_ERR_CAPABILITY_DENIED;
+                }
+
+                float p1_ms = to_float(&v_p1);
+                float p2_ms = to_float(&v_p2);
+                float ip_ms = to_float(&v_interphase);
+
+                /* Randles Interface: V_elec = I * Rs + V_dl */
+                float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+                wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
+                if (comp_st != WET_OK) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                    return comp_st;
+                }
+
+                /* Per-phase charge density check: Q (nC) = I (uA) * t (ms) */
+                if (p1_ms > 0.0f && p2_ms > 0.0f) {
+                    float q_phase1 = wet_fabsf(current_ua) * 1e-3f * p1_ms;
+                    float q_phase2 = wet_fabsf(current_ua) * 1e-3f * p2_ms;
+                    if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+                        vm->interlocks.locked = 1;
+                        vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+                        vm->interlocks.tripped_channel = channel;
+                        vm->interlocks.trip_tick = vm->current_tick;
+                        vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+                        snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                                 "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+                                 channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+                        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                        return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+                    }
+                }
+
+                biophysics_schedule_stim_current(&vm->bio, channel, current_ua, p1_ms, p2_ms, ip_ms);
+                vm->voltages[channel] = v_elec;
+                vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
+                break;
+            }
+
+            case WET_OP_READ_PH: {
+                vm->pc = instr_pc + 1;
+                wet_value_t ph_val;
+                ph_val.type = WET_VAL_FLOAT;
+                ph_val.as.f_val = vm->ph_level > 0.0f ? vm->ph_level : 7.40f;
+                wet_status_t st = push_val(vm, ph_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_READ_DO: {
+                vm->pc = instr_pc + 1;
+                wet_value_t do_val;
+                do_val.type = WET_VAL_FLOAT;
+                do_val.as.f_val = vm->dissolved_oxygen_pct > 0.0f ? vm->dissolved_oxygen_pct : 95.0f;
+                wet_status_t st = push_val(vm, do_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_READ_CO2: {
+                vm->pc = instr_pc + 1;
+                wet_value_t co2_val;
+                co2_val.type = WET_VAL_FLOAT;
+                co2_val.as.f_val = vm->dissolved_co2_pct > 0.0f ? vm->dissolved_co2_pct : 5.0f;
+                wet_status_t st = push_val(vm, co2_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_READ_BUBBLE: {
+                if (instr_pc + 2 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_BUBBLE operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 2;
+                if (sensor_id >= 8) sensor_id = 0;
+                wet_value_t b_val;
+                b_val.type = WET_VAL_INT;
+                b_val.as.i_val = vm->bubble_detected[sensor_id] ? 1 : 0;
+                wet_status_t st = push_val(vm, b_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
+            case WET_OP_READ_FLOW: {
+                if (instr_pc + 2 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_FLOW operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+                vm->pc = instr_pc + 2;
+                if (sensor_id >= 8) sensor_id = 0;
+                wet_value_t f_val;
+                f_val.type = WET_VAL_FLOAT;
+                f_val.as.f_val = vm->fluid_flow_rate_ul_min[sensor_id];
+                wet_status_t st = push_val(vm, f_val);
+                if (st != WET_OK) return st;
+                break;
+            }
+
             default: {
                 snprintf(vm->last_error, sizeof(vm->last_error),
                          "Unrecognized or invalid opcode 0x%02X at pc %zu", op, instr_pc);
@@ -1397,5 +1570,384 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
     }
 
     populate_telemetry(vm, out_telem);
+    return WET_OK;
+}
+
+/* =========================================================================
+ * Phase 3: Standalone C99 Load-Time Bytecode Verifier
+ * ========================================================================= */
+
+wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len) {
+    if (!bytecode) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Null bytecode pointer");
+        return WET_ERR_NULL_PTR;
+    }
+    if (size < WET_HEADER_SIZE) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Bytecode size %zu smaller than 32-byte header", size);
+        return WET_ERR_INVALID_MAGIC;
+    }
+
+    if (memcmp(bytecode, WET_HEADER_MAGIC, 4) != 0) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Invalid header magic (expected WETB)");
+        return WET_ERR_INVALID_MAGIC;
+    }
+
+    uint8_t v_maj = bytecode[4];
+    uint8_t v_min = bytecode[5];
+    if (v_maj != WET_VERSION_MAJOR || v_min != WET_VERSION_MINOR) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Unsupported version %u.%u (expected 1.0)", v_maj, v_min);
+        return WET_ERR_UNSUPPORTED_VERSION;
+    }
+
+    uint32_t file_size = wet_read_u32_le(bytecode + 8);
+    uint32_t stored_crc = wet_read_u32_le(bytecode + 12);
+    uint32_t num_sections = wet_read_u32_le(bytecode + 16);
+
+    if (file_size > size) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Declared file size %u exceeds buffer %zu", file_size, size);
+        return WET_ERR_MALFORMED_SECTION;
+    }
+
+    /* CRC32 check: copy header, zero bytes 12..15, compute CRC */
+    uint8_t hdr_copy[WET_HEADER_SIZE];
+    memcpy(hdr_copy, bytecode, WET_HEADER_SIZE);
+    memset(hdr_copy + 12, 0, 4);
+    uint32_t crc = wet_compute_crc32(hdr_copy, WET_HEADER_SIZE, 0);
+    if (file_size > WET_HEADER_SIZE) {
+        crc = wet_compute_crc32(bytecode + WET_HEADER_SIZE, file_size - WET_HEADER_SIZE, crc);
+    }
+    if (crc != stored_crc) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "CRC32 mismatch (computed 0x%08X != stored 0x%08X)", crc, stored_crc);
+        return WET_ERR_CRC_MISMATCH;
+    }
+
+    size_t sec_table_end = WET_HEADER_SIZE + (size_t)num_sections * WET_SECTION_ENTRY_SIZE;
+    if (sec_table_end > file_size) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Section table overflows file bounds");
+        return WET_ERR_MALFORMED_SECTION;
+    }
+
+    const uint8_t* code_ptr = NULL;
+    size_t code_size = 0;
+    size_t num_constants = 0;
+
+    for (uint32_t s = 0; s < num_sections; ++s) {
+        const uint8_t* entry = bytecode + WET_HEADER_SIZE + s * WET_SECTION_ENTRY_SIZE;
+        uint16_t sec_type = wet_read_u16_le(entry);
+        uint32_t sec_offset = wet_read_u32_le(entry + 4);
+        uint32_t sec_size = wet_read_u32_le(entry + 8);
+
+        if ((size_t)sec_offset + sec_size > file_size || sec_offset < sec_table_end) {
+            if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Section %u (type %u) out of bounds", s, sec_type);
+            return WET_ERR_MALFORMED_SECTION;
+        }
+
+        if (sec_type == WET_SEC_BYTECODE_STREAM) {
+            code_ptr = bytecode + sec_offset;
+            code_size = sec_size;
+        } else if (sec_type == WET_SEC_CONSTANT_POOL) {
+            if (sec_size >= 4) {
+                uint32_t declared_entries = wet_read_u32_le(bytecode + sec_offset);
+                const uint8_t* cp = bytecode + sec_offset + 4;
+                size_t cp_remain = sec_size - 4;
+                while (cp_remain > 0) {
+                    uint8_t ctype = *cp;
+                    cp++; cp_remain--;
+                    if (ctype == WET_VAL_INT || ctype == WET_VAL_FLOAT) {
+                        if (cp_remain < 4) {
+                            if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Malformed constant pool");
+                            return WET_ERR_MALFORMED_SECTION;
+                        }
+                        cp += 4; cp_remain -= 4;
+                    } else if (ctype == WET_VAL_STRING) {
+                        if (cp_remain < 2) {
+                            if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Malformed string in constant pool");
+                            return WET_ERR_MALFORMED_SECTION;
+                        }
+                        uint16_t slen = wet_read_u16_le(cp);
+                        cp += 2; cp_remain -= 2;
+                        if (cp_remain < slen) {
+                            if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "String payload overflows constant pool");
+                            return WET_ERR_MALFORMED_SECTION;
+                        }
+                        cp += slen; cp_remain -= slen;
+                    } else {
+                        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Unknown constant type %u", ctype);
+                        return WET_ERR_MALFORMED_SECTION;
+                    }
+                    num_constants++;
+                }
+            }
+        }
+    }
+
+    if (!code_ptr || code_size == 0) {
+        return WET_OK;
+    }
+
+    uint8_t* is_start = (uint8_t*)malloc(code_size);
+    if (!is_start) {
+        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Failed to allocate verifier bitmap (%zu bytes)", code_size);
+        return WET_ERR_ALLOC_FAILED;
+    }
+    memset(is_start, 0, code_size);
+
+    /* Pass 1: Decode opcodes and check instruction sizes */
+    size_t pc = 0;
+    while (pc < code_size) {
+        is_start[pc] = 1;
+        uint8_t op = code_ptr[pc];
+        size_t ilen = 1;
+
+        switch ((wet_opcode_t)op) {
+            case WET_OP_NOP:
+            case WET_OP_HALT:
+            case WET_OP_SYNC_TICK:
+            case WET_OP_POP:
+            case WET_OP_DUP:
+            case WET_OP_SWAP:
+            case WET_OP_ADD_I:
+            case WET_OP_SUB_I:
+            case WET_OP_MUL_I:
+            case WET_OP_DIV_I:
+            case WET_OP_ADD_F:
+            case WET_OP_SUB_F:
+            case WET_OP_MUL_F:
+            case WET_OP_DIV_F:
+            case WET_OP_NEG:
+            case WET_OP_MOD_I:
+            case WET_OP_CMP_EQ:
+            case WET_OP_CMP_NE:
+            case WET_OP_CMP_LT:
+            case WET_OP_CMP_LE:
+            case WET_OP_CMP_GT:
+            case WET_OP_CMP_GE:
+            case WET_OP_RET:
+            case WET_OP_GET_POP_RATE:
+            case WET_OP_READ_TEMPERATURE:
+            case WET_OP_READ_PH:
+            case WET_OP_READ_DO:
+            case WET_OP_READ_CO2:
+                ilen = 1;
+                break;
+
+            case WET_OP_STIM_BIPHASIC:
+            case WET_OP_READ_SPIKES:
+            case WET_OP_READ_VOLTAGE:
+            case WET_OP_READ_PRESSURE:
+            case WET_OP_READ_BUBBLE:
+            case WET_OP_READ_FLOW:
+                ilen = 2;
+                break;
+
+            case WET_OP_SLEEP_TICKS:
+            case WET_OP_LOAD_LOCAL:
+            case WET_OP_STORE_LOCAL:
+            case WET_OP_JMP:
+            case WET_OP_JMP_IF_TRUE:
+            case WET_OP_JMP_IF_FALSE:
+            case WET_OP_MODULATE_STDP:
+            case WET_OP_MEA_CONFIG:
+            case WET_OP_VALVE_SET:
+                ilen = 3;
+                break;
+
+            case WET_OP_PUSH_CONST:
+                ilen = 3;
+                if (pc + 3 <= code_size) {
+                    uint16_t c_idx = wet_read_u16_le(code_ptr + pc + 1);
+                    if (c_idx >= num_constants) {
+                        if (err_buf && err_buf_len > 0)
+                            snprintf(err_buf, err_buf_len, "Constant index %u out of range (%zu)", c_idx, num_constants);
+                        free(is_start);
+                        return WET_ERR_BYTECODE_VERIFICATION;
+                    }
+                }
+                break;
+
+            case WET_OP_CALL:
+                ilen = 4;
+                break;
+
+            case WET_OP_PUSH_INT:
+            case WET_OP_PUSH_FLOAT:
+                ilen = 5;
+                break;
+
+            case WET_OP_PUMP_SET_RATE:
+            case WET_OP_PUMP_DISPENSE:
+            case WET_OP_STIM_CURRENT:
+                ilen = 6;
+                break;
+
+            case WET_OP_MOTOR_STEP:
+                ilen = 10;
+                break;
+
+            default:
+                if (err_buf && err_buf_len > 0)
+                    snprintf(err_buf, err_buf_len, "Invalid opcode 0x%02X at offset %zu", op, pc);
+                free(is_start);
+                return WET_ERR_INVALID_OPCODE;
+        }
+
+        if (pc + ilen > code_size) {
+            if (err_buf && err_buf_len > 0)
+                snprintf(err_buf, err_buf_len, "Truncated instruction (opcode 0x%02X needs %zu bytes, only %zu left)", op, ilen, code_size - pc);
+            free(is_start);
+            return WET_ERR_BYTECODE_VERIFICATION;
+        }
+        pc += ilen;
+    }
+
+    /* Pass 2: Verify branch target alignment */
+    pc = 0;
+    while (pc < code_size) {
+        uint8_t op = code_ptr[pc];
+        if (op == WET_OP_JMP || op == WET_OP_JMP_IF_TRUE || op == WET_OP_JMP_IF_FALSE) {
+            int16_t offset = wet_read_i16_le(code_ptr + pc + 1);
+            int64_t target = (int64_t)pc + offset;
+            if (target < 0 || (size_t)target >= code_size) {
+                if (err_buf && err_buf_len > 0)
+                    snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld out of code range [0, %zu)", pc, (long long)target, code_size);
+                free(is_start);
+                return WET_ERR_BYTECODE_VERIFICATION;
+            }
+            if (!is_start[target]) {
+                if (err_buf && err_buf_len > 0)
+                    snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld lands in middle of instruction", pc, (long long)target);
+                free(is_start);
+                return WET_ERR_BYTECODE_VERIFICATION;
+            }
+            pc += 3;
+        } else {
+            size_t next_pc = pc + 1;
+            while (next_pc < code_size && !is_start[next_pc]) next_pc++;
+            pc = next_pc;
+        }
+    }
+
+    free(is_start);
+    return WET_OK;
+}
+
+/* =========================================================================
+ * Phase 3: Live State Checkpointing & Hot-Swap
+ * ========================================================================= */
+
+#define WET_SNAPSHOT_MAGIC 0x53544557U /* 'W','E','T','S' */
+#define WET_SNAPSHOT_VERSION 1
+
+#pragma pack(push, 1)
+typedef struct {
+    uint32_t magic;
+    uint32_t version;
+    uint32_t payload_bytes;
+    uint64_t current_tick;
+    double   sim_time_ms;
+    int64_t  sim_time_us;
+    float    v_m_mv[64];
+    float    v_thresh_mv[64];
+    float    g_exc_ns[64];
+    float    g_inh_ns[64];
+    float    g_ahp_ns[64];
+    uint16_t refract_ticks[64];
+    float    trace_pre[64];
+    float    trace_post[64];
+    float    v_double_layer_v[64];
+    float    q_accum[64];
+    float    cumulative_unbounded_dc_nc[64];
+    float    syn_weights_ns[64][64];
+    float    syn_u_stp[64][64];
+    float    syn_x_stp[64][64];
+    float    pump_dispensed_ul[8];
+} wet_vm_snapshot_payload_t;
+#pragma pack(pop)
+
+wet_status_t wet_vm_snapshot_internal(const struct wet_vm_instance* vm, uint8_t* buffer, size_t* inout_len) {
+    if (!vm || !inout_len) return WET_ERR_NULL_PTR;
+
+    size_t req_size = sizeof(wet_vm_snapshot_payload_t);
+    if (!buffer) {
+        *inout_len = req_size;
+        return WET_OK;
+    }
+    if (*inout_len < req_size) {
+        *inout_len = req_size;
+        return WET_ERR_ALLOC_FAILED;
+    }
+
+    wet_vm_snapshot_payload_t* snap = (wet_vm_snapshot_payload_t*)buffer;
+    memset(snap, 0, sizeof(*snap));
+    snap->magic = WET_SNAPSHOT_MAGIC;
+    snap->version = WET_SNAPSHOT_VERSION;
+    snap->payload_bytes = (uint32_t)req_size;
+    snap->current_tick = vm->current_tick;
+    snap->sim_time_ms = vm->sim_time_ms;
+    snap->sim_time_us = vm->sim_time_us;
+
+    memcpy(snap->v_m_mv, vm->bio.v_m_mv, sizeof(snap->v_m_mv));
+    memcpy(snap->v_thresh_mv, vm->bio.v_thresh_mv, sizeof(snap->v_thresh_mv));
+    memcpy(snap->g_exc_ns, vm->bio.g_exc_ns, sizeof(snap->g_exc_ns));
+    memcpy(snap->g_inh_ns, vm->bio.g_inh_ns, sizeof(snap->g_inh_ns));
+    memcpy(snap->g_ahp_ns, vm->bio.g_ahp_ns, sizeof(snap->g_ahp_ns));
+    memcpy(snap->refract_ticks, vm->bio.refract_ticks, sizeof(snap->refract_ticks));
+    memcpy(snap->trace_pre, vm->bio.trace_pre, sizeof(snap->trace_pre));
+    memcpy(snap->trace_post, vm->bio.trace_post, sizeof(snap->trace_post));
+    memcpy(snap->v_double_layer_v, vm->bio.v_double_layer_v, sizeof(snap->v_double_layer_v));
+    memcpy(snap->q_accum, vm->interlocks.q_accum, sizeof(snap->q_accum));
+    memcpy(snap->cumulative_unbounded_dc_nc, vm->interlocks.cumulative_unbounded_dc_nc, sizeof(snap->cumulative_unbounded_dc_nc));
+    memcpy(snap->pump_dispensed_ul, vm->pump_dispensed_ul, sizeof(snap->pump_dispensed_ul));
+
+    for (int i = 0; i < 64; ++i) {
+        for (int j = 0; j < 64; ++j) {
+            snap->syn_weights_ns[i][j] = vm->bio.synapses[i][j].weight_ns;
+            snap->syn_u_stp[i][j] = vm->bio.synapses[i][j].u_stp;
+            snap->syn_x_stp[i][j] = vm->bio.synapses[i][j].x_stp;
+        }
+    }
+
+    *inout_len = req_size;
+    return WET_OK;
+}
+
+wet_status_t wet_vm_restore_internal(struct wet_vm_instance* vm, const uint8_t* buffer, size_t len) {
+    if (!vm || !buffer) return WET_ERR_NULL_PTR;
+    if (len < sizeof(wet_vm_snapshot_payload_t)) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "Snapshot buffer too small (%zu < %zu)", len, sizeof(wet_vm_snapshot_payload_t));
+        return WET_ERR_MALFORMED_SECTION;
+    }
+
+    const wet_vm_snapshot_payload_t* snap = (const wet_vm_snapshot_payload_t*)buffer;
+    if (snap->magic != WET_SNAPSHOT_MAGIC || snap->version != WET_SNAPSHOT_VERSION) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "Invalid snapshot magic or version");
+        return WET_ERR_INVALID_MAGIC;
+    }
+
+    vm->current_tick = snap->current_tick;
+    vm->sim_time_ms = snap->sim_time_ms;
+    vm->sim_time_us = snap->sim_time_us;
+
+    memcpy(vm->bio.v_m_mv, snap->v_m_mv, sizeof(snap->v_m_mv));
+    memcpy(vm->bio.v_thresh_mv, snap->v_thresh_mv, sizeof(snap->v_thresh_mv));
+    memcpy(vm->bio.g_exc_ns, snap->g_exc_ns, sizeof(snap->g_exc_ns));
+    memcpy(vm->bio.g_inh_ns, snap->g_inh_ns, sizeof(snap->g_inh_ns));
+    memcpy(vm->bio.g_ahp_ns, snap->g_ahp_ns, sizeof(snap->g_ahp_ns));
+    memcpy(vm->bio.refract_ticks, snap->refract_ticks, sizeof(snap->refract_ticks));
+    memcpy(vm->bio.trace_pre, snap->trace_pre, sizeof(snap->trace_pre));
+    memcpy(vm->bio.trace_post, snap->trace_post, sizeof(snap->trace_post));
+    memcpy(vm->bio.v_double_layer_v, snap->v_double_layer_v, sizeof(snap->v_double_layer_v));
+    memcpy(vm->interlocks.q_accum, snap->q_accum, sizeof(snap->q_accum));
+    memcpy(vm->interlocks.cumulative_unbounded_dc_nc, snap->cumulative_unbounded_dc_nc, sizeof(snap->cumulative_unbounded_dc_nc));
+    memcpy(vm->pump_dispensed_ul, snap->pump_dispensed_ul, sizeof(snap->pump_dispensed_ul));
+
+    for (int i = 0; i < 64; ++i) {
+        for (int j = 0; j < 64; ++j) {
+            vm->bio.synapses[i][j].weight_ns = snap->syn_weights_ns[i][j];
+            vm->bio.synapses[i][j].u_stp = snap->syn_u_stp[i][j];
+            vm->bio.synapses[i][j].x_stp = snap->syn_x_stp[i][j];
+        }
+    }
+
     return WET_OK;
 }

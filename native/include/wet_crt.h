@@ -9,6 +9,7 @@ void* calloc(size_t num, size_t size);
 void  free(void* ptr);
 void* memcpy(void* dest, const void* src, size_t count);
 void* memset(void* dest, int ch, size_t count);
+int   memcmp(const void* s1, const void* s2, size_t count);
 int   _snprintf(char* buffer, size_t count, const char* format, ...);
 #ifndef snprintf
 #define snprintf _snprintf

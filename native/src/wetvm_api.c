@@ -20,6 +20,25 @@ extern wet_status_t wet_vm_load_bytecode_internal(
     size_t err_buf_len
 );
 
+extern wet_status_t wet_verify_bytecode_internal(
+    const uint8_t* bytecode,
+    size_t size,
+    char* err_buf,
+    size_t err_buf_len
+);
+
+extern wet_status_t wet_vm_snapshot_internal(
+    const struct wet_vm_instance* vm,
+    uint8_t* buffer,
+    size_t* inout_len
+);
+
+extern wet_status_t wet_vm_restore_internal(
+    struct wet_vm_instance* vm,
+    const uint8_t* buffer,
+    size_t len
+);
+
 WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
     struct wet_vm_instance* vm = (struct wet_vm_instance*)calloc(1, sizeof(struct wet_vm_instance));
     if (!vm) return NULL;
@@ -390,6 +409,14 @@ WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
             return "WET_ERR_SECURITY_UNTRUSTED: Bytecode failed cryptographic security signature verification";
         case WET_ERR_ACTUATOR_FAULT:
             return "WET_ERR_ACTUATOR_FAULT: Cyber-physical actuator execution fault or invalid parameter";
+        case WET_ERR_THERMAL_LIMIT:
+            return "WET_ERR_THERMAL_LIMIT: Temperature exceeded maximum biological threshold (38.0 C)";
+        case WET_ERR_BUBBLE_DETECTED:
+            return "WET_ERR_BUBBLE_DETECTED: Fluidic optical bubble detector tripped (cavitation hazard)";
+        case WET_ERR_COMPLIANCE_RAILED:
+            return "WET_ERR_COMPLIANCE_RAILED: Stimulator output voltage saturated ASIC compliance rail (+/-7.0 V)";
+        case WET_ERR_BYTECODE_VERIFICATION:
+            return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
         default:
             return "WET_ERR_UNKNOWN: Unknown error status";
     }
@@ -425,4 +452,126 @@ WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
     for (int p = 0; p < 8; ++p) {
         vm->pump_rates_ul_min[p] = 0.0f;
     }
+}
+
+WET_EXPORT void wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
+    if (!vm) return;
+    biophysics_set_blanking_window(&vm->bio, blanking_ms, enable_spatial);
+}
+
+WET_EXPORT wet_status_t wet_inject_current_stimulus(
+    wet_vm_t* vm,
+    uint8_t channel,
+    float current_ua,
+    float phase1_ms,
+    float phase2_ms
+) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    if (channel >= vm->config.channel_count) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    if (vm->interlocks.locked) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return WET_ERR_INTERLOCK_LOCKED;
+    }
+
+    if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Capability denied for wet_inject_current_stimulus on ch %u", channel);
+        return WET_ERR_CAPABILITY_DENIED;
+    }
+
+    /* Randles Interface check: V_elec = I * Rs + V_dl */
+    float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+    wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
+    if (comp_st != WET_OK) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return comp_st;
+    }
+
+    /* Shannon charge density limit */
+    if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
+        float q_p1 = fabsf(current_ua) * 1e-3f * phase1_ms;
+        float q_p2 = fabsf(current_ua) * 1e-3f * phase2_ms;
+        if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+            vm->interlocks.locked = 1;
+            vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+            vm->interlocks.tripped_channel = channel;
+            vm->interlocks.trip_tick = vm->current_tick;
+            vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
+            snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                     "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+                     channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+        }
+    }
+
+    biophysics_schedule_stim_current(&vm->bio, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
+    vm->voltages[channel] = v_elec;
+    vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (phase1_ms - phase2_ms);
+    return WET_OK;
+}
+
+WET_EXPORT wet_status_t wet_verify_bytecode(
+    const uint8_t* bytecode,
+    size_t size,
+    char* err_buf,
+    size_t err_buf_len
+) {
+    return wet_verify_bytecode_internal(bytecode, size, err_buf, err_buf_len);
+}
+
+WET_EXPORT wet_status_t wet_vm_snapshot(
+    const wet_vm_t* vm,
+    uint8_t* buffer,
+    size_t* inout_len
+) {
+    return wet_vm_snapshot_internal(vm, buffer, inout_len);
+}
+
+WET_EXPORT wet_status_t wet_vm_restore(
+    wet_vm_t* vm,
+    const uint8_t* buffer,
+    size_t len
+) {
+    return wet_vm_restore_internal(vm, buffer, len);
+}
+
+WET_EXPORT void wet_set_environmental_sensors(
+    wet_vm_t* vm,
+    float ph,
+    float do_pct,
+    float co2_pct,
+    uint8_t bubble_sensor_id,
+    uint8_t bubble_state,
+    float flow_rate_ul_min
+) {
+    if (!vm) return;
+    if (ph > 0.0f) vm->ph_level = ph;
+    if (do_pct > 0.0f) vm->dissolved_oxygen_pct = do_pct;
+    if (co2_pct > 0.0f) vm->dissolved_co2_pct = co2_pct;
+    if (bubble_sensor_id < 8) {
+        vm->bubble_detected[bubble_sensor_id] = bubble_state ? 1 : 0;
+        vm->fluid_flow_rate_ul_min[bubble_sensor_id] = flow_rate_ul_min;
+    }
+}
+
+WET_EXPORT void wet_set_temperature(
+    wet_vm_t* vm,
+    float temp_c
+) {
+    if (!vm) return;
+    vm->ambient_temperature_c = temp_c;
+}
+
+WET_EXPORT void wet_set_channel_banks(
+    wet_vm_t* vm,
+    uint64_t ref_mask,
+    uint64_t rec_mask
+) {
+    if (!vm) return;
+    interlocks_set_channel_banks(&vm->interlocks, ref_mask, rec_mask);
 }

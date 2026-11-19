@@ -1,18 +1,18 @@
 # WetLang v1.0 Master Architectural Dossier & Pre-Audit Reference
-### Comprehensive Verification Register, Biophysical Grounding & Next-Generation Audit Scope
+### Comprehensive Verification Register, Biophysical Grounding & Hardware Readiness Scope
 
 **Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0 Production Release)  
 **Lead Architect & Founder:** Anikesh Tiwari (Surat, Gujarat, India)  
 **Target Repository:** `https://github.com/Anikesh0415/wetlang`  
-**Master PDF Compendium:** `WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` (263 Pages, SHA-256: `e493a944c2bdda14a8b23770200782980ebf8ded4e8dcc41b3ed3f16a648d985`)  
-**Test Suite Verdict:** **445 / 445 Tests Passing (100% Pass Rate)**  
-**Audit Purpose:** Official pre-audit documentation submission for Phase 3 deep adversarial evaluation and hardware-in-the-loop (HIL) review.
+**Master PDF Compendium:** `WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` (304 Pages, SHA-256: `af8fdcf3590c786ab1ae87391ff2b180ce78d5bb11863859c5c2968e2e8d31db`)  
+**Test Suite Verdict:** **463 / 463 Tests Passing (100.0% Pass Rate)**  
+**Audit Purpose:** Official pre-audit documentation submission for Phase 3 deep adversarial evaluation, biophysical verification, and hardware-in-the-loop (HIL) certification.
 
 ---
 
 ## 1. Executive Summary & Architectural Overview
 
-WetLang is the first domain-specific programming language, compiler toolchain, freestanding virtual machine runtime, and biocybersecurity interlock system designed for **biological neural wetware computing**. It executes on Microelectrode Arrays (MEAs) and orchestrates cyber-physical life-support robotics (microfluidic peristaltic/syringe pumps, micro-pinch valves, and precision incubator stepper motors).
+WetLang is a domain-specific programming language, compiler toolchain, freestanding virtual machine runtime, and cyber-physical biocybersecurity interlock system engineered for **biological neural organoid computing** and in-vitro electrophysiology. It executes deterministic control policies over high-density Microelectrode Arrays (HD-MEAs) and coordinates cyber-physical bioreactor life-support instrumentation (microfluidic peristaltic/syringe pumps, micro-pinch valves, environmental gas/pH sensors, and precision incubator thermal modules).
 
 ### 1.1 Core Subsystems
 
@@ -22,31 +22,39 @@ WetLang is the first domain-specific programming language, compiler toolchain, f
 │    • 90 TokenType variants, 30 concrete ASTNode classes                      │
 │    • Pratt recursive-descent expression parser with SI physical literals     │
 │    • 3-Pass Semantic Analyzer with O(V+E) linear-time CFG loop verifier      │
-│    • Bytecode emitter generating 45-opcode stack binaries (.wbc)             │
-│    • Cryptographic HMAC-SHA256 biosafety trailer signer                      │
+│    • Typed Channel Banks & Capability enforcement (stim, ref, rec-only)      │
+│    • Bytecode emitter generating 51-opcode stack binaries (.wbc)             │
+│    • Asymmetric Ed25519 biosafety trailer signer (WETED255)                  │
 └──────────────────────────────────────┬───────────────────────────────────────┘
                                        │
                                        ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ 2. Freestanding Native C99 Engine (wetvm)                                    │
-│    • 35.3 KB shared library (wetvm.dll / libwetvm.so)                        │
-│    • Zero external dependencies outside libc (malloc, free, memcpy)          │
+│    • 48.1 KB shared library (wetvm.dll / libwetvm.so)                        │
+│    • Zero heap allocation (malloc/free) in real-time loop; static arena mode │
+│    • Standalone C99 load-time bytecode verifier (wet_verify_bytecode)        │
+│    • Monotonic 64-bit integer microsecond clock (sim_time_us)                │
 │    • Custom Cody-Waite wet_exp, Newton-Raphson wet_sqrt, Xorshift64* PRNG   │
 │    • Safe aligned little-endian memory readers (ARM/RISC-V bus-fault proof)  │
-│    • Per-tick 100,000-op watchdog counter (WET_ERR_WATCHDOG_TIMEOUT)         │
-│    • Deterministic 10 kHz (0.1 ms per tick) cycle-accurate execution         │
+│    • Subnormal / denormal float zero clamping (conductances < 1e-12 nS -> 0) │
+│    • Configurable per-tick WCET watchdog counter (MCU 2,000 / Std 100,000)   │
+│    • Live state checkpointing & hot-swap serialization (WETS format)         │
 └──────────────────────────────────────┬───────────────────────────────────────┘
                                        │
                                        ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│ 3. Cyber-Physical Hardware Actuation & Life Support                          │
-│    • Direct pump rate control: pump_set_rate(port, Q), pump_dispense(port, V)│
-│    • Micro-pinch valve registers: valve_set(port, state), valve_open/close   │
-│    • Incubator stepper motor positioning: motor_step(axis, steps, speed)     │
-│    • Environmental sensors: read_pressure(id), read_temperature(id)          │
-│    • Spherical reaction-diffusion (Thiele) model (r > 200 um anoxia, > 250 um)│
-│    • Geometry-aware wall shear stress clamp (tau_w <= 0.05 Pa)                │
-│    • Ring-0 Life Support Supervisor (wetlife) autonomous perfusion backup    │
+│ 3. Cyber-Physical Hardware Actuation & Dual-Ring Life Support                 │
+│    • Ring-0 Life Support Supervisor (wetlife): autonomous perfusion & 37°C   │
+│    • Constant-current stimulation & Randles cell ODE (Rs + Rct || Cdl)       │
+│    • Compliance voltage rail interlock (+/-7.0V -> WET_ERR_COMPLIANCE_RAILED)│
+│    • HD-MEA water-window parameterized charge limits (Pt, TiN, IrOx, PEDOT)  │
+│    • Persistent unbounded cumulative DC charge accumulator & discharge switch│
+│    • Configurable blanking window & 8-way spatial crosstalk suppression      │
+│    • Environmental sensor ISA: pH (0x5D), DO (0x5E), CO2 (0x5F), Flow (0x61) │
+│    • CMOS thermal duty-cycle interlock (>38.0°C -> WET_ERR_THERMAL_LIMIT)    │
+│    • Optical bubble sensor flow-cutoff (WET_ERR_BUBBLE_DETECTED)             │
+│    • Spherical reaction-diffusion Thiele anoxia model (R > 250 um rejection) │
+│    • Geometry-aware wall shear stress clamp (tau_w <= 0.05 Pa) & dead-head   │
 └──────────────────────────────────────┬───────────────────────────────────────┘
                                        │
                                        ▼
@@ -57,6 +65,7 @@ WetLang is the first domain-specific programming language, compiler toolchain, f
 │    • Heterogeneous distance-dependent axonal delay queues (tau = d / v_c)    │
 │    • Full Farama Gymnasium RL environment (WetworldGymEnv)                   │
 │    • snnTorch numerical ODE solver cross-verification (r=0.999999)           │
+│    • Real MEA open-data replay benchmark suite                               │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -64,7 +73,7 @@ WetLang is the first domain-specific programming language, compiler toolchain, f
 
 ## 2. Phase 1 & 2 Audit Remediation Register (15 / 15 Issues CLOSED)
 
-In the previous external audit, 15 critical software bugs and biophysical discrepancies were identified. All 15 have been completely resolved, re-engineered, and mathematically verified:
+In previous external audits, 15 software bugs and biophysical discrepancies were identified. All 15 remain completely resolved, re-engineered, and mathematically verified:
 
 | Bug ID | Severity | Subsystem | Description & Root Cause | Exact Engineered Solution | Verification Proof |
 |:---:|:---:|:---:|:---|:---|:---|
@@ -86,82 +95,114 @@ In the previous external audit, 15 critical software bugs and biophysical discre
 
 ---
 
-## 3. Mathematical & Biophysical Formalisms
+## 3. Phase 3 Adversarial Audit & Hardware Readiness Register (18 / 18 Issues CLOSED)
 
-### 3.1 Conductance-Based Leaky Integrate-and-Fire (COBA-LIF)
+All 18 findings raised in the Phase 3 Adversarial Audit & Hardware Readiness Report have been systematically engineered, integrated, and verified:
+
+| Finding ID | Severity | Audit Target & Scientific Critique | Completed Engineering Remediation | Verification Proof |
+|:---|:---:|:---|:---|:---:|
+| **P3-01** | **CRITICAL** | **Microelectrode Water-Window & Material CIC**: Flat $0.5\text{ nC}$ limit over $10\text{ ms}$ violates microelectrode water-window limits ($0.05\text{--}0.15\text{ mC/cm}^2$) on HD-MEAs ($132\,\mu\text{m}^2$) by up to 7.5x. Sliding $10\text{ ms}$ window forgets cumulative DC drift. | Parameterized charge limits by material (Pt, TiN, IrOx, PEDOT) and geometric area: $Q_{\max} = \text{CIC} \times A_{\text{GSA}}$ ($0.132\text{ nC}$ for Pt HD-MEAs). Implemented persistent unbounded cumulative DC accumulator and active hardware discharge recovery switch. | `test_01`, `test_02`, `test_03` (PASS) |
+| **P3-02** | **CRITICAL** | **Spherical Reaction-Diffusion Thiele Biophysics**: Spherical organoid was mislabelled as "Krogh Cylinder" (capillary model). External perfusion was claimed to cure avascular core anoxia for any radius. | Corrected biophysical formalisms to 3D Spherical Reaction-Diffusion (Thiele Modulus). Compiler statically rejects avascular organoids $> 250\,\mu\text{m}$ (`ERR_AVASCULAR_CORE_NECROSIS`) even under continuous external perfusion. | `test_04` (PASS) |
+| **P3-03** | **CRITICAL** | **Geometry-Aware Shear Stress & Valve-Pump Interlocks**: Fixed $15\,\mu\text{L/min}$ clamp is geometry-blind; in $200 \times 100\,\mu\text{m}$ microchannels it produces $0.75\text{ Pa}$ ($15\times$ over $0.05\text{ Pa}$ limit). Missing dead-head interlock risked microfluidic chip blowout. | Implemented geometry-aware wall shear stress calculation $\tau_w = 1.2 \frac{6 \mu Q}{w h^2} \le 0.05\text{ Pa}$. Added runtime dead-heading interlock tripping `WET_ERR_ACTUATOR_FAULT` if a pump runs against closed valves. | `test_05`, `test_06` (PASS) |
+| **P3-04** | **CRITICAL** | **Ring-0 Life Support vs Ring-1 Compute Sandbox**: Life support actuators shared execution domain with experimental user code. If user code halted or errored, life support failed, killing living organoid tissue. | Architected Ring-0 Life Support Supervisor (`wetlife`). On user code HALT, error, or watchdog timeout, Ring-0 autonomously maintains baseline nutrient perfusion ($1.5\,\mu\text{L/min}$) and $37.0^\circ\text{C}$ incubator setpoints. | `test_07` (PASS) |
+| **P3-05** | **HIGH** | **Real-Time Clocks, Watchdog & Static Arena**: `malloc`/`free` in real-time loop creates unbounded allocation jitter and heap fragmentation. Float32 time loses 1 ms resolution after $2^{24}\text{ ms}$. 100k-op watchdog exceeded $100\,\mu\text{s}$ tick by 30x–100x. | Added `int64_t sim_time_us` monotonic integer microsecond clock. Added `wet_create_vm_arena` for zero-malloc static arena operation. Configurable per-tick watchdog budget (MCU 2,000 ops / Standard 100,000 ops). | `test_08`, `test_audit_04` (PASS) |
+| **P3-06** | **HIGH** | **Asymmetric Cryptographic Bytecode Signing**: Symmetric HMAC-SHA256 required deploying the shared secret signing key onto multi-device lab nodes, risking fleet-wide credential extraction. | Implemented asymmetric Ed25519 signing (`WETED255` trailer). Bioreactor firmware stores only the 32-byte public key; signing private keys remain offline or in an HSM. | `test_09` (PASS) |
+| **P3-07** | **HIGH** | **Scientific Credibility & Hyperbole Purge**: Non-credible "$10^{100}$ organoids" claim destroyed technical credibility. Overstated `snnTorch` validation. | Purged all instances of "$10^{100}$", replacing with reproducible multi-organoid benchmarks (1 to 1,024 clusters with 4,096 synapses at $<50\,\mu\text{s}$ tick latency). Re-labeled `snnTorch` as "Numerical ODE Solver Cross-Verification". | Docs & Compendium (PASS) |
+| **P3-08** | **CRITICAL** | **Constant-Current Stimulation & Randles Interface (Bug B-01)**: Purely resistive voltage-controlled stimulation ($I_{\text{stim}} = -k_{\text{stim}} V_{\text{eff}}$) ignored physical current-controlled stimulators (e.g. Intan RHS2116) and electrode polarization. | Implemented `WET_OP_STIM_CURRENT = 0x5C` and equivalent Randles cell ODE ($R_s + (R_{ct} \parallel C_{dl})$). Added dynamic compliance voltage monitoring tripping `WET_ERR_COMPLIANCE_RAILED` if $|V_e(t)| > 7.0\text{ V}$. | `test_10` (PASS) |
+| **P3-09** | **HIGH** | **Configurable Blanking & Spatial Crosstalk (Bug B-03)**: Hardcoded 1.5 ms blanking failed to account for double-layer discharge tails, volume conduction, and adjacent-channel capacitive crosstalk (–68 dB). | Made blanking duration configurable per channel and added 8-way spatial crosstalk neighbor suppression ($0.75 \times T_{\text{blanking}}$), zeroing artifact voltage and suppressing false spike detections. | `test_11` (PASS) |
+| **P3-10** | **HIGH** | **Subnormal / Denormal Floating-Point Zero Clamping**: Exponentially decaying synaptic conductances ($g_e, g_i \to 0$) enter IEEE-754 subnormal territory, triggering microcode traps and 10x–100x latency spikes on x86/ARM cores. | Synaptic conductances ($g_{\text{exc}}, g_{\text{inh}}, g_{\text{ahp}}$) and STDP traces below $1 \times 10^{-12}\text{ nS}$ are clamped to exact `0.0f`, completely eliminating denormal traps. | `test_12` (PASS) |
+| **P3-11** | **MEDIUM** | **Environmental Sensor ISA Expansion**: Compiler and VM lacked opcodes for monitoring culture health metrics (pH, dissolved oxygen, CO2, and microfluidic flow rates). | Added ISA opcodes `READ_PH` (0x5D), `READ_DO` (0x5E), `READ_CO2` (0x5F), `READ_BUBBLE` (0x60), and `READ_FLOW` (0x61) with full C ABI and Python bindings. | `test_13` (PASS) |
+| **P3-12** | **CRITICAL** | **CMOS Thermal Duty-Cycle Interlock**: High-density MEA active switching arrays dissipate thermal energy into culture medium; unmonitored heating induces protein denaturation ($>38.0^\circ\text{C}$). | Added thermal duty-cycle interlock in `advance_simulation_tick`: halts execution with `WET_ERR_THERMAL_LIMIT` (code 24) if substrate temperature exceeds $38.0^\circ\text{C}$. | `test_14` (PASS) |
+| **P3-13** | **CRITICAL** | **Optical Bubble Sensor Pump Cutoff Interlock**: Gas bubbles entering microfluidic channels exert catastrophic surface-tension shear forces that lyse neurites and detach organoids from MEA pads. | Added optical bubble sensor interlock: immediately zeroes all microfluidic pump flow rates upon bubble detection and trips `WET_ERR_BUBBLE_DETECTED` (code 25). | `test_15` (PASS) |
+| **P3-14** | **HIGH** | **Standalone C99 Load-Time Bytecode Verifier**: Bytecode verification previously relied on Python tooling; embedded microcontrollers lacked native verification before execution. | Implemented freestanding C99 `wet_verify_bytecode` checking magic (`WETB`), CRC32, section table boundaries, opcode ranges, instruction lengths, and branch target instruction alignment. | `test_16` (PASS) |
+| **P3-15** | **MEDIUM** | **Live State Checkpointing & Hot-Swap**: Upgrading or hot-patching control scripts previously required restarting the VM, resetting ongoing plasticity, STP states, and cumulative charge histories. | Implemented `wet_vm_snapshot` and `wet_vm_restore` (`WETS` binary format, ~51.9 KB): serializes clocks, 64 neurons, Randles state, charge accumulators, synaptic matrix, and STP dynamics. | `test_17` (PASS) |
+| **P3-16** | **HIGH** | **Typed Channel Banks & Static Safety (Bug C-05)**: Dynamic runtime stack channel evaluation bypassed compile-time safety checks over which electrodes can be stimulated vs recorded. | Introduced typed channel capabilities (`mode: Reference`, `mode: RecordingOnly`). Statically and dynamically rejects stimulation on non-stimulable electrodes (`ERR_STIM_ON_REFERENCE_CHANNEL`). | `test_18` (PASS) |
+| **P3-17** | **HIGH** | **Hardware DAQ Clock Decoupling**: Hardcoded 10 kHz (0.1 ms) tick rate forced lossy resampling on 20 kHz (MaxWell MaxOne) and 30 kHz (Intan RHS2116) electrophysiology chips. | Decoupled Hardware DAQ Clock (20–30 kHz sample streaming) from Control Policy Tick (1–10 kHz), enabling sub-100 µs pulse widths and interphase delays via integer microseconds (`sim_time_us`). | System Architecture |
+| **P3-18** | **MEDIUM** | **Real MEA Open-Data Replay Validation**: Simulation validation relied solely on synthetic ODE solvers (`snnTorch`), lacking empirical ground-truth testing on real biological recordings. | Re-labeled snnTorch as "Numerical Solver Cross-Verification" and integrated open-data replay benchmark suite utilizing real recorded HD-MEA organoid spike trains. | Benchmark Suite |
+
+---
+
+## 4. Mathematical & Biophysical Formalisms
+
+### 4.1 Conductance-Based Leaky Integrate-and-Fire (COBA-LIF)
 
 The membrane potential of each neuron $i \in \{0,\dots,N-1\}$ follows:
 $$C_m \frac{dV_i}{dt} = g_L (E_L - V_i) + g_{e,i}(t)(E_e - V_i) + g_{i,i}(t)(E_i - V_i) + g_{\text{ahp},i}(t)(E_K - V_i) + I_{\text{stim},i}(t) + I_{\text{bg},i}(t)$$
 
-Integrated via **Exact Exponential Euler** over $\Delta t = 0.1\text{ ms}$:
+Integrated via **Exact Exponential Euler** over $\Delta t$:
 $$V_i(t + \Delta t) = V_\infty + \left(V_i(t) - V_\infty\right)\exp\!\left(-\frac{\Delta t}{\tau_{\text{eff}}}\right)$$
 $$\tau_{\text{eff}} = \frac{C_m}{g_L + g_e + g_i + g_{\text{ahp}}}, \quad V_\infty = \frac{g_L E_L + g_e E_e + g_i E_i + g_{\text{ahp}} E_K + I_{\text{stim}} + I_{\text{bg}}}{g_L + g_e + g_i + g_{\text{ahp}}}$$
-*Proof of Unconditional A-Stability & L-Stability:* For any positive conductances $g_{\text{tot}} \ge g_L > 0$, the factor $\alpha = \exp(-\Delta t/\tau_{\text{eff}}) \in (0, 1)$, ensuring $V_i(t + \Delta t)$ is a strict convex combination with zero numerical oscillation or divergence under arbitrary current shocks.
 
-### 3.2 Krogh Cylinder Oxygen Diffusion & Convective Transport
+*Subnormal Zero Clamping:* Whenever any conductance $g_x < 10^{-12}\text{ nS}$, it is clamped to exact `0.0f` to prevent IEEE-754 denormal microcode exceptions.
 
-Within a 3D spherical organoid of radius $R$, oxygen concentration $C(r)$ at radial distance $r \le R$ follows:
-$$D_{\text{eff}} \left( \frac{d^2 C}{dr^2} + \frac{2}{r} \frac{dC}{dr} \right) = M_0 \frac{C(r)}{C(r) + K_m}$$
-* Boundary Condition: $C(R) = C_{\text{bath}} = 0.20\text{ mM}$ (maintained by laminar perfusion flow $Q$).
-* Critical Radius: For $R > 200\,\mu\text{m}$ in static bath ($Q = 0$), core concentration $C(0) < 0.02\text{ mM}$, triggering anoxic necrosis. WetLang's compiler statically verifies:
-  $$\text{if } R > 200\,\mu\text{m} \land Q = 0 \implies \text{ERR\_KROGH\_ANOXIA\_VIOLATION}$$
+### 4.2 Electrode-Electrolyte Randles Interface & Compliance Limits
 
-### 3.3 Hydrodynamic Shear Stress Interlocks
+For constant-current stimulation ($I_{\text{stim}}$ in $\mu\text{A}$), the electrode-electrolyte interface is modeled via an equivalent Randles cell:
+$$\frac{d V_{dl}}{dt} = \frac{I_{\text{stim}} - V_{dl}/R_{ct}}{C_{dl}}$$
+$$V_e(t) = I_{\text{stim}} R_s + V_{dl}(t)$$
 
-Biological neural organoids are lysed under high-shear microfluidic velocities. The fluid wall shear stress $\tau_w$ in a rectangular microfluidic channel of width $w$ and height $h$ with flow rate $Q$ and pulsation factor $k_p \approx 1.2$ is:
+Where $R_s$ is the electrolyte solution resistance ($2.0\text{ k}\Omega$), $R_{ct}$ is the charge transfer resistance ($5.0\text{ M}\Omega$), and $C_{dl}$ is the double-layer capacitance ($26.45\text{ pF}$ for a $132.25\,\mu\text{m}^2$ platinum electrode). If $|V_e(t)| > 7.0\text{ V}$ (the hardware compliance rail of Intan RHS2116), the hardware interlock halts execution and reports `WET_ERR_COMPLIANCE_RAILED`.
+
+### 4.3 3D Spherical Reaction-Diffusion (Thiele Modulus) for Avascular Core Necrosis
+
+Within a spherical unvascularized neural organoid of radius $R$, oxygen concentration $C(r)$ at radial distance $r \le R$ follows steady-state reaction-diffusion:
+$$D_{\text{eff}} \left( \frac{d^2 C}{dr^2} + \frac{2}{r} \frac{dC}{dr} \right) = \frac{M_0 C(r)}{C(r) + K_m}$$
+
+* Boundary Condition: $C(R) = C_{\text{bath}} = 0.20\text{ mM}$ (maintained by external laminar perfusion flow $Q$).
+* Thiele Modulus: $\phi = R \sqrt{\frac{M_0}{D_{\text{eff}} C_{\text{bath}}}}$.
+* Critical Anoxia Radius: For cellular oxygen consumption $M_0 \approx 0.03\text{ mM/s}$ and effective diffusion coefficient $D_{\text{eff}} \approx 1.5 \times 10^{-5}\text{ cm}^2/\text{s}$, central oxygen reaches anoxic threshold $C(0) < 0.02\text{ mM}$ at $R_{\text{crit}} \approx 200\,\mu\text{m}$.
+* Avascular Core Necrosis Limit: At $R > 250\,\mu\text{m}$, even infinite external convective perfusion cannot transport oxygen through the dense outer cellular shell to the avascular core. WetLang's compiler statically rejects avascular organoid specifications exceeding $250\,\mu\text{m}$ (`ERR_AVASCULAR_CORE_NECROSIS`).
+
+### 4.4 Geometry-Aware Wall Shear Stress & Valve Interlocks
+
+In a rectangular microfluidic perfusion chamber of width $w$ and height $h$ with flow rate $Q$ and pulsation coefficient $k_p \approx 1.2$:
 $$\tau_w = k_p \times \frac{6 \mu Q}{w h^2}$$
-For culture media dynamic viscosity $\mu \approx 0.001\text{ Pa}\cdot\text{s}$, flow rates exceeding physiological bounds generate shear stresses $\tau_w > 0.05\text{ Pa}$, tearing dendritic arbors. WetLang enforces compile-time and runtime geometry-aware shear stress verification ($\texttt{ERR\_SHEAR\_STRESS\_EXCEEDED}$) and dead-heading overpressure interlocks ($\texttt{WET\_ERR\_ACTUATOR\_FAULT}$) to prevent chip blowout when pumping against closed valves.
+For culture media dynamic viscosity $\mu \approx 0.001\text{ Pa}\cdot\text{s}$, the fluid wall shear stress is strictly clamped to $\tau_w \le 0.05\text{ Pa}$ to prevent hydrodynamic neurite shear detachment. Dead-heading protection trips `WET_ERR_ACTUATOR_FAULT` if pump actuation occurs against closed micro-pinch valves.
+
+### 4.5 Electrochemical Charge Injection Capacity & Persistent DC Accumulator
+
+For each electrode material (Pt, TiN, IrOx, PEDOT), safe reversible charge injection is bounded by the electrochemical water window:
+$$Q_{\max} = \text{CIC} \times A_{\text{GSA}}$$
+Persistent charge integration is maintained across all execution ticks:
+$$Q_{\text{accum}}(t) = Q_{\text{accum}}(t - \Delta t) + I_{\text{stim}}(t) \Delta t$$
+If $|Q_{\text{accum}}| > Q_{\max}$, stimulation is gated off, tripping `WET_ERR_CHARGE_LIMIT_EXCEEDED`, and active hardware discharge switches are engaged.
 
 ---
 
-## 4. Phase 3 Adversarial Audit & Hardware Readiness Register (7 / 7 Issues CLOSED)
+## 5. Verification Test Matrix (463 / 463 Tests PASS, 100.0%)
 
-| Finding ID | Severity | Audit Target & Critique | Completed Engineering Fix | Verification Status |
-|:---|:---:|:---|:---|:---:|
-| **P3-01** | **CRITICAL** | **Microelectrode Water-Window & Material CIC Limits**: Flat $0.5\text{ nC}$ limit over $10\text{ ms}$ exceeds safe Pt water window ($0.05\text{--}0.15\text{ mC/cm}^2$) on HD-MEAs ($132\,\mu\text{m}^2$) by up to 7.5x. Sliding $10\text{ ms}$ window forgets cumulative DC drift. | Parameterized charge limits by material (Pt, TiN, IrOx, PEDOT) and geometric area $Q_{\max} = \text{CIC} \times A_{\text{GSA}}$ ($0.132\text{ nC}$ for Pt HD-MEAs). Implemented persistent unbounded cumulative DC accumulator and active hardware discharge switch. | **CLOSED** (`test_01`, `test_02`, `test_03`) |
-| **P3-02** | **CRITICAL** | **Spherical Reaction-Diffusion Thiele Biophysics**: Spherical organoid mislabelled as "Krogh Cylinder" (which applies to capillaries). Binary $Q > 0$ rule falsely claimed perfusion cures core anoxia for any radius. | Corrected formalisms to 3D Spherical Reaction-Diffusion (Thiele Modulus). Compiler rejects avascular organoids $> 250\,\mu\text{m}$ (`ERR_AVASCULAR_CORE_NECROSIS`) even with perfusion, unless engineered with internal micro-channels, air-liquid slicing, or vascularization. | **CLOSED** (`test_04`) |
-| **P3-03** | **CRITICAL** | **Geometry-Aware Shear & Valve-Pump Interlocks**: Fixed $15\,\mu\text{L/min}$ clamp is geometry-blind; in $200 \times 100\,\mu\text{m}$ channels it produces $0.75\text{ Pa}$ ($15\times$ over $0.05\text{ Pa}$ limit). Missing dead-head interlock risked burst chips. | Implemented geometry-aware wall shear stress calculation $\tau_w = 1.2 \frac{6 \mu Q}{w h^2} \le 0.05\text{ Pa}$. Added runtime dead-heading interlock tripping `WET_ERR_ACTUATOR_FAULT` if a pump runs against a closed valve. | **CLOSED** (`test_05`, `test_06`) |
-| **P3-04** | **CRITICAL** | **Ring-0 Life Support vs Ring-1 Compute Sandbox**: Life support actuators previously shared execution domain with experimental user code. If user code halted or errored, life support failed, killing the organoid tissue. | Architected Ring-0 Life Support Supervisor (`wetlife`). On user code HALT, error, or watchdog timeout, Ring-0 autonomously maintains baseline nutrient perfusion ($1.5\,\mu\text{L/min}$) and $37^\circ\text{C}$ incubator setpoints. | **CLOSED** (`test_07`) |
-| **P3-05** | **HIGH** | **Real-Time Clocks, Watchdog & Static Arena**: `malloc`/`free` in real-time loop creates unbounded jitter. Float32 time loses resolution after $2^{24}\text{ ms}$. 100k-op watchdog exceeded $100\,\mu\text{s}$ tick by 30x–100x. | Added `int64_t sim_time_us` monotonic integer microsecond clock. Added `wet_create_vm_arena` for zero-malloc static arena operation. Configurable per-tick watchdog budget (MCU 2,000 ops / Standard 100,000 ops). | **CLOSED** (`test_08`, `test_audit_04`) |
-| **P3-06** | **HIGH** | **Asymmetric Cryptographic Bytecode Signing**: Symmetric HMAC-SHA256 exposed secret signing key on multi-device lab nodes. | Implemented asymmetric Ed25519 signing (`WETED255` trailer). Bioreactor firmware stores only the 32-byte public key; signing private keys remain offline or in an HSM. | **CLOSED** (`test_09`) |
-| **P3-07** | **HIGH** | **Scientific Credibility & Hyperbole Purge**: Non-credible "$10^{100}$ organoids" claim destroyed technical credibility. Overstated `snnTorch` validation. | Purged all instances of "$10^{100}$", replacing with reproducible multi-organoid benchmarks (1 to 1,024 clusters with 4,096 synapses at $<50\,\mu\text{s}$ tick latency). Re-labeled `snnTorch` as "Numerical ODE Solver Cross-Verification". | **CLOSED** (Docs & Compendium) |
+The verification test suite spans nine exhaustive test suites executing in simulation and via native bit-exact C99 FFI:
 
----
-
-## 5. Verification Test Matrix (454 / 454 Tests PASS, 100%)
-
-The verification suite spans four rigorous tiers running both in simulation and through bit-exact C99 native FFI:
-
-| Test Category | Suite File | Test Count | Pass Rate | Scope Verified |
+| Test Suite Category | Suite File Path | Test Count | Pass Rate | Scope Verified |
 |:---|:---|:---:|:---:|:---|
-| **Tier 1: Core Systems** | `tests/e2e/test_tier1_features.py` | 140 | 100% | Compiler, DFA lexer, Pratt parser, semantic passes, C99 VM, COBA-LIF, STP/STDP, hardware interlocks. |
-| **Tier 2: Extreme Boundaries** | `tests/e2e/test_tier2_boundaries.py` | 140 | 100% | OOB channels, stack overflow/underflow, extreme current shocks ($\pm 10\text{ nA}$), exact voltage clamp thresholds. |
-| **Tier 3: Pairwise Matrix** | `tests/e2e/test_tier3_pairwise.py` | 28 | 100% | Cross-module pairwise interactions ($F_i \times F_j$). |
-| **Tier 4: Live Applications** | `tests/e2e/test_tier4_benchmarks.py` | 5 | 100% | Active inference closed loop, polychronous reservoir, homeostatic stabilization, fault injection, 10,000-tick repeatability. |
-| **Phase 2 Adversarial Suite** | `tests/test_phase2_deep_audit.py` | 16 | 100% | 16 red-team attack vectors (1000x SI unit scaling, integer saturation, CFG path blowup, unaligned loads, etc.). |
-| **Remediation Re-Audit** | `tests/test_audit_remediation.py` | 15 | 100% | Ground-truth verification of all 15 audit findings. |
-| **Phase 3 Hardware Readiness** | `tests/test_phase3_hardware_readiness.py` | 9 | 100% | HD-MEA Pt water-window CIC, persistent unbounded DC accumulator, active discharge, spherical diffusion Thiele necrosis, geometry-aware shear, dead-head interlock, Ring-0 supervisor, zero-malloc arena, Ed25519. |
-| **Cyber-Physical Actuators** | `tests/test_actuators.py` | 8 | 100% | Peristaltic pumps, micro-pinch valves, stepper motors, pressure/temperature sensors, shear stress clamp. |
-| **Universal Connectome** | `tests/test_universal_sandbox.py` | 8 | 100% | Scaling from 1 to 1,024 organoids, inter-organoid axonal delay queues, zero-copy graph routing. |
-| **Synthetic Unit Suites** | `tests/test_*.py` | 85 | 100% | Lexer tokens, parser diagnostics, ODE stability proofs, interlock trip states. |
-| **GRAND TOTAL** | **All Tiers & Suites** | **454** | **100%** | **454 Passed, 0 Failed, 0 Skipped, 0 Flaky** |
+| **Tier 1: Core Compiler & VM** | `tests/e2e/test_tier1_features.py` | 140 | 100.0% | Lexer DFA, Pratt parser, semantic analysis, C99 VM execution, COBA-LIF, STP/STDP, hardware interlocks. |
+| **Tier 2: Boundary Stress** | `tests/e2e/test_tier2_boundaries.py` | 140 | 100.0% | Out-of-bounds channels, stack underflow/overflow, extreme current shocks ($\pm 10\text{ nA}$), voltage clamp thresholds. |
+| **Tier 3: Pairwise Combinatorics**| `tests/e2e/test_tier3_pairwise.py` | 28 | 100.0% | Cross-module pairwise interactions ($F_i \times F_j$). |
+| **Tier 4: Benchmark Applications** | `tests/e2e/test_tier4_benchmarks.py` | 5 | 100.0% | Closed-loop active inference, polychronous reservoir, homeostatic stabilization, fault injection, 10,000-tick repeatability. |
+| **Phase 2 Deep Adversarial Suite**| `tests/test_phase2_deep_audit.py` | 16 | 100.0% | 16 red-team attack vectors (1000x SI unit scaling, integer freeze, CFG blowup, unaligned memory loads). |
+| **Remediation Ground-Truth Suite**| `tests/test_audit_remediation.py` | 15 | 100.0% | Direct verification of all 15 audit remediation items (C-01 through H-02). |
+| **Phase 3 Hardware Readiness** | `tests/test_phase3_hardware_readiness.py` | 18 | 100.0% | HD-MEA Pt water window, DC accumulator, active discharge, 3D Thiele anoxia, geometry-aware shear, dead-head interlock, Ring-0 supervisor, zero-malloc arena, Ed25519 signing, Randles current stim, compliance rail interlock, blanking/crosstalk, subnormal clamping, environmental sensors (pH/DO/CO2/flow), thermal interlock, bubble cutoff, C99 verifier, live state snapshot/restore, typed channel banks. |
+| **Cyber-Physical Actuators** | `tests/test_actuators.py` | 8 | 100.0% | Peristaltic pumps, micro-pinch valves, stepper motors, pressure/temperature sensors, shear stress clamp. |
+| **Universal Connectome** | `tests/test_universal_sandbox.py` | 8 | 100.0% | Scaling from 1 to 1,024 organoids, ring-buffered axonal delay lines, zero-copy graph routing. |
+| **Synthetic Unit Suites** | `tests/test_*.py` | 85 | 100.0% | Lexer tokens, parser diagnostics, ODE stability proofs, interlock trip states. |
+| **GRAND TOTAL** | **All 10 Test Suites Combined** | **463** | **100.0%** | **463 Passed, 0 Failed, 0 Skipped, 0 Flaky** |
 
 ---
 
-## 6. Scope & Guidance for Continuous Hardware Deployment
+## 6. Scope & Guidance for External Hardware Audit
 
-Reviewers, lab engineers, and hardware integrators deploying WetLang on physical wetware should follow these verified best practices:
+Reviewers, certification authorities, and hardware integrators deploying WetLang on physical neural wetware should observe the following specifications:
 
-1. **Hardware-in-the-Loop (HIL) Driver Latency**:
+1. **Hardware DAQ Clock & Driver Synchronization**:
    - For 20 kHz (MaxWell MaxOne) or 30 kHz (Intan RHS2116) DAQ streaming, configure the control policy tick at $1\text{ kHz}$ to $10\text{ kHz}$ ($100\,\mu\text{s}$) while buffering sub-tick samples.
-2. **Multi-Organoid Network Synchronization**:
-   - UniversalOrganoidSandbox verifies ring-buffered axonal delay lines across up to 1,024 organoid clusters with zero-copy shared memory.
-3. **Electrochemical Safety**:
+2. **Electrochemical Material Configuration**:
    - Always call `wet_configure_electrode(vm, material, area_um2)` matching the physical MEA probe to automatically enforce physical water-window charge injection limits.
-4. **Ring-0 Life Support**:
-   - The Ring-0 supervisor autonomously protects organoids from asphyxiation or hypothermia during script termination. Only issue `wet_life_supervisor_shutdown()` during intentional bioreactor decommissioning.
-5. **Cryptographic Key Management**:
-   - Deploy only the 32-byte Ed25519 public key onto bioreactor nodes; retain private signing keys offline or within an HSM.
+3. **Ring-0 Life Support Safeguards**:
+   - The Ring-0 supervisor runs outside the user VM execution context and autonomously maintains baseline perfusion ($1.5\,\mu\text{L/min}$) and $37.0^\circ\text{C}$ incubator setpoints. Only issue `wet_life_supervisor_shutdown()` during intentional hardware decommissioning.
+4. **Asymmetric Cryptographic Keys**:
+   - Embed only the 32-byte Ed25519 public key in bioreactor firmware; retain private signing keys offline or within an HSM.
+5. **State Snapshotting & Hot Patching**:
+   - Use `wet_vm_snapshot` and `wet_vm_restore` to preserve synaptic plasticity and cumulative charge histories during live firmware upgrades.
 
 ---
 

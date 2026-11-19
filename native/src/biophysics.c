@@ -61,6 +61,20 @@ void biophysics_init(bio_state_t* bio, double dt_ms, uint64_t seed) {
     bio->stdp_a_minus      = 0.21f;    /* 1.05x LTD bias for network stability */
     bio->electrode_impedance_kohm = 1000.0f; /* 1 MOhm microelectrode impedance */
 
+    /* Phase 3 Blanking and Randles Equivalent Circuit Parameters */
+    bio->default_blanking_ticks = 20;   /* 2.0 ms default amplifier blanking */
+    bio->spatial_blanking_enabled = 1;  /* Enable adjacent channel crosstalk blanking */
+    bio->r_solution_kohm = 2.0f;        /* 2.0 kOhm electrolyte solution resistance */
+    bio->r_charge_transfer_kohm = 5000.0f; /* 5.0 MOhm Faradaic charge transfer resistance */
+    bio->max_compliance_voltage_v = 7.0f;  /* +/-7.0 V Intan RHS2116 compliance limit */
+
+    for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
+        bio->c_double_layer_pf[ch] = 26.45f; /* 26.45 pF for 132 um2 microelectrode */
+        bio->v_double_layer_v[ch] = 0.0f;
+        bio->last_stim_current_ua[ch] = 0.0f;
+        bio->stim_blanking_ticks[ch] = 0;
+    }
+
     /* 1. Place 64 neurons over 8x8 MEA (200 um pitch), 80% Exc (51) / 20% Inh (13) */
     for (int i = 0; i < BIO_NUM_NEURONS; ++i) {
         int r = i / BIO_GRID_COLS;
@@ -169,8 +183,62 @@ void biophysics_schedule_stim_ext(
     p->phase1_amp_v = -v_mag;
     p->phase2_amp_v = v_mag;
 
-    /* Set post-stimulus amplifier blanking window (10 ticks = 1.0 ms) */
-    bio->stim_blanking_ticks[channel] = 10;
+    /* Set post-stimulus amplifier blanking window with spatial crosstalk neighbor propagation */
+    uint16_t total_blanking = (uint16_t)(p1_ticks + ip_ticks + p2_ticks + bio->default_blanking_ticks);
+    bio->stim_blanking_ticks[channel] = total_blanking;
+
+    if (bio->spatial_blanking_enabled) {
+        int r1 = channel / BIO_GRID_COLS;
+        int c1 = channel % BIO_GRID_COLS;
+        uint16_t neighbor_blank = (total_blanking * 3) / 4;
+        for (int r2 = r1 - 1; r2 <= r1 + 1; ++r2) {
+            for (int c2 = c1 - 1; c2 <= c1 + 1; ++c2) {
+                if (r2 >= 0 && r2 < BIO_GRID_ROWS && c2 >= 0 && c2 < BIO_GRID_COLS) {
+                    int neighbor_ch = r2 * BIO_GRID_COLS + c2;
+                    if (neighbor_ch != (int)channel && bio->stim_blanking_ticks[neighbor_ch] < neighbor_blank) {
+                        bio->stim_blanking_ticks[neighbor_ch] = neighbor_blank;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void biophysics_schedule_stim_current(
+    bio_state_t* bio,
+    uint8_t channel,
+    float current_ua,
+    float phase1_ms,
+    float phase2_ms,
+    float interphase_ms
+) {
+    if (!bio || channel >= BIO_NUM_CHANNELS) return;
+    bio->last_stim_current_ua[channel] = current_ua;
+
+    /* Randles interface: Effective applied voltage V_eff = I * Rs + V_dl */
+    float v_eff = (current_ua / 1000.0f) * bio->r_solution_kohm + bio->v_double_layer_v[channel];
+    biophysics_schedule_stim_ext(bio, channel, v_eff, phase1_ms, phase2_ms, interphase_ms);
+}
+
+void biophysics_set_blanking_window(bio_state_t* bio, float blanking_ms, uint8_t enable_spatial) {
+    if (!bio) return;
+    float dt = (float)bio->dt_ms;
+    if (dt <= 0.0f) dt = 0.1f;
+    bio->default_blanking_ticks = (uint16_t)(blanking_ms / dt + 0.5f);
+    bio->spatial_blanking_enabled = enable_spatial;
+}
+
+void biophysics_get_randles_state(
+    const bio_state_t* bio,
+    uint8_t channel,
+    float* out_v_dl_v,
+    float* out_v_elec_v
+) {
+    if (!bio || channel >= BIO_NUM_CHANNELS) return;
+    float v_dl = bio->v_double_layer_v[channel];
+    float v_elec = (bio->last_stim_current_ua[channel] / 1000.0f) * bio->r_solution_kohm + v_dl;
+    if (out_v_dl_v) *out_v_dl_v = v_dl;
+    if (out_v_elec_v) *out_v_elec_v = v_elec;
 }
 
 void biophysics_schedule_stim(
@@ -262,6 +330,16 @@ void biophysics_step_tick(bio_state_t* bio) {
         /* I (uA) = V (V) / Z (kOhm) * 1000; Q (nC) = I (uA) * dt (ms) */
         float i_ua = (v_applied / bio->electrode_impedance_kohm) * 1000.0f;
         bio->tick_charge_nc[ch] = i_ua * dt_f;
+
+        /* Randles Cell Integration: dV_dl/dt = (I - V_dl/Rct) / Cdl */
+        float c_dl_pf = bio->c_double_layer_pf[ch] > 0.0f ? bio->c_double_layer_pf[ch] : 26.45f;
+        float r_ct_kohm = bio->r_charge_transfer_kohm > 0.0f ? bio->r_charge_transfer_kohm : 5000.0f;
+        float tau_dl_ms = (r_ct_kohm * 1e3f) * (c_dl_pf * 1e-12f) * 1e3f; /* Rct * Cdl in ms */
+        if (tau_dl_ms < 0.01f) tau_dl_ms = 0.01f;
+        float decay_dl = (float)wet_exp(-dt / (double)tau_dl_ms);
+        /* Injected dv = I * dt / Cdl; I in uA, dt in ms, Cdl in pF -> (uA * ms) / pF = (1e-6 * 1e-3) / 1e-12 = 1.0 V */
+        float dv_dl = (i_ua * dt_f) / c_dl_pf;
+        bio->v_double_layer_v[ch] = bio->v_double_layer_v[ch] * decay_dl + dv_dl;
     }
 
     /* 2. Decay synaptic conductances, AHP, dynamic thresholds, STDP traces & STP state */
@@ -273,6 +351,13 @@ void biophysics_step_tick(bio_state_t* bio) {
         bio->trace_pre[i]  *= decay_pre;
         bio->trace_post[i] *= decay_post;
         bio->spikes_now[i]  = 0;
+
+        /* Denormal / Subnormal Floating-Point Clamping to eliminate microcode exception traps */
+        if (bio->g_exc_ns[i] < 1e-12f) bio->g_exc_ns[i] = 0.0f;
+        if (bio->g_inh_ns[i] < 1e-12f) bio->g_inh_ns[i] = 0.0f;
+        if (bio->g_ahp_ns[i] < 1e-12f) bio->g_ahp_ns[i] = 0.0f;
+        if (bio->trace_pre[i] < 1e-12f) bio->trace_pre[i] = 0.0f;
+        if (bio->trace_post[i] < 1e-12f) bio->trace_post[i] = 0.0f;
     }
 
     /* Exact Exponential Euler relaxation of Tsodyks-Markram STP variables */
@@ -404,6 +489,12 @@ void biophysics_step_tick(bio_state_t* bio) {
         }
         /* Report extracellular voltage in Volts (stim + attenuated biological LFP, zero baseline) */
         bio->mea_voltage_v[ch] = bio->ext_stim_v[ch] + (v_pick_mv * 1e-3f);
+
+        /* Hardware Blanking Suppression: silence artifact and biological false-positives during post-stimulus discharge */
+        if (!bio->stim_pulses[ch].active && bio->stim_blanking_ticks[ch] > 0) {
+            bio->mea_voltage_v[ch] = 0.0f;
+            bio->spikes_now[ch] = 0;
+        }
 
         /* Rolling 500-tick (50 ms) spike count */
         uint8_t old_spk = bio->spike_history[ch][head];

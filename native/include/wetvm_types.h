@@ -67,7 +67,11 @@ typedef enum {
     WET_ERR_FOCAL_EXCITOTOXICITY = 20,
     WET_ERR_SHEAR_STRESS_EXCEEDED = 21,
     WET_ERR_SECURITY_UNTRUSTED    = 22,
-    WET_ERR_ACTUATOR_FAULT        = 23
+    WET_ERR_ACTUATOR_FAULT        = 23,
+    WET_ERR_THERMAL_LIMIT         = 24,
+    WET_ERR_BUBBLE_DETECTED       = 25,
+    WET_ERR_COMPLIANCE_RAILED     = 26,
+    WET_ERR_BYTECODE_VERIFICATION = 27
 } wet_status_t;
 
 /* Opcode Table (30+ Opcodes) matching compiler/isa.py */
@@ -129,7 +133,15 @@ typedef enum {
     WET_OP_VALVE_SET        = 0x58, /* <BB (uint8 valve_id, uint8 state) */
     WET_OP_MOTOR_STEP       = 0x59, /* <Bif (uint8 motor_id, int32 steps, float32 speed_rpm) */
     WET_OP_READ_PRESSURE    = 0x5A, /* <B (uint8 port_id) */
-    WET_OP_READ_TEMPERATURE = 0x5B
+    WET_OP_READ_TEMPERATURE = 0x5B,
+
+    /* Phase 3 Electrophysiology & Environmental Sensors */
+    WET_OP_STIM_CURRENT     = 0x5C, /* <Bf (uint8 channel, float32 current_ua) */
+    WET_OP_READ_PH          = 0x5D,
+    WET_OP_READ_DO          = 0x5E,
+    WET_OP_READ_CO2         = 0x5F,
+    WET_OP_READ_BUBBLE      = 0x60, /* <B (uint8 sensor_id) */
+    WET_OP_READ_FLOW        = 0x61  /* <B (uint8 sensor_id) */
 } wet_opcode_t;
 
 #pragma pack(push, 1)

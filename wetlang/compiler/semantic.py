@@ -154,6 +154,8 @@ class _Pass1Visitor(ASTVisitor):
     def __init__(self, analyzer: SemanticAnalyzer):
         self.analyzer: SemanticAnalyzer = analyzer
         self.const_int_values: Dict[str, int] = {}
+        self.ref_channels: set = set()
+        self.rec_only_channels: set = set()
 
     def visit_ProgramNode(self, node: ProgramNode) -> None:
         for decl in node.declarations:
@@ -179,6 +181,11 @@ class _Pass1Visitor(ASTVisitor):
 
         # Verify target coordinate literal bounds
         self._check_coordinate_bounds(node.target)
+        mode_str = str(node.mode) if node.mode else ""
+        if mode_str in ("Reference", "ref", "Ref", "reference"):
+            self.ref_channels.add(node.name)
+        elif mode_str in ("RecordingOnly", "record", "Rec", "SpikeReadout", "rec"):
+            self.rec_only_channels.add(node.name)
         self.analyzer.current_scope.define(Symbol(node.name, "channel", Dimension.NONE, False, node))
 
     def visit_OrganoidDeclNode(self, node: OrganoidDeclNode) -> None:
@@ -256,6 +263,17 @@ class _Pass1Visitor(ASTVisitor):
 
     def visit_StimStmtNode(self, node: StimStmtNode) -> None:
         self._check_coordinate_bounds(node.channel)
+        if isinstance(node.channel, IdentifierNode):
+            if node.channel.name in self.ref_channels:
+                raise SemanticError(
+                    f"Electrode channel '{node.channel.name}' is declared as a reference channel and cannot be stimulated",
+                    node.line, node.column, "ERR_STIM_ON_REFERENCE_CHANNEL"
+                )
+            if node.channel.name in self.rec_only_channels:
+                raise SemanticError(
+                    f"Electrode channel '{node.channel.name}' is declared in a recording-only channel bank and cannot be stimulated",
+                    node.line, node.column, "ERR_STIM_ON_RECORDING_CHANNEL"
+                )
         self.visit(node.channel)
         self.visit(node.voltage)
         self.visit(node.phase1)

@@ -42,6 +42,10 @@ class WetStatus(IntEnum):
     WET_ERR_SHEAR_STRESS_EXCEEDED = 21
     WET_ERR_SECURITY_UNTRUSTED    = 22
     WET_ERR_ACTUATOR_FAULT        = 23
+    WET_ERR_THERMAL_LIMIT         = 24
+    WET_ERR_BUBBLE_DETECTED       = 25
+    WET_ERR_COMPLIANCE_RAILED     = 26
+    WET_ERR_BYTECODE_VERIFICATION = 27
 
 
 # =========================================================================
@@ -255,6 +259,38 @@ def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
         lib.wet_life_supervisor_shutdown.restype = None
         lib.wet_life_supervisor_shutdown.argtypes = [c_void_p]
 
+    if hasattr(lib, "wet_configure_blanking"):
+        lib.wet_configure_blanking.restype = None
+        lib.wet_configure_blanking.argtypes = [c_void_p, c_float, c_uint8]
+
+    if hasattr(lib, "wet_inject_current_stimulus"):
+        lib.wet_inject_current_stimulus.restype = c_int
+        lib.wet_inject_current_stimulus.argtypes = [c_void_p, c_uint8, c_float, c_float, c_float]
+
+    if hasattr(lib, "wet_verify_bytecode"):
+        lib.wet_verify_bytecode.restype = c_int
+        lib.wet_verify_bytecode.argtypes = [POINTER(c_uint8), c_size_t, c_char_p, c_size_t]
+
+    if hasattr(lib, "wet_vm_snapshot"):
+        lib.wet_vm_snapshot.restype = c_int
+        lib.wet_vm_snapshot.argtypes = [c_void_p, POINTER(c_uint8), POINTER(c_size_t)]
+
+    if hasattr(lib, "wet_vm_restore"):
+        lib.wet_vm_restore.restype = c_int
+        lib.wet_vm_restore.argtypes = [c_void_p, POINTER(c_uint8), c_size_t]
+
+    if hasattr(lib, "wet_set_environmental_sensors"):
+        lib.wet_set_environmental_sensors.restype = None
+        lib.wet_set_environmental_sensors.argtypes = [c_void_p, c_float, c_float, c_float, c_uint8, c_uint8, c_float]
+
+    if hasattr(lib, "wet_set_temperature"):
+        lib.wet_set_temperature.restype = None
+        lib.wet_set_temperature.argtypes = [c_void_p, c_float]
+
+    if hasattr(lib, "wet_set_channel_banks"):
+        lib.wet_set_channel_banks.restype = None
+        lib.wet_set_channel_banks.argtypes = [c_void_p, c_uint64, c_uint64]
+
     return lib
 
 
@@ -347,3 +383,73 @@ class WetVMFFI:
 
     def life_supervisor_shutdown(self, vm: ctypes.c_void_p) -> None:
         self.lib.wet_life_supervisor_shutdown(vm)
+
+    def configure_blanking(self, vm: ctypes.c_void_p, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
+        self.lib.wet_configure_blanking(vm, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
+
+    def inject_current_stimulus(
+        self,
+        vm: ctypes.c_void_p,
+        channel: int,
+        current_ua: float,
+        p1_ms: float = 0.5,
+        p2_ms: float = 0.5
+    ) -> int:
+        return self.lib.wet_inject_current_stimulus(
+            vm,
+            ctypes.c_uint8(channel),
+            ctypes.c_float(current_ua),
+            ctypes.c_float(p1_ms),
+            ctypes.c_float(p2_ms)
+        )
+
+    def verify_bytecode(self, bytecode: bytes) -> Tuple[int, str]:
+        c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
+        err_buf = ctypes.create_string_buffer(512)
+        st = self.lib.wet_verify_bytecode(c_bytes, ctypes.c_size_t(len(bytecode)), err_buf, ctypes.c_size_t(len(err_buf)))
+        msg = err_buf.value.decode("utf-8", errors="replace")
+        return st, msg
+
+    def snapshot(self, vm: ctypes.c_void_p) -> bytes:
+        needed_len = ctypes.c_size_t(0)
+        self.lib.wet_vm_snapshot(vm, None, ctypes.byref(needed_len))
+        buf = (ctypes.c_uint8 * needed_len.value)()
+        st = self.lib.wet_vm_snapshot(vm, buf, ctypes.byref(needed_len))
+        if st != 0:
+            raise RuntimeError(f"Snapshot failed with status {st}")
+        return bytes(buf)
+
+    def restore(self, vm: ctypes.c_void_p, data: bytes) -> int:
+        c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
+        return self.lib.wet_vm_restore(vm, c_bytes, ctypes.c_size_t(len(data)))
+
+    def set_environmental_sensors(
+        self,
+        vm: ctypes.c_void_p,
+        ph: float = 7.4,
+        do_pct: float = 95.0,
+        co2_pct: float = 5.0,
+        bubble_sensor_id: int = 0,
+        bubble_state: bool = False,
+        flow_rate_ul_min: float = 1.5
+    ) -> None:
+        self.lib.wet_set_environmental_sensors(
+            vm,
+            ctypes.c_float(ph),
+            ctypes.c_float(do_pct),
+            ctypes.c_float(co2_pct),
+            ctypes.c_uint8(bubble_sensor_id),
+            ctypes.c_uint8(1 if bubble_state else 0),
+            ctypes.c_float(flow_rate_ul_min)
+        )
+
+    def set_temperature(self, vm: ctypes.c_void_p, temp_c: float) -> None:
+        self.lib.wet_set_temperature(vm, ctypes.c_float(temp_c))
+
+    def set_channel_banks(
+        self,
+        vm: ctypes.c_void_p,
+        ref_mask: int = 0,
+        rec_mask: int = 0
+    ) -> None:
+        self.lib.wet_set_channel_banks(vm, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))

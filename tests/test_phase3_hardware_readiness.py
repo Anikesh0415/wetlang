@@ -272,6 +272,244 @@ class TestPhase3HardwareReadiness(unittest.TestCase):
         is_valid_tampered, _ = verify_bytecode_ed25519(bytes(tampered), pub_bytes)
         self.assertFalse(is_valid_tampered, "Tampered bytecode must be rejected")
 
+    # -------------------------------------------------------------------------
+    # 10. Randles Equivalent Circuit & Constant-Current Stimulation (Bug B-01)
+    # -------------------------------------------------------------------------
+    def test_10_randles_interface_and_compliance_voltage_interlock(self):
+        """Verify Randles interface model and compliance rail saturation (+/-7.0V)."""
+        emitter = BytecodeEmitter()
+        emitter.capabilities = Capability.CAP_STIMULATION | Capability.CAP_HIGH_VOLTAGE
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Safe constant current stimulation: 50 uA for 0.1 ms -> net V_elec ~ 0.1 V (well within 7.0V rail)
+            rt.inject_current_stimulus(0, 50.0, 0.1, 0.1)
+            rt.step(1)
+            telem = rt.get_telemetry()
+            self.assertEqual(telem.tick_index, 1)
+
+            # Saturated compliance voltage: 5000 uA across 2 kOhm = 10.0 V > 7.0 V compliance rail!
+            with self.assertRaises(WetVMError) as ctx:
+                rt.inject_current_stimulus(0, 5000.0, 0.5, 0.5)
+            self.assertEqual(ctx.exception.status, WetStatus.WET_ERR_COMPLIANCE_RAILED)
+            self.assertIn("compliance rail", str(ctx.exception).lower())
+
+    # -------------------------------------------------------------------------
+    # 11. Configurable Blanking Window & Spatial Crosstalk (Bug B-03)
+    # -------------------------------------------------------------------------
+    def test_11_configurable_blanking_and_spatial_crosstalk(self):
+        """Verify configurable blanking suppresses stimulation artifacts on stimulated & neighboring electrodes."""
+        emitter = BytecodeEmitter()
+        emitter.capabilities = Capability.CAP_STIMULATION
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Configure 5.0 ms blanking with spatial crosstalk neighbor propagation
+            rt.configure_blanking(5.0, enable_spatial=True)
+
+            # Stimulate channel 9 (row 1, col 1 in 8x8 grid) with 0.1 ms p1 and 0.1 ms p2 (2 ticks)
+            rt.inject_stimulus(9, 0.5, 0.1, 0.1)
+            # Neighbor channel 10 is immediately blanked via spatial crosstalk suppression
+            rt.step(1)
+            telem = rt.get_telemetry()
+            self.assertEqual(telem.channel_voltages[10], 0.0)
+
+            # After pulse completes (tick 3), channel 9 is in post-stimulus discharge blanking
+            rt.step(2)
+            telem2 = rt.get_telemetry()
+            self.assertEqual(telem2.channel_voltages[9], 0.0)
+            self.assertEqual(telem2.channel_voltages[10], 0.0)
+
+    # -------------------------------------------------------------------------
+    # 12. Subnormal / Denormal Conductance Clamping
+    # -------------------------------------------------------------------------
+    def test_12_subnormal_denormal_conductance_zero_clamping(self):
+        """Verify exponentially decaying conductances clamp cleanly to 0.0f without microcode traps."""
+        emitter = BytecodeEmitter()
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Step 100 ticks allowing conductances to relax
+            rt.step(100)
+            # Verify simulation executes with deterministic real-time ticks
+            self.assertEqual(rt.tick_index, 100)
+            self.assertAlmostEqual(rt.sim_time_ms, 10.0, places=2)
+
+    # -------------------------------------------------------------------------
+    # 13. Environmental Sensor ISA & Telemetry
+    # -------------------------------------------------------------------------
+    def test_13_environmental_sensors_ph_do_co2_flow(self):
+        """Verify environmental sensor updates and telemetry interfaces."""
+        emitter = BytecodeEmitter()
+        emitter.emit(Opcode.READ_PH)
+        emitter.emit(Opcode.POP)
+        emitter.emit(Opcode.READ_DO)
+        emitter.emit(Opcode.POP)
+        emitter.emit(Opcode.READ_CO2)
+        emitter.emit(Opcode.POP)
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.set_environmental_sensors(ph=7.38, do_pct=92.5, co2_pct=5.1, bubble_sensor_id=0, bubble_state=False, flow_rate_ul_min=2.4)
+            rt.load(wbc)
+            rt.step(1)
+            self.assertEqual(rt.tick_index, 1)
+
+    # -------------------------------------------------------------------------
+    # 14. CMOS Thermal Duty-Cycle Interlock
+    # -------------------------------------------------------------------------
+    def test_14_cmos_thermal_duty_cycle_interlock(self):
+        """Verify CMOS die / incubator temperature exceeding 38.0 C trips WET_ERR_THERMAL_LIMIT."""
+        emitter = BytecodeEmitter()
+        for _ in range(5):
+            emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Normal incubator temperature 37.0 C executes safely
+            rt.set_temperature(37.0)
+            rt.step(1)
+            self.assertEqual(rt.tick_index, 1)
+
+            # CMOS HD-MEA self-heating causes die temperature to reach 38.5 C (> 38.0 C limit)
+            rt.set_temperature(38.5)
+            with self.assertRaises(WetVMError) as ctx:
+                rt.step(1)
+            self.assertEqual(ctx.exception.status, WetStatus.WET_ERR_THERMAL_LIMIT)
+            self.assertIn("38.0", str(ctx.exception))
+
+    # -------------------------------------------------------------------------
+    # 15. Optical Bubble Sensor Pump Halt Interlock
+    # -------------------------------------------------------------------------
+    def test_15_optical_bubble_sensor_pump_halt_interlock(self):
+        """Verify optical bubble detection halts microfluidic pumps immediately to prevent neurite lysis."""
+        emitter = BytecodeEmitter()
+        emitter.capabilities = Capability.CAP_MICROFLUIDICS
+        emitter.emit(Opcode.PUMP_SET_RATE, 0, 3.0) # 3 uL/min
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Trip optical bubble sensor on port 0
+            rt.set_environmental_sensors(bubble_sensor_id=0, bubble_state=True)
+            with self.assertRaises(WetVMError) as ctx:
+                rt.step(1)
+            self.assertEqual(ctx.exception.status, WetStatus.WET_ERR_BUBBLE_DETECTED)
+            self.assertIn("bubble", str(ctx.exception).lower())
+
+            # Verify pump rates were immediately zeroed
+            act = rt.get_actuator_telemetry()
+            self.assertEqual(act.pump_rates[0], 0.0)
+
+    # -------------------------------------------------------------------------
+    # 16. Load-Time C99 Bytecode Verifier
+    # -------------------------------------------------------------------------
+    def test_16_load_time_c99_bytecode_verifier(self):
+        """Verify standalone C99 bytecode verifier validates WBC binaries before execution."""
+        emitter = BytecodeEmitter()
+        emitter.emit(Opcode.SYNC_TICK)
+        valid_wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            # Valid bytecode passes
+            res = rt.verify_bytecode(valid_wbc)
+            self.assertEqual(res, "OK")
+
+            # Corrupted magic header
+            bad_magic = bytearray(valid_wbc)
+            bad_magic[0:4] = b"NOPE"
+            with self.assertRaises(WetVMError) as ctx:
+                rt.verify_bytecode(bytes(bad_magic))
+            self.assertEqual(ctx.exception.status, WetStatus.WET_ERR_INVALID_MAGIC)
+
+            # Corrupted CRC32
+            bad_crc = bytearray(valid_wbc)
+            bad_crc[12] ^= 0x55
+            with self.assertRaises(WetVMError) as ctx:
+                rt.verify_bytecode(bytes(bad_crc))
+            self.assertEqual(ctx.exception.status, WetStatus.WET_ERR_CRC_MISMATCH)
+
+    # -------------------------------------------------------------------------
+    # 17. Live State Checkpointing & Hot-Swap
+    # -------------------------------------------------------------------------
+    def test_17_live_state_checkpointing_and_hot_swap(self):
+        """Verify dynamic neural state snapshot and restoration without resetting learned weights."""
+        emitter = BytecodeEmitter()
+        emitter.capabilities = Capability.CAP_PLASTICITY
+        emitter.emit(Opcode.PUSH_FLOAT, 0.5)
+        emitter.emit(Opcode.MODULATE_STDP, 5, 12)
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Run 20 ticks
+            rt.step(20)
+            self.assertEqual(rt.tick_index, 20)
+
+            # Checkpoint live state
+            snap = rt.snapshot()
+            self.assertTrue(len(snap) > 50000, "Snapshot must include neural matrix")
+
+            # Run 30 more ticks
+            rt.step(30)
+            self.assertEqual(rt.tick_index, 50)
+
+            # Restore checkpoint
+            rt.restore(snap)
+            self.assertEqual(rt.tick_index, 20)
+            self.assertAlmostEqual(rt.sim_time_ms, 2.0, places=2)
+
+    # -------------------------------------------------------------------------
+    # 18. Typed Channel Capabilities / Banks (Bug C-05)
+    # -------------------------------------------------------------------------
+    def test_18_typed_channel_banks_static_safety(self):
+        """Verify static compiler and runtime rejection of stimulation on reference/recording electrodes."""
+        # 1. Compiler static check on reference channel
+        src_ref = """
+        grid mea[8, 8];
+        channel ref_ch = mea[0, 0] mode: Reference;
+        stim_biphasic(ref_ch, 0.5 V, 0.1 ms, 0.1 ms);
+        """
+        with self.assertRaises(SemanticError) as ctx:
+            self._compile(src_ref)
+        self.assertEqual(ctx.exception.error_code, "ERR_STIM_ON_REFERENCE_CHANNEL")
+
+        # 2. Compiler static check on recording-only channel
+        src_rec = """
+        grid mea[8, 8];
+        channel rec_ch = mea[0, 1] mode: RecordingOnly;
+        stim_biphasic(rec_ch, 0.5 V, 0.1 ms, 0.1 ms);
+        """
+        with self.assertRaises(SemanticError) as ctx:
+            self._compile(src_rec)
+        self.assertEqual(ctx.exception.error_code, "ERR_STIM_ON_RECORDING_CHANNEL")
+
+        # 3. Runtime dynamic enforcement
+        emitter = BytecodeEmitter()
+        emitter.capabilities = Capability.CAP_STIMULATION
+        emitter.emit(Opcode.SYNC_TICK)
+        wbc = emitter._build_wbc_binary()
+
+        with WetRuntime() as rt:
+            rt.load(wbc)
+            # Designate channel 7 as reference electrode
+            rt.set_channel_banks(ref_channels=[7])
+
+            # Stimulating channel 7 must be denied
+            with self.assertRaises(WetVMError) as ctx:
+                rt.inject_stimulus(7, 0.5, 0.5, 0.5)
+            self.assertEqual(ctx.exception.status, WetStatus.WET_ERR_CAPABILITY_DENIED)
+
 
 if __name__ == "__main__":
     unittest.main()

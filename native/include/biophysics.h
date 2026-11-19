@@ -136,7 +136,17 @@ typedef struct {
     float    stdp_a_plus;     /* LTP amplitude (0.20 nS) */
     float    stdp_a_minus;    /* LTD amplitude (0.21 nS = 1.05x bias) */
     float    electrode_impedance_kohm; /* Electrode-electrolyte impedance (50 kOhm) */
-    uint8_t  stim_blanking_ticks[BIO_NUM_CHANNELS]; /* Post-stimulus amplifier artifact blanking ticks */
+    uint16_t stim_blanking_ticks[BIO_NUM_CHANNELS]; /* Post-stimulus amplifier artifact blanking ticks */
+    uint16_t default_blanking_ticks; /* Configurable baseline blanking duration in ticks (e.g. 20 = 2.0 ms) */
+    uint8_t  spatial_blanking_enabled; /* 1 = propagate attenuated blanking to adjacent MEA channels */
+
+    /* Randles Equivalent Circuit Interface Model (Electrode-Electrolyte Interface) */
+    float    r_solution_kohm;        /* Solution bulk resistance Rs (e.g. 2.0 kOhm) */
+    float    r_charge_transfer_kohm; /* Faradaic charge transfer resistance Rct (e.g. 5000.0 kOhm = 5 MOhm) */
+    float    c_double_layer_pf[BIO_NUM_CHANNELS];  /* Helmholtz double-layer capacitance Cdl */
+    float    v_double_layer_v[BIO_NUM_CHANNELS];   /* Instantaneous polarization voltage Vdl(t) */
+    float    last_stim_current_ua[BIO_NUM_CHANNELS]; /* Last injected constant current */
+    float    max_compliance_voltage_v; /* Maximum ASIC compliance voltage (e.g. 7.0 V) */
 } bio_state_t;
 
 /* Lifecycle & Simulation Functions */
@@ -159,6 +169,27 @@ void biophysics_schedule_stim_ext(
     float phase1_ms,
     float phase2_ms,
     float interphase_ms
+);
+
+/* Schedule a constant-current stimulation pulse on a channel (Randles interface model) */
+void biophysics_schedule_stim_current(
+    bio_state_t* bio,
+    uint8_t channel,
+    float current_ua,
+    float phase1_ms,
+    float phase2_ms,
+    float interphase_ms
+);
+
+/* Configure post-stimulus blanking window in milliseconds */
+void biophysics_set_blanking_window(bio_state_t* bio, float blanking_ms, uint8_t enable_spatial);
+
+/* Query instantaneous Randles polarization and total electrode potential */
+void biophysics_get_randles_state(
+    const bio_state_t* bio,
+    uint8_t channel,
+    float* out_v_dl_v,
+    float* out_v_elec_v
 );
 
 /* Direct instantaneous voltage override (used for fail-safe zeroing or external injection) */
