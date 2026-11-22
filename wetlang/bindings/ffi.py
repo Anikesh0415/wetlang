@@ -176,13 +176,14 @@ class WetCanFrame(ctypes.Structure):
 # =========================================================================
 
 class WetVMConfig(ctypes.Structure):
-    """Mirror of C wet_vm_config_t (28 bytes)."""
+    """Mirror of C wet_vm_config_t (32 bytes)."""
     _fields_ = [
         ("dt_ms", c_double),
         ("max_stack_depth", c_uint32),
         ("max_locals", c_uint32),
         ("channel_count", c_uint32),
         ("max_ops_per_tick", c_uint32),
+        ("min_sequence_counter", c_uint32),
     ]
 
     def __init__(
@@ -191,14 +192,16 @@ class WetVMConfig(ctypes.Structure):
         max_stack_depth: int = 1024,
         max_locals: int = 256,
         channel_count: int = 64,
-        max_ops_per_tick: int = 100000
+        max_ops_per_tick: int = 100000,
+        min_sequence_counter: int = 0
     ):
         super().__init__(
             dt_ms=dt_ms,
             max_stack_depth=max_stack_depth,
             max_locals=max_locals,
             channel_count=channel_count,
-            max_ops_per_tick=max_ops_per_tick
+            max_ops_per_tick=max_ops_per_tick,
+            min_sequence_counter=min_sequence_counter
         )
 
 

@@ -350,6 +350,16 @@ def decompose_to_dales_principle(
     """
     Decomposes an arbitrary signed synaptic weight matrix into Dale-compliant
     excitatory (W_exc >= 0) and inhibitory (W_inh <= 0) matrices.
+
+    NOTE ON PHYSICAL WETWARE EMBEDDING:
+    Decomposing an arbitrary mixed-sign weight matrix element-wise into W_exc + W_inh
+    means that a single presynaptic neuron index j would project both excitatory
+    and inhibitory connections unless split into distinct physical neural populations.
+    In biological neural tissue, Dale's Principle requires that each biological neuron
+    is either strictly excitatory or inhibitory. Therefore, in physical wetware deployment,
+    W_exc and W_inh must map to distinct excitatory and inhibitory interneuron populations,
+    doubling the effective presynaptic channel allocation when arbitrary signed ANN weights
+    are projected onto organoid tissue.
     """
     w = np.asarray(weight, dtype=np.float32)
     w_exc = np.where(w > eps, w, 0.0).astype(np.float32)

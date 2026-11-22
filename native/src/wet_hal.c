@@ -466,7 +466,10 @@ void wet_hal_emergency_crowbar(wet_vm_t* vm, uint32_t trip_reason) {
         }
     }
 
-    /* 3. Execute active discharge across all ephys channels to clear Faradaic charge */
+    /* 3. Two-Stage Crowbar Disconnect:
+     *    Stage 3a: High-Impedance (Hi-Z) disconnect to instantly stop Faradaic current.
+     *    Stage 3b: Current-limited soft bleed (100 kOhm equivalent) to safely discharge
+     *              double-layer capacitance without localized electroporation current spikes. */
     for (uint16_t ch = 0; ch < 64; ++ch) {
         wet_hal_active_discharge(hal, ch);
         vm->discharge_charge_nc[ch] += vm->last_charge_nc[ch];

@@ -20,7 +20,7 @@ VERSION_MINOR = 0
 # Header format:
 # magic (4s), version_major (B), version_minor (B), capabilities (H),
 # file_size (I), checksum_crc32 (I), num_sections (I), channel_count (I),
-# max_charge_nc (f), reserved (I)
+# max_charge_nc (f), sequence_counter (I)
 HEADER_STRUCT_FORMAT = "<4sBBHIIIIfI"
 assert struct.calcsize(HEADER_STRUCT_FORMAT) == HEADER_SIZE, "Header struct must be exactly 32 bytes"
 

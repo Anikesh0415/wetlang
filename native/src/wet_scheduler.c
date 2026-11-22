@@ -16,7 +16,8 @@
 #include "../include/wetvm_vm.h"
 #include "../include/biophysics.h"
 
-#define WET_CACHELINE_SIZE 64
+/* 128-byte cache line alignment isolates Intel L2 spatial prefetcher pairs (eliminating cross-core false sharing) */
+#define WET_CACHELINE_SIZE 128
 #define WET_DEFAULT_SAMPLE_CAPACITY 100000
 
 #if defined(_WIN32)
@@ -47,6 +48,7 @@ HANDLE __stdcall CreateThread(void* lpThreadAttributes, size_t dwStackSize, void
 DWORD __stdcall WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
 BOOL __stdcall CloseHandle(HANDLE hObject);
 void __stdcall Sleep(DWORD dwMilliseconds);
+BOOL __stdcall VirtualLock(void* lpAddress, size_t dwSize);
 #ifdef __cplusplus
 }
 #endif
@@ -347,6 +349,13 @@ WET_EXPORT wet_scheduler_t* wet_scheduler_create(wet_vm_instance_t* vm, const we
     if (sched->sample_computes_us) memset(sched->sample_computes_us, 0, sched->sample_capacity * sizeof(double));
     if (sched->sample_periods_us)  memset(sched->sample_periods_us, 0, sched->sample_capacity * sizeof(double));
 
+#if defined(_WIN32)
+    /* Pin working set pages in physical RAM to prevent OS page trimming */
+    if (sched->sample_jitters_us)  VirtualLock(sched->sample_jitters_us, sched->sample_capacity * sizeof(double));
+    if (sched->sample_computes_us) VirtualLock(sched->sample_computes_us, sched->sample_capacity * sizeof(double));
+    if (sched->sample_periods_us)  VirtualLock(sched->sample_periods_us, sched->sample_capacity * sizeof(double));
+#endif
+
     /* Initialize stats */
     sched->stats.min_compute_us = 1e9;
     sched->stats.min_period_us = 1e9;
@@ -397,6 +406,25 @@ WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched) {
      * catastrophic catch-up storms at the expense of wallclock phase slip. */
     if (sched->next_deadline_qpc == 0 || start_qpc > (sched->next_deadline_qpc + sched->period_qpc * 2)) {
         sched->next_deadline_qpc = start_qpc + sched->period_qpc;
+
+        /* ATOMIC CHARGE RECOVERY SAFETY INTERLOCK:
+         * If an OS preemption occurred mid-pulse, ensure ongoing biphasic pulses
+         * immediately complete active discharge to prevent leaving electrodes
+         * with uncompensated net DC charge violating the Faradaic water window. */
+        if (sched->vm) {
+            bio_state_t* bio = &sched->vm->bio;
+            for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
+                if (bio->stim_pulses[ch].active) {
+                    bio->stim_pulses[ch].active = 0;
+                    bio->stim_pulses[ch].phase1_ticks_left = 0;
+                    bio->stim_pulses[ch].interphase_ticks_left = 0;
+                    bio->stim_pulses[ch].phase2_ticks_left = 0;
+                    bio->ext_stim_v[ch] = 0.0f;
+                    bio->tick_charge_nc[ch] = 0.0f;
+                    wet_active_discharge(sched->vm, (uint8_t)ch);
+                }
+            }
+        }
     } else {
         sched->next_deadline_qpc += sched->period_qpc;
     }

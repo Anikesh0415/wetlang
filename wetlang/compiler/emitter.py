@@ -210,7 +210,7 @@ class BytecodeEmitter(ASTVisitor):
     # AST Traversal & Code Generation
     # =========================================================================
 
-    def compile(self, program: ProgramNode) -> bytes:
+    def compile(self, program: ProgramNode, sequence_counter: int = 1) -> bytes:
         """Compiles the AST ProgramNode into a complete WBC binary."""
         self.visit(program)
 
@@ -222,7 +222,7 @@ class BytecodeEmitter(ASTVisitor):
         self.emit(Opcode.HALT)
 
         # Serialize WBC Sections and Binary
-        return self._build_wbc_binary()
+        return self._build_wbc_binary(sequence_counter=sequence_counter)
 
     def visit_ProgramNode(self, node: ProgramNode) -> None:
         for decl in node.declarations:
@@ -776,7 +776,7 @@ class BytecodeEmitter(ASTVisitor):
     # Section Packaging & WBC Serialization
     # =========================================================================
 
-    def _build_wbc_binary(self) -> bytes:
+    def _build_wbc_binary(self, sequence_counter: int = 1) -> bytes:
         # 1. Section 1: CONSTANT_POOL
         sec1_data = self.constant_pool.serialize()
 
@@ -829,7 +829,7 @@ class BytecodeEmitter(ASTVisitor):
             num_sections,
             64, # channel count (8x8 MEA)
             0.5, # max charge limit 0.5 nC
-            0 # reserved
+            sequence_counter # Monotonic anti-rollback security sequence counter
         )
 
         full_binary = bytearray(header_placeholder)
@@ -901,14 +901,14 @@ def disassemble(bytecode_bytes: bytes) -> str:
     if len(bytecode_bytes) < HEADER_SIZE:
         raise ValueError(f"Binary too small ({len(bytecode_bytes)} bytes), expected at least {HEADER_SIZE}")
 
-    magic, v_maj, v_min, caps, fsize, crc, n_secs, ch_cnt, max_q, res = struct.unpack_from(HEADER_STRUCT_FORMAT, bytecode_bytes, 0)
+    magic, v_maj, v_min, caps, fsize, crc, n_secs, ch_cnt, max_q, seq_counter = struct.unpack_from(HEADER_STRUCT_FORMAT, bytecode_bytes, 0)
     if magic != HEADER_MAGIC:
         raise ValueError(f"Invalid WBC magic: {magic!r}, expected {HEADER_MAGIC!r}")
 
     lines: List[str] = []
     lines.append("=" * 70)
     lines.append(f"WBC Binary Disassembly (v{v_maj}.{v_min})")
-    lines.append(f"File Size: {fsize} bytes | CRC32: 0x{crc:08X} | Capabilities: 0x{caps:04X}")
+    lines.append(f"File Size: {fsize} bytes | CRC32: 0x{crc:08X} | Capabilities: 0x{caps:04X} | Seq: {seq_counter}")
     lines.append(f"Sections: {n_secs} | Channels: {ch_cnt} | Max Charge Bound: {max_q:.2f} nC")
     lines.append("=" * 70)
 

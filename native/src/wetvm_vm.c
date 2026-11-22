@@ -210,6 +210,17 @@ wet_status_t wet_vm_load_bytecode_internal(
         return WET_ERR_CRC_MISMATCH;
     }
 
+    /* 4b. Anti-Rollback Monotonic Sequence Verification */
+    if (vm->config.min_sequence_counter > 0 && hdr->sequence_counter < vm->config.min_sequence_counter) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Anti-rollback security violation: binary sequence counter %u is below required hardware minimum %u",
+                 hdr->sequence_counter, vm->config.min_sequence_counter);
+        if (err_buf && err_buf_len > 0) {
+            snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+        }
+        return WET_ERR_CAPABILITY_DENIED;
+    }
+
     /* 5. Validate Section Table Bounds */
     size_t sec_table_size = (size_t)hdr->num_sections * WET_SECTION_ENTRY_SIZE;
     if (WET_HEADER_SIZE + sec_table_size > size) {

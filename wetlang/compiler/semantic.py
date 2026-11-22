@@ -93,6 +93,7 @@ class SemanticAnalyzer:
         self.global_scope: Scope = Scope(parent=None, name="global")
         self.current_scope: Scope = self.global_scope
         self.mea_grids: Dict[str, Tuple[int, int]] = {} # grid_name -> (rows, cols)
+        self.node_dimensions: Dict[int, Dimension] = {}
 
     def analyze(self) -> None:
         """Run all verification passes in sequence."""
@@ -117,6 +118,14 @@ class SemanticAnalyzer:
             ("abs", "fn", Dimension.NONE),
             ("float", "fn", Dimension.NONE),
             ("int", "fn", Dimension.NONE),
+            ("exp", "fn", Dimension.NONE),
+            ("log", "fn", Dimension.NONE),
+            ("ln", "fn", Dimension.NONE),
+            ("sqrt", "fn", Dimension.NONE),
+            ("pow", "fn", Dimension.NONE),
+            ("sin", "fn", Dimension.NONE),
+            ("cos", "fn", Dimension.NONE),
+            ("tanh", "fn", Dimension.NONE),
         ]
         for name, tname, dim in builtins:
             self.global_scope.define(Symbol(name, tname, dimension=dim))
@@ -136,6 +145,7 @@ class SemanticAnalyzer:
     def _pass2_types_and_dimensions(self) -> None:
         visitor = _Pass2Visitor(self)
         visitor.visit(self.program)
+        self.node_dimensions = visitor.node_dimensions
 
     # =========================================================================
     # PASS 3: Static Loop-Yield Verifier (CFG Post-Dominance)
@@ -156,6 +166,8 @@ class _Pass1Visitor(ASTVisitor):
         self.const_int_values: Dict[str, int] = {}
         self.ref_channels: set = set()
         self.rec_only_channels: set = set()
+        self.ref_channel_indices: set = set()
+        self.rec_only_channel_indices: set = set()
 
     def visit_ProgramNode(self, node: ProgramNode) -> None:
         for decl in node.declarations:
@@ -182,11 +194,29 @@ class _Pass1Visitor(ASTVisitor):
         # Verify target coordinate literal bounds
         self._check_coordinate_bounds(node.target)
         mode_str = str(node.mode) if node.mode else ""
+        ch_idx = self._extract_channel_index(node.target)
         if mode_str in ("Reference", "ref", "Ref", "reference"):
             self.ref_channels.add(node.name)
+            if ch_idx is not None:
+                self.ref_channel_indices.add(ch_idx)
         elif mode_str in ("RecordingOnly", "record", "Rec", "SpikeReadout", "rec"):
             self.rec_only_channels.add(node.name)
+            if ch_idx is not None:
+                self.rec_only_channel_indices.add(ch_idx)
         self.analyzer.current_scope.define(Symbol(node.name, "channel", Dimension.NONE, False, node))
+
+    def _extract_channel_index(self, node: ASTNode) -> Optional[int]:
+        if isinstance(node, IndexNode):
+            if len(node.indices) == 2:
+                r = self._extract_int_constant(node.indices[0])
+                c = self._extract_int_constant(node.indices[1])
+                if r is not None and c is not None:
+                    return r * 8 + c
+            elif len(node.indices) == 1:
+                return self._extract_int_constant(node.indices[0])
+        elif isinstance(node, (LiteralNode, IdentifierNode)):
+            return self._extract_int_constant(node)
+        return None
 
     def visit_OrganoidDeclNode(self, node: OrganoidDeclNode) -> None:
         if self.analyzer.current_scope.is_local(node.name):
@@ -263,6 +293,18 @@ class _Pass1Visitor(ASTVisitor):
 
     def visit_StimStmtNode(self, node: StimStmtNode) -> None:
         self._check_coordinate_bounds(node.channel)
+        ch_idx = self._extract_channel_index(node.channel)
+        if ch_idx is not None:
+            if ch_idx in self.ref_channel_indices:
+                raise SemanticError(
+                    f"Electrode channel index {ch_idx} is declared as a reference channel and cannot be stimulated",
+                    node.line, node.column, "ERR_STIM_ON_REFERENCE_CHANNEL"
+                )
+            if ch_idx in self.rec_only_channel_indices:
+                raise SemanticError(
+                    f"Electrode channel index {ch_idx} is declared in a recording-only channel bank and cannot be stimulated",
+                    node.line, node.column, "ERR_STIM_ON_RECORDING_CHANNEL"
+                )
         if isinstance(node.channel, IdentifierNode):
             if node.channel.name in self.ref_channels:
                 raise SemanticError(
@@ -351,7 +393,8 @@ class _Pass1Visitor(ASTVisitor):
                         node.line, node.column, "ERR_SHEAR_STRESS_EXCEEDED"
                     )
 
-                # Geometry-Aware Shear Stress Check: tau_w = 1.2 * (6 * mu * Q) / (w * h^2)
+                # Geometry-Aware Shear Stress Check:
+                # Uses Shah-London rectangular duct friction factor with aspect ratio alpha = min(h/w, w/h)
                 # If optional channel dimensions are passed as args: pump_set_rate(ch, rate, width, height)
                 if len(node.args) >= 4:
                     w_node, h_node = node.args[2], node.args[3]
@@ -362,7 +405,12 @@ class _Pass1Visitor(ASTVisitor):
                     w_m = float(w_um) * 1e-6
                     h_m = float(h_um) * 1e-6
                     mu = 0.001 # Pa*s (viscosity of aqueous culture medium)
-                    tau_w = 1.2 * (6.0 * mu * q_m3_s) / (w_m * (h_m ** 2))
+
+                    # Shah-London aspect-ratio correction for rectangular microchannels:
+                    alpha = min(h_m / w_m, w_m / h_m) if w_m > 0 and h_m > 0 else 0.2
+                    f_re = 24.0 * (1.0 - 1.3553 * alpha + 1.9467 * (alpha**2) - 1.7012 * (alpha**3) + 0.9564 * (alpha**4) - 0.2537 * (alpha**5))
+                    tau_wall_base = (f_re / 4.0) * (mu * q_m3_s) / (w_m * (h_m ** 2))
+                    tau_w = max(tau_wall_base, 1.2 * (6.0 * mu * q_m3_s) / (w_m * (h_m ** 2)))
                     if tau_w > 0.05: # 0.05 Pa maximum safe shear stress for neurites
                         raise SemanticError(
                             f"Hydrodynamic Shear Stress Exceeded: Wall shear stress tau_w = {tau_w:.3f} Pa "
@@ -468,6 +516,8 @@ class _Pass1Visitor(ASTVisitor):
             "Frequency": Dimension.FREQUENCY,
             "Length": Dimension.LENGTH,
             "Charge": Dimension.CHARGE,
+            "Resistance": Dimension.RESISTANCE,
+            "Conductance": Dimension.CONDUCTANCE,
         }
         return mapping.get(tname, Dimension.NONE)
 
@@ -638,6 +688,14 @@ class _Pass2Visitor(ASTVisitor):
             if (left_dim == Dimension.CURRENT and right_dim == Dimension.TIME) or \
                (left_dim == Dimension.TIME and right_dim == Dimension.CURRENT):
                 self.node_dimensions[id(node)] = Dimension.CHARGE
+            elif (left_dim == Dimension.CURRENT and right_dim == Dimension.RESISTANCE) or \
+                 (left_dim == Dimension.RESISTANCE and right_dim == Dimension.CURRENT):
+                # Ohm's Law: V = I * R
+                self.node_dimensions[id(node)] = Dimension.VOLTAGE
+            elif (left_dim == Dimension.VOLTAGE and right_dim == Dimension.CONDUCTANCE) or \
+                 (left_dim == Dimension.CONDUCTANCE and right_dim == Dimension.VOLTAGE):
+                # Ohm's Law: I = V * G
+                self.node_dimensions[id(node)] = Dimension.CURRENT
             elif left_dim == Dimension.NONE:
                 self.node_dimensions[id(node)] = right_dim
             elif right_dim == Dimension.NONE:
@@ -651,6 +709,26 @@ class _Pass2Visitor(ASTVisitor):
                 self.node_dimensions[id(node)] = Dimension.NONE
             elif left_dim == Dimension.CHARGE and right_dim == Dimension.TIME:
                 self.node_dimensions[id(node)] = Dimension.CURRENT
+            elif left_dim == Dimension.CHARGE and right_dim == Dimension.CURRENT:
+                self.node_dimensions[id(node)] = Dimension.TIME
+            elif left_dim == Dimension.VOLTAGE and right_dim == Dimension.CURRENT:
+                # Ohm's Law: V / I = R (Resistance, Ohms)
+                self.node_dimensions[id(node)] = Dimension.RESISTANCE
+            elif left_dim == Dimension.CURRENT and right_dim == Dimension.VOLTAGE:
+                # Ohm's Law: I / V = G (Conductance, Siemens)
+                self.node_dimensions[id(node)] = Dimension.CONDUCTANCE
+            elif left_dim == Dimension.VOLTAGE and right_dim == Dimension.RESISTANCE:
+                # Ohm's Law: V / R = I (Current, Amperes)
+                self.node_dimensions[id(node)] = Dimension.CURRENT
+            elif left_dim == Dimension.CURRENT and right_dim == Dimension.CONDUCTANCE:
+                # Ohm's Law: I / G = V (Voltage, Volts)
+                self.node_dimensions[id(node)] = Dimension.VOLTAGE
+            elif left_dim == Dimension.NONE and right_dim == Dimension.RESISTANCE:
+                # 1 / R = G (Conductance, Siemens)
+                self.node_dimensions[id(node)] = Dimension.CONDUCTANCE
+            elif left_dim == Dimension.NONE and right_dim == Dimension.CONDUCTANCE:
+                # 1 / G = R (Resistance, Ohms)
+                self.node_dimensions[id(node)] = Dimension.RESISTANCE
             elif right_dim == Dimension.NONE:
                 self.node_dimensions[id(node)] = left_dim
             else:
@@ -688,6 +766,68 @@ class _Pass2Visitor(ASTVisitor):
         else:
             self.node_dimensions[id(node)] = Dimension.NONE
 
+    def visit_CallNode(self, node: CallNode) -> None:
+        self.visit(node.callee)
+        for arg in node.args:
+            self.visit(arg)
+
+        callee_name = None
+        if isinstance(node.callee, IdentifierNode):
+            callee_name = node.callee.name
+
+        # Enforce dimensionless operands for transcendental functions
+        transcendental_fns = {"exp", "log", "ln", "sin", "cos", "tanh"}
+        if callee_name in transcendental_fns:
+            for idx, arg in enumerate(node.args):
+                arg_dim = self.get_dimension(arg)
+                if arg_dim != Dimension.NONE:
+                    raise SemanticError(
+                        f"Transcendental function '{callee_name}' requires dimensionless arguments, but argument {idx+1} has physical dimension '{arg_dim.value}'",
+                        node.line, node.column, "ERR_DIMENSIONAL_MISMATCH"
+                    )
+            self.node_dimensions[id(node)] = Dimension.NONE
+            return
+
+        if callee_name == "sqrt":
+            if node.args:
+                arg_dim = self.get_dimension(node.args[0])
+                if arg_dim != Dimension.NONE:
+                    raise SemanticError(
+                        f"Square root function 'sqrt' requires dimensionless argument, got dimension '{arg_dim.value}'",
+                        node.line, node.column, "ERR_DIMENSIONAL_MISMATCH"
+                    )
+            self.node_dimensions[id(node)] = Dimension.NONE
+            return
+
+        if callee_name == "pow":
+            if len(node.args) >= 2:
+                base_dim = self.get_dimension(node.args[0])
+                exp_dim = self.get_dimension(node.args[1])
+                if exp_dim != Dimension.NONE:
+                    raise SemanticError(
+                        f"Exponent in 'pow' must be dimensionless, got '{exp_dim.value}'",
+                        node.line, node.column, "ERR_DIMENSIONAL_MISMATCH"
+                    )
+                self.node_dimensions[id(node)] = base_dim if base_dim == Dimension.NONE else Dimension.NONE
+            return
+
+        if callee_name == "abs":
+            if node.args:
+                self.node_dimensions[id(node)] = self.get_dimension(node.args[0])
+            else:
+                self.node_dimensions[id(node)] = Dimension.NONE
+            return
+
+        # Lookup function in current scope for return dimension
+        if callee_name:
+            sym = self.current_scope.resolve(callee_name)
+            if sym is not None:
+                self.node_dimensions[id(node)] = sym.dimension
+            else:
+                self.node_dimensions[id(node)] = Dimension.NONE
+        else:
+            self.node_dimensions[id(node)] = Dimension.NONE
+
     def _type_to_dimension(self, tname: Optional[str]) -> Dimension:
         if not tname:
             return Dimension.NONE
@@ -698,6 +838,8 @@ class _Pass2Visitor(ASTVisitor):
             "Frequency": Dimension.FREQUENCY,
             "Length": Dimension.LENGTH,
             "Charge": Dimension.CHARGE,
+            "Resistance": Dimension.RESISTANCE,
+            "Conductance": Dimension.CONDUCTANCE,
         }
         return mapping.get(tname, Dimension.NONE)
 
@@ -812,10 +954,7 @@ class _Pass3LoopYieldVisitor(ASTVisitor):
                     # Out of the if/else construct, if either branch carries unyielded stim:
                     curr_stim = then_stim if then_stim is not None else else_stim
                 elif isinstance(stmt, BlockNode):
-                    res = self._check_unyielded_stim_path(stmt, curr_stim)
-                    if res is not None:
-                        return res
-                    curr_stim = None
+                    curr_stim = self._check_unyielded_stim_path(stmt, curr_stim)
                 elif isinstance(stmt, (WhileStmtNode, ForStmtNode)):
                     # Inner loops cannot guarantee yield for an outer loop's path
                     pass

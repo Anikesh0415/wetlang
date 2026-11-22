@@ -20,6 +20,8 @@ class Dimension(Enum):
     VOLUME = "VOLUME"
     FLOW_RATE = "FLOW_RATE"
     PRESSURE = "PRESSURE"
+    RESISTANCE = "RESISTANCE"
+    CONDUCTANCE = "CONDUCTANCE"
 
 
 class TokenType(Enum):
@@ -72,6 +74,8 @@ class TokenType(Enum):
     TYPE_FREQUENCY = auto()
     TYPE_LENGTH = auto()
     TYPE_CHARGE = auto()
+    TYPE_RESISTANCE = auto()
+    TYPE_CONDUCTANCE = auto()
 
     # Keywords - Closed-Loop Control
     STREAM = auto()
@@ -188,6 +192,17 @@ UNIT_SUFFIXES: Dict[str, Tuple[Dimension, float]] = {
     "Pa": (Dimension.PRESSURE, 1.0),
     "kPa": (Dimension.PRESSURE, 1000.0),
     "mmHg": (Dimension.PRESSURE, 133.322),
+
+    # Resistance (base: Ohms)
+    "Ohm": (Dimension.RESISTANCE, 1.0),
+    "kOhm": (Dimension.RESISTANCE, 1e3),
+    "MOhm": (Dimension.RESISTANCE, 1e6),
+
+    # Conductance (base: Siemens)
+    "S": (Dimension.CONDUCTANCE, 1.0),
+    "mS": (Dimension.CONDUCTANCE, 1e-3),
+    "uS": (Dimension.CONDUCTANCE, 1e-6),
+    "nS": (Dimension.CONDUCTANCE, 1e-9),
 }
 
 # Sorted unit suffixes by descending length so multi-char suffixes match before single-char (e.g. "ms" before "s")
@@ -224,6 +239,8 @@ KEYWORDS: Dict[str, TokenType] = {
     "Frequency": TokenType.TYPE_FREQUENCY,
     "Length": TokenType.TYPE_LENGTH,
     "Charge": TokenType.TYPE_CHARGE,
+    "Resistance": TokenType.TYPE_RESISTANCE,
+    "Conductance": TokenType.TYPE_CONDUCTANCE,
     "stream": TokenType.STREAM,
     "bind": TokenType.BIND,
     "cycle": TokenType.CYCLE,

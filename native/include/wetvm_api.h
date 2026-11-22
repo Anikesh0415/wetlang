@@ -34,6 +34,7 @@ typedef struct {
     uint32_t max_locals;       /* Max local variable slots (default: 256) */
     uint32_t channel_count;    /* Number of MEA channels (default: 64) */
     uint32_t max_ops_per_tick; /* Per-tick watchdog instruction limit (default: 100,000 / 2,000 for MCU) */
+    uint32_t min_sequence_counter; /* Minimum monotonic anti-rollback sequence counter required (0 = unconstrained) */
 } wet_vm_config_t;
 
 /* Cycle-Accurate Telemetry Output */

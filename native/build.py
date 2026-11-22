@@ -80,6 +80,7 @@ SetThreadAffinityMask
 SetPriorityClass
 SetThreadPriority
 Sleep
+VirtualLock
 """
     output_def.write_text(def_content, encoding="utf-8")
     cmd = [
@@ -111,7 +112,7 @@ def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, 
         if dlltool_path:
             if not msvcrt_lib.exists() or msvcrt_lib.stat().st_size == 0 or not msvcrt_def.exists() or "qsort" not in msvcrt_def.read_text(encoding="utf-8"):
                 generate_msvcrt_import_lib(dlltool_path, msvcrt_lib, msvcrt_def)
-            if not kernel32_lib.exists() or kernel32_lib.stat().st_size == 0 or not kernel32_def.exists() or "CreateThread" not in kernel32_def.read_text(encoding="utf-8"):
+            if not kernel32_lib.exists() or kernel32_lib.stat().st_size == 0 or not kernel32_def.exists() or "VirtualLock" not in kernel32_def.read_text(encoding="utf-8"):
                 generate_kernel32_import_lib(dlltool_path, kernel32_lib, kernel32_def)
             if msvcrt_lib.exists() and kernel32_lib.exists():
                 extra_link_args = ["-nostdlib", "-Xlinker", "/noentry", str(msvcrt_lib), str(kernel32_lib)]

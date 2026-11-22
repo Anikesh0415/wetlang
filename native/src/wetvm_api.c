@@ -52,12 +52,14 @@ WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
         vm->config.channel_count = (config->channel_count > 0 && config->channel_count <= 64)
                                     ? config->channel_count : 64;
         vm->config.max_ops_per_tick = (config->max_ops_per_tick > 0) ? config->max_ops_per_tick : 100000U;
+        vm->config.min_sequence_counter = config->min_sequence_counter;
     } else {
         vm->config.dt_ms = 0.1;
         vm->config.max_stack_depth = 1024;
         vm->config.max_locals = 256;
         vm->config.channel_count = 64;
         vm->config.max_ops_per_tick = 100000U;
+        vm->config.min_sequence_counter = 0;
     }
 
     vm->max_stack = vm->config.max_stack_depth;

@@ -313,6 +313,13 @@ void biophysics_step_tick(bio_state_t* bio) {
             } else if (p->interphase_ticks_left > 0) {
                 v_applied = 0.0f;
                 p->interphase_ticks_left--;
+                /* Interphase Overpotential (E_mc): During zero-current interphase delay,
+                 * I * Rs = 0, so measured electrode potential is purely the interfacial overpotential E_mc.
+                 * If |E_mc| exceeds water window (0.8 V), extend blanking and flag Faradaic excursion. */
+                float e_mc_v = bio->v_double_layer_v[ch];
+                if (wet_fabsf(e_mc_v) > 0.8f && bio->stim_blanking_ticks[ch] < 50) {
+                    bio->stim_blanking_ticks[ch] += 10;
+                }
             } else if (p->phase2_ticks_left > 0) {
                 v_applied = p->phase2_amp_v;
                 p->phase2_ticks_left--;

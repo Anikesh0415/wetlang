@@ -157,7 +157,7 @@ typedef struct {
     uint32_t num_sections;   /* Number of section table entries */
     uint32_t channel_count;  /* MEA channel count (typically 64) */
     float    max_charge_nc;  /* Upper bound static charge limit */
-    uint32_t reserved;       /* Reserved (0) */
+    uint32_t sequence_counter; /* Monotonically increasing anti-rollback security counter (0 = unconstrained) */
 } wet_bytecode_header_t;
 
 /* WBC Section Table Entry (<HHII, 12 bytes) */
