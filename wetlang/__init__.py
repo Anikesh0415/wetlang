@@ -3,7 +3,7 @@ WetLang: Domain-Specific Programming Language & Cyber-Physical Engine
 for Neural Organoid Computing on Microelectrode Arrays (MEA) & Microfluidics.
 """
 
-__version__ = "1.1.0"
+__version__ = "2.1.0"
 __author__ = "Anikesh Tiwari (Surat, Gujarat, India) / Wetworld"
 __license__ = "Apache-2.0"
 

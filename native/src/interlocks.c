@@ -8,6 +8,8 @@ void interlocks_init(interlock_state_t* il) {
     il->authorized_channels = INTERLOCK_NUM_CHANNELS;
     il->electrode_material = (uint8_t)WET_ELEC_PLATINUM;
     il->electrode_area_um2 = 5000.0f; /* Default macro-electrode area (5000 um^2) */
+    il->v_water_window_low_v = -0.6f;  /* Platinum safe cathodic limit */
+    il->v_water_window_high_v = +0.8f; /* Platinum safe anodic limit */
     il->max_charge_per_phase_nc = INTERLOCK_CHARGE_LIMIT_NC; /* Default 0.5 nC */
     il->max_cumulative_dc_nc = INTERLOCK_DC_DRIFT_LIMIT_NC;  /* Default 1.0 nC */
     for (int p = 0; p < 8; ++p) {
@@ -25,13 +27,39 @@ void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, flo
      * Max charge in nC = CIC (mC/cm^2) * Area (cm^2) * 1e6 nC/mC = CIC * area_um2 * 0.01 nC
      */
     float cic_mc_cm2 = 0.10f;
+    float v_low = -0.6f;
+    float v_high = +0.8f;
+
     switch ((wet_electrode_material_t)material) {
-        case WET_ELEC_PLATINUM: cic_mc_cm2 = 0.10f; break; /* 0.05..0.15 mC/cm^2 water window */
-        case WET_ELEC_TIN:      cic_mc_cm2 = 0.90f; break; /* Titanium Nitride */
-        case WET_ELEC_IROX:     cic_mc_cm2 = 2.00f; break; /* Iridium Oxide */
-        case WET_ELEC_PEDOT:    cic_mc_cm2 = 5.00f; break; /* Conductive polymer */
-        default:                cic_mc_cm2 = 0.10f; break;
+        case WET_ELEC_PLATINUM:
+            cic_mc_cm2 = 0.10f;
+            v_low = -0.6f;
+            v_high = +0.8f;
+            break;
+        case WET_ELEC_IROX:
+            cic_mc_cm2 = 2.00f;
+            v_low = -0.6f;
+            v_high = +0.8f;
+            break;
+        case WET_ELEC_TIN:
+            cic_mc_cm2 = 0.90f;
+            v_low = -0.9f;
+            v_high = +0.9f;
+            break;
+        case WET_ELEC_PEDOT:
+            cic_mc_cm2 = 5.00f;
+            v_low = -0.9f;
+            v_high = +0.6f;
+            break;
+        default:
+            cic_mc_cm2 = 0.10f;
+            v_low = -0.6f;
+            v_high = +0.8f;
+            break;
     }
+
+    il->v_water_window_low_v = v_low;
+    il->v_water_window_high_v = v_high;
 
     float limit_nc = cic_mc_cm2 * area_um2 * 0.01f;
     if (limit_nc < 0.01f) limit_nc = 0.01f;
@@ -134,13 +162,16 @@ int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, flo
 }
 
 float interlocks_clamp_voltage(interlock_state_t* il, float requested_v) {
-    if (requested_v > INTERLOCK_VOLTAGE_LIMIT_V) {
+    float v_high = (il && il->v_water_window_high_v > 0.0f) ? il->v_water_window_high_v : 0.8f;
+    float v_low  = (il && il->v_water_window_low_v < 0.0f)  ? il->v_water_window_low_v  : -0.6f;
+
+    if (requested_v > v_high) {
         if (il) il->clamp_events++;
-        return INTERLOCK_VOLTAGE_LIMIT_V;
+        return v_high;
     }
-    if (requested_v < -INTERLOCK_VOLTAGE_LIMIT_V) {
+    if (requested_v < v_low) {
         if (il) il->clamp_events++;
-        return -INTERLOCK_VOLTAGE_LIMIT_V;
+        return v_low;
     }
     return requested_v;
 }

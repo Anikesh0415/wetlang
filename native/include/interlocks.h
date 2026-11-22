@@ -9,6 +9,20 @@
 extern "C" {
 #endif
 
+#if defined(_WIN32) || defined(__CYGWIN__)
+  #ifdef WET_BUILDING_DLL
+    #define WET_EXPORT __declspec(dllexport)
+  #else
+    #define WET_EXPORT __declspec(dllimport)
+  #endif
+#else
+  #if defined(__GNUC__) && __GNUC__ >= 4
+    #define WET_EXPORT __attribute__((visibility("default")))
+  #else
+    #define WET_EXPORT
+  #endif
+#endif
+
 /* =========================================================================
  * WetLang Cycle-Accurate Biocybersecurity Hardware Watchdog & Interlocks
  * =========================================================================
@@ -94,11 +108,19 @@ typedef struct {
     float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
     int64_t  cumulative_dc_femtocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point femtoCoulombs (1 nC = 1e6 fC) - immune to multi-week float32 ULP saturation */
 
-    /* Phase 3: Electrode Material & Area Parameterization */
+    /* Phase 3 & v2.1: Electrode Material & Material-Dependent Water-Window */
     uint8_t  electrode_material;   /* wet_electrode_material_t */
     float    electrode_area_um2;   /* e.g. 132.25 um^2 for MaxOne, or 5000 um^2 for macro */
+    float    v_water_window_low_v; /* Material-dependent cathodic limit (e.g. -0.6 V for Pt, -0.9 V for TiN) */
+    float    v_water_window_high_v;/* Material-dependent anodic limit (e.g. +0.8 V for Pt, +0.9 V for TiN) */
     float    max_charge_per_phase_nc; /* Dynamic limit = CIC * Area */
     float    max_cumulative_dc_nc;    /* Dynamic persistent DC limit */
+
+    /* Active Emc Closed-Loop Hardware Trimming & OCP Guard */
+    uint8_t  active_emc_trim_enabled;
+    float    emc_trim_offset_v[INTERLOCK_NUM_CHANNELS];
+    float    reference_ocp_baseline_v;
+    uint8_t  reference_ocp_fault_tripped;
 
     /* Phase 3: Microfluidic Dead-Heading Pressure Interlock */
     uint8_t  dead_head_protection_enabled;
@@ -127,7 +149,7 @@ void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t 
 void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask);
 
 /* Phase 3 Electrochemical & Hardware Interlock API */
-void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
+WET_EXPORT void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
 void interlocks_active_discharge(interlock_state_t* il, uint8_t channel);
 void interlocks_active_discharge_all(interlock_state_t* il);
 void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable);
@@ -140,8 +162,8 @@ wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current
 /* Static authorization check for an opcode against loaded bytecode capabilities */
 int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel);
 
-/* Clamp requested stimulation voltage to [-1.2 V, +1.2 V] */
-float interlocks_clamp_voltage(interlock_state_t* il, float requested_v);
+/* Clamp requested stimulation voltage to material water window */
+WET_EXPORT float interlocks_clamp_voltage(interlock_state_t* il, float requested_v);
 
 /* Advance 10.0 ms charge ring buffer with this tick's per-channel injected charge (nC).
  * Returns WET_OK or WET_ERR_CHARGE_IMBALANCE (locking the watchdog on trip). */

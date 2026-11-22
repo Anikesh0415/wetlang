@@ -1,9 +1,9 @@
 # WetLang 🧠💧
 ### The Domain-Specific Programming Language & Cyber-Physical Engine for Neural Organoid Computing
 
-[![Release](https://img.shields.io/badge/Release-v1.1.0-blue.svg)](https://github.com/Anikesh0415/wetlang/releases)
+[![Release](https://img.shields.io/badge/Release-v2.1.0-blue.svg)](https://github.com/Anikesh0415/wetlang/releases)
 [![Language: WetLang](https://img.shields.io/badge/Language-WetLang%20(100%25)-00B4D8?style=for-the-badge&logo=dna)](docs/compendium/VOL_1_LANGUAGE_AND_COMPILER.md)
-[![Tests Passing](https://img.shields.io/badge/Tests-527%2F527%20Passing%20(100%25)-brightgreen.svg)]()
+[![Tests Passing](https://img.shields.io/badge/Tests-556%2F556%20Passing%20(100%25)-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Gymnasium](https://img.shields.io/badge/RL-Farama%20Gymnasium-purple.svg)]()
 [![snnTorch](https://img.shields.io/badge/ODE--Verification-snnTorch%20(r%3D0.999999)-success.svg)]()
@@ -34,6 +34,9 @@ WetLang treats **living neural tissue and robotic life support as a single, unif
 * **Ring-0 Life Support Supervisor (`wetlife`):** Autonomous life-support daemon maintaining baseline nutrient perfusion ($1.5\,\mu\text{L/min}$) and $37^\circ\text{C}$ incubator thermal setpoints even if experimental user code halts or throws errors.
 * **Asymmetric Cryptographic Provenance:** Signed via Ed25519; bioreactor nodes only need the 32-byte public verifying key to execute authentic wetware binaries.
 * **Standard AI & Numerical Cross-Verification:** Conforms to the Farama Foundation Gymnasium standard (`gymnasium.Env`) and cross-verified against Columbia University's `snnTorch` ODE integrator ($r = 0.9999999999996$).
+* **AER Packet Engine & High-Density MEA Scaling (`wet_aer.h`):** 16-byte aligned binary event-driven streaming protocol with single-producer single-consumer (SPSC) lockless ring buffer, 5-tap Bartlett filtered discrete Nonlinear Energy Operator (NEO) spike detection, and int8 Compressed Sparse Row (CSR) connectivity matrix scaling to 26,400+ channels with under 22 MB RAM footprint.
+* **Distributed Time-Triggered Synchronization (IEEE 1588 PTP & TSN, `wet_distributed.h`):** Nanosecond-accurate time-slotted network protocol with 32-byte deterministic frame layouts, sub-microsecond slew-only clock disciplining ($|\text{residual}| \le 1000\text{ ns}$), 512-slot Hierarchical Timing Wheel eliminating Head-of-Line blocking for heterogeneous axonal propagation delays ($1\text{--}50\text{ ms}$), and multi-chamber epileptiform rate governors ($>50\text{ Hz}$).
+* **Bare-Metal RTOS Static Arena & Soak Interlocks:** MISRA-C:2012 Rule 21.3 compliant zero-malloc static arena allocator with 128-byte cache line alignment and volatile memory scrubbing; bounded Worst-Case Execution Time (WCET $<100\,\mu\text{s}$) across 2,000 continuous ticks; multi-week 64-bit femtoCoulomb charge tracking eliminating IEEE-754 float32 ULP drift; material-dependent water window clamping (Pt: $+0.8\text{ V}$, TiN: $+0.9\text{ V}$, PEDOT: $+0.6\text{ V}$).
 
 ---
 

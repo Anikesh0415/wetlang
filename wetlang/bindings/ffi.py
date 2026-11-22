@@ -372,6 +372,10 @@ def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
         lib.wet_configure_electrode.restype = None
         lib.wet_configure_electrode.argtypes = [c_void_p, c_uint8, c_float]
 
+    if hasattr(lib, "wet_clamp_voltage_vm"):
+        lib.wet_clamp_voltage_vm.restype = c_float
+        lib.wet_clamp_voltage_vm.argtypes = [c_void_p, c_float]
+
     if hasattr(lib, "wet_active_discharge"):
         lib.wet_active_discharge.restype = None
         lib.wet_active_discharge.argtypes = [c_void_p, c_uint8]

@@ -1,9 +1,9 @@
 # Volume VI: Verified Appendices, Checksums, Live Logs & Source Listings
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v2.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
-**Generated Programmatically:** `2026-11-22 15:44:11 UTC` by `docs/compendium/generate_compendium.py`  
-**Repository Scope:** 124 tracked files | 2,689,815 bytes | 32,340 text lines
+**Generated Programmatically:** `2026-11-22 21:55:42 UTC` by `docs/compendium/generate_compendium.py`  
+**Repository Scope:** 134 tracked files | 2,467,026 bytes | 34,392 text lines
 
 ---
 
@@ -12,129 +12,139 @@
 | # | Repository Path | Bytes | Lines | SHA-256 Checksum (Truncated / Full) |
 |---:|---|---:|---:|---|
 | 1 | `.gitattributes` | 486 | 19 | `06605de4ccdde7ca2ca17571eb44c8c655f32202de1d7df81c42525f53021a4b` |
-| 2 | `.gitignore` | 379 | 35 | `e16352655b73321e73348d85f754869373f3aeabd9e1781c0b9875656029136f` |
-| 3 | `benchmarks/01_active_inference_closed_loop.wbc` | 1,540 | BIN | `65fa6fd3fbda453cd7ecb53ffb0b2e7a7387aafcbaa3223438da42cc3ba458ec` |
-| 4 | `benchmarks/01_active_inference_closed_loop.wet` | 1,778 | 54 | `8dba4c8f3aedacde3c467c3a4bff80b581523ac37842fde9c85634474eb2b0f7` |
-| 5 | `benchmarks/02_polychronous_reservoir_classifier.wbc` | 1,676 | BIN | `171e9560331c67d7f0fddd97efd985572356233e23e3607d5aefcacd3dfadcb7` |
-| 6 | `benchmarks/02_polychronous_reservoir_classifier.wet` | 1,377 | 49 | `b385c987835dae60a479f77e6ec581a81d8ed8ecf5aa83400704fc6275416511` |
-| 7 | `benchmarks/03_homeostatic_stabilization_and_stress.wbc` | 1,111 | BIN | `e7d2c293becbfebf9f39232d7c0f14439eb8c987a54e4be0282656f0cd02bee4` |
-| 8 | `benchmarks/03_homeostatic_stabilization_and_stress.wet` | 1,326 | 43 | `88646455ff957520a8401921c7d8ee9a22b30b6ed78f889fba178acbaa454be5` |
-| 9 | `bin/wetlang` | 48 | 2 | `ddb439bcbff7b0a10072988327d74d9bbbfa6186207ce83b2e2e5a750fca677c` |
-| 10 | `bin/wetlang.cmd` | 35 | 2 | `4fd697a7d010293e3287761ec698ebf8c24b1092eb8ff2ed40029c92cefb0582` |
-| 11 | `bin/wetvm.dll` | 76,288 | BIN | `baa9ebd2e2a864fb8587a0baae8c70cfbd2b7dffd74414fdc8d24ffb25b41122` |
-| 12 | `CONTRIBUTING.md` | 1,371 | 35 | `e05ce8218f37cbccd487443e6ed7306ff633ec3c93091d8fcf9f4af802955dd5` |
-| 13 | `docs/adversarial_debate.md` | 29,926 | 286 | `80620f350cff9f2e9af1781d27e1718c63cfb5efdad4f6bf57b8c55a63fb62a4` |
-| 14 | `docs/AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
-| 15 | `docs/LANGUAGE_SPECIFICATION.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
-| 16 | `docs/OI_HARDWARE_SCALING_SPECIFICATION.md` | 5,874 | 83 | `618af1daac247bc74828391eea7ce352b4e3bc102f3e1108023f9e6ada1be520` |
-| 17 | `docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` | 1,089,085 | BIN | `2794cc8bc1c80103a757abce2b3e70237a6800c7f054cd1959ffc69980b96d98` |
-| 18 | `docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 30,348 | 219 | `7988a6f4ddbf431c6fb846a43a7a7bbba6f46b990ec4a1a32e6f8e3d174680dd` |
-| 19 | `examples/01_single_organoid_baseline.wbc` | 259 | BIN | `d4476a8217f32780adc25d8817e5805fd996267e17caf1be1c7524ae4dc6fc47` |
-| 20 | `examples/01_single_organoid_baseline.wet` | 499 | 18 | `30f38bde068238378589ac7d452824f53fee9ef3d2ee8221194857178748f00a` |
-| 21 | `examples/02_krogh_perfused_organoid.wet` | 593 | 19 | `41de709fd536cd8dffb322193491fc54f36e884ce63abb8aea1811e92c7d919d` |
-| 22 | `examples/03_cyber_physical_actuation.wet` | 875 | 30 | `c7c591df662ff70c603b001e3688bc6bb49d8fe15772015e58d541e5aa357a00` |
-| 23 | `examples/04_multi_organoid_connectome.wet` | 574 | 24 | `cd4c2e7e2420c6200d95f9aafaa2955aca5f70003bae6a7447cb6d060313a93a` |
-| 24 | `examples/05_gymnasium_active_inference.py` | 1,524 | 41 | `ba14f7afba193b87701e83499cc5b1812ff497d35911decef269544047e7c174` |
-| 25 | `examples/06_snntorch_validation.py` | 1,036 | 23 | `4d8f52c84fa79b4b2a4b4b7d90693baadd840247d272285e988dbb6acca9dee0` |
-| 26 | `LICENSE` | 778 | 17 | `ad302ce114a707983380135aa042d5b051caae9ee20ae8c270c8dbaeec8e4171` |
-| 27 | `native/__init__.py` | 61 | 3 | `d0681b3b7d83c57b6d20bfe602085e1620539b6f082cec5308bcaac40394e318` |
-| 28 | `native/bin/kernel32.def` | 248 | 14 | `e529e508916c97866afd884b0231b80be7bfa471302c002e795778171f59c44a` |
-| 29 | `native/bin/kernel32.lib` | 3,662 | BIN | `edca80141c1648a975f5945f38495020062e28ffa5b295b7b6793e5be2aef875` |
-| 30 | `native/bin/msvcrt.def` | 182 | 20 | `15775a186f68afed2dc83e1da279ac9aba5b77549e25f44633b7dcf65ba7e553` |
-| 31 | `native/bin/msvcrt.lib` | 3,984 | BIN | `0abf27283319dc423d0c0ad066308cbe84f78765d3ff61a767d2c382abb699a8` |
-| 32 | `native/bin/wetvm.dll` | 76,288 | BIN | `baa9ebd2e2a864fb8587a0baae8c70cfbd2b7dffd74414fdc8d24ffb25b41122` |
-| 33 | `native/bin/wetvm.lib` | 26,970 | BIN | `2fc3b25aea2532685bc8c993b826953d41a1f7f6467cf3d5f13995b69d87241e` |
-| 34 | `native/build.py` | 8,077 | 254 | `d365ef766499ce2f2f2ed15fa4d901a8c89c1852fbf30f836866064b6fa59f72` |
-| 35 | `native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
-| 36 | `native/include/interlocks.h` | 7,972 | 166 | `3b0500777569d5917e8c3af0fe72c79ff32466a507eed20c0585ef9ea2bb35f2` |
-| 37 | `native/include/wet_crt.h` | 3,325 | 108 | `3c1a972b9cd8b7c7959e2d7362edb27f211577b535869a752b90d51e41a26f3c` |
-| 38 | `native/include/wet_hal.h` | 10,134 | 230 | `8b70512b8ce204939c066d0cc51985b2c48aba73a8b3727a8e359c082f8efa05` |
-| 39 | `native/include/wet_hal_intan.h` | 5,000 | 169 | `15e6a6849d146a2522be660507c0ca896dd40db8b3164b866e5ec5d8fede6a10` |
-| 40 | `native/include/wet_hal_maxwell.h` | 5,292 | 173 | `f5be2fac6cba467d89fd78a8017982cea9cdf18710406fc87bc107dce396df05` |
-| 41 | `native/include/wet_hal_pump_valve.h` | 6,625 | 216 | `5db2b883e4822e33c028397394bc3ebc75b4be823e53b5253528faab68c198c2` |
-| 42 | `native/include/wet_hal_sensirion.h` | 4,384 | 153 | `c5cadc6f9f2f1b2b7d0ea747dc19cce5246f1822519dd02d14092c4f9056144b` |
-| 43 | `native/include/wet_scheduler.h` | 6,890 | 136 | `ae755ab83f92e02449f3bd47eeb7223b47a0ee8efee79bff5020215f4e89be4d` |
-| 44 | `native/include/wetvm_api.h` | 8,359 | 302 | `2bfade00027458ffae70cfa78ce6175984b776169c84781f2aaac0f2dddf590f` |
-| 45 | `native/include/wetvm_types.h` | 6,675 | 177 | `b7289c4cdde4199c2fa77c87a1f5797132220e75a7dde7b4fcc548487dc491f6` |
-| 46 | `native/include/wetvm_vm.h` | 4,235 | 146 | `e769cd7ca730fe3f32e0731b58dd048350163b60d9e6f48be06a67649ee774d4` |
-| 47 | `native/interlocks.py` | 3,689 | 90 | `5831e4240793de5987e600feed2d8d32a6a294f05587113050968078dfe56b7c` |
-| 48 | `native/src/biophysics.c` | 23,591 | 547 | `9854cac4a9aab3369896417d4732e4541befd934fe6a8974446bed80261e9b4b` |
-| 49 | `native/src/interlocks.c` | 13,193 | 319 | `33b51c6855575217cbc7376dff9a2fec3d9cd03cc5418d530622c5d010a8e28c` |
-| 50 | `native/src/wet_hal.c` | 20,667 | 564 | `02cf9c0cd1c098b2b439b983e3d4d6e43fc502bfca923053a6223340a858135e` |
-| 51 | `native/src/wet_hal_intan.c` | 15,642 | 404 | `04902df138963d3e4f6009a7501abdbc89a70311aefdbc6ebaecc42799f0f874` |
-| 52 | `native/src/wet_hal_maxwell.c` | 14,303 | 357 | `e9c265c923734f464bf80b17bd7bd6f732492c32b1b2a1f2f390ad633185553a` |
-| 53 | `native/src/wet_hal_pump_valve.c` | 16,066 | 463 | `0643ab7ba9b8e772538af708222527a1b845c6d61f84e941534d97a750c3f68d` |
-| 54 | `native/src/wet_hal_sensirion.c` | 10,766 | 332 | `19293c38932593af4d119653c6ff904c1567163fdd58a80d2e729d08987bf3fe` |
-| 55 | `native/src/wet_scheduler.c` | 23,845 | 658 | `128de8fe00f83e9055a26e8149386788ae5cf61cc7133fd736d7312a813367a4` |
-| 56 | `native/src/wetvm_api.c` | 21,911 | 615 | `0775d05f6752ec8c43640df071eb6b81b6a349acccb6f1381c439034fccfeee8` |
-| 57 | `native/src/wetvm_vm.c` | 87,487 | 2034 | `9c85d5d4afad5dc0de9306066d5a2d9d108ffb21e9c6c7aec18c91cfc2d50d68` |
-| 58 | `native/wetvm.dll` | 76,288 | BIN | `baa9ebd2e2a864fb8587a0baae8c70cfbd2b7dffd74414fdc8d24ffb25b41122` |
-| 59 | `PROJECT.md` | 14,727 | 198 | `0ed7cee23597284f347b97dc1c85ba3d001b493489ecd773375aff47aa328d40` |
-| 60 | `pyproject.toml` | 1,424 | 56 | `bf1a96c42071520b00e4568bced3fca5241bc3ac8d59d7c9ec540f2accb14c94` |
-| 61 | `pytest.ini` | 80 | 4 | `f4bf1ab2c2b7363adbb36a4924619319baff715b1cc63cb9de6d252a3d11e4d5` |
-| 62 | `README.md` | 13,219 | 233 | `e09ca90346d742d2e2fbfe246e89c2d2c850511aad8368e40cd54cee662b7ddc` |
-| 63 | `requirements.txt` | 75 | 5 | `6c0084c24660fd7f560241e652a7fab38e715289d6ffcdd53e9e8933d7af96f6` |
-| 64 | `setup.py` | 262 | 13 | `ecb64ce4d922e590c7960f87370dcf627480a8eb8ae03e1b8323287d51df02bb` |
-| 65 | `TEST_INFRA.md` | 5,666 | 71 | `9bfab52507a9ce87deaabb3d4f18f439a8826f28c06fbe67a693ed6b99c69606` |
-| 66 | `TEST_READY.md` | 1,330 | 28 | `033fc27c27d1a17cdbf1378a56d1184ef143b5c632cf553a0ef082a8720b3585` |
-| 67 | `tests/conftest.py` | 248 | 10 | `84fa09784e3171a88012caf158a599110e2d2cc4581ecb8ee07cb514f44ee0ba` |
-| 68 | `tests/e2e/__init__.py` | 890 | 43 | `90fc12f4d49c01d1af12d768fff0eef372150c091fac25a1bf94e252f4da4c1d` |
-| 69 | `tests/e2e/common.py` | 38,914 | 1062 | `faf560dae3b7e1b42a2e333b0e75bd619b00fb71c0ba111d4dcdb1ebaeb9dc24` |
-| 70 | `tests/e2e/test_tier1_features.py` | 74,476 | 1582 | `55a282b60f08cdb5d7a7d45faf7aa57cd700c8796e522a2f4082a8298c2959d1` |
-| 71 | `tests/e2e/test_tier2_boundaries.py` | 82,966 | 1835 | `989e23f9ba080d04d6e04c26126a7c6c0dc26effd7f7d6981ec179f93be57562` |
-| 72 | `tests/e2e/test_tier3_pairwise.py` | 42,694 | 976 | `3008ff114dd1105258c4777d37427bf1a08962647f0615a17989caeacee2f6d8` |
-| 73 | `tests/e2e/test_tier4_benchmarks.py` | 26,398 | 577 | `51287efebd301ab19d55bd630548f109ae5e19fb29d73be9abfeedec665003a3` |
-| 74 | `tests/run_e2e_tests.py` | 11,055 | 322 | `2ca92dbb3cc9c230a7d3cf9d38eede7a55cb77e13aa57fd9ce967b918e5f2c48` |
-| 75 | `tests/test_actuators.py` | 987 | 36 | `e0740cc2b9fa7b8475c6f7b6f2001cae3312291bdbc88e08f6fdc620ad5b0951` |
-| 76 | `tests/test_audit_remediation.py` | 15,595 | 372 | `c5df3ce3eb8584e6f6c013a091613a7a7399983683148336fb370d254de64d10` |
-| 77 | `tests/test_benchmarks.py` | 7,830 | 216 | `415b239383f290b91cca89c402389b8f1d586d3c2081fa0392c4891730e4d04f` |
-| 78 | `tests/test_compiler.py` | 965 | 30 | `9f312c9e6fae882410299a7194f6b6c150ddcc1075dbd2fafb910747bde36f82` |
-| 79 | `tests/test_hal_drivers.py` | 29,061 | 709 | `ca8bf850cd03ce66597afdf9b4ac95e91666bc871cdd03ad6755f3a72e71620d` |
-| 80 | `tests/test_interlocks.py` | 12,556 | 302 | `0dd0fa920d0d8a597a4330fd9da868e2046a7daab6fa11a6ddc9b85d950c1725` |
-| 81 | `tests/test_nir_bridge.py` | 17,608 | 480 | `c922ec35314e3d0c355388cf14c923072fced18bb968fdaad7e0c7922684bbd2` |
-| 82 | `tests/test_ode_stability.py` | 17,095 | 425 | `d401dfe9d0d16c79a2a1d5ce5a6eed3d69a79286a5b83266e1bcaba24883d376` |
-| 83 | `tests/test_parser_diagnostics.py` | 13,059 | 437 | `56a0914159f7f9c6302bba7aaa7ec78bd8d4d820337cf40abde9e3f06948cc3b` |
-| 84 | `tests/test_phase2_deep_audit.py` | 14,468 | 348 | `d2b739b630b6e93a060f7a02c21a3c8bc8c0daa19ec508cc2086cd9d452614a4` |
-| 85 | `tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
-| 86 | `tests/test_rt_scheduler.py` | 12,191 | 307 | `750f42facca4e40141eada6080db79120ba5c9d7b810c5e8690b95f2f106d778` |
-| 87 | `tests/test_runtime.py` | 643 | 22 | `7f8381b60a4cca97c68f4e63799cbf16ea489df723f7c6c01752a427af672269` |
-| 88 | `tests/test_sandbox.py` | 1,113 | 31 | `5a2415e1659ca63f9374f5913db18b28721967a0de52e3e0551495ac9ff62884` |
-| 89 | `tests/test_section1_audit_remediation.py` | 6,139 | 171 | `57a2f7fc2d42de440a53af230ea5f95cd017ad642dfb625cb256a1c27275cdde` |
-| 90 | `tests/test_section3_audit_remediation.py` | 4,655 | 122 | `e4a1604d3ea56f9afde38e6db24e692d80f347aea0418e2c13326e650baa9640` |
-| 91 | `tests/test_section5_audit_remediation.py` | 4,303 | 116 | `477791374681097bc88e2b70142f99de9ee869bc4d12713eb5255a1b189c6b4a` |
-| 92 | `tests/test_static_verifier.py` | 17,470 | 584 | `54ca1aa3eb0d25c2b451224e8bea3be522a566a7502f2c4d7864dce57c770d5f` |
-| 93 | `tests/test_universal_sandbox.py` | 5,725 | 139 | `ab7be8be193420d1d25a3ab3324be9342ee420b20210c3067199c1741832df1d` |
-| 94 | `wetlang/__init__.py` | 2,004 | 63 | `3ecc051bf952306bbae884529944b9169392ca30c6b8e781fee56d1bc5abee82` |
-| 95 | `wetlang/bindings/__init__.py` | 798 | 42 | `7cfb2e1e1803c1220d5e90ab609730761d1d3500a35b087e5e5f966260b263d0` |
-| 96 | `wetlang/bindings/ffi.py` | 48,759 | 1133 | `93848bfe6eb99c8e71580bc5bbc19fd442eb0bcef80d0b9a5836bc7df99962f5` |
-| 97 | `wetlang/bindings/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
-| 98 | `wetlang/bindings/scheduler.py` | 10,504 | 302 | `a26fa321476c3e7ec4644f3b92c2457bc7fda9669dac9104dab7f5385ca6d0ba` |
-| 99 | `wetlang/biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
-| 100 | `wetlang/biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
-| 101 | `wetlang/biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
-| 102 | `wetlang/biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
-| 103 | `wetlang/biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
-| 104 | `wetlang/biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
-| 105 | `wetlang/cli.py` | 7,244 | 191 | `9cdb73e6406f12c08df57bf394d4e225a9f62584f1b599c26087867265e69ca2` |
-| 106 | `wetlang/compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
-| 107 | `wetlang/compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
-| 108 | `wetlang/compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
-| 109 | `wetlang/compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
-| 110 | `wetlang/compiler/emitter.py` | 39,419 | 951 | `f985cdab9ee3c89e79be2a59e441907b6e0eaf5a09f50da9db5914efd6913e50` |
-| 111 | `wetlang/compiler/isa.py` | 5,758 | 185 | `80b277d6c870e49152b46b9ef5d77ca224c94f35e02a9ee93206cb59e95d719b` |
-| 112 | `wetlang/compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
-| 113 | `wetlang/compiler/nir_bridge.py` | 35,640 | 920 | `db41404376027cb0f75b3ed17fab6fabf6eaf56c6fbfffb2fa4578d3d3d7ef84` |
-| 114 | `wetlang/compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
-| 115 | `wetlang/compiler/semantic.py` | 44,837 | 987 | `bbdc4a0456335ba61fe71b42effb9725f6467731f54e76feb06c5ad2bff60b1a` |
-| 116 | `wetlang/compiler/token.py` | 8,024 | 287 | `a9dd472e260458e11caf5daac599f6258b21009013791975a8409e179a7610fa` |
-| 117 | `wetlang/runtime/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
-| 118 | `wetlang/runtime/ffi.py` | 10,509 | 297 | `6e1717b508cb1fae7d6018f4e29fc0cac5fb94cd3a3acdd4e635d6cd7a4f19cc` |
-| 119 | `wetlang/runtime/runtime.py` | 10,880 | 323 | `7a1b134d8712895e2bfe840e95e2853a62ffdf24f23a6218a0dd0b983728dcaa` |
-| 120 | `wetlang/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
-| 121 | `wetlang/sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
-| 122 | `wetlang/sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
-| 123 | `wetlang/sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
-| 124 | `wetlang/sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
+| 2 | `.github/workflows/ci.yml` | 979 | 42 | `2e8f79189cbdbaa184ef4b016ec5d2425156205abc42737968ed1acf4c37a3a1` |
+| 3 | `.gitignore` | 379 | 35 | `e16352655b73321e73348d85f754869373f3aeabd9e1781c0b9875656029136f` |
+| 4 | `benchmarks/01_active_inference_closed_loop.wbc` | 1,540 | BIN | `65fa6fd3fbda453cd7ecb53ffb0b2e7a7387aafcbaa3223438da42cc3ba458ec` |
+| 5 | `benchmarks/01_active_inference_closed_loop.wet` | 1,778 | 54 | `8dba4c8f3aedacde3c467c3a4bff80b581523ac37842fde9c85634474eb2b0f7` |
+| 6 | `benchmarks/02_polychronous_reservoir_classifier.wbc` | 1,676 | BIN | `171e9560331c67d7f0fddd97efd985572356233e23e3607d5aefcacd3dfadcb7` |
+| 7 | `benchmarks/02_polychronous_reservoir_classifier.wet` | 1,377 | 49 | `b385c987835dae60a479f77e6ec581a81d8ed8ecf5aa83400704fc6275416511` |
+| 8 | `benchmarks/03_homeostatic_stabilization_and_stress.wbc` | 1,111 | BIN | `e7d2c293becbfebf9f39232d7c0f14439eb8c987a54e4be0282656f0cd02bee4` |
+| 9 | `benchmarks/03_homeostatic_stabilization_and_stress.wet` | 1,326 | 43 | `88646455ff957520a8401921c7d8ee9a22b30b6ed78f889fba178acbaa454be5` |
+| 10 | `bin/wetlang` | 48 | 2 | `ddb439bcbff7b0a10072988327d74d9bbbfa6186207ce83b2e2e5a750fca677c` |
+| 11 | `bin/wetlang.cmd` | 35 | 2 | `4fd697a7d010293e3287761ec698ebf8c24b1092eb8ff2ed40029c92cefb0582` |
+| 12 | `bin/wetvm.dll` | 81,920 | BIN | `86c4cf692aef4623d1c136971bb2485f0d9206110d333052edac3f6dcb025bfb` |
+| 13 | `CONTRIBUTING.md` | 1,371 | 35 | `e05ce8218f37cbccd487443e6ed7306ff633ec3c93091d8fcf9f4af802955dd5` |
+| 14 | `docs/adversarial_debate.md` | 29,926 | 286 | `80620f350cff9f2e9af1781d27e1718c63cfb5efdad4f6bf57b8c55a63fb62a4` |
+| 15 | `docs/AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
+| 16 | `docs/LANGUAGE_SPECIFICATION.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
+| 17 | `docs/OI_HARDWARE_SCALING_SPECIFICATION.md` | 5,874 | 83 | `618af1daac247bc74828391eea7ce352b4e3bc102f3e1108023f9e6ada1be520` |
+| 18 | `docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` | 768,784 | BIN | `c6812e20cfc814bc75ed7acbb8908ef8e94bfe5d2ea4662009955eec56784c11` |
+| 19 | `docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 30,348 | 219 | `7988a6f4ddbf431c6fb846a43a7a7bbba6f46b990ec4a1a32e6f8e3d174680dd` |
+| 20 | `examples/01_single_organoid_baseline.wbc` | 259 | BIN | `d4476a8217f32780adc25d8817e5805fd996267e17caf1be1c7524ae4dc6fc47` |
+| 21 | `examples/01_single_organoid_baseline.wet` | 499 | 18 | `30f38bde068238378589ac7d452824f53fee9ef3d2ee8221194857178748f00a` |
+| 22 | `examples/02_krogh_perfused_organoid.wet` | 593 | 19 | `41de709fd536cd8dffb322193491fc54f36e884ce63abb8aea1811e92c7d919d` |
+| 23 | `examples/03_cyber_physical_actuation.wet` | 875 | 30 | `c7c591df662ff70c603b001e3688bc6bb49d8fe15772015e58d541e5aa357a00` |
+| 24 | `examples/04_multi_organoid_connectome.wet` | 574 | 24 | `cd4c2e7e2420c6200d95f9aafaa2955aca5f70003bae6a7447cb6d060313a93a` |
+| 25 | `examples/05_gymnasium_active_inference.py` | 1,524 | 41 | `ba14f7afba193b87701e83499cc5b1812ff497d35911decef269544047e7c174` |
+| 26 | `examples/06_snntorch_validation.py` | 1,036 | 23 | `4d8f52c84fa79b4b2a4b4b7d90693baadd840247d272285e988dbb6acca9dee0` |
+| 27 | `LICENSE` | 778 | 17 | `ad302ce114a707983380135aa042d5b051caae9ee20ae8c270c8dbaeec8e4171` |
+| 28 | `native/__init__.py` | 61 | 3 | `d0681b3b7d83c57b6d20bfe602085e1620539b6f082cec5308bcaac40394e318` |
+| 29 | `native/bin/kernel32.def` | 248 | 14 | `e529e508916c97866afd884b0231b80be7bfa471302c002e795778171f59c44a` |
+| 30 | `native/bin/kernel32.lib` | 3,662 | BIN | `edca80141c1648a975f5945f38495020062e28ffa5b295b7b6793e5be2aef875` |
+| 31 | `native/bin/msvcrt.def` | 182 | 20 | `15775a186f68afed2dc83e1da279ac9aba5b77549e25f44633b7dcf65ba7e553` |
+| 32 | `native/bin/msvcrt.lib` | 3,984 | BIN | `0abf27283319dc423d0c0ad066308cbe84f78765d3ff61a767d2c382abb699a8` |
+| 33 | `native/bin/wetvm.dll` | 81,920 | BIN | `86c4cf692aef4623d1c136971bb2485f0d9206110d333052edac3f6dcb025bfb` |
+| 34 | `native/bin/wetvm.lib` | 32,320 | BIN | `7cfc3da014690c3d2569a71f094895962859aed3c4a9907053c5f548d415ab76` |
+| 35 | `native/build.py` | 8,147 | 256 | `2cc2c020859bb090c3d391bc4c596d2822c5c0a179a89c95a75d3537fe083993` |
+| 36 | `native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
+| 37 | `native/include/interlocks.h` | 8,810 | 188 | `5017b655ffe3fd61f74afc71e15d01c6b5b6aefffd977f9e5bf8a96b44d2f3d8` |
+| 38 | `native/include/wet_aer.h` | 6,091 | 159 | `84b2e70694f38a59f9d9c66f74cd7220a9c1cf6298bcdd360f8fc78a5260f4f7` |
+| 39 | `native/include/wet_crt.h` | 3,325 | 108 | `3c1a972b9cd8b7c7959e2d7362edb27f211577b535869a752b90d51e41a26f3c` |
+| 40 | `native/include/wet_distributed.h` | 5,208 | 130 | `0aab09235da0a6be3b3d572ccd51ac8005a1d8c41549944b95f2d12bbf367d45` |
+| 41 | `native/include/wet_hal.h` | 10,134 | 230 | `8b70512b8ce204939c066d0cc51985b2c48aba73a8b3727a8e359c082f8efa05` |
+| 42 | `native/include/wet_hal_intan.h` | 5,000 | 169 | `15e6a6849d146a2522be660507c0ca896dd40db8b3164b866e5ec5d8fede6a10` |
+| 43 | `native/include/wet_hal_maxwell.h` | 5,292 | 173 | `f5be2fac6cba467d89fd78a8017982cea9cdf18710406fc87bc107dce396df05` |
+| 44 | `native/include/wet_hal_pump_valve.h` | 6,625 | 216 | `5db2b883e4822e33c028397394bc3ebc75b4be823e53b5253528faab68c198c2` |
+| 45 | `native/include/wet_hal_sensirion.h` | 4,384 | 153 | `c5cadc6f9f2f1b2b7d0ea747dc19cce5246f1822519dd02d14092c4f9056144b` |
+| 46 | `native/include/wet_scheduler.h` | 6,890 | 136 | `ae755ab83f92e02449f3bd47eeb7223b47a0ee8efee79bff5020215f4e89be4d` |
+| 47 | `native/include/wetvm_api.h` | 8,546 | 310 | `f1f5e21dac2938cd8d6a6e035b0ab1d6172a37ce28ec9478113ec4c86b144efc` |
+| 48 | `native/include/wetvm_types.h` | 6,675 | 177 | `b7289c4cdde4199c2fa77c87a1f5797132220e75a7dde7b4fcc548487dc491f6` |
+| 49 | `native/include/wetvm_vm.h` | 4,235 | 146 | `e769cd7ca730fe3f32e0731b58dd048350163b60d9e6f48be06a67649ee774d4` |
+| 50 | `native/interlocks.py` | 3,689 | 90 | `5831e4240793de5987e600feed2d8d32a6a294f05587113050968078dfe56b7c` |
+| 51 | `native/src/biophysics.c` | 23,591 | 547 | `9854cac4a9aab3369896417d4732e4541befd934fe6a8974446bed80261e9b4b` |
+| 52 | `native/src/interlocks.c` | 13,846 | 350 | `d17021d6920714f8f502f5c434af9ab7ac6133a0c8252b682548b54eade69199` |
+| 53 | `native/src/wet_aer.c` | 11,713 | 307 | `bf9b381918ee73d445a38236a06bb21db9a61f48ac70cb08514360648ae68d02` |
+| 54 | `native/src/wet_distributed.c` | 6,345 | 168 | `5c22625cf18763c227a8ca38f70c61c8025d17058bbedd39b750a34d861a0064` |
+| 55 | `native/src/wet_hal.c` | 20,667 | 564 | `02cf9c0cd1c098b2b439b983e3d4d6e43fc502bfca923053a6223340a858135e` |
+| 56 | `native/src/wet_hal_intan.c` | 15,642 | 404 | `04902df138963d3e4f6009a7501abdbc89a70311aefdbc6ebaecc42799f0f874` |
+| 57 | `native/src/wet_hal_maxwell.c` | 14,303 | 357 | `e9c265c923734f464bf80b17bd7bd6f732492c32b1b2a1f2f390ad633185553a` |
+| 58 | `native/src/wet_hal_pump_valve.c` | 16,066 | 463 | `0643ab7ba9b8e772538af708222527a1b845c6d61f84e941534d97a750c3f68d` |
+| 59 | `native/src/wet_hal_sensirion.c` | 10,766 | 332 | `19293c38932593af4d119653c6ff904c1567163fdd58a80d2e729d08987bf3fe` |
+| 60 | `native/src/wet_scheduler.c` | 23,845 | 658 | `128de8fe00f83e9055a26e8149386788ae5cf61cc7133fd736d7312a813367a4` |
+| 61 | `native/src/wetvm_api.c` | 22,943 | 639 | `6a0641509ff77e10767f10f23d3b8ed1aa87e9f1f0480e45b7f51f5971a42345` |
+| 62 | `native/src/wetvm_vm.c` | 87,487 | 2034 | `9c85d5d4afad5dc0de9306066d5a2d9d108ffb21e9c6c7aec18c91cfc2d50d68` |
+| 63 | `native/wetvm.dll` | 81,920 | BIN | `86c4cf692aef4623d1c136971bb2485f0d9206110d333052edac3f6dcb025bfb` |
+| 64 | `PROJECT.md` | 14,727 | 198 | `0ed7cee23597284f347b97dc1c85ba3d001b493489ecd773375aff47aa328d40` |
+| 65 | `pyproject.toml` | 1,424 | 56 | `e9c9a7e703165689ca5b5dc68558376dca0d25b4e53e2c5a226b9e6bd2babb40` |
+| 66 | `pytest.ini` | 80 | 4 | `f4bf1ab2c2b7363adbb36a4924619319baff715b1cc63cb9de6d252a3d11e4d5` |
+| 67 | `README.md` | 14,563 | 236 | `17ea7c1ae7847907f59f93a57dfc6536de3a14a11634101df0eae0d6da16eafa` |
+| 68 | `requirements.txt` | 75 | 5 | `6c0084c24660fd7f560241e652a7fab38e715289d6ffcdd53e9e8933d7af96f6` |
+| 69 | `setup.py` | 262 | 13 | `ecb64ce4d922e590c7960f87370dcf627480a8eb8ae03e1b8323287d51df02bb` |
+| 70 | `TEST_INFRA.md` | 5,666 | 71 | `9bfab52507a9ce87deaabb3d4f18f439a8826f28c06fbe67a693ed6b99c69606` |
+| 71 | `TEST_READY.md` | 1,330 | 28 | `033fc27c27d1a17cdbf1378a56d1184ef143b5c632cf553a0ef082a8720b3585` |
+| 72 | `tests/conftest.py` | 248 | 10 | `84fa09784e3171a88012caf158a599110e2d2cc4581ecb8ee07cb514f44ee0ba` |
+| 73 | `tests/e2e/__init__.py` | 890 | 43 | `90fc12f4d49c01d1af12d768fff0eef372150c091fac25a1bf94e252f4da4c1d` |
+| 74 | `tests/e2e/common.py` | 39,006 | 1063 | `3938424c010f887dd573a2980b24b2232f03475a0b1356a9180298a2e7b5178d` |
+| 75 | `tests/e2e/test_tier1_features.py` | 74,568 | 1583 | `7098cf6a22339f1d0e74f8822473bdb28c653324638a3df7213c6685e977dda8` |
+| 76 | `tests/e2e/test_tier2_boundaries.py` | 83,058 | 1836 | `551d1874d71da39d559fe975df8aaee097c3a911129fb8e67ea0a3bd5979be5e` |
+| 77 | `tests/e2e/test_tier3_pairwise.py` | 42,786 | 977 | `68ee56301a785e4884a2ce887ec5ae4b2aad0e531973517384106076cef99757` |
+| 78 | `tests/e2e/test_tier4_benchmarks.py` | 26,490 | 578 | `78a16ce38fcc7115cadc323f78aa694de546008351217bd59944146adb9cc0ac` |
+| 79 | `tests/run_e2e_tests.py` | 11,147 | 323 | `60117a64b4f9abd9bdeff9ce315e00886d245811a3d6d05f3f8f6fa8dffdb955` |
+| 80 | `tests/test_actuators.py` | 987 | 36 | `e0740cc2b9fa7b8475c6f7b6f2001cae3312291bdbc88e08f6fdc620ad5b0951` |
+| 81 | `tests/test_audit_remediation.py` | 15,595 | 372 | `c5df3ce3eb8584e6f6c013a091613a7a7399983683148336fb370d254de64d10` |
+| 82 | `tests/test_benchmarks.py` | 7,830 | 216 | `415b239383f290b91cca89c402389b8f1d586d3c2081fa0392c4891730e4d04f` |
+| 83 | `tests/test_compiler.py` | 965 | 30 | `9f312c9e6fae882410299a7194f6b6c150ddcc1075dbd2fafb910747bde36f82` |
+| 84 | `tests/test_hal_drivers.py` | 29,061 | 709 | `ca8bf850cd03ce66597afdf9b4ac95e91666bc871cdd03ad6755f3a72e71620d` |
+| 85 | `tests/test_interlocks.py` | 12,556 | 302 | `0dd0fa920d0d8a597a4330fd9da868e2046a7daab6fa11a6ddc9b85d950c1725` |
+| 86 | `tests/test_milestone2_aer_hdmea.py` | 6,639 | 166 | `bd929f3474cac5877905ec83375a5b6bc8e4239dd9755012074455cc40999894` |
+| 87 | `tests/test_milestone3_distributed.py` | 6,906 | 218 | `74657ddac8b031862af3d95e488ff4d23d11f2cc0d46e3662e66f5952f7fe3e7` |
+| 88 | `tests/test_milestone4_rtos_arena.py` | 7,251 | 184 | `ad1a380f1765b93a632f671149349c457476ef1b7bc8de41b7e12d15bb1990e3` |
+| 89 | `tests/test_nir_bridge.py` | 17,608 | 480 | `c922ec35314e3d0c355388cf14c923072fced18bb968fdaad7e0c7922684bbd2` |
+| 90 | `tests/test_ode_stability.py` | 17,095 | 425 | `d401dfe9d0d16c79a2a1d5ce5a6eed3d69a79286a5b83266e1bcaba24883d376` |
+| 91 | `tests/test_parser_diagnostics.py` | 13,059 | 437 | `56a0914159f7f9c6302bba7aaa7ec78bd8d4d820337cf40abde9e3f06948cc3b` |
+| 92 | `tests/test_phase2_deep_audit.py` | 14,468 | 348 | `d2b739b630b6e93a060f7a02c21a3c8bc8c0daa19ec508cc2086cd9d452614a4` |
+| 93 | `tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
+| 94 | `tests/test_rt_scheduler.py` | 12,191 | 307 | `750f42facca4e40141eada6080db79120ba5c9d7b810c5e8690b95f2f106d778` |
+| 95 | `tests/test_runtime.py` | 643 | 22 | `7f8381b60a4cca97c68f4e63799cbf16ea489df723f7c6c01752a427af672269` |
+| 96 | `tests/test_sandbox.py` | 1,113 | 31 | `5a2415e1659ca63f9374f5913db18b28721967a0de52e3e0551495ac9ff62884` |
+| 97 | `tests/test_section1_audit_remediation.py` | 6,139 | 171 | `57a2f7fc2d42de440a53af230ea5f95cd017ad642dfb625cb256a1c27275cdde` |
+| 98 | `tests/test_section3_audit_remediation.py` | 4,655 | 122 | `e4a1604d3ea56f9afde38e6db24e692d80f347aea0418e2c13326e650baa9640` |
+| 99 | `tests/test_section5_audit_remediation.py` | 4,303 | 116 | `477791374681097bc88e2b70142f99de9ee869bc4d12713eb5255a1b189c6b4a` |
+| 100 | `tests/test_static_verifier.py` | 17,470 | 584 | `54ca1aa3eb0d25c2b451224e8bea3be522a566a7502f2c4d7864dce57c770d5f` |
+| 101 | `tests/test_universal_sandbox.py` | 5,725 | 139 | `ab7be8be193420d1d25a3ab3324be9342ee420b20210c3067199c1741832df1d` |
+| 102 | `wetlang/__init__.py` | 2,004 | 63 | `99fad8b3eb64e679d57adf9a75fbd527ef67c6f9d0833d035b68d69e520f0f46` |
+| 103 | `wetlang/bindings/__init__.py` | 798 | 42 | `7cfb2e1e1803c1220d5e90ab609730761d1d3500a35b087e5e5f966260b263d0` |
+| 104 | `wetlang/bindings/aer.py` | 10,968 | 319 | `1be7d1fc1a5155a79af9da16f0d84924d343242e49ae76a77ea164a5129c65b9` |
+| 105 | `wetlang/bindings/distributed.py` | 8,329 | 259 | `2eb4ebdc2a337209dc935d318cfafb114c047c9d07374897b413530edcb420fe` |
+| 106 | `wetlang/bindings/ffi.py` | 48,920 | 1137 | `6fc5545771357f47091d01d90f8224ca59518a985356553e12728a394a9b5ba9` |
+| 107 | `wetlang/bindings/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
+| 108 | `wetlang/bindings/scheduler.py` | 10,504 | 302 | `a26fa321476c3e7ec4644f3b92c2457bc7fda9669dac9104dab7f5385ca6d0ba` |
+| 109 | `wetlang/biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
+| 110 | `wetlang/biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
+| 111 | `wetlang/biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
+| 112 | `wetlang/biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
+| 113 | `wetlang/biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
+| 114 | `wetlang/biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
+| 115 | `wetlang/cli.py` | 7,244 | 191 | `9cdb73e6406f12c08df57bf394d4e225a9f62584f1b599c26087867265e69ca2` |
+| 116 | `wetlang/compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
+| 117 | `wetlang/compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
+| 118 | `wetlang/compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
+| 119 | `wetlang/compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
+| 120 | `wetlang/compiler/emitter.py` | 39,419 | 951 | `f985cdab9ee3c89e79be2a59e441907b6e0eaf5a09f50da9db5914efd6913e50` |
+| 121 | `wetlang/compiler/isa.py` | 5,758 | 185 | `80b277d6c870e49152b46b9ef5d77ca224c94f35e02a9ee93206cb59e95d719b` |
+| 122 | `wetlang/compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
+| 123 | `wetlang/compiler/nir_bridge.py` | 35,640 | 920 | `db41404376027cb0f75b3ed17fab6fabf6eaf56c6fbfffb2fa4578d3d3d7ef84` |
+| 124 | `wetlang/compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
+| 125 | `wetlang/compiler/semantic.py` | 44,837 | 987 | `bbdc4a0456335ba61fe71b42effb9725f6467731f54e76feb06c5ad2bff60b1a` |
+| 126 | `wetlang/compiler/token.py` | 8,024 | 287 | `a9dd472e260458e11caf5daac599f6258b21009013791975a8409e179a7610fa` |
+| 127 | `wetlang/runtime/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
+| 128 | `wetlang/runtime/ffi.py` | 10,509 | 297 | `6e1717b508cb1fae7d6018f4e29fc0cac5fb94cd3a3acdd4e635d6cd7a4f19cc` |
+| 129 | `wetlang/runtime/runtime.py` | 10,880 | 323 | `7a1b134d8712895e2bfe840e95e2853a62ffdf24f23a6218a0dd0b983728dcaa` |
+| 130 | `wetlang/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
+| 131 | `wetlang/sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
+| 132 | `wetlang/sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
+| 133 | `wetlang/sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
+| 134 | `wetlang/sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
 
 ---
 
@@ -154,10 +164,22 @@
 - **Macros / Constants:** `INTERLOCK_NUM_CHANNELS` = `64`, `INTERLOCK_VOLTAGE_LIMIT_V` = `1.2f`, `INTERLOCK_CHARGE_WINDOW_TICKS` = `100`, `INTERLOCK_CHARGE_LIMIT_NC` = `0.5f`, `INTERLOCK_EPILEPSY_RATE_HZ` = `150.0f`, `INTERLOCK_EPILEPSY_MIN_CHANNELS` = `23`, `INTERLOCK_EPILEPSY_SUSTAIN_TICKS` = `500`, `INTERLOCK_DC_DRIFT_LIMIT_NC` = `1.0f`, `INTERLOCK_BLEED_DECAY_PER_TICK` = `0.99999f`, `INTERLOCK_CHARGE_DENSITY_LIMIT_NC` = `0.40f`, `INTERLOCK_FOCAL_RATE_HZ` = `150.0f`, `INTERLOCK_FOCAL_SUSTAIN_TICKS` = `2500`, `INTERLOCK_DUTY_CYCLE_LIMIT` = `0.05f`, `INTERLOCK_DUTY_CYCLE_DECAY` = `0.9999f`, `INTERLOCK_THERMAL_LIMIT_C` = `38.0f`, `INTERLOCK_COMPLIANCE_LIMIT_V` = `7.0f`
 - **Functions:** `interlocks_init(interlock_state_t* il)`; `interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count)`; `interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask)`; `interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2)`; `interlocks_active_discharge(interlock_state_t* il, uint8_t channel)`; `interlocks_active_discharge_all(interlock_state_t* il)`; `interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable)`; `interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c)`; `interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id)`; `interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v)`; `interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel)`; `interlocks_clamp_voltage(interlock_state_t* il, float requested_v)`; `interlocks_record_charge_tick(interlock_state_t* il, uint64_t current_tick, const float tick_charge_nc[INTERLOCK_NUM_CHANNELS])`; `interlocks_check_epileptiform(interlock_state_t* il, uint64_t current_tick, const float channel_rates_hz[INTERLOCK_NUM_CHANNELS])`
 
+#### `native/include/wet_aer.h`
+
+- **Types / Structs / Enums:** `wet_aer_packet_t`, `wet_aer_ring_t`, `wet_csr_matrix_t`, `wet_neo_detector_t`
+- **Macros / Constants:** `WET_AER_CACHELINE_SIZE` = `128`, `WET_AER_PACKET_SIZE` = `16`, `WET_AER_MAX_CHANNELS` = `26400`
+- **Functions:** `wet_aer_ring_init(wet_aer_ring_t *ring, wet_aer_packet_t *buffer, uint32_t capacity, uint32_t burst_limit_max_hz, uint16_t *ch_counts, uint32_t num_channels)`; `wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t amp_uv, uint16_t flags)`; `wet_aer_pop_batch(wet_aer_ring_t *ring, wet_aer_packet_t *out_batch, uint32_t max_count)`; `wet_aer_available(const wet_aer_ring_t *ring)`; `wet_aer_get_stats(wet_aer_ring_t *ring, uint64_t current_tick, uint64_t *out_total, double *out_rate_hz, double *out_mbps)`; `wet_neo_init(wet_neo_detector_t *det, uint32_t num_channels, float threshold_multiplier, uint32_t refractory_ticks)`; `wet_neo_free(wet_neo_detector_t *det)`; `wet_neo_set_blanking(wet_neo_detector_t *det, uint16_t channel, uint32_t blanking_ticks)`; `wet_neo_process_sample(wet_neo_detector_t *det, uint16_t channel, float voltage, uint64_t current_tick, wet_aer_ring_t *out_ring)`; `wet_csr_init(wet_csr_matrix_t *csr, uint32_t rows, uint32_t cols, uint32_t nnz, float scale_ns)`; `wet_csr_free(wet_csr_matrix_t *csr)`; `wet_csr_spmv_spikes(const wet_csr_matrix_t *csr, const uint8_t *spike_events, float *out_conductance_ns)`
+
 #### `native/include/wet_crt.h`
 
 - **Macros / Constants:** `snprintf` = `_snprintf`, `fabsf` = `wet_fabsf`
 - **Functions:** `malloc(size_t size)`; `calloc(size_t num, size_t size)`; `free(void* ptr)`; `memcpy(void* dest, const void* src, size_t count)`; `memset(void* dest, int ch, size_t count)`; `memcmp(const void* s1, const void* s2, size_t count)`; `strlen(const char* str)`; `strncpy(char* dest, const char* src, size_t count)`; `strcpy(char* dest, const char* src)`; `strcat(char* dest, const char* src)`; `strcmp(const char* s1, const char* s2)`; `strncmp(const char* s1, const char* s2, size_t count)`; `sprintf(char* buffer, const char* format, ...)`; `_snprintf(char* buffer, size_t count, const char* format, ...)`; `wet_fabsf(float x)`; `wet_fabs(double x)`; `wet_clampf(float x, float lo, float hi)`; `wet_clampd(double x, double lo, double hi)`; `wet_exp(double x)`; `wet_expf(float x)`; `wet_sqrt(double x)`; `wet_rng_next(uint64_t* state)`; `wet_rng_uniform(uint64_t* state)`; `wet_rng_normal(uint64_t* state)`
+
+#### `native/include/wet_distributed.h`
+
+- **Types / Structs / Enums:** `wet_ptp_clock_t`, `wet_timing_wheel_bucket_t`, `wet_timing_wheel_t`, `wet_tsn_frame_t`
+- **Macros / Constants:** `WET_DIST_CACHELINE_SIZE` = `128`, `WET_TSN_FRAME_SIZE` = `32`, `WET_TIMING_WHEEL_SLOTS` = `512`, `WET_WHEEL_BUCKET_CAP` = `64`, `WET_MAX_CHAMBERS` = `16`
+- **Functions:** `wet_ptp_init(wet_ptp_clock_t *clk, double kp, double ki)`; `wet_ptp_update_offset(wet_ptp_clock_t *clk, uint64_t t1_ns, uint64_t t2_ns, uint64_t t3_ns, uint64_t t4_ns)`; `wet_ptp_get_disciplined_time_ns(const wet_ptp_clock_t *clk, uint64_t local_raw_ns)`; `wet_tsn_serialize_frame(wet_tsn_frame_t *frame, uint64_t src_epoch_ns, uint64_t rel_epoch_ns, uint32_t seq, uint16_t src_chamb, uint16_t dst_chamb, uint16_t src_ch, uint16_t dst_ch, int16_t amp_uv, uint16_t flags)`; `wet_tsn_validate_frame(const wet_tsn_frame_t *frame, uint32_t expected_dst_chamber)`; `wet_timing_wheel_init(wet_timing_wheel_t *tw, uint32_t chamber_id)`; `wet_timing_wheel_schedule(wet_timing_wheel_t *tw, const wet_tsn_frame_t *frame, uint64_t current_epoch_ns)`; `wet_timing_wheel_drain_tick(wet_timing_wheel_t *tw, uint64_t current_epoch_ns, wet_tsn_frame_t *out_ready, uint32_t max_count)`; `wet_timing_wheel_set_tx_blanking(wet_timing_wheel_t *tw, uint16_t target_chamber, uint32_t blanking_ticks)`
 
 #### `native/include/wet_hal.h`
 
@@ -197,7 +219,7 @@
 #### `native/include/wetvm_api.h`
 
 - **Types / Structs / Enums:** `wet_actuator_telemetry_t`, `wet_telemetry_t`, `wet_vm_config_t`
-- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`; `wet_vm_get_synapse_matrix(const wet_vm_t* vm, float* out_matrix, size_t out_capacity_floats)`; `wet_vm_get_synapse_weight(const wet_vm_t* vm, uint8_t pre, uint8_t post)`
+- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`; `wet_vm_get_synapse_matrix(const wet_vm_t* vm, float* out_matrix, size_t out_capacity_floats)`; `wet_vm_get_synapse_weight(const wet_vm_t* vm, uint8_t pre, uint8_t post)`; `wet_clamp_voltage_vm(wet_vm_t* vm, float requested_v)`
 
 #### `native/include/wetvm_types.h`
 
@@ -216,6 +238,14 @@
 #### `native/src/interlocks.c`
 
 - **Functions:** `interlocks_init(interlock_state_t* il)`; `interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2)`; `interlocks_active_discharge(interlock_state_t* il, uint8_t channel)`; `interlocks_active_discharge_all(interlock_state_t* il)`; `interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable)`; `interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count)`; `interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask)`; `interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel)`; `interlocks_clamp_voltage(interlock_state_t* il, float requested_v)`; `interlocks_record_charge_tick(interlock_state_t* il, uint64_t current_tick, const float tick_charge_nc[INTERLOCK_NUM_CHANNELS])`; `interlocks_check_epileptiform(interlock_state_t* il, uint64_t current_tick, const float channel_rates_hz[INTERLOCK_NUM_CHANNELS])`; `interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c)`; `interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id)`; `interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v)`
+
+#### `native/src/wet_aer.c`
+
+- **Functions:** `wet_aer_ring_init(wet_aer_ring_t *ring, wet_aer_packet_t *buffer, uint32_t capacity, uint32_t burst_limit_max_hz, uint16_t *ch_counts, uint32_t num_channels)`; `wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t amp_uv, uint16_t flags)`; `wet_aer_pop_batch(wet_aer_ring_t *ring, wet_aer_packet_t *out_batch, uint32_t max_count)`; `wet_aer_available(const wet_aer_ring_t *ring)`; `wet_aer_get_stats(wet_aer_ring_t *ring, uint64_t current_tick, uint64_t *out_total, double *out_rate_hz, double *out_mbps)`; `wet_neo_init(wet_neo_detector_t *det, uint32_t num_channels, float threshold_multiplier, uint32_t refractory_ticks)`; `wet_neo_free(wet_neo_detector_t *det)`; `wet_neo_set_blanking(wet_neo_detector_t *det, uint16_t channel, uint32_t blanking_ticks)`; `wet_neo_process_sample(wet_neo_detector_t *det, uint16_t channel, float voltage, uint64_t current_tick, wet_aer_ring_t *out_ring)`; `wet_csr_init(wet_csr_matrix_t *csr, uint32_t rows, uint32_t cols, uint32_t nnz, float scale_ns)`; `wet_csr_free(wet_csr_matrix_t *csr)`; `wet_csr_spmv_spikes(const wet_csr_matrix_t *csr, const uint8_t *spike_events, float *out_conductance_ns)`
+
+#### `native/src/wet_distributed.c`
+
+- **Functions:** `wet_ptp_init(wet_ptp_clock_t *clk, double kp, double ki)`; `wet_ptp_update_offset(wet_ptp_clock_t *clk, uint64_t t1_ns, uint64_t t2_ns, uint64_t t3_ns, uint64_t t4_ns)`; `wet_ptp_get_disciplined_time_ns(const wet_ptp_clock_t *clk, uint64_t local_raw_ns)`; `wet_tsn_serialize_frame(wet_tsn_frame_t *frame, uint64_t src_epoch_ns, uint64_t rel_epoch_ns, uint32_t seq, uint16_t src_chamb, uint16_t dst_chamb, uint16_t src_ch, uint16_t dst_ch, int16_t amp_uv, uint16_t flags)`; `wet_tsn_validate_frame(const wet_tsn_frame_t *frame, uint32_t expected_dst_chamber)`; `wet_timing_wheel_init(wet_timing_wheel_t *tw, uint32_t chamber_id)`; `wet_timing_wheel_schedule(wet_timing_wheel_t *tw, const wet_tsn_frame_t *frame, uint64_t current_epoch_ns)`; `wet_timing_wheel_drain_tick(wet_timing_wheel_t *tw, uint64_t current_epoch_ns, wet_tsn_frame_t *out_ready, uint32_t max_count)`; `wet_timing_wheel_set_tx_blanking(wet_timing_wheel_t *tw, uint16_t target_chamber, uint32_t blanking_ticks)`
 
 #### `native/src/wet_hal.c`
 
@@ -246,7 +276,7 @@
 
 #### `native/src/wetvm_api.c`
 
-- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`; `wet_vm_get_synapse_matrix(const wet_vm_t* vm, float* out_matrix, size_t out_capacity_floats)`; `wet_vm_get_synapse_weight(const wet_vm_t* vm, uint8_t pre, uint8_t post)`
+- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`; `wet_vm_get_synapse_matrix(const wet_vm_t* vm, float* out_matrix, size_t out_capacity_floats)`; `wet_vm_get_synapse_weight(const wet_vm_t* vm, uint8_t pre, uint8_t post)`; `wet_clamp_voltage_vm(wet_vm_t* vm, float requested_v)`
 
 #### `native/src/wetvm_vm.c`
 
@@ -635,188 +665,40 @@ Sections: 5 | Channels: 64 | Max Charge Bound: 0.50 nC
 ### D.1 Live 4-Tier E2E Test Suite (`python tests/run_e2e_tests.py`)
 
 ```text
-$ python tests/run_e2e_tests.py  (exit_code=1)
+$ python tests/run_e2e_tests.py  (exit_code=0)
 ================================================================================
  WetLang Neural Organoid Platform — 4-Tier E2E Test Suite
  Python Interpreter : 3.12.10 (C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\python.exe)
  Working Directory  : D:\WetLang\wetlang_github_release
  Tests Discovered   : 313
 ================================================================================
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1Interlocks.test_tier1_f21_counter_reset_on_calm_happy took 1.77s
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_benchmarks_suite_happy took 2.03s
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_interlocks_suite_happy took 1.81s
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_ode_stability_suite_happy took 1.86s
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_parser_diagnostics_suite_happy took 1.10s
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_static_verifier_suite_happy took 1.69s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1Interlocks.test_tier1_f21_counter_reset_on_calm_happy took 1.94s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_benchmarks_suite_happy took 2.48s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_interlocks_suite_happy took 2.45s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_ode_stability_suite_happy took 2.48s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_parser_diagnostics_suite_happy took 1.83s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_static_verifier_suite_happy took 2.06s
 
 ================================================================================
  E2E Test Execution Summary
 --------------------------------------------------------------------------------
 Tier        Passed      Skipped     Failed      Errors      Total     
 --------------------------------------------------------------------------------
-Tier 1      40          97          0           3           140       
-Tier 2      75          54          0           11          140       
-Tier 3      18          9           0           1           28        
-Tier 4      1           3           1           0           5         
+Tier 1      140         0           0           0           140       
+Tier 2      140         0           0           0           140       
+Tier 3      28          0           0           0           28        
+Tier 4      5           0           0           0           5         
 --------------------------------------------------------------------------------
-TOTAL: 313 run | 134 passed | 163 skipped | 1 failed | 15 errors
-Elapsed Time: 11.573 s
+TOTAL: 313 run | 313 passed | 0 skipped | 0 failed | 0 errors
+Elapsed Time: 16.011 s
 ================================================================================
 
 [STDERR]
-EssssEsssssEssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss...................................ssssssssssssssssssss..........E.....E...........................................sEsEsssssssssssssssssssssssssssssssE..E................EEEEE.s...sssssssssssssssssssss.....s.ssss........s..sEs..sssF.
-======================================================================
-ERROR: test_tier1_f23_compile_benchmark_01_happy (tests.e2e.test_tier1_features.TestTier1Benchmarks.test_tier1_f23_compile_benchmark_01_happy)
-F23: Test Benchmark 01 compiles cleanly from source into WBC binary.
+.........................................................................................................................................................................................................................................................................................................................
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier1_features.py", line 1274, in test_tier1_f23_compile_benchmark_01_happy
-    binary = compile_source(src)
-             ^^^^^^^^^^^^^^
-NameError: name 'compile_source' is not defined. Did you mean: 'self.compile_source'?
+Ran 313 tests in 16.008s
 
-======================================================================
-ERROR: test_tier1_f24_compile_benchmark_02_happy (tests.e2e.test_tier1_features.TestTier1Benchmarks.test_tier1_f24_compile_benchmark_02_happy)
-F24: Test Benchmark 02 compiles cleanly from source into WBC binary.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier1_features.py", line 1320, in test_tier1_f24_compile_benchmark_02_happy
-    binary = compile_source(src)
-             ^^^^^^^^^^^^^^
-NameError: name 'compile_source' is not defined. Did you mean: 'self.compile_source'?
-
-======================================================================
-ERROR: test_tier1_f25_compile_benchmark_03_happy (tests.e2e.test_tier1_features.TestTier1Benchmarks.test_tier1_f25_compile_benchmark_03_happy)
-F25: Test Benchmark 03 compiles cleanly from source into WBC binary.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier1_features.py", line 1366, in test_tier1_f25_compile_benchmark_03_happy
-    binary = compile_source(src)
-             ^^^^^^^^^^^^^^
-NameError: name 'compile_source' is not defined. Did you mean: 'self.compile_source'?
-
-======================================================================
-ERROR: test_tier2_f24_empty_reservoir_readout (tests.e2e.test_tier2_boundaries.TestTier2BenchmarkBoundaries.test_tier2_f24_empty_reservoir_readout)
-[F24] [F24] Empty reservoir readout handled cleanly with 0.95 STDP depression factor without crash.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1585, in test_tier2_f24_empty_reservoir_readout
-    from compiler.compiler_cli import compile_source
-ModuleNotFoundError: No module named 'compiler'
-
-======================================================================
-ERROR: test_tier2_f25_oscillation_damping (tests.e2e.test_tier2_boundaries.TestTier2BenchmarkBoundaries.test_tier2_f25_oscillation_damping)
-[F25] [F25] Homeostatic target equilibrium bounded within [15.0, 25.0] Hz.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1653, in test_tier2_f25_oscillation_damping
-    from compiler.compiler_cli import compile_source
-ModuleNotFoundError: No module named 'compiler'
-
-======================================================================
-ERROR: test_tier2_f17_corrupted_output_path (tests.e2e.test_tier2_boundaries.TestTier2BiophysicsBoundaries.test_tier2_f17_corrupted_output_path)
-[F17] [F17] Telemetry engine given an invalid/unwriteable path raises IOError/OSError safely.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1133, in test_tier2_f17_corrupted_output_path
-    from biophysics.telemetry import TelemetryStream
-ModuleNotFoundError: No module named 'biophysics'
-
-======================================================================
-ERROR: test_tier2_f17_nan_formatting_guard (tests.e2e.test_tier2_boundaries.TestTier2BiophysicsBoundaries.test_tier2_f17_nan_formatting_guard)
-[F17] [F17] Serializer refuses to emit unquoted NaN/Inf in strict JSON compliance.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1169, in test_tier2_f17_nan_formatting_guard
-    from biophysics.telemetry import TelemetryStream
-ModuleNotFoundError: No module named 'biophysics'
-
-======================================================================
-ERROR: test_tier2_f18_corrupted_code_size_header (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f18_corrupted_code_size_header)
-[F18] [F18] Declared code size 500 when file payload is 100 bytes is detected as malformed.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1241, in test_tier2_f18_corrupted_code_size_header
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier2_f18_tier4_privilege_escalation (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f18_tier4_privilege_escalation)
-[F18] [F18] Bytecode with forbidden clamp-override opcode (0xFE) is rejected as privilege violation.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1214, in test_tier2_f18_tier4_privilege_escalation
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier2_f22_fail_safe_on_internal_exception (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f22_fail_safe_on_internal_exception)
-[F22] [F22] Internal VM exception triggers fail-safe DAC zeroing (0.0V, 0.0A).
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1463, in test_tier2_f22_fail_safe_on_internal_exception
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier2_f22_interlock_register_mutation_blocked (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f22_interlock_register_mutation_blocked)
-[F22] [F22] Bytecode attempting to mutate hardware watchdog state registers is blocked.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1489, in test_tier2_f22_interlock_register_mutation_blocked
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier2_f22_no_spontaneous_recovery (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f22_no_spontaneous_recovery)
-[F22] [F22] Advancing 1000 ticks after trip does not re-enable stimulation; stays HALTED_SAFETY_LOCKOUT.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1404, in test_tier2_f22_no_spontaneous_recovery
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier2_f22_reject_stimulus_after_trip (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f22_reject_stimulus_after_trip)
-[F22] [F22] Injected stimulus after safety trip is rejected; all electrode DACs zeroed.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1372, in test_tier2_f22_reject_stimulus_after_trip
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier2_f22_simultaneous_dual_fault (tests.e2e.test_tier2_boundaries.TestTier2InterlockBoundaries.test_tier2_f22_simultaneous_dual_fault)
-[F22] [F22] Simultaneous voltage clamp saturation and charge imbalance locks cleanly without deadlock.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier2_boundaries.py", line 1436, in test_tier2_f22_simultaneous_dual_fault
-    from bindings.runtime import WetVM, WetVMError
-ModuleNotFoundError: No module named 'bindings'
-
-======================================================================
-ERROR: test_tier3_pair_25_scope_symbol_table_const_dedup (tests.e2e.test_tier3_pairwise.TestTier3Pairwise.test_tier3_pair_25_scope_symbol_table_const_dedup)
-Pair 25: F4 x F7 - Constant pool deduplication for repeated literals.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier3_pairwise.py", line 897, in test_tier3_pair_25_scope_symbol_table_const_dedup
-    pool = ConstantPool()
-           ^^^^^^^^^^^^
-NameError: name 'ConstantPool' is not defined
-
-======================================================================
-FAIL: test_tier4_scenario_04_adversarial_multi_vector_fault_injection (tests.e2e.test_tier4_benchmarks.TestTier4Benchmarks.test_tier4_scenario_04_adversarial_multi_vector_fault_injection)
-Scenario 4: Adversarial multi-vector fault injection (overvoltage, DC erosion, hypersynchrony).
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "D:\WetLang\wetlang_github_release\tests\e2e\test_tier4_benchmarks.py", line 498, in test_tier4_scenario_04_adversarial_multi_vector_fault_injection
-    self.assertEqual(len(neutralized_vectors), 5)
-AssertionError: 4 != 5
-
-----------------------------------------------------------------------
-Ran 313 tests in 11.569s
-
-FAILED (failures=1, errors=15, skipped=163)
+OK
 ```
 
 ### D.2 Live Synthetic Unit Test Suite (`python -m pytest tests/test_*.py -v`)
@@ -829,208 +711,244 @@ cachedir: .pytest_cache
 rootdir: D:\WetLang\wetlang_github_release
 configfile: pytest.ini
 plugins: anyio-4.14.2, platformdirs-4.12.3
-collecting ... collected 207 items
+collecting ... collected 243 items
 
+tests/test_actuators.py::TestWetLangActuators::test_cyber_physical_actuation PASSED [  0%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_01_si_time_scaling PASSED [  0%]
-tests/test_audit_remediation.py::TestAuditRemediation::test_audit_02_integer_arithmetic_precision PASSED [  0%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_02_integer_arithmetic_precision PASSED [  1%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_03_cfg_reachability_pass3 PASSED [  1%]
-tests/test_audit_remediation.py::TestAuditRemediation::test_audit_04_watchdog_timeout_100k PASSED [  1%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_04_watchdog_timeout_100k PASSED [  2%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_05_leaky_dc_drift_integrator PASSED [  2%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_06_focal_hyperactivity_breaker PASSED [  2%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_07_charge_density_limit PASSED [  3%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_08_cathodic_first_extracellular_sign PASSED [  3%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_09_lfp_zero_baseline PASSED [  4%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_10_amplifier_blanking PASSED [  4%]
-tests/test_audit_remediation.py::TestAuditRemediation::test_audit_11_dynamic_channel_dispatch PASSED [  5%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_11_dynamic_channel_dispatch PASSED [  4%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_12_user_functions_and_calls PASSED [  5%]
-tests/test_audit_remediation.py::TestAuditRemediation::test_audit_13_boolean_normalization PASSED [  6%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_13_boolean_normalization PASSED [  5%]
 tests/test_audit_remediation.py::TestAuditRemediation::test_audit_14_safe_unaligned_memory_access PASSED [  6%]
-tests/test_audit_remediation.py::TestAuditRemediation::test_audit_15_free_running_simulation_ticks PASSED [  7%]
-tests/test_benchmarks.py::test_compile_benchmark_01_active_inference PASSED [  7%]
-tests/test_benchmarks.py::test_compile_benchmark_02_polychronous_reservoir PASSED [  8%]
-tests/test_benchmarks.py::test_compile_benchmark_03_homeostatic_stabilization PASSED [  8%]
-tests/test_benchmarks.py::test_run_benchmark_01_in_wetvm PASSED          [  9%]
-tests/test_benchmarks.py::test_run_benchmark_02_in_wetvm PASSED          [  9%]
-tests/test_benchmarks.py::test_run_benchmark_03_in_wetvm PASSED          [ 10%]
-tests/test_benchmarks.py::test_benchmark_telemetry_jsonl_formatting PASSED [ 10%]
-tests/test_benchmarks.py::test_benchmark_telemetry_csv_formatting PASSED [ 11%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_15_free_running_simulation_ticks PASSED [  6%]
+tests/test_benchmarks.py::test_compile_benchmark_01_active_inference PASSED [  6%]
+tests/test_benchmarks.py::test_compile_benchmark_02_polychronous_reservoir PASSED [  7%]
+tests/test_benchmarks.py::test_compile_benchmark_03_homeostatic_stabilization PASSED [  7%]
+tests/test_benchmarks.py::test_run_benchmark_01_in_wetvm PASSED          [  8%]
+tests/test_benchmarks.py::test_run_benchmark_02_in_wetvm PASSED          [  8%]
+tests/test_benchmarks.py::test_run_benchmark_03_in_wetvm PASSED          [  9%]
+tests/test_benchmarks.py::test_benchmark_telemetry_jsonl_formatting PASSED [  9%]
+tests/test_benchmarks.py::test_benchmark_telemetry_csv_formatting PASSED [  9%]
+tests/test_compiler.py::TestWetLangCompiler::test_lexer_physical_units PASSED [ 10%]
+tests/test_compiler.py::TestWetLangCompiler::test_parser_and_semantic_analysis PASSED [ 10%]
 tests/test_hal_drivers.py::TestHalCoreArchitecture::test_hal_create_and_destroy PASSED [ 11%]
-tests/test_hal_drivers.py::TestHalCoreArchitecture::test_hal_mode_switching PASSED [ 12%]
-tests/test_hal_drivers.py::TestHalCoreArchitecture::test_driver_registration_and_lookup PASSED [ 12%]
-tests/test_hal_drivers.py::TestHalCoreArchitecture::test_emergency_crowbar_fastpath_sub_100us PASSED [ 13%]
-tests/test_hal_drivers.py::TestHalCoreArchitecture::test_router_valve_mapping_dead_head PASSED [ 13%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_command_encoding_and_decoding PASSED [ 14%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_constant_current_dac_ranges PASSED [ 14%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_compliance_rail_detection_and_clearing PASSED [ 14%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_in_situ_1khz_impedance_check PASSED [ 15%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_active_charge_recovery_switch PASSED [ 15%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_intan_fault_injection PASSED [ 16%]
-tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_intan_voltage_stimulation_duration_and_cathodic_polarity PASSED [ 16%]
-tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_routing_matrix_configuration PASSED [ 17%]
-tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_sequence_buffering_and_playback PASSED [ 17%]
-tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_voltage_clamping_and_charge_injection_protection PASSED [ 18%]
-tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_maxwell_connect_stim_and_fault_injection PASSED [ 18%]
-tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_harvard_rs232_formatting_and_prompt_parsing PASSED [ 19%]
-tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_dead_head_overpressure_interlock PASSED [ 19%]
-tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_bus_pdo_and_emergency_frames PASSED [ 20%]
-tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_dead_head_recovery_and_fault_injection PASSED [ 20%]
-tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_bus_boundary_dlc_and_extended_id_segregation PASSED [ 21%]
-tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_hil_bidirectional_loopback PASSED [ 21%]
-tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_crc8_algorithm PASSED [ 22%]
-tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_i2c_flow_reading PASSED [ 22%]
-tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_shdlc_framing_and_byte_stuffing PASSED [ 23%]
-tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_nak_and_multiple_crc_vectors PASSED [ 23%]
-tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_shdlc_illegal_stuffing_rejection PASSED [ 24%]
-tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_with_hal_pump_and_flow_routing PASSED [ 24%]
-tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_bytecode_actuation_with_hal PASSED [ 25%]
-tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_bytecode_dead_head_interlock_trip PASSED [ 25%]
-tests/test_interlocks.py::test_voltage_clamp_positive_saturation PASSED  [ 26%]
-tests/test_interlocks.py::test_voltage_clamp_negative_saturation PASSED  [ 26%]
-tests/test_interlocks.py::test_voltage_clamp_within_water_window_passthrough PASSED [ 27%]
-tests/test_interlocks.py::test_static_compile_rejection_overvoltage PASSED [ 27%]
-tests/test_interlocks.py::test_static_compile_rejection_undervoltage PASSED [ 28%]
-tests/test_interlocks.py::test_sliding_charge_balance_symmetric_biphasic_no_trip PASSED [ 28%]
-tests/test_interlocks.py::test_sliding_charge_balance_unbalanced_dc_trip_at_100_ticks PASSED [ 28%]
-tests/test_interlocks.py::test_sliding_charge_balance_boundary_threshold PASSED [ 29%]
-tests/test_interlocks.py::test_epileptiform_sub_critical_burst_does_not_trip PASSED [ 29%]
-tests/test_interlocks.py::test_epileptiform_focal_burst_few_channels_does_not_trip PASSED [ 30%]
-tests/test_interlocks.py::test_epileptiform_runaway_trips_at_500_ticks PASSED [ 30%]
-tests/test_interlocks.py::test_failsafe_state_lockout_blocks_further_operations PASSED [ 31%]
-tests/test_nir_bridge.py::test_cubalif_biophysical_parameters PASSED     [ 31%]
-tests/test_nir_bridge.py::test_lif_parameters PASSED                     [ 32%]
-tests/test_nir_bridge.py::test_izhikevich_cortical_phenotypes PASSED     [ 32%]
-tests/test_nir_bridge.py::test_dales_principle_valid_matrices PASSED     [ 33%]
-tests/test_nir_bridge.py::test_dales_principle_violation_raises PASSED   [ 33%]
-tests/test_nir_bridge.py::test_decompose_to_dales_principle PASSED       [ 34%]
-tests/test_nir_bridge.py::test_feedforward_topological_sort PASSED       [ 34%]
-tests/test_nir_bridge.py::test_recurrent_graph_detection PASSED          [ 35%]
-tests/test_nir_bridge.py::test_hdf5_serialization_roundtrip PASSED       [ 35%]
-tests/test_nir_bridge.py::test_json_serialization_roundtrip PASSED       [ 36%]
-tests/test_nir_bridge.py::test_nir_to_wet_source_generation PASSED       [ 36%]
-tests/test_nir_bridge.py::test_nir_to_wet_ast PASSED                     [ 37%]
-tests/test_nir_bridge.py::test_nir_to_wet_bytecode_and_native_execution PASSED [ 37%]
-tests/test_nir_bridge.py::test_nir_dimension_validation_exceeding_channels PASSED [ 38%]
-tests/test_nir_bridge.py::test_wet_ast_to_nir PASSED                     [ 38%]
-tests/test_nir_bridge.py::test_wet_bytecode_to_nir PASSED                [ 39%]
-tests/test_nir_bridge.py::test_wet_vm_to_nir PASSED                      [ 39%]
-tests/test_nir_bridge.py::test_vm_get_synapse_matrix_live PASSED         [ 40%]
-tests/test_nir_bridge.py::test_multilayer_feedforward_pipeline PASSED    [ 40%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_hal_mode_switching PASSED [ 11%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_driver_registration_and_lookup PASSED [ 11%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_emergency_crowbar_fastpath_sub_100us PASSED [ 12%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_router_valve_mapping_dead_head PASSED [ 12%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_command_encoding_and_decoding PASSED [ 13%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_constant_current_dac_ranges PASSED [ 13%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_compliance_rail_detection_and_clearing PASSED [ 13%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_in_situ_1khz_impedance_check PASSED [ 14%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_active_charge_recovery_switch PASSED [ 14%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_intan_fault_injection PASSED [ 15%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_intan_voltage_stimulation_duration_and_cathodic_polarity PASSED [ 15%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_routing_matrix_configuration PASSED [ 16%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_sequence_buffering_and_playback PASSED [ 16%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_voltage_clamping_and_charge_injection_protection PASSED [ 16%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_maxwell_connect_stim_and_fault_injection PASSED [ 17%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_harvard_rs232_formatting_and_prompt_parsing PASSED [ 17%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_dead_head_overpressure_interlock PASSED [ 18%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_bus_pdo_and_emergency_frames PASSED [ 18%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_dead_head_recovery_and_fault_injection PASSED [ 18%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_bus_boundary_dlc_and_extended_id_segregation PASSED [ 19%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_hil_bidirectional_loopback PASSED [ 19%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_crc8_algorithm PASSED [ 20%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_i2c_flow_reading PASSED [ 20%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_shdlc_framing_and_byte_stuffing PASSED [ 20%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_nak_and_multiple_crc_vectors PASSED [ 21%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_shdlc_illegal_stuffing_rejection PASSED [ 21%]
+tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_with_hal_pump_and_flow_routing PASSED [ 22%]
+tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_bytecode_actuation_with_hal PASSED [ 22%]
+tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_bytecode_dead_head_interlock_trip PASSED [ 23%]
+tests/test_interlocks.py::test_voltage_clamp_positive_saturation PASSED  [ 23%]
+tests/test_interlocks.py::test_voltage_clamp_negative_saturation PASSED  [ 23%]
+tests/test_interlocks.py::test_voltage_clamp_within_water_window_passthrough PASSED [ 24%]
+tests/test_interlocks.py::test_static_compile_rejection_overvoltage PASSED [ 24%]
+tests/test_interlocks.py::test_static_compile_rejection_undervoltage PASSED [ 25%]
+tests/test_interlocks.py::test_sliding_charge_balance_symmetric_biphasic_no_trip PASSED [ 25%]
+tests/test_interlocks.py::test_sliding_charge_balance_unbalanced_dc_trip_at_100_ticks PASSED [ 25%]
+tests/test_interlocks.py::test_sliding_charge_balance_boundary_threshold PASSED [ 26%]
+tests/test_interlocks.py::test_epileptiform_sub_critical_burst_does_not_trip PASSED [ 26%]
+tests/test_interlocks.py::test_epileptiform_focal_burst_few_channels_does_not_trip PASSED [ 27%]
+tests/test_interlocks.py::test_epileptiform_runaway_trips_at_500_ticks PASSED [ 27%]
+tests/test_interlocks.py::test_failsafe_state_lockout_blocks_further_operations PASSED [ 27%]
+tests/test_milestone2_aer_hdmea.py::test_aer_packet_16byte_aligned_layout PASSED [ 28%]
+tests/test_milestone2_aer_hdmea.py::test_aer_ring_burst_tolerance_and_quarantine PASSED [ 28%]
+tests/test_milestone2_aer_hdmea.py::test_aer_bandwidth_reduction_metric PASSED [ 29%]
+tests/test_milestone2_aer_hdmea.py::test_neo_bartlett_smoother_and_artifact_blanking PASSED [ 29%]
+tests/test_milestone2_aer_hdmea.py::test_csr_sparse_synaptic_matrix_footprint_and_spmv PASSED [ 30%]
+tests/test_milestone3_distributed.py::test_tsn_frame_32byte_aligned_layout_and_causality PASSED [ 30%]
+tests/test_milestone3_distributed.py::test_ptp_slew_only_disciplining_and_safety_inhibit PASSED [ 30%]
+tests/test_milestone3_distributed.py::test_timing_wheel_eliminates_head_of_line_blocking PASSED [ 31%]
+tests/test_milestone3_distributed.py::test_late_packet_drop_telemetry PASSED [ 31%]
+tests/test_milestone3_distributed.py::test_epileptiform_rate_governor_and_tx_blanking PASSED [ 32%]
+tests/test_milestone4_rtos_arena.py::test_bare_metal_rtos_static_arena_allocation_and_scrubbing PASSED [ 32%]
+tests/test_milestone4_rtos_arena.py::test_bounded_wcet_realtime_determinism PASSED [ 32%]
+tests/test_milestone4_rtos_arena.py::test_multi_week_64bit_femtocoulomb_soak_stability PASSED [ 33%]
+tests/test_milestone4_rtos_arena.py::test_material_dependent_water_window_clamping PASSED [ 33%]
+tests/test_nir_bridge.py::test_cubalif_biophysical_parameters PASSED     [ 34%]
+tests/test_nir_bridge.py::test_lif_parameters PASSED                     [ 34%]
+tests/test_nir_bridge.py::test_izhikevich_cortical_phenotypes PASSED     [ 34%]
+tests/test_nir_bridge.py::test_dales_principle_valid_matrices PASSED     [ 35%]
+tests/test_nir_bridge.py::test_dales_principle_violation_raises PASSED   [ 35%]
+tests/test_nir_bridge.py::test_decompose_to_dales_principle PASSED       [ 36%]
+tests/test_nir_bridge.py::test_feedforward_topological_sort PASSED       [ 36%]
+tests/test_nir_bridge.py::test_recurrent_graph_detection PASSED          [ 37%]
+tests/test_nir_bridge.py::test_hdf5_serialization_roundtrip PASSED       [ 37%]
+tests/test_nir_bridge.py::test_json_serialization_roundtrip PASSED       [ 37%]
+tests/test_nir_bridge.py::test_nir_to_wet_source_generation PASSED       [ 38%]
+tests/test_nir_bridge.py::test_nir_to_wet_ast PASSED                     [ 38%]
+tests/test_nir_bridge.py::test_nir_to_wet_bytecode_and_native_execution PASSED [ 39%]
+tests/test_nir_bridge.py::test_nir_dimension_validation_exceeding_channels PASSED [ 39%]
+tests/test_nir_bridge.py::test_wet_ast_to_nir PASSED                     [ 39%]
+tests/test_nir_bridge.py::test_wet_bytecode_to_nir PASSED                [ 40%]
+tests/test_nir_bridge.py::test_wet_vm_to_nir PASSED                      [ 40%]
+tests/test_nir_bridge.py::test_vm_get_synapse_matrix_live PASSED         [ 41%]
+tests/test_nir_bridge.py::test_multilayer_feedforward_pipeline PASSED    [ 41%]
 tests/test_nir_bridge.py::test_hdf5_to_bytecode_roundtrip PASSED         [ 41%]
-tests/test_nir_bridge.py::test_affine_dales_principle PASSED             [ 41%]
+tests/test_nir_bridge.py::test_affine_dales_principle PASSED             [ 42%]
 tests/test_ode_stability.py::test_coba_lif_extreme_positive_current_injection PASSED [ 42%]
-tests/test_ode_stability.py::test_coba_lif_extreme_negative_current_injection PASSED [ 42%]
-tests/test_ode_stability.py::test_coba_lif_resting_equilibrium_stability PASSED [ 42%]
-tests/test_ode_stability.py::test_absolute_refractory_clamp_2ms PASSED   [ 43%]
-tests/test_ode_stability.py::test_membrane_clamped_at_reset_during_refractory PASSED [ 43%]
+tests/test_ode_stability.py::test_coba_lif_extreme_negative_current_injection PASSED [ 43%]
+tests/test_ode_stability.py::test_coba_lif_resting_equilibrium_stability PASSED [ 43%]
+tests/test_ode_stability.py::test_absolute_refractory_clamp_2ms PASSED   [ 44%]
+tests/test_ode_stability.py::test_membrane_clamped_at_reset_during_refractory PASSED [ 44%]
 tests/test_ode_stability.py::test_dynamic_threshold_jump_and_decay PASSED [ 44%]
-tests/test_ode_stability.py::test_slow_ahp_potassium_conductance_decay PASSED [ 44%]
+tests/test_ode_stability.py::test_slow_ahp_potassium_conductance_decay PASSED [ 45%]
 tests/test_ode_stability.py::test_tsodyks_markram_ee_depression_and_recovery PASSED [ 45%]
-tests/test_ode_stability.py::test_tsodyks_markram_ei_facilitation PASSED [ 45%]
+tests/test_ode_stability.py::test_tsodyks_markram_ei_facilitation PASSED [ 46%]
 tests/test_ode_stability.py::test_stdp_weight_hard_clamping PASSED       [ 46%]
 tests/test_ode_stability.py::test_stdp_depression_bias_ratio PASSED      [ 46%]
 tests/test_ode_stability.py::test_dales_principle_conductance_reversal PASSED [ 47%]
 tests/test_ode_stability.py::test_native_wetvm_multi_tick_stability PASSED [ 47%]
 tests/test_parser_diagnostics.py::test_lexer_keywords_and_identifiers PASSED [ 48%]
 tests/test_parser_diagnostics.py::test_lexer_physical_literals_si_scaling PASSED [ 48%]
-tests/test_parser_diagnostics.py::test_lexer_line_column_tracking PASSED [ 49%]
+tests/test_parser_diagnostics.py::test_lexer_line_column_tracking PASSED [ 48%]
 tests/test_parser_diagnostics.py::test_lexer_comment_skipping PASSED     [ 49%]
-tests/test_parser_diagnostics.py::test_lexer_unterminated_block_comment PASSED [ 50%]
+tests/test_parser_diagnostics.py::test_lexer_unterminated_block_comment PASSED [ 49%]
 tests/test_parser_diagnostics.py::test_lexer_unterminated_string PASSED  [ 50%]
-tests/test_parser_diagnostics.py::test_parser_arithmetic_precedence PASSED [ 51%]
+tests/test_parser_diagnostics.py::test_parser_arithmetic_precedence PASSED [ 50%]
 tests/test_parser_diagnostics.py::test_parser_logical_operator_precedence PASSED [ 51%]
-tests/test_parser_diagnostics.py::test_parser_parentheses_override PASSED [ 52%]
-tests/test_parser_diagnostics.py::test_parser_unary_operators PASSED     [ 52%]
-tests/test_parser_diagnostics.py::test_parser_grid_and_channel_declarations PASSED [ 53%]
-tests/test_parser_diagnostics.py::test_parser_function_and_control_flow PASSED [ 53%]
-tests/test_parser_diagnostics.py::test_parser_for_loop PASSED            [ 54%]
-tests/test_parser_diagnostics.py::test_parser_stream_declaration PASSED  [ 54%]
-tests/test_parser_diagnostics.py::test_parser_domain_primitives PASSED   [ 55%]
-tests/test_parser_diagnostics.py::test_parser_error_diagnostics PASSED   [ 55%]
-tests/test_parser_diagnostics.py::test_compiler_bytecode_binary_header_and_disasm PASSED [ 56%]
-tests/test_parser_diagnostics.py::test_compile_benchmark_01 PASSED       [ 56%]
-tests/test_parser_diagnostics.py::test_compile_benchmark_02 PASSED       [ 57%]
-tests/test_parser_diagnostics.py::test_compile_benchmark_03 PASSED       [ 57%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_01_wbc_header_truncation PASSED [ 57%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_02_wbc_magic_corruption PASSED [ 58%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_03_wbc_crc32_tamper_detection PASSED [ 58%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_04_wbc_unsupported_version PASSED [ 59%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_05_stimulation_without_capability PASSED [ 59%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_06_microfluidics_without_capability PASSED [ 60%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_07_motor_actuation_without_capability PASSED [ 60%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_08_hydrodynamic_shear_stress_enforcement PASSED [ 61%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_09_compiler_shear_stress_rejection PASSED [ 61%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_10_valid_actuator_telemetry_inspection PASSED [ 62%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_11_cryptographic_signing_and_verification PASSED [ 62%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_12_division_by_zero_safety PASSED [ 63%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_13_stack_underflow_safety PASSED [ 63%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_14_multithreaded_concurrent_vms PASSED [ 64%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_15_hundred_cycle_memory_endurance PASSED [ 64%]
-tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_16_full_cyber_physical_closed_loop_program PASSED [ 65%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_01_hd_mea_water_window_clamping PASSED [ 65%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_02_persistent_unbounded_dc_accumulator PASSED [ 66%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_03_active_hardware_discharge_recovery PASSED [ 66%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_04_spherical_diffusion_thiele_anoxia PASSED [ 67%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_05_geometry_aware_shear_stress PASSED [ 67%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_06_dead_heading_valve_pump_interlock PASSED [ 68%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_07_ring0_life_support_supervisor PASSED [ 68%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_08_static_arena_allocation_zero_malloc PASSED [ 69%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_09_ed25519_asymmetric_bytecode_provenance PASSED [ 69%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_10_randles_interface_and_compliance_voltage_interlock PASSED [ 70%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_11_configurable_blanking_and_spatial_crosstalk PASSED [ 70%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_12_subnormal_denormal_conductance_zero_clamping PASSED [ 71%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_13_environmental_sensors_ph_do_co2_flow PASSED [ 71%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_14_cmos_thermal_duty_cycle_interlock PASSED [ 71%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_15_optical_bubble_sensor_pump_halt_interlock PASSED [ 72%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_16_load_time_c99_bytecode_verifier PASSED [ 72%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_17_live_state_checkpointing_and_hot_swap PASSED [ 73%]
-tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_18_typed_channel_banks_static_safety PASSED [ 73%]
-tests/test_rt_scheduler.py::test_scheduler_lifecycle PASSED              [ 74%]
-tests/test_rt_scheduler.py::test_scheduler_context_manager PASSED        [ 74%]
-tests/test_rt_scheduler.py::test_spsc_stimulus_and_telemetry_streaming PASSED [ 75%]
-tests/test_rt_scheduler.py::test_quiescent_hard_realtime_benchmark_10k_ticks PASSED [ 75%]
-tests/test_rt_scheduler.py::test_stress_load_hard_realtime_benchmark_10k_ticks PASSED [ 76%]
-tests/test_rt_scheduler.py::test_isochronous_pacing_zero_cumulative_drift PASSED [ 76%]
-tests/test_static_verifier.py::test_symbol_resolution_undeclared_identifier PASSED [ 77%]
-tests/test_static_verifier.py::test_symbol_resolution_redeclared_identifier PASSED [ 77%]
-tests/test_static_verifier.py::test_symbol_resolution_duplicate_function_params PASSED [ 78%]
-tests/test_static_verifier.py::test_mea_coordinates_valid PASSED         [ 78%]
-tests/test_static_verifier.py::test_mea_coordinates_row_out_of_bounds PASSED [ 79%]
-tests/test_static_verifier.py::test_mea_coordinates_col_out_of_bounds PASSED [ 79%]
-tests/test_static_verifier.py::test_mea_coordinates_negative_row PASSED  [ 80%]
-tests/test_static_verifier.py::test_mea_coordinates_negative_col PASSED  [ 80%]
-tests/test_static_verifier.py::test_mea_coordinates_linear_out_of_bounds PASSED [ 81%]
-tests/test_static_verifier.py::test_mea_coordinates_linear_negative PASSED [ 81%]
-tests/test_static_verifier.py::test_mea_coordinates_in_stim_stmt_out_of_bounds PASSED [ 82%]
-tests/test_static_verifier.py::test_dimensional_homogeneous_addition PASSED [ 82%]
-tests/test_static_verifier.py::test_dimensional_incompatible_addition PASSED [ 83%]
-tests/test_static_verifier.py::test_dimensional_multiplication_current_time_to_charge PASSED [ 83%]
-tests/test_static_verifier.py::test_dimensional_incompatible_comparison PASSED [ 84%]
-tests/test_static_verifier.py::test_static_voltage_clamp_valid PASSED    [ 84%]
-tests/test_static_verifier.py::test_static_voltage_clamp_positive_exceeded PASSED [ 85%]
-tests/test_static_verifier.py::test_static_voltage_clamp_negative_exceeded PASSED [ 85%]
-tests/test_static_verifier.py::test_static_voltage_clamp_unitless_float_exceeded PASSED [ 85%]
-tests/test_static_verifier.py::test_loop_yield_bounded_while_loop PASSED [ 86%]
-tests/test_static_verifier.py::test_loop_yield_unbounded_while_loop_rejected PASSED [ 86%]
-tests/test_static_verifier.py::test_loop_yield_unbounded_if_branch_rejected PASSED [ 87%]
-tests/test_static_verifier.py::test_loop_yield_bounded_if_branch_accepted PASSED [ 87%]
-tests/test_static_verifier.py::test_loop_yield_pure_compute_loop_accepted PASSED [ 88%]
-tests/test_static_verifier.py::test_loop_yield_unbounded_for_loop_rejected PASSED [ 88%]
-tests/test_static_verifier.py::test_loop_yield_bounded_for_loop_accepted PASSED [ 89%]
-tests/test_static_verifier.py::test_loop_yield_stream_cycle_unbounded_rejected PASSED [ 89%]
-tests/test_static_verifier.py::test_loop_yield_stream_cycle_bounded_accepted PASSED [ 90%]
-tests/test_static_verifier.py::test_loop_yield_nested_block_unbounded_rejected PASSED [ 90%]
-tests/test_static_verifier.py::test_loop_yield_inner_while_loop_evasion_rejected PASSED [ 91%]
-tests/test_static_verifier.py::test_loop_yield_inner_for_loop_evasion_rejected PASSED [ 91%]
-tests/test_static_verifier.py::test_loop_yield_nested_block_if_without_else_rejected PASSED [ 92%]
-tests/test_static_verifier.py::test_static_voltage_clamp_constant_folded_addition_exceeded PASSED [ 92%]
-tests/test_static_verifier.py::test_static_voltage_clamp_constant_folded_multiplication_exceeded PASSED [ 93%]
-tests/test_static_verifier.py::test_static_voltage_clamp_variable_constant_exceeded PASSED [ 93%]
-tests/test_static_verifier.py::test_negative_high_voltage_capability_and_manifest PASSED [ 94%]
-tests/test_static_verifier.py::test_mea_coordinates_constant_folded_out_of_bounds PASSED [ 94%]
+tests/test_parser_diagnostics.py::test_parser_parentheses_override PASSED [ 51%]
+tests/test_parser_diagnostics.py::test_parser_unary_operators PASSED     [ 51%]
+tests/test_parser_diagnostics.py::test_parser_grid_and_channel_declarations PASSED [ 52%]
+tests/test_parser_diagnostics.py::test_parser_function_and_control_flow PASSED [ 52%]
+tests/test_parser_diagnostics.py::test_parser_for_loop PASSED            [ 53%]
+tests/test_parser_diagnostics.py::test_parser_stream_declaration PASSED  [ 53%]
+tests/test_parser_diagnostics.py::test_parser_domain_primitives PASSED   [ 53%]
+tests/test_parser_diagnostics.py::test_parser_error_diagnostics PASSED   [ 54%]
+tests/test_parser_diagnostics.py::test_compiler_bytecode_binary_header_and_disasm PASSED [ 54%]
+tests/test_parser_diagnostics.py::test_compile_benchmark_01 PASSED       [ 55%]
+tests/test_parser_diagnostics.py::test_compile_benchmark_02 PASSED       [ 55%]
+tests/test_parser_diagnostics.py::test_compile_benchmark_03 PASSED       [ 55%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_01_wbc_header_truncation PASSED [ 56%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_02_wbc_magic_corruption PASSED [ 56%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_03_wbc_crc32_tamper_detection PASSED [ 57%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_04_wbc_unsupported_version PASSED [ 57%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_05_stimulation_without_capability PASSED [ 58%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_06_microfluidics_without_capability PASSED [ 58%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_07_motor_actuation_without_capability PASSED [ 58%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_08_hydrodynamic_shear_stress_enforcement PASSED [ 59%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_09_compiler_shear_stress_rejection PASSED [ 59%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_10_valid_actuator_telemetry_inspection PASSED [ 60%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_11_cryptographic_signing_and_verification PASSED [ 60%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_12_division_by_zero_safety PASSED [ 60%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_13_stack_underflow_safety PASSED [ 61%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_14_multithreaded_concurrent_vms PASSED [ 61%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_15_hundred_cycle_memory_endurance PASSED [ 62%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_16_full_cyber_physical_closed_loop_program PASSED [ 62%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_01_hd_mea_water_window_clamping PASSED [ 62%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_02_persistent_unbounded_dc_accumulator PASSED [ 63%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_03_active_hardware_discharge_recovery PASSED [ 63%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_04_spherical_diffusion_thiele_anoxia PASSED [ 64%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_05_geometry_aware_shear_stress PASSED [ 64%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_06_dead_heading_valve_pump_interlock PASSED [ 65%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_07_ring0_life_support_supervisor PASSED [ 65%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_08_static_arena_allocation_zero_malloc PASSED [ 65%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_09_ed25519_asymmetric_bytecode_provenance PASSED [ 66%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_10_randles_interface_and_compliance_voltage_interlock PASSED [ 66%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_11_configurable_blanking_and_spatial_crosstalk PASSED [ 67%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_12_subnormal_denormal_conductance_zero_clamping PASSED [ 67%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_13_environmental_sensors_ph_do_co2_flow PASSED [ 67%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_14_cmos_thermal_duty_cycle_interlock PASSED [ 68%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_15_optical_bubble_sensor_pump_halt_interlock PASSED [ 68%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_16_load_time_c99_bytecode_verifier PASSED [ 69%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_17_live_state_checkpointing_and_hot_swap PASSED [ 69%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_18_typed_channel_banks_static_safety PASSED [ 69%]
+tests/test_rt_scheduler.py::test_scheduler_lifecycle PASSED              [ 70%]
+tests/test_rt_scheduler.py::test_scheduler_context_manager PASSED        [ 70%]
+tests/test_rt_scheduler.py::test_spsc_stimulus_and_telemetry_streaming PASSED [ 71%]
+tests/test_rt_scheduler.py::test_quiescent_hard_realtime_benchmark_10k_ticks PASSED [ 71%]
+tests/test_rt_scheduler.py::test_stress_load_hard_realtime_benchmark_10k_ticks PASSED [ 72%]
+tests/test_rt_scheduler.py::test_isochronous_pacing_zero_cumulative_drift PASSED [ 72%]
+tests/test_runtime.py::TestWetLangRuntime::test_vm_stepping PASSED       [ 72%]
+tests/test_sandbox.py::TestWetLangSandbox::test_gymnasium_compliance PASSED [ 73%]
+tests/test_sandbox.py::TestWetLangSandbox::test_multi_organoid_orchestration PASSED [ 73%]
+tests/test_sandbox.py::TestWetLangSandbox::test_snntorch_cross_validation PASSED [ 74%]
+tests/test_section1_audit_remediation.py::test_ohms_law_dimensional_analysis PASSED [ 74%]
+tests/test_section1_audit_remediation.py::test_transcendental_dimensionless_check_happy PASSED [ 74%]
+tests/test_section1_audit_remediation.py::test_transcendental_dimensional_mismatch_rejected PASSED [ 75%]
+tests/test_section1_audit_remediation.py::test_cfg_sync_tick_post_dominance_nested_blocks PASSED [ 75%]
+tests/test_section1_audit_remediation.py::test_cfg_sync_tick_branching_rejection PASSED [ 76%]
+tests/test_section1_audit_remediation.py::test_reference_channel_static_rejection PASSED [ 76%]
+tests/test_section1_audit_remediation.py::test_anti_rollback_security_verification PASSED [ 76%]
+tests/test_section3_audit_remediation.py::test_hardware_inline_pressure_dead_head_interlock PASSED [ 77%]
+tests/test_section3_audit_remediation.py::test_asynchronous_microfluidics_queue PASSED [ 77%]
+tests/test_section3_audit_remediation.py::test_i2c_bus_recovery_routine PASSED [ 78%]
+tests/test_section3_audit_remediation.py::test_intan_charge_recovery_dac_registers PASSED [ 78%]
+tests/test_section5_audit_remediation.py::test_fixed_point_femtocoulomb_dc_accumulation PASSED [ 79%]
+tests/test_section5_audit_remediation.py::test_adversarial_corrupt_bytecode_fuzzing PASSED [ 79%]
+tests/test_section5_audit_remediation.py::test_empirical_mea_burst_replay PASSED [ 79%]
+tests/test_section5_audit_remediation.py::test_oi_hardware_scaling_memory_bounds PASSED [ 80%]
+tests/test_static_verifier.py::test_symbol_resolution_undeclared_identifier PASSED [ 80%]
+tests/test_static_verifier.py::test_symbol_resolution_redeclared_identifier PASSED [ 81%]
+tests/test_static_verifier.py::test_symbol_resolution_duplicate_function_params PASSED [ 81%]
+tests/test_static_verifier.py::test_mea_coordinates_valid PASSED         [ 81%]
+tests/test_static_verifier.py::test_mea_coordinates_row_out_of_bounds PASSED [ 82%]
+tests/test_static_verifier.py::test_mea_coordinates_col_out_of_bounds PASSED [ 82%]
+tests/test_static_verifier.py::test_mea_coordinates_negative_row PASSED  [ 83%]
+tests/test_static_verifier.py::test_mea_coordinates_negative_col PASSED  [ 83%]
+tests/test_static_verifier.py::test_mea_coordinates_linear_out_of_bounds PASSED [ 83%]
+tests/test_static_verifier.py::test_mea_coordinates_linear_negative PASSED [ 84%]
+tests/test_static_verifier.py::test_mea_coordinates_in_stim_stmt_out_of_bounds PASSED [ 84%]
+tests/test_static_verifier.py::test_dimensional_homogeneous_addition PASSED [ 85%]
+tests/test_static_verifier.py::test_dimensional_incompatible_addition PASSED [ 85%]
+tests/test_static_verifier.py::test_dimensional_multiplication_current_time_to_charge PASSED [ 86%]
+tests/test_static_verifier.py::test_dimensional_incompatible_comparison PASSED [ 86%]
+tests/test_static_verifier.py::test_static_voltage_clamp_valid PASSED    [ 86%]
+tests/test_static_verifier.py::test_static_voltage_clamp_positive_exceeded PASSED [ 87%]
+tests/test_static_verifier.py::test_static_voltage_clamp_negative_exceeded PASSED [ 87%]
+tests/test_static_verifier.py::test_static_voltage_clamp_unitless_float_exceeded PASSED [ 88%]
+tests/test_static_verifier.py::test_loop_yield_bounded_while_loop PASSED [ 88%]
+tests/test_static_verifier.py::test_loop_yield_unbounded_while_loop_rejected PASSED [ 88%]
+tests/test_static_verifier.py::test_loop_yield_unbounded_if_branch_rejected PASSED [ 89%]
+tests/test_static_verifier.py::test_loop_yield_bounded_if_branch_accepted PASSED [ 89%]
+tests/test_static_verifier.py::test_loop_yield_pure_compute_loop_accepted PASSED [ 90%]
+tests/test_static_verifier.py::test_loop_yield_unbounded_for_loop_rejected PASSED [ 90%]
+tests/test_static_verifier.py::test_loop_yield_bounded_for_loop_accepted PASSED [ 90%]
+tests/test_static_verifier.py::test_loop_yield_stream_cycle_unbounded_rejected PASSED [ 91%]
+tests/test_static_verifier.py::test_loop_yield_stream_cycle_bounded_accepted PASSED [ 91%]
+tests/test_static_verifier.py::test_loop_yield_nested_block_unbounded_rejected PASSED [ 92%]
+tests/test_static_verifier.py::test_loop_yield_inner_while_loop_evasion_rejected PASSED [ 92%]
+tests/test_static_verifier.py::test_loop_yield_inner_for_loop_evasion_rejected PASSED [ 93%]
+tests/test_static_verifier.py::test_loop_yield_nested_block_if_without_else_rejected PASSED [ 93%]
+tests/test_static_verifier.py::test_static_voltage_clamp_constant_folded_addition_exceeded PASSED [ 93%]
+tests/test_static_verifier.py::test_static_voltage_clamp_constant_folded_multiplication_exceeded PASSED [ 94%]
+tests/test_static_verifier.py::test_static_voltage_clamp_variable_constant_exceeded PASSED [ 94%]
+tests/test_static_verifier.py::test_negative_high_voltage_capability_and_manifest PASSED [ 95%]
+tests/test_static_verifier.py::test_mea_coordinates_constant_folded_out_of_bounds PASSED [ 95%]
 tests/test_static_verifier.py::test_mea_coordinates_constant_folded_linear_out_of_bounds PASSED [ 95%]
-tests/test_static_verifier.py::test_mea_coordinates_constant_folded_valid_mapping PASSED [ 95%]
+tests/test_static_verifier.py::test_mea_coordinates_constant_folded_valid_mapping PASSED [ 96%]
 tests/test_static_verifier.py::test_capability_multi_electrode_threshold PASSED [ 96%]
-tests/test_universal_sandbox.py::TestUniversalSandbox::test_01_single_organoid_sandbox PASSED [ 96%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_01_single_organoid_sandbox PASSED [ 97%]
 tests/test_universal_sandbox.py::TestUniversalSandbox::test_02_16_organoid_cluster_sandbox PASSED [ 97%]
 tests/test_universal_sandbox.py::TestUniversalSandbox::test_03_1024_parametric_cluster_scaling PASSED [ 97%]
 tests/test_universal_sandbox.py::TestUniversalSandbox::test_04_axonal_conduction_delay_timing PASSED [ 98%]
@@ -1048,7 +966,7 @@ C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio
     from _pytest.python import CallSpec2
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-======================= 207 passed, 1 warning in 13.94s =======================
+======================= 243 passed, 1 warning in 14.73s =======================
 ```
 
 ### D.3 Live 10,000-Tick `wetvm.dll` Latency Microbenchmark
@@ -1060,28 +978,28 @@ Python        : 3.12.10
 Workload      : benchmarks/01_active_inference_closed_loop.wet (dt = 0.1 ms = 100 us)
 
 [Mode A: Per-Tick Python->C FFI vm.step_tick() x 10,000 ticks]
-  mean   : 27.269 us/tick
-  median : 24.500 us/tick
-  p95    : 30.800 us/tick
-  p99    : 92.900 us/tick
-  min    : 20.000 us/tick
-  max    : 2777.400 us/tick
-  wall   : 277.130 ms (1.0 s simulated time)
+  mean   : 27.528 us/tick
+  median : 24.800 us/tick
+  p95    : 29.300 us/tick
+  p99    : 67.600 us/tick
+  min    : 15.800 us/tick
+  max    : 2751.000 us/tick
+  wall   : 279.735 ms (1.0 s simulated time)
 
 [Mode B: Batched Native C vm.run_ticks(10000) x 10 trials]
-  mean       : 26.619 us/tick
-  median     : 26.007 us/tick
-  min        : 23.702 us/tick
-  max        : 31.683 us/tick
-  throughput : 37568 ticks/sec
-  speedup    : 3.76x real-time
+  mean       : 24.700 us/tick
+  median     : 25.578 us/tick
+  min        : 21.286 us/tick
+  max        : 26.447 us/tick
+  throughput : 40485 ticks/sec
+  speedup    : 4.05x real-time
 ```
 
 ---
 
 ## Appendix E: Verified Line-Numbered Core Source Code Listing
 
-Covers all 27 core source files across `compiler/`, `native/include/`, `native/src/`, `native/build.py`, `native/interlocks.py`, `bindings/`, `biophysics/`, and `benchmarks/*.wet`.
+Covers all 31 core source files across `compiler/`, `native/include/`, `native/src/`, `native/build.py`, `native/interlocks.py`, `bindings/`, `biophysics/`, and `benchmarks/*.wet`.
 
 ### `native/include/biophysics.h` (214 lines, SHA-256: `c1ff823a6b9772a6...`)
 
@@ -1302,7 +1220,7 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  214 | #endif /* WET_BIOPHYSICS_H */
 ```
 
-### `native/include/interlocks.h` (166 lines, SHA-256: `3b0500777569d591...`)
+### `native/include/interlocks.h` (188 lines, SHA-256: `5017b655ffe3fd61...`)
 
 ```text
    1 | #ifndef WET_INTERLOCKS_H
@@ -1316,161 +1234,347 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
    9 | extern "C" {
   10 | #endif
   11 | 
-  12 | /* =========================================================================
-  13 |  * WetLang Cycle-Accurate Biocybersecurity Hardware Watchdog & Interlocks
-  14 |  * =========================================================================
-  15 |  * 1. Water-Window Voltage Clamp: Hard clamp [-1.2 V, +1.2 V]
-  16 |  * 2. Sliding Charge-Balance Ring Buffer:
-  17 |  *    - 100-tick (10.0 ms at dt=0.1 ms) per-electrode circular buffer
-  18 |  *    - Trip ERR_CHARGE_IMBALANCE if |Q_accum[ch]| >= 0.5 nC
-  19 |  * 3. Epileptiform Runaway Firing Breaker:
-  20 |  *    - Monitors sliding 50.0 ms firing rate per channel
-  21 |  *    - Hyperactive channel: firing_rate > 150.0 Hz
-  22 |  *    - Fraction threshold: > 35% of 64 channels (>= 23 channels)
-  23 |  *    - Sustained duration: 500 consecutive ticks (50.0 ms)
-  24 |  *    - Trip ERR_EPILEPTIFORM_RUNAWAY -> immediately zero DACs & lock VM
-  25 |  * 4. Fail-Safe Interlock Lockout:
-  26 |  *    - Once tripped, zeroes all stimulation voltages (0.0 V) and blocks
-  27 |  *      further stimulation/execution until explicit hardware reset.
-  28 |  * ========================================================================= */
-  29 | 
-  30 | #define INTERLOCK_NUM_CHANNELS          64
-  31 | #define INTERLOCK_VOLTAGE_LIMIT_V       1.2f
-  32 | #define INTERLOCK_CHARGE_WINDOW_TICKS   100     /* 10.0 ms at dt = 0.1 ms */
-  33 | #define INTERLOCK_CHARGE_LIMIT_NC       0.5f    /* 0.5 nC per electrode */
-  34 | #define INTERLOCK_EPILEPSY_RATE_HZ      150.0f  /* > 150 Hz */
-  35 | #define INTERLOCK_EPILEPSY_MIN_CHANNELS 23      /* > 35% of 64 (22.4 -> 23) */
-  36 | #define INTERLOCK_EPILEPSY_SUSTAIN_TICKS 500    /* 50.0 ms at dt = 0.1 ms */
-  37 | 
-  38 | /* Hardened Biocybersecurity Extensions (Audit Remediation) */
-  39 | #define INTERLOCK_DC_DRIFT_LIMIT_NC     1.0f    /* 1.0 nC cumulative unrecovered DC charge */
-  40 | #define INTERLOCK_BLEED_DECAY_PER_TICK  0.99999f/* tau = 10.0 s (100,000 ticks) */
-  41 | #define INTERLOCK_CHARGE_DENSITY_LIMIT_NC 0.40f /* 0.40 nC max per single pulse phase (Shannon limit) */
-  42 | #define INTERLOCK_FOCAL_RATE_HZ         150.0f  /* 150 Hz focal rate */
-  43 | #define INTERLOCK_FOCAL_SUSTAIN_TICKS   2500    /* 250.0 ms sustained focal hyperactivity */
-  44 | #define INTERLOCK_DUTY_CYCLE_LIMIT      0.05f   /* 5% max stimulation duty cycle */
-  45 | #define INTERLOCK_DUTY_CYCLE_DECAY      0.9999f /* tau = 1.0 s (10,000 ticks) */
-  46 | #define INTERLOCK_THERMAL_LIMIT_C       38.0f   /* 38.0 C max incubator / CMOS die temperature */
-  47 | #define INTERLOCK_COMPLIANCE_LIMIT_V    7.0f    /* 7.0 V Intan RHS2116 compliance rail */
-  48 | 
-  49 | /* Phase 3 Electrochemical Water-Window & Material CIC Limits */
-  50 | typedef enum {
-  51 |     WET_ELEC_PLATINUM = 0,  /* 0.10 mC/cm^2 (water-window limit: 0.05..0.15 mC/cm^2) */
-  52 |     WET_ELEC_TIN      = 1,  /* 0.90 mC/cm^2 (Titanium Nitride) */
-  53 |     WET_ELEC_IROX     = 2,  /* 2.00 mC/cm^2 (Iridium Oxide / SIROF) */
-  54 |     WET_ELEC_PEDOT    = 3,  /* 5.00 mC/cm^2 (Conductive Polymer PEDOT:PSS) */
-  55 |     WET_ELEC_CUSTOM   = 4
-  56 | } wet_electrode_material_t;
-  57 | 
-  58 | typedef enum {
-  59 |     INTERLOCK_TRIP_NONE                = 0,
-  60 |     INTERLOCK_TRIP_CHARGE_IMBALANCE    = 1,
-  61 |     INTERLOCK_TRIP_EPILEPTIFORM_RUNAWAY= 2,
-  62 |     INTERLOCK_TRIP_CAPABILITY_VIOLATION= 3,
-  63 |     INTERLOCK_TRIP_VOLTAGE_OVERRIDE    = 4,
-  64 |     INTERLOCK_TRIP_DC_DRIFT            = 5,
-  65 |     INTERLOCK_TRIP_CHARGE_DENSITY      = 6,
-  66 |     INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY= 7,
-  67 |     INTERLOCK_TRIP_DEAD_HEAD_PRESSURE  = 8,
-  68 |     INTERLOCK_TRIP_THERMAL_LIMIT       = 9,
-  69 |     INTERLOCK_TRIP_BUBBLE_DETECTED     = 10,
-  70 |     INTERLOCK_TRIP_COMPLIANCE_RAILED   = 11
-  71 | } interlock_trip_reason_t;
-  72 | 
-  73 | typedef struct {
-  74 |     /* Fail-safe lockout state */
-  75 |     uint8_t  locked;
-  76 |     uint8_t  trip_reason;          /* interlock_trip_reason_t */
-  77 |     uint8_t  tripped_channel;
-  78 |     uint64_t trip_tick;
-  79 |     float    trip_value;           /* Measured charge (nC) or hyperactive count */
-  80 |     char     diagnostic[256];
-  81 | 
-  82 |     /* Water-window clamp statistics */
-  83 |     uint64_t clamp_events;
-  84 | 
-  85 |     /* 10.0 ms (100-tick) sliding charge balance ring buffer per electrode */
-  86 |     float    q_ring[INTERLOCK_NUM_CHANNELS][INTERLOCK_CHARGE_WINDOW_TICKS];
-  87 |     float    q_accum[INTERLOCK_NUM_CHANNELS];
-  88 |     uint16_t q_head;
-  89 | 
-  90 |     /* Long-horizon leaky DC charge integrator (10.0 s bleed time constant) */
-  91 |     float    q_dc[INTERLOCK_NUM_CHANNELS];
-  92 | 
-  93 |     /* Phase 3: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
-  94 |     float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
-  95 |     int64_t  cumulative_dc_femtocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point femtoCoulombs (1 nC = 1e6 fC) - immune to multi-week float32 ULP saturation */
-  96 | 
-  97 |     /* Phase 3: Electrode Material & Area Parameterization */
-  98 |     uint8_t  electrode_material;   /* wet_electrode_material_t */
-  99 |     float    electrode_area_um2;   /* e.g. 132.25 um^2 for MaxOne, or 5000 um^2 for macro */
- 100 |     float    max_charge_per_phase_nc; /* Dynamic limit = CIC * Area */
- 101 |     float    max_cumulative_dc_nc;    /* Dynamic persistent DC limit */
- 102 | 
- 103 |     /* Phase 3: Microfluidic Dead-Heading Pressure Interlock */
- 104 |     uint8_t  dead_head_protection_enabled;
- 105 |     uint8_t  pump_valve_mapping[8]; /* Maps pump ID to downstream pinch valve ID */
+  12 | #if defined(_WIN32) || defined(__CYGWIN__)
+  13 |   #ifdef WET_BUILDING_DLL
+  14 |     #define WET_EXPORT __declspec(dllexport)
+  15 |   #else
+  16 |     #define WET_EXPORT __declspec(dllimport)
+  17 |   #endif
+  18 | #else
+  19 |   #if defined(__GNUC__) && __GNUC__ >= 4
+  20 |     #define WET_EXPORT __attribute__((visibility("default")))
+  21 |   #else
+  22 |     #define WET_EXPORT
+  23 |   #endif
+  24 | #endif
+  25 | 
+  26 | /* =========================================================================
+  27 |  * WetLang Cycle-Accurate Biocybersecurity Hardware Watchdog & Interlocks
+  28 |  * =========================================================================
+  29 |  * 1. Water-Window Voltage Clamp: Hard clamp [-1.2 V, +1.2 V]
+  30 |  * 2. Sliding Charge-Balance Ring Buffer:
+  31 |  *    - 100-tick (10.0 ms at dt=0.1 ms) per-electrode circular buffer
+  32 |  *    - Trip ERR_CHARGE_IMBALANCE if |Q_accum[ch]| >= 0.5 nC
+  33 |  * 3. Epileptiform Runaway Firing Breaker:
+  34 |  *    - Monitors sliding 50.0 ms firing rate per channel
+  35 |  *    - Hyperactive channel: firing_rate > 150.0 Hz
+  36 |  *    - Fraction threshold: > 35% of 64 channels (>= 23 channels)
+  37 |  *    - Sustained duration: 500 consecutive ticks (50.0 ms)
+  38 |  *    - Trip ERR_EPILEPTIFORM_RUNAWAY -> immediately zero DACs & lock VM
+  39 |  * 4. Fail-Safe Interlock Lockout:
+  40 |  *    - Once tripped, zeroes all stimulation voltages (0.0 V) and blocks
+  41 |  *      further stimulation/execution until explicit hardware reset.
+  42 |  * ========================================================================= */
+  43 | 
+  44 | #define INTERLOCK_NUM_CHANNELS          64
+  45 | #define INTERLOCK_VOLTAGE_LIMIT_V       1.2f
+  46 | #define INTERLOCK_CHARGE_WINDOW_TICKS   100     /* 10.0 ms at dt = 0.1 ms */
+  47 | #define INTERLOCK_CHARGE_LIMIT_NC       0.5f    /* 0.5 nC per electrode */
+  48 | #define INTERLOCK_EPILEPSY_RATE_HZ      150.0f  /* > 150 Hz */
+  49 | #define INTERLOCK_EPILEPSY_MIN_CHANNELS 23      /* > 35% of 64 (22.4 -> 23) */
+  50 | #define INTERLOCK_EPILEPSY_SUSTAIN_TICKS 500    /* 50.0 ms at dt = 0.1 ms */
+  51 | 
+  52 | /* Hardened Biocybersecurity Extensions (Audit Remediation) */
+  53 | #define INTERLOCK_DC_DRIFT_LIMIT_NC     1.0f    /* 1.0 nC cumulative unrecovered DC charge */
+  54 | #define INTERLOCK_BLEED_DECAY_PER_TICK  0.99999f/* tau = 10.0 s (100,000 ticks) */
+  55 | #define INTERLOCK_CHARGE_DENSITY_LIMIT_NC 0.40f /* 0.40 nC max per single pulse phase (Shannon limit) */
+  56 | #define INTERLOCK_FOCAL_RATE_HZ         150.0f  /* 150 Hz focal rate */
+  57 | #define INTERLOCK_FOCAL_SUSTAIN_TICKS   2500    /* 250.0 ms sustained focal hyperactivity */
+  58 | #define INTERLOCK_DUTY_CYCLE_LIMIT      0.05f   /* 5% max stimulation duty cycle */
+  59 | #define INTERLOCK_DUTY_CYCLE_DECAY      0.9999f /* tau = 1.0 s (10,000 ticks) */
+  60 | #define INTERLOCK_THERMAL_LIMIT_C       38.0f   /* 38.0 C max incubator / CMOS die temperature */
+  61 | #define INTERLOCK_COMPLIANCE_LIMIT_V    7.0f    /* 7.0 V Intan RHS2116 compliance rail */
+  62 | 
+  63 | /* Phase 3 Electrochemical Water-Window & Material CIC Limits */
+  64 | typedef enum {
+  65 |     WET_ELEC_PLATINUM = 0,  /* 0.10 mC/cm^2 (water-window limit: 0.05..0.15 mC/cm^2) */
+  66 |     WET_ELEC_TIN      = 1,  /* 0.90 mC/cm^2 (Titanium Nitride) */
+  67 |     WET_ELEC_IROX     = 2,  /* 2.00 mC/cm^2 (Iridium Oxide / SIROF) */
+  68 |     WET_ELEC_PEDOT    = 3,  /* 5.00 mC/cm^2 (Conductive Polymer PEDOT:PSS) */
+  69 |     WET_ELEC_CUSTOM   = 4
+  70 | } wet_electrode_material_t;
+  71 | 
+  72 | typedef enum {
+  73 |     INTERLOCK_TRIP_NONE                = 0,
+  74 |     INTERLOCK_TRIP_CHARGE_IMBALANCE    = 1,
+  75 |     INTERLOCK_TRIP_EPILEPTIFORM_RUNAWAY= 2,
+  76 |     INTERLOCK_TRIP_CAPABILITY_VIOLATION= 3,
+  77 |     INTERLOCK_TRIP_VOLTAGE_OVERRIDE    = 4,
+  78 |     INTERLOCK_TRIP_DC_DRIFT            = 5,
+  79 |     INTERLOCK_TRIP_CHARGE_DENSITY      = 6,
+  80 |     INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY= 7,
+  81 |     INTERLOCK_TRIP_DEAD_HEAD_PRESSURE  = 8,
+  82 |     INTERLOCK_TRIP_THERMAL_LIMIT       = 9,
+  83 |     INTERLOCK_TRIP_BUBBLE_DETECTED     = 10,
+  84 |     INTERLOCK_TRIP_COMPLIANCE_RAILED   = 11
+  85 | } interlock_trip_reason_t;
+  86 | 
+  87 | typedef struct {
+  88 |     /* Fail-safe lockout state */
+  89 |     uint8_t  locked;
+  90 |     uint8_t  trip_reason;          /* interlock_trip_reason_t */
+  91 |     uint8_t  tripped_channel;
+  92 |     uint64_t trip_tick;
+  93 |     float    trip_value;           /* Measured charge (nC) or hyperactive count */
+  94 |     char     diagnostic[256];
+  95 | 
+  96 |     /* Water-window clamp statistics */
+  97 |     uint64_t clamp_events;
+  98 | 
+  99 |     /* 10.0 ms (100-tick) sliding charge balance ring buffer per electrode */
+ 100 |     float    q_ring[INTERLOCK_NUM_CHANNELS][INTERLOCK_CHARGE_WINDOW_TICKS];
+ 101 |     float    q_accum[INTERLOCK_NUM_CHANNELS];
+ 102 |     uint16_t q_head;
+ 103 | 
+ 104 |     /* Long-horizon leaky DC charge integrator (10.0 s bleed time constant) */
+ 105 |     float    q_dc[INTERLOCK_NUM_CHANNELS];
  106 | 
- 107 |     /* 50.0 ms (500-tick) sustained epileptiform runaway counter */
- 108 |     uint32_t hyperactive_consecutive_ticks;
- 109 |     uint32_t last_hyperactive_channel_count;
+ 107 |     /* Phase 3: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
+ 108 |     float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
+ 109 |     int64_t  cumulative_dc_femtocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point femtoCoulombs (1 nC = 1e6 fC) - immune to multi-week float32 ULP saturation */
  110 | 
- 111 |     /* Per-channel focal hyperactivity & stimulation duty cycle monitors */
- 112 |     uint32_t focal_hyperactive_ticks[INTERLOCK_NUM_CHANNELS];
- 113 |     float    stim_duty_filter[INTERLOCK_NUM_CHANNELS];
- 114 | 
- 115 |     /* Authorized bytecode capabilities */
- 116 |     uint16_t authorized_capabilities;
- 117 |     uint32_t authorized_channels;
+ 111 |     /* Phase 3 & v2.1: Electrode Material & Material-Dependent Water-Window */
+ 112 |     uint8_t  electrode_material;   /* wet_electrode_material_t */
+ 113 |     float    electrode_area_um2;   /* e.g. 132.25 um^2 for MaxOne, or 5000 um^2 for macro */
+ 114 |     float    v_water_window_low_v; /* Material-dependent cathodic limit (e.g. -0.6 V for Pt, -0.9 V for TiN) */
+ 115 |     float    v_water_window_high_v;/* Material-dependent anodic limit (e.g. +0.8 V for Pt, +0.9 V for TiN) */
+ 116 |     float    max_charge_per_phase_nc; /* Dynamic limit = CIC * Area */
+ 117 |     float    max_cumulative_dc_nc;    /* Dynamic persistent DC limit */
  118 | 
- 119 |     /* Typed Channel Banks / Capabilities (Bug C-05 Remediation) */
- 120 |     uint64_t reference_channels_mask;      /* Cannot be stimulated */
- 121 |     uint64_t recording_only_channels_mask; /* Cannot be stimulated */
- 122 | } interlock_state_t;
- 123 | 
- 124 | /* Initialize / reset watchdog state */
- 125 | void interlocks_init(interlock_state_t* il);
- 126 | void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count);
- 127 | void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask);
+ 119 |     /* Active Emc Closed-Loop Hardware Trimming & OCP Guard */
+ 120 |     uint8_t  active_emc_trim_enabled;
+ 121 |     float    emc_trim_offset_v[INTERLOCK_NUM_CHANNELS];
+ 122 |     float    reference_ocp_baseline_v;
+ 123 |     uint8_t  reference_ocp_fault_tripped;
+ 124 | 
+ 125 |     /* Phase 3: Microfluidic Dead-Heading Pressure Interlock */
+ 126 |     uint8_t  dead_head_protection_enabled;
+ 127 |     uint8_t  pump_valve_mapping[8]; /* Maps pump ID to downstream pinch valve ID */
  128 | 
- 129 | /* Phase 3 Electrochemical & Hardware Interlock API */
- 130 | void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
- 131 | void interlocks_active_discharge(interlock_state_t* il, uint8_t channel);
- 132 | void interlocks_active_discharge_all(interlock_state_t* il);
- 133 | void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable);
- 134 | 
- 135 | /* Environmental & Compliance Safety Checks */
- 136 | wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c);
- 137 | wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id);
- 138 | wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v);
- 139 | 
- 140 | /* Static authorization check for an opcode against loaded bytecode capabilities */
- 141 | int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel);
- 142 | 
- 143 | /* Clamp requested stimulation voltage to [-1.2 V, +1.2 V] */
- 144 | float interlocks_clamp_voltage(interlock_state_t* il, float requested_v);
+ 129 |     /* 50.0 ms (500-tick) sustained epileptiform runaway counter */
+ 130 |     uint32_t hyperactive_consecutive_ticks;
+ 131 |     uint32_t last_hyperactive_channel_count;
+ 132 | 
+ 133 |     /* Per-channel focal hyperactivity & stimulation duty cycle monitors */
+ 134 |     uint32_t focal_hyperactive_ticks[INTERLOCK_NUM_CHANNELS];
+ 135 |     float    stim_duty_filter[INTERLOCK_NUM_CHANNELS];
+ 136 | 
+ 137 |     /* Authorized bytecode capabilities */
+ 138 |     uint16_t authorized_capabilities;
+ 139 |     uint32_t authorized_channels;
+ 140 | 
+ 141 |     /* Typed Channel Banks / Capabilities (Bug C-05 Remediation) */
+ 142 |     uint64_t reference_channels_mask;      /* Cannot be stimulated */
+ 143 |     uint64_t recording_only_channels_mask; /* Cannot be stimulated */
+ 144 | } interlock_state_t;
  145 | 
- 146 | /* Advance 10.0 ms charge ring buffer with this tick's per-channel injected charge (nC).
- 147 |  * Returns WET_OK or WET_ERR_CHARGE_IMBALANCE (locking the watchdog on trip). */
- 148 | wet_status_t interlocks_record_charge_tick(
- 149 |     interlock_state_t* il,
- 150 |     uint64_t current_tick,
- 151 |     const float tick_charge_nc[INTERLOCK_NUM_CHANNELS]
- 152 | );
- 153 | 
- 154 | /* Evaluate epileptiform runaway breaker using per-channel firing rates (Hz).
- 155 |  * Returns WET_OK or WET_ERR_EPILEPTIFORM_RUNAWAY (locking the watchdog on trip). */
- 156 | wet_status_t interlocks_check_epileptiform(
- 157 |     interlock_state_t* il,
- 158 |     uint64_t current_tick,
- 159 |     const float channel_rates_hz[INTERLOCK_NUM_CHANNELS]
- 160 | );
+ 146 | /* Initialize / reset watchdog state */
+ 147 | void interlocks_init(interlock_state_t* il);
+ 148 | void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count);
+ 149 | void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask);
+ 150 | 
+ 151 | /* Phase 3 Electrochemical & Hardware Interlock API */
+ 152 | WET_EXPORT void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
+ 153 | void interlocks_active_discharge(interlock_state_t* il, uint8_t channel);
+ 154 | void interlocks_active_discharge_all(interlock_state_t* il);
+ 155 | void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable);
+ 156 | 
+ 157 | /* Environmental & Compliance Safety Checks */
+ 158 | wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c);
+ 159 | wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id);
+ 160 | wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v);
  161 | 
- 162 | #ifdef __cplusplus
- 163 | }
- 164 | #endif
- 165 | 
- 166 | #endif /* WET_INTERLOCKS_H */
+ 162 | /* Static authorization check for an opcode against loaded bytecode capabilities */
+ 163 | int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel);
+ 164 | 
+ 165 | /* Clamp requested stimulation voltage to material water window */
+ 166 | WET_EXPORT float interlocks_clamp_voltage(interlock_state_t* il, float requested_v);
+ 167 | 
+ 168 | /* Advance 10.0 ms charge ring buffer with this tick's per-channel injected charge (nC).
+ 169 |  * Returns WET_OK or WET_ERR_CHARGE_IMBALANCE (locking the watchdog on trip). */
+ 170 | wet_status_t interlocks_record_charge_tick(
+ 171 |     interlock_state_t* il,
+ 172 |     uint64_t current_tick,
+ 173 |     const float tick_charge_nc[INTERLOCK_NUM_CHANNELS]
+ 174 | );
+ 175 | 
+ 176 | /* Evaluate epileptiform runaway breaker using per-channel firing rates (Hz).
+ 177 |  * Returns WET_OK or WET_ERR_EPILEPTIFORM_RUNAWAY (locking the watchdog on trip). */
+ 178 | wet_status_t interlocks_check_epileptiform(
+ 179 |     interlock_state_t* il,
+ 180 |     uint64_t current_tick,
+ 181 |     const float channel_rates_hz[INTERLOCK_NUM_CHANNELS]
+ 182 | );
+ 183 | 
+ 184 | #ifdef __cplusplus
+ 185 | }
+ 186 | #endif
+ 187 | 
+ 188 | #endif /* WET_INTERLOCKS_H */
+```
+
+### `native/include/wet_aer.h` (159 lines, SHA-256: `84b2e70694f38a59...`)
+
+```text
+   1 | #ifndef WET_AER_H
+   2 | #define WET_AER_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | 
+   7 | #ifdef __cplusplus
+   8 | extern "C" {
+   9 | #endif
+  10 | 
+  11 | #define WET_AER_CACHELINE_SIZE 128
+  12 | #define WET_AER_PACKET_SIZE    16
+  13 | #define WET_AER_MAX_CHANNELS   26400
+  14 | 
+  15 | #if defined(_WIN32) || defined(__CYGWIN__)
+  16 |   #ifdef WET_BUILDING_DLL
+  17 |     #define WET_EXPORT __declspec(dllexport)
+  18 |   #else
+  19 |     #define WET_EXPORT __declspec(dllimport)
+  20 |   #endif
+  21 | #else
+  22 |   #if defined(__GNUC__) && __GNUC__ >= 4
+  23 |     #define WET_EXPORT __attribute__((visibility("default")))
+  24 |   #else
+  25 |     #define WET_EXPORT
+  26 |   #endif
+  27 | #endif
+  28 | 
+  29 | /*
+  30 |  * Production 16-byte AER Packet Layout
+  31 |  * Guaranteed 8-byte natural alignment in arrays: eliminates hardware Alignment/UsageFault
+  32 |  * exceptions on ARM Cortex-M/R and RISC-V cores while preventing split cache-line loads.
+  33 |  */
+  34 | #if defined(_MSC_VER)
+  35 | #pragma pack(push, 8)
+  36 | typedef struct {
+  37 |     uint64_t timestamp_tick;    /* 8 bytes: tick count */
+  38 |     uint16_t channel_id;        /* 2 bytes: 0..65535 electrode index */
+  39 |     int16_t  peak_amplitude_uv; /* 2 bytes: spike peak amplitude in microvolts */
+  40 |     uint16_t flags;             /* 2 bytes: bit 0: burst, bit 1: multi-unit, bit 2: stim-recovery */
+  41 |     uint16_t reserved;          /* 2 bytes: padding for strict 16-byte power-of-two alignment */
+  42 | } wet_aer_packet_t;
+  43 | #pragma pack(pop)
+  44 | #else
+  45 | typedef struct __attribute__((aligned(8))) {
+  46 |     uint64_t timestamp_tick;    /* 8 bytes: tick count */
+  47 |     uint16_t channel_id;        /* 2 bytes: 0..65535 electrode index */
+  48 |     int16_t  peak_amplitude_uv; /* 2 bytes: spike peak amplitude in microvolts */
+  49 |     uint16_t flags;             /* 2 bytes: bit 0: burst, bit 1: multi-unit, bit 2: stim-recovery */
+  50 |     uint16_t reserved;          /* 2 bytes: padding for strict 16-byte power-of-two alignment */
+  51 | } wet_aer_packet_t;
+  52 | #endif
+  53 | 
+  54 | #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+  55 | _Static_assert(sizeof(wet_aer_packet_t) == 16, "wet_aer_packet_t must be exactly 16 bytes");
+  56 | #endif
+  57 | 
+  58 | /*
+  59 |  * High-Throughput Burst-Tolerant Lockless SPSC Circular Ring Buffer
+  60 |  */
+  61 | typedef struct {
+  62 |     /* Producer cacheline */
+  63 |     uint8_t pad0[WET_AER_CACHELINE_SIZE];
+  64 |     uint32_t head;
+  65 |     uint8_t pad1[WET_AER_CACHELINE_SIZE - sizeof(uint32_t)];
+  66 | 
+  67 |     /* Consumer cacheline */
+  68 |     uint32_t tail;
+  69 |     uint8_t pad2[WET_AER_CACHELINE_SIZE - sizeof(uint32_t)];
+  70 | 
+  71 |     /* Shared configuration and storage */
+  72 |     wet_aer_packet_t *buffer;
+  73 |     uint32_t capacity;
+  74 |     uint32_t mask; /* capacity - 1 (must be power of 2) */
+  75 | 
+  76 |     /* Statistics and burst rate tracking */
+  77 |     uint64_t total_pushed;
+  78 |     uint64_t total_dropped;
+  79 |     uint64_t last_stat_tick;
+  80 |     uint32_t spikes_in_window;
+  81 |     double current_spike_rate_hz;
+  82 |     double current_bandwidth_mbps;
+  83 |     uint32_t burst_limit_max_hz; /* Peak burst ceiling (e.g. 5,000,000 Hz) */
+  84 |     uint8_t is_burst_tripped;
+  85 | 
+  86 |     /* Per-channel rate monitoring to quarantine noisy / oscillating pads */
+  87 |     uint16_t *channel_spike_counts;
+  88 |     uint32_t monitored_channels;
+  89 |     uint16_t max_channel_hz; /* Default 250 Hz per channel */
+  90 | } wet_aer_ring_t;
+  91 | 
+  92 | /*
+  93 |  * Nonlinear Energy Operator (NEO) Spike Detector with Bartlett Smoother
+  94 |  * Pipeline:
+  95 |  *  1. Baseline subtraction: x_ac = v - v_base
+  96 |  *  2. Raw discrete NEO: Psi[n] = x_ac[n-1]^2 - x_ac[n] * x_ac[n-2]
+  97 |  *  3. 5-tap Bartlett smoothing window: Psi_smooth = (1/9)*(Psi[-2] + 2Psi[-1] + 3Psi[0] + 2Psi[1] + Psi[2])
+  98 |  *  4. Blanking window suppression
+  99 |  */
+ 100 | typedef struct {
+ 101 |     uint32_t num_channels;
+ 102 |     float threshold_multiplier;
+ 103 |     uint32_t refractory_ticks;
+ 104 |     
+ 105 |     /* Per-channel state */
+ 106 |     float *v_baseline;
+ 107 |     float *prev_v1;       /* x_ac[n-1] */
+ 108 |     float *prev_v2;       /* x_ac[n-2] */
+ 109 |     float *psi_history[4]; /* 4-tap history for 5-tap Bartlett smoother */
+ 110 |     uint32_t *refract_left;
+ 111 |     uint32_t *blanking_left; /* Hardware stimulus artifact blanking window */
+ 112 |     float *running_neo_mean;
+ 113 |     uint32_t *sample_count;
+ 114 |     uint64_t total_detected;
+ 115 | } wet_neo_detector_t;
+ 116 | 
+ 117 | /*
+ 118 |  * Event-Driven Compressed Sparse Row / Adjacency Synaptic Matrix
+ 119 |  * Total footprint:
+ 120 |  *  - weights_int8: 6.97 MB (int8)
+ 121 |  *  - col_idx:      13.94 MB (uint16_t)
+ 122 |  *  - row_ptr:      0.11 MB (uint32_t)
+ 123 |  *  - Total:        21.02 MB for 26,400 neurons @ 1% density
+ 124 |  *
+ 125 |  * Event-driven dispatch: O(spiking_neurons * avg_degree) complexity.
+ 126 |  */
+ 127 | typedef struct {
+ 128 |     uint32_t num_rows;
+ 129 |     uint32_t num_cols;
+ 130 |     uint32_t nnz;
+ 131 |     uint32_t *row_ptr;      /* Size: num_rows + 1 */
+ 132 |     uint16_t *col_idx;      /* Size: nnz */
+ 133 |     int8_t   *weights_int8;  /* Size: nnz, signed 8-bit quantized weights */
+ 134 |     float    weight_scale_ns; /* Conductance per LSB (default 0.2 nS) */
+ 135 | } wet_csr_matrix_t;
+ 136 | 
+ 137 | /* AER Ring Buffer Functions */
+ 138 | WET_EXPORT int wet_aer_ring_init(wet_aer_ring_t *ring, wet_aer_packet_t *buffer, uint32_t capacity, uint32_t burst_limit_max_hz, uint16_t *ch_counts, uint32_t num_channels);
+ 139 | WET_EXPORT int wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t amp_uv, uint16_t flags);
+ 140 | WET_EXPORT uint32_t wet_aer_pop_batch(wet_aer_ring_t *ring, wet_aer_packet_t *out_batch, uint32_t max_count);
+ 141 | WET_EXPORT uint32_t wet_aer_available(const wet_aer_ring_t *ring);
+ 142 | WET_EXPORT void wet_aer_get_stats(wet_aer_ring_t *ring, uint64_t current_tick, uint64_t *out_total, double *out_rate_hz, double *out_mbps);
+ 143 | 
+ 144 | /* NEO Detector Functions */
+ 145 | WET_EXPORT int wet_neo_init(wet_neo_detector_t *det, uint32_t num_channels, float threshold_multiplier, uint32_t refractory_ticks);
+ 146 | WET_EXPORT void wet_neo_free(wet_neo_detector_t *det);
+ 147 | WET_EXPORT void wet_neo_set_blanking(wet_neo_detector_t *det, uint16_t channel, uint32_t blanking_ticks);
+ 148 | WET_EXPORT int wet_neo_process_sample(wet_neo_detector_t *det, uint16_t channel, float voltage, uint64_t current_tick, wet_aer_ring_t *out_ring);
+ 149 | 
+ 150 | /* CSR int8 Synaptic Matrix Functions */
+ 151 | WET_EXPORT int wet_csr_init(wet_csr_matrix_t *csr, uint32_t rows, uint32_t cols, uint32_t nnz, float scale_ns);
+ 152 | WET_EXPORT void wet_csr_free(wet_csr_matrix_t *csr);
+ 153 | WET_EXPORT void wet_csr_spmv_spikes(const wet_csr_matrix_t *csr, const uint8_t *spike_events, float *out_conductance_ns);
+ 154 | 
+ 155 | #ifdef __cplusplus
+ 156 | }
+ 157 | #endif
+ 158 | 
+ 159 | #endif /* WET_AER_H */
 ```
 
 ### `native/include/wet_crt.h` (108 lines, SHA-256: `3c1a972b9cd8b7c7...`)
@@ -1584,6 +1688,141 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  106 | }
  107 | 
  108 | #endif /* WET_CRT_H */
+```
+
+### `native/include/wet_distributed.h` (130 lines, SHA-256: `0aab09235da0a6be...`)
+
+```text
+   1 | #ifndef WET_DISTRIBUTED_H
+   2 | #define WET_DISTRIBUTED_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | 
+   7 | #ifdef __cplusplus
+   8 | extern "C" {
+   9 | #endif
+  10 | 
+  11 | #define WET_DIST_CACHELINE_SIZE 128
+  12 | #define WET_TSN_FRAME_SIZE      32
+  13 | #define WET_TIMING_WHEEL_SLOTS  512  /* 512 slots * 100 us = 51.2 ms horizon */
+  14 | #define WET_WHEEL_BUCKET_CAP    64   /* Max spikes per 100 us tick */
+  15 | #define WET_MAX_CHAMBERS        16
+  16 | 
+  17 | #if defined(_WIN32) || defined(__CYGWIN__)
+  18 |   #ifdef WET_BUILDING_DLL
+  19 |     #define WET_EXPORT __declspec(dllexport)
+  20 |   #else
+  21 |     #define WET_EXPORT __declspec(dllimport)
+  22 |   #endif
+  23 | #else
+  24 |   #if defined(__GNUC__) && __GNUC__ >= 4
+  25 |     #define WET_EXPORT __attribute__((visibility("default")))
+  26 |   #else
+  27 |     #define WET_EXPORT
+  28 |   #endif
+  29 | #endif
+  30 | 
+  31 | /*
+  32 |  * Production 32-Byte Time-Sensitive Networking (TSN) Inter-Chamber Packet
+  33 |  * Natural 8-byte alignment, zero split-load penalty, explicit release epoch & sequence number.
+  34 |  */
+  35 | #if defined(_MSC_VER)
+  36 | #pragma pack(push, 8)
+  37 | typedef struct {
+  38 |     uint64_t source_epoch_ns;   /* 8 bytes: Originating biological spike epoch */
+  39 |     uint64_t release_epoch_ns;  /* 8 bytes: Scheduled target delivery epoch */
+  40 |     uint32_t sequence_number;   /* 4 bytes: Monotonic packet counter */
+  41 |     uint16_t source_chamber;    /* 2 bytes: Originating incubator ID */
+  42 |     uint16_t target_chamber;    /* 2 bytes: Destination incubator ID */
+  43 |     uint16_t source_channel;    /* 2 bytes: Transmitting electrode */
+  44 |     uint16_t target_channel;    /* 2 bytes: Receiving electrode */
+  45 |     int16_t  spike_amplitude_uv;/* 2 bytes: Spike amplitude */
+  46 |     uint16_t flags;             /* 2 bytes: bit 0: burst, bit 1: e-stop, bit 2: clock-sync, bit 3: echo-suppressed */
+  47 | } wet_tsn_frame_t;
+  48 | #pragma pack(pop)
+  49 | #else
+  50 | typedef struct __attribute__((aligned(8))) {
+  51 |     uint64_t source_epoch_ns;   /* 8 bytes: Originating biological spike epoch */
+  52 |     uint64_t release_epoch_ns;  /* 8 bytes: Scheduled target delivery epoch */
+  53 |     uint32_t sequence_number;   /* 4 bytes: Monotonic packet counter */
+  54 |     uint16_t source_chamber;    /* 2 bytes: Originating incubator ID */
+  55 |     uint16_t target_chamber;    /* 2 bytes: Destination incubator ID */
+  56 |     uint16_t source_channel;    /* 2 bytes: Transmitting electrode */
+  57 |     uint16_t target_channel;    /* 2 bytes: Receiving electrode */
+  58 |     int16_t  spike_amplitude_uv;/* 2 bytes: Spike amplitude */
+  59 |     uint16_t flags;             /* 2 bytes: bit 0: burst, bit 1: e-stop, bit 2: clock-sync, bit 3: echo-suppressed */
+  60 | } wet_tsn_frame_t;
+  61 | #endif
+  62 | 
+  63 | #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+  64 | _Static_assert(sizeof(wet_tsn_frame_t) == 32, "wet_tsn_frame_t must be exactly 32 bytes");
+  65 | #endif
+  66 | 
+  67 | /*
+  68 |  * IEEE 1588 PTP Slew-Only Hardware Clock Disciplining State
+  69 |  */
+  70 | typedef struct {
+  71 |     uint64_t local_time_ns;
+  72 |     uint64_t grandmaster_time_ns;
+  73 |     int64_t  accumulated_offset_ns;
+  74 |     int64_t  mean_path_delay_ns;
+  75 |     double   frequency_slew_ppm;
+  76 |     double   integral_err_ns;
+  77 |     double   kp;
+  78 |     double   ki;
+  79 |     uint8_t  is_synchronized;
+  80 |     uint8_t  stim_inhibited;      /* Inhibited if |residual_offset| > 1000 ns */
+  81 |     uint32_t sync_sequence;
+  82 | } wet_ptp_clock_t;
+  83 | 
+  84 | /*
+  85 |  * Timing Wheel Bucket for O(1) Heterogeneous Axonal Delay Dispatching
+  86 |  * Eliminates Head-of-Line blocking inherent to FIFO queues.
+  87 |  */
+  88 | typedef struct {
+  89 |     uint32_t count;
+  90 |     wet_tsn_frame_t frames[WET_WHEEL_BUCKET_CAP];
+  91 | } wet_timing_wheel_bucket_t;
+  92 | 
+  93 | typedef struct {
+  94 |     wet_timing_wheel_bucket_t buckets[WET_TIMING_WHEEL_SLOTS];
+  95 |     uint64_t current_wheel_tick;
+  96 |     uint32_t chamber_id;
+  97 |     uint64_t total_scheduled;
+  98 |     uint64_t total_dispatched;
+  99 |     uint64_t late_drops;
+ 100 |     uint64_t bucket_overflows;
+ 101 | 
+ 102 |     /* Cross-chamber epileptiform rate governor (caps max inter-chamber rate at 50 Hz) */
+ 103 |     uint32_t rate_governor_window_spikes;
+ 104 |     uint64_t rate_governor_last_tick;
+ 105 |     uint8_t  is_epileptiform_tripped;
+ 106 | 
+ 107 |     /* Outbound TX stimulus artifact blanking */
+ 108 |     uint32_t tx_blanking_ticks_remaining[WET_MAX_CHAMBERS];
+ 109 | } wet_timing_wheel_t;
+ 110 | 
+ 111 | /* PTP Clock Functions */
+ 112 | WET_EXPORT void wet_ptp_init(wet_ptp_clock_t *clk, double kp, double ki);
+ 113 | WET_EXPORT void wet_ptp_update_offset(wet_ptp_clock_t *clk, uint64_t t1_ns, uint64_t t2_ns, uint64_t t3_ns, uint64_t t4_ns);
+ 114 | WET_EXPORT uint64_t wet_ptp_get_disciplined_time_ns(const wet_ptp_clock_t *clk, uint64_t local_raw_ns);
+ 115 | 
+ 116 | /* TSN Frame Functions */
+ 117 | WET_EXPORT int wet_tsn_serialize_frame(wet_tsn_frame_t *frame, uint64_t src_epoch_ns, uint64_t rel_epoch_ns, uint32_t seq, uint16_t src_chamb, uint16_t dst_chamb, uint16_t src_ch, uint16_t dst_ch, int16_t amp_uv, uint16_t flags);
+ 118 | WET_EXPORT int wet_tsn_validate_frame(const wet_tsn_frame_t *frame, uint32_t expected_dst_chamber);
+ 119 | 
+ 120 | /* Timing Wheel Functions */
+ 121 | WET_EXPORT int wet_timing_wheel_init(wet_timing_wheel_t *tw, uint32_t chamber_id);
+ 122 | WET_EXPORT int wet_timing_wheel_schedule(wet_timing_wheel_t *tw, const wet_tsn_frame_t *frame, uint64_t current_epoch_ns);
+ 123 | WET_EXPORT uint32_t wet_timing_wheel_drain_tick(wet_timing_wheel_t *tw, uint64_t current_epoch_ns, wet_tsn_frame_t *out_ready, uint32_t max_count);
+ 124 | WET_EXPORT void wet_timing_wheel_set_tx_blanking(wet_timing_wheel_t *tw, uint16_t target_chamber, uint32_t blanking_ticks);
+ 125 | 
+ 126 | #ifdef __cplusplus
+ 127 | }
+ 128 | #endif
+ 129 | 
+ 130 | #endif /* WET_DISTRIBUTED_H */
 ```
 
 ### `native/include/wet_hal.h` (230 lines, SHA-256: `8b70512b8ce20493...`)
@@ -2693,7 +2932,7 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  136 | #endif /* WET_SCHEDULER_H */
 ```
 
-### `native/include/wetvm_api.h` (302 lines, SHA-256: `2bfade00027458ff...`)
+### `native/include/wetvm_api.h` (310 lines, SHA-256: `f1f5e21dac2938cd...`)
 
 ```text
    1 | #ifndef WETVM_API_H
@@ -2993,11 +3232,19 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  295 |     uint8_t post
  296 | );
  297 | 
- 298 | #ifdef __cplusplus
- 299 | }
- 300 | #endif
- 301 | 
- 302 | #endif /* WETVM_API_H */
+ 298 | /**
+ 299 |  * Clamps requested stimulation voltage against the configured electrode material water window.
+ 300 |  */
+ 301 | WET_EXPORT float wet_clamp_voltage_vm(
+ 302 |     wet_vm_t* vm,
+ 303 |     float requested_v
+ 304 | );
+ 305 | 
+ 306 | #ifdef __cplusplus
+ 307 | }
+ 308 | #endif
+ 309 | 
+ 310 | #endif /* WETVM_API_H */
 ```
 
 ### `native/include/wetvm_types.h` (177 lines, SHA-256: `b7289c4cdde4199c...`)
@@ -3885,7 +4132,7 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  547 | }
 ```
 
-### `native/src/interlocks.c` (319 lines, SHA-256: `33b51c6855575217...`)
+### `native/src/interlocks.c` (350 lines, SHA-256: `d17021d6920714f8...`)
 
 ```text
    1 | #include "../include/wet_crt.h"
@@ -3898,315 +4145,831 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
    8 |     il->authorized_channels = INTERLOCK_NUM_CHANNELS;
    9 |     il->electrode_material = (uint8_t)WET_ELEC_PLATINUM;
   10 |     il->electrode_area_um2 = 5000.0f; /* Default macro-electrode area (5000 um^2) */
-  11 |     il->max_charge_per_phase_nc = INTERLOCK_CHARGE_LIMIT_NC; /* Default 0.5 nC */
-  12 |     il->max_cumulative_dc_nc = INTERLOCK_DC_DRIFT_LIMIT_NC;  /* Default 1.0 nC */
-  13 |     for (int p = 0; p < 8; ++p) {
-  14 |         il->pump_valve_mapping[p] = (uint8_t)p;
-  15 |     }
-  16 | }
-  17 | 
-  18 | void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2) {
-  19 |     if (!il) return;
-  20 |     il->electrode_material = material;
-  21 |     il->electrode_area_um2 = area_um2;
-  22 | 
-  23 |     /* Charge Injection Capacity (CIC) in mC/cm^2:
-  24 |      * Area in cm^2 = area_um2 * 1e-8 cm^2/um^2
-  25 |      * Max charge in nC = CIC (mC/cm^2) * Area (cm^2) * 1e6 nC/mC = CIC * area_um2 * 0.01 nC
-  26 |      */
-  27 |     float cic_mc_cm2 = 0.10f;
-  28 |     switch ((wet_electrode_material_t)material) {
-  29 |         case WET_ELEC_PLATINUM: cic_mc_cm2 = 0.10f; break; /* 0.05..0.15 mC/cm^2 water window */
-  30 |         case WET_ELEC_TIN:      cic_mc_cm2 = 0.90f; break; /* Titanium Nitride */
-  31 |         case WET_ELEC_IROX:     cic_mc_cm2 = 2.00f; break; /* Iridium Oxide */
-  32 |         case WET_ELEC_PEDOT:    cic_mc_cm2 = 5.00f; break; /* Conductive polymer */
-  33 |         default:                cic_mc_cm2 = 0.10f; break;
-  34 |     }
-  35 | 
-  36 |     float limit_nc = cic_mc_cm2 * area_um2 * 0.01f;
-  37 |     if (limit_nc < 0.01f) limit_nc = 0.01f;
-  38 |     il->max_charge_per_phase_nc = limit_nc;
-  39 |     il->max_cumulative_dc_nc = limit_nc * 2.0f;
-  40 | }
-  41 | 
-  42 | void interlocks_active_discharge(interlock_state_t* il, uint8_t channel) {
-  43 |     if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
-  44 |     il->cumulative_unbounded_dc_nc[channel] = 0.0f;
-  45 |     il->cumulative_dc_femtocoulombs[channel] = 0;
-  46 |     il->q_dc[channel] = 0.0f;
-  47 | }
-  48 | 
-  49 | void interlocks_active_discharge_all(interlock_state_t* il) {
-  50 |     if (!il) return;
-  51 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
-  52 |         il->cumulative_unbounded_dc_nc[ch] = 0.0f;
-  53 |         il->cumulative_dc_femtocoulombs[ch] = 0;
-  54 |         il->q_dc[ch] = 0.0f;
-  55 |     }
-  56 | }
-  57 | 
-  58 | void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable) {
-  59 |     if (!il) return;
-  60 |     il->dead_head_protection_enabled = enable;
-  61 | }
-  62 | 
-  63 | void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count) {
-  64 |     if (!il) return;
-  65 |     il->authorized_capabilities = caps;
-  66 |     il->authorized_channels = (channel_count > 0 && channel_count <= INTERLOCK_NUM_CHANNELS)
-  67 |                               ? channel_count : INTERLOCK_NUM_CHANNELS;
+  11 |     il->v_water_window_low_v = -0.6f;  /* Platinum safe cathodic limit */
+  12 |     il->v_water_window_high_v = +0.8f; /* Platinum safe anodic limit */
+  13 |     il->max_charge_per_phase_nc = INTERLOCK_CHARGE_LIMIT_NC; /* Default 0.5 nC */
+  14 |     il->max_cumulative_dc_nc = INTERLOCK_DC_DRIFT_LIMIT_NC;  /* Default 1.0 nC */
+  15 |     for (int p = 0; p < 8; ++p) {
+  16 |         il->pump_valve_mapping[p] = (uint8_t)p;
+  17 |     }
+  18 | }
+  19 | 
+  20 | void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2) {
+  21 |     if (!il) return;
+  22 |     il->electrode_material = material;
+  23 |     il->electrode_area_um2 = area_um2;
+  24 | 
+  25 |     /* Charge Injection Capacity (CIC) in mC/cm^2:
+  26 |      * Area in cm^2 = area_um2 * 1e-8 cm^2/um^2
+  27 |      * Max charge in nC = CIC (mC/cm^2) * Area (cm^2) * 1e6 nC/mC = CIC * area_um2 * 0.01 nC
+  28 |      */
+  29 |     float cic_mc_cm2 = 0.10f;
+  30 |     float v_low = -0.6f;
+  31 |     float v_high = +0.8f;
+  32 | 
+  33 |     switch ((wet_electrode_material_t)material) {
+  34 |         case WET_ELEC_PLATINUM:
+  35 |             cic_mc_cm2 = 0.10f;
+  36 |             v_low = -0.6f;
+  37 |             v_high = +0.8f;
+  38 |             break;
+  39 |         case WET_ELEC_IROX:
+  40 |             cic_mc_cm2 = 2.00f;
+  41 |             v_low = -0.6f;
+  42 |             v_high = +0.8f;
+  43 |             break;
+  44 |         case WET_ELEC_TIN:
+  45 |             cic_mc_cm2 = 0.90f;
+  46 |             v_low = -0.9f;
+  47 |             v_high = +0.9f;
+  48 |             break;
+  49 |         case WET_ELEC_PEDOT:
+  50 |             cic_mc_cm2 = 5.00f;
+  51 |             v_low = -0.9f;
+  52 |             v_high = +0.6f;
+  53 |             break;
+  54 |         default:
+  55 |             cic_mc_cm2 = 0.10f;
+  56 |             v_low = -0.6f;
+  57 |             v_high = +0.8f;
+  58 |             break;
+  59 |     }
+  60 | 
+  61 |     il->v_water_window_low_v = v_low;
+  62 |     il->v_water_window_high_v = v_high;
+  63 | 
+  64 |     float limit_nc = cic_mc_cm2 * area_um2 * 0.01f;
+  65 |     if (limit_nc < 0.01f) limit_nc = 0.01f;
+  66 |     il->max_charge_per_phase_nc = limit_nc;
+  67 |     il->max_cumulative_dc_nc = limit_nc * 2.0f;
   68 | }
   69 | 
-  70 | void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask) {
-  71 |     if (!il) return;
-  72 |     il->reference_channels_mask = ref_mask;
-  73 |     il->recording_only_channels_mask = rec_mask;
-  74 | }
-  75 | 
-  76 | int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel) {
-  77 |     if (!il) return 0;
-  78 |     if (il->locked) return 0;
-  79 | 
-  80 |     /* Bounds check for channel-addressed opcodes */
-  81 |     if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_STIM_CURRENT ||
-  82 |         opcode == WET_OP_READ_SPIKES || opcode == WET_OP_READ_VOLTAGE) {
-  83 |         if ((uint32_t)channel >= il->authorized_channels) {
-  84 |             return 0;
-  85 |         }
-  86 |     }
-  87 | 
-  88 |     /* Typed Channel Banks: Disallow stimulation on reference or recording-only electrodes */
-  89 |     if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_STIM_CURRENT) {
-  90 |         if (channel < 64) {
-  91 |             uint64_t ch_bit = 1ULL << channel;
-  92 |             if ((il->reference_channels_mask & ch_bit) != 0ULL ||
-  93 |                 (il->recording_only_channels_mask & ch_bit) != 0ULL) {
-  94 |                 return 0; /* Capability Denied: Channel restricted to reference or recording */
-  95 |             }
-  96 |         }
-  97 |     }
-  98 | 
-  99 |     switch ((wet_opcode_t)opcode) {
- 100 |         case WET_OP_STIM_BIPHASIC:
- 101 |         case WET_OP_STIM_CURRENT:
- 102 |             if ((il->authorized_capabilities & WET_CAP_STIMULATION) == 0) {
- 103 |                 return 0;
- 104 |             }
- 105 |             if (wet_fabsf(voltage_v) > 0.8f && (il->authorized_capabilities & WET_CAP_HIGH_VOLTAGE) == 0) {
- 106 |                 return 0;
- 107 |             }
- 108 |             return 1;
- 109 | 
- 110 |         case WET_OP_MODULATE_STDP:
- 111 |             if ((il->authorized_capabilities & WET_CAP_PLASTICITY) == 0) {
- 112 |                 return 0;
- 113 |             }
- 114 |             return 1;
+  70 | void interlocks_active_discharge(interlock_state_t* il, uint8_t channel) {
+  71 |     if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
+  72 |     il->cumulative_unbounded_dc_nc[channel] = 0.0f;
+  73 |     il->cumulative_dc_femtocoulombs[channel] = 0;
+  74 |     il->q_dc[channel] = 0.0f;
+  75 | }
+  76 | 
+  77 | void interlocks_active_discharge_all(interlock_state_t* il) {
+  78 |     if (!il) return;
+  79 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
+  80 |         il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+  81 |         il->cumulative_dc_femtocoulombs[ch] = 0;
+  82 |         il->q_dc[ch] = 0.0f;
+  83 |     }
+  84 | }
+  85 | 
+  86 | void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable) {
+  87 |     if (!il) return;
+  88 |     il->dead_head_protection_enabled = enable;
+  89 | }
+  90 | 
+  91 | void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count) {
+  92 |     if (!il) return;
+  93 |     il->authorized_capabilities = caps;
+  94 |     il->authorized_channels = (channel_count > 0 && channel_count <= INTERLOCK_NUM_CHANNELS)
+  95 |                               ? channel_count : INTERLOCK_NUM_CHANNELS;
+  96 | }
+  97 | 
+  98 | void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask) {
+  99 |     if (!il) return;
+ 100 |     il->reference_channels_mask = ref_mask;
+ 101 |     il->recording_only_channels_mask = rec_mask;
+ 102 | }
+ 103 | 
+ 104 | int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel) {
+ 105 |     if (!il) return 0;
+ 106 |     if (il->locked) return 0;
+ 107 | 
+ 108 |     /* Bounds check for channel-addressed opcodes */
+ 109 |     if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_STIM_CURRENT ||
+ 110 |         opcode == WET_OP_READ_SPIKES || opcode == WET_OP_READ_VOLTAGE) {
+ 111 |         if ((uint32_t)channel >= il->authorized_channels) {
+ 112 |             return 0;
+ 113 |         }
+ 114 |     }
  115 | 
- 116 |         case WET_OP_PUMP_SET_RATE:
- 117 |         case WET_OP_PUMP_DISPENSE:
- 118 |         case WET_OP_VALVE_SET:
- 119 |             if ((il->authorized_capabilities & WET_CAP_MICROFLUIDICS) == 0) {
- 120 |                 return 0;
- 121 |             }
- 122 |             return 1;
- 123 | 
- 124 |         case WET_OP_MOTOR_STEP:
- 125 |             if ((il->authorized_capabilities & WET_CAP_MOTOR_ACTUATION) == 0) {
- 126 |                 return 0;
- 127 |             }
- 128 |             return 1;
- 129 | 
- 130 |         default:
- 131 |             /* Tier 0 compute and Tier 1 passive readout always permitted */
- 132 |             return 1;
- 133 |     }
- 134 | }
- 135 | 
- 136 | float interlocks_clamp_voltage(interlock_state_t* il, float requested_v) {
- 137 |     if (requested_v > INTERLOCK_VOLTAGE_LIMIT_V) {
- 138 |         if (il) il->clamp_events++;
- 139 |         return INTERLOCK_VOLTAGE_LIMIT_V;
- 140 |     }
- 141 |     if (requested_v < -INTERLOCK_VOLTAGE_LIMIT_V) {
- 142 |         if (il) il->clamp_events++;
- 143 |         return -INTERLOCK_VOLTAGE_LIMIT_V;
- 144 |     }
- 145 |     return requested_v;
- 146 | }
- 147 | 
- 148 | wet_status_t interlocks_record_charge_tick(
- 149 |     interlock_state_t* il,
- 150 |     uint64_t current_tick,
- 151 |     const float tick_charge_nc[INTERLOCK_NUM_CHANNELS]
- 152 | ) {
- 153 |     if (!il || !tick_charge_nc) return WET_ERR_NULL_PTR;
- 154 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
- 155 | 
- 156 |     uint16_t head = il->q_head;
- 157 |     wet_status_t status = WET_OK;
- 158 | 
- 159 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
- 160 |         float old_q = il->q_ring[ch][head];
- 161 |         float new_q = tick_charge_nc[ch];
- 162 |         il->q_ring[ch][head] = new_q;
+ 116 |     /* Typed Channel Banks: Disallow stimulation on reference or recording-only electrodes */
+ 117 |     if (opcode == WET_OP_STIM_BIPHASIC || opcode == WET_OP_STIM_CURRENT) {
+ 118 |         if (channel < 64) {
+ 119 |             uint64_t ch_bit = 1ULL << channel;
+ 120 |             if ((il->reference_channels_mask & ch_bit) != 0ULL ||
+ 121 |                 (il->recording_only_channels_mask & ch_bit) != 0ULL) {
+ 122 |                 return 0; /* Capability Denied: Channel restricted to reference or recording */
+ 123 |             }
+ 124 |         }
+ 125 |     }
+ 126 | 
+ 127 |     switch ((wet_opcode_t)opcode) {
+ 128 |         case WET_OP_STIM_BIPHASIC:
+ 129 |         case WET_OP_STIM_CURRENT:
+ 130 |             if ((il->authorized_capabilities & WET_CAP_STIMULATION) == 0) {
+ 131 |                 return 0;
+ 132 |             }
+ 133 |             if (wet_fabsf(voltage_v) > 0.8f && (il->authorized_capabilities & WET_CAP_HIGH_VOLTAGE) == 0) {
+ 134 |                 return 0;
+ 135 |             }
+ 136 |             return 1;
+ 137 | 
+ 138 |         case WET_OP_MODULATE_STDP:
+ 139 |             if ((il->authorized_capabilities & WET_CAP_PLASTICITY) == 0) {
+ 140 |                 return 0;
+ 141 |             }
+ 142 |             return 1;
+ 143 | 
+ 144 |         case WET_OP_PUMP_SET_RATE:
+ 145 |         case WET_OP_PUMP_DISPENSE:
+ 146 |         case WET_OP_VALVE_SET:
+ 147 |             if ((il->authorized_capabilities & WET_CAP_MICROFLUIDICS) == 0) {
+ 148 |                 return 0;
+ 149 |             }
+ 150 |             return 1;
+ 151 | 
+ 152 |         case WET_OP_MOTOR_STEP:
+ 153 |             if ((il->authorized_capabilities & WET_CAP_MOTOR_ACTUATION) == 0) {
+ 154 |                 return 0;
+ 155 |             }
+ 156 |             return 1;
+ 157 | 
+ 158 |         default:
+ 159 |             /* Tier 0 compute and Tier 1 passive readout always permitted */
+ 160 |             return 1;
+ 161 |     }
+ 162 | }
  163 | 
- 164 |         /* Recompute exact sum periodically or maintain running sum with drift-free precision */
- 165 |         float accum = il->q_accum[ch] - old_q + new_q;
- 166 |         if (wet_fabsf(accum) < 1e-7f) accum = 0.0f;
- 167 |         il->q_accum[ch] = accum;
- 168 | 
- 169 |         /* Long-horizon leaky DC integrator (tau = 10.0 s = 100,000 ticks) */
- 170 |         il->q_dc[ch] = il->q_dc[ch] * INTERLOCK_BLEED_DECAY_PER_TICK + new_q;
- 171 |         if (wet_fabsf(il->q_dc[ch]) < 1e-7f) il->q_dc[ch] = 0.0f;
- 172 | 
- 173 |         /* Phase 3: Persistent unbounded cumulative DC charge accumulator (zero decay, exact fixed-point femtoCoulombs) */
- 174 |         int64_t delta_fc = (int64_t)((double)new_q * 1000000.0);
- 175 |         il->cumulative_dc_femtocoulombs[ch] += delta_fc;
- 176 |         il->cumulative_unbounded_dc_nc[ch] = (float)((double)il->cumulative_dc_femtocoulombs[ch] * 1e-6);
- 177 |         if (wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) < 1e-7f) {
- 178 |             il->cumulative_unbounded_dc_nc[ch] = 0.0f;
- 179 |             il->cumulative_dc_femtocoulombs[ch] = 0;
- 180 |         }
- 181 | 
- 182 |         float charge_limit = il->max_charge_per_phase_nc > 0.0f ? il->max_charge_per_phase_nc : INTERLOCK_CHARGE_LIMIT_NC;
- 183 |         float dc_limit = il->max_cumulative_dc_nc > 0.0f ? il->max_cumulative_dc_nc : INTERLOCK_DC_DRIFT_LIMIT_NC;
- 184 | 
- 185 |         if (wet_fabsf(accum) >= charge_limit) {
- 186 |             il->locked = 1;
- 187 |             il->trip_reason = INTERLOCK_TRIP_CHARGE_IMBALANCE;
- 188 |             il->tripped_channel = (uint8_t)ch;
- 189 |             il->trip_tick = current_tick;
- 190 |             il->trip_value = accum;
- 191 |             snprintf(il->diagnostic, sizeof(il->diagnostic),
- 192 |                      "ERR_CHARGE_IMBALANCE: ch=%d net_q=%.4f nC >= %.2f nC (CIC limit for material %u, area %.1f um2) at tick %llu",
- 193 |                      ch, (double)accum, (double)charge_limit, il->electrode_material, (double)il->electrode_area_um2, (unsigned long long)current_tick);
- 194 |             status = WET_ERR_CHARGE_IMBALANCE;
- 195 |             break;
- 196 |         }
- 197 | 
- 198 |         if (wet_fabsf(il->q_dc[ch]) >= dc_limit || wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) >= dc_limit) {
- 199 |             il->locked = 1;
- 200 |             il->trip_reason = INTERLOCK_TRIP_DC_DRIFT;
- 201 |             il->tripped_channel = (uint8_t)ch;
- 202 |             il->trip_tick = current_tick;
- 203 |             il->trip_value = wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) >= dc_limit ? il->cumulative_unbounded_dc_nc[ch] : il->q_dc[ch];
- 204 |             snprintf(il->diagnostic, sizeof(il->diagnostic),
- 205 |                      "ERR_DC_DRIFT: ch=%d cumulative DC charge=%.4f nC >= %.2f nC at tick %llu",
- 206 |                      ch, (double)il->trip_value, (double)dc_limit, (unsigned long long)current_tick);
- 207 |             status = WET_ERR_DC_DRIFT;
- 208 |             break;
- 209 |         }
- 210 |     }
- 211 | 
- 212 |     il->q_head = (uint16_t)((head + 1U) % INTERLOCK_CHARGE_WINDOW_TICKS);
- 213 |     return status;
- 214 | }
+ 164 | float interlocks_clamp_voltage(interlock_state_t* il, float requested_v) {
+ 165 |     float v_high = (il && il->v_water_window_high_v > 0.0f) ? il->v_water_window_high_v : 0.8f;
+ 166 |     float v_low  = (il && il->v_water_window_low_v < 0.0f)  ? il->v_water_window_low_v  : -0.6f;
+ 167 | 
+ 168 |     if (requested_v > v_high) {
+ 169 |         if (il) il->clamp_events++;
+ 170 |         return v_high;
+ 171 |     }
+ 172 |     if (requested_v < v_low) {
+ 173 |         if (il) il->clamp_events++;
+ 174 |         return v_low;
+ 175 |     }
+ 176 |     return requested_v;
+ 177 | }
+ 178 | 
+ 179 | wet_status_t interlocks_record_charge_tick(
+ 180 |     interlock_state_t* il,
+ 181 |     uint64_t current_tick,
+ 182 |     const float tick_charge_nc[INTERLOCK_NUM_CHANNELS]
+ 183 | ) {
+ 184 |     if (!il || !tick_charge_nc) return WET_ERR_NULL_PTR;
+ 185 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+ 186 | 
+ 187 |     uint16_t head = il->q_head;
+ 188 |     wet_status_t status = WET_OK;
+ 189 | 
+ 190 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
+ 191 |         float old_q = il->q_ring[ch][head];
+ 192 |         float new_q = tick_charge_nc[ch];
+ 193 |         il->q_ring[ch][head] = new_q;
+ 194 | 
+ 195 |         /* Recompute exact sum periodically or maintain running sum with drift-free precision */
+ 196 |         float accum = il->q_accum[ch] - old_q + new_q;
+ 197 |         if (wet_fabsf(accum) < 1e-7f) accum = 0.0f;
+ 198 |         il->q_accum[ch] = accum;
+ 199 | 
+ 200 |         /* Long-horizon leaky DC integrator (tau = 10.0 s = 100,000 ticks) */
+ 201 |         il->q_dc[ch] = il->q_dc[ch] * INTERLOCK_BLEED_DECAY_PER_TICK + new_q;
+ 202 |         if (wet_fabsf(il->q_dc[ch]) < 1e-7f) il->q_dc[ch] = 0.0f;
+ 203 | 
+ 204 |         /* Phase 3: Persistent unbounded cumulative DC charge accumulator (zero decay, exact fixed-point femtoCoulombs) */
+ 205 |         int64_t delta_fc = (int64_t)((double)new_q * 1000000.0);
+ 206 |         il->cumulative_dc_femtocoulombs[ch] += delta_fc;
+ 207 |         il->cumulative_unbounded_dc_nc[ch] = (float)((double)il->cumulative_dc_femtocoulombs[ch] * 1e-6);
+ 208 |         if (wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) < 1e-7f) {
+ 209 |             il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+ 210 |             il->cumulative_dc_femtocoulombs[ch] = 0;
+ 211 |         }
+ 212 | 
+ 213 |         float charge_limit = il->max_charge_per_phase_nc > 0.0f ? il->max_charge_per_phase_nc : INTERLOCK_CHARGE_LIMIT_NC;
+ 214 |         float dc_limit = il->max_cumulative_dc_nc > 0.0f ? il->max_cumulative_dc_nc : INTERLOCK_DC_DRIFT_LIMIT_NC;
  215 | 
- 216 | wet_status_t interlocks_check_epileptiform(
- 217 |     interlock_state_t* il,
- 218 |     uint64_t current_tick,
- 219 |     const float channel_rates_hz[INTERLOCK_NUM_CHANNELS]
- 220 | ) {
- 221 |     if (!il || !channel_rates_hz) return WET_ERR_NULL_PTR;
- 222 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
- 223 | 
- 224 |     uint32_t hyper_count = 0U;
- 225 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
- 226 |         if (channel_rates_hz[ch] >= INTERLOCK_EPILEPSY_RATE_HZ) {
- 227 |             hyper_count++;
- 228 |             il->focal_hyperactive_ticks[ch]++;
- 229 |             if (il->focal_hyperactive_ticks[ch] >= INTERLOCK_FOCAL_SUSTAIN_TICKS) {
- 230 |                 il->locked = 1;
- 231 |                 il->trip_reason = INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY;
- 232 |                 il->tripped_channel = (uint8_t)ch;
- 233 |                 il->trip_tick = current_tick;
- 234 |                 il->trip_value = channel_rates_hz[ch];
- 235 |                 snprintf(il->diagnostic, sizeof(il->diagnostic),
- 236 |                          "ERR_FOCAL_EXCITOTOXICITY: ch=%d sustained %.1f Hz >= 150 Hz for 250.0 ms at tick %llu",
- 237 |                          ch, (double)channel_rates_hz[ch], (unsigned long long)current_tick);
- 238 |                 return WET_ERR_FOCAL_EXCITOTOXICITY;
- 239 |             }
- 240 |         } else {
- 241 |             il->focal_hyperactive_ticks[ch] = 0U;
- 242 |         }
- 243 |     }
- 244 | 
- 245 |     il->last_hyperactive_channel_count = hyper_count;
+ 216 |         if (wet_fabsf(accum) >= charge_limit) {
+ 217 |             il->locked = 1;
+ 218 |             il->trip_reason = INTERLOCK_TRIP_CHARGE_IMBALANCE;
+ 219 |             il->tripped_channel = (uint8_t)ch;
+ 220 |             il->trip_tick = current_tick;
+ 221 |             il->trip_value = accum;
+ 222 |             snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 223 |                      "ERR_CHARGE_IMBALANCE: ch=%d net_q=%.4f nC >= %.2f nC (CIC limit for material %u, area %.1f um2) at tick %llu",
+ 224 |                      ch, (double)accum, (double)charge_limit, il->electrode_material, (double)il->electrode_area_um2, (unsigned long long)current_tick);
+ 225 |             status = WET_ERR_CHARGE_IMBALANCE;
+ 226 |             break;
+ 227 |         }
+ 228 | 
+ 229 |         if (wet_fabsf(il->q_dc[ch]) >= dc_limit || wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) >= dc_limit) {
+ 230 |             il->locked = 1;
+ 231 |             il->trip_reason = INTERLOCK_TRIP_DC_DRIFT;
+ 232 |             il->tripped_channel = (uint8_t)ch;
+ 233 |             il->trip_tick = current_tick;
+ 234 |             il->trip_value = wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) >= dc_limit ? il->cumulative_unbounded_dc_nc[ch] : il->q_dc[ch];
+ 235 |             snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 236 |                      "ERR_DC_DRIFT: ch=%d cumulative DC charge=%.4f nC >= %.2f nC at tick %llu",
+ 237 |                      ch, (double)il->trip_value, (double)dc_limit, (unsigned long long)current_tick);
+ 238 |             status = WET_ERR_DC_DRIFT;
+ 239 |             break;
+ 240 |         }
+ 241 |     }
+ 242 | 
+ 243 |     il->q_head = (uint16_t)((head + 1U) % INTERLOCK_CHARGE_WINDOW_TICKS);
+ 244 |     return status;
+ 245 | }
  246 | 
- 247 |     if (hyper_count >= INTERLOCK_EPILEPSY_MIN_CHANNELS) {
- 248 |         il->hyperactive_consecutive_ticks++;
- 249 |         if (il->hyperactive_consecutive_ticks >= INTERLOCK_EPILEPSY_SUSTAIN_TICKS) {
- 250 |             il->locked = 1;
- 251 |             il->trip_reason = INTERLOCK_TRIP_EPILEPTIFORM_RUNAWAY;
- 252 |             il->tripped_channel = 0xFF;
- 253 |             il->trip_tick = current_tick;
- 254 |             il->trip_value = (float)hyper_count;
- 255 |             snprintf(il->diagnostic, sizeof(il->diagnostic),
- 256 |                      "ERR_EPILEPTIFORM_RUNAWAY: %u/64 channels (>35%%) exceeded 150 Hz for 50.0 ms at tick %llu",
- 257 |                      hyper_count, (unsigned long long)current_tick);
- 258 |             return WET_ERR_EPILEPTIFORM_RUNAWAY;
- 259 |         }
- 260 |     } else {
- 261 |         il->hyperactive_consecutive_ticks = 0U;
- 262 |     }
+ 247 | wet_status_t interlocks_check_epileptiform(
+ 248 |     interlock_state_t* il,
+ 249 |     uint64_t current_tick,
+ 250 |     const float channel_rates_hz[INTERLOCK_NUM_CHANNELS]
+ 251 | ) {
+ 252 |     if (!il || !channel_rates_hz) return WET_ERR_NULL_PTR;
+ 253 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+ 254 | 
+ 255 |     uint32_t hyper_count = 0U;
+ 256 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
+ 257 |         if (channel_rates_hz[ch] >= INTERLOCK_EPILEPSY_RATE_HZ) {
+ 258 |             hyper_count++;
+ 259 |             il->focal_hyperactive_ticks[ch]++;
+ 260 |             if (il->focal_hyperactive_ticks[ch] >= INTERLOCK_FOCAL_SUSTAIN_TICKS) {
+ 261 |                 il->locked = 1;
+ 262 |                 il->trip_reason = INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY;
+ 263 |                 il->tripped_channel = (uint8_t)ch;
+ 264 |                 il->trip_tick = current_tick;
+ 265 |                 il->trip_value = channel_rates_hz[ch];
+ 266 |                 snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 267 |                          "ERR_FOCAL_EXCITOTOXICITY: ch=%d sustained %.1f Hz >= 150 Hz for 250.0 ms at tick %llu",
+ 268 |                          ch, (double)channel_rates_hz[ch], (unsigned long long)current_tick);
+ 269 |                 return WET_ERR_FOCAL_EXCITOTOXICITY;
+ 270 |             }
+ 271 |         } else {
+ 272 |             il->focal_hyperactive_ticks[ch] = 0U;
+ 273 |         }
+ 274 |     }
+ 275 | 
+ 276 |     il->last_hyperactive_channel_count = hyper_count;
+ 277 | 
+ 278 |     if (hyper_count >= INTERLOCK_EPILEPSY_MIN_CHANNELS) {
+ 279 |         il->hyperactive_consecutive_ticks++;
+ 280 |         if (il->hyperactive_consecutive_ticks >= INTERLOCK_EPILEPSY_SUSTAIN_TICKS) {
+ 281 |             il->locked = 1;
+ 282 |             il->trip_reason = INTERLOCK_TRIP_EPILEPTIFORM_RUNAWAY;
+ 283 |             il->tripped_channel = 0xFF;
+ 284 |             il->trip_tick = current_tick;
+ 285 |             il->trip_value = (float)hyper_count;
+ 286 |             snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 287 |                      "ERR_EPILEPTIFORM_RUNAWAY: %u/64 channels (>35%%) exceeded 150 Hz for 50.0 ms at tick %llu",
+ 288 |                      hyper_count, (unsigned long long)current_tick);
+ 289 |             return WET_ERR_EPILEPTIFORM_RUNAWAY;
+ 290 |         }
+ 291 |     } else {
+ 292 |         il->hyperactive_consecutive_ticks = 0U;
+ 293 |     }
+ 294 | 
+ 295 |     return WET_OK;
+ 296 | }
+ 297 | 
+ 298 | wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c) {
+ 299 |     if (!il) return WET_ERR_NULL_PTR;
+ 300 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+ 301 | 
+ 302 |     if (temp_c > INTERLOCK_THERMAL_LIMIT_C) {
+ 303 |         il->locked = 1;
+ 304 |         il->trip_reason = INTERLOCK_TRIP_THERMAL_LIMIT;
+ 305 |         il->tripped_channel = 0xFF;
+ 306 |         il->trip_tick = current_tick;
+ 307 |         il->trip_value = temp_c;
+ 308 |         snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 309 |                  "ERR_THERMAL_LIMIT: Temperature %.2f C exceeds incubator threshold (38.00 C) at tick %llu",
+ 310 |                  (double)temp_c, (unsigned long long)current_tick);
+ 311 |         return WET_ERR_THERMAL_LIMIT;
+ 312 |     }
+ 313 |     return WET_OK;
+ 314 | }
+ 315 | 
+ 316 | wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id) {
+ 317 |     if (!il) return WET_ERR_NULL_PTR;
+ 318 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+ 319 | 
+ 320 |     if (bubble_detected) {
+ 321 |         il->locked = 1;
+ 322 |         il->trip_reason = INTERLOCK_TRIP_BUBBLE_DETECTED;
+ 323 |         il->tripped_channel = sensor_id;
+ 324 |         il->trip_tick = current_tick;
+ 325 |         il->trip_value = 1.0f;
+ 326 |         snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 327 |                  "ERR_BUBBLE_DETECTED: Optical bubble sensor %u triggered (fluid line cavitation risk) at tick %llu",
+ 328 |                  sensor_id, (unsigned long long)current_tick);
+ 329 |         return WET_ERR_BUBBLE_DETECTED;
+ 330 |     }
+ 331 |     return WET_OK;
+ 332 | }
+ 333 | 
+ 334 | wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v) {
+ 335 |     if (!il) return WET_ERR_NULL_PTR;
+ 336 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
+ 337 | 
+ 338 |     if (wet_fabsf(v_elec_v) > INTERLOCK_COMPLIANCE_LIMIT_V) {
+ 339 |         il->locked = 1;
+ 340 |         il->trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
+ 341 |         il->tripped_channel = channel;
+ 342 |         il->trip_tick = current_tick;
+ 343 |         il->trip_value = v_elec_v;
+ 344 |         snprintf(il->diagnostic, sizeof(il->diagnostic),
+ 345 |                  "ERR_COMPLIANCE_RAILED: ch=%u electrode potential %.3f V exceeded compliance rail (+/-7.0 V) at tick %llu",
+ 346 |                  channel, (double)v_elec_v, (unsigned long long)current_tick);
+ 347 |         return WET_ERR_COMPLIANCE_RAILED;
+ 348 |     }
+ 349 |     return WET_OK;
+ 350 | }
+```
+
+### `native/src/wet_aer.c` (307 lines, SHA-256: `bf9b381918ee73d4...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_aer.h"
+   3 | 
+   4 | int wet_aer_ring_init(wet_aer_ring_t *ring, wet_aer_packet_t *buffer, uint32_t capacity, uint32_t burst_limit_max_hz, uint16_t *ch_counts, uint32_t num_channels) {
+   5 |     if (!ring || !buffer || capacity < 2) {
+   6 |         return -1;
+   7 |     }
+   8 |     /* Capacity must be a power of 2 */
+   9 |     if ((capacity & (capacity - 1)) != 0) {
+  10 |         return -2;
+  11 |     }
+  12 | 
+  13 |     memset(ring, 0, sizeof(*ring));
+  14 |     ring->buffer = buffer;
+  15 |     ring->capacity = capacity;
+  16 |     ring->mask = capacity - 1;
+  17 |     /* Allow burst traffic up to 5 MHz during network bursts */
+  18 |     ring->burst_limit_max_hz = burst_limit_max_hz > 0 ? burst_limit_max_hz : 5000000U;
+  19 |     ring->channel_spike_counts = ch_counts;
+  20 |     ring->monitored_channels = num_channels;
+  21 |     ring->max_channel_hz = 250; /* Quarantine pads oscillating above 250 Hz */
+  22 |     return 0;
+  23 | }
+  24 | 
+  25 | int wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t amp_uv, uint16_t flags) {
+  26 |     if (!ring || !ring->buffer) {
+  27 |         return -1;
+  28 |     }
+  29 | 
+  30 |     /* Per-channel rate monitoring to quarantine noisy / oscillating pads */
+  31 |     if (ring->channel_spike_counts && channel < ring->monitored_channels) {
+  32 |         if (ring->channel_spike_counts[channel] > ring->max_channel_hz) {
+  33 |             ring->total_dropped++;
+  34 |             return -3; /* Quarantined noisy channel */
+  35 |         }
+  36 |         ring->channel_spike_counts[channel]++;
+  37 |     }
+  38 | 
+  39 |     /* Check if ring is full */
+  40 |     uint32_t next_head = (ring->head + 1) & ring->mask;
+  41 |     if (next_head == (ring->tail & ring->mask)) {
+  42 |         ring->total_dropped++;
+  43 |         return -2; /* Buffer full */
+  44 |     }
+  45 | 
+  46 |     /* Burst rate tracking over sliding 1-second window */
+  47 |     if (tick > ring->last_stat_tick + 10000ULL) {
+  48 |         double elapsed_sec = (double)(tick - ring->last_stat_tick) * 0.0001;
+  49 |         ring->current_spike_rate_hz = (double)ring->spikes_in_window / elapsed_sec;
+  50 |         /* 16 bytes per packet * 8 bits = 128 bits */
+  51 |         ring->current_bandwidth_mbps = (ring->current_spike_rate_hz * 128.0) / 1000000.0;
+  52 | 
+  53 |         if (ring->burst_limit_max_hz > 0 && ring->current_spike_rate_hz > (double)ring->burst_limit_max_hz) {
+  54 |             ring->is_burst_tripped = 1;
+  55 |         } else {
+  56 |             ring->is_burst_tripped = 0;
+  57 |         }
+  58 |         ring->spikes_in_window = 0;
+  59 |         ring->last_stat_tick = tick;
+  60 | 
+  61 |         /* Reset per-channel counts */
+  62 |         if (ring->channel_spike_counts) {
+  63 |             memset(ring->channel_spike_counts, 0, ring->monitored_channels * sizeof(uint16_t));
+  64 |         }
+  65 |     }
+  66 |     ring->spikes_in_window++;
+  67 | 
+  68 |     /* Write 16-byte aligned packet */
+  69 |     uint32_t idx = ring->head & ring->mask;
+  70 |     ring->buffer[idx].timestamp_tick = tick;
+  71 |     ring->buffer[idx].channel_id = channel;
+  72 |     ring->buffer[idx].peak_amplitude_uv = amp_uv;
+  73 |     ring->buffer[idx].flags = flags;
+  74 |     ring->buffer[idx].reserved = 0;
+  75 | 
+  76 |     /* Publish head */
+  77 |     ring->head = (ring->head + 1) & ring->mask;
+  78 |     ring->total_pushed++;
+  79 |     return 0;
+  80 | }
+  81 | 
+  82 | uint32_t wet_aer_pop_batch(wet_aer_ring_t *ring, wet_aer_packet_t *out_batch, uint32_t max_count) {
+  83 |     if (!ring || !out_batch || max_count == 0) {
+  84 |         return 0;
+  85 |     }
+  86 | 
+  87 |     uint32_t popped = 0;
+  88 |     while (popped < max_count && (ring->tail != ring->head)) {
+  89 |         uint32_t idx = ring->tail & ring->mask;
+  90 |         out_batch[popped] = ring->buffer[idx];
+  91 |         ring->tail = (ring->tail + 1) & ring->mask;
+  92 |         popped++;
+  93 |     }
+  94 |     return popped;
+  95 | }
+  96 | 
+  97 | uint32_t wet_aer_available(const wet_aer_ring_t *ring) {
+  98 |     if (!ring) return 0;
+  99 |     if (ring->head >= ring->tail) {
+ 100 |         return ring->head - ring->tail;
+ 101 |     }
+ 102 |     return ring->capacity - (ring->tail - ring->head);
+ 103 | }
+ 104 | 
+ 105 | void wet_aer_get_stats(wet_aer_ring_t *ring, uint64_t current_tick, uint64_t *out_total, double *out_rate_hz, double *out_mbps) {
+ 106 |     if (!ring) return;
+ 107 |     if (current_tick > ring->last_stat_tick && ring->spikes_in_window > 0) {
+ 108 |         double elapsed_sec = (double)(current_tick - ring->last_stat_tick) * 0.0001;
+ 109 |         if (elapsed_sec > 0.0) {
+ 110 |             ring->current_spike_rate_hz = (double)ring->spikes_in_window / elapsed_sec;
+ 111 |             ring->current_bandwidth_mbps = (ring->current_spike_rate_hz * 128.0) / 1000000.0;
+ 112 |         }
+ 113 |     }
+ 114 |     if (out_total) *out_total = ring->total_pushed;
+ 115 |     if (out_rate_hz) *out_rate_hz = ring->current_spike_rate_hz;
+ 116 |     if (out_mbps) *out_mbps = ring->current_bandwidth_mbps;
+ 117 | }
+ 118 | 
+ 119 | /*
+ 120 |  * NEO Detector Implementation with 5-Tap Bartlett Filter & Blanking
+ 121 |  */
+ 122 | int wet_neo_init(wet_neo_detector_t *det, uint32_t num_channels, float threshold_multiplier, uint32_t refractory_ticks) {
+ 123 |     if (!det || num_channels == 0) return -1;
+ 124 |     memset(det, 0, sizeof(*det));
+ 125 | 
+ 126 |     det->num_channels = num_channels;
+ 127 |     det->threshold_multiplier = threshold_multiplier > 0.0f ? threshold_multiplier : 4.0f;
+ 128 |     det->refractory_ticks = refractory_ticks > 0 ? refractory_ticks : 10; /* 1.0 ms default */
+ 129 | 
+ 130 |     det->v_baseline = (float*)calloc(num_channels, sizeof(float));
+ 131 |     det->prev_v1 = (float*)calloc(num_channels, sizeof(float));
+ 132 |     det->prev_v2 = (float*)calloc(num_channels, sizeof(float));
+ 133 |     for (int k = 0; k < 4; k++) {
+ 134 |         det->psi_history[k] = (float*)calloc(num_channels, sizeof(float));
+ 135 |     }
+ 136 |     det->refract_left = (uint32_t*)calloc(num_channels, sizeof(uint32_t));
+ 137 |     det->blanking_left = (uint32_t*)calloc(num_channels, sizeof(uint32_t));
+ 138 |     det->running_neo_mean = (float*)calloc(num_channels, sizeof(float));
+ 139 |     det->sample_count = (uint32_t*)calloc(num_channels, sizeof(uint32_t));
+ 140 | 
+ 141 |     if (!det->v_baseline || !det->prev_v1 || !det->prev_v2 || !det->refract_left ||
+ 142 |         !det->blanking_left || !det->running_neo_mean || !det->sample_count) {
+ 143 |         wet_neo_free(det);
+ 144 |         return -2;
+ 145 |     }
+ 146 | 
+ 147 |     for (uint32_t i = 0; i < num_channels; i++) {
+ 148 |         det->running_neo_mean[i] = 1.0f;
+ 149 |     }
+ 150 |     return 0;
+ 151 | }
+ 152 | 
+ 153 | void wet_neo_free(wet_neo_detector_t *det) {
+ 154 |     if (!det) return;
+ 155 |     if (det->v_baseline) { free(det->v_baseline); det->v_baseline = NULL; }
+ 156 |     if (det->prev_v1) { free(det->prev_v1); det->prev_v1 = NULL; }
+ 157 |     if (det->prev_v2) { free(det->prev_v2); det->prev_v2 = NULL; }
+ 158 |     for (int k = 0; k < 4; k++) {
+ 159 |         if (det->psi_history[k]) { free(det->psi_history[k]); det->psi_history[k] = NULL; }
+ 160 |     }
+ 161 |     if (det->refract_left) { free(det->refract_left); det->refract_left = NULL; }
+ 162 |     if (det->blanking_left) { free(det->blanking_left); det->blanking_left = NULL; }
+ 163 |     if (det->running_neo_mean) { free(det->running_neo_mean); det->running_neo_mean = NULL; }
+ 164 |     if (det->sample_count) { free(det->sample_count); det->sample_count = NULL; }
+ 165 |     det->num_channels = 0;
+ 166 | }
+ 167 | 
+ 168 | void wet_neo_set_blanking(wet_neo_detector_t *det, uint16_t channel, uint32_t blanking_ticks) {
+ 169 |     if (!det || channel >= det->num_channels) return;
+ 170 |     det->blanking_left[channel] = blanking_ticks;
+ 171 | }
+ 172 | 
+ 173 | int wet_neo_process_sample(wet_neo_detector_t *det, uint16_t channel, float voltage, uint64_t current_tick, wet_aer_ring_t *out_ring) {
+ 174 |     if (!det || channel >= det->num_channels) return 0;
+ 175 | 
+ 176 |     /* Hardware stimulus artifact blanking */
+ 177 |     if (det->blanking_left[channel] > 0) {
+ 178 |         det->blanking_left[channel]--;
+ 179 |         det->v_baseline[channel] = voltage; /* Clamp baseline to avoid transient blinding */
+ 180 |         return 0;
+ 181 |     }
+ 182 | 
+ 183 |     /* DC baseline estimation */
+ 184 |     if (det->sample_count[channel] == 0) {
+ 185 |         det->v_baseline[channel] = voltage;
+ 186 |     } else {
+ 187 |         det->v_baseline[channel] = 0.95f * det->v_baseline[channel] + 0.05f * voltage;
+ 188 |     }
+ 189 |     float x_ac = voltage - det->v_baseline[channel];
+ 190 | 
+ 191 |     /* Prime pipeline on first 2 samples */
+ 192 |     if (det->sample_count[channel] < 2) {
+ 193 |         det->prev_v2[channel] = det->prev_v1[channel];
+ 194 |         det->prev_v1[channel] = x_ac;
+ 195 |         det->sample_count[channel]++;
+ 196 |         return 0;
+ 197 |     }
+ 198 |     det->sample_count[channel]++;
+ 199 | 
+ 200 |     /* Update refractory counter */
+ 201 |     if (det->refract_left[channel] > 0) {
+ 202 |         det->refract_left[channel]--;
+ 203 |     }
+ 204 | 
+ 205 |     /* Shift voltages: x[n] = x_ac, x[n-1] = prev_v1, x[n-2] = prev_v2 */
+ 206 |     float v_curr = x_ac;
+ 207 |     float v_prev1 = det->prev_v1[channel];
+ 208 |     float v_prev2 = det->prev_v2[channel];
+ 209 | 
+ 210 |     /* Raw discrete NEO: Psi = v_prev1^2 - v_curr * v_prev2 */
+ 211 |     float raw_psi = (v_prev1 * v_prev1) - (v_curr * v_prev2);
+ 212 |     if (raw_psi < 0.0f) raw_psi = 0.0f;
+ 213 | 
+ 214 |     /*
+ 215 |      * 5-Tap Bartlett Triangular Smoother:
+ 216 |      * Weights: [1, 2, 3, 2, 1] / 9
+ 217 |      * Suppresses quadratic high-frequency thermal noise amplification
+ 218 |      */
+ 219 |     float p_m2 = det->psi_history[0][channel];
+ 220 |     float p_m1 = det->psi_history[1][channel];
+ 221 |     float p_0  = raw_psi;
+ 222 |     float p_p1 = det->psi_history[2][channel];
+ 223 |     float p_p2 = det->psi_history[3][channel];
+ 224 | 
+ 225 |     float psi_smooth = (p_m2 + 2.0f * p_m1 + 3.0f * p_0 + 2.0f * p_p1 + p_p2) * (1.0f / 9.0f);
+ 226 | 
+ 227 |     /* Shift PSI history */
+ 228 |     det->psi_history[0][channel] = det->psi_history[1][channel];
+ 229 |     det->psi_history[1][channel] = p_0;
+ 230 |     det->psi_history[2][channel] = det->psi_history[3][channel];
+ 231 |     det->psi_history[3][channel] = raw_psi;
+ 232 | 
+ 233 |     /* Running baseline energy tracking */
+ 234 |     det->running_neo_mean[channel] = 0.99f * det->running_neo_mean[channel] + 0.01f * psi_smooth;
+ 235 |     if (det->running_neo_mean[channel] < 0.1f) det->running_neo_mean[channel] = 0.1f;
+ 236 |     float threshold = det->threshold_multiplier * det->running_neo_mean[channel];
+ 237 | 
+ 238 |     int spike_detected = 0;
+ 239 |     if (psi_smooth > threshold && det->refract_left[channel] == 0) {
+ 240 |         spike_detected = 1;
+ 241 |         det->refract_left[channel] = det->refractory_ticks;
+ 242 |         det->total_detected++;
+ 243 |         if (out_ring) {
+ 244 |             int16_t amp_uv = (int16_t)(v_curr * 1000.0f); /* Convert mV to uV */
+ 245 |             wet_aer_push(out_ring, current_tick, channel, amp_uv, 0x0001);
+ 246 |         }
+ 247 |     }
+ 248 | 
+ 249 |     /* Shift pipeline */
+ 250 |     det->prev_v2[channel] = v_prev1;
+ 251 |     det->prev_v1[channel] = v_curr;
+ 252 | 
+ 253 |     return spike_detected;
+ 254 | }
+ 255 | 
+ 256 | /*
+ 257 |  * Event-Driven CSR Synaptic Matrix
+ 258 |  * Complexity: O(spiking_neurons * degree), avoiding O(N_rows) scans
+ 259 |  */
+ 260 | int wet_csr_init(wet_csr_matrix_t *csr, uint32_t rows, uint32_t cols, uint32_t nnz, float scale_ns) {
+ 261 |     if (!csr || rows == 0 || cols == 0 || nnz == 0) return -1;
+ 262 |     memset(csr, 0, sizeof(*csr));
  263 | 
- 264 |     return WET_OK;
- 265 | }
- 266 | 
- 267 | wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c) {
- 268 |     if (!il) return WET_ERR_NULL_PTR;
- 269 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
- 270 | 
- 271 |     if (temp_c > INTERLOCK_THERMAL_LIMIT_C) {
- 272 |         il->locked = 1;
- 273 |         il->trip_reason = INTERLOCK_TRIP_THERMAL_LIMIT;
- 274 |         il->tripped_channel = 0xFF;
- 275 |         il->trip_tick = current_tick;
- 276 |         il->trip_value = temp_c;
- 277 |         snprintf(il->diagnostic, sizeof(il->diagnostic),
- 278 |                  "ERR_THERMAL_LIMIT: Temperature %.2f C exceeds incubator threshold (38.00 C) at tick %llu",
- 279 |                  (double)temp_c, (unsigned long long)current_tick);
- 280 |         return WET_ERR_THERMAL_LIMIT;
- 281 |     }
- 282 |     return WET_OK;
- 283 | }
- 284 | 
- 285 | wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id) {
- 286 |     if (!il) return WET_ERR_NULL_PTR;
- 287 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
- 288 | 
- 289 |     if (bubble_detected) {
- 290 |         il->locked = 1;
- 291 |         il->trip_reason = INTERLOCK_TRIP_BUBBLE_DETECTED;
- 292 |         il->tripped_channel = sensor_id;
- 293 |         il->trip_tick = current_tick;
- 294 |         il->trip_value = 1.0f;
- 295 |         snprintf(il->diagnostic, sizeof(il->diagnostic),
- 296 |                  "ERR_BUBBLE_DETECTED: Optical bubble sensor %u triggered (fluid line cavitation risk) at tick %llu",
- 297 |                  sensor_id, (unsigned long long)current_tick);
- 298 |         return WET_ERR_BUBBLE_DETECTED;
- 299 |     }
- 300 |     return WET_OK;
- 301 | }
- 302 | 
- 303 | wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v) {
- 304 |     if (!il) return WET_ERR_NULL_PTR;
- 305 |     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
- 306 | 
- 307 |     if (wet_fabsf(v_elec_v) > INTERLOCK_COMPLIANCE_LIMIT_V) {
- 308 |         il->locked = 1;
- 309 |         il->trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
- 310 |         il->tripped_channel = channel;
- 311 |         il->trip_tick = current_tick;
- 312 |         il->trip_value = v_elec_v;
- 313 |         snprintf(il->diagnostic, sizeof(il->diagnostic),
- 314 |                  "ERR_COMPLIANCE_RAILED: ch=%u electrode potential %.3f V exceeded compliance rail (+/-7.0 V) at tick %llu",
- 315 |                  channel, (double)v_elec_v, (unsigned long long)current_tick);
- 316 |         return WET_ERR_COMPLIANCE_RAILED;
- 317 |     }
- 318 |     return WET_OK;
- 319 | }
+ 264 |     csr->num_rows = rows;
+ 265 |     csr->num_cols = cols;
+ 266 |     csr->nnz = nnz;
+ 267 |     csr->weight_scale_ns = scale_ns > 0.0f ? scale_ns : 0.2f;
+ 268 | 
+ 269 |     csr->row_ptr = (uint32_t*)calloc(rows + 1, sizeof(uint32_t));
+ 270 |     csr->col_idx = (uint16_t*)calloc(nnz, sizeof(uint16_t));
+ 271 |     csr->weights_int8 = (int8_t*)calloc(nnz, sizeof(int8_t));
+ 272 | 
+ 273 |     if (!csr->row_ptr || !csr->col_idx || !csr->weights_int8) {
+ 274 |         wet_csr_free(csr);
+ 275 |         return -2;
+ 276 |     }
+ 277 |     return 0;
+ 278 | }
+ 279 | 
+ 280 | void wet_csr_free(wet_csr_matrix_t *csr) {
+ 281 |     if (!csr) return;
+ 282 |     if (csr->row_ptr) { free(csr->row_ptr); csr->row_ptr = NULL; }
+ 283 |     if (csr->col_idx) { free(csr->col_idx); csr->col_idx = NULL; }
+ 284 |     if (csr->weights_int8) { free(csr->weights_int8); csr->weights_int8 = NULL; }
+ 285 |     csr->num_rows = 0;
+ 286 |     csr->num_cols = 0;
+ 287 |     csr->nnz = 0;
+ 288 | }
+ 289 | 
+ 290 | void wet_csr_spmv_spikes(const wet_csr_matrix_t *csr, const uint8_t *spike_events, float *out_conductance_ns) {
+ 291 |     if (!csr || !spike_events || !out_conductance_ns) return;
+ 292 | 
+ 293 |     float scale = csr->weight_scale_ns;
+ 294 |     /* Strictly event-driven: only traverse outgoing edges of spiking pre-synaptic neurons */
+ 295 |     for (uint32_t r = 0; r < csr->num_rows; r++) {
+ 296 |         if (!spike_events[r]) continue;
+ 297 | 
+ 298 |         uint32_t start = csr->row_ptr[r];
+ 299 |         uint32_t end = csr->row_ptr[r + 1];
+ 300 |         for (uint32_t idx = start; idx < end; idx++) {
+ 301 |             uint16_t post_id = csr->col_idx[idx];
+ 302 |             if (post_id < csr->num_cols) {
+ 303 |                 out_conductance_ns[post_id] += (float)csr->weights_int8[idx] * scale;
+ 304 |             }
+ 305 |         }
+ 306 |     }
+ 307 | }
+```
+
+### `native/src/wet_distributed.c` (168 lines, SHA-256: `5c22625cf18763c2...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_distributed.h"
+   3 | 
+   4 | /*
+   5 |  * IEEE 1588 PTP Slew-Only Disciplining & Safety Invariants
+   6 |  */
+   7 | void wet_ptp_init(wet_ptp_clock_t *clk, double kp, double ki) {
+   8 |     if (!clk) return;
+   9 |     memset(clk, 0, sizeof(*clk));
+  10 |     clk->kp = (kp > 0.0) ? kp : 0.7;
+  11 |     clk->ki = (ki > 0.0) ? ki : 0.2;
+  12 |     clk->stim_inhibited = 1; /* Inhibit inter-chamber stimulation until synchronized */
+  13 | }
+  14 | 
+  15 | void wet_ptp_update_offset(wet_ptp_clock_t *clk, uint64_t t1_ns, uint64_t t2_ns, uint64_t t3_ns, uint64_t t4_ns) {
+  16 |     if (!clk) return;
+  17 | 
+  18 |     /*
+  19 |      * Fundamental PTP 4-Timestamp Formula:
+  20 |      * offset = ((t2 - t1) - (t4 - t3)) / 2
+  21 |      * delay  = ((t2 - t1) + (t4 - t3)) / 2
+  22 |      */
+  23 |     int64_t ms_diff = (int64_t)t2_ns - (int64_t)t1_ns;
+  24 |     int64_t sm_diff = (int64_t)t4_ns - (int64_t)t3_ns;
+  25 | 
+  26 |     int64_t raw_offset = (ms_diff - sm_diff) / 2;
+  27 |     int64_t raw_delay  = (ms_diff + sm_diff) / 2;
+  28 | 
+  29 |     /* Residual timing error after accumulated clock discipline */
+  30 |     int64_t residual_offset = raw_offset - clk->accumulated_offset_ns;
+  31 | 
+  32 |     /* Slew-only PI Servo filter */
+  33 |     clk->integral_err_ns += (double)residual_offset * 0.1;
+  34 |     double adj = (clk->kp * (double)residual_offset) + (clk->ki * clk->integral_err_ns);
+  35 | 
+  36 |     /* Clamp maximum slew rate to +/- 100 ppm (prevents sudden time dilation) */
+  37 |     if (adj > 10000.0) adj = 10000.0;
+  38 |     if (adj < -10000.0) adj = -10000.0;
+  39 | 
+  40 |     clk->accumulated_offset_ns += (int64_t)adj;
+  41 |     clk->mean_path_delay_ns = raw_delay;
+  42 |     clk->sync_sequence++;
+  43 | 
+  44 |     /* Sub-microsecond synchronization threshold: |residual_offset| <= 1000 ns (1.0 us) */
+  45 |     int64_t post_residual = raw_offset - clk->accumulated_offset_ns;
+  46 |     if (post_residual >= -1000 && post_residual <= 1000) {
+  47 |         clk->is_synchronized = 1;
+  48 |         clk->stim_inhibited = 0; /* Clear safety inhibit */
+  49 |     } else {
+  50 |         clk->is_synchronized = 0;
+  51 |         clk->stim_inhibited = 1; /* Inhibit inter-chamber stimulation if timing diverges */
+  52 |     }
+  53 | }
+  54 | 
+  55 | uint64_t wet_ptp_get_disciplined_time_ns(const wet_ptp_clock_t *clk, uint64_t local_raw_ns) {
+  56 |     if (!clk) return local_raw_ns;
+  57 |     return (uint64_t)((int64_t)local_raw_ns - clk->accumulated_offset_ns);
+  58 | }
+  59 | 
+  60 | /*
+  61 |  * 32-Byte TSN Frame Serialization & Validation
+  62 |  */
+  63 | int wet_tsn_serialize_frame(wet_tsn_frame_t *frame, uint64_t src_epoch_ns, uint64_t rel_epoch_ns, uint32_t seq, uint16_t src_chamb, uint16_t dst_chamb, uint16_t src_ch, uint16_t dst_ch, int16_t amp_uv, uint16_t flags) {
+  64 |     if (!frame) return -1;
+  65 |     frame->source_epoch_ns = src_epoch_ns;
+  66 |     frame->release_epoch_ns = rel_epoch_ns;
+  67 |     frame->sequence_number = seq;
+  68 |     frame->source_chamber = src_chamb;
+  69 |     frame->target_chamber = dst_chamb;
+  70 |     frame->source_channel = src_ch;
+  71 |     frame->target_channel = dst_ch;
+  72 |     frame->spike_amplitude_uv = amp_uv;
+  73 |     frame->flags = flags;
+  74 |     return 0;
+  75 | }
+  76 | 
+  77 | int wet_tsn_validate_frame(const wet_tsn_frame_t *frame, uint32_t expected_dst_chamber) {
+  78 |     if (!frame) return -1;
+  79 |     if (frame->target_chamber != expected_dst_chamber && expected_dst_chamber != 0xFFFF) {
+  80 |         return -2; /* Wrong destination chamber */
+  81 |     }
+  82 |     if (frame->release_epoch_ns < frame->source_epoch_ns) {
+  83 |         return -3; /* Negative axonal delay (causality violation) */
+  84 |     }
+  85 |     return 0;
+  86 | }
+  87 | 
+  88 | /*
+  89 |  * Timing Wheel: O(1) Heterogeneous Axonal Delay Dispatcher
+  90 |  * Completely eliminates Head-of-Line blocking inherent to FIFO queues.
+  91 |  */
+  92 | int wet_timing_wheel_init(wet_timing_wheel_t *tw, uint32_t chamber_id) {
+  93 |     if (!tw) return -1;
+  94 |     memset(tw, 0, sizeof(*tw));
+  95 |     tw->chamber_id = chamber_id;
+  96 |     return 0;
+  97 | }
+  98 | 
+  99 | int wet_timing_wheel_schedule(wet_timing_wheel_t *tw, const wet_tsn_frame_t *frame, uint64_t current_epoch_ns) {
+ 100 |     if (!tw || !frame) return -1;
+ 101 | 
+ 102 |     /* Outbound stimulus artifact echo blanking check */
+ 103 |     if (frame->target_chamber < WET_MAX_CHAMBERS && tw->tx_blanking_ticks_remaining[frame->target_chamber] > 0) {
+ 104 |         return -5; /* Suppressed by local TX stimulus blanking window */
+ 105 |     }
+ 106 | 
+ 107 |     /* Cross-chamber epileptiform rate governor (max 50 Hz inter-chamber rate = 50 spikes / second) */
+ 108 |     if (current_epoch_ns > tw->rate_governor_last_tick + 1000000000ULL) {
+ 109 |         tw->rate_governor_window_spikes = 0;
+ 110 |         tw->rate_governor_last_tick = current_epoch_ns;
+ 111 |         tw->is_epileptiform_tripped = 0;
+ 112 |     }
+ 113 |     tw->rate_governor_window_spikes++;
+ 114 |     if (tw->rate_governor_window_spikes > 50) {
+ 115 |         tw->is_epileptiform_tripped = 1;
+ 116 |         return -4; /* Cross-chamber epileptiform runaway tripped */
+ 117 |     }
+ 118 | 
+ 119 |     /* Check for late arrival (transit delay exceeded axonal delay) */
+ 120 |     if (frame->release_epoch_ns < current_epoch_ns) {
+ 121 |         tw->late_drops++;
+ 122 |         return -2; /* Late drop */
+ 123 |     }
+ 124 | 
+ 125 |     /* Map absolute release epoch to wheel slot (100 us per slot) */
+ 126 |     uint64_t rel_slots = frame->release_epoch_ns / 100000ULL;
+ 127 |     uint32_t slot_idx = (uint32_t)(rel_slots % WET_TIMING_WHEEL_SLOTS);
+ 128 |     wet_timing_wheel_bucket_t *bucket = &tw->buckets[slot_idx];
+ 129 | 
+ 130 |     if (bucket->count >= WET_WHEEL_BUCKET_CAP) {
+ 131 |         tw->bucket_overflows++;
+ 132 |         return -3; /* Bucket overflow */
+ 133 |     }
+ 134 | 
+ 135 |     bucket->frames[bucket->count++] = *frame;
+ 136 |     tw->total_scheduled++;
+ 137 |     return 0;
+ 138 | }
+ 139 | 
+ 140 | uint32_t wet_timing_wheel_drain_tick(wet_timing_wheel_t *tw, uint64_t current_epoch_ns, wet_tsn_frame_t *out_ready, uint32_t max_count) {
+ 141 |     if (!tw || !out_ready || max_count == 0) return 0;
+ 142 | 
+ 143 |     /* Advance TX blanking counters */
+ 144 |     for (int c = 0; c < WET_MAX_CHAMBERS; c++) {
+ 145 |         if (tw->tx_blanking_ticks_remaining[c] > 0) {
+ 146 |             tw->tx_blanking_ticks_remaining[c]--;
+ 147 |         }
+ 148 |     }
+ 149 | 
+ 150 |     /* Map current absolute epoch to wheel slot */
+ 151 |     uint64_t curr_slots = current_epoch_ns / 100000ULL;
+ 152 |     uint32_t slot_idx = (uint32_t)(curr_slots % WET_TIMING_WHEEL_SLOTS);
+ 153 |     wet_timing_wheel_bucket_t *bucket = &tw->buckets[slot_idx];
+ 154 | 
+ 155 |     uint32_t ready_count = 0;
+ 156 |     while (ready_count < max_count && bucket->count > 0) {
+ 157 |         out_ready[ready_count++] = bucket->frames[--bucket->count];
+ 158 |         tw->total_dispatched++;
+ 159 |     }
+ 160 | 
+ 161 |     tw->current_wheel_tick = curr_slots;
+ 162 |     return ready_count;
+ 163 | }
+ 164 | 
+ 165 | void wet_timing_wheel_set_tx_blanking(wet_timing_wheel_t *tw, uint16_t target_chamber, uint32_t blanking_ticks) {
+ 166 |     if (!tw || target_chamber >= WET_MAX_CHAMBERS) return;
+ 167 |     tw->tx_blanking_ticks_remaining[target_chamber] = blanking_ticks;
+ 168 | }
 ```
 
 ### `native/src/wet_hal.c` (564 lines, SHA-256: `02cf9c0cd1c098b2...`)
@@ -7017,7 +7780,7 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  658 | }
 ```
 
-### `native/src/wetvm_api.c` (615 lines, SHA-256: `0775d05f6752ec8c...`)
+### `native/src/wetvm_api.c` (639 lines, SHA-256: `6a0641509ff77e10...`)
 
 ```text
    1 | #ifndef WET_BUILDING_DLL
@@ -7149,492 +7912,516 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  127 | 
  128 |     if (arena_bytes < needed) return NULL;
  129 | 
- 130 |     uint8_t* ptr = (uint8_t*)arena_buf;
- 131 |     struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
- 132 |     ptr += sizeof(struct wet_vm_instance);
- 133 |     memset(vm, 0, sizeof(struct wet_vm_instance));
- 134 | 
- 135 |     vm->arena_allocated = 1;
- 136 |     if (config) {
- 137 |         vm->config = *config;
- 138 |         if (vm->config.dt_ms <= 0.0) vm->config.dt_ms = 0.1;
- 139 |         if (vm->config.max_stack_depth == 0) vm->config.max_stack_depth = stack_depth;
- 140 |         if (vm->config.max_locals == 0) vm->config.max_locals = max_locals;
- 141 |         if (vm->config.channel_count == 0) vm->config.channel_count = 64;
- 142 |         if (vm->config.max_ops_per_tick == 0) vm->config.max_ops_per_tick = 100000U;
- 143 |     } else {
- 144 |         vm->config.dt_ms = 0.1;
- 145 |         vm->config.max_stack_depth = stack_depth;
- 146 |         vm->config.max_locals = max_locals;
- 147 |         vm->config.channel_count = 64;
- 148 |         vm->config.max_ops_per_tick = 100000U;
- 149 |     }
- 150 | 
- 151 |     vm->max_stack = stack_depth;
- 152 |     vm->stack = (wet_value_t*)ptr;
- 153 |     ptr += (size_t)stack_depth * sizeof(wet_value_t);
- 154 | 
- 155 |     vm->max_locals = max_locals;
- 156 |     vm->locals = (wet_value_t*)ptr;
- 157 |     ptr += (size_t)max_locals * sizeof(wet_value_t);
- 158 | 
- 159 |     vm->max_call_depth = call_depth;
- 160 |     vm->call_stack = (wet_call_frame_t*)ptr;
- 161 | 
- 162 |     vm->grid_rows = 8;
- 163 |     vm->grid_cols = 8;
- 164 |     vm->last_error[0] = '\0';
- 165 |     vm->ambient_temperature_c = 37.0f;
- 166 |     for (int p = 0; p < 4; ++p) {
- 167 |         vm->fluid_pressure_kpa[p] = 101.325f;
- 168 |     }
- 169 | 
- 170 |     vm->life_supervisor.supervisor_active = 1;
- 171 |     vm->life_supervisor.maintenance_temperature_c = 37.0f;
- 172 |     for (int i = 0; i < 8; ++i) {
- 173 |         vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
- 174 |     }
- 175 | 
- 176 |     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
- 177 |     interlocks_init(&vm->interlocks);
+ 130 |     /* Align arena to 128 bytes (WET_CACHELINE_SIZE) for DMA & cache coherency */
+ 131 |     uint8_t* raw_ptr = (uint8_t*)arena_buf;
+ 132 |     uintptr_t u = (uintptr_t)raw_ptr;
+ 133 |     uintptr_t aligned_u = (u + 127) & ~((uintptr_t)127);
+ 134 |     size_t align_pad = (size_t)(aligned_u - u);
+ 135 |     if (arena_bytes < needed + align_pad + 256) return NULL;
+ 136 | 
+ 137 |     uint8_t* ptr = (uint8_t*)aligned_u;
+ 138 |     struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
+ 139 |     ptr += sizeof(struct wet_vm_instance);
+ 140 |     u = (uintptr_t)ptr;
+ 141 |     ptr = (uint8_t*)((u + 127) & ~((uintptr_t)127));
+ 142 |     memset(vm, 0, sizeof(struct wet_vm_instance));
+ 143 | 
+ 144 |     vm->arena_allocated = 1;
+ 145 |     if (config) {
+ 146 |         vm->config = *config;
+ 147 |         if (vm->config.dt_ms <= 0.0) vm->config.dt_ms = 0.1;
+ 148 |         if (vm->config.max_stack_depth == 0) vm->config.max_stack_depth = stack_depth;
+ 149 |         if (vm->config.max_locals == 0) vm->config.max_locals = max_locals;
+ 150 |         if (vm->config.channel_count == 0) vm->config.channel_count = 64;
+ 151 |         if (vm->config.max_ops_per_tick == 0) vm->config.max_ops_per_tick = 100000U;
+ 152 |     } else {
+ 153 |         vm->config.dt_ms = 0.1;
+ 154 |         vm->config.max_stack_depth = stack_depth;
+ 155 |         vm->config.max_locals = max_locals;
+ 156 |         vm->config.channel_count = 64;
+ 157 |         vm->config.max_ops_per_tick = 100000U;
+ 158 |     }
+ 159 | 
+ 160 |     vm->max_stack = stack_depth;
+ 161 |     vm->stack = (wet_value_t*)ptr;
+ 162 |     ptr += (size_t)stack_depth * sizeof(wet_value_t);
+ 163 | 
+ 164 |     vm->max_locals = max_locals;
+ 165 |     vm->locals = (wet_value_t*)ptr;
+ 166 |     ptr += (size_t)max_locals * sizeof(wet_value_t);
+ 167 | 
+ 168 |     vm->max_call_depth = call_depth;
+ 169 |     vm->call_stack = (wet_call_frame_t*)ptr;
+ 170 | 
+ 171 |     vm->grid_rows = 8;
+ 172 |     vm->grid_cols = 8;
+ 173 |     vm->last_error[0] = '\0';
+ 174 |     vm->ambient_temperature_c = 37.0f;
+ 175 |     for (int p = 0; p < 4; ++p) {
+ 176 |         vm->fluid_pressure_kpa[p] = 101.325f;
+ 177 |     }
  178 | 
- 179 |     return vm;
- 180 | }
- 181 | 
- 182 | WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
- 183 |     if (!vm) return;
+ 179 |     vm->life_supervisor.supervisor_active = 1;
+ 180 |     vm->life_supervisor.maintenance_temperature_c = 37.0f;
+ 181 |     for (int i = 0; i < 8; ++i) {
+ 182 |         vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
+ 183 |     }
  184 | 
- 185 |     if (vm->hal) {
- 186 |         wet_hal_destroy(vm->hal);
- 187 |         vm->hal = NULL;
- 188 |     }
- 189 | 
- 190 |     if (vm->constants) {
- 191 |         for (size_t i = 0; i < vm->num_constants; ++i) {
- 192 |             if (vm->constants[i].str_alloc) {
- 193 |                 free(vm->constants[i].str_alloc);
- 194 |                 vm->constants[i].str_alloc = NULL;
- 195 |             }
- 196 |         }
- 197 |         free(vm->constants);
- 198 |         vm->constants = NULL;
- 199 |     }
- 200 | 
- 201 |     if (vm->bytecode_raw) {
- 202 |         free(vm->bytecode_raw);
- 203 |         vm->bytecode_raw = NULL;
- 204 |     }
- 205 | 
- 206 |     if (!vm->arena_allocated) {
- 207 |         if (vm->stack) {
- 208 |             free(vm->stack);
- 209 |             vm->stack = NULL;
- 210 |         }
- 211 | 
- 212 |         if (vm->locals) {
- 213 |             free(vm->locals);
- 214 |             vm->locals = NULL;
- 215 |         }
- 216 | 
- 217 |         if (vm->call_stack) {
- 218 |             free(vm->call_stack);
- 219 |             vm->call_stack = NULL;
- 220 |         }
- 221 | 
- 222 |         free(vm);
- 223 |     }
- 224 | }
+ 185 |     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
+ 186 |     interlocks_init(&vm->interlocks);
+ 187 | 
+ 188 |     return vm;
+ 189 | }
+ 190 | 
+ 191 | WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
+ 192 |     if (!vm) return;
+ 193 | 
+ 194 |     if (vm->hal) {
+ 195 |         wet_hal_destroy(vm->hal);
+ 196 |         vm->hal = NULL;
+ 197 |     }
+ 198 | 
+ 199 |     if (vm->constants) {
+ 200 |         for (size_t i = 0; i < vm->num_constants; ++i) {
+ 201 |             if (vm->constants[i].str_alloc) {
+ 202 |                 free(vm->constants[i].str_alloc);
+ 203 |                 vm->constants[i].str_alloc = NULL;
+ 204 |             }
+ 205 |         }
+ 206 |         free(vm->constants);
+ 207 |         vm->constants = NULL;
+ 208 |     }
+ 209 | 
+ 210 |     if (vm->bytecode_raw) {
+ 211 |         free(vm->bytecode_raw);
+ 212 |         vm->bytecode_raw = NULL;
+ 213 |     }
+ 214 | 
+ 215 |     if (!vm->arena_allocated) {
+ 216 |         if (vm->stack) {
+ 217 |             free(vm->stack);
+ 218 |             vm->stack = NULL;
+ 219 |         }
+ 220 | 
+ 221 |         if (vm->locals) {
+ 222 |             free(vm->locals);
+ 223 |             vm->locals = NULL;
+ 224 |         }
  225 | 
- 226 | WET_EXPORT wet_status_t wet_load_bytecode(
- 227 |     wet_vm_t* vm,
- 228 |     const uint8_t* code_bytes,
- 229 |     size_t size,
- 230 |     char* err_buf,
- 231 |     size_t err_buf_len
- 232 | ) {
- 233 |     if (!vm) {
- 234 |         if (err_buf && err_buf_len > 0) {
- 235 |             snprintf(err_buf, err_buf_len, "Null VM pointer");
- 236 |         }
- 237 |         return WET_ERR_NULL_PTR;
- 238 |     }
- 239 |     return wet_vm_load_bytecode_internal(vm, code_bytes, size, err_buf, err_buf_len);
- 240 | }
- 241 | 
- 242 | WET_EXPORT wet_status_t wet_step_tick(
- 243 |     wet_vm_t* vm,
- 244 |     wet_telemetry_t* out_telem
- 245 | ) {
- 246 |     if (!vm) return WET_ERR_NULL_PTR;
- 247 |     return wet_vm_step_internal(vm, out_telem);
- 248 | }
- 249 | 
- 250 | WET_EXPORT wet_status_t wet_run_ticks(
- 251 |     wet_vm_t* vm,
- 252 |     uint32_t ticks,
- 253 |     uint32_t* executed_ticks,
- 254 |     wet_telemetry_t* out_telem
- 255 | ) {
- 256 |     if (!vm) return WET_ERR_NULL_PTR;
- 257 | 
- 258 |     uint32_t executed = 0;
- 259 |     wet_status_t status = WET_OK;
+ 226 |         if (vm->call_stack) {
+ 227 |             free(vm->call_stack);
+ 228 |             vm->call_stack = NULL;
+ 229 |         }
+ 230 | 
+ 231 |         free(vm);
+ 232 |     } else {
+ 233 |         /*
+ 234 |          * Defense-in-depth: Secure volatile memory scrubbing.
+ 235 |          * Zeroes the entire VM instance structure to prevent stale stimulation schedules,
+ 236 |          * cryptographic keys, or stack frames from leaking into future arena allocations.
+ 237 |          */
+ 238 |         volatile uint8_t* scrub_p = (volatile uint8_t*)vm;
+ 239 |         for (size_t i = 0; i < sizeof(struct wet_vm_instance); i++) {
+ 240 |             scrub_p[i] = 0;
+ 241 |         }
+ 242 |     }
+ 243 | }
+ 244 | 
+ 245 | WET_EXPORT wet_status_t wet_load_bytecode(
+ 246 |     wet_vm_t* vm,
+ 247 |     const uint8_t* code_bytes,
+ 248 |     size_t size,
+ 249 |     char* err_buf,
+ 250 |     size_t err_buf_len
+ 251 | ) {
+ 252 |     if (!vm) {
+ 253 |         if (err_buf && err_buf_len > 0) {
+ 254 |             snprintf(err_buf, err_buf_len, "Null VM pointer");
+ 255 |         }
+ 256 |         return WET_ERR_NULL_PTR;
+ 257 |     }
+ 258 |     return wet_vm_load_bytecode_internal(vm, code_bytes, size, err_buf, err_buf_len);
+ 259 | }
  260 | 
- 261 |     for (uint32_t i = 0; i < ticks; ++i) {
- 262 |         status = wet_vm_step_internal(vm, out_telem);
- 263 |         if (status != WET_OK) {
- 264 |             break;
- 265 |         }
- 266 |         executed++;
- 267 |     }
+ 261 | WET_EXPORT wet_status_t wet_step_tick(
+ 262 |     wet_vm_t* vm,
+ 263 |     wet_telemetry_t* out_telem
+ 264 | ) {
+ 265 |     if (!vm) return WET_ERR_NULL_PTR;
+ 266 |     return wet_vm_step_internal(vm, out_telem);
+ 267 | }
  268 | 
- 269 |     if (executed_ticks) {
- 270 |         *executed_ticks = executed;
- 271 |     }
- 272 | 
- 273 |     return status;
- 274 | }
- 275 | 
- 276 | WET_EXPORT wet_status_t wet_inject_stimulus(
- 277 |     wet_vm_t* vm,
- 278 |     uint8_t channel,
- 279 |     float voltage_v,
- 280 |     float phase1_ms,
- 281 |     float phase2_ms
- 282 | ) {
- 283 |     if (!vm) return WET_ERR_NULL_PTR;
- 284 |     if (channel >= vm->config.channel_count) {
- 285 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 286 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
- 287 |         return WET_ERR_OUT_OF_BOUNDS_CH;
- 288 |     }
- 289 |     if (vm->interlocks.locked) {
- 290 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 291 |         return WET_ERR_INTERLOCK_LOCKED;
- 292 |     }
- 293 | 
- 294 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage_v, channel)) {
- 295 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 296 |                  "Capability denied for wet_inject_stimulus on ch %u (req %.2fV)", channel, voltage_v);
- 297 |         return WET_ERR_CAPABILITY_DENIED;
- 298 |     }
- 299 | 
- 300 |     /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
- 301 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
- 302 |         float q_p1 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase1_ms;
- 303 |         float q_p2 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase2_ms;
- 304 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
- 305 |             vm->interlocks.locked = 1;
- 306 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
- 307 |             vm->interlocks.tripped_channel = channel;
- 308 |             vm->interlocks.trip_tick = vm->current_tick;
- 309 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
- 310 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
- 311 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
- 312 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
- 313 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 314 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
- 315 |         }
- 316 |     }
- 317 | 
- 318 |     /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
- 319 |     bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
- 320 |     if (prev_p->active && prev_p->phase2_ticks_left > 0) {
- 321 |         float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
- 322 |         vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
- 323 |     }
- 324 | 
- 325 |     float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage_v);
- 326 |     biophysics_schedule_stim(&vm->bio, channel, clamped_v, phase1_ms, phase2_ms);
- 327 |     vm->voltages[channel] = clamped_v;
- 328 |     float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
- 329 |     vm->last_charge_nc[channel] = i_ma * (phase1_ms - phase2_ms);
- 330 |     return WET_OK;
- 331 | }
- 332 | 
- 333 | WET_EXPORT wet_status_t wet_get_telemetry(
- 334 |     wet_vm_t* vm,
- 335 |     wet_telemetry_t* out_telem
- 336 | ) {
- 337 |     if (!vm || !out_telem) return WET_ERR_NULL_PTR;
- 338 | 
- 339 |     out_telem->current_tick = vm->current_tick;
- 340 |     out_telem->sim_time_ms = vm->sim_time_ms;
- 341 |     out_telem->population_rate_hz = vm->population_rate_hz;
- 342 |     memcpy(out_telem->voltages, vm->voltages, sizeof(float) * 64);
- 343 |     memcpy(out_telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
- 344 |     memcpy(out_telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
- 345 | 
- 346 |     return WET_OK;
- 347 | }
- 348 | 
- 349 | WET_EXPORT wet_status_t wet_get_actuator_telemetry(
- 350 |     wet_vm_t* vm,
- 351 |     wet_actuator_telemetry_t* out_act_telem
- 352 | ) {
- 353 |     if (!vm || !out_act_telem) return WET_ERR_NULL_PTR;
- 354 | 
- 355 |     for (int i = 0; i < 8; ++i) {
- 356 |         out_act_telem->pump_rates_ul_min[i] = vm->pump_rates_ul_min[i];
- 357 |         out_act_telem->pump_dispensed_ul[i] = vm->pump_dispensed_ul[i];
- 358 |         out_act_telem->valve_states[i] = vm->valve_states[i];
- 359 |     }
- 360 |     for (int i = 0; i < 4; ++i) {
- 361 |         out_act_telem->motor_positions[i] = vm->motor_positions[i];
- 362 |         out_act_telem->motor_speeds_rpm[i] = vm->motor_speeds_rpm[i];
- 363 |         out_act_telem->fluid_pressure_kpa[i] = vm->fluid_pressure_kpa[i];
- 364 |     }
- 365 |     out_act_telem->ambient_temperature_c = vm->ambient_temperature_c;
- 366 |     return WET_OK;
- 367 | }
- 368 | 
- 369 | WET_EXPORT const char* wet_get_last_error(wet_vm_t* vm) {
- 370 |     if (!vm) return "NULL VM pointer";
- 371 |     return vm->last_error;
- 372 | }
+ 269 | WET_EXPORT wet_status_t wet_run_ticks(
+ 270 |     wet_vm_t* vm,
+ 271 |     uint32_t ticks,
+ 272 |     uint32_t* executed_ticks,
+ 273 |     wet_telemetry_t* out_telem
+ 274 | ) {
+ 275 |     if (!vm) return WET_ERR_NULL_PTR;
+ 276 | 
+ 277 |     uint32_t executed = 0;
+ 278 |     wet_status_t status = WET_OK;
+ 279 | 
+ 280 |     for (uint32_t i = 0; i < ticks; ++i) {
+ 281 |         status = wet_vm_step_internal(vm, out_telem);
+ 282 |         if (status != WET_OK) {
+ 283 |             break;
+ 284 |         }
+ 285 |         executed++;
+ 286 |     }
+ 287 | 
+ 288 |     if (executed_ticks) {
+ 289 |         *executed_ticks = executed;
+ 290 |     }
+ 291 | 
+ 292 |     return status;
+ 293 | }
+ 294 | 
+ 295 | WET_EXPORT wet_status_t wet_inject_stimulus(
+ 296 |     wet_vm_t* vm,
+ 297 |     uint8_t channel,
+ 298 |     float voltage_v,
+ 299 |     float phase1_ms,
+ 300 |     float phase2_ms
+ 301 | ) {
+ 302 |     if (!vm) return WET_ERR_NULL_PTR;
+ 303 |     if (channel >= vm->config.channel_count) {
+ 304 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 305 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+ 306 |         return WET_ERR_OUT_OF_BOUNDS_CH;
+ 307 |     }
+ 308 |     if (vm->interlocks.locked) {
+ 309 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 310 |         return WET_ERR_INTERLOCK_LOCKED;
+ 311 |     }
+ 312 | 
+ 313 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage_v, channel)) {
+ 314 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 315 |                  "Capability denied for wet_inject_stimulus on ch %u (req %.2fV)", channel, voltage_v);
+ 316 |         return WET_ERR_CAPABILITY_DENIED;
+ 317 |     }
+ 318 | 
+ 319 |     /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
+ 320 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
+ 321 |         float q_p1 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase1_ms;
+ 322 |         float q_p2 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase2_ms;
+ 323 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+ 324 |             vm->interlocks.locked = 1;
+ 325 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+ 326 |             vm->interlocks.tripped_channel = channel;
+ 327 |             vm->interlocks.trip_tick = vm->current_tick;
+ 328 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
+ 329 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+ 330 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+ 331 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+ 332 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 333 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+ 334 |         }
+ 335 |     }
+ 336 | 
+ 337 |     /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
+ 338 |     bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
+ 339 |     if (prev_p->active && prev_p->phase2_ticks_left > 0) {
+ 340 |         float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
+ 341 |         vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+ 342 |     }
+ 343 | 
+ 344 |     float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage_v);
+ 345 |     biophysics_schedule_stim(&vm->bio, channel, clamped_v, phase1_ms, phase2_ms);
+ 346 |     vm->voltages[channel] = clamped_v;
+ 347 |     float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
+ 348 |     vm->last_charge_nc[channel] = i_ma * (phase1_ms - phase2_ms);
+ 349 |     return WET_OK;
+ 350 | }
+ 351 | 
+ 352 | WET_EXPORT wet_status_t wet_get_telemetry(
+ 353 |     wet_vm_t* vm,
+ 354 |     wet_telemetry_t* out_telem
+ 355 | ) {
+ 356 |     if (!vm || !out_telem) return WET_ERR_NULL_PTR;
+ 357 | 
+ 358 |     out_telem->current_tick = vm->current_tick;
+ 359 |     out_telem->sim_time_ms = vm->sim_time_ms;
+ 360 |     out_telem->population_rate_hz = vm->population_rate_hz;
+ 361 |     memcpy(out_telem->voltages, vm->voltages, sizeof(float) * 64);
+ 362 |     memcpy(out_telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
+ 363 |     memcpy(out_telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
+ 364 | 
+ 365 |     return WET_OK;
+ 366 | }
+ 367 | 
+ 368 | WET_EXPORT wet_status_t wet_get_actuator_telemetry(
+ 369 |     wet_vm_t* vm,
+ 370 |     wet_actuator_telemetry_t* out_act_telem
+ 371 | ) {
+ 372 |     if (!vm || !out_act_telem) return WET_ERR_NULL_PTR;
  373 | 
- 374 | WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
- 375 |     switch (status) {
- 376 |         case WET_OK:
- 377 |             return "WET_OK: Operation successful";
- 378 |         case WET_ERR_INVALID_MAGIC:
- 379 |             return "WET_ERR_INVALID_MAGIC: Invalid WBC header magic";
- 380 |         case WET_ERR_CRC_MISMATCH:
- 381 |             return "WET_ERR_CRC_MISMATCH: Bytecode CRC32 checksum mismatch";
- 382 |         case WET_ERR_UNSUPPORTED_VERSION:
- 383 |             return "WET_ERR_UNSUPPORTED_VERSION: Unsupported bytecode version";
- 384 |         case WET_ERR_MALFORMED_SECTION:
- 385 |             return "WET_ERR_MALFORMED_SECTION: Malformed bytecode or section table";
- 386 |         case WET_ERR_STACK_OVERFLOW:
- 387 |             return "WET_ERR_STACK_OVERFLOW: Operand stack overflow";
- 388 |         case WET_ERR_STACK_UNDERFLOW:
- 389 |             return "WET_ERR_STACK_UNDERFLOW: Operand stack underflow";
- 390 |         case WET_ERR_INVALID_OPCODE:
- 391 |             return "WET_ERR_INVALID_OPCODE: Unrecognized or invalid opcode";
- 392 |         case WET_ERR_OUT_OF_BOUNDS_CH:
- 393 |             return "WET_ERR_OUT_OF_BOUNDS_CH: Channel index out of bounds";
- 394 |         case WET_ERR_DIVISION_BY_ZERO:
- 395 |             return "WET_ERR_DIVISION_BY_ZERO: Division by zero";
- 396 |         case WET_ERR_NULL_PTR:
- 397 |             return "WET_ERR_NULL_PTR: Null pointer argument";
- 398 |         case WET_ERR_ALLOC_FAILED:
- 399 |             return "WET_ERR_ALLOC_FAILED: Memory allocation failed";
- 400 |         case WET_ERR_HALTED:
- 401 |             return "WET_ERR_HALTED: Virtual machine is halted";
- 402 |         case WET_ERR_CHARGE_IMBALANCE:
- 403 |             return "WET_ERR_CHARGE_IMBALANCE: Net charge imbalance exceeded safety threshold (0.5 nC over 10 ms)";
- 404 |         case WET_ERR_EPILEPTIFORM_RUNAWAY:
- 405 |             return "WET_ERR_EPILEPTIFORM_RUNAWAY: Epileptiform runaway firing breaker tripped (>150 Hz on >35% channels for 50 ms)";
- 406 |         case WET_ERR_CAPABILITY_DENIED:
- 407 |             return "WET_ERR_CAPABILITY_DENIED: Capability permission denied by bytecode security manifest";
- 408 |         case WET_ERR_INTERLOCK_LOCKED:
- 409 |             return "WET_ERR_INTERLOCK_LOCKED: Hardware interlock locked out; all stimulation disabled";
- 410 |         case WET_ERR_CHARGE_DENSITY_EXCEEDED:
- 411 |             return "WET_ERR_CHARGE_DENSITY_EXCEEDED: Single-phase charge density exceeded Shannon safety limit";
- 412 |         case WET_ERR_FOCAL_EXCITOTOXICITY:
- 413 |             return "WET_ERR_FOCAL_EXCITOTOXICITY: Focal excitotoxicity limit exceeded";
- 414 |         case WET_ERR_SHEAR_STRESS_EXCEEDED:
- 415 |             return "WET_ERR_SHEAR_STRESS_EXCEEDED: Requested microfluidic pump rate exceeds safe shear stress limit (15.0 uL/min)";
- 416 |         case WET_ERR_SECURITY_UNTRUSTED:
- 417 |             return "WET_ERR_SECURITY_UNTRUSTED: Bytecode failed cryptographic security signature verification";
- 418 |         case WET_ERR_ACTUATOR_FAULT:
- 419 |             return "WET_ERR_ACTUATOR_FAULT: Cyber-physical actuator execution fault or invalid parameter";
- 420 |         case WET_ERR_THERMAL_LIMIT:
- 421 |             return "WET_ERR_THERMAL_LIMIT: Temperature exceeded maximum biological threshold (38.0 C)";
- 422 |         case WET_ERR_BUBBLE_DETECTED:
- 423 |             return "WET_ERR_BUBBLE_DETECTED: Fluidic optical bubble detector tripped (cavitation hazard)";
- 424 |         case WET_ERR_COMPLIANCE_RAILED:
- 425 |             return "WET_ERR_COMPLIANCE_RAILED: Stimulator output voltage saturated ASIC compliance rail (+/-7.0 V)";
- 426 |         case WET_ERR_BYTECODE_VERIFICATION:
- 427 |             return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
- 428 |         default:
- 429 |             return "WET_ERR_UNKNOWN: Unknown error status";
- 430 |     }
- 431 | }
- 432 | 
- 433 | /* =========================================================================
- 434 |  * Phase 3 Hardware Readiness & Safety Implementations
- 435 |  * ========================================================================= */
- 436 | 
- 437 | WET_EXPORT void wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2) {
- 438 |     if (!vm) return;
- 439 |     interlocks_configure_electrode(&vm->interlocks, material, area_um2);
- 440 | }
- 441 | 
- 442 | WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
- 443 |     if (!vm) return;
- 444 |     interlocks_active_discharge(&vm->interlocks, channel);
- 445 | }
- 446 | 
- 447 | WET_EXPORT void wet_active_discharge_all(wet_vm_t* vm) {
- 448 |     if (!vm) return;
- 449 |     interlocks_active_discharge_all(&vm->interlocks);
+ 374 |     for (int i = 0; i < 8; ++i) {
+ 375 |         out_act_telem->pump_rates_ul_min[i] = vm->pump_rates_ul_min[i];
+ 376 |         out_act_telem->pump_dispensed_ul[i] = vm->pump_dispensed_ul[i];
+ 377 |         out_act_telem->valve_states[i] = vm->valve_states[i];
+ 378 |     }
+ 379 |     for (int i = 0; i < 4; ++i) {
+ 380 |         out_act_telem->motor_positions[i] = vm->motor_positions[i];
+ 381 |         out_act_telem->motor_speeds_rpm[i] = vm->motor_speeds_rpm[i];
+ 382 |         out_act_telem->fluid_pressure_kpa[i] = vm->fluid_pressure_kpa[i];
+ 383 |     }
+ 384 |     out_act_telem->ambient_temperature_c = vm->ambient_temperature_c;
+ 385 |     return WET_OK;
+ 386 | }
+ 387 | 
+ 388 | WET_EXPORT const char* wet_get_last_error(wet_vm_t* vm) {
+ 389 |     if (!vm) return "NULL VM pointer";
+ 390 |     return vm->last_error;
+ 391 | }
+ 392 | 
+ 393 | WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
+ 394 |     switch (status) {
+ 395 |         case WET_OK:
+ 396 |             return "WET_OK: Operation successful";
+ 397 |         case WET_ERR_INVALID_MAGIC:
+ 398 |             return "WET_ERR_INVALID_MAGIC: Invalid WBC header magic";
+ 399 |         case WET_ERR_CRC_MISMATCH:
+ 400 |             return "WET_ERR_CRC_MISMATCH: Bytecode CRC32 checksum mismatch";
+ 401 |         case WET_ERR_UNSUPPORTED_VERSION:
+ 402 |             return "WET_ERR_UNSUPPORTED_VERSION: Unsupported bytecode version";
+ 403 |         case WET_ERR_MALFORMED_SECTION:
+ 404 |             return "WET_ERR_MALFORMED_SECTION: Malformed bytecode or section table";
+ 405 |         case WET_ERR_STACK_OVERFLOW:
+ 406 |             return "WET_ERR_STACK_OVERFLOW: Operand stack overflow";
+ 407 |         case WET_ERR_STACK_UNDERFLOW:
+ 408 |             return "WET_ERR_STACK_UNDERFLOW: Operand stack underflow";
+ 409 |         case WET_ERR_INVALID_OPCODE:
+ 410 |             return "WET_ERR_INVALID_OPCODE: Unrecognized or invalid opcode";
+ 411 |         case WET_ERR_OUT_OF_BOUNDS_CH:
+ 412 |             return "WET_ERR_OUT_OF_BOUNDS_CH: Channel index out of bounds";
+ 413 |         case WET_ERR_DIVISION_BY_ZERO:
+ 414 |             return "WET_ERR_DIVISION_BY_ZERO: Division by zero";
+ 415 |         case WET_ERR_NULL_PTR:
+ 416 |             return "WET_ERR_NULL_PTR: Null pointer argument";
+ 417 |         case WET_ERR_ALLOC_FAILED:
+ 418 |             return "WET_ERR_ALLOC_FAILED: Memory allocation failed";
+ 419 |         case WET_ERR_HALTED:
+ 420 |             return "WET_ERR_HALTED: Virtual machine is halted";
+ 421 |         case WET_ERR_CHARGE_IMBALANCE:
+ 422 |             return "WET_ERR_CHARGE_IMBALANCE: Net charge imbalance exceeded safety threshold (0.5 nC over 10 ms)";
+ 423 |         case WET_ERR_EPILEPTIFORM_RUNAWAY:
+ 424 |             return "WET_ERR_EPILEPTIFORM_RUNAWAY: Epileptiform runaway firing breaker tripped (>150 Hz on >35% channels for 50 ms)";
+ 425 |         case WET_ERR_CAPABILITY_DENIED:
+ 426 |             return "WET_ERR_CAPABILITY_DENIED: Capability permission denied by bytecode security manifest";
+ 427 |         case WET_ERR_INTERLOCK_LOCKED:
+ 428 |             return "WET_ERR_INTERLOCK_LOCKED: Hardware interlock locked out; all stimulation disabled";
+ 429 |         case WET_ERR_CHARGE_DENSITY_EXCEEDED:
+ 430 |             return "WET_ERR_CHARGE_DENSITY_EXCEEDED: Single-phase charge density exceeded Shannon safety limit";
+ 431 |         case WET_ERR_FOCAL_EXCITOTOXICITY:
+ 432 |             return "WET_ERR_FOCAL_EXCITOTOXICITY: Focal excitotoxicity limit exceeded";
+ 433 |         case WET_ERR_SHEAR_STRESS_EXCEEDED:
+ 434 |             return "WET_ERR_SHEAR_STRESS_EXCEEDED: Requested microfluidic pump rate exceeds safe shear stress limit (15.0 uL/min)";
+ 435 |         case WET_ERR_SECURITY_UNTRUSTED:
+ 436 |             return "WET_ERR_SECURITY_UNTRUSTED: Bytecode failed cryptographic security signature verification";
+ 437 |         case WET_ERR_ACTUATOR_FAULT:
+ 438 |             return "WET_ERR_ACTUATOR_FAULT: Cyber-physical actuator execution fault or invalid parameter";
+ 439 |         case WET_ERR_THERMAL_LIMIT:
+ 440 |             return "WET_ERR_THERMAL_LIMIT: Temperature exceeded maximum biological threshold (38.0 C)";
+ 441 |         case WET_ERR_BUBBLE_DETECTED:
+ 442 |             return "WET_ERR_BUBBLE_DETECTED: Fluidic optical bubble detector tripped (cavitation hazard)";
+ 443 |         case WET_ERR_COMPLIANCE_RAILED:
+ 444 |             return "WET_ERR_COMPLIANCE_RAILED: Stimulator output voltage saturated ASIC compliance rail (+/-7.0 V)";
+ 445 |         case WET_ERR_BYTECODE_VERIFICATION:
+ 446 |             return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
+ 447 |         default:
+ 448 |             return "WET_ERR_UNKNOWN: Unknown error status";
+ 449 |     }
  450 | }
  451 | 
- 452 | WET_EXPORT void wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable) {
- 453 |     if (!vm) return;
- 454 |     interlocks_enable_dead_head_protection(&vm->interlocks, enable);
- 455 | }
- 456 | 
- 457 | WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
- 458 |     if (!vm) return;
- 459 |     vm->life_supervisor.supervisor_active = 0;
- 460 |     for (int p = 0; p < 8; ++p) {
- 461 |         vm->pump_rates_ul_min[p] = 0.0f;
- 462 |     }
- 463 | }
- 464 | 
- 465 | WET_EXPORT void wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
- 466 |     if (!vm) return;
- 467 |     biophysics_set_blanking_window(&vm->bio, blanking_ms, enable_spatial);
- 468 | }
- 469 | 
- 470 | WET_EXPORT wet_status_t wet_inject_current_stimulus(
- 471 |     wet_vm_t* vm,
- 472 |     uint8_t channel,
- 473 |     float current_ua,
- 474 |     float phase1_ms,
- 475 |     float phase2_ms
- 476 | ) {
- 477 |     if (!vm) return WET_ERR_NULL_PTR;
- 478 |     if (channel >= vm->config.channel_count) {
- 479 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 480 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
- 481 |         return WET_ERR_OUT_OF_BOUNDS_CH;
- 482 |     }
- 483 |     if (vm->interlocks.locked) {
- 484 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 485 |         return WET_ERR_INTERLOCK_LOCKED;
- 486 |     }
- 487 | 
- 488 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
- 489 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 490 |                  "Capability denied for wet_inject_current_stimulus on ch %u", channel);
- 491 |         return WET_ERR_CAPABILITY_DENIED;
- 492 |     }
- 493 | 
- 494 |     /* Randles Interface check: V_elec = I * Rs + V_dl */
- 495 |     float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
- 496 |     wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
- 497 |     if (comp_st != WET_OK) {
- 498 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 499 |         return comp_st;
- 500 |     }
- 501 | 
- 502 |     /* Shannon charge density limit */
- 503 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
- 504 |         float q_p1 = fabsf(current_ua) * 1e-3f * phase1_ms;
- 505 |         float q_p2 = fabsf(current_ua) * 1e-3f * phase2_ms;
- 506 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
- 507 |             vm->interlocks.locked = 1;
- 508 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
- 509 |             vm->interlocks.tripped_channel = channel;
- 510 |             vm->interlocks.trip_tick = vm->current_tick;
- 511 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
- 512 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
- 513 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
- 514 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
- 515 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 516 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
- 517 |         }
- 518 |     }
- 519 | 
- 520 |     biophysics_schedule_stim_current(&vm->bio, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
- 521 |     vm->voltages[channel] = v_elec;
- 522 |     vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (phase1_ms - phase2_ms);
- 523 |     return WET_OK;
- 524 | }
- 525 | 
- 526 | WET_EXPORT wet_status_t wet_verify_bytecode(
- 527 |     const uint8_t* bytecode,
- 528 |     size_t size,
- 529 |     char* err_buf,
- 530 |     size_t err_buf_len
- 531 | ) {
- 532 |     return wet_verify_bytecode_internal(bytecode, size, err_buf, err_buf_len);
- 533 | }
- 534 | 
- 535 | WET_EXPORT wet_status_t wet_vm_snapshot(
- 536 |     const wet_vm_t* vm,
- 537 |     uint8_t* buffer,
- 538 |     size_t* inout_len
- 539 | ) {
- 540 |     return wet_vm_snapshot_internal(vm, buffer, inout_len);
- 541 | }
- 542 | 
- 543 | WET_EXPORT wet_status_t wet_vm_restore(
- 544 |     wet_vm_t* vm,
- 545 |     const uint8_t* buffer,
- 546 |     size_t len
- 547 | ) {
- 548 |     return wet_vm_restore_internal(vm, buffer, len);
- 549 | }
- 550 | 
- 551 | WET_EXPORT void wet_set_environmental_sensors(
- 552 |     wet_vm_t* vm,
- 553 |     float ph,
- 554 |     float do_pct,
- 555 |     float co2_pct,
- 556 |     uint8_t bubble_sensor_id,
- 557 |     uint8_t bubble_state,
- 558 |     float flow_rate_ul_min
- 559 | ) {
- 560 |     if (!vm) return;
- 561 |     if (ph > 0.0f) vm->ph_level = ph;
- 562 |     if (do_pct > 0.0f) vm->dissolved_oxygen_pct = do_pct;
- 563 |     if (co2_pct > 0.0f) vm->dissolved_co2_pct = co2_pct;
- 564 |     if (bubble_sensor_id < 8) {
- 565 |         vm->bubble_detected[bubble_sensor_id] = bubble_state ? 1 : 0;
- 566 |         vm->fluid_flow_rate_ul_min[bubble_sensor_id] = flow_rate_ul_min;
- 567 |     }
+ 452 | /* =========================================================================
+ 453 |  * Phase 3 Hardware Readiness & Safety Implementations
+ 454 |  * ========================================================================= */
+ 455 | 
+ 456 | WET_EXPORT void wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2) {
+ 457 |     if (!vm) return;
+ 458 |     interlocks_configure_electrode(&vm->interlocks, material, area_um2);
+ 459 | }
+ 460 | 
+ 461 | WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
+ 462 |     if (!vm) return;
+ 463 |     interlocks_active_discharge(&vm->interlocks, channel);
+ 464 | }
+ 465 | 
+ 466 | WET_EXPORT void wet_active_discharge_all(wet_vm_t* vm) {
+ 467 |     if (!vm) return;
+ 468 |     interlocks_active_discharge_all(&vm->interlocks);
+ 469 | }
+ 470 | 
+ 471 | WET_EXPORT void wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable) {
+ 472 |     if (!vm) return;
+ 473 |     interlocks_enable_dead_head_protection(&vm->interlocks, enable);
+ 474 | }
+ 475 | 
+ 476 | WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
+ 477 |     if (!vm) return;
+ 478 |     vm->life_supervisor.supervisor_active = 0;
+ 479 |     for (int p = 0; p < 8; ++p) {
+ 480 |         vm->pump_rates_ul_min[p] = 0.0f;
+ 481 |     }
+ 482 | }
+ 483 | 
+ 484 | WET_EXPORT void wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
+ 485 |     if (!vm) return;
+ 486 |     biophysics_set_blanking_window(&vm->bio, blanking_ms, enable_spatial);
+ 487 | }
+ 488 | 
+ 489 | WET_EXPORT wet_status_t wet_inject_current_stimulus(
+ 490 |     wet_vm_t* vm,
+ 491 |     uint8_t channel,
+ 492 |     float current_ua,
+ 493 |     float phase1_ms,
+ 494 |     float phase2_ms
+ 495 | ) {
+ 496 |     if (!vm) return WET_ERR_NULL_PTR;
+ 497 |     if (channel >= vm->config.channel_count) {
+ 498 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 499 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+ 500 |         return WET_ERR_OUT_OF_BOUNDS_CH;
+ 501 |     }
+ 502 |     if (vm->interlocks.locked) {
+ 503 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 504 |         return WET_ERR_INTERLOCK_LOCKED;
+ 505 |     }
+ 506 | 
+ 507 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
+ 508 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 509 |                  "Capability denied for wet_inject_current_stimulus on ch %u", channel);
+ 510 |         return WET_ERR_CAPABILITY_DENIED;
+ 511 |     }
+ 512 | 
+ 513 |     /* Randles Interface check: V_elec = I * Rs + V_dl */
+ 514 |     float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+ 515 |     wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
+ 516 |     if (comp_st != WET_OK) {
+ 517 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 518 |         return comp_st;
+ 519 |     }
+ 520 | 
+ 521 |     /* Shannon charge density limit */
+ 522 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
+ 523 |         float q_p1 = fabsf(current_ua) * 1e-3f * phase1_ms;
+ 524 |         float q_p2 = fabsf(current_ua) * 1e-3f * phase2_ms;
+ 525 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+ 526 |             vm->interlocks.locked = 1;
+ 527 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+ 528 |             vm->interlocks.tripped_channel = channel;
+ 529 |             vm->interlocks.trip_tick = vm->current_tick;
+ 530 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
+ 531 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+ 532 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+ 533 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+ 534 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 535 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+ 536 |         }
+ 537 |     }
+ 538 | 
+ 539 |     biophysics_schedule_stim_current(&vm->bio, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
+ 540 |     vm->voltages[channel] = v_elec;
+ 541 |     vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (phase1_ms - phase2_ms);
+ 542 |     return WET_OK;
+ 543 | }
+ 544 | 
+ 545 | WET_EXPORT wet_status_t wet_verify_bytecode(
+ 546 |     const uint8_t* bytecode,
+ 547 |     size_t size,
+ 548 |     char* err_buf,
+ 549 |     size_t err_buf_len
+ 550 | ) {
+ 551 |     return wet_verify_bytecode_internal(bytecode, size, err_buf, err_buf_len);
+ 552 | }
+ 553 | 
+ 554 | WET_EXPORT wet_status_t wet_vm_snapshot(
+ 555 |     const wet_vm_t* vm,
+ 556 |     uint8_t* buffer,
+ 557 |     size_t* inout_len
+ 558 | ) {
+ 559 |     return wet_vm_snapshot_internal(vm, buffer, inout_len);
+ 560 | }
+ 561 | 
+ 562 | WET_EXPORT wet_status_t wet_vm_restore(
+ 563 |     wet_vm_t* vm,
+ 564 |     const uint8_t* buffer,
+ 565 |     size_t len
+ 566 | ) {
+ 567 |     return wet_vm_restore_internal(vm, buffer, len);
  568 | }
  569 | 
- 570 | WET_EXPORT void wet_set_temperature(
+ 570 | WET_EXPORT void wet_set_environmental_sensors(
  571 |     wet_vm_t* vm,
- 572 |     float temp_c
- 573 | ) {
- 574 |     if (!vm) return;
- 575 |     vm->ambient_temperature_c = temp_c;
- 576 | }
- 577 | 
- 578 | WET_EXPORT void wet_set_channel_banks(
- 579 |     wet_vm_t* vm,
- 580 |     uint64_t ref_mask,
- 581 |     uint64_t rec_mask
- 582 | ) {
- 583 |     if (!vm) return;
- 584 |     interlocks_set_channel_banks(&vm->interlocks, ref_mask, rec_mask);
- 585 | }
- 586 | 
- 587 | WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
- 588 |     const wet_vm_t* vm,
- 589 |     float* out_matrix,
- 590 |     size_t out_capacity_floats
- 591 | ) {
- 592 |     if (!vm || !out_matrix) return WET_ERR_NULL_PTR;
- 593 |     if (out_capacity_floats < (size_t)(BIO_NUM_NEURONS * BIO_NUM_NEURONS)) {
- 594 |         return WET_ERR_OUT_OF_BOUNDS_CH;
- 595 |     }
- 596 |     for (size_t i = 0; i < BIO_NUM_NEURONS; ++i) {
- 597 |         for (size_t j = 0; j < BIO_NUM_NEURONS; ++j) {
- 598 |             if (vm->bio.synapses[i][j].exists) {
- 599 |                 out_matrix[i * BIO_NUM_NEURONS + j] = vm->bio.synapses[i][j].weight_ns;
- 600 |             } else {
- 601 |                 out_matrix[i * BIO_NUM_NEURONS + j] = 0.0f;
- 602 |             }
- 603 |         }
- 604 |     }
- 605 |     return WET_OK;
- 606 | }
- 607 | 
- 608 | WET_EXPORT float wet_vm_get_synapse_weight(
- 609 |     const wet_vm_t* vm,
- 610 |     uint8_t pre,
- 611 |     uint8_t post
- 612 | ) {
- 613 |     if (!vm || pre >= BIO_NUM_NEURONS || post >= BIO_NUM_NEURONS) return 0.0f;
- 614 |     return biophysics_get_weight(&vm->bio, pre, post);
- 615 | }
+ 572 |     float ph,
+ 573 |     float do_pct,
+ 574 |     float co2_pct,
+ 575 |     uint8_t bubble_sensor_id,
+ 576 |     uint8_t bubble_state,
+ 577 |     float flow_rate_ul_min
+ 578 | ) {
+ 579 |     if (!vm) return;
+ 580 |     if (ph > 0.0f) vm->ph_level = ph;
+ 581 |     if (do_pct > 0.0f) vm->dissolved_oxygen_pct = do_pct;
+ 582 |     if (co2_pct > 0.0f) vm->dissolved_co2_pct = co2_pct;
+ 583 |     if (bubble_sensor_id < 8) {
+ 584 |         vm->bubble_detected[bubble_sensor_id] = bubble_state ? 1 : 0;
+ 585 |         vm->fluid_flow_rate_ul_min[bubble_sensor_id] = flow_rate_ul_min;
+ 586 |     }
+ 587 | }
+ 588 | 
+ 589 | WET_EXPORT void wet_set_temperature(
+ 590 |     wet_vm_t* vm,
+ 591 |     float temp_c
+ 592 | ) {
+ 593 |     if (!vm) return;
+ 594 |     vm->ambient_temperature_c = temp_c;
+ 595 | }
+ 596 | 
+ 597 | WET_EXPORT void wet_set_channel_banks(
+ 598 |     wet_vm_t* vm,
+ 599 |     uint64_t ref_mask,
+ 600 |     uint64_t rec_mask
+ 601 | ) {
+ 602 |     if (!vm) return;
+ 603 |     interlocks_set_channel_banks(&vm->interlocks, ref_mask, rec_mask);
+ 604 | }
+ 605 | 
+ 606 | WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
+ 607 |     const wet_vm_t* vm,
+ 608 |     float* out_matrix,
+ 609 |     size_t out_capacity_floats
+ 610 | ) {
+ 611 |     if (!vm || !out_matrix) return WET_ERR_NULL_PTR;
+ 612 |     if (out_capacity_floats < (size_t)(BIO_NUM_NEURONS * BIO_NUM_NEURONS)) {
+ 613 |         return WET_ERR_OUT_OF_BOUNDS_CH;
+ 614 |     }
+ 615 |     for (size_t i = 0; i < BIO_NUM_NEURONS; ++i) {
+ 616 |         for (size_t j = 0; j < BIO_NUM_NEURONS; ++j) {
+ 617 |             if (vm->bio.synapses[i][j].exists) {
+ 618 |                 out_matrix[i * BIO_NUM_NEURONS + j] = vm->bio.synapses[i][j].weight_ns;
+ 619 |             } else {
+ 620 |                 out_matrix[i * BIO_NUM_NEURONS + j] = 0.0f;
+ 621 |             }
+ 622 |         }
+ 623 |     }
+ 624 |     return WET_OK;
+ 625 | }
+ 626 | 
+ 627 | WET_EXPORT float wet_vm_get_synapse_weight(
+ 628 |     const wet_vm_t* vm,
+ 629 |     uint8_t pre,
+ 630 |     uint8_t post
+ 631 | ) {
+ 632 |     if (!vm || pre >= BIO_NUM_NEURONS || post >= BIO_NUM_NEURONS) return 0.0f;
+ 633 |     return biophysics_get_weight(&vm->bio, pre, post);
+ 634 | }
+ 635 | 
+ 636 | WET_EXPORT float wet_clamp_voltage_vm(wet_vm_t* vm, float requested_v) {
+ 637 |     if (!vm) return requested_v;
+ 638 |     return interlocks_clamp_voltage(&vm->interlocks, requested_v);
+ 639 | }
 ```
 
 ### `native/src/wetvm_vm.c` (2034 lines, SHA-256: `9c85d5d4afad5dc0...`)
@@ -9676,7 +10463,7 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
 2034 | }
 ```
 
-### `native/build.py` (254 lines, SHA-256: `d365ef766499ce2f...`)
+### `native/build.py` (256 lines, SHA-256: `2cc2c020859bb090...`)
 
 ```text
    1 | #!/usr/bin/env python3
@@ -9879,60 +10666,62 @@ Covers all 27 core source files across `compiler/`, `native/include/`, `native/s
  198 |         src_dir / "wet_hal_pump_valve.c",
  199 |         src_dir / "wet_hal_sensirion.c",
  200 |         src_dir / "wet_scheduler.c",
- 201 |     ]
- 202 |     for sf in src_files:
- 203 |         if not sf.exists():
- 204 |             raise FileNotFoundError(f"Source file not found: {sf}")
- 205 | 
- 206 |     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
- 207 |     out_dll = bin_dir / f"wetvm{ext}"
- 208 |     fallback_dll = native_dir / f"wetvm{ext}"
- 209 | 
- 210 |     # Search for compilers in order of preference
- 211 |     # 1. MSVC cl.exe
- 212 |     cl_exe = find_executable("cl")
- 213 |     if cl_exe and build_with_msvc(cl_exe, src_files, include_dir, out_dll):
- 214 |         shutil.copy2(out_dll, fallback_dll)
- 215 |         print(f"Successfully compiled shared library: {out_dll}")
- 216 |         return out_dll
- 217 | 
- 218 |     # 2. Clang
- 219 |     extra_clang_paths = [
- 220 |         r"C:\Program Files\LLVM\bin",
- 221 |         r"C:\LLVM\bin",
- 222 |         r"C:\msys64\mingw64\bin",
- 223 |         r"C:\msys64\ucrt64\bin"
- 224 |     ]
- 225 |     clang_exe = find_executable("clang", extra_clang_paths)
- 226 |     if clang_exe and build_with_clang(clang_exe, src_files, include_dir, out_dll):
- 227 |         shutil.copy2(out_dll, fallback_dll)
- 228 |         print(f"Successfully compiled shared library: {out_dll}")
- 229 |         return out_dll
- 230 | 
- 231 |     # 3. GCC
- 232 |     extra_gcc_paths = [
- 233 |         r"C:\msys64\mingw64\bin",
- 234 |         r"C:\msys64\ucrt64\bin",
- 235 |         r"C:\mingw64\bin",
- 236 |         r"C:\TDM-GCC-64\bin"
- 237 |     ]
- 238 |     gcc_exe = find_executable("gcc", extra_gcc_paths)
- 239 |     if gcc_exe and build_with_gcc(gcc_exe, src_files, include_dir, out_dll):
- 240 |         shutil.copy2(out_dll, fallback_dll)
- 241 |         print(f"Successfully compiled shared library: {out_dll}")
- 242 |         return out_dll
- 243 | 
- 244 |     raise RuntimeError("No suitable C compiler found (MSVC cl.exe, Clang, or GCC).")
+ 201 |         src_dir / "wet_aer.c",
+ 202 |         src_dir / "wet_distributed.c",
+ 203 |     ]
+ 204 |     for sf in src_files:
+ 205 |         if not sf.exists():
+ 206 |             raise FileNotFoundError(f"Source file not found: {sf}")
+ 207 | 
+ 208 |     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
+ 209 |     out_dll = bin_dir / f"wetvm{ext}"
+ 210 |     fallback_dll = native_dir / f"wetvm{ext}"
+ 211 | 
+ 212 |     # Search for compilers in order of preference
+ 213 |     # 1. MSVC cl.exe
+ 214 |     cl_exe = find_executable("cl")
+ 215 |     if cl_exe and build_with_msvc(cl_exe, src_files, include_dir, out_dll):
+ 216 |         shutil.copy2(out_dll, fallback_dll)
+ 217 |         print(f"Successfully compiled shared library: {out_dll}")
+ 218 |         return out_dll
+ 219 | 
+ 220 |     # 2. Clang
+ 221 |     extra_clang_paths = [
+ 222 |         r"C:\Program Files\LLVM\bin",
+ 223 |         r"C:\LLVM\bin",
+ 224 |         r"C:\msys64\mingw64\bin",
+ 225 |         r"C:\msys64\ucrt64\bin"
+ 226 |     ]
+ 227 |     clang_exe = find_executable("clang", extra_clang_paths)
+ 228 |     if clang_exe and build_with_clang(clang_exe, src_files, include_dir, out_dll):
+ 229 |         shutil.copy2(out_dll, fallback_dll)
+ 230 |         print(f"Successfully compiled shared library: {out_dll}")
+ 231 |         return out_dll
+ 232 | 
+ 233 |     # 3. GCC
+ 234 |     extra_gcc_paths = [
+ 235 |         r"C:\msys64\mingw64\bin",
+ 236 |         r"C:\msys64\ucrt64\bin",
+ 237 |         r"C:\mingw64\bin",
+ 238 |         r"C:\TDM-GCC-64\bin"
+ 239 |     ]
+ 240 |     gcc_exe = find_executable("gcc", extra_gcc_paths)
+ 241 |     if gcc_exe and build_with_gcc(gcc_exe, src_files, include_dir, out_dll):
+ 242 |         shutil.copy2(out_dll, fallback_dll)
+ 243 |         print(f"Successfully compiled shared library: {out_dll}")
+ 244 |         return out_dll
  245 | 
- 246 | 
- 247 | if __name__ == "__main__":
- 248 |     try:
- 249 |         path = build_native_runtime()
- 250 |         print(f"BUILD SUCCESS: {path}")
- 251 |         sys.exit(0)
- 252 |     except Exception as e:
- 253 |         print(f"BUILD ERROR: {e}", file=sys.stderr)
- 254 |         sys.exit(1)
+ 246 |     raise RuntimeError("No suitable C compiler found (MSVC cl.exe, Clang, or GCC).")
+ 247 | 
+ 248 | 
+ 249 | if __name__ == "__main__":
+ 250 |     try:
+ 251 |         path = build_native_runtime()
+ 252 |         print(f"BUILD SUCCESS: {path}")
+ 253 |         sys.exit(0)
+ 254 |     except Exception as e:
+ 255 |         print(f"BUILD ERROR: {e}", file=sys.stderr)
+ 256 |         sys.exit(1)
 ```
 
 ### `native/interlocks.py` (90 lines, SHA-256: `5831e4240793de59...`)

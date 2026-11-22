@@ -127,9 +127,18 @@ WET_EXPORT wet_vm_t* wet_create_vm_arena(
 
     if (arena_bytes < needed) return NULL;
 
-    uint8_t* ptr = (uint8_t*)arena_buf;
+    /* Align arena to 128 bytes (WET_CACHELINE_SIZE) for DMA & cache coherency */
+    uint8_t* raw_ptr = (uint8_t*)arena_buf;
+    uintptr_t u = (uintptr_t)raw_ptr;
+    uintptr_t aligned_u = (u + 127) & ~((uintptr_t)127);
+    size_t align_pad = (size_t)(aligned_u - u);
+    if (arena_bytes < needed + align_pad + 256) return NULL;
+
+    uint8_t* ptr = (uint8_t*)aligned_u;
     struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
     ptr += sizeof(struct wet_vm_instance);
+    u = (uintptr_t)ptr;
+    ptr = (uint8_t*)((u + 127) & ~((uintptr_t)127));
     memset(vm, 0, sizeof(struct wet_vm_instance));
 
     vm->arena_allocated = 1;
@@ -220,6 +229,16 @@ WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
         }
 
         free(vm);
+    } else {
+        /*
+         * Defense-in-depth: Secure volatile memory scrubbing.
+         * Zeroes the entire VM instance structure to prevent stale stimulation schedules,
+         * cryptographic keys, or stack frames from leaking into future arena allocations.
+         */
+        volatile uint8_t* scrub_p = (volatile uint8_t*)vm;
+        for (size_t i = 0; i < sizeof(struct wet_vm_instance); i++) {
+            scrub_p[i] = 0;
+        }
     }
 }
 
@@ -612,4 +631,9 @@ WET_EXPORT float wet_vm_get_synapse_weight(
 ) {
     if (!vm || pre >= BIO_NUM_NEURONS || post >= BIO_NUM_NEURONS) return 0.0f;
     return biophysics_get_weight(&vm->bio, pre, post);
+}
+
+WET_EXPORT float wet_clamp_voltage_vm(wet_vm_t* vm, float requested_v) {
+    if (!vm) return requested_v;
+    return interlocks_clamp_voltage(&vm->interlocks, requested_v);
 }

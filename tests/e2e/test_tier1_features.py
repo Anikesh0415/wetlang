@@ -24,10 +24,11 @@ import subprocess
 import unittest
 from typing import Any, Dict, List, Optional, Tuple
 
-# Ensure project root is in sys.path
+# Ensure project root and wetlang package are in sys.path
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
+for p in [PROJECT_ROOT, os.path.join(PROJECT_ROOT, "wetlang")]:
+    if p not in sys.path and os.path.isdir(p):
+        sys.path.insert(0, p)
 
 from tests.e2e.common import (
     WetLangE2ETestCase,

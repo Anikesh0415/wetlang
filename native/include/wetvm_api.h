@@ -295,6 +295,14 @@ WET_EXPORT float wet_vm_get_synapse_weight(
     uint8_t post
 );
 
+/**
+ * Clamps requested stimulation voltage against the configured electrode material water window.
+ */
+WET_EXPORT float wet_clamp_voltage_vm(
+    wet_vm_t* vm,
+    float requested_v
+);
+
 #ifdef __cplusplus
 }
 #endif

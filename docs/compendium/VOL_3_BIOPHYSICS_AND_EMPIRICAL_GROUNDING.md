@@ -1,6 +1,6 @@
 # Volume III: Biophysical Digital Twin & Empirical Scientific Grounding
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v2.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
 **Source Scope:** `native/include/biophysics.h`, `native/src/biophysics.c`, `biophysics/ode_solver.py`, `biophysics/stp.py`, `biophysics/stdp.py`, `biophysics/mea_grid.py`, `biophysics/telemetry.py`, `all_10_zenodo_papers.txt`, FinalSpark `fs369` dataset (`E:\data\fs369\fs369data`)
 
