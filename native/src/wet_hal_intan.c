@@ -285,6 +285,16 @@ wet_hal_status_t wet_hal_intan_set_charge_recovery(
 
     intan_device_state_t* state = (intan_device_state_t*)drv->context;
     state->channels[channel].charge_recovery_on = enable ? 1 : 0;
+
+    /* Program RHS2116 current-limited charge recovery DAC (Registers 36-37)
+     * avoids instantaneous capacitive dump by limiting recovery current to <= 10 uA */
+    if (enable) {
+        state->registers[36] = (uint16_t)0x0080U; /* Current-limited recovery mode */
+        state->registers[37] = (uint16_t)0x000AU; /* Target 10 uA discharge current limit */
+    } else {
+        state->registers[36] = 0;
+        state->registers[37] = 0;
+    }
     return WET_HAL_OK;
 }
 

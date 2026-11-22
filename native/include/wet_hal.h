@@ -85,6 +85,28 @@ struct wet_hal_driver {
     wet_hal_driver_t*     next;
 };
 
+#define WET_HAL_CROWBAR_BLEED_RESISTOR_OHMS 700000.0f /* 700 kOhm: guarantees <= 10 uA surge from +/-7.0 V compliance rail */
+#define WET_HAL_MAX_DEAD_HEAD_PRESSURE_KPA  150.0f   /* 150 kPa safety cutoff threshold */
+#define WET_HAL_ASYNC_QUEUE_CAPACITY        64
+
+/* Asynchronous Microfluidic Command Packet */
+typedef enum {
+    WET_ASYNC_CMD_NONE           = 0,
+    WET_ASYNC_CMD_PUMP_RATE      = 1,
+    WET_ASYNC_CMD_PUMP_DISPENSE  = 2,
+    WET_ASYNC_CMD_VALVE_SET      = 3,
+    WET_ASYNC_CMD_BUS_RECOVERY   = 4
+} wet_async_cmd_type_t;
+
+typedef struct {
+    uint8_t  cmd_type;    /* wet_async_cmd_type_t */
+    uint8_t  device_id;   /* pump_id or valve_id */
+    uint8_t  state;       /* run_flag or valve state */
+    uint8_t  padding;
+    double   param_val;   /* rate_ul_min or volume_ul */
+    uint64_t submit_tick;
+} wet_async_cmd_t;
+
 /* HAL Configuration */
 typedef struct {
     wet_hal_mode_t mode;
@@ -95,6 +117,7 @@ typedef struct {
     uint8_t        enable_dead_head_protection;
     uint8_t        enable_crowbar_fastpath;
     uint8_t        valve_for_pump[8]; /* Associated downstream valve for dead-head protection */
+    float          max_line_pressure_kpa; /* Maximum inline fluidic pressure threshold (default 150.0 kPa) */
 } wet_hal_config_t;
 
 /* HAL Hardware Statistics & Telemetry */
@@ -132,6 +155,7 @@ struct wet_hal_context {
     float                pump_rates_ul_min[8];
     uint8_t              valve_states[8];
     double               flow_rates_ul_min[8];
+    float                fluid_pressure_kpa[8];
     float                ephys_voltages[64];
     uint8_t              ephys_spikes[64];
 
@@ -140,6 +164,11 @@ struct wet_hal_context {
     uint32_t             crowbar_reason;
     uint64_t             crowbar_tick;
     uint64_t             crowbar_timestamp_us;
+
+    /* Asynchronous Microfluidics Lockless Command Queue */
+    wet_async_cmd_t      async_queue[WET_HAL_ASYNC_QUEUE_CAPACITY];
+    volatile uint32_t    async_head;
+    volatile uint32_t    async_tail;
 
     /* Telemetry Counters */
     wet_hal_telemetry_t  telemetry;
@@ -176,6 +205,16 @@ WET_EXPORT wet_hal_status_t wet_hal_active_discharge(wet_hal_context_t* hal, uin
 
 /* Emergency Hardware Crowbar Fast-Path (<100 µs) */
 WET_EXPORT void wet_hal_emergency_crowbar(wet_vm_t* vm, uint32_t trip_reason);
+
+/* Asynchronous Microfluidics Queue APIs (Decouples 10 kHz Ephys from slow RS-232 / I2C) */
+WET_EXPORT wet_hal_status_t wet_hal_async_enqueue(wet_hal_context_t* hal, const wet_async_cmd_t* cmd);
+WET_EXPORT uint32_t wet_hal_process_async_queue(wet_hal_context_t* hal);
+
+/* Standard 9-SCL-pulse I2C bus recovery routine */
+WET_EXPORT wet_hal_status_t wet_hal_i2c_bus_recovery(wet_hal_context_t* hal);
+
+/* Physical inline pressure transducer setter for dead-head monitoring */
+WET_EXPORT void wet_hal_set_inline_pressure(wet_hal_context_t* hal, uint8_t port, float pressure_kpa);
 
 /* Telemetry & Mapping Accessors */
 WET_EXPORT wet_hal_telemetry_t* wet_hal_get_telemetry(wet_hal_context_t* hal);

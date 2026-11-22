@@ -90,6 +90,7 @@ class WetHalConfig(ctypes.Structure):
         ("enable_dead_head_protection", c_uint8),
         ("enable_crowbar_fastpath", c_uint8),
         ("valve_for_pump", c_uint8 * 8),
+        ("max_line_pressure_kpa", c_float),
     ]
 
     def __init__(
@@ -102,6 +103,7 @@ class WetHalConfig(ctypes.Structure):
         enable_dead_head_protection: int = 1,
         enable_crowbar_fastpath: int = 1,
         valve_for_pump = None,
+        max_line_pressure_kpa: float = 150.0,
     ):
         v = (c_uint8 * 8)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF)
         if valve_for_pump is not None:
@@ -116,6 +118,7 @@ class WetHalConfig(ctypes.Structure):
             enable_dead_head_protection=enable_dead_head_protection,
             enable_crowbar_fastpath=enable_crowbar_fastpath,
             valve_for_pump=v,
+            max_line_pressure_kpa=max_line_pressure_kpa,
         )
 
 
