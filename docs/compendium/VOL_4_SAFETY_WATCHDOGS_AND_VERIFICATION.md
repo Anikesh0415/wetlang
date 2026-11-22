@@ -161,9 +161,9 @@ All 406 automated tests were executed live on `Python 3.12.10` against the compi
 | **E2E Tier 2** (`test_tier2_boundaries.py`) | `python tests/run_e2e_tests.py` | 140 | 140 | 0 | 0 | — |
 | **E2E Tier 3** (`test_tier3_pairwise.py`) | `python tests/run_e2e_tests.py` | 28 | 28 | 0 | 0 | — |
 | **E2E Tier 4** (`test_tier4_benchmarks.py`) | `python tests/run_e2e_tests.py` | 5 | 5 | 0 | 0 | — |
-| **E2E Subtotal** | `python tests/run_e2e_tests.py` | **313** | **313** | **0** | **0** | **5.553 s** |
-| **Synthetic Unit Suite** (`tests/test_*.py`) | `python -m pytest tests/test_*.py -v` | **93** | **93** | **0** | **0** | **0.32 s** |
-| **GRAND TOTAL** | **All Verification Suites** | **406** | **406** | **0** | **0** | **5.87 s** |
+| **E2E Subtotal** | `python tests/run_e2e_tests.py` | **313** | **313** | **0** | **0** | **6.300 s** |
+| **Synthetic Unit Suite** (`tests/test_*.py`) | `python -m pytest tests/test_*.py -v` | **93** | **93** | **0** | **0** | **0.40 s** |
+| **GRAND TOTAL** | **All Verification Suites** | **406** | **406** | **0** | **0** | **6.70 s** |
 <!-- LIVE_TEST_END -->
 
 ### 3.2 Tier 1 (Feature Coverage — Category-Partition, 140 Tests) & Tier 2 (Boundary Value Analysis, 140 Tests)
@@ -234,23 +234,46 @@ All 406 automated tests were executed live on `Python 3.12.10` against the compi
 | `tests/test_ode_stability.py` | 13 | Extreme $\pm$ current shocks, resting equilibrium, 2.0 ms refractory clamp, dynamic threshold, AHP decay, E->E/E->I STP, STDP clamping & 1.05x bias, Dale's principle |
 | `tests/test_parser_diagnostics.py` | 20 | Lexer keywords/units/comments/errors, Pratt precedence, unary ops, declarations, loops/streams, error diagnostics, `.wbc` header/disasm |
 
-### 3.6 Phase 2 Deep Audit & Cyber-Physical Actuator Suite (39 Tests)
+### 3.6 Phase 2 Deep Audit, Hardware Readiness & v1.1 Driver Suites (102 Tests)
 
 | Test Module | Count | Primary Verification Focus |
 |---|---:|---|
 | `tests/test_phase2_deep_audit.py` | 16 | 16 adversarial attack vectors: SI 1000x scaling mismatch, integer vs float saturation, linear-time $O(V+E)$ CFG verifier, dynamic channel indexing, ARM/RISC-V unaligned LE access, 100,000-op watchdog, HALT flag commit, thread safety, cathodic-first polarity, axonal delay queues, LFP volume dipole pickup. |
 | `tests/test_audit_remediation.py` | 15 | Systematic re-verification of all 15 audit bug fixes. |
+| `tests/test_phase3_hardware_readiness.py` | 18 | Phase 3 hardware readiness: Pt HD-MEA water-window CIC clamping, persistent unbounded DC accumulator, active discharge switch, spherical diffusion Thiele necrosis, geometry-aware shear stress, dead-head valve interlock, Ring-0 life support supervisor, zero-malloc static arena allocation, Ed25519 asymmetric signatures, constant-current stimulation & Randles cell ODE, configurable blanking & spatial crosstalk, subnormal float zero clamping, environmental sensor ISA (pH/DO/CO2/flow), CMOS thermal interlock, optical bubble cutoff, C99 verifier, live state snapshot/restore, and typed channel banks. |
+| `tests/test_hal_drivers.py` | 30 | Physical Hardware Abstraction Layer (HAL) drivers: Intan RHS2116 SPI DAQ controller (CPOL=0/CPHA=0 pipelining, in-situ 1 kHz impedance, compliance clamping), MaxWell MaxOne CMOS HD-MEA routing matrix, Harvard Apparatus RS-232 serial protocol, CAN-bus micro-pinch valves with dead-head interlocks, Sensirion SLF3x/SLI flow meters (I2C CRC-8, SHDLC de-stuffing), and sub-microsecond hardware emergency crowbar. |
+| `tests/test_nir_bridge.py` | 21 | Neuromorphic Intermediate Representation (NIR v1.0) graph bridge: CubaLIF, LIF, Izhikevich, Dale's principle excitatory/inhibitory matrix decomposition, and loss-free HDF5 / JSON roundtrips. |
+| `tests/test_rt_scheduler.py` | 6 | C99 hard real-time 10 kHz scheduler: P-core affinity pinning, Win32 QPC hardware timer pacing, phase-slip forward resynchronization, cacheline-aligned SPSC lockless ring buffers, and 10,000-tick microbenchmarks under multi-core CPU stress. |
 | `tests/test_actuators.py` | 8 | Microfluidic peristaltic/syringe pumps, micro-pinch valves, stepper motor stepping, hydrodynamic shear limit ($Q \le 15.0\,\mu\text{L/min}$), chamber pressure/temperature sensor telemetry. |
 | `tests/test_universal_sandbox.py` | 8 | Universal organoid connectome engine scaling from 1 to 1,024 organoid clusters with axonal conduction delay queues. |
-| `tests/test_phase3_hardware_readiness.py` | 9 | Phase 3 hardware readiness: Pt HD-MEA water-window CIC clamping, persistent unbounded DC accumulator, active discharge switch, spherical diffusion Thiele necrosis, geometry-aware shear stress, dead-head valve interlock, Ring-0 life support supervisor, zero-malloc static arena allocation, and Ed25519 asymmetric signatures. |
 
 ---
 
-## 4. Master Test Suite Execution Summary (454 / 454 Tests Passing, 100%)
+## 4. Master Test Suite Execution Summary (520 / 520 Tests Passing, 100%)
 
-Across all 4 tiers of the Master E2E Suite, the Synthetic Pytest Suite, Phase 2 Deep Audit, and Phase 3 Hardware Readiness Suite:
-- **Total Passing Tests:** **454 / 454 (100.0% Pass Rate)**
+Across all 4 tiers of the Master E2E Suite, the Synthetic Pytest Suite, Phase 2 Deep Audit, Phase 3 Hardware Readiness Suite, and v1.1 HAL/NIR/Scheduler Suites:
+- **Total Passing Tests:** **520 / 520 (100.0% Pass Rate)**
 - **Failed / Errored:** 0
 - **Skipped:** 0
 - **Flaky / Non-Deterministic:** 0 (bit-exact deterministic reproducibility)
-| `tests/test_static_verifier.py` | 40 | Symbol scoping, 1D/2D/constant-folded MEA bounds, dimensional algebra, constant-folded static voltage clamps, CFG loop-yield evasion resistance (nested blocks, inner-loop evasion, branch fall-through), negative HV & multi-electrode capabilities |
+- **Total Execution Duration:** 29.53 seconds across 16 test modules.
+
+| Test Module / Suite Category | Test Count | Pass Rate | Scope Verified |
+|:---|:---:|:---:|:---|
+| `tests/e2e/test_tier1_features.py` | 140 | 100% | Compiler, DFA lexer, Pratt parser, semantic analysis, C99 VM execution, COBA-LIF, STP/STDP, hardware interlocks. |
+| `tests/e2e/test_tier2_boundaries.py` | 140 | 100% | Out-of-bounds channels, stack underflow/overflow, extreme current shocks ($\pm 10\text{ nA}$), voltage clamp thresholds. |
+| `tests/e2e/test_tier3_pairwise.py` | 28 | 100% | Cross-module pairwise interactions ($F_i \times F_j$). |
+| `tests/e2e/test_tier4_benchmarks.py` | 5 | 100% | Active inference closed-loop, polychronous reservoir, homeostatic stabilization, fault injection, 10,000-tick repeatability. |
+| `tests/test_static_verifier.py` | 40 | 100% | Symbol scoping, 1D/2D/constant-folded MEA bounds, dimensional algebra, constant-folded static voltage clamps, CFG loop-yield evasion resistance. |
+| `tests/test_hal_drivers.py` | 30 | 100% | Intan RHS2116 SPI DAQ, MaxWell MaxOne CMOS HD-MEA, Harvard Apparatus RS-232, CAN-bus valves, Sensirion I2C/SHDLC, and emergency crowbar. |
+| `tests/test_nir_bridge.py` | 21 | 100% | Bidirectional NIR graph translation, Dale's principle decomposition, and HDF5/JSON serialization. |
+| `tests/test_parser_diagnostics.py` | 20 | 100% | Parser syntax diagnostics, error recovery, and unexpected token reporting. |
+| `tests/test_phase3_hardware_readiness.py` | 18 | 100% | HD-MEA Pt water-window, DC accumulator, active discharge, 3D Thiele anoxia, geometry-aware shear, Ring-0 supervisor, zero-malloc arena, Ed25519. |
+| `tests/test_phase2_deep_audit.py` | 16 | 100% | 16 adversarial attack vectors from deep audit. |
+| `tests/test_audit_remediation.py` | 15 | 100% | Systematic re-verification of all 15 audit bug fixes. |
+| `tests/test_ode_stability.py` | 13 | 100% | Unconditional Exponential Euler numerical ODE stability and convex bounding proofs. |
+| `tests/test_interlocks.py` | 12 | 100% | Hardware interlock trip states, DAC zeroing, and lockout recovery. |
+| `tests/test_benchmarks.py` | 8 | 100% | Closed-loop benchmark stability and telemetry validation. |
+| `tests/test_universal_sandbox.py` | 8 | 100% | Connectome scaling from 1 to 1,024 clusters and axonal delay routing. |
+| `tests/test_rt_scheduler.py` | 6 | 100% | C99 10 kHz scheduler, P-core affinity, QPC pacing, and 10k-tick stress benchmarks. |
+| **GRAND TOTAL** | **520** | **100.0%** | **520 Passed, 0 Failed, 0 Skipped** |

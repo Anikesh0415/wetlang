@@ -1,0 +1,49 @@
+// Benchmark 02: Polychronous Reservoir Classifier
+// Spatio-temporal trajectory classification with short-term synaptic dynamics.
+
+grid mea[8, 8];
+channel in_0 = mea[0, 0];
+channel in_1 = mea[0, 2];
+channel in_2 = mea[0, 4];
+channel in_3 = mea[0, 6];
+
+int trial = 0;
+while (trial < 100) {
+    // Inject Spatio-Temporal Pattern Alpha: Trajectory [in_0 -> in_1 -> in_2 -> in_3]
+    stim_biphasic(in_0, 0.9, 0.1, 0.1);
+    
+    int t = 0;
+    while (t < 50) { sync_tick(); t = t + 1; }
+    stim_biphasic(in_1, 0.9, 0.1, 0.1);
+    
+    t = 0;
+    while (t < 50) { sync_tick(); t = t + 1; }
+    stim_biphasic(in_2, 0.9, 0.1, 0.1);
+    
+    t = 0;
+    while (t < 50) { sync_tick(); t = t + 1; }
+    stim_biphasic(in_3, 0.9, 0.1, 0.1);
+    
+    // Reservoir settling & integration period (30.0 ms = 300 ticks)
+    t = 0;
+    while (t < 300) { sync_tick(); t = t + 1; }
+    
+    // Read high-dimensional polychronous spike response across reservoir
+    int r = 0;
+    int total_reservoir_spikes = 0;
+    while (r < 16) {
+        int ch_idx = 24 + r;
+        total_reservoir_spikes = total_reservoir_spikes + read_spikes(mea[ch_idx], 30.0);
+        r = r + 1;
+    }
+    
+    // Modulate STDP based on classification margin
+    if (total_reservoir_spikes > 45) {
+        modulate_stdp(1.1);
+    } else {
+        modulate_stdp(0.95);
+    }
+    
+    trial = trial + 1;
+    sync_tick();
+}

@@ -14,6 +14,9 @@ from bindings.ffi import (
     WetVMConfig,
     WetTelemetry,
     WetActuatorTelemetry,
+    WetHalMode,
+    WetHalConfig,
+    WetHalStatus,
 )
 
 
@@ -443,6 +446,58 @@ class WetVM:
             if 0 <= ch < 64:
                 rec_mask |= (1 << ch)
         self._lib.wet_set_channel_banks(self._handle, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))
+
+    def init_hal(
+        self,
+        mode: WetHalMode = WetHalMode.WET_HAL_MODE_HIL_LOOPBACK,
+        config: Optional[WetHalConfig] = None
+    ) -> int:
+        """Initializes and attaches Hardware Abstraction Layer (HAL) on VM."""
+        self._check_alive()
+        cfg_ptr = ctypes.byref(config) if config is not None else None
+        return self._lib.wet_hal_init(self._handle, ctypes.c_int(int(mode)), cfg_ptr)
+
+    def attach_hal(self, hal: ctypes.c_void_p) -> int:
+        """Attaches an existing HAL context to the VM."""
+        self._check_alive()
+        return self._lib.wet_hal_attach(self._handle, hal)
+
+    def get_hal(self) -> ctypes.c_void_p:
+        """Returns the HAL context pointer attached to this VM."""
+        self._check_alive()
+        return self._lib.wet_hal_get_context(self._handle)
+
+    def emergency_crowbar(self, trip_reason: int = 1) -> None:
+        """Triggers emergency hardware crowbar fast-path (<100 µs)."""
+        self._check_alive()
+        self._lib.wet_hal_emergency_crowbar(self._handle, ctypes.c_uint32(trip_reason))
+
+    def get_synapse_matrix(self) -> np.ndarray:
+        """
+        Extracts the 64x64 synaptic conductance matrix (nS) from C VM biophysics state.
+        Returns a NumPy float32 array of shape (64, 64).
+        """
+        self._check_alive()
+        buf = (ctypes.c_float * (64 * 64))()
+        st = self._lib.wet_vm_get_synapse_matrix(
+            self._handle,
+            buf,
+            ctypes.c_size_t(64 * 64)
+        )
+        if st != WetStatus.WET_OK:
+            raise WetVMError(WetStatus(st), self.last_error() or "Failed to read synapse matrix")
+        return np.ctypeslib.as_array(buf).reshape((64, 64)).copy()
+
+    def get_synapse_weight(self, pre: int, post: int) -> float:
+        """
+        Queries the synaptic conductance weight between pre and post neurons in nS.
+        """
+        self._check_alive()
+        return float(self._lib.wet_vm_get_synapse_weight(
+            self._handle,
+            ctypes.c_uint8(pre),
+            ctypes.c_uint8(post)
+        ))
 
 
 class WetRuntime(WetVM):

@@ -274,6 +274,26 @@ WET_EXPORT void wet_set_channel_banks(
     uint64_t rec_mask
 );
 
+/**
+ * Milestone 2 Biophysics Live Synapse Matrix Introspection:
+ * Copies the dense 64x64 synaptic conductance matrix (nS) from VM biophysics state
+ * into caller-allocated buffer (float[64][64] = 4096 floats).
+ */
+WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
+    const wet_vm_t* vm,
+    float* out_matrix,
+    size_t out_capacity_floats
+);
+
+/**
+ * Queries single synaptic conductance weight between pre and post neurons in nS.
+ */
+WET_EXPORT float wet_vm_get_synapse_weight(
+    const wet_vm_t* vm,
+    uint8_t pre,
+    uint8_t post
+);
+
 #ifdef __cplusplus
 }
 #endif

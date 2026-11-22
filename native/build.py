@@ -45,8 +45,41 @@ memmove
 memcmp
 strlen
 strncpy
+strcpy
+strcat
+strcmp
+strncmp
+sprintf
 _snprintf
 _vsnprintf
+qsort
+"""
+    output_def.write_text(def_content, encoding="utf-8")
+    cmd = [
+        dlltool_path,
+        "-d", str(output_def),
+        "-l", str(output_lib),
+        "-m", "i386:x86-64"
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    return res.returncode == 0 and output_lib.exists()
+
+
+def generate_kernel32_import_lib(dlltool_path: str, output_lib: Path, output_def: Path) -> bool:
+    """Generates an import library for Windows kernel32.dll using llvm-dlltool."""
+    def_content = """LIBRARY kernel32.dll
+EXPORTS
+QueryPerformanceCounter
+QueryPerformanceFrequency
+CreateThread
+WaitForSingleObject
+CloseHandle
+GetCurrentThread
+GetCurrentProcess
+SetThreadAffinityMask
+SetPriorityClass
+SetThreadPriority
+Sleep
 """
     output_def.write_text(def_content, encoding="utf-8")
     cmd = [
@@ -64,7 +97,7 @@ def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, 
     bin_dir = out_dll.parent
     bin_dir.mkdir(parents=True, exist_ok=True)
 
-    # Check if we need standalone msvcrt import library on Windows
+    # Check if we need standalone msvcrt / kernel32 import libraries on Windows
     extra_link_args = []
     if sys.platform == "win32":
         # Look for llvm-dlltool next to clang
@@ -72,11 +105,17 @@ def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, 
         dlltool_path = find_executable("llvm-dlltool", [clang_dir])
         msvcrt_lib = bin_dir / "msvcrt.lib"
         msvcrt_def = bin_dir / "msvcrt.def"
+        kernel32_lib = bin_dir / "kernel32.lib"
+        kernel32_def = bin_dir / "kernel32.def"
 
         if dlltool_path:
-            if not msvcrt_lib.exists() or msvcrt_lib.stat().st_size == 0:
+            if not msvcrt_lib.exists() or msvcrt_lib.stat().st_size == 0 or not msvcrt_def.exists() or "qsort" not in msvcrt_def.read_text(encoding="utf-8"):
                 generate_msvcrt_import_lib(dlltool_path, msvcrt_lib, msvcrt_def)
-            if msvcrt_lib.exists():
+            if not kernel32_lib.exists() or kernel32_lib.stat().st_size == 0 or not kernel32_def.exists() or "CreateThread" not in kernel32_def.read_text(encoding="utf-8"):
+                generate_kernel32_import_lib(dlltool_path, kernel32_lib, kernel32_def)
+            if msvcrt_lib.exists() and kernel32_lib.exists():
+                extra_link_args = ["-nostdlib", "-Xlinker", "/noentry", str(msvcrt_lib), str(kernel32_lib)]
+            elif msvcrt_lib.exists():
                 extra_link_args = ["-nostdlib", "-Xlinker", "/noentry", str(msvcrt_lib)]
 
     cmd = [
@@ -152,6 +191,12 @@ def build_native_runtime() -> Path:
         src_dir / "wetvm_vm.c",
         src_dir / "biophysics.c",
         src_dir / "interlocks.c",
+        src_dir / "wet_hal.c",
+        src_dir / "wet_hal_intan.c",
+        src_dir / "wet_hal_maxwell.c",
+        src_dir / "wet_hal_pump_valve.c",
+        src_dir / "wet_hal_sensirion.c",
+        src_dir / "wet_scheduler.c",
     ]
     for sf in src_files:
         if not sf.exists():

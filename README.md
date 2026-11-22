@@ -1,11 +1,12 @@
 # WetLang 🧠💧
 ### The Domain-Specific Programming Language & Cyber-Physical Engine for Neural Organoid Computing
 
-[![Language: WetLang](https://img.shields.io/badge/Language-WetLang%20(100%25)-00B4D8?style=for-the-badge&logo=dna)](docs/LANGUAGE_SPECIFICATION.md)
-[![Tests Passing](https://img.shields.io/badge/Tests-463%2F463%20Passing%20(100%25)-brightgreen.svg)]()
+[![Language: WetLang](https://img.shields.io/badge/Language-WetLang%20(100%25)-00B4D8?style=for-the-badge&logo=dna)](docs/compendium/VOL_1_LANGUAGE_AND_COMPILER.md)
+[![Tests Passing](https://img.shields.io/badge/Tests-527%2F527%20Passing%20(100%25)-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Gymnasium](https://img.shields.io/badge/RL-Farama%20Gymnasium-purple.svg)]()
 [![snnTorch](https://img.shields.io/badge/ODE--Verification-snnTorch%20(r%3D0.999999)-success.svg)]()
+[![NIR v1.0](https://img.shields.io/badge/Neuromorphic-NIR%20v1.0%20Bridge-orange.svg)]()
 
 > **WetLang** is the first production-grade programming language, compiler toolchain, freestanding virtual machine runtime, and biocybersecurity interlock system designed for **biological neural wetware computing**. It executes on Microelectrode Arrays (MEAs) and orchestrates cyber-physical life-support robotics (microfluidic pumps, pinch valves, stepper motors).
 
@@ -18,6 +19,10 @@ Traditional silicon programming languages are blind to biological physics. If co
 WetLang treats **living neural tissue and robotic life support as a single, unified cyber-physical machine**:
 * **Universal Multi-Organoid Scale:** Scales dynamically from a **single organoid** to **$10^3+$ interconnected organoid clusters** with biological axonal conduction delay queues.
 * **Dimensional Physical Type Safety:** Physical units (`0.4V`, `0.2ms`, `1.5uL/min`, `101.3kPa`, `150um`) are first-class language types checked at compile time.
+* **Physical Hardware Abstraction Layer (HAL):** Tri-modal C99 HAL driver architecture (`simulated`, `physical`, `hil_loopback`) supporting commercial SPI DAQs (Intan RHS2116), high-density CMOS MEAs (MaxWell MaxOne/MaxTwo, 1024 channels), Harvard Apparatus RS-232 syringe pumps, ISO 11898 microfluidic CAN-bus pinch valves, and Sensirion SLF3x/SLI flow sensors.
+* **Sub-100 µs Emergency Hardware Crowbar:** Sub-microsecond hardware fast-path interlock (0.19 µs mean, 2.0 µs P99 latency under 100% CPU load) immediately shunting stimulator outputs upon electrochemical or microfluidic limit breaches.
+* **Neuromorphic Intermediate Representation (NIR v1.0) Bridge:** Bidirectional conversion between standard NIR v1.0 computational graphs (LIF, CubaLIF, Izhikevich) and WetLang AST / `.wbc` bytecode, with strict biological Dale's principle excitatory/inhibitory weight matrix decomposition ($W = W_+ - W_-$).
+* **C99 Hard Real-Time 10 kHz Execution Scheduler:** Deterministic isochronous execution paced by Windows QPC hardware clocks with dedicated CPU Performance-Core (P-core) affinity pinning, `REALTIME_PRIORITY_CLASS`, forward-resynchronization on phase slip, and dual 64-byte padded lockless SPSC ring buffers.
 * **Cyber-Physical Actuator Control:** Directly drives microfluidic peristaltic/syringe pumps, micro-pinch valves, and stepper motors in cycle-accurate ($0.1\text{ ms}$) synchrony with electrical stimulation.
 * **Spherical Reaction-Diffusion Thiele Anoxia Check:** Rejects unperfused organoids exceeding $r > 200\,\mu\text{m}$ and strictly forbids avascular organoids exceeding $r > 250\,\mu\text{m}$ (`ERR_AVASCULAR_CORE_NECROSIS`) even with perfusion, unless structurally vascularized or sliced.
 * **Geometry-Aware Hydrodynamic Shear Stress Clamp:** Enforces $\tau_w = 1.2 \frac{6\mu Q}{w h^2} \le 0.05\text{ Pa}$ and dead-head valve-pump interlocks to prevent neurite shear lysis and microfluidic backpressure blowout.
@@ -213,9 +218,11 @@ wetlang/
 
 ## 📖 Complete Documentation
 
-* **[Master Reference Compendium (PDF)](docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf):** 255-page comprehensive textbook covering the formal mathematical derivations, biophysics ODE proofs, and compiler semantics.
-* **[Formal Language Specification](docs/LANGUAGE_SPECIFICATION.md):** Complete EBNF grammar, physical unit dimensional matrices, and 30+ opcode specifications.
-* **[Phase 2 Red-Team Audit Report](docs/AUDIT_REPORT.md):** Detailed results of the 16 adversarial attack vectors and safety interlock verifications.
+* **[Master Reference Compendium (PDF)](docs/compendium/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf):** 448-page comprehensive textbook across 6 volumes covering formal mathematical derivations, biophysics ODE proofs, physical HAL architecture, and compiler semantics.
+* **[Master Architectural Dossier](docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md):** Complete architectural audit dossier, vulnerability register, and verification evidence.
+* **[Volume 1: Language & Compiler](docs/compendium/VOL_1_LANGUAGE_AND_COMPILER.md):** Formal EBNF grammar, physical unit dimensional matrices, 51 opcode specifications, and NIR v1.0 bridge.
+* **[Volume 2: Native Runtime & FFI](docs/compendium/VOL_2_NATIVE_RUNTIME_AND_FFI.md):** C99 virtual machine, physical HAL drivers, and hard real-time execution scheduler.
+* **[Volume 4: Safety Watchdogs & Verification](docs/compendium/VOL_4_SAFETY_WATCHDOGS_AND_VERIFICATION.md):** Detailed results of adversarial attack vectors, 527 passing tests, and safety interlocks.
 
 ---
 

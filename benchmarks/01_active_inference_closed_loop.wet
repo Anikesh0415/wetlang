@@ -1,0 +1,54 @@
+// Benchmark 01: Active Inference Closed-Loop Sensory-Motor Controller
+// Organoid controls a 1D continuous tracking agent.
+
+grid mea[8, 8];
+channel sens_left  = mea[0, 2];
+channel sens_right = mea[0, 5];
+channel mot_left   = mea[7, 2];
+channel mot_right  = mea[7, 5];
+channel rew_chan   = mea[3, 3];
+channel pun_chan   = mea[4, 4];
+
+float agent_pos   = 0.0;
+float target_pos  = 0.0;
+float prev_error  = 0.0;
+int   step_count  = 0;
+
+while (step_count < 5000) {
+    // 1. Sensory Encoding: deliver biphasic pulses proportional to target offset
+    float error = target_pos - agent_pos;
+    if (error > 0.1) {
+        stim_biphasic(sens_right, 0.8, 0.2, 0.2);
+    } else if (error < -0.1) {
+        stim_biphasic(sens_left, 0.8, 0.2, 0.2);
+    }
+    
+    // 2. Advance biological time by 20.0 ms (200 ticks of dt = 0.1 ms)
+    int tick = 0;
+    while (tick < 200) {
+        sync_tick();
+        tick = tick + 1;
+    }
+    
+    // 3. Motor Decoding: read spike rasters over the 20 ms window
+    int left_spikes  = read_spikes(mot_left, 20.0);
+    int right_spikes = read_spikes(mot_right, 20.0);
+    float motor_delta = (float(right_spikes) - float(left_spikes)) * 0.05;
+    agent_pos = agent_pos + motor_delta;
+    
+    // 4. Closed-loop Reinforcement (Active Inference Free-Energy Principle)
+    float new_error = abs(target_pos - agent_pos);
+    if (new_error < abs(prev_error)) {
+        // Success: Predictable 20 Hz low-entropy reward, boost STDP
+        stim_biphasic(rew_chan, 0.5, 0.1, 0.1);
+        modulate_stdp(1.2);
+    } else {
+        // Failure: Unpredictable high-entropy chaotic punishment burst
+        stim_biphasic(pun_chan, 0.9, 0.1, 0.1);
+        modulate_stdp(0.7);
+    }
+    
+    prev_error = new_error;
+    step_count = step_count + 1;
+    sync_tick();
+}

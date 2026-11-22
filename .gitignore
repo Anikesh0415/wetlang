@@ -27,6 +27,7 @@ venv/
 *.obj
 *.so
 *.dylib
+*.dll
 !native/bin/wetvm.dll
 !bin/wetvm.dll
 native/bin/*.lib

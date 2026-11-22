@@ -49,6 +49,9 @@ typedef struct {
     uint64_t ticks_under_supervisor;
 } wet_life_supervisor_t;
 
+/* Forward declaration for Hardware Abstraction Layer context */
+struct wet_hal_context;
+
 /* Internal VM instance structure */
 struct wet_vm_instance {
     wet_vm_config_t config;
@@ -123,6 +126,9 @@ struct wet_vm_instance {
     float    dissolved_co2_pct;     /* e.g. 5.0 % */
     uint8_t  bubble_detected[8];    /* 1 if bubble detected on tubing line */
     float    fluid_flow_rate_ul_min[8]; /* flow sensor readouts */
+
+    /* Hardware Abstraction Layer Context (M1 HAL) */
+    struct wet_hal_context* hal;
 
     /* Error reporting buffer */
     char     last_error[256];

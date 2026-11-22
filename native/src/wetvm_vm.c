@@ -2,6 +2,7 @@
 #include "../include/wetvm_types.h"
 #include "../include/wetvm_api.h"
 #include "../include/wetvm_vm.h"
+#include "../include/wet_hal.h"
 
 /* Unaligned Little-Endian Memory Readers (prevents hardware faults on ARM/RISC-V) */
 static inline uint16_t wet_read_u16_le(const void* p) {
@@ -380,6 +381,9 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
                 if (v < 8 && vm->valve_states[v] == 0) {
                     vm->interlocks.locked = 1;
                     vm->interlocks.trip_reason = INTERLOCK_TRIP_DEAD_HEAD_PRESSURE;
+                    if (vm->hal) {
+                        wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_DEAD_HEAD_PRESSURE);
+                    }
                     snprintf(vm->last_error, sizeof(vm->last_error),
                              "ERR_DEAD_HEAD_OVERPRESSURE: Pump %d active at %.2f uL/min while downstream valve %d is closed",
                              p, (double)vm->pump_rates_ul_min[p], v);
@@ -395,6 +399,9 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
         if (th_st != WET_OK) {
             biophysics_zero_all_stim(&vm->bio);
             vm->is_halted = 1;
+            if (vm->hal) {
+                wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+            }
             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
             populate_telemetry(vm, out_telem);
             return th_st;
@@ -408,6 +415,9 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
                 for (int p = 0; p < 8; ++p) vm->pump_rates_ul_min[p] = 0.0f;
                 biophysics_zero_all_stim(&vm->bio);
                 vm->is_halted = 1;
+                if (vm->hal) {
+                    wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+                }
                 snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
                 populate_telemetry(vm, out_telem);
                 return bub_st;
@@ -439,6 +449,9 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
         memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
         memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
         vm->is_halted = 1;
+        if (vm->hal) {
+            wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+        }
         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
         populate_telemetry(vm, out_telem);
         return il_st;
@@ -456,6 +469,9 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
         memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
         memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
         vm->is_halted = 1;
+        if (vm->hal) {
+            wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+        }
         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
         populate_telemetry(vm, out_telem);
         return il_st;
@@ -1083,6 +1099,9 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                         vm->interlocks.tripped_channel = channel;
                         vm->interlocks.trip_tick = vm->current_tick;
                         vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+                        if (vm->hal) {
+                            wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+                        }
                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
                                  "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
                                  channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
@@ -1099,6 +1118,9 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 }
 
                 float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage);
+                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+                    wet_hal_stim_voltage(vm->hal, (uint16_t)channel, clamped_v, p1_ms, p2_ms);
+                }
                 biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
                 vm->voltages[channel] = clamped_v;
                 /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
@@ -1299,6 +1321,16 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                     return WET_ERR_SHEAR_STRESS_EXCEEDED;
                 }
 
+                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+                    wet_hal_status_t hst = wet_hal_write_pump(vm->hal, pump_id, (double)rate_ul_min, 1);
+                    if (hst == WET_HAL_ERR_DEAD_HEAD) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "ERR_ACTUATOR_FAULT: Dead-head overpressure interlock tripped on pump %u (downstream valve closed)",
+                                 pump_id);
+                        return WET_ERR_ACTUATOR_FAULT;
+                    }
+                }
+
                 vm->pump_rates_ul_min[pump_id] = rate_ul_min;
                 break;
             }
@@ -1331,6 +1363,16 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                     return WET_ERR_ACTUATOR_FAULT;
                 }
 
+                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+                    wet_hal_status_t hst = wet_hal_dispense_pump(vm->hal, pump_id, (double)volume_ul);
+                    if (hst == WET_HAL_ERR_DEAD_HEAD) {
+                        snprintf(vm->last_error, sizeof(vm->last_error),
+                                 "ERR_ACTUATOR_FAULT: Dead-head overpressure interlock tripped on pump %u (downstream valve closed)",
+                                 pump_id);
+                        return WET_ERR_ACTUATOR_FAULT;
+                    }
+                }
+
                 vm->pump_dispensed_ul[pump_id] += volume_ul;
                 break;
             }
@@ -1353,6 +1395,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 if (valve_id >= 8) {
                     snprintf(vm->last_error, sizeof(vm->last_error), "Valve ID %u out of bounds (max 7)", valve_id);
                     return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+
+                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+                    wet_hal_write_valve(vm->hal, valve_id, state);
                 }
 
                 vm->valve_states[valve_id] = (state != 0) ? 1 : 0;
@@ -1485,11 +1531,31 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                         vm->interlocks.tripped_channel = channel;
                         vm->interlocks.trip_tick = vm->current_tick;
                         vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+                        if (vm->hal) {
+                            wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+                        }
                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
                                  "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
                                  channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
                         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
                         return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+                    }
+                }
+
+                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+                    int32_t cur_pA = (int32_t)(current_ua * 1e6f);
+                    uint32_t dur_us = (uint32_t)(p1_ms * 1000.0f);
+                    wet_hal_status_t hst = wet_hal_stim_current(vm->hal, (uint16_t)channel, cur_pA, dur_us);
+                    if (hst == WET_HAL_ERR_COMPLIANCE_RAILED) {
+                        vm->interlocks.locked = 1;
+                        vm->interlocks.trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
+                        vm->interlocks.tripped_channel = channel;
+                        vm->interlocks.trip_tick = vm->current_tick;
+                        snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                                 "ERR_COMPLIANCE_RAILED: Channel %u compliance rail tripped on hardware driver (~7.0V limit)", channel);
+                        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+                        wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_COMPLIANCE_RAILED);
+                        return WET_ERR_COMPLIANCE_RAILED;
                     }
                 }
 
@@ -1553,9 +1619,13 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
                 vm->pc = instr_pc + 2;
                 if (sensor_id >= 8) sensor_id = 0;
+                double flow_val = (double)vm->fluid_flow_rate_ul_min[sensor_id];
+                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+                    wet_hal_read_flow(vm->hal, sensor_id, &flow_val);
+                }
                 wet_value_t f_val;
                 f_val.type = WET_VAL_FLOAT;
-                f_val.as.f_val = vm->fluid_flow_rate_ul_min[sensor_id];
+                f_val.as.f_val = (float)flow_val;
                 wet_status_t st = push_val(vm, f_val);
                 if (st != WET_OK) return st;
                 break;

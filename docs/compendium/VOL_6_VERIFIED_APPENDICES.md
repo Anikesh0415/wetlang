@@ -2,8 +2,8 @@
 
 **Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
-**Generated Programmatically:** `2026-11-19 16:31:49 UTC` by `docs/compendium/generate_compendium.py`  
-**Repository Scope:** 151 tracked files | 2,520,075 bytes | 38,313 text lines
+**Generated Programmatically:** `2026-11-22 13:30:15 UTC` by `docs/compendium/generate_compendium.py`  
+**Repository Scope:** 171 tracked files | 2,902,365 bytes | 45,980 text lines
 
 ---
 
@@ -18,150 +18,170 @@
 | 5 | `benchmarks/02_polychronous_reservoir_classifier.wet` | 1,377 | 49 | `b385c987835dae60a479f77e6ec581a81d8ed8ecf5aa83400704fc6275416511` |
 | 6 | `benchmarks/03_homeostatic_stabilization_and_stress.wbc` | 1,111 | BIN | `e7d2c293becbfebf9f39232d7c0f14439eb8c987a54e4be0282656f0cd02bee4` |
 | 7 | `benchmarks/03_homeostatic_stabilization_and_stress.wet` | 1,326 | 43 | `88646455ff957520a8401921c7d8ee9a22b30b6ed78f889fba178acbaa454be5` |
-| 8 | `bindings/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
-| 9 | `bindings/ffi.py` | 17,236 | 455 | `3e86aa73a89b723672d40d8596c721efd7d399d1a41742dd30df519ca4d32de5` |
-| 10 | `bindings/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
-| 11 | `biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
-| 12 | `biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
-| 13 | `biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
-| 14 | `biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
-| 15 | `biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
-| 16 | `biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
-| 17 | `compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
-| 18 | `compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
-| 19 | `compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
-| 20 | `compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
-| 21 | `compiler/emitter.py` | 39,247 | 951 | `0c0daf0ece1d0a17ff0f04f10373d423dd4605ffea4dbf52a4796b5bff743d60` |
-| 22 | `compiler/isa.py` | 5,750 | 185 | `1236dcf84a16009f80c2a0d98a58cf56c8d10a4a7ef061f34a0792b3f0976e0c` |
-| 23 | `compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
-| 24 | `compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
-| 25 | `compiler/semantic.py` | 37,453 | 848 | `cafb5abc9bb024e32c27e8718696c01d79f93b900c0fdcc5f556ad660e739c61` |
-| 26 | `compiler/token.py` | 7,461 | 270 | `1cb5c20236fd522b40b4589a77df2cd4b0e0097169e175c563b85a479aa77a6c` |
-| 27 | `docs/adversarial_debate.md` | 29,926 | 286 | `80620f350cff9f2e9af1781d27e1718c63cfb5efdad4f6bf57b8c55a63fb62a4` |
-| 28 | `docs/AUDIT_EXTERNAL_REVIEW.md` | 31,132 | 413 | `32396889220ebc8dcff5330dec7b0f3f215ed6a3941639a781d82909e7d3314e` |
-| 29 | `docs/language_spec.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
-| 30 | `docs/PHASE2_DEEP_AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
-| 31 | `docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 21,836 | 172 | `55827b4261801c768caa05ece270774d874c94288186d3ebb84ac584ccf577c8` |
-| 32 | `examples/sample_closed_loop.wbc` | 525 | BIN | `8a58718093bb37d2e0f1867153fffbd824587f02c0d79e01d4b4705ac0bedc6f` |
-| 33 | `examples/sample_closed_loop.wet` | 411 | 15 | `718976d0535685e8edf39d139722a014f8483069ab806e3506c9b24f9f8c7ad5` |
-| 34 | `legacy_specs/test_wetworld_cuda.py` | 4,873 | 102 | `fb3ce5f34f58dad1f45aba5cfd2a362903daf6d5c448e7af4ccf17100ac6fed8` |
-| 35 | `legacy_specs/WETLANG_LANGUAGE_SPECIFICATION.md` | 4,316 | 117 | `35857be3692842bc2fd2f244fd962f72d91a1be523e89b0334fa17e48c2a2361` |
-| 36 | `legacy_specs/wetworld_oi_studio.html` | 63,613 | 1551 | `825462c388983fe7ab343387b4a32fa35060a1a5ed712b6872e0ee9b23a4ae8a` |
-| 37 | `legacy_specs/WETWORLD_README.md` | 6,435 | 102 | `9b4a47efb9a29e1b3cbdd86e8ff37ecf372024805482c15a6954e3e6e4e9f409` |
-| 38 | `native/__init__.py` | 61 | 3 | `d0681b3b7d83c57b6d20bfe602085e1620539b6f082cec5308bcaac40394e318` |
-| 39 | `native/bin/msvcrt.def` | 120 | 14 | `e23058b3a7f790f618fd835c1689d48d4326ca0d92d07ea9aa89d5b54f11b145` |
-| 40 | `native/bin/msvcrt.lib` | 3,052 | BIN | `96433a90f40026af91c44c90fccea1f6dbed4b224461aaf2090f39b57fdc900d` |
-| 41 | `native/bin/wetvm.dll` | 48,128 | BIN | `cce082e9a2ddc47a50cdfb3bac75e9954a02b7f8a99d094979c8c5815ceb94b7` |
-| 42 | `native/bin/wetvm.lib` | 6,502 | BIN | `b81433f0ffd7f2dcc755ce69cbfe2591aa4393cbdece576ad219dbf4133b5aba` |
-| 43 | `native/build.py` | 6,438 | 208 | `c1492b8c733b046b00a30acd795bb3ffe32b590fa2b9b22469fbd3130d9ea41b` |
-| 44 | `native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
-| 45 | `native/include/interlocks.h` | 7,799 | 165 | `2eeee7b4f3868ac4edf4cffd59eaf1c58d7167b45b98a5a7120912fa7e52f2da` |
-| 46 | `native/include/wet_crt.h` | 2,988 | 101 | `a18377fac4743913679dc09fc6630d42098c1d526441450b91f0160b77a5ee55` |
-| 47 | `native/include/wetvm_api.h` | 7,695 | 281 | `aedad5bea596a707ab57506fc956a9160da2a02150880ea7d4a295d693c9c8ac` |
-| 48 | `native/include/wetvm_types.h` | 6,610 | 177 | `90dc6be4f81eb94219c356bc070d53992ad863aeea0789956bd4405cc10858a3` |
-| 49 | `native/include/wetvm_vm.h` | 4,057 | 140 | `15209c34328bb97947386100096274cf39f7ffbc8e436608b6752c690c5541ed` |
-| 50 | `native/interlocks.py` | 3,689 | 90 | `5831e4240793de5987e600feed2d8d32a6a294f05587113050968078dfe56b7c` |
-| 51 | `native/src/biophysics.c` | 23,068 | 540 | `9f12d3ca6c10cd8861cfd27bc1b9f33d6093699f790481d12d9a4299c65e77a6` |
-| 52 | `native/src/interlocks.c` | 12,833 | 314 | `f5b7f88bdfe056916239ff9c51b256da2feac36f5b23f3dcb0095b32e4034fa3` |
-| 53 | `native/src/wetvm_api.c` | 20,749 | 577 | `e0a7b379e7531e3740fa7372061696edb82246f36460e36f0fd8f8dfe85081bb` |
-| 54 | `native/src/wetvm_vm.c` | 83,054 | 1953 | `a55c9f22bb0f1d781f10253f7bfa9050f734132203162210fe60b14a1ace3863` |
-| 55 | `native/wetvm.dll` | 48,128 | BIN | `cce082e9a2ddc47a50cdfb3bac75e9954a02b7f8a99d094979c8c5815ceb94b7` |
-| 56 | `PROJECT.md` | 14,727 | 198 | `0ed7cee23597284f347b97dc1c85ba3d001b493489ecd773375aff47aa328d40` |
-| 57 | `pytest.ini` | 95 | 4 | `f99f036c5063c3bba344c0ab687e6d0c0eb585764b8fcfaddd6fd34958e58c5f` |
-| 58 | `sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
-| 59 | `sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
-| 60 | `sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
-| 61 | `sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
-| 62 | `TEST_INFRA.md` | 5,666 | 71 | `9bfab52507a9ce87deaabb3d4f18f439a8826f28c06fbe67a693ed6b99c69606` |
-| 63 | `TEST_READY.md` | 1,330 | 28 | `033fc27c27d1a17cdbf1378a56d1184ef143b5c632cf553a0ef082a8720b3585` |
-| 64 | `test_reports/tier3_4_report.json` | 921 | 44 | `202e27a3017044a1f3ff314893eb49cd0e3d005b8bee59dd279a96ad7bc08a67` |
-| 65 | `tests/e2e/__init__.py` | 890 | 43 | `90fc12f4d49c01d1af12d768fff0eef372150c091fac25a1bf94e252f4da4c1d` |
-| 66 | `tests/e2e/common.py` | 38,914 | 1062 | `faf560dae3b7e1b42a2e333b0e75bd619b00fb71c0ba111d4dcdb1ebaeb9dc24` |
-| 67 | `tests/e2e/test_tier1_features.py` | 74,476 | 1582 | `55a282b60f08cdb5d7a7d45faf7aa57cd700c8796e522a2f4082a8298c2959d1` |
-| 68 | `tests/e2e/test_tier2_boundaries.py` | 82,966 | 1835 | `989e23f9ba080d04d6e04c26126a7c6c0dc26effd7f7d6981ec179f93be57562` |
-| 69 | `tests/e2e/test_tier3_pairwise.py` | 42,694 | 976 | `3008ff114dd1105258c4777d37427bf1a08962647f0615a17989caeacee2f6d8` |
-| 70 | `tests/e2e/test_tier4_benchmarks.py` | 26,398 | 577 | `51287efebd301ab19d55bd630548f109ae5e19fb29d73be9abfeedec665003a3` |
-| 71 | `tests/run_e2e_tests.py` | 11,055 | 322 | `2ca92dbb3cc9c230a7d3cf9d38eede7a55cb77e13aa57fd9ce967b918e5f2c48` |
-| 72 | `tests/test_audit_remediation.py` | 15,595 | 372 | `c5df3ce3eb8584e6f6c013a091613a7a7399983683148336fb370d254de64d10` |
-| 73 | `tests/test_benchmarks.py` | 7,830 | 216 | `415b239383f290b91cca89c402389b8f1d586d3c2081fa0392c4891730e4d04f` |
-| 74 | `tests/test_interlocks.py` | 12,556 | 302 | `0dd0fa920d0d8a597a4330fd9da868e2046a7daab6fa11a6ddc9b85d950c1725` |
-| 75 | `tests/test_ode_stability.py` | 17,095 | 425 | `d401dfe9d0d16c79a2a1d5ce5a6eed3d69a79286a5b83266e1bcaba24883d376` |
-| 76 | `tests/test_parser_diagnostics.py` | 13,059 | 437 | `56a0914159f7f9c6302bba7aaa7ec78bd8d4d820337cf40abde9e3f06948cc3b` |
-| 77 | `tests/test_phase2_deep_audit.py` | 14,468 | 348 | `d2b739b630b6e93a060f7a02c21a3c8bc8c0daa19ec508cc2086cd9d452614a4` |
-| 78 | `tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
-| 79 | `tests/test_static_verifier.py` | 17,470 | 584 | `54ca1aa3eb0d25c2b451224e8bea3be522a566a7502f2c4d7864dce57c770d5f` |
-| 80 | `tests/test_universal_sandbox.py` | 5,725 | 139 | `ab7be8be193420d1d25a3ab3324be9342ee420b20210c3067199c1741832df1d` |
-| 81 | `wetlang_github_release/.gitattributes` | 486 | 19 | `06605de4ccdde7ca2ca17571eb44c8c655f32202de1d7df81c42525f53021a4b` |
-| 82 | `wetlang_github_release/.gitignore` | 373 | 34 | `c4da17fb5574583a5503b2db5f218ff5f9deb20b2bfe4f540447640c8f21a78a` |
-| 83 | `wetlang_github_release/bin/wetlang` | 48 | 2 | `ddb439bcbff7b0a10072988327d74d9bbbfa6186207ce83b2e2e5a750fca677c` |
-| 84 | `wetlang_github_release/bin/wetlang.cmd` | 35 | 2 | `4fd697a7d010293e3287761ec698ebf8c24b1092eb8ff2ed40029c92cefb0582` |
-| 85 | `wetlang_github_release/bin/wetvm.dll` | 48,128 | BIN | `4e4ee81ff60f5ad31fbcaae9c7113aad17bff60fdcae48a3162241feb6a9a1e9` |
-| 86 | `wetlang_github_release/CONTRIBUTING.md` | 1,371 | 35 | `e05ce8218f37cbccd487443e6ed7306ff633ec3c93091d8fcf9f4af802955dd5` |
-| 87 | `wetlang_github_release/docs/AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
-| 88 | `wetlang_github_release/docs/LANGUAGE_SPECIFICATION.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
-| 89 | `wetlang_github_release/docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` | 701,662 | BIN | `e493a944c2bdda14a8b23770200782980ebf8ded4e8dcc41b3ed3f16a648d985` |
-| 90 | `wetlang_github_release/docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 21,836 | 172 | `55827b4261801c768caa05ece270774d874c94288186d3ebb84ac584ccf577c8` |
-| 91 | `wetlang_github_release/examples/01_single_organoid_baseline.wbc` | 259 | BIN | `d4476a8217f32780adc25d8817e5805fd996267e17caf1be1c7524ae4dc6fc47` |
-| 92 | `wetlang_github_release/examples/01_single_organoid_baseline.wet` | 499 | 18 | `30f38bde068238378589ac7d452824f53fee9ef3d2ee8221194857178748f00a` |
-| 93 | `wetlang_github_release/examples/02_krogh_perfused_organoid.wet` | 593 | 19 | `41de709fd536cd8dffb322193491fc54f36e884ce63abb8aea1811e92c7d919d` |
-| 94 | `wetlang_github_release/examples/03_cyber_physical_actuation.wet` | 875 | 30 | `c7c591df662ff70c603b001e3688bc6bb49d8fe15772015e58d541e5aa357a00` |
-| 95 | `wetlang_github_release/examples/04_multi_organoid_connectome.wet` | 574 | 24 | `cd4c2e7e2420c6200d95f9aafaa2955aca5f70003bae6a7447cb6d060313a93a` |
-| 96 | `wetlang_github_release/examples/05_gymnasium_active_inference.py` | 1,524 | 41 | `ba14f7afba193b87701e83499cc5b1812ff497d35911decef269544047e7c174` |
-| 97 | `wetlang_github_release/examples/06_snntorch_validation.py` | 1,036 | 23 | `4d8f52c84fa79b4b2a4b4b7d90693baadd840247d272285e988dbb6acca9dee0` |
-| 98 | `wetlang_github_release/LICENSE` | 778 | 17 | `ad302ce114a707983380135aa042d5b051caae9ee20ae8c270c8dbaeec8e4171` |
-| 99 | `wetlang_github_release/native/bin/msvcrt.def` | 133 | 14 | `6929efe6f41270f6b761f9fe418501e19326f283227b1325a1495531067c4f5d` |
-| 100 | `wetlang_github_release/native/bin/msvcrt.lib` | 3,052 | BIN | `96433a90f40026af91c44c90fccea1f6dbed4b224461aaf2090f39b57fdc900d` |
-| 101 | `wetlang_github_release/native/bin/wetvm.dll` | 48,128 | BIN | `4e4ee81ff60f5ad31fbcaae9c7113aad17bff60fdcae48a3162241feb6a9a1e9` |
-| 102 | `wetlang_github_release/native/bin/wetvm.lib` | 6,502 | BIN | `b81433f0ffd7f2dcc755ce69cbfe2591aa4393cbdece576ad219dbf4133b5aba` |
-| 103 | `wetlang_github_release/native/build.py` | 6,438 | 208 | `c1492b8c733b046b00a30acd795bb3ffe32b590fa2b9b22469fbd3130d9ea41b` |
-| 104 | `wetlang_github_release/native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
-| 105 | `wetlang_github_release/native/include/interlocks.h` | 7,799 | 165 | `2eeee7b4f3868ac4edf4cffd59eaf1c58d7167b45b98a5a7120912fa7e52f2da` |
-| 106 | `wetlang_github_release/native/include/wet_crt.h` | 2,988 | 101 | `a18377fac4743913679dc09fc6630d42098c1d526441450b91f0160b77a5ee55` |
-| 107 | `wetlang_github_release/native/include/wetvm_api.h` | 7,695 | 281 | `aedad5bea596a707ab57506fc956a9160da2a02150880ea7d4a295d693c9c8ac` |
-| 108 | `wetlang_github_release/native/include/wetvm_types.h` | 6,610 | 177 | `90dc6be4f81eb94219c356bc070d53992ad863aeea0789956bd4405cc10858a3` |
-| 109 | `wetlang_github_release/native/include/wetvm_vm.h` | 4,057 | 140 | `15209c34328bb97947386100096274cf39f7ffbc8e436608b6752c690c5541ed` |
-| 110 | `wetlang_github_release/native/src/biophysics.c` | 23,068 | 540 | `9f12d3ca6c10cd8861cfd27bc1b9f33d6093699f790481d12d9a4299c65e77a6` |
-| 111 | `wetlang_github_release/native/src/interlocks.c` | 12,833 | 314 | `f5b7f88bdfe056916239ff9c51b256da2feac36f5b23f3dcb0095b32e4034fa3` |
-| 112 | `wetlang_github_release/native/src/wetvm_api.c` | 20,749 | 577 | `e0a7b379e7531e3740fa7372061696edb82246f36460e36f0fd8f8dfe85081bb` |
-| 113 | `wetlang_github_release/native/src/wetvm_vm.c` | 83,054 | 1953 | `a55c9f22bb0f1d781f10253f7bfa9050f734132203162210fe60b14a1ace3863` |
-| 114 | `wetlang_github_release/pyproject.toml` | 1,424 | 56 | `8ff6f4d98bb7373af36552b5d4c72ff4fa24d1f5a711c0c2f3f68d7f5226f792` |
-| 115 | `wetlang_github_release/README.md` | 10,152 | 222 | `a828a28a25388b0b5f2c7a2609035a168fb6be06cc9c34f56d6e1aa0f514febc` |
-| 116 | `wetlang_github_release/requirements.txt` | 75 | 5 | `6c0084c24660fd7f560241e652a7fab38e715289d6ffcdd53e9e8933d7af96f6` |
-| 117 | `wetlang_github_release/setup.py` | 262 | 13 | `4cf4331fe446579d9be12eb58dc6740ce38212edbddf087ab4718a284fa01082` |
-| 118 | `wetlang_github_release/tests/test_actuators.py` | 987 | 36 | `e0740cc2b9fa7b8475c6f7b6f2001cae3312291bdbc88e08f6fdc620ad5b0951` |
-| 119 | `wetlang_github_release/tests/test_compiler.py` | 965 | 30 | `9f312c9e6fae882410299a7194f6b6c150ddcc1075dbd2fafb910747bde36f82` |
-| 120 | `wetlang_github_release/tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
-| 121 | `wetlang_github_release/tests/test_runtime.py` | 643 | 22 | `7f8381b60a4cca97c68f4e63799cbf16ea489df723f7c6c01752a427af672269` |
-| 122 | `wetlang_github_release/tests/test_sandbox.py` | 1,113 | 31 | `5a2415e1659ca63f9374f5913db18b28721967a0de52e3e0551495ac9ff62884` |
-| 123 | `wetlang_github_release/wetlang/__init__.py` | 1,615 | 54 | `6b256cf5205bc599adf96ec2531211b69c4154205e17f3d48a8860281267b0ee` |
-| 124 | `wetlang_github_release/wetlang/bindings/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
-| 125 | `wetlang_github_release/wetlang/bindings/ffi.py` | 17,236 | 455 | `3e86aa73a89b723672d40d8596c721efd7d399d1a41742dd30df519ca4d32de5` |
-| 126 | `wetlang_github_release/wetlang/bindings/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
-| 127 | `wetlang_github_release/wetlang/biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
-| 128 | `wetlang_github_release/wetlang/biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
-| 129 | `wetlang_github_release/wetlang/biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
-| 130 | `wetlang_github_release/wetlang/biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
-| 131 | `wetlang_github_release/wetlang/biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
-| 132 | `wetlang_github_release/wetlang/biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
-| 133 | `wetlang_github_release/wetlang/cli.py` | 7,244 | 191 | `9cdb73e6406f12c08df57bf394d4e225a9f62584f1b599c26087867265e69ca2` |
-| 134 | `wetlang_github_release/wetlang/compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
-| 135 | `wetlang_github_release/wetlang/compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
-| 136 | `wetlang_github_release/wetlang/compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
-| 137 | `wetlang_github_release/wetlang/compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
-| 138 | `wetlang_github_release/wetlang/compiler/emitter.py` | 39,247 | 951 | `0c0daf0ece1d0a17ff0f04f10373d423dd4605ffea4dbf52a4796b5bff743d60` |
-| 139 | `wetlang_github_release/wetlang/compiler/isa.py` | 5,750 | 185 | `1236dcf84a16009f80c2a0d98a58cf56c8d10a4a7ef061f34a0792b3f0976e0c` |
-| 140 | `wetlang_github_release/wetlang/compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
-| 141 | `wetlang_github_release/wetlang/compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
-| 142 | `wetlang_github_release/wetlang/compiler/semantic.py` | 37,453 | 848 | `cafb5abc9bb024e32c27e8718696c01d79f93b900c0fdcc5f556ad660e739c61` |
-| 143 | `wetlang_github_release/wetlang/compiler/token.py` | 7,461 | 270 | `1cb5c20236fd522b40b4589a77df2cd4b0e0097169e175c563b85a479aa77a6c` |
-| 144 | `wetlang_github_release/wetlang/runtime/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
-| 145 | `wetlang_github_release/wetlang/runtime/ffi.py` | 10,509 | 297 | `6e1717b508cb1fae7d6018f4e29fc0cac5fb94cd3a3acdd4e635d6cd7a4f19cc` |
-| 146 | `wetlang_github_release/wetlang/runtime/runtime.py` | 10,880 | 323 | `7a1b134d8712895e2bfe840e95e2853a62ffdf24f23a6218a0dd0b983728dcaa` |
-| 147 | `wetlang_github_release/wetlang/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
-| 148 | `wetlang_github_release/wetlang/sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
-| 149 | `wetlang_github_release/wetlang/sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
-| 150 | `wetlang_github_release/wetlang/sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
-| 151 | `wetlang_github_release/wetlang/sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
+| 8 | `bindings/__init__.py` | 798 | 42 | `7cfb2e1e1803c1220d5e90ab609730761d1d3500a35b087e5e5f966260b263d0` |
+| 9 | `bindings/ffi.py` | 48,474 | 1127 | `57f28e802ac68829986c36c4ab8c21b0f7c7291f6300722c1bd8e54c9ce7fe96` |
+| 10 | `bindings/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
+| 11 | `bindings/scheduler.py` | 10,504 | 302 | `a26fa321476c3e7ec4644f3b92c2457bc7fda9669dac9104dab7f5385ca6d0ba` |
+| 12 | `biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
+| 13 | `biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
+| 14 | `biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
+| 15 | `biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
+| 16 | `biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
+| 17 | `biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
+| 18 | `compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
+| 19 | `compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
+| 20 | `compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
+| 21 | `compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
+| 22 | `compiler/emitter.py` | 39,247 | 951 | `0c0daf0ece1d0a17ff0f04f10373d423dd4605ffea4dbf52a4796b5bff743d60` |
+| 23 | `compiler/isa.py` | 5,750 | 185 | `1236dcf84a16009f80c2a0d98a58cf56c8d10a4a7ef061f34a0792b3f0976e0c` |
+| 24 | `compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
+| 25 | `compiler/nir_bridge.py` | 34,942 | 910 | `b8145cffc82cf8a1b0b03845ac0092637a7143b8ee5c2408393ffa264f8b1989` |
+| 26 | `compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
+| 27 | `compiler/semantic.py` | 37,453 | 848 | `cafb5abc9bb024e32c27e8718696c01d79f93b900c0fdcc5f556ad660e739c61` |
+| 28 | `compiler/token.py` | 7,461 | 270 | `1cb5c20236fd522b40b4589a77df2cd4b0e0097169e175c563b85a479aa77a6c` |
+| 29 | `docs/adversarial_debate.md` | 29,926 | 286 | `80620f350cff9f2e9af1781d27e1718c63cfb5efdad4f6bf57b8c55a63fb62a4` |
+| 30 | `docs/AUDIT_EXTERNAL_REVIEW.md` | 31,132 | 413 | `32396889220ebc8dcff5330dec7b0f3f215ed6a3941639a781d82909e7d3314e` |
+| 31 | `docs/language_spec.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
+| 32 | `docs/PHASE2_DEEP_AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
+| 33 | `docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 30,290 | 219 | `613bce1e91140a04801b174515038d6522b173ed67eac6dab6fe5977ef7a9e18` |
+| 34 | `examples/sample_closed_loop.wbc` | 525 | BIN | `8a58718093bb37d2e0f1867153fffbd824587f02c0d79e01d4b4705ac0bedc6f` |
+| 35 | `examples/sample_closed_loop.wet` | 411 | 15 | `718976d0535685e8edf39d139722a014f8483069ab806e3506c9b24f9f8c7ad5` |
+| 36 | `legacy_specs/test_wetworld_cuda.py` | 4,873 | 102 | `fb3ce5f34f58dad1f45aba5cfd2a362903daf6d5c448e7af4ccf17100ac6fed8` |
+| 37 | `legacy_specs/WETLANG_LANGUAGE_SPECIFICATION.md` | 4,316 | 117 | `35857be3692842bc2fd2f244fd962f72d91a1be523e89b0334fa17e48c2a2361` |
+| 38 | `legacy_specs/wetworld_oi_studio.html` | 63,613 | 1551 | `825462c388983fe7ab343387b4a32fa35060a1a5ed712b6872e0ee9b23a4ae8a` |
+| 39 | `legacy_specs/WETWORLD_README.md` | 6,435 | 102 | `9b4a47efb9a29e1b3cbdd86e8ff37ecf372024805482c15a6954e3e6e4e9f409` |
+| 40 | `native/__init__.py` | 61 | 3 | `d0681b3b7d83c57b6d20bfe602085e1620539b6f082cec5308bcaac40394e318` |
+| 41 | `native/bin/kernel32.def` | 235 | 13 | `c3ccb263de8fa517c0b6fba27d957c083b72b43f29c70902ab60a12c9a76aba5` |
+| 42 | `native/bin/kernel32.lib` | 3,480 | BIN | `9a7fd047c8b062c3e371da22a21a04afba4e3413dc27349ad1ba60a900b72f30` |
+| 43 | `native/bin/msvcrt.def` | 182 | 20 | `15775a186f68afed2dc83e1da279ac9aba5b77549e25f44633b7dcf65ba7e553` |
+| 44 | `native/bin/msvcrt.lib` | 3,984 | BIN | `0abf27283319dc423d0c0ad066308cbe84f78765d3ff61a767d2c382abb699a8` |
+| 45 | `native/bin/wetvm.dll` | 74,240 | BIN | `76a6e9243c919473c6dbd54306d52f09404d8877f449da4ea16731974447ed07` |
+| 46 | `native/bin/wetvm.lib` | 25,982 | BIN | `f2268a5b382202234ca7718980dfe0966dc88119eea5f3941524c1fbeca246dc` |
+| 47 | `native/build.py` | 8,066 | 253 | `d80faddc3126e4c4ddea917b8d60e86317e90a1da4f4e26d9510b600024dae27` |
+| 48 | `native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
+| 49 | `native/include/interlocks.h` | 7,799 | 165 | `2eeee7b4f3868ac4edf4cffd59eaf1c58d7167b45b98a5a7120912fa7e52f2da` |
+| 50 | `native/include/wet_crt.h` | 3,325 | 108 | `3c1a972b9cd8b7c7959e2d7362edb27f211577b535869a752b90d51e41a26f3c` |
+| 51 | `native/include/wet_hal.h` | 8,351 | 191 | `a9a2d1dca0115a12a6cbb7fe2dfbd777e0c936e5abb96dc97ddfba3c9c3e0c6a` |
+| 52 | `native/include/wet_hal_intan.h` | 5,000 | 169 | `15e6a6849d146a2522be660507c0ca896dd40db8b3164b866e5ec5d8fede6a10` |
+| 53 | `native/include/wet_hal_maxwell.h` | 5,292 | 173 | `f5be2fac6cba467d89fd78a8017982cea9cdf18710406fc87bc107dce396df05` |
+| 54 | `native/include/wet_hal_pump_valve.h` | 6,625 | 216 | `5db2b883e4822e33c028397394bc3ebc75b4be823e53b5253528faab68c198c2` |
+| 55 | `native/include/wet_hal_sensirion.h` | 4,384 | 153 | `c5cadc6f9f2f1b2b7d0ea747dc19cce5246f1822519dd02d14092c4f9056144b` |
+| 56 | `native/include/wet_scheduler.h` | 6,890 | 136 | `ae755ab83f92e02449f3bd47eeb7223b47a0ee8efee79bff5020215f4e89be4d` |
+| 57 | `native/include/wetvm_api.h` | 8,240 | 301 | `1ce7d24e459ec9bba04d2779564345d78f0fbd72c79430d083b11ecb00f6cf2a` |
+| 58 | `native/include/wetvm_types.h` | 6,610 | 177 | `90dc6be4f81eb94219c356bc070d53992ad863aeea0789956bd4405cc10858a3` |
+| 59 | `native/include/wetvm_vm.h` | 4,235 | 146 | `e769cd7ca730fe3f32e0731b58dd048350163b60d9e6f48be06a67649ee774d4` |
+| 60 | `native/interlocks.py` | 3,689 | 90 | `5831e4240793de5987e600feed2d8d32a6a294f05587113050968078dfe56b7c` |
+| 61 | `native/src/biophysics.c` | 23,068 | 540 | `9f12d3ca6c10cd8861cfd27bc1b9f33d6093699f790481d12d9a4299c65e77a6` |
+| 62 | `native/src/interlocks.c` | 12,833 | 314 | `f5b7f88bdfe056916239ff9c51b256da2feac36f5b23f3dcb0095b32e4034fa3` |
+| 63 | `native/src/wet_hal.c` | 17,159 | 489 | `f975ddf0fa223c9c723c5b500923c5121c35bbc5668bb8565cc9bd6a0fcdf452` |
+| 64 | `native/src/wet_hal_intan.c` | 15,192 | 394 | `a25facbb372a8c41704e7f9d126cd44945866204928fcaf3ab4f831509178813` |
+| 65 | `native/src/wet_hal_maxwell.c` | 14,303 | 357 | `e9c265c923734f464bf80b17bd7bd6f732492c32b1b2a1f2f390ad633185553a` |
+| 66 | `native/src/wet_hal_pump_valve.c` | 16,066 | 463 | `0643ab7ba9b8e772538af708222527a1b845c6d61f84e941534d97a750c3f68d` |
+| 67 | `native/src/wet_hal_sensirion.c` | 10,766 | 332 | `19293c38932593af4d119653c6ff904c1567163fdd58a80d2e729d08987bf3fe` |
+| 68 | `native/src/wet_scheduler.c` | 22,277 | 630 | `1fc17137ae23e51587879d05f6b311b27aaf4f43598582830e9051b194716df4` |
+| 69 | `native/src/wetvm_api.c` | 21,794 | 613 | `8971d78775e796a52f7b1d5c2f0225f584899cf8bb1ae64e7d32a3c3d6044103` |
+| 70 | `native/src/wetvm_vm.c` | 86,904 | 2023 | `4cce51ec2f893ada95d77421d245e841a9d9cff96c39c371b2aade2aeaa4a095` |
+| 71 | `native/wetvm.dll` | 74,240 | BIN | `76a6e9243c919473c6dbd54306d52f09404d8877f449da4ea16731974447ed07` |
+| 72 | `PROJECT.md` | 14,727 | 198 | `0ed7cee23597284f347b97dc1c85ba3d001b493489ecd773375aff47aa328d40` |
+| 73 | `pytest.ini` | 95 | 4 | `f99f036c5063c3bba344c0ab687e6d0c0eb585764b8fcfaddd6fd34958e58c5f` |
+| 74 | `README.md` | 11,071 | 225 | `5dee24cff7b6eb106f9f6fc180d56847319cdf98eeeebea2838acda600457f61` |
+| 75 | `sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
+| 76 | `sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
+| 77 | `sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
+| 78 | `sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
+| 79 | `TEST_INFRA.md` | 5,666 | 71 | `9bfab52507a9ce87deaabb3d4f18f439a8826f28c06fbe67a693ed6b99c69606` |
+| 80 | `TEST_READY.md` | 1,330 | 28 | `033fc27c27d1a17cdbf1378a56d1184ef143b5c632cf553a0ef082a8720b3585` |
+| 81 | `test_reports/tier3_4_report.json` | 921 | 44 | `202e27a3017044a1f3ff314893eb49cd0e3d005b8bee59dd279a96ad7bc08a67` |
+| 82 | `tests/e2e/__init__.py` | 890 | 43 | `90fc12f4d49c01d1af12d768fff0eef372150c091fac25a1bf94e252f4da4c1d` |
+| 83 | `tests/e2e/common.py` | 38,914 | 1062 | `faf560dae3b7e1b42a2e333b0e75bd619b00fb71c0ba111d4dcdb1ebaeb9dc24` |
+| 84 | `tests/e2e/test_tier1_features.py` | 74,476 | 1582 | `55a282b60f08cdb5d7a7d45faf7aa57cd700c8796e522a2f4082a8298c2959d1` |
+| 85 | `tests/e2e/test_tier2_boundaries.py` | 82,966 | 1835 | `989e23f9ba080d04d6e04c26126a7c6c0dc26effd7f7d6981ec179f93be57562` |
+| 86 | `tests/e2e/test_tier3_pairwise.py` | 42,694 | 976 | `3008ff114dd1105258c4777d37427bf1a08962647f0615a17989caeacee2f6d8` |
+| 87 | `tests/e2e/test_tier4_benchmarks.py` | 26,398 | 577 | `51287efebd301ab19d55bd630548f109ae5e19fb29d73be9abfeedec665003a3` |
+| 88 | `tests/run_e2e_tests.py` | 11,055 | 322 | `2ca92dbb3cc9c230a7d3cf9d38eede7a55cb77e13aa57fd9ce967b918e5f2c48` |
+| 89 | `tests/test_audit_remediation.py` | 15,595 | 372 | `c5df3ce3eb8584e6f6c013a091613a7a7399983683148336fb370d254de64d10` |
+| 90 | `tests/test_benchmarks.py` | 7,830 | 216 | `415b239383f290b91cca89c402389b8f1d586d3c2081fa0392c4891730e4d04f` |
+| 91 | `tests/test_hal_drivers.py` | 29,061 | 709 | `ca8bf850cd03ce66597afdf9b4ac95e91666bc871cdd03ad6755f3a72e71620d` |
+| 92 | `tests/test_interlocks.py` | 12,556 | 302 | `0dd0fa920d0d8a597a4330fd9da868e2046a7daab6fa11a6ddc9b85d950c1725` |
+| 93 | `tests/test_nir_bridge.py` | 17,608 | 480 | `c922ec35314e3d0c355388cf14c923072fced18bb968fdaad7e0c7922684bbd2` |
+| 94 | `tests/test_ode_stability.py` | 17,095 | 425 | `d401dfe9d0d16c79a2a1d5ce5a6eed3d69a79286a5b83266e1bcaba24883d376` |
+| 95 | `tests/test_parser_diagnostics.py` | 13,059 | 437 | `56a0914159f7f9c6302bba7aaa7ec78bd8d4d820337cf40abde9e3f06948cc3b` |
+| 96 | `tests/test_phase2_deep_audit.py` | 14,468 | 348 | `d2b739b630b6e93a060f7a02c21a3c8bc8c0daa19ec508cc2086cd9d452614a4` |
+| 97 | `tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
+| 98 | `tests/test_rt_scheduler.py` | 12,112 | 307 | `9bf6783185ad4b93b74ce3c1a10c0f4ae5bf7693f9488c0108b59e6a322fe5a6` |
+| 99 | `tests/test_static_verifier.py` | 17,470 | 584 | `54ca1aa3eb0d25c2b451224e8bea3be522a566a7502f2c4d7864dce57c770d5f` |
+| 100 | `tests/test_universal_sandbox.py` | 5,725 | 139 | `ab7be8be193420d1d25a3ab3324be9342ee420b20210c3067199c1741832df1d` |
+| 101 | `wetlang_github_release/.gitattributes` | 486 | 19 | `06605de4ccdde7ca2ca17571eb44c8c655f32202de1d7df81c42525f53021a4b` |
+| 102 | `wetlang_github_release/.gitignore` | 373 | 34 | `c4da17fb5574583a5503b2db5f218ff5f9deb20b2bfe4f540447640c8f21a78a` |
+| 103 | `wetlang_github_release/bin/wetlang` | 48 | 2 | `ddb439bcbff7b0a10072988327d74d9bbbfa6186207ce83b2e2e5a750fca677c` |
+| 104 | `wetlang_github_release/bin/wetlang.cmd` | 35 | 2 | `4fd697a7d010293e3287761ec698ebf8c24b1092eb8ff2ed40029c92cefb0582` |
+| 105 | `wetlang_github_release/bin/wetvm.dll` | 48,128 | BIN | `4e4ee81ff60f5ad31fbcaae9c7113aad17bff60fdcae48a3162241feb6a9a1e9` |
+| 106 | `wetlang_github_release/CONTRIBUTING.md` | 1,371 | 35 | `e05ce8218f37cbccd487443e6ed7306ff633ec3c93091d8fcf9f4af802955dd5` |
+| 107 | `wetlang_github_release/docs/AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
+| 108 | `wetlang_github_release/docs/LANGUAGE_SPECIFICATION.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
+| 109 | `wetlang_github_release/docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` | 701,662 | BIN | `e493a944c2bdda14a8b23770200782980ebf8ded4e8dcc41b3ed3f16a648d985` |
+| 110 | `wetlang_github_release/docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 29,586 | 213 | `4ac04cf46819a0cac37b0da7d46618b51e8783918ef18ff738b68c1a836c8bc5` |
+| 111 | `wetlang_github_release/examples/01_single_organoid_baseline.wbc` | 259 | BIN | `d4476a8217f32780adc25d8817e5805fd996267e17caf1be1c7524ae4dc6fc47` |
+| 112 | `wetlang_github_release/examples/01_single_organoid_baseline.wet` | 499 | 18 | `30f38bde068238378589ac7d452824f53fee9ef3d2ee8221194857178748f00a` |
+| 113 | `wetlang_github_release/examples/02_krogh_perfused_organoid.wet` | 593 | 19 | `41de709fd536cd8dffb322193491fc54f36e884ce63abb8aea1811e92c7d919d` |
+| 114 | `wetlang_github_release/examples/03_cyber_physical_actuation.wet` | 875 | 30 | `c7c591df662ff70c603b001e3688bc6bb49d8fe15772015e58d541e5aa357a00` |
+| 115 | `wetlang_github_release/examples/04_multi_organoid_connectome.wet` | 574 | 24 | `cd4c2e7e2420c6200d95f9aafaa2955aca5f70003bae6a7447cb6d060313a93a` |
+| 116 | `wetlang_github_release/examples/05_gymnasium_active_inference.py` | 1,524 | 41 | `ba14f7afba193b87701e83499cc5b1812ff497d35911decef269544047e7c174` |
+| 117 | `wetlang_github_release/examples/06_snntorch_validation.py` | 1,036 | 23 | `4d8f52c84fa79b4b2a4b4b7d90693baadd840247d272285e988dbb6acca9dee0` |
+| 118 | `wetlang_github_release/LICENSE` | 778 | 17 | `ad302ce114a707983380135aa042d5b051caae9ee20ae8c270c8dbaeec8e4171` |
+| 119 | `wetlang_github_release/native/bin/msvcrt.def` | 133 | 14 | `6929efe6f41270f6b761f9fe418501e19326f283227b1325a1495531067c4f5d` |
+| 120 | `wetlang_github_release/native/bin/msvcrt.lib` | 3,052 | BIN | `96433a90f40026af91c44c90fccea1f6dbed4b224461aaf2090f39b57fdc900d` |
+| 121 | `wetlang_github_release/native/bin/wetvm.dll` | 48,128 | BIN | `4e4ee81ff60f5ad31fbcaae9c7113aad17bff60fdcae48a3162241feb6a9a1e9` |
+| 122 | `wetlang_github_release/native/bin/wetvm.lib` | 6,502 | BIN | `b81433f0ffd7f2dcc755ce69cbfe2591aa4393cbdece576ad219dbf4133b5aba` |
+| 123 | `wetlang_github_release/native/build.py` | 6,438 | 208 | `c1492b8c733b046b00a30acd795bb3ffe32b590fa2b9b22469fbd3130d9ea41b` |
+| 124 | `wetlang_github_release/native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
+| 125 | `wetlang_github_release/native/include/interlocks.h` | 7,799 | 165 | `2eeee7b4f3868ac4edf4cffd59eaf1c58d7167b45b98a5a7120912fa7e52f2da` |
+| 126 | `wetlang_github_release/native/include/wet_crt.h` | 2,988 | 101 | `a18377fac4743913679dc09fc6630d42098c1d526441450b91f0160b77a5ee55` |
+| 127 | `wetlang_github_release/native/include/wetvm_api.h` | 7,695 | 281 | `aedad5bea596a707ab57506fc956a9160da2a02150880ea7d4a295d693c9c8ac` |
+| 128 | `wetlang_github_release/native/include/wetvm_types.h` | 6,610 | 177 | `90dc6be4f81eb94219c356bc070d53992ad863aeea0789956bd4405cc10858a3` |
+| 129 | `wetlang_github_release/native/include/wetvm_vm.h` | 4,057 | 140 | `15209c34328bb97947386100096274cf39f7ffbc8e436608b6752c690c5541ed` |
+| 130 | `wetlang_github_release/native/src/biophysics.c` | 23,068 | 540 | `9f12d3ca6c10cd8861cfd27bc1b9f33d6093699f790481d12d9a4299c65e77a6` |
+| 131 | `wetlang_github_release/native/src/interlocks.c` | 12,833 | 314 | `f5b7f88bdfe056916239ff9c51b256da2feac36f5b23f3dcb0095b32e4034fa3` |
+| 132 | `wetlang_github_release/native/src/wetvm_api.c` | 20,749 | 577 | `e0a7b379e7531e3740fa7372061696edb82246f36460e36f0fd8f8dfe85081bb` |
+| 133 | `wetlang_github_release/native/src/wetvm_vm.c` | 83,054 | 1953 | `a55c9f22bb0f1d781f10253f7bfa9050f734132203162210fe60b14a1ace3863` |
+| 134 | `wetlang_github_release/pyproject.toml` | 1,424 | 56 | `8ff6f4d98bb7373af36552b5d4c72ff4fa24d1f5a711c0c2f3f68d7f5226f792` |
+| 135 | `wetlang_github_release/README.md` | 11,071 | 225 | `5dee24cff7b6eb106f9f6fc180d56847319cdf98eeeebea2838acda600457f61` |
+| 136 | `wetlang_github_release/requirements.txt` | 75 | 5 | `6c0084c24660fd7f560241e652a7fab38e715289d6ffcdd53e9e8933d7af96f6` |
+| 137 | `wetlang_github_release/setup.py` | 262 | 13 | `4cf4331fe446579d9be12eb58dc6740ce38212edbddf087ab4718a284fa01082` |
+| 138 | `wetlang_github_release/tests/test_actuators.py` | 987 | 36 | `e0740cc2b9fa7b8475c6f7b6f2001cae3312291bdbc88e08f6fdc620ad5b0951` |
+| 139 | `wetlang_github_release/tests/test_compiler.py` | 965 | 30 | `9f312c9e6fae882410299a7194f6b6c150ddcc1075dbd2fafb910747bde36f82` |
+| 140 | `wetlang_github_release/tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
+| 141 | `wetlang_github_release/tests/test_runtime.py` | 643 | 22 | `7f8381b60a4cca97c68f4e63799cbf16ea489df723f7c6c01752a427af672269` |
+| 142 | `wetlang_github_release/tests/test_sandbox.py` | 1,113 | 31 | `5a2415e1659ca63f9374f5913db18b28721967a0de52e3e0551495ac9ff62884` |
+| 143 | `wetlang_github_release/wetlang/__init__.py` | 1,615 | 54 | `6b256cf5205bc599adf96ec2531211b69c4154205e17f3d48a8860281267b0ee` |
+| 144 | `wetlang_github_release/wetlang/bindings/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
+| 145 | `wetlang_github_release/wetlang/bindings/ffi.py` | 17,236 | 455 | `3e86aa73a89b723672d40d8596c721efd7d399d1a41742dd30df519ca4d32de5` |
+| 146 | `wetlang_github_release/wetlang/bindings/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
+| 147 | `wetlang_github_release/wetlang/biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
+| 148 | `wetlang_github_release/wetlang/biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
+| 149 | `wetlang_github_release/wetlang/biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
+| 150 | `wetlang_github_release/wetlang/biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
+| 151 | `wetlang_github_release/wetlang/biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
+| 152 | `wetlang_github_release/wetlang/biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
+| 153 | `wetlang_github_release/wetlang/cli.py` | 7,244 | 191 | `9cdb73e6406f12c08df57bf394d4e225a9f62584f1b599c26087867265e69ca2` |
+| 154 | `wetlang_github_release/wetlang/compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
+| 155 | `wetlang_github_release/wetlang/compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
+| 156 | `wetlang_github_release/wetlang/compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
+| 157 | `wetlang_github_release/wetlang/compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
+| 158 | `wetlang_github_release/wetlang/compiler/emitter.py` | 39,247 | 951 | `0c0daf0ece1d0a17ff0f04f10373d423dd4605ffea4dbf52a4796b5bff743d60` |
+| 159 | `wetlang_github_release/wetlang/compiler/isa.py` | 5,750 | 185 | `1236dcf84a16009f80c2a0d98a58cf56c8d10a4a7ef061f34a0792b3f0976e0c` |
+| 160 | `wetlang_github_release/wetlang/compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
+| 161 | `wetlang_github_release/wetlang/compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
+| 162 | `wetlang_github_release/wetlang/compiler/semantic.py` | 37,453 | 848 | `cafb5abc9bb024e32c27e8718696c01d79f93b900c0fdcc5f556ad660e739c61` |
+| 163 | `wetlang_github_release/wetlang/compiler/token.py` | 7,461 | 270 | `1cb5c20236fd522b40b4589a77df2cd4b0e0097169e175c563b85a479aa77a6c` |
+| 164 | `wetlang_github_release/wetlang/runtime/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
+| 165 | `wetlang_github_release/wetlang/runtime/ffi.py` | 10,509 | 297 | `6e1717b508cb1fae7d6018f4e29fc0cac5fb94cd3a3acdd4e635d6cd7a4f19cc` |
+| 166 | `wetlang_github_release/wetlang/runtime/runtime.py` | 10,880 | 323 | `7a1b134d8712895e2bfe840e95e2853a62ffdf24f23a6218a0dd0b983728dcaa` |
+| 167 | `wetlang_github_release/wetlang/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
+| 168 | `wetlang_github_release/wetlang/sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
+| 169 | `wetlang_github_release/wetlang/sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
+| 170 | `wetlang_github_release/wetlang/sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
+| 171 | `wetlang_github_release/wetlang/sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
 
 ---
 
@@ -184,12 +204,47 @@
 #### `native/include/wet_crt.h`
 
 - **Macros / Constants:** `snprintf` = `_snprintf`, `fabsf` = `wet_fabsf`
-- **Functions:** `malloc(size_t size)`; `calloc(size_t num, size_t size)`; `free(void* ptr)`; `memcpy(void* dest, const void* src, size_t count)`; `memset(void* dest, int ch, size_t count)`; `memcmp(const void* s1, const void* s2, size_t count)`; `_snprintf(char* buffer, size_t count, const char* format, ...)`; `wet_fabsf(float x)`; `wet_fabs(double x)`; `wet_clampf(float x, float lo, float hi)`; `wet_clampd(double x, double lo, double hi)`; `wet_exp(double x)`; `wet_expf(float x)`; `wet_sqrt(double x)`; `wet_rng_next(uint64_t* state)`; `wet_rng_uniform(uint64_t* state)`; `wet_rng_normal(uint64_t* state)`
+- **Functions:** `malloc(size_t size)`; `calloc(size_t num, size_t size)`; `free(void* ptr)`; `memcpy(void* dest, const void* src, size_t count)`; `memset(void* dest, int ch, size_t count)`; `memcmp(const void* s1, const void* s2, size_t count)`; `strlen(const char* str)`; `strncpy(char* dest, const char* src, size_t count)`; `strcpy(char* dest, const char* src)`; `strcat(char* dest, const char* src)`; `strcmp(const char* s1, const char* s2)`; `strncmp(const char* s1, const char* s2, size_t count)`; `sprintf(char* buffer, const char* format, ...)`; `_snprintf(char* buffer, size_t count, const char* format, ...)`; `wet_fabsf(float x)`; `wet_fabs(double x)`; `wet_clampf(float x, float lo, float hi)`; `wet_clampd(double x, double lo, double hi)`; `wet_exp(double x)`; `wet_expf(float x)`; `wet_sqrt(double x)`; `wet_rng_next(uint64_t* state)`; `wet_rng_uniform(uint64_t* state)`; `wet_rng_normal(uint64_t* state)`
+
+#### `native/include/wet_hal.h`
+
+- **Types / Structs / Enums:** `struct wet_hal_context`, `struct wet_hal_driver`, `wet_hal_config_t`, `wet_hal_driver_type_t`, `wet_hal_mode_t`, `wet_hal_ops_t`, `wet_hal_status_t`, `wet_hal_telemetry_t`
+- **Macros / Constants:** `WET_HAL_MAX_DRIVERS` = `16`
+- **Functions:** `wet_hal_create(wet_hal_mode_t mode, const wet_hal_config_t* config)`; `wet_hal_destroy(wet_hal_context_t* hal)`; `wet_hal_init(wet_vm_t* vm, wet_hal_mode_t mode, const wet_hal_config_t* config)`; `wet_hal_attach(wet_vm_t* vm, wet_hal_context_t* hal)`; `wet_hal_get_context(wet_vm_t* vm)`; `wet_hal_set_mode(wet_hal_context_t* hal, wet_hal_mode_t mode)`; `wet_hal_get_mode(const wet_hal_context_t* hal)`; `wet_hal_register_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver)`; `wet_hal_unregister_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver)`; `wet_hal_find_driver(wet_hal_context_t* hal, wet_hal_driver_type_t type)`; `wet_hal_write_pump(wet_hal_context_t* hal, uint8_t pump_id, double rate_ul_min, uint8_t run_flag)`; `wet_hal_dispense_pump(wet_hal_context_t* hal, uint8_t pump_id, double volume_ul)`; `wet_hal_write_valve(wet_hal_context_t* hal, uint8_t valve_id, uint8_t state)`; `wet_hal_read_flow(wet_hal_context_t* hal, uint8_t sensor_id, double* out_flow_ul_min)`; `wet_hal_stim_current(wet_hal_context_t* hal, uint16_t channel, int32_t current_pA, uint32_t duration_us)`; `wet_hal_stim_voltage(wet_hal_context_t* hal, uint16_t channel, float voltage_v, float p1_ms, float p2_ms)`; `wet_hal_read_spikes(wet_hal_context_t* hal, uint16_t channel, uint8_t* out_spike_flag)`; `wet_hal_measure_impedance(wet_hal_context_t* hal, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad)`; `wet_hal_active_discharge(wet_hal_context_t* hal, uint16_t channel)`; `wet_hal_emergency_crowbar(wet_vm_t* vm, uint32_t trip_reason)`; `wet_hal_get_telemetry(wet_hal_context_t* hal)`; `wet_hal_set_valve_for_pump(wet_hal_context_t* hal, uint8_t pump_id, uint8_t valve_id)`; `wet_hal_get_time_us(void)`
+
+#### `native/include/wet_hal_intan.h`
+
+- **Types / Structs / Enums:** `intan_current_range_t`, `intan_device_state_t`, `intan_spi_command_t`
+- **Macros / Constants:** `INTAN_RHS2116_NUM_CHANNELS` = `16`, `INTAN_SPI_WORD_BITS` = `32`, `INTAN_PIPELINE_DELAY_WORDS` = `2`, `INTAN_COMPLIANCE_RAIL_VOLT` = `7.0f`, `INTAN_CMD_CONVERT` = `0x00U`, `INTAN_CMD_WRITE` = `0x80U`, `INTAN_CMD_READ` = `0xC0U`, `INTAN_FLAG_M_COMPLIANCE_CLEAR` = `0x800000U`, `INTAN_FLAG_U_UPDATE_LATCH` = `0x400000U`
+- **Functions:** `wet_hal_intan_create(wet_hal_mode_t mode)`; `wet_hal_intan_destroy(wet_hal_driver_t* drv)`; `wet_hal_intan_spi_transfer(wet_hal_driver_t* drv, uint32_t mosi_word)`; `wet_hal_intan_encode_cmd(const intan_spi_command_t* cmd)`; `wet_hal_intan_decode_cmd(uint32_t word, intan_spi_command_t* cmd)`; `wet_hal_intan_set_stim_current(wet_hal_driver_t* drv, uint8_t channel, int32_t current_pA, uint32_t duration_us)`; `wet_hal_intan_get_compliance_status(wet_hal_driver_t* drv)`; `wet_hal_intan_clear_compliance(wet_hal_driver_t* drv)`; `wet_hal_intan_measure_impedance(wet_hal_driver_t* drv, uint8_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad)`; `wet_hal_intan_set_charge_recovery(wet_hal_driver_t* drv, uint8_t channel, uint8_t enable)`; `wet_hal_intan_inject_fault(wet_hal_driver_t* drv, uint8_t force_rail, uint8_t spi_error, uint8_t bus_timeout)`
+
+#### `native/include/wet_hal_maxwell.h`
+
+- **Types / Structs / Enums:** `maxwell_device_state_t`, `maxwell_seq_state_t`, `maxwell_seq_step_t`
+- **Macros / Constants:** `MAXWELL_TOTAL_ELECTRODES` = `26400`, `MAXWELL_RECORDING_CHANNELS` = `1024`, `MAXWELL_STIMULATION_UNITS` = `32`, `MAXWELL_PITCH_UM` = `17.5f`, `MAXWELL_ELECTRODE_AREA_UM2` = `132.25f`, `MAXWELL_VOLTAGE_LIMIT_MV` = `1000.0f`, `MAXWELL_MAX_DAC_BITS` = `335`, `MAXWELL_PT_CIC_MC_CM2` = `0.10f`, `MAXWELL_MAX_PHASE_CHARGE_NC` = `0.13225f`, `MAXWELL_MAX_SEQUENCE_STEPS` = `4096`
+- **Functions:** `wet_hal_maxwell_create(wet_hal_mode_t mode)`; `wet_hal_maxwell_destroy(wet_hal_driver_t* drv)`; `wet_hal_maxwell_route_channels(wet_hal_driver_t* drv, const uint16_t* electrode_indices, uint32_t count)`; `wet_hal_maxwell_connect_stim(wet_hal_driver_t* drv, uint8_t stim_unit, uint16_t electrode_id)`; `wet_hal_maxwell_sequence_clear(wet_hal_driver_t* drv)`; `wet_hal_maxwell_sequence_append(wet_hal_driver_t* drv, uint32_t timestamp_us, uint8_t stim_unit, uint16_t electrode_id, float voltage_mv, uint16_t duration_us)`; `wet_hal_maxwell_sequence_arm(wet_hal_driver_t* drv)`; `wet_hal_maxwell_sequence_start(wet_hal_driver_t* drv)`; `wet_hal_maxwell_sequence_get_state(wet_hal_driver_t* drv)`; `wet_hal_maxwell_stim_voltage(wet_hal_driver_t* drv, uint8_t stim_unit, uint16_t electrode_id, float voltage_mv, float phase1_ms, float phase2_ms)`; `wet_hal_maxwell_inject_fault(wet_hal_driver_t* drv, uint8_t force_charge_violation, uint8_t drop_frames)`
+
+#### `native/include/wet_hal_pump_valve.h`
+
+- **Types / Structs / Enums:** `harvard_prompt_t`, `harvard_pump_state_t`, `microfluidic_state_t`, `wet_can_frame_t`
+- **Macros / Constants:** `WET_MAX_PUMPS` = `8`, `WET_MAX_VALVES` = `8`, `WET_CAN_MAX_PAYLOAD` = `8`, `WET_CAN_QUEUE_CAPACITY` = `128`, `CAN_ID_EMCY_BASE` = `0x080U`, `CAN_ID_TPDO1_BASE` = `0x180U`, `CAN_ID_RPDO1_BASE` = `0x200U`, `CAN_ID_RPDO2_BASE` = `0x300U`, `CAN_ID_HEARTBEAT_BASE` = `0x700U`
+- **Functions:** `wet_hal_microfluidics_create(wet_hal_mode_t mode)`; `wet_hal_microfluidics_destroy(wet_hal_driver_t* drv)`; `wet_hal_harvard_format_cmd(uint8_t address, uint8_t fast_mode, const char* cmd_name, const char* args, char* out_buf, size_t out_buf_len)`; `wet_hal_harvard_parse_response(const char* resp_buf, size_t resp_len)`; `wet_hal_pump_set_rate(wet_hal_driver_t* drv, uint8_t pump_id, double rate_ul_min, uint8_t run_flag)`; `wet_hal_pump_dispense(wet_hal_driver_t* drv, uint8_t pump_id, double volume_ul)`; `wet_hal_pump_stop(wet_hal_driver_t* drv, uint8_t pump_id)`; `wet_hal_valve_set_state(wet_hal_driver_t* drv, uint8_t valve_id, uint8_t state)`; `wet_hal_pump_bind_downstream_valve(wet_hal_driver_t* drv, uint8_t pump_id, uint8_t valve_id)`; `wet_hal_can_send(wet_hal_driver_t* drv, const wet_can_frame_t* frame)`; `wet_hal_can_recv(wet_hal_driver_t* drv, wet_can_frame_t* out_frame)`; `wet_hal_can_send_emcy(wet_hal_driver_t* drv, uint8_t node_id, uint16_t error_code, uint8_t error_register)`; `wet_hal_microfluidics_inject_fault(wet_hal_driver_t* drv, uint8_t stall, uint8_t can_drop, uint8_t timeout)`
+
+#### `native/include/wet_hal_sensirion.h`
+
+- **Types / Structs / Enums:** `sensirion_device_state_t`
+- **Macros / Constants:** `SENSIRION_I2C_ADDR_DEFAULT` = `0x08U`, `SENSIRION_CRC8_POLYNOMIAL` = `0x31U`, `SENSIRION_CRC8_INIT` = `0xFFU`, `SENSIRION_CMD_START_CONT_H2O` = `0x3608U`, `SENSIRION_CMD_START_CONT_IPA` = `0x3615U`, `SENSIRION_CMD_STOP_CONT` = `0x3FF9U`, `SENSIRION_CMD_SOFT_RESET` = `0x0006U`, `SHDLC_FRAME_START_STOP` = `0x7EU`, `SHDLC_FRAME_ESCAPE` = `0x7DU`, `SHDLC_ESCAPE_MASK` = `0x20U`, `SHDLC_MAX_FRAME_SIZE` = `256`
+- **Functions:** `wet_hal_sensirion_create(wet_hal_mode_t mode)`; `wet_hal_sensirion_destroy(wet_hal_driver_t* drv)`; `wet_hal_sensirion_crc8(const uint8_t* data, size_t len)`; `wet_hal_sensirion_validate_crc(const uint8_t word_and_crc[3])`; `wet_hal_sensirion_start_measurement(wet_hal_driver_t* drv, uint16_t cmd)`; `wet_hal_sensirion_stop_measurement(wet_hal_driver_t* drv)`; `wet_hal_sensirion_read_flow(wet_hal_driver_t* drv, double* out_flow_ul_min)`; `wet_hal_sensirion_hil_set_flow(wet_hal_driver_t* drv, double flow_ul_min)`; `wet_hal_shdlc_encode(uint8_t address, uint8_t command, const uint8_t* payload, uint8_t payload_len, uint8_t* out_buf, size_t out_buf_max)`; `wet_hal_shdlc_decode(const uint8_t* raw_buf, size_t raw_len, uint8_t* out_address, uint8_t* out_command, uint8_t* out_payload, uint8_t* out_payload_len)`; `wet_hal_sensirion_inject_fault(wet_hal_driver_t* drv, uint8_t corrupt_crc, uint8_t nak_addr)`
+
+#### `native/include/wet_scheduler.h`
+
+- **Types / Structs / Enums:** `wet_scheduler_config_t`, `wet_scheduler_stats_t`, `wet_stim_command_t`
+- **Functions:** `wet_scheduler_create(wet_vm_instance_t* vm, const wet_scheduler_config_t* config)`; `wet_scheduler_start(wet_scheduler_t* sched)`; `wet_scheduler_step(wet_scheduler_t* sched)`; `wet_scheduler_stop(wet_scheduler_t* sched)`; `wet_scheduler_get_stats(const wet_scheduler_t* sched, wet_scheduler_stats_t* out_stats)`; `wet_scheduler_poll_telemetry(wet_scheduler_t* sched, wet_telemetry_t* out_telem)`; `wet_scheduler_push_stimulus(wet_scheduler_t* sched, const wet_stim_command_t* cmd)`; `wet_scheduler_benchmark(wet_scheduler_t* sched, uint32_t total_ticks, wet_scheduler_stats_t* out_stats)`; `wet_scheduler_destroy(wet_scheduler_t* sched)`
 
 #### `native/include/wetvm_api.h`
 
 - **Types / Structs / Enums:** `wet_actuator_telemetry_t`, `wet_telemetry_t`, `wet_vm_config_t`
-- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`
+- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`; `wet_vm_get_synapse_matrix(const wet_vm_t* vm, float* out_matrix, size_t out_capacity_floats)`; `wet_vm_get_synapse_weight(const wet_vm_t* vm, uint8_t pre, uint8_t post)`
 
 #### `native/include/wetvm_types.h`
 
@@ -209,9 +264,36 @@
 
 - **Functions:** `interlocks_init(interlock_state_t* il)`; `interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2)`; `interlocks_active_discharge(interlock_state_t* il, uint8_t channel)`; `interlocks_active_discharge_all(interlock_state_t* il)`; `interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable)`; `interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count)`; `interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask)`; `interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel)`; `interlocks_clamp_voltage(interlock_state_t* il, float requested_v)`; `interlocks_record_charge_tick(interlock_state_t* il, uint64_t current_tick, const float tick_charge_nc[INTERLOCK_NUM_CHANNELS])`; `interlocks_check_epileptiform(interlock_state_t* il, uint64_t current_tick, const float channel_rates_hz[INTERLOCK_NUM_CHANNELS])`; `interlocks_check_thermal(interlock_state_t* il, uint64_t current_tick, float temp_c)`; `interlocks_check_bubble(interlock_state_t* il, uint64_t current_tick, uint8_t bubble_detected, uint8_t sensor_id)`; `interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v)`
 
+#### `native/src/wet_hal.c`
+
+- **Types / Structs / Enums:** `LARGE_INTEGER`
+- **Functions:** `wet_hal_get_time_us(void)`; `wet_hal_create(wet_hal_mode_t mode, const wet_hal_config_t* config)`; `wet_hal_destroy(wet_hal_context_t* hal)`; `wet_hal_init(wet_vm_t* vm, wet_hal_mode_t mode, const wet_hal_config_t* config)`; `wet_hal_attach(wet_vm_t* vm, wet_hal_context_t* hal)`; `wet_hal_get_context(wet_vm_t* vm)`; `wet_hal_set_mode(wet_hal_context_t* hal, wet_hal_mode_t mode)`; `wet_hal_get_mode(const wet_hal_context_t* hal)`; `wet_hal_register_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver)`; `wet_hal_unregister_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver)`; `wet_hal_find_driver(wet_hal_context_t* hal, wet_hal_driver_type_t type)`; `wet_hal_write_pump(wet_hal_context_t* hal, uint8_t pump_id, double rate_ul_min, uint8_t run_flag)`; `wet_hal_dispense_pump(wet_hal_context_t* hal, uint8_t pump_id, double volume_ul)`; `wet_hal_write_valve(wet_hal_context_t* hal, uint8_t valve_id, uint8_t state)`; `wet_hal_read_flow(wet_hal_context_t* hal, uint8_t sensor_id, double* out_flow_ul_min)`; `wet_hal_stim_current(wet_hal_context_t* hal, uint16_t channel, int32_t current_pA, uint32_t duration_us)`; `wet_hal_stim_voltage(wet_hal_context_t* hal, uint16_t channel, float voltage_v, float p1_ms, float p2_ms)`; `wet_hal_read_spikes(wet_hal_context_t* hal, uint16_t channel, uint8_t* out_spike_flag)`; `wet_hal_measure_impedance(wet_hal_context_t* hal, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad)`; `wet_hal_active_discharge(wet_hal_context_t* hal, uint16_t channel)`; `wet_hal_emergency_crowbar(wet_vm_t* vm, uint32_t trip_reason)`; `wet_hal_get_telemetry(wet_hal_context_t* hal)`; `wet_hal_set_valve_for_pump(wet_hal_context_t* hal, uint8_t pump_id, uint8_t valve_id)`
+
+#### `native/src/wet_hal_intan.c`
+
+- **Functions:** `intan_op_init(wet_hal_driver_t* drv, void* config)`; `intan_op_shutdown(wet_hal_driver_t* drv)`; `intan_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason)`; `intan_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms)`; `intan_op_stim_voltage(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms)`; `intan_op_stim_current(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us)`; `intan_op_read_ephys(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count)`; `intan_op_measure_impedance(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad)`; `intan_op_active_discharge(wet_hal_driver_t* drv, uint16_t channel)`; `wet_hal_intan_encode_cmd(const intan_spi_command_t* cmd)`; `wet_hal_intan_decode_cmd(uint32_t word, intan_spi_command_t* cmd)`; `wet_hal_intan_spi_transfer(wet_hal_driver_t* drv, uint32_t mosi_word)`; `wet_hal_intan_create(wet_hal_mode_t mode)`; `wet_hal_intan_destroy(wet_hal_driver_t* drv)`; `wet_hal_intan_set_stim_current(wet_hal_driver_t* drv, uint8_t channel, int32_t current_pA, uint32_t duration_us)`; `wet_hal_intan_get_compliance_status(wet_hal_driver_t* drv)`; `wet_hal_intan_clear_compliance(wet_hal_driver_t* drv)`; `wet_hal_intan_measure_impedance(wet_hal_driver_t* drv, uint8_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad)`; `wet_hal_intan_set_charge_recovery(wet_hal_driver_t* drv, uint8_t channel, uint8_t enable)`; `wet_hal_intan_inject_fault(wet_hal_driver_t* drv, uint8_t force_rail, uint8_t spi_error, uint8_t bus_timeout)`
+
+#### `native/src/wet_hal_maxwell.c`
+
+- **Functions:** `maxwell_op_init(wet_hal_driver_t* drv, void* config)`; `maxwell_op_shutdown(wet_hal_driver_t* drv)`; `maxwell_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason)`; `maxwell_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms)`; `maxwell_op_stim_voltage(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms)`; `maxwell_op_stim_current(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us)`; `maxwell_op_read_ephys(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count)`; `maxwell_op_measure_impedance(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad)`; `maxwell_op_active_discharge(wet_hal_driver_t* drv, uint16_t channel)`; `wet_hal_maxwell_create(wet_hal_mode_t mode)`; `wet_hal_maxwell_destroy(wet_hal_driver_t* drv)`; `wet_hal_maxwell_route_channels(wet_hal_driver_t* drv, const uint16_t* electrode_indices, uint32_t count)`; `wet_hal_maxwell_connect_stim(wet_hal_driver_t* drv, uint8_t stim_unit, uint16_t electrode_id)`; `wet_hal_maxwell_sequence_clear(wet_hal_driver_t* drv)`; `wet_hal_maxwell_sequence_append(wet_hal_driver_t* drv, uint32_t timestamp_us, uint8_t stim_unit, uint16_t electrode_id, float voltage_mv, uint16_t duration_us)`; `wet_hal_maxwell_sequence_arm(wet_hal_driver_t* drv)`; `wet_hal_maxwell_sequence_start(wet_hal_driver_t* drv)`; `wet_hal_maxwell_sequence_get_state(wet_hal_driver_t* drv)`; `wet_hal_maxwell_stim_voltage(wet_hal_driver_t* drv, uint8_t stim_unit, uint16_t electrode_id, float voltage_mv, float phase1_ms, float phase2_ms)`; `wet_hal_maxwell_inject_fault(wet_hal_driver_t* drv, uint8_t force_charge_violation, uint8_t drop_frames)`
+
+#### `native/src/wet_hal_pump_valve.c`
+
+- **Functions:** `microfluidics_op_init(wet_hal_driver_t* drv, void* config)`; `microfluidics_op_shutdown(wet_hal_driver_t* drv)`; `microfluidics_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason)`; `microfluidics_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms)`; `microfluidics_op_write_pump(wet_hal_driver_t* drv, uint8_t pump_id, double rate_ul_min, uint8_t run_flag)`; `microfluidics_op_dispense_volume(wet_hal_driver_t* drv, uint8_t pump_id, double volume_ul)`; `microfluidics_op_write_valve(wet_hal_driver_t* drv, uint8_t valve_id, uint8_t state)`; `microfluidics_op_read_flow(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min)`; `microfluidics_op_read_pressure(wet_hal_driver_t* drv, uint8_t port_id, float* out_kpa)`; `wet_hal_harvard_format_cmd(uint8_t address, uint8_t fast_mode, const char* cmd_name, const char* args, char* out_buf, size_t out_buf_len)`; `wet_hal_harvard_parse_response(const char* resp_buf, size_t resp_len)`; `wet_hal_microfluidics_create(wet_hal_mode_t mode)`; `wet_hal_microfluidics_destroy(wet_hal_driver_t* drv)`; `wet_hal_pump_set_rate(wet_hal_driver_t* drv, uint8_t pump_id, double rate_ul_min, uint8_t run_flag)`; `wet_hal_pump_dispense(wet_hal_driver_t* drv, uint8_t pump_id, double volume_ul)`; `wet_hal_pump_stop(wet_hal_driver_t* drv, uint8_t pump_id)`; `wet_hal_valve_set_state(wet_hal_driver_t* drv, uint8_t valve_id, uint8_t val_state)`; `wet_hal_pump_bind_downstream_valve(wet_hal_driver_t* drv, uint8_t pump_id, uint8_t valve_id)`; `wet_hal_can_send(wet_hal_driver_t* drv, const wet_can_frame_t* frame)`; `wet_hal_can_recv(wet_hal_driver_t* drv, wet_can_frame_t* out_frame)`; `wet_hal_can_send_emcy(wet_hal_driver_t* drv, uint8_t node_id, uint16_t error_code, uint8_t error_register)`; `wet_hal_microfluidics_inject_fault(wet_hal_driver_t* drv, uint8_t stall, uint8_t can_drop, uint8_t timeout)`
+
+#### `native/src/wet_hal_sensirion.c`
+
+- **Functions:** `sensirion_op_init(wet_hal_driver_t* drv, void* config)`; `sensirion_op_shutdown(wet_hal_driver_t* drv)`; `sensirion_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason)`; `sensirion_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms)`; `sensirion_op_read_flow(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min)`; `wet_hal_sensirion_crc8(const uint8_t* data, size_t len)`; `wet_hal_sensirion_validate_crc(const uint8_t word_and_crc[3])`; `wet_hal_shdlc_encode(uint8_t address, uint8_t command, const uint8_t* payload, uint8_t payload_len, uint8_t* out_buf, size_t out_buf_max)`; `wet_hal_shdlc_decode(const uint8_t* raw_buf, size_t raw_len, uint8_t* out_address, uint8_t* out_command, uint8_t* out_payload, uint8_t* out_payload_len)`; `wet_hal_sensirion_create(wet_hal_mode_t mode)`; `wet_hal_sensirion_destroy(wet_hal_driver_t* drv)`; `wet_hal_sensirion_start_measurement(wet_hal_driver_t* drv, uint16_t cmd)`; `wet_hal_sensirion_stop_measurement(wet_hal_driver_t* drv)`; `wet_hal_sensirion_read_flow(wet_hal_driver_t* drv, double* out_flow_ul_min)`; `wet_hal_sensirion_hil_set_flow(wet_hal_driver_t* drv, double flow_ul_min)`; `wet_hal_sensirion_inject_fault(wet_hal_driver_t* drv, uint8_t corrupt_crc, uint8_t nak_addr)`
+
+#### `native/src/wet_scheduler.c`
+
+- **Types / Structs / Enums:** `LARGE_INTEGER`, `struct wet_scheduler`, `wet_spsc_ring_t`
+- **Macros / Constants:** `WET_CACHELINE_SIZE` = `64`, `WET_DEFAULT_SAMPLE_CAPACITY` = `100000`
+- **Functions:** `wet_cpu_pause(void)`; `wet_atomic_load_u32_acquire(const volatile uint32_t* ptr)`; `wet_atomic_store_u32_release(volatile uint32_t* ptr, uint32_t val)`; `wet_spsc_init(wet_spsc_ring_t* ring, uint32_t capacity, size_t elem_size)`; `wet_spsc_free(wet_spsc_ring_t* ring)`; `wet_spsc_push(wet_spsc_ring_t* ring, const void* item)`; `wet_spsc_pop(wet_spsc_ring_t* ring, void* out_item)`; `wet_sort_doubles(double* arr, int left, int right)`; `wet_scheduler_thread_proc(void* param)`; `wet_scheduler_create(wet_vm_instance_t* vm, const wet_scheduler_config_t* config)`; `wet_scheduler_start(wet_scheduler_t* sched)`; `wet_scheduler_step(wet_scheduler_t* sched)`; `wet_scheduler_stop(wet_scheduler_t* sched)`; `wet_scheduler_get_stats(const wet_scheduler_t* sched, wet_scheduler_stats_t* out_stats)`; `wet_scheduler_poll_telemetry(wet_scheduler_t* sched, wet_telemetry_t* out_telem)`; `wet_scheduler_push_stimulus(wet_scheduler_t* sched, const wet_stim_command_t* cmd)`; `wet_scheduler_benchmark(wet_scheduler_t* sched, uint32_t total_ticks, wet_scheduler_stats_t* out_stats)`; `wet_scheduler_destroy(wet_scheduler_t* sched)`
+
 #### `native/src/wetvm_api.c`
 
-- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`
+- **Functions:** `wet_create_vm(const wet_vm_config_t* config)`; `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, const wet_vm_config_t* config)`; `wet_free_vm(wet_vm_t* vm)`; `wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)`; `wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)`; `wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)`; `wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)`; `wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)`; `wet_get_last_error(wet_vm_t* vm)`; `wet_status_to_string(wet_status_t status)`; `wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2)`; `wet_active_discharge(wet_vm_t* vm, uint8_t channel)`; `wet_active_discharge_all(wet_vm_t* vm)`; `wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable)`; `wet_life_supervisor_shutdown(wet_vm_t* vm)`; `wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial)`; `wet_inject_current_stimulus(wet_vm_t* vm, uint8_t channel, float current_ua, float phase1_ms, float phase2_ms)`; `wet_verify_bytecode(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len)`; `wet_vm_snapshot(const wet_vm_t* vm, uint8_t* buffer, size_t* inout_len)`; `wet_vm_restore(wet_vm_t* vm, const uint8_t* buffer, size_t len)`; `wet_set_environmental_sensors(wet_vm_t* vm, float ph, float do_pct, float co2_pct, uint8_t bubble_sensor_id, uint8_t bubble_state, float flow_rate_ul_min)`; `wet_set_temperature(wet_vm_t* vm, float temp_c)`; `wet_set_channel_banks(wet_vm_t* vm, uint64_t ref_mask, uint64_t rec_mask)`; `wet_vm_get_synapse_matrix(const wet_vm_t* vm, float* out_matrix, size_t out_capacity_floats)`; `wet_vm_get_synapse_weight(const wet_vm_t* vm, uint8_t pre, uint8_t post)`
 
 #### `native/src/wetvm_vm.c`
 
@@ -287,6 +369,34 @@
 - class `LexerError`: __init__()
 - class `Lexer`: __init__(), _peek(), _advance(), _match(), tokenize(), _scan_number(), _scan_string(), _scan_identifier_or_keyword(), _scan_operator_or_delimiter()
 
+#### `compiler/nir_bridge.py`
+
+- class `DalesPrincipleError`: (subclass alias of ValueError)
+- class `NIRValidationError`: (subclass alias of ValueError)
+- class `NIRNode`: node_type(), to_dict()
+- class `Input`: shape()
+- class `Output`: shape()
+- class `Linear`: __post_init__()
+- class `Affine`: __post_init__()
+- class `LIF`: __post_init__()
+- class `CubaLIF`: __post_init__()
+- class `Izhikevich`: __post_init__()
+- class `NIRGraph`: add_node(), add_edge(), get_predecessors(), get_successors(), is_recurrent(), topological_sort(), to_dict()
+- def `validate_dales_principle(weight, eps)`
+- def `enforce_dales_principle(weight, eps)`
+- def `decompose_to_dales_principle(weight, eps)`
+- def `save_nir_hdf5(graph, filepath)`
+- def `load_nir_hdf5(filepath)`
+- def `save_nir_json(graph, filepath)`
+- def `load_nir_json(source)`
+- def `nir_to_wet_source(graph, mea_rows, mea_cols, num_cycles, enforce_dale)`
+- def `nir_to_wet_ast(graph, mea_rows, mea_cols, num_cycles, enforce_dale)`
+- def `nir_to_wet_bytecode(graph, mea_rows, mea_cols, num_cycles, enforce_dale)`
+- def `load_nir_into_vm(graph, vm, enforce_dale)`
+- def `wet_ast_to_nir(ast)`
+- def `wet_bytecode_to_nir(bytecode)`
+- def `wet_vm_to_nir(vm, num_neurons)`
+
 #### `compiler/parser.py`
 
 - class `ParseError`: __init__()
@@ -311,20 +421,36 @@
 #### `bindings/ffi.py`
 
 - class `WetStatus`: (IntEnum)
+- class `WetHalMode`: (IntEnum)
+- class `WetHalDriverType`: (IntEnum)
+- class `WetHalStatus`: (IntEnum)
+- class `WetHalConfig`: __init__()
+- class `WetHalTelemetry`: (subclass alias of ctypes.Structure)
+- class `WetHalContext`: (subclass alias of ctypes.Structure)
+- class `WetCanFrame`: (subclass alias of ctypes.Structure)
 - class `WetVMConfig`: __init__()
 - class `WetTelemetry`: tick_index(), channel_voltages(), spike_raster(), net_charge(), last_charge()
 - class `WetActuatorTelemetry`: pump_rates(), pump_dispensed(), valves(), motors()
 - def `_find_library_path()`
 - def `load_wetvm_lib(lib_path)`
 - def `get_wetvm_lib(lib_path)`
-- class `WetVMFFI`: __init__(), get_version(), create_vm(), free_vm(), allocate_telemetry(), step_tick(), run_ticks(), inject_stimulus(), get_last_error(), status_to_string(), load_bytecode(), get_telemetry(), create_vm_arena(), configure_electrode(), active_discharge(), active_discharge_all(), enable_dead_head_protection(), life_supervisor_shutdown(), configure_blanking(), inject_current_stimulus(), verify_bytecode(), snapshot(), restore(), set_environmental_sensors(), set_temperature(), set_channel_banks()
+- class `WetVMFFI`: __init__(), get_version(), create_vm(), free_vm(), allocate_telemetry(), step_tick(), run_ticks(), inject_stimulus(), get_last_error(), status_to_string(), load_bytecode(), get_telemetry(), create_vm_arena(), configure_electrode(), active_discharge(), active_discharge_all(), enable_dead_head_protection(), life_supervisor_shutdown(), configure_blanking(), inject_current_stimulus(), verify_bytecode(), snapshot(), restore(), set_environmental_sensors(), set_temperature(), set_channel_banks(), hal_create(), hal_destroy(), hal_get_telemetry(), hal_set_valve_for_pump(), hal_init(), hal_attach(), hal_get_context(), hal_set_mode(), hal_get_mode(), hal_register_driver(), hal_unregister_driver(), hal_find_driver(), hal_write_pump(), hal_dispense_pump(), hal_write_valve(), hal_read_flow(), hal_stim_current(), hal_stim_voltage(), hal_read_spikes(), hal_measure_impedance(), hal_active_discharge(), hal_emergency_crowbar(), intan_create(), intan_destroy(), intan_spi_transfer(), intan_set_stim_current(), intan_get_compliance_status(), intan_clear_compliance(), intan_measure_impedance(), intan_set_charge_recovery(), intan_inject_fault(), maxwell_create(), maxwell_destroy(), maxwell_route_channels(), maxwell_connect_stim(), maxwell_sequence_clear(), maxwell_sequence_append(), maxwell_sequence_arm(), maxwell_sequence_start(), maxwell_sequence_get_state(), maxwell_stim_voltage(), maxwell_inject_fault(), microfluidics_create(), microfluidics_destroy(), harvard_format_cmd(), harvard_parse_response(), pump_set_rate(), pump_dispense(), pump_stop(), valve_set_state(), pump_bind_downstream_valve(), can_send(), can_recv(), can_send_emcy(), microfluidics_inject_fault(), sensirion_create(), sensirion_destroy(), sensirion_crc8(), sensirion_validate_crc(), sensirion_start_measurement(), sensirion_stop_measurement(), sensirion_read_flow(), sensirion_hil_set_flow(), shdlc_encode(), shdlc_decode(), sensirion_inject_fault()
 
 #### `bindings/runtime.py`
 
 - class `WetVMError`: __init__()
 - class `WetTelemetryView`: __init__(), current_tick(), tick_index(), sim_time_ms(), population_rate_hz(), channel_voltages(), spike_raster(), last_charge_nc(), get(), __getitem__()
-- class `WetVM`: __init__(), close(), __enter__(), __exit__(), __del__(), _check_alive(), load_bytecode(), load(), step_tick(), run_ticks(), step(), inject_stimulus(), get_telemetry(), get_actuator_telemetry(), get_voltages_numpy(), get_spikes_numpy(), get_charge_numpy(), last_error(), _status_to_string(), current_tick(), tick_index(), sim_time_ms(), is_halted(), configure_electrode(), active_discharge(), active_discharge_all(), enable_dead_head_protection(), life_supervisor_shutdown(), configure_blanking(), inject_current_stimulus(), verify_bytecode(), snapshot(), restore(), set_environmental_sensors(), set_temperature(), set_channel_banks()
+- class `WetVM`: __init__(), close(), __enter__(), __exit__(), __del__(), _check_alive(), load_bytecode(), load(), step_tick(), run_ticks(), step(), inject_stimulus(), get_telemetry(), get_actuator_telemetry(), get_voltages_numpy(), get_spikes_numpy(), get_charge_numpy(), last_error(), _status_to_string(), current_tick(), tick_index(), sim_time_ms(), is_halted(), configure_electrode(), active_discharge(), active_discharge_all(), enable_dead_head_protection(), life_supervisor_shutdown(), configure_blanking(), inject_current_stimulus(), verify_bytecode(), snapshot(), restore(), set_environmental_sensors(), set_temperature(), set_channel_banks(), init_hal(), attach_hal(), get_hal(), emergency_crowbar(), get_synapse_matrix(), get_synapse_weight()
 - class `WetRuntime`: (subclass alias of WetVM)
+
+#### `bindings/scheduler.py`
+
+- def `resolve_p_core(requested_core, allow_e_cores)`
+- class `WetSchedulerConfig`: __init__()
+- class `WetStimCommand`: __init__()
+- class `WetSchedulerStats`: as_dict()
+- def `_bind_scheduler_ffi(lib)`
+- class `WetScheduler`: __init__(), handle(), start(), step(), stop(), get_stats(), poll_telemetry(), push_stimulus(), benchmark(), destroy(), __enter__(), __exit__()
 
 #### `biophysics/mea_grid.py`
 
@@ -351,6 +477,7 @@
 - def `get_project_root()`
 - def `find_executable(name, extra_paths)`
 - def `generate_msvcrt_import_lib(dlltool_path, output_lib, output_def)`
+- def `generate_kernel32_import_lib(dlltool_path, output_lib, output_def)`
 - def `build_with_clang(clang_path, src_files, include_dir, out_dll)`
 - def `build_with_gcc(gcc_path, src_files, include_dir, out_dll)`
 - def `build_with_msvc(cl_path, src_files, include_dir, out_dll)`
@@ -731,6 +858,7 @@ $ python tests/run_e2e_tests.py  (exit_code=0)
  Working Directory  : D:\WetLang
  Tests Discovered   : 313
 ================================================================================
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_ode_stability_suite_happy took 1.19s
 
 ================================================================================
  E2E Test Execution Summary
@@ -743,13 +871,13 @@ Tier 3      28          0           0           0           28
 Tier 4      5           0           0           0           5         
 --------------------------------------------------------------------------------
 TOTAL: 313 run | 313 passed | 0 skipped | 0 failed | 0 errors
-Elapsed Time: 5.553 s
+Elapsed Time: 6.300 s
 ================================================================================
 
 [STDERR]
 .........................................................................................................................................................................................................................................................................................................................
 ----------------------------------------------------------------------
-Ran 313 tests in 5.552s
+Ran 313 tests in 6.299s
 
 OK
 ```
@@ -869,7 +997,7 @@ C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio
     from _pytest.python import CallSpec2
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-======================== 93 passed, 1 warning in 0.32s ========================
+======================== 93 passed, 1 warning in 0.40s ========================
 ```
 
 ### D.3 Live 10,000-Tick `wetvm.dll` Latency Microbenchmark
@@ -881,28 +1009,28 @@ Python        : 3.12.10
 Workload      : benchmarks/01_active_inference_closed_loop.wet (dt = 0.1 ms = 100 us)
 
 [Mode A: Per-Tick Python->C FFI vm.step_tick() x 10,000 ticks]
-  mean   : 13.559 us/tick
-  median : 9.000 us/tick
-  p95    : 17.300 us/tick
-  p99    : 22.800 us/tick
-  min    : 7.400 us/tick
-  max    : 3387.400 us/tick
-  wall   : 137.478 ms (1.0 s simulated time)
+  mean   : 10.908 us/tick
+  median : 10.300 us/tick
+  p95    : 12.500 us/tick
+  p99    : 22.700 us/tick
+  min    : 8.100 us/tick
+  max    : 1418.500 us/tick
+  wall   : 110.743 ms (1.0 s simulated time)
 
 [Mode B: Batched Native C vm.run_ticks(10000) x 10 trials]
-  mean       : 10.223 us/tick
-  median     : 9.807 us/tick
-  min        : 9.028 us/tick
-  max        : 14.200 us/tick
-  throughput : 97817 ticks/sec
-  speedup    : 9.78x real-time
+  mean       : 9.628 us/tick
+  median     : 9.785 us/tick
+  min        : 8.543 us/tick
+  max        : 10.587 us/tick
+  throughput : 103869 ticks/sec
+  speedup    : 10.39x real-time
 ```
 
 ---
 
 ## Appendix E: Verified Line-Numbered Core Source Code Listing
 
-Covers all 34 core source files across `compiler/`, `native/include/`, `native/src/`, `native/build.py`, `native/interlocks.py`, `bindings/`, `biophysics/`, and `benchmarks/*.wet`.
+Covers all 48 core source files across `compiler/`, `native/include/`, `native/src/`, `native/build.py`, `native/interlocks.py`, `bindings/`, `biophysics/`, and `benchmarks/*.wet`.
 
 ### `compiler/__init__.py` (123 lines, SHA-256: `79a50dc641756ee2...`)
 
@@ -3112,6 +3240,921 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
  405 |             return Token(tt, text, start_line, start_col, raw_text=text)
  406 | 
  407 |         raise LexerError(f"Unexpected character: {ch!r}", start_line, start_col)
+```
+
+### `compiler/nir_bridge.py` (910 lines, SHA-256: `b8145cffc82cf8a1...`)
+
+```text
+   1 | """
+   2 | WetLang Compiler - Neuromorphic Intermediate Representation (NIR v1.0) Bridge
+   3 | Production-grade bidirectional translator between standard NIR v1.0 graphs and WetLang.
+   4 | Supports:
+   5 |   - Primitives: Input, Output, Linear, Affine, LIF, CubaLIF, Izhikevich
+   6 |   - Biophysical Parameter Mappings (COBA-LIF, Dale's Principle, Rs/Fs Izhikevich)
+   7 |   - Ingestion (HDF5 .nir, JSON, Python dict) -> WetLang AST, .wet source, .wbc bytecode, live VM
+   8 |   - Export (AST, .wbc bytecode, live VM) -> NIRGraph -> HDF5 .nir, JSON schema
+   9 | """
+  10 | 
+  11 | from __future__ import annotations
+  12 | 
+  13 | import json
+  14 | import math
+  15 | import struct
+  16 | from dataclasses import dataclass, field
+  17 | from pathlib import Path
+  18 | from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+  19 | 
+  20 | import numpy as np
+  21 | import h5py
+  22 | 
+  23 | from compiler.ast_nodes import (
+  24 |     ASTNode,
+  25 |     ProgramNode,
+  26 |     GridDeclNode,
+  27 |     ChannelDeclNode,
+  28 |     WhileStmtNode,
+  29 |     LetStmtNode,
+  30 |     AssignStmtNode,
+  31 |     StimStmtNode,
+  32 |     SyncTickStmtNode,
+  33 |     BlockNode,
+  34 |     IdentifierNode,
+  35 |     LiteralNode,
+  36 |     IndexNode,
+  37 |     BinaryOpNode,
+  38 |     CallNode,
+  39 |     DomainCallNode,
+  40 |     PhysicalLiteralNode,
+  41 |     IfStmtNode,
+  42 | )
+  43 | from compiler.isa import (
+  44 |     HEADER_MAGIC,
+  45 |     HEADER_SIZE,
+  46 |     HEADER_STRUCT_FORMAT,
+  47 |     SECTION_ENTRY_FORMAT,
+  48 |     SECTION_ENTRY_SIZE,
+  49 |     SectionType,
+  50 |     Opcode,
+  51 | )
+  52 | from compiler.emitter import compile_source
+  53 | 
+  54 | 
+  55 | # =========================================================================
+  56 | # Biophysical Constants & Mappings (WetLang In-Silico Digital Twin)
+  57 | # =========================================================================
+  58 | 
+  59 | # Membrane & Synaptic Dynamics
+  60 | WET_C_M_PF: float = 200.0         # Membrane capacitance: 200 pF
+  61 | WET_G_LEAK_NS: float = 10.0       # Leak conductance: 10 nS
+  62 | WET_TAU_MEM_MS: float = 20.0      # tau_mem = Cm / gL = 200 pF / 10 nS = 20.0 ms
+  63 | WET_R_MEM_MOHM: float = 100.0     # R_mem = 1 / gL = 100 MOhm
+  64 | WET_TAU_SYN_AMPA_MS: float = 5.0  # AMPA excitatory synaptic decay
+  65 | WET_TAU_SYN_GABA_MS: float = 10.0 # GABA_A inhibitory synaptic decay
+  66 | 
+  67 | # Voltage Boundaries (mV)
+  68 | WET_V_LEAK_MV: float = -70.0      # E_leak = -70.0 mV
+  69 | WET_V_RESET_MV: float = -75.0     # E_reset = -75.0 mV
+  70 | WET_V_THRESH_MV: float = -50.0    # E_thresh = -50.0 mV
+  71 | WET_V_REV_EXC_MV: float = 0.0     # Excitatory reversal potential
+  72 | WET_V_REV_INH_MV: float = -80.0   # Inhibitory reversal potential
+  73 | 
+  74 | # Synaptic Conductance Hard Bounds (nS)
+  75 | WET_W_MIN_NS: float = 0.0
+  76 | WET_W_MAX_NS: float = 40.0
+  77 | 
+  78 | # Cortical Izhikevich Cell Archetypes
+  79 | # Regular Spiking (RS) - Excitatory Pyramidal (80% cortical population)
+  80 | IZHIKEVICH_RS = {
+  81 |     "a": 0.02,
+  82 |     "b": 0.20,
+  83 |     "c": -65.0,
+  84 |     "d": 8.0,
+  85 |     "v_threshold": 30.0,
+  86 | }
+  87 | 
+  88 | # Fast Spiking (FS) - Inhibitory Interneuron (20% cortical population)
+  89 | IZHIKEVICH_FS = {
+  90 |     "a": 0.10,
+  91 |     "b": 0.20,
+  92 |     "c": -65.0,
+  93 |     "d": 2.0,
+  94 |     "v_threshold": 30.0,
+  95 | }
+  96 | 
+  97 | 
+  98 | class DalesPrincipleError(ValueError):
+  99 |     """Raised when synaptic connectivity violates Dale's Principle."""
+ 100 |     pass
+ 101 | 
+ 102 | 
+ 103 | class NIRValidationError(ValueError):
+ 104 |     """Raised when an NIR graph contains invalid dimensions or topology."""
+ 105 |     pass
+ 106 | 
+ 107 | 
+ 108 | # =========================================================================
+ 109 | # NIR v1.0 Node Primitives Data Model
+ 110 | # =========================================================================
+ 111 | 
+ 112 | @dataclass
+ 113 | class NIRNode:
+ 114 |     """Base class for standard Neuromorphic Intermediate Representation nodes."""
+ 115 |     metadata: Dict[str, Any] = field(default_factory=dict)
+ 116 | 
+ 117 |     @property
+ 118 |     def node_type(self) -> str:
+ 119 |         return self.__class__.__name__
+ 120 | 
+ 121 |     def to_dict(self) -> Dict[str, Any]:
+ 122 |         res = {"type": self.node_type}
+ 123 |         for k, v in self.__dict__.items():
+ 124 |             if isinstance(v, np.ndarray):
+ 125 |                 res[k] = v.tolist()
+ 126 |             elif isinstance(v, (list, tuple)):
+ 127 |                 res[k] = list(v)
+ 128 |             elif isinstance(v, (int, float, str, bool, dict)):
+ 129 |                 res[k] = v
+ 130 |         return res
+ 131 | 
+ 132 | 
+ 133 | @dataclass
+ 134 | class Input(NIRNode):
+ 135 |     """NIR Input Node representing stimulation sources."""
+ 136 |     input_type: Dict[str, Sequence[int]] = field(default_factory=dict)
+ 137 | 
+ 138 |     @property
+ 139 |     def shape(self) -> Tuple[int, ...]:
+ 140 |         if "input" in self.input_type:
+ 141 |             return tuple(self.input_type["input"])
+ 142 |         for v in self.input_type.values():
+ 143 |             return tuple(v)
+ 144 |         return ()
+ 145 | 
+ 146 | 
+ 147 | @dataclass
+ 148 | class Output(NIRNode):
+ 149 |     """NIR Output Node representing spike recording sensors."""
+ 150 |     output_type: Dict[str, Sequence[int]] = field(default_factory=dict)
+ 151 | 
+ 152 |     @property
+ 153 |     def shape(self) -> Tuple[int, ...]:
+ 154 |         if "output" in self.output_type:
+ 155 |             return tuple(self.output_type["output"])
+ 156 |         for v in self.output_type.values():
+ 157 |             return tuple(v)
+ 158 |         return ()
+ 159 | 
+ 160 | 
+ 161 | @dataclass
+ 162 | class Linear(NIRNode):
+ 163 |     """Dense Synaptic Weight Matrix."""
+ 164 |     weight: np.ndarray = field(default_factory=lambda: np.zeros((1, 1), dtype=np.float32))
+ 165 | 
+ 166 |     def __post_init__(self):
+ 167 |         self.weight = np.asarray(self.weight, dtype=np.float32)
+ 168 | 
+ 169 | 
+ 170 | @dataclass
+ 171 | class Affine(NIRNode):
+ 172 |     """Linear Synaptic Weight Matrix with constant bias."""
+ 173 |     weight: np.ndarray = field(default_factory=lambda: np.zeros((1, 1), dtype=np.float32))
+ 174 |     bias: np.ndarray = field(default_factory=lambda: np.zeros((1,), dtype=np.float32))
+ 175 | 
+ 176 |     def __post_init__(self):
+ 177 |         self.weight = np.asarray(self.weight, dtype=np.float32)
+ 178 |         self.bias = np.asarray(self.bias, dtype=np.float32)
+ 179 | 
+ 180 | 
+ 181 | @dataclass
+ 182 | class LIF(NIRNode):
+ 183 |     """Leaky Integrate-and-Fire neuron with instantaneous synaptic integration."""
+ 184 |     tau: np.ndarray = field(default_factory=lambda: np.array([WET_TAU_MEM_MS], dtype=np.float32))
+ 185 |     r: np.ndarray = field(default_factory=lambda: np.array([WET_R_MEM_MOHM], dtype=np.float32))
+ 186 |     v_leak: np.ndarray = field(default_factory=lambda: np.array([WET_V_LEAK_MV], dtype=np.float32))
+ 187 |     v_threshold: np.ndarray = field(default_factory=lambda: np.array([WET_V_THRESH_MV], dtype=np.float32))
+ 188 |     v_reset: np.ndarray = field(default_factory=lambda: np.array([WET_V_RESET_MV], dtype=np.float32))
+ 189 | 
+ 190 |     def __post_init__(self):
+ 191 |         self.tau = np.asarray(self.tau, dtype=np.float32)
+ 192 |         self.r = np.asarray(self.r, dtype=np.float32)
+ 193 |         self.v_leak = np.asarray(self.v_leak, dtype=np.float32)
+ 194 |         self.v_threshold = np.asarray(self.v_threshold, dtype=np.float32)
+ 195 |         self.v_reset = np.asarray(self.v_reset, dtype=np.float32)
+ 196 | 
+ 197 | 
+ 198 | @dataclass
+ 199 | class CubaLIF(NIRNode):
+ 200 |     """Current-Based Leaky Integrate-and-Fire with explicit synaptic filtering."""
+ 201 |     tau_mem: np.ndarray = field(default_factory=lambda: np.array([WET_TAU_MEM_MS], dtype=np.float32))
+ 202 |     tau_syn: np.ndarray = field(default_factory=lambda: np.array([WET_TAU_SYN_AMPA_MS], dtype=np.float32))
+ 203 |     r: np.ndarray = field(default_factory=lambda: np.array([WET_R_MEM_MOHM], dtype=np.float32))
+ 204 |     v_leak: np.ndarray = field(default_factory=lambda: np.array([WET_V_LEAK_MV], dtype=np.float32))
+ 205 |     v_threshold: np.ndarray = field(default_factory=lambda: np.array([WET_V_THRESH_MV], dtype=np.float32))
+ 206 |     v_reset: np.ndarray = field(default_factory=lambda: np.array([WET_V_RESET_MV], dtype=np.float32))
+ 207 | 
+ 208 |     def __post_init__(self):
+ 209 |         self.tau_mem = np.asarray(self.tau_mem, dtype=np.float32)
+ 210 |         self.tau_syn = np.asarray(self.tau_syn, dtype=np.float32)
+ 211 |         self.r = np.asarray(self.r, dtype=np.float32)
+ 212 |         self.v_leak = np.asarray(self.v_leak, dtype=np.float32)
+ 213 |         self.v_threshold = np.asarray(self.v_threshold, dtype=np.float32)
+ 214 |         self.v_reset = np.asarray(self.v_reset, dtype=np.float32)
+ 215 | 
+ 216 | 
+ 217 | @dataclass
+ 218 | class Izhikevich(NIRNode):
+ 219 |     """Two-variable quadratic Izhikevich spiking neuron model."""
+ 220 |     a: np.ndarray = field(default_factory=lambda: np.array([IZHIKEVICH_RS["a"]], dtype=np.float32))
+ 221 |     b: np.ndarray = field(default_factory=lambda: np.array([IZHIKEVICH_RS["b"]], dtype=np.float32))
+ 222 |     c: np.ndarray = field(default_factory=lambda: np.array([IZHIKEVICH_RS["c"]], dtype=np.float32))
+ 223 |     d: np.ndarray = field(default_factory=lambda: np.array([IZHIKEVICH_RS["d"]], dtype=np.float32))
+ 224 |     v_threshold: np.ndarray = field(default_factory=lambda: np.array([IZHIKEVICH_RS["v_threshold"]], dtype=np.float32))
+ 225 | 
+ 226 |     def __post_init__(self):
+ 227 |         self.a = np.asarray(self.a, dtype=np.float32)
+ 228 |         self.b = np.asarray(self.b, dtype=np.float32)
+ 229 |         self.c = np.asarray(self.c, dtype=np.float32)
+ 230 |         self.d = np.asarray(self.d, dtype=np.float32)
+ 231 |         self.v_threshold = np.asarray(self.v_threshold, dtype=np.float32)
+ 232 | 
+ 233 | 
+ 234 | @dataclass
+ 235 | class NIRGraph:
+ 236 |     """Standard NIR Computational Graph consisting of named nodes and directed edges."""
+ 237 |     nodes: Dict[str, NIRNode] = field(default_factory=dict)
+ 238 |     edges: List[Tuple[str, str]] = field(default_factory=list)
+ 239 |     version: str = "1.0.0"
+ 240 | 
+ 241 |     def add_node(self, name: str, node: NIRNode) -> None:
+ 242 |         self.nodes[name] = node
+ 243 | 
+ 244 |     def add_edge(self, source: str, target: str) -> None:
+ 245 |         if (source, target) not in self.edges:
+ 246 |             self.edges.append((source, target))
+ 247 | 
+ 248 |     def get_predecessors(self, node_name: str) -> List[str]:
+ 249 |         return [src for src, tgt in self.edges if tgt == node_name]
+ 250 | 
+ 251 |     def get_successors(self, node_name: str) -> List[str]:
+ 252 |         return [tgt for src, tgt in self.edges if src == node_name]
+ 253 | 
+ 254 |     def is_recurrent(self) -> bool:
+ 255 |         """Determines if the graph contains feedback loops/cycles."""
+ 256 |         visited: Dict[str, int] = {}  # 0: unvisited, 1: visiting, 2: visited
+ 257 | 
+ 258 |         def has_cycle(u: str) -> bool:
+ 259 |             visited[u] = 1
+ 260 |             for v in self.get_successors(u):
+ 261 |                 st = visited.get(v, 0)
+ 262 |                 if st == 1:
+ 263 |                     return True
+ 264 |                 if st == 0 and has_cycle(v):
+ 265 |                     return True
+ 266 |             visited[u] = 2
+ 267 |             return False
+ 268 | 
+ 269 |         for node in self.nodes:
+ 270 |             if visited.get(node, 0) == 0:
+ 271 |                 if has_cycle(node):
+ 272 |                     return True
+ 273 |         return False
+ 274 | 
+ 275 |     def topological_sort(self) -> List[str]:
+ 276 |         """
+ 277 |         Performs topological sort using Kahn's algorithm.
+ 278 |         For recurrent graphs, orders feedforward forward-nodes and appends recurrent nodes.
+ 279 |         """
+ 280 |         in_degree: Dict[str, int] = {name: 0 for name in self.nodes}
+ 281 |         for _, tgt in self.edges:
+ 282 |             if tgt in in_degree:
+ 283 |                 in_degree[tgt] += 1
+ 284 | 
+ 285 |         queue = [name for name, deg in in_degree.items() if deg == 0]
+ 286 |         order: List[str] = []
+ 287 | 
+ 288 |         while queue:
+ 289 |             u = queue.pop(0)
+ 290 |             order.append(u)
+ 291 |             for v in self.get_successors(u):
+ 292 |                 if v in in_degree:
+ 293 |                     in_degree[v] -= 1
+ 294 |                     if in_degree[v] == 0:
+ 295 |                         queue.append(v)
+ 296 | 
+ 297 |         # If cycles exist, append any remaining nodes to preserve full node list
+ 298 |         if len(order) < len(self.nodes):
+ 299 |             remaining = [name for name in self.nodes if name not in order]
+ 300 |             order.extend(remaining)
+ 301 | 
+ 302 |         return order
+ 303 | 
+ 304 |     def to_dict(self) -> Dict[str, Any]:
+ 305 |         return {
+ 306 |             "version": self.version,
+ 307 |             "nodes": {name: node.to_dict() for name, node in self.nodes.items()},
+ 308 |             "edges": list(self.edges),
+ 309 |         }
+ 310 | 
+ 311 | 
+ 312 | # =========================================================================
+ 313 | # Dale's Principle Validation & Decomposition
+ 314 | # =========================================================================
+ 315 | 
+ 316 | def validate_dales_principle(weight: np.ndarray, eps: float = 1e-6) -> bool:
+ 317 |     """
+ 318 |     Validates that a synaptic weight matrix respects Dale's Principle.
+ 319 |     Each presynaptic neuron (column j) must only project all non-negative (excitatory)
+ 320 |     or all non-positive (inhibitory) synaptic connections.
+ 321 |     """
+ 322 |     w = np.asarray(weight)
+ 323 |     if w.ndim != 2:
+ 324 |         return True
+ 325 |     
+ 326 |     # Check each presynaptic neuron (columns)
+ 327 |     num_pre = w.shape[1]
+ 328 |     for j in range(num_pre):
+ 329 |         col = w[:, j]
+ 330 |         has_pos = np.any(col > eps)
+ 331 |         has_neg = np.any(col < -eps)
+ 332 |         if has_pos and has_neg:
+ 333 |             return False
+ 334 |     return True
+ 335 | 
+ 336 | 
+ 337 | def enforce_dales_principle(weight: np.ndarray, eps: float = 1e-6) -> None:
+ 338 |     """Raises DalesPrincipleError if weight violates Dale's Principle."""
+ 339 |     if not validate_dales_principle(weight, eps=eps):
+ 340 |         raise DalesPrincipleError(
+ 341 |             "Synaptic weight matrix violates Dale's Principle: "
+ 342 |             "one or more presynaptic neurons project both excitatory and inhibitory connections."
+ 343 |         )
+ 344 | 
+ 345 | 
+ 346 | def decompose_to_dales_principle(
+ 347 |     weight: np.ndarray,
+ 348 |     eps: float = 1e-6
+ 349 | ) -> Tuple[np.ndarray, np.ndarray]:
+ 350 |     """
+ 351 |     Decomposes an arbitrary signed synaptic weight matrix into Dale-compliant
+ 352 |     excitatory (W_exc >= 0) and inhibitory (W_inh <= 0) matrices.
+ 353 |     """
+ 354 |     w = np.asarray(weight, dtype=np.float32)
+ 355 |     w_exc = np.where(w > eps, w, 0.0).astype(np.float32)
+ 356 |     w_inh = np.where(w < -eps, w, 0.0).astype(np.float32)
+ 357 |     return w_exc, w_inh
+ 358 | 
+ 359 | 
+ 360 | # =========================================================================
+ 361 | # HDF5 and JSON Serialization / Deserialization
+ 362 | # =========================================================================
+ 363 | 
+ 364 | def save_nir_hdf5(graph: NIRGraph, filepath: Union[str, Path]) -> None:
+ 365 |     """Saves NIRGraph to standard HDF5 .nir file."""
+ 366 |     filepath = Path(filepath)
+ 367 |     filepath.parent.mkdir(parents=True, exist_ok=True)
+ 368 | 
+ 369 |     with h5py.File(filepath, "w") as f:
+ 370 |         f.attrs["version"] = graph.version
+ 371 |         nodes_grp = f.create_group("nodes")
+ 372 | 
+ 373 |         for name, node in graph.nodes.items():
+ 374 |             ngrp = nodes_grp.create_group(name)
+ 375 |             ngrp.attrs["type"] = node.node_type
+ 376 | 
+ 377 |             if isinstance(node, Input):
+ 378 |                 for k, v in node.input_type.items():
+ 379 |                     ngrp.create_dataset(f"input_type/{k}", data=np.array(v, dtype=np.int64))
+ 380 |             elif isinstance(node, Output):
+ 381 |                 for k, v in node.output_type.items():
+ 382 |                     ngrp.create_dataset(f"output_type/{k}", data=np.array(v, dtype=np.int64))
+ 383 |             elif isinstance(node, Linear):
+ 384 |                 ngrp.create_dataset("weight", data=node.weight)
+ 385 |             elif isinstance(node, Affine):
+ 386 |                 ngrp.create_dataset("weight", data=node.weight)
+ 387 |                 ngrp.create_dataset("bias", data=node.bias)
+ 388 |             elif isinstance(node, LIF):
+ 389 |                 ngrp.create_dataset("tau", data=node.tau)
+ 390 |                 ngrp.create_dataset("r", data=node.r)
+ 391 |                 ngrp.create_dataset("v_leak", data=node.v_leak)
+ 392 |                 ngrp.create_dataset("v_threshold", data=node.v_threshold)
+ 393 |                 ngrp.create_dataset("v_reset", data=node.v_reset)
+ 394 |             elif isinstance(node, CubaLIF):
+ 395 |                 ngrp.create_dataset("tau_mem", data=node.tau_mem)
+ 396 |                 ngrp.create_dataset("tau_syn", data=node.tau_syn)
+ 397 |                 ngrp.create_dataset("r", data=node.r)
+ 398 |                 ngrp.create_dataset("v_leak", data=node.v_leak)
+ 399 |                 ngrp.create_dataset("v_threshold", data=node.v_threshold)
+ 400 |                 ngrp.create_dataset("v_reset", data=node.v_reset)
+ 401 |             elif isinstance(node, Izhikevich):
+ 402 |                 ngrp.create_dataset("a", data=node.a)
+ 403 |                 ngrp.create_dataset("b", data=node.b)
+ 404 |                 ngrp.create_dataset("c", data=node.c)
+ 405 |                 ngrp.create_dataset("d", data=node.d)
+ 406 |                 ngrp.create_dataset("v_threshold", data=node.v_threshold)
+ 407 | 
+ 408 |         # Edges dataset
+ 409 |         if graph.edges:
+ 410 |             dt = h5py.string_dtype(encoding="utf-8")
+ 411 |             edges_arr = np.array(graph.edges, dtype=dt)
+ 412 |             f.create_dataset("edges", data=edges_arr)
+ 413 |         else:
+ 414 |             f.create_dataset("edges", data=np.zeros((0, 2), dtype="S10"))
+ 415 | 
+ 416 | 
+ 417 | def load_nir_hdf5(filepath: Union[str, Path]) -> NIRGraph:
+ 418 |     """Loads an NIRGraph from standard HDF5 .nir file."""
+ 419 |     filepath = Path(filepath)
+ 420 |     if not filepath.exists():
+ 421 |         raise FileNotFoundError(f"NIR file not found: {filepath}")
+ 422 | 
+ 423 |     with h5py.File(filepath, "r") as f:
+ 424 |         version = f.attrs.get("version", "1.0.0")
+ 425 |         if isinstance(version, bytes):
+ 426 |             version = version.decode("utf-8")
+ 427 | 
+ 428 |         nodes: Dict[str, NIRNode] = {}
+ 429 |         nodes_grp = f["nodes"]
+ 430 | 
+ 431 |         for name in nodes_grp:
+ 432 |             ngrp = nodes_grp[name]
+ 433 |             node_type = ngrp.attrs.get("type", "")
+ 434 |             if isinstance(node_type, bytes):
+ 435 |                 node_type = node_type.decode("utf-8")
+ 436 | 
+ 437 |             if node_type == "Input":
+ 438 |                 input_type = {}
+ 439 |                 if "input_type" in ngrp:
+ 440 |                     for k in ngrp["input_type"]:
+ 441 |                         input_type[k] = list(ngrp["input_type"][k][:])
+ 442 |                 elif "shape" in ngrp:
+ 443 |                     input_type["input"] = list(ngrp["shape"][:])
+ 444 |                 nodes[name] = Input(input_type=input_type)
+ 445 | 
+ 446 |             elif node_type == "Output":
+ 447 |                 output_type = {}
+ 448 |                 if "output_type" in ngrp:
+ 449 |                     for k in ngrp["output_type"]:
+ 450 |                         output_type[k] = list(ngrp["output_type"][k][:])
+ 451 |                 elif "shape" in ngrp:
+ 452 |                     output_type["output"] = list(ngrp["shape"][:])
+ 453 |                 nodes[name] = Output(output_type=output_type)
+ 454 | 
+ 455 |             elif node_type == "Linear":
+ 456 |                 nodes[name] = Linear(weight=np.array(ngrp["weight"][:], dtype=np.float32))
+ 457 | 
+ 458 |             elif node_type == "Affine":
+ 459 |                 nodes[name] = Affine(
+ 460 |                     weight=np.array(ngrp["weight"][:], dtype=np.float32),
+ 461 |                     bias=np.array(ngrp["bias"][:], dtype=np.float32)
+ 462 |                 )
+ 463 | 
+ 464 |             elif node_type == "LIF":
+ 465 |                 nodes[name] = LIF(
+ 466 |                     tau=np.array(ngrp["tau"][:], dtype=np.float32),
+ 467 |                     r=np.array(ngrp["r"][:], dtype=np.float32),
+ 468 |                     v_leak=np.array(ngrp["v_leak"][:], dtype=np.float32),
+ 469 |                     v_threshold=np.array(ngrp["v_threshold"][:], dtype=np.float32),
+ 470 |                     v_reset=np.array(ngrp["v_reset"][:], dtype=np.float32),
+ 471 |                 )
+ 472 | 
+ 473 |             elif node_type == "CubaLIF":
+ 474 |                 nodes[name] = CubaLIF(
+ 475 |                     tau_mem=np.array(ngrp["tau_mem"][:], dtype=np.float32),
+ 476 |                     tau_syn=np.array(ngrp["tau_syn"][:], dtype=np.float32),
+ 477 |                     r=np.array(ngrp["r"][:], dtype=np.float32),
+ 478 |                     v_leak=np.array(ngrp["v_leak"][:], dtype=np.float32),
+ 479 |                     v_threshold=np.array(ngrp["v_threshold"][:], dtype=np.float32),
+ 480 |                     v_reset=np.array(ngrp["v_reset"][:], dtype=np.float32),
+ 481 |                 )
+ 482 | 
+ 483 |             elif node_type == "Izhikevich":
+ 484 |                 nodes[name] = Izhikevich(
+ 485 |                     a=np.array(ngrp["a"][:], dtype=np.float32),
+ 486 |                     b=np.array(ngrp["b"][:], dtype=np.float32),
+ 487 |                     c=np.array(ngrp["c"][:], dtype=np.float32),
+ 488 |                     d=np.array(ngrp["d"][:], dtype=np.float32),
+ 489 |                     v_threshold=np.array(ngrp["v_threshold"][:], dtype=np.float32),
+ 490 |                 )
+ 491 | 
+ 492 |         edges: List[Tuple[str, str]] = []
+ 493 |         if "edges" in f:
+ 494 |             edges_ds = f["edges"][:]
+ 495 |             for row in edges_ds:
+ 496 |                 u, v = row[0], row[1]
+ 497 |                 if isinstance(u, bytes):
+ 498 |                     u = u.decode("utf-8")
+ 499 |                 if isinstance(v, bytes):
+ 500 |                     v = v.decode("utf-8")
+ 501 |                 edges.append((str(u), str(v)))
+ 502 | 
+ 503 |         return NIRGraph(nodes=nodes, edges=edges, version=version)
+ 504 | 
+ 505 | 
+ 506 | def save_nir_json(graph: NIRGraph, filepath: Union[str, Path]) -> None:
+ 507 |     """Saves NIRGraph to JSON schema file."""
+ 508 |     filepath = Path(filepath)
+ 509 |     filepath.parent.mkdir(parents=True, exist_ok=True)
+ 510 |     with open(filepath, "w", encoding="utf-8") as f:
+ 511 |         json.dump(graph.to_dict(), f, indent=2)
+ 512 | 
+ 513 | 
+ 514 | def load_nir_json(source: Union[str, Path, Dict[str, Any]]) -> NIRGraph:
+ 515 |     """Loads an NIRGraph from JSON file path or dictionary."""
+ 516 |     if isinstance(source, (str, Path)):
+ 517 |         p = Path(source)
+ 518 |         if p.is_file():
+ 519 |             with open(p, "r", encoding="utf-8") as f:
+ 520 |                 data = json.load(f)
+ 521 |         else:
+ 522 |             data = json.loads(str(source))
+ 523 |     else:
+ 524 |         data = source
+ 525 | 
+ 526 |     version = data.get("version", "1.0.0")
+ 527 |     nodes: Dict[str, NIRNode] = {}
+ 528 | 
+ 529 |     for name, nd in data.get("nodes", {}).items():
+ 530 |         ntype = nd.get("type", "")
+ 531 |         if ntype == "Input":
+ 532 |             nodes[name] = Input(input_type=nd.get("input_type", {}))
+ 533 |         elif ntype == "Output":
+ 534 |             nodes[name] = Output(output_type=nd.get("output_type", {}))
+ 535 |         elif ntype == "Linear":
+ 536 |             nodes[name] = Linear(weight=np.array(nd.get("weight", []), dtype=np.float32))
+ 537 |         elif ntype == "Affine":
+ 538 |             nodes[name] = Affine(
+ 539 |                 weight=np.array(nd.get("weight", []), dtype=np.float32),
+ 540 |                 bias=np.array(nd.get("bias", []), dtype=np.float32),
+ 541 |             )
+ 542 |         elif ntype == "LIF":
+ 543 |             nodes[name] = LIF(
+ 544 |                 tau=np.array(nd.get("tau", [WET_TAU_MEM_MS]), dtype=np.float32),
+ 545 |                 r=np.array(nd.get("r", [WET_R_MEM_MOHM]), dtype=np.float32),
+ 546 |                 v_leak=np.array(nd.get("v_leak", [WET_V_LEAK_MV]), dtype=np.float32),
+ 547 |                 v_threshold=np.array(nd.get("v_threshold", [WET_V_THRESH_MV]), dtype=np.float32),
+ 548 |                 v_reset=np.array(nd.get("v_reset", [WET_V_RESET_MV]), dtype=np.float32),
+ 549 |             )
+ 550 |         elif ntype == "CubaLIF":
+ 551 |             nodes[name] = CubaLIF(
+ 552 |                 tau_mem=np.array(nd.get("tau_mem", [WET_TAU_MEM_MS]), dtype=np.float32),
+ 553 |                 tau_syn=np.array(nd.get("tau_syn", [WET_TAU_SYN_AMPA_MS]), dtype=np.float32),
+ 554 |                 r=np.array(nd.get("r", [WET_R_MEM_MOHM]), dtype=np.float32),
+ 555 |                 v_leak=np.array(nd.get("v_leak", [WET_V_LEAK_MV]), dtype=np.float32),
+ 556 |                 v_threshold=np.array(nd.get("v_threshold", [WET_V_THRESH_MV]), dtype=np.float32),
+ 557 |                 v_reset=np.array(nd.get("v_reset", [WET_V_RESET_MV]), dtype=np.float32),
+ 558 |             )
+ 559 |         elif ntype == "Izhikevich":
+ 560 |             nodes[name] = Izhikevich(
+ 561 |                 a=np.array(nd.get("a", [IZHIKEVICH_RS["a"]]), dtype=np.float32),
+ 562 |                 b=np.array(nd.get("b", [IZHIKEVICH_RS["b"]]), dtype=np.float32),
+ 563 |                 c=np.array(nd.get("c", [IZHIKEVICH_RS["c"]]), dtype=np.float32),
+ 564 |                 d=np.array(nd.get("d", [IZHIKEVICH_RS["d"]]), dtype=np.float32),
+ 565 |                 v_threshold=np.array(nd.get("v_threshold", [IZHIKEVICH_RS["v_threshold"]]), dtype=np.float32),
+ 566 |             )
+ 567 | 
+ 568 |     edges: List[Tuple[str, str]] = []
+ 569 |     for edge in data.get("edges", []):
+ 570 |         edges.append((str(edge[0]), str(edge[1])))
+ 571 | 
+ 572 |     return NIRGraph(nodes=nodes, edges=edges, version=version)
+ 573 | 
+ 574 | 
+ 575 | # =========================================================================
+ 576 | # Ingestion Pipeline: NIR -> WetLang Source, AST, and Bytecode
+ 577 | # =========================================================================
+ 578 | 
+ 579 | def nir_to_wet_source(
+ 580 |     graph: NIRGraph,
+ 581 |     mea_rows: int = 8,
+ 582 |     mea_cols: int = 8,
+ 583 |     num_cycles: int = 100,
+ 584 |     enforce_dale: bool = True
+ 585 | ) -> str:
+ 586 |     """
+ 587 |     Translates an NIRGraph into a valid, compilable WetLang (.wet) source program.
+ 588 |     Validates physical dimensions (max rows * cols = 64 channels).
+ 589 |     Applies Dale's Principle check on all linear/affine weight matrices.
+ 590 |     """
+ 591 |     max_channels = mea_rows * mea_cols
+ 592 | 
+ 593 |     # Find Input and Output nodes
+ 594 |     input_nodes = [name for name, n in graph.nodes.items() if isinstance(n, Input)]
+ 595 |     output_nodes = [name for name, n in graph.nodes.items() if isinstance(n, Output)]
+ 596 | 
+ 597 |     # Validate synaptic weights
+ 598 |     for name, node in graph.nodes.items():
+ 599 |         if isinstance(node, (Linear, Affine)):
+ 600 |             if enforce_dale:
+ 601 |                 enforce_dales_principle(node.weight)
+ 602 | 
+ 603 |     # Determine channel counts
+ 604 |     num_in = 1
+ 605 |     if input_nodes:
+ 606 |         in_shape = graph.nodes[input_nodes[0]].shape
+ 607 |         if in_shape:
+ 608 |             num_in = int(np.prod(in_shape))
+ 609 | 
+ 610 |     num_out = 1
+ 611 |     if output_nodes:
+ 612 |         out_shape = graph.nodes[output_nodes[0]].shape
+ 613 |         if out_shape:
+ 614 |             num_out = int(np.prod(out_shape))
+ 615 | 
+ 616 |     if num_in + num_out > max_channels:
+ 617 |         raise NIRValidationError(
+ 618 |             f"NIR graph exceeds available MEA channels: {num_in} inputs + {num_out} outputs "
+ 619 |             f"> {max_channels} max electrodes."
+ 620 |         )
+ 621 | 
+ 622 |     # Map input channels to MEA (starting at [0, 0])
+ 623 |     lines = [
+ 624 |         f"// WetLang Program Synthesized from NIR Graph (v{graph.version})",
+ 625 |         f"grid mea[{mea_rows}, {mea_cols}];",
+ 626 |         "",
+ 627 |         "// Input Channels (Stimulation)",
+ 628 |     ]
+ 629 | 
+ 630 |     in_chan_names: List[str] = []
+ 631 |     for i in range(num_in):
+ 632 |         r = i // mea_cols
+ 633 |         c = i % mea_cols
+ 634 |         name = f"stim_{i}"
+ 635 |         in_chan_names.append(name)
+ 636 |         lines.append(f"channel {name} = mea[{r}, {c}] mode: BiphasicStim;")
+ 637 | 
+ 638 |     lines.append("")
+ 639 |     lines.append("// Output Channels (Spike Readout)")
+ 640 |     out_chan_names: List[str] = []
+ 641 |     for j in range(num_out):
+ 642 |         ch_idx = max_channels - 1 - j
+ 643 |         r = ch_idx // mea_cols
+ 644 |         c = ch_idx % mea_cols
+ 645 |         name = f"sense_{j}"
+ 646 |         out_chan_names.append(name)
+ 647 |         lines.append(f"channel {name} = mea[{r}, {c}] mode: SpikeReadout;")
+ 648 | 
+ 649 |     lines.append("")
+ 650 |     lines.append("// Closed-Loop Execution Stream")
+ 651 |     lines.append("let mut tick_counter = 0;")
+ 652 |     lines.append(f"while (tick_counter < {num_cycles}) {{")
+ 653 | 
+ 654 |     # Read output spikes
+ 655 |     for out_name in out_chan_names:
+ 656 |         lines.append(f"    let spikes_{out_name} = read_spikes({out_name}, 20.0);")
+ 657 | 
+ 658 |     # Closed-loop stimulus injection condition
+ 659 |     primary_out = out_chan_names[0] if out_chan_names else "sense_0"
+ 660 |     primary_in = in_chan_names[0] if in_chan_names else "stim_0"
+ 661 |     lines.append(f"    if (spikes_{primary_out} > 2) {{")
+ 662 |     lines.append(f"        stim_biphasic({primary_in}, 0.8 V, 200 us, 200 us);")
+ 663 |     lines.append("        modulate_stdp(1.05);")
+ 664 |     lines.append("    }")
+ 665 | 
+ 666 |     lines.append("    sync_tick();")
+ 667 |     lines.append("    tick_counter = tick_counter + 1;")
+ 668 |     lines.append("}")
+ 669 | 
+ 670 |     return "\n".join(lines)
+ 671 | 
+ 672 | 
+ 673 | def nir_to_wet_ast(
+ 674 |     graph: NIRGraph,
+ 675 |     mea_rows: int = 8,
+ 676 |     mea_cols: int = 8,
+ 677 |     num_cycles: int = 100,
+ 678 |     enforce_dale: bool = True
+ 679 | ) -> ProgramNode:
+ 680 |     """
+ 681 |     Translates an NIRGraph into a typed WetLang ProgramNode AST.
+ 682 |     """
+ 683 |     src = nir_to_wet_source(
+ 684 |         graph,
+ 685 |         mea_rows=mea_rows,
+ 686 |         mea_cols=mea_cols,
+ 687 |         num_cycles=num_cycles,
+ 688 |         enforce_dale=enforce_dale,
+ 689 |     )
+ 690 |     from compiler.lexer import Lexer
+ 691 |     from compiler.parser import Parser
+ 692 |     tokens = Lexer(src).tokenize()
+ 693 |     return Parser(tokens).parse()
+ 694 | 
+ 695 | 
+ 696 | def nir_to_wet_bytecode(
+ 697 |     graph: NIRGraph,
+ 698 |     mea_rows: int = 8,
+ 699 |     mea_cols: int = 8,
+ 700 |     num_cycles: int = 100,
+ 701 |     enforce_dale: bool = True
+ 702 | ) -> bytes:
+ 703 |     """
+ 704 |     Translates an NIRGraph directly into compiled WetLang binary bytecode (.wbc).
+ 705 |     """
+ 706 |     src = nir_to_wet_source(
+ 707 |         graph,
+ 708 |         mea_rows=mea_rows,
+ 709 |         mea_cols=mea_cols,
+ 710 |         num_cycles=num_cycles,
+ 711 |         enforce_dale=enforce_dale,
+ 712 |     )
+ 713 |     return compile_source(src)
+ 714 | 
+ 715 | 
+ 716 | def load_nir_into_vm(graph: NIRGraph, vm: Any, enforce_dale: bool = True) -> None:
+ 717 |     """
+ 718 |     Injects NIR synaptic weights and biophysical parameters directly into a live
+ 719 |     WetLang VM instance (bindings.runtime.WetVM or ctypes pointer).
+ 720 |     """
+ 721 |     # Extract linear weights from graph
+ 722 |     for name, node in graph.nodes.items():
+ 723 |         if isinstance(node, (Linear, Affine)):
+ 724 |             w = node.weight
+ 725 |             if enforce_dale:
+ 726 |                 enforce_dales_principle(w)
+ 727 | 
+ 728 |             # Map weights to VM biophysical state if available
+ 729 |             w_shape = w.shape
+ 730 |             if len(w_shape) == 2:
+ 731 |                 n_post, n_pre = w_shape
+ 732 |                 max_post = min(n_post, 64)
+ 733 |                 max_pre = min(n_pre, 64)
+ 734 | 
+ 735 |                 # If vm is a high-level WetVM instance
+ 736 |                 if hasattr(vm, "bio") or hasattr(vm, "_vm"):
+ 737 |                     # Access underlying bio state
+ 738 |                     for i in range(max_pre):
+ 739 |                         for j in range(max_post):
+ 740 |                             val = float(w[j, i])
+ 741 |                             # In WetLang biophysics, weight_ns is bounded [0.0, 40.0]
+ 742 |                             conductance = max(WET_W_MIN_NS, min(abs(val), WET_W_MAX_NS))
+ 743 |                             if hasattr(vm, "set_synapse_weight"):
+ 744 |                                 vm.set_synapse_weight(i, j, conductance, is_exc=(val >= 0.0))
+ 745 | 
+ 746 | 
+ 747 | # =========================================================================
+ 748 | # Export Pipeline: WetLang AST, Bytecode, and Live VM -> NIRGraph
+ 749 | # =========================================================================
+ 750 | 
+ 751 | def wet_ast_to_nir(ast: ProgramNode) -> NIRGraph:
+ 752 |     """
+ 753 |     Extracts topology and declarations from a WetLang ProgramNode and constructs an NIRGraph.
+ 754 |     """
+ 755 |     graph = NIRGraph()
+ 756 |     input_channels: List[str] = []
+ 757 |     output_channels: List[str] = []
+ 758 | 
+ 759 |     for decl in ast.declarations:
+ 760 |         if isinstance(decl, ChannelDeclNode):
+ 761 |             mode = getattr(decl, "mode", None)
+ 762 |             if mode in ("BiphasicStim", "VoltageStim"):
+ 763 |                 input_channels.append(decl.name)
+ 764 |             elif mode in ("SpikeReadout", "VoltageSense"):
+ 765 |                 output_channels.append(decl.name)
+ 766 | 
+ 767 |     n_in = max(1, len(input_channels))
+ 768 |     n_out = max(1, len(output_channels))
+ 769 | 
+ 770 |     # Add Input node
+ 771 |     graph.add_node("input", Input(input_type={"input": (n_in,)}))
+ 772 | 
+ 773 |     # Add Linear feedforward projection
+ 774 |     w_mat = np.full((n_out, n_in), 10.0, dtype=np.float32)
+ 775 |     graph.add_node("synapses", Linear(weight=w_mat))
+ 776 |     graph.add_edge("input", "synapses")
+ 777 | 
+ 778 |     # Add CubaLIF neurons
+ 779 |     graph.add_node(
+ 780 |         "lif_layer",
+ 781 |         CubaLIF(
+ 782 |             tau_mem=np.full((n_out,), WET_TAU_MEM_MS, dtype=np.float32),
+ 783 |             tau_syn=np.full((n_out,), WET_TAU_SYN_AMPA_MS, dtype=np.float32),
+ 784 |             r=np.full((n_out,), WET_R_MEM_MOHM, dtype=np.float32),
+ 785 |             v_leak=np.full((n_out,), WET_V_LEAK_MV, dtype=np.float32),
+ 786 |             v_threshold=np.full((n_out,), WET_V_THRESH_MV, dtype=np.float32),
+ 787 |             v_reset=np.full((n_out,), WET_V_RESET_MV, dtype=np.float32),
+ 788 |         )
+ 789 |     )
+ 790 |     graph.add_edge("synapses", "lif_layer")
+ 791 | 
+ 792 |     # Add Output node
+ 793 |     graph.add_node("output", Output(output_type={"output": (n_out,)}))
+ 794 |     graph.add_edge("lif_layer", "output")
+ 795 | 
+ 796 |     return graph
+ 797 | 
+ 798 | 
+ 799 | def wet_bytecode_to_nir(bytecode: bytes) -> NIRGraph:
+ 800 |     """
+ 801 |     Parses a compiled .wbc binary bytecode stream and reconstructs the corresponding NIRGraph.
+ 802 |     """
+ 803 |     if len(bytecode) < HEADER_SIZE:
+ 804 |         raise ValueError("Bytecode is smaller than 32-byte WBC header")
+ 805 | 
+ 806 |     magic, vmaj, vmin, caps, fsize, crc, nsec, ch_cnt, max_charge, res = struct.unpack(
+ 807 |         HEADER_STRUCT_FORMAT, bytecode[:HEADER_SIZE]
+ 808 |     )
+ 809 | 
+ 810 |     if magic != HEADER_MAGIC:
+ 811 |         raise ValueError(f"Invalid WBC header magic: {magic!r}")
+ 812 | 
+ 813 |     # Inspect Section 2: TOPOLOGY_CONFIG if present
+ 814 |     offset = HEADER_SIZE
+ 815 |     channel_aliases: List[Tuple[str, int, int]] = []
+ 816 | 
+ 817 |     for _ in range(nsec):
+ 818 |         if offset + SECTION_ENTRY_SIZE > len(bytecode):
+ 819 |             break
+ 820 |         sec_type, s_res, sec_off, sec_len = struct.unpack(
+ 821 |             SECTION_ENTRY_FORMAT, bytecode[offset : offset + SECTION_ENTRY_SIZE]
+ 822 |         )
+ 823 |         offset += SECTION_ENTRY_SIZE
+ 824 | 
+ 825 |         if sec_type == int(SectionType.TOPOLOGY_CONFIG) and sec_off + sec_len <= len(bytecode):
+ 826 |             sec_data = bytecode[sec_off : sec_off + sec_len]
+ 827 |             if len(sec_data) >= 16:
+ 828 |                 tot_ch, rows, cols, pitch, alias_count = struct.unpack("<IHHfI", sec_data[:16])
+ 829 |                 p = 16
+ 830 |                 for _ in range(alias_count):
+ 831 |                     if p + 2 > len(sec_data):
+ 832 |                         break
+ 833 |                     nlen = struct.unpack("<H", sec_data[p : p + 2])[0]
+ 834 |                     p += 2
+ 835 |                     name = sec_data[p : p + nlen].decode("utf-8", errors="replace")
+ 836 |                     p += nlen
+ 837 |                     ch_id, mode_byte = struct.unpack("<BB", sec_data[p : p + 2])
+ 838 |                     p += 2
+ 839 |                     channel_aliases.append((name, ch_id, mode_byte))
+ 840 | 
+ 841 |     n_in = sum(1 for _, _, m in channel_aliases if m == 1) or 1
+ 842 |     n_out = sum(1 for _, _, m in channel_aliases if m == 2) or 1
+ 843 | 
+ 844 |     graph = NIRGraph()
+ 845 |     graph.add_node("input", Input(input_type={"input": (n_in,)}))
+ 846 |     graph.add_node("weight", Linear(weight=np.full((n_out, n_in), 15.0, dtype=np.float32)))
+ 847 |     graph.add_edge("input", "weight")
+ 848 |     graph.add_node(
+ 849 |         "lif",
+ 850 |         CubaLIF(
+ 851 |             tau_mem=np.full((n_out,), WET_TAU_MEM_MS, dtype=np.float32),
+ 852 |             tau_syn=np.full((n_out,), WET_TAU_SYN_AMPA_MS, dtype=np.float32),
+ 853 |             r=np.full((n_out,), WET_R_MEM_MOHM, dtype=np.float32),
+ 854 |             v_leak=np.full((n_out,), WET_V_LEAK_MV, dtype=np.float32),
+ 855 |             v_threshold=np.full((n_out,), WET_V_THRESH_MV, dtype=np.float32),
+ 856 |             v_reset=np.full((n_out,), WET_V_RESET_MV, dtype=np.float32),
+ 857 |         )
+ 858 |     )
+ 859 |     graph.add_edge("weight", "lif")
+ 860 |     graph.add_node("output", Output(output_type={"output": (n_out,)}))
+ 861 |     graph.add_edge("lif", "output")
+ 862 |     return graph
+ 863 | 
+ 864 | 
+ 865 | def wet_vm_to_nir(vm: Any, num_neurons: int = 64) -> NIRGraph:
+ 866 |     """
+ 867 |     Introspects a live WetLang VM instance and extracts active synaptic topology,
+ 868 |     conductances, and biophysical cell parameters into a standard NIRGraph.
+ 869 |     """
+ 870 |     graph = NIRGraph()
+ 871 |     n = min(64, num_neurons)
+ 872 | 
+ 873 |     # Input: 64 MEA stimulation channels
+ 874 |     graph.add_node("input", Input(input_type={"input": (n,)}))
+ 875 | 
+ 876 |     # Synaptic weight matrix extraction
+ 877 |     w_mat = np.zeros((n, n), dtype=np.float32)
+ 878 | 
+ 879 |     # If vm provides direct synapse matrix inspection
+ 880 |     if hasattr(vm, "get_synapse_matrix"):
+ 881 |         w_mat = np.array(vm.get_synapse_matrix(), dtype=np.float32)[:n, :n]
+ 882 |     else:
+ 883 |         # Default baseline biophysical connectivity (e.g. 10.0 nS AMPA)
+ 884 |         for i in range(n):
+ 885 |             for j in range(n):
+ 886 |                 if i != j and abs(i - j) <= 2:
+ 887 |                     w_mat[j, i] = 12.5
+ 888 | 
+ 889 |     graph.add_node("synaptic_matrix", Linear(weight=w_mat))
+ 890 |     graph.add_edge("input", "synaptic_matrix")
+ 891 | 
+ 892 |     # CubaLIF neuronal population
+ 893 |     graph.add_node(
+ 894 |         "organoid_neurons",
+ 895 |         CubaLIF(
+ 896 |             tau_mem=np.full((n,), WET_TAU_MEM_MS, dtype=np.float32),
+ 897 |             tau_syn=np.full((n,), WET_TAU_SYN_AMPA_MS, dtype=np.float32),
+ 898 |             r=np.full((n,), WET_R_MEM_MOHM, dtype=np.float32),
+ 899 |             v_leak=np.full((n,), WET_V_LEAK_MV, dtype=np.float32),
+ 900 |             v_threshold=np.full((n,), WET_V_THRESH_MV, dtype=np.float32),
+ 901 |             v_reset=np.full((n,), WET_V_RESET_MV, dtype=np.float32),
+ 902 |         )
+ 903 |     )
+ 904 |     graph.add_edge("synaptic_matrix", "organoid_neurons")
+ 905 | 
+ 906 |     # Output: 64 spike readout channels
+ 907 |     graph.add_node("output", Output(output_type={"output": (n,)}))
+ 908 |     graph.add_edge("organoid_neurons", "output")
+ 909 | 
+ 910 |     return graph
 ```
 
 ### `compiler/parser.py` (905 lines, SHA-256: `779033cb13b290b8...`)
@@ -5541,7 +6584,7 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
  165 | #endif /* WET_INTERLOCKS_H */
 ```
 
-### `native/include/wet_crt.h` (101 lines, SHA-256: `a18377fac4743913...`)
+### `native/include/wet_crt.h` (108 lines, SHA-256: `3c1a972b9cd8b7c7...`)
 
 ```text
    1 | #ifndef WET_CRT_H
@@ -5556,98 +6599,1173 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   10 | void* memcpy(void* dest, const void* src, size_t count);
   11 | void* memset(void* dest, int ch, size_t count);
   12 | int   memcmp(const void* s1, const void* s2, size_t count);
-  13 | int   _snprintf(char* buffer, size_t count, const char* format, ...);
-  14 | #ifndef snprintf
-  15 | #define snprintf _snprintf
-  16 | #endif
-  17 | 
-  18 | static inline float wet_fabsf(float x) {
-  19 |     return (x < 0.0f) ? -x : x;
-  20 | }
-  21 | #ifndef fabsf
-  22 | #define fabsf wet_fabsf
+  13 | size_t strlen(const char* str);
+  14 | char* strncpy(char* dest, const char* src, size_t count);
+  15 | char* strcpy(char* dest, const char* src);
+  16 | char* strcat(char* dest, const char* src);
+  17 | int   strcmp(const char* s1, const char* s2);
+  18 | int   strncmp(const char* s1, const char* s2, size_t count);
+  19 | int   sprintf(char* buffer, const char* format, ...);
+  20 | int   _snprintf(char* buffer, size_t count, const char* format, ...);
+  21 | #ifndef snprintf
+  22 | #define snprintf _snprintf
   23 | #endif
   24 | 
-  25 | static inline double wet_fabs(double x) {
-  26 |     return (x < 0.0) ? -x : x;
+  25 | static inline float wet_fabsf(float x) {
+  26 |     return (x < 0.0f) ? -x : x;
   27 | }
-  28 | 
-  29 | static inline float wet_clampf(float x, float lo, float hi) {
-  30 |     if (x < lo) return lo;
-  31 |     if (x > hi) return hi;
-  32 |     return x;
-  33 | }
-  34 | 
-  35 | static inline double wet_clampd(double x, double lo, double hi) {
-  36 |     if (x < lo) return lo;
-  37 |     if (x > hi) return hi;
-  38 |     return x;
-  39 | }
-  40 | 
-  41 | /* Pure C99 deterministic exp(x) via range reduction (Cody-Waite) + minimax polynomial.
-  42 |  * Accurate to < 1e-6 for all biophysical inputs; zero external libm dependency. */
-  43 | static inline double wet_exp(double x) {
-  44 |     if (x < -700.0) return 0.0;
-  45 |     if (x > 700.0)  return 1e300;
-  46 |     const double LN2_INV = 1.44269504088896340736;
-  47 |     const double LN2_HI  = 0.69314718055994530942;
-  48 |     int k = (int)(x * LN2_INV + (x >= 0.0 ? 0.5 : -0.5));
-  49 |     double r = x - (double)k * LN2_HI;
-  50 |     /* 7th-order Taylor/Horner on [-ln2/2, ln2/2] -> error < 1e-9 */
-  51 |     double poly = 1.0 + r * (1.0 + r * (0.5 + r * (1.0/6.0 + r * (1.0/24.0
-  52 |                 + r * (1.0/120.0 + r * (1.0/720.0 + r * (1.0/5040.0)))))));
-  53 |     /* Multiply by 2^k via IEEE-754 exponent manipulation */
-  54 |     union { double d; uint64_t u; } scale;
-  55 |     int exp_bits = k + 1023;
-  56 |     if (exp_bits <= 0) return 0.0;
-  57 |     if (exp_bits >= 2047) return 1e300;
-  58 |     scale.u = ((uint64_t)exp_bits) << 52;
-  59 |     return poly * scale.d;
-  60 | }
-  61 | 
-  62 | static inline float wet_expf(float x) {
-  63 |     return (float)wet_exp((double)x);
-  64 | }
-  65 | 
-  66 | /* Pure C99 Newton-Raphson sqrt(x) */
-  67 | static inline double wet_sqrt(double x) {
-  68 |     if (x <= 0.0) return 0.0;
-  69 |     double g = x > 1.0 ? x * 0.5 : 1.0;
-  70 |     for (int i = 0; i < 16; ++i) {
-  71 |         g = 0.5 * (g + x / g);
-  72 |     }
-  73 |     return g;
-  74 | }
-  75 | 
-  76 | /* Deterministic Xorshift64* PRNG for reproducible background noise & network wiring */
-  77 | static inline uint64_t wet_rng_next(uint64_t* state) {
-  78 |     uint64_t x = *state;
-  79 |     if (x == 0) x = 0x9E3779B97F4A7C15ULL;
-  80 |     x ^= x >> 12;
-  81 |     x ^= x << 25;
-  82 |     x ^= x >> 27;
-  83 |     *state = x;
-  84 |     return x * 0x2545F4914F6CDD1DULL;
-  85 | }
-  86 | 
-  87 | /* Uniform double in [0, 1) */
-  88 | static inline double wet_rng_uniform(uint64_t* state) {
-  89 |     return (double)(wet_rng_next(state) >> 11) * (1.0 / 9007199254740992.0);
-  90 | }
-  91 | 
-  92 | /* Approximate standard normal N(0,1) via Irwin-Hall (sum of 12 uniforms - 6) */
-  93 | static inline double wet_rng_normal(uint64_t* state) {
-  94 |     double s = 0.0;
-  95 |     for (int i = 0; i < 12; ++i) {
-  96 |         s += wet_rng_uniform(state);
-  97 |     }
-  98 |     return s - 6.0;
-  99 | }
- 100 | 
- 101 | #endif /* WET_CRT_H */
+  28 | #ifndef fabsf
+  29 | #define fabsf wet_fabsf
+  30 | #endif
+  31 | 
+  32 | static inline double wet_fabs(double x) {
+  33 |     return (x < 0.0) ? -x : x;
+  34 | }
+  35 | 
+  36 | static inline float wet_clampf(float x, float lo, float hi) {
+  37 |     if (x < lo) return lo;
+  38 |     if (x > hi) return hi;
+  39 |     return x;
+  40 | }
+  41 | 
+  42 | static inline double wet_clampd(double x, double lo, double hi) {
+  43 |     if (x < lo) return lo;
+  44 |     if (x > hi) return hi;
+  45 |     return x;
+  46 | }
+  47 | 
+  48 | /* Pure C99 deterministic exp(x) via range reduction (Cody-Waite) + minimax polynomial.
+  49 |  * Accurate to < 1e-6 for all biophysical inputs; zero external libm dependency. */
+  50 | static inline double wet_exp(double x) {
+  51 |     if (x < -700.0) return 0.0;
+  52 |     if (x > 700.0)  return 1e300;
+  53 |     const double LN2_INV = 1.44269504088896340736;
+  54 |     const double LN2_HI  = 0.69314718055994530942;
+  55 |     int k = (int)(x * LN2_INV + (x >= 0.0 ? 0.5 : -0.5));
+  56 |     double r = x - (double)k * LN2_HI;
+  57 |     /* 7th-order Taylor/Horner on [-ln2/2, ln2/2] -> error < 1e-9 */
+  58 |     double poly = 1.0 + r * (1.0 + r * (0.5 + r * (1.0/6.0 + r * (1.0/24.0
+  59 |                 + r * (1.0/120.0 + r * (1.0/720.0 + r * (1.0/5040.0)))))));
+  60 |     /* Multiply by 2^k via IEEE-754 exponent manipulation */
+  61 |     union { double d; uint64_t u; } scale;
+  62 |     int exp_bits = k + 1023;
+  63 |     if (exp_bits <= 0) return 0.0;
+  64 |     if (exp_bits >= 2047) return 1e300;
+  65 |     scale.u = ((uint64_t)exp_bits) << 52;
+  66 |     return poly * scale.d;
+  67 | }
+  68 | 
+  69 | static inline float wet_expf(float x) {
+  70 |     return (float)wet_exp((double)x);
+  71 | }
+  72 | 
+  73 | /* Pure C99 Newton-Raphson sqrt(x) */
+  74 | static inline double wet_sqrt(double x) {
+  75 |     if (x <= 0.0) return 0.0;
+  76 |     double g = x > 1.0 ? x * 0.5 : 1.0;
+  77 |     for (int i = 0; i < 16; ++i) {
+  78 |         g = 0.5 * (g + x / g);
+  79 |     }
+  80 |     return g;
+  81 | }
+  82 | 
+  83 | /* Deterministic Xorshift64* PRNG for reproducible background noise & network wiring */
+  84 | static inline uint64_t wet_rng_next(uint64_t* state) {
+  85 |     uint64_t x = *state;
+  86 |     if (x == 0) x = 0x9E3779B97F4A7C15ULL;
+  87 |     x ^= x >> 12;
+  88 |     x ^= x << 25;
+  89 |     x ^= x >> 27;
+  90 |     *state = x;
+  91 |     return x * 0x2545F4914F6CDD1DULL;
+  92 | }
+  93 | 
+  94 | /* Uniform double in [0, 1) */
+  95 | static inline double wet_rng_uniform(uint64_t* state) {
+  96 |     return (double)(wet_rng_next(state) >> 11) * (1.0 / 9007199254740992.0);
+  97 | }
+  98 | 
+  99 | /* Approximate standard normal N(0,1) via Irwin-Hall (sum of 12 uniforms - 6) */
+ 100 | static inline double wet_rng_normal(uint64_t* state) {
+ 101 |     double s = 0.0;
+ 102 |     for (int i = 0; i < 12; ++i) {
+ 103 |         s += wet_rng_uniform(state);
+ 104 |     }
+ 105 |     return s - 6.0;
+ 106 | }
+ 107 | 
+ 108 | #endif /* WET_CRT_H */
 ```
 
-### `native/include/wetvm_api.h` (281 lines, SHA-256: `aedad5bea596a707...`)
+### `native/include/wet_hal.h` (191 lines, SHA-256: `a9a2d1dca0115a12...`)
+
+```text
+   1 | #ifndef WET_HAL_H
+   2 | #define WET_HAL_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | #include "wetvm_types.h"
+   7 | #include "wetvm_api.h"
+   8 | 
+   9 | #ifdef __cplusplus
+  10 | extern "C" {
+  11 | #endif
+  12 | 
+  13 | /* =========================================================================
+  14 |  * WetLang Hardware Abstraction Layer (HAL) Core Architecture
+  15 |  * Tri-Modal Router: SIMULATED (0), PHYSICAL (1), HIL_LOOPBACK (2)
+  16 |  * ========================================================================= */
+  17 | 
+  18 | typedef enum {
+  19 |     WET_HAL_MODE_SIMULATED    = 0, /* In-silico ODE biophysics & virtual registers */
+  20 |     WET_HAL_MODE_PHYSICAL     = 1, /* Real device drivers (SPI, I2C, RS-232, CAN) */
+  21 |     WET_HAL_MODE_HIL_LOOPBACK = 2  /* Hardware-in-the-loop mock with bit-level validation */
+  22 | } wet_hal_mode_t;
+  23 | 
+  24 | typedef enum {
+  25 |     WET_HAL_DRIVER_EPHYS      = 1, /* Intan RHS2116 / MaxWell MaxOne */
+  26 |     WET_HAL_DRIVER_PUMP       = 2, /* Harvard Apparatus RS-232 */
+  27 |     WET_HAL_DRIVER_VALVE      = 3, /* Microfluidic Solenoid / CAN */
+  28 |     WET_HAL_DRIVER_FLOW       = 4, /* Sensirion I2C / SHDLC */
+  29 |     WET_HAL_DRIVER_CAN_BUS    = 5  /* CAN-bus transceiver */
+  30 | } wet_hal_driver_type_t;
+  31 | 
+  32 | typedef enum {
+  33 |     WET_HAL_OK                   = 0,
+  34 |     WET_HAL_ERR_NULL_PTR         = -1,
+  35 |     WET_HAL_ERR_INVALID_MODE     = -2,
+  36 |     WET_HAL_ERR_DRIVER_NOT_FOUND = -3,
+  37 |     WET_HAL_ERR_IO               = -4,
+  38 |     WET_HAL_ERR_TIMEOUT          = -5,
+  39 |     WET_HAL_ERR_CRC_MISMATCH     = -6,
+  40 |     WET_HAL_ERR_COMPLIANCE_RAILED= -7,
+  41 |     WET_HAL_ERR_INTERLOCK        = -8,
+  42 |     WET_HAL_ERR_DEAD_HEAD        = -9,
+  43 |     WET_HAL_ERR_OUT_OF_BOUNDS    = -10,
+  44 |     WET_HAL_ERR_BUS_BUSY         = -11,
+  45 |     WET_HAL_ERR_NOT_SUPPORTED    = -12,
+  46 |     WET_HAL_ERR_BUFFER_FULL      = -13
+  47 | } wet_hal_status_t;
+  48 | 
+  49 | /* Forward declarations */
+  50 | typedef struct wet_hal_driver wet_hal_driver_t;
+  51 | typedef struct wet_hal_context wet_hal_context_t;
+  52 | 
+  53 | /* Driver vtable operations */
+  54 | typedef struct {
+  55 |     /* Lifecycle */
+  56 |     wet_hal_status_t (*init)(wet_hal_driver_t* drv, void* config);
+  57 |     wet_hal_status_t (*shutdown)(wet_hal_driver_t* drv);
+  58 |     wet_hal_status_t (*emergency_stop)(wet_hal_driver_t* drv, uint32_t reason);
+  59 |     wet_hal_status_t (*step_tick)(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms);
+  60 | 
+  61 |     /* Electrophysiology DAQ */
+  62 |     wet_hal_status_t (*stim_voltage)(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms);
+  63 |     wet_hal_status_t (*stim_current)(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us);
+  64 |     wet_hal_status_t (*read_ephys)(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count);
+  65 |     wet_hal_status_t (*measure_impedance)(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad);
+  66 |     wet_hal_status_t (*active_discharge)(wet_hal_driver_t* drv, uint16_t channel);
+  67 | 
+  68 |     /* Microfluidics & Actuators */
+  69 |     wet_hal_status_t (*write_pump)(wet_hal_driver_t* drv, uint8_t pump_id, double rate_ul_min, uint8_t run_flag);
+  70 |     wet_hal_status_t (*dispense_volume)(wet_hal_driver_t* drv, uint8_t pump_id, double volume_ul);
+  71 |     wet_hal_status_t (*write_valve)(wet_hal_driver_t* drv, uint8_t valve_id, uint8_t state);
+  72 |     wet_hal_status_t (*read_flow)(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min);
+  73 |     wet_hal_status_t (*read_pressure)(wet_hal_driver_t* drv, uint8_t port_id, float* out_kpa);
+  74 | } wet_hal_ops_t;
+  75 | 
+  76 | /* Driver instance structure */
+  77 | struct wet_hal_driver {
+  78 |     char                  name[32];
+  79 |     wet_hal_driver_type_t driver_type;
+  80 |     wet_hal_mode_t        mode;
+  81 |     uint8_t               is_initialized;
+  82 |     uint8_t               is_active;
+  83 |     const wet_hal_ops_t*  ops;
+  84 |     void*                 context;
+  85 |     wet_hal_driver_t*     next;
+  86 | };
+  87 | 
+  88 | /* HAL Configuration */
+  89 | typedef struct {
+  90 |     wet_hal_mode_t mode;
+  91 |     uint32_t       max_ephys_channels;
+  92 |     uint32_t       num_pumps;
+  93 |     uint32_t       num_valves;
+  94 |     uint32_t       num_flow_sensors;
+  95 |     uint8_t        enable_dead_head_protection;
+  96 |     uint8_t        enable_crowbar_fastpath;
+  97 |     uint8_t        valve_for_pump[8]; /* Associated downstream valve for dead-head protection */
+  98 | } wet_hal_config_t;
+  99 | 
+ 100 | /* HAL Hardware Statistics & Telemetry */
+ 101 | typedef struct {
+ 102 |     uint64_t total_spi_transactions;
+ 103 |     uint64_t total_i2c_transactions;
+ 104 |     uint64_t total_rs232_commands;
+ 105 |     uint64_t total_can_frames;
+ 106 |     uint64_t total_crowbar_events;
+ 107 |     uint64_t last_crowbar_timestamp_us;
+ 108 |     uint32_t last_crowbar_reason;
+ 109 |     double   crowbar_latency_us;
+ 110 | } wet_hal_telemetry_t;
+ 111 | 
+ 112 | /* HAL Context / Router Registry */
+ 113 | #define WET_HAL_MAX_DRIVERS 16
+ 114 | 
+ 115 | struct wet_hal_context {
+ 116 |     wet_hal_mode_t       mode;
+ 117 |     wet_hal_config_t     config;
+ 118 |     wet_vm_t*            vm; /* Attached VM */
+ 119 | 
+ 120 |     /* Registered Drivers */
+ 121 |     wet_hal_driver_t*    drivers[WET_HAL_MAX_DRIVERS];
+ 122 |     uint32_t             driver_count;
+ 123 | 
+ 124 |     /* Primary specialized driver slots for zero-search O(1) routing */
+ 125 |     wet_hal_driver_t*    ephys_driver;
+ 126 |     wet_hal_driver_t*    pump_driver;
+ 127 |     wet_hal_driver_t*    valve_driver;
+ 128 |     wet_hal_driver_t*    flow_driver;
+ 129 |     wet_hal_driver_t*    can_driver;
+ 130 | 
+ 131 |     /* Actuator & Sensor Caches */
+ 132 |     float                pump_rates_ul_min[8];
+ 133 |     uint8_t              valve_states[8];
+ 134 |     double               flow_rates_ul_min[8];
+ 135 |     float                ephys_voltages[64];
+ 136 |     uint8_t              ephys_spikes[64];
+ 137 | 
+ 138 |     /* Emergency Crowbar Status */
+ 139 |     uint8_t              crowbar_tripped;
+ 140 |     uint32_t             crowbar_reason;
+ 141 |     uint64_t             crowbar_tick;
+ 142 |     uint64_t             crowbar_timestamp_us;
+ 143 | 
+ 144 |     /* Telemetry Counters */
+ 145 |     wet_hal_telemetry_t  telemetry;
+ 146 | };
+ 147 | 
+ 148 | /* =========================================================================
+ 149 |  * Core HAL API Prototypes
+ 150 |  * ========================================================================= */
+ 151 | 
+ 152 | WET_EXPORT wet_hal_context_t* wet_hal_create(wet_hal_mode_t mode, const wet_hal_config_t* config);
+ 153 | WET_EXPORT void wet_hal_destroy(wet_hal_context_t* hal);
+ 154 | 
+ 155 | WET_EXPORT wet_hal_status_t wet_hal_init(wet_vm_t* vm, wet_hal_mode_t mode, const wet_hal_config_t* config);
+ 156 | WET_EXPORT wet_hal_status_t wet_hal_attach(wet_vm_t* vm, wet_hal_context_t* hal);
+ 157 | WET_EXPORT wet_hal_context_t* wet_hal_get_context(wet_vm_t* vm);
+ 158 | 
+ 159 | WET_EXPORT wet_hal_status_t wet_hal_set_mode(wet_hal_context_t* hal, wet_hal_mode_t mode);
+ 160 | WET_EXPORT wet_hal_mode_t wet_hal_get_mode(const wet_hal_context_t* hal);
+ 161 | 
+ 162 | WET_EXPORT wet_hal_status_t wet_hal_register_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver);
+ 163 | WET_EXPORT wet_hal_status_t wet_hal_unregister_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver);
+ 164 | WET_EXPORT wet_hal_driver_t* wet_hal_find_driver(wet_hal_context_t* hal, wet_hal_driver_type_t type);
+ 165 | 
+ 166 | /* Actuator & Sensor Dispatch */
+ 167 | WET_EXPORT wet_hal_status_t wet_hal_write_pump(wet_hal_context_t* hal, uint8_t pump_id, double rate_ul_min, uint8_t run_flag);
+ 168 | WET_EXPORT wet_hal_status_t wet_hal_dispense_pump(wet_hal_context_t* hal, uint8_t pump_id, double volume_ul);
+ 169 | WET_EXPORT wet_hal_status_t wet_hal_write_valve(wet_hal_context_t* hal, uint8_t valve_id, uint8_t state);
+ 170 | WET_EXPORT wet_hal_status_t wet_hal_read_flow(wet_hal_context_t* hal, uint8_t sensor_id, double* out_flow_ul_min);
+ 171 | WET_EXPORT wet_hal_status_t wet_hal_stim_current(wet_hal_context_t* hal, uint16_t channel, int32_t current_pA, uint32_t duration_us);
+ 172 | WET_EXPORT wet_hal_status_t wet_hal_stim_voltage(wet_hal_context_t* hal, uint16_t channel, float voltage_v, float p1_ms, float p2_ms);
+ 173 | WET_EXPORT wet_hal_status_t wet_hal_read_spikes(wet_hal_context_t* hal, uint16_t channel, uint8_t* out_spike_flag);
+ 174 | WET_EXPORT wet_hal_status_t wet_hal_measure_impedance(wet_hal_context_t* hal, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad);
+ 175 | WET_EXPORT wet_hal_status_t wet_hal_active_discharge(wet_hal_context_t* hal, uint16_t channel);
+ 176 | 
+ 177 | /* Emergency Hardware Crowbar Fast-Path (<100 µs) */
+ 178 | WET_EXPORT void wet_hal_emergency_crowbar(wet_vm_t* vm, uint32_t trip_reason);
+ 179 | 
+ 180 | /* Telemetry & Mapping Accessors */
+ 181 | WET_EXPORT wet_hal_telemetry_t* wet_hal_get_telemetry(wet_hal_context_t* hal);
+ 182 | WET_EXPORT void wet_hal_set_valve_for_pump(wet_hal_context_t* hal, uint8_t pump_id, uint8_t valve_id);
+ 183 | 
+ 184 | /* High-resolution timer utility (monotonic microseconds) */
+ 185 | WET_EXPORT uint64_t wet_hal_get_time_us(void);
+ 186 | 
+ 187 | #ifdef __cplusplus
+ 188 | }
+ 189 | #endif
+ 190 | 
+ 191 | #endif /* WET_HAL_H */
+```
+
+### `native/include/wet_hal_intan.h` (169 lines, SHA-256: `15e6a6849d146a25...`)
+
+```text
+   1 | #ifndef WET_HAL_INTAN_H
+   2 | #define WET_HAL_INTAN_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | #include "wet_hal.h"
+   7 | 
+   8 | #ifdef __cplusplus
+   9 | extern "C" {
+  10 | #endif
+  11 | 
+  12 | /* =========================================================================
+  13 |  * Intan RHS2116 Electrophysiology DAQ Driver Specification
+  14 |  * 16-Channel Bidirectional SPI Interface
+  15 |  * ========================================================================= */
+  16 | 
+  17 | #define INTAN_RHS2116_NUM_CHANNELS 16
+  18 | #define INTAN_SPI_WORD_BITS        32
+  19 | #define INTAN_PIPELINE_DELAY_WORDS 2
+  20 | #define INTAN_COMPLIANCE_RAIL_VOLT 7.0f
+  21 | 
+  22 | /* SPI Command Opcode prefixes */
+  23 | #define INTAN_CMD_CONVERT 0x00U /* 00xxxxxx: Convert channel [3:0] */
+  24 | #define INTAN_CMD_WRITE   0x80U /* 10xxxxxx: Write register [7:0] */
+  25 | #define INTAN_CMD_READ    0xC0U /* 11xxxxxx: Read register [7:0] */
+  26 | 
+  27 | /* Command Control Flags */
+  28 | #define INTAN_FLAG_M_COMPLIANCE_CLEAR 0x800000U /* Bit 23: M flag */
+  29 | #define INTAN_FLAG_U_UPDATE_LATCH     0x400000U /* Bit 22: U flag */
+  30 | 
+  31 | /* Current Range Selectors */
+  32 | typedef enum {
+  33 |     INTAN_RANGE_1X   = 0, /* 10 nA step,   range: 10 nA .. 2.55 uA */
+  34 |     INTAN_RANGE_10X  = 1, /* 100 nA step,  range: 100 nA .. 25.5 uA */
+  35 |     INTAN_RANGE_100X = 2  /* 10 uA step,   range: 1.0 uA .. 2.55 mA */
+  36 | } intan_current_range_t;
+  37 | 
+  38 | /* Intan 32-bit SPI Command Word Structure */
+  39 | typedef struct {
+  40 |     uint8_t  opcode;   /* 0x00=Convert, 0x80=Write, 0xC0=Read */
+  41 |     uint8_t  channel;  /* 0..15 */
+  42 |     uint8_t  reg;      /* Register address 0..63 */
+  43 |     uint16_t data;     /* 16-bit register payload */
+  44 |     uint8_t  flag_m;   /* Compliance clear flag */
+  45 |     uint8_t  flag_u;   /* Update / Latch flag */
+  46 | } intan_spi_command_t;
+  47 | 
+  48 | /* Intan Hardware / HIL State */
+  49 | typedef struct {
+  50 |     /* SPI State */
+  51 |     uint32_t tx_pipeline[INTAN_PIPELINE_DELAY_WORDS + 1];
+  52 |     uint32_t rx_pipeline[INTAN_PIPELINE_DELAY_WORDS + 1];
+  53 |     uint32_t pipeline_index;
+  54 | 
+  55 |     /* Register File (64 x 16-bit registers) */
+  56 |     uint16_t registers[64];
+  57 | 
+  58 |     /* Channel DAC Configuration (16 channels) */
+  59 |     struct {
+  60 |         uint8_t               dac_val_p1;
+  61 |         uint8_t               dac_val_p2;
+  62 |         intan_current_range_t range;
+  63 |         int32_t               current_pA;
+  64 |         uint32_t              duration_us;
+  65 |         uint8_t               enabled;
+  66 |         uint8_t               charge_recovery_on;
+  67 |         float                 impedance_ohms;
+  68 |         float                 impedance_phase_rad;
+  69 |     } channels[INTAN_RHS2116_NUM_CHANNELS];
+  70 | 
+  71 |     /* Compliance Monitor */
+  72 |     uint16_t compliance_rail_mask; /* Bitmask of channels currently railed */
+  73 |     uint32_t total_compliance_trips;
+  74 | 
+  75 |     /* Impedance Module Configuration */
+  76 |     float    zcheck_freq_hz;
+  77 |     float    zcheck_probe_current_pA;
+  78 | 
+  79 |     /* HIL Fault Injection Hooks */
+  80 |     uint8_t  fault_force_compliance_rail;
+  81 |     uint8_t  fault_spi_crc_error;
+  82 |     uint8_t  fault_bus_timeout;
+  83 |     uint32_t transaction_count;
+  84 | } intan_device_state_t;
+  85 | 
+  86 | /* =========================================================================
+  87 |  * Intan RHS2116 Driver APIs
+  88 |  * ========================================================================= */
+  89 | 
+  90 | /**
+  91 |  * Creates and registers an Intan RHS2116 DAQ driver instance.
+  92 |  */
+  93 | WET_EXPORT wet_hal_driver_t* wet_hal_intan_create(wet_hal_mode_t mode);
+  94 | 
+  95 | /**
+  96 |  * Destroys an Intan RHS2116 driver instance.
+  97 |  */
+  98 | WET_EXPORT void wet_hal_intan_destroy(wet_hal_driver_t* drv);
+  99 | 
+ 100 | /**
+ 101 |  * Low-level 32-bit SPI word exchange.
+ 102 |  */
+ 103 | WET_EXPORT uint32_t wet_hal_intan_spi_transfer(wet_hal_driver_t* drv, uint32_t mosi_word);
+ 104 | 
+ 105 | /**
+ 106 |  * Encodes a 32-bit SPI command word.
+ 107 |  */
+ 108 | WET_EXPORT uint32_t wet_hal_intan_encode_cmd(const intan_spi_command_t* cmd);
+ 109 | 
+ 110 | /**
+ 111 |  * Decodes a 32-bit SPI command word.
+ 112 |  */
+ 113 | WET_EXPORT void wet_hal_intan_decode_cmd(uint32_t word, intan_spi_command_t* cmd);
+ 114 | 
+ 115 | /**
+ 116 |  * Configures constant current stimulation on channel (10 nA - 2.55 mA).
+ 117 |  */
+ 118 | WET_EXPORT wet_hal_status_t wet_hal_intan_set_stim_current(
+ 119 |     wet_hal_driver_t* drv,
+ 120 |     uint8_t channel,
+ 121 |     int32_t current_pA,
+ 122 |     uint32_t duration_us
+ 123 | );
+ 124 | 
+ 125 | /**
+ 126 |  * Queries compliance rail register.
+ 127 |  */
+ 128 | WET_EXPORT uint16_t wet_hal_intan_get_compliance_status(wet_hal_driver_t* drv);
+ 129 | 
+ 130 | /**
+ 131 |  * Clears compliance rail register (issues command with M flag).
+ 132 |  */
+ 133 | WET_EXPORT void wet_hal_intan_clear_compliance(wet_hal_driver_t* drv);
+ 134 | 
+ 135 | /**
+ 136 |  * Performs in-situ 1 kHz AC impedance test on channel.
+ 137 |  */
+ 138 | WET_EXPORT wet_hal_status_t wet_hal_intan_measure_impedance(
+ 139 |     wet_hal_driver_t* drv,
+ 140 |     uint8_t channel,
+ 141 |     float freq_hz,
+ 142 |     float* out_mag_ohms,
+ 143 |     float* out_phase_rad
+ 144 | );
+ 145 | 
+ 146 | /**
+ 147 |  * Enables / disables active hardware charge recovery switch on channel.
+ 148 |  */
+ 149 | WET_EXPORT wet_hal_status_t wet_hal_intan_set_charge_recovery(
+ 150 |     wet_hal_driver_t* drv,
+ 151 |     uint8_t channel,
+ 152 |     uint8_t enable
+ 153 | );
+ 154 | 
+ 155 | /**
+ 156 |  * HIL Fault Injection: Inject simulated compliance railing or bus errors.
+ 157 |  */
+ 158 | WET_EXPORT void wet_hal_intan_inject_fault(
+ 159 |     wet_hal_driver_t* drv,
+ 160 |     uint8_t force_rail,
+ 161 |     uint8_t spi_error,
+ 162 |     uint8_t bus_timeout
+ 163 | );
+ 164 | 
+ 165 | #ifdef __cplusplus
+ 166 | }
+ 167 | #endif
+ 168 | 
+ 169 | #endif /* WET_HAL_INTAN_H */
+```
+
+### `native/include/wet_hal_maxwell.h` (173 lines, SHA-256: `f5be2fac6cba467d...`)
+
+```text
+   1 | #ifndef WET_HAL_MAXWELL_H
+   2 | #define WET_HAL_MAXWELL_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | #include "wet_hal.h"
+   7 | 
+   8 | #ifdef __cplusplus
+   9 | extern "C" {
+  10 | #endif
+  11 | 
+  12 | /* =========================================================================
+  13 |  * MaxWell Biosystems MaxOne HD-MEA Driver Specification
+  14 |  * CMOS High-Density Microelectrode Array Interface
+  15 |  * ========================================================================= */
+  16 | 
+  17 | #define MAXWELL_TOTAL_ELECTRODES      26400
+  18 | #define MAXWELL_RECORDING_CHANNELS    1024
+  19 | #define MAXWELL_STIMULATION_UNITS     32
+  20 | #define MAXWELL_PITCH_UM              17.5f
+  21 | #define MAXWELL_ELECTRODE_AREA_UM2    132.25f
+  22 | 
+  23 | /* Electrochemical Safety Bounds for Platinum (Pt) Microelectrodes */
+  24 | #define MAXWELL_VOLTAGE_LIMIT_MV      1000.0f /* Max safe DAC amplitude */
+  25 | #define MAXWELL_MAX_DAC_BITS          335     /* Corresponding to 1000 mV */
+  26 | #define MAXWELL_PT_CIC_MC_CM2         0.10f   /* Pt charge injection capacity */
+  27 | #define MAXWELL_MAX_PHASE_CHARGE_NC   0.13225f/* Max safe single-phase charge in nC */
+  28 | 
+  29 | /* Sequence Buffer Capacity */
+  30 | #define MAXWELL_MAX_SEQUENCE_STEPS    4096
+  31 | 
+  32 | typedef enum {
+  33 |     MAXWELL_SEQ_IDLE    = 0,
+  34 |     MAXWELL_SEQ_ARMED   = 1,
+  35 |     MAXWELL_SEQ_RUNNING = 2,
+  36 |     MAXWELL_SEQ_DONE    = 3,
+  37 |     MAXWELL_SEQ_ERROR   = 4
+  38 | } maxwell_seq_state_t;
+  39 | 
+  40 | /* Single step in pre-compiled hardware Sequence buffer */
+  41 | typedef struct {
+  42 |     uint32_t timestamp_us;     /* Offset from sequence start in microseconds */
+  43 |     uint8_t  stim_unit_id;     /* 0..31 */
+  44 |     uint16_t electrode_id;     /* Target electrode 0..26399 */
+  45 |     int16_t  dac_val;          /* Voltage DAC value (-335 .. +335) */
+  46 |     uint16_t phase_duration_us;/* Pulse duration */
+  47 | } maxwell_seq_step_t;
+  48 | 
+  49 | /* MaxWell Driver State */
+  50 | typedef struct {
+  51 |     /* Electrode Routing Matrix (1024 recording channels mapped to 26400 electrodes) */
+  52 |     uint16_t routing_matrix[MAXWELL_RECORDING_CHANNELS];
+  53 |     uint8_t  channel_active[MAXWELL_RECORDING_CHANNELS];
+  54 | 
+  55 |     /* 32 Stimulation Units */
+  56 |     struct {
+  57 |         uint16_t connected_electrode;
+  58 |         uint8_t  is_connected;
+  59 |         int16_t  current_dac_val;
+  60 |         float    phase1_charge_nc;
+  61 |         float    phase2_charge_nc;
+  62 |     } stim_units[MAXWELL_STIMULATION_UNITS];
+  63 | 
+  64 |     /* Hardware Sequence Buffer (to eliminate host OS preemption jitter) */
+  65 |     maxwell_seq_step_t  sequence_buffer[MAXWELL_MAX_SEQUENCE_STEPS];
+  66 |     uint32_t            sequence_length;
+  67 |     uint32_t            sequence_playback_index;
+  68 |     maxwell_seq_state_t sequence_state;
+  69 |     uint64_t            sequence_start_time_us;
+  70 | 
+  71 |     /* Channel Readout Cache */
+  72 |     float    channel_voltages[MAXWELL_RECORDING_CHANNELS];
+  73 |     uint8_t  channel_spikes[MAXWELL_RECORDING_CHANNELS];
+  74 | 
+  75 |     /* Safety & Interlock Counters */
+  76 |     uint32_t voltage_clamp_events;
+  77 |     uint32_t charge_limit_violations;
+  78 | 
+  79 |     /* HIL Fault Injection */
+  80 |     uint8_t  fault_force_charge_violation;
+  81 |     uint8_t  fault_bus_dropped_frame;
+  82 | } maxwell_device_state_t;
+  83 | 
+  84 | /* =========================================================================
+  85 |  * MaxWell MaxOne Driver APIs
+  86 |  * ========================================================================= */
+  87 | 
+  88 | /**
+  89 |  * Creates and registers a MaxWell MaxOne HD-MEA driver instance.
+  90 |  */
+  91 | WET_EXPORT wet_hal_driver_t* wet_hal_maxwell_create(wet_hal_mode_t mode);
+  92 | 
+  93 | /**
+  94 |  * Destroys a MaxWell MaxOne driver instance.
+  95 |  */
+  96 | WET_EXPORT void wet_hal_maxwell_destroy(wet_hal_driver_t* drv);
+  97 | 
+  98 | /**
+  99 |  * Configures the switch matrix to connect 1024 recording channels to specific electrodes.
+ 100 |  */
+ 101 | WET_EXPORT wet_hal_status_t wet_hal_maxwell_route_channels(
+ 102 |     wet_hal_driver_t* drv,
+ 103 |     const uint16_t* electrode_indices,
+ 104 |     uint32_t count
+ 105 | );
+ 106 | 
+ 107 | /**
+ 108 |  * Connects a stimulation unit to a specific electrode.
+ 109 |  */
+ 110 | WET_EXPORT wet_hal_status_t wet_hal_maxwell_connect_stim(
+ 111 |     wet_hal_driver_t* drv,
+ 112 |     uint8_t stim_unit,
+ 113 |     uint16_t electrode_id
+ 114 | );
+ 115 | 
+ 116 | /**
+ 117 |  * Clears the hardware sequence buffer.
+ 118 |  */
+ 119 | WET_EXPORT void wet_hal_maxwell_sequence_clear(wet_hal_driver_t* drv);
+ 120 | 
+ 121 | /**
+ 122 |  * Appends a step to the hardware sequence buffer (enforces voltage and charge safety bounds).
+ 123 |  */
+ 124 | WET_EXPORT wet_hal_status_t wet_hal_maxwell_sequence_append(
+ 125 |     wet_hal_driver_t* drv,
+ 126 |     uint32_t timestamp_us,
+ 127 |     uint8_t stim_unit,
+ 128 |     uint16_t electrode_id,
+ 129 |     float voltage_mv,
+ 130 |     uint16_t duration_us
+ 131 | );
+ 132 | 
+ 133 | /**
+ 134 |  * Uploads and arms the pre-compiled sequence buffer for jitter-free execution.
+ 135 |  */
+ 136 | WET_EXPORT wet_hal_status_t wet_hal_maxwell_sequence_arm(wet_hal_driver_t* drv);
+ 137 | 
+ 138 | /**
+ 139 |  * Starts execution of the sequence.
+ 140 |  */
+ 141 | WET_EXPORT wet_hal_status_t wet_hal_maxwell_sequence_start(wet_hal_driver_t* drv);
+ 142 | 
+ 143 | /**
+ 144 |  * Queries sequence playback status.
+ 145 |  */
+ 146 | WET_EXPORT maxwell_seq_state_t wet_hal_maxwell_sequence_get_state(wet_hal_driver_t* drv);
+ 147 | 
+ 148 | /**
+ 149 |  * Immediate voltage pulse injection (with Pt safety clamping: <= 1000 mV and <= 0.13225 nC).
+ 150 |  */
+ 151 | WET_EXPORT wet_hal_status_t wet_hal_maxwell_stim_voltage(
+ 152 |     wet_hal_driver_t* drv,
+ 153 |     uint8_t stim_unit,
+ 154 |     uint16_t electrode_id,
+ 155 |     float voltage_mv,
+ 156 |     float phase1_ms,
+ 157 |     float phase2_ms
+ 158 | );
+ 159 | 
+ 160 | /**
+ 161 |  * HIL Fault Injection: Inject simulated charge violation or frame drop.
+ 162 |  */
+ 163 | WET_EXPORT void wet_hal_maxwell_inject_fault(
+ 164 |     wet_hal_driver_t* drv,
+ 165 |     uint8_t force_charge_violation,
+ 166 |     uint8_t drop_frames
+ 167 | );
+ 168 | 
+ 169 | #ifdef __cplusplus
+ 170 | }
+ 171 | #endif
+ 172 | 
+ 173 | #endif /* WET_HAL_MAXWELL_H */
+```
+
+### `native/include/wet_hal_pump_valve.h` (216 lines, SHA-256: `5db2b883e4822e33...`)
+
+```text
+   1 | #ifndef WET_HAL_PUMP_VALVE_H
+   2 | #define WET_HAL_PUMP_VALVE_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | #include "wet_hal.h"
+   7 | 
+   8 | #ifdef __cplusplus
+   9 | extern "C" {
+  10 | #endif
+  11 | 
+  12 | /* =========================================================================
+  13 |  * Microfluidic Pump & Valve Protocol Specifications
+  14 |  * Harvard Apparatus RS-232 & CAN-bus (ISO 11898-1/2) Microfluidics
+  15 |  * ========================================================================= */
+  16 | 
+  17 | #define WET_MAX_PUMPS             8
+  18 | #define WET_MAX_VALVES            8
+  19 | #define WET_CAN_MAX_PAYLOAD       8
+  20 | #define WET_CAN_QUEUE_CAPACITY    128
+  21 | 
+  22 | /* Harvard Apparatus Prompt Return Codes */
+  23 | typedef enum {
+  24 |     HARVARD_PROMPT_IDLE        = ':', /* Prompt : (pump stopped / idle) */
+  25 |     HARVARD_PROMPT_INFUSING    = '>', /* Prompt > (pump infusing) */
+  26 |     HARVARD_PROMPT_WITHDRAWING = '<', /* Prompt < (pump withdrawing) */
+  27 |     HARVARD_PROMPT_STALLED     = '*', /* Prompt * (motor stalled / alarm) */
+  28 |     HARVARD_PROMPT_TARGET_DONE = 'T', /* Prompt T* (target volume reached) */
+  29 |     HARVARD_PROMPT_INVALID     = '?'
+  30 | } harvard_prompt_t;
+  31 | 
+  32 | /* Harvard RS-232 Device Configuration */
+  33 | typedef struct {
+  34 |     uint8_t address;          /* Daisy-chain address 00..99 (0 = master) */
+  35 |     uint8_t fast_mode;        /* 1 = use '@' prefix for sub-50 ms execution */
+  36 |     double  rate_ul_min;      /* Current programmed infusion rate */
+  37 |     double  infused_volume_ul;/* Cumulative dispensed volume */
+  38 |     uint8_t is_running;       /* 1 = infusing, 2 = withdrawing, 0 = stopped */
+  39 |     uint8_t is_stalled;       /* 1 = stall condition */
+  40 | } harvard_pump_state_t;
+  41 | 
+  42 | /* CAN Message Frame (ISO 11898-1/2) */
+  43 | typedef struct {
+  44 |     uint32_t id;                       /* 11-bit standard or 29-bit extended ID */
+  45 |     uint8_t  is_extended;              /* 1 = 29-bit CAN 2.0B, 0 = 11-bit standard */
+  46 |     uint8_t  is_rtr;                   /* Remote Transmission Request */
+  47 |     uint8_t  dlc;                      /* Data Length Code (0..8) */
+  48 |     uint8_t  data[WET_CAN_MAX_PAYLOAD];/* Frame payload */
+  49 |     uint64_t timestamp_us;             /* Monotonic arrival/tx timestamp */
+  50 | } wet_can_frame_t;
+  51 | 
+  52 | /* CAN Message Type IDs */
+  53 | #define CAN_ID_EMCY_BASE          0x080U /* Emergency frame: 0x080 + NodeID */
+  54 | #define CAN_ID_TPDO1_BASE         0x180U /* Telemetry transmit: 0x180 + NodeID */
+  55 | #define CAN_ID_RPDO1_BASE         0x200U /* Pump rate command: 0x200 + NodeID */
+  56 | #define CAN_ID_RPDO2_BASE         0x300U /* Valve state command: 0x300 + NodeID */
+  57 | #define CAN_ID_HEARTBEAT_BASE     0x700U /* Heartbeat: 0x700 + NodeID */
+  58 | 
+  59 | /* Valve & Pump Microfluidics State */
+  60 | typedef struct {
+  61 |     /* Harvard RS-232 Pumps (up to 8) */
+  62 |     harvard_pump_state_t pumps[WET_MAX_PUMPS];
+  63 | 
+  64 |     /* Micro-pinch / Solenoid Valve States (0=Closed, 1=Open) */
+  65 |     uint8_t              valve_states[WET_MAX_VALVES];
+  66 | 
+  67 |     /* Dead-Head Overpressure Interlock Configuration */
+  68 |     uint8_t              dead_head_enabled;
+  69 |     uint8_t              valve_for_pump[WET_MAX_PUMPS]; /* Associated downstream valve */
+  70 |     uint32_t             dead_head_trip_count;
+  71 | 
+  72 |     /* CAN-bus Loopback & Queue */
+  73 |     wet_can_frame_t      can_tx_queue[WET_CAN_QUEUE_CAPACITY];
+  74 |     uint32_t             can_tx_head;
+  75 |     uint32_t             can_tx_tail;
+  76 |     uint32_t             can_tx_count;
+  77 | 
+  78 |     wet_can_frame_t      can_rx_queue[WET_CAN_QUEUE_CAPACITY];
+  79 |     uint32_t             can_rx_head;
+  80 |     uint32_t             can_rx_tail;
+  81 |     uint32_t             can_rx_count;
+  82 | 
+  83 |     /* Telemetry Counters */
+  84 |     uint32_t             total_rs232_tx;
+  85 |     uint32_t             total_can_frames_tx;
+  86 |     uint32_t             total_can_frames_rx;
+  87 |     uint32_t             total_emcy_frames;
+  88 | 
+  89 |     /* HIL Fault Injection */
+  90 |     uint8_t              fault_inject_stall;
+  91 |     uint8_t              fault_inject_can_drop;
+  92 |     uint8_t              fault_inject_rs232_timeout;
+  93 | } microfluidic_state_t;
+  94 | 
+  95 | /* =========================================================================
+  96 |  * Microfluidic Pump & Valve APIs
+  97 |  * ========================================================================= */
+  98 | 
+  99 | /**
+ 100 |  * Creates and registers a microfluidic pump & valve driver instance.
+ 101 |  */
+ 102 | WET_EXPORT wet_hal_driver_t* wet_hal_microfluidics_create(wet_hal_mode_t mode);
+ 103 | 
+ 104 | /**
+ 105 |  * Destroys microfluidic driver instance.
+ 106 |  */
+ 107 | WET_EXPORT void wet_hal_microfluidics_destroy(wet_hal_driver_t* drv);
+ 108 | 
+ 109 | /**
+ 110 |  * Encodes a Harvard Apparatus RS-232 command string into out_buf.
+ 111 |  * (e.g. "@irate 1.500 u/m\r", "01 stp\r", etc.)
+ 112 |  */
+ 113 | WET_EXPORT int wet_hal_harvard_format_cmd(
+ 114 |     uint8_t address,
+ 115 |     uint8_t fast_mode,
+ 116 |     const char* cmd_name,
+ 117 |     const char* args,
+ 118 |     char* out_buf,
+ 119 |     size_t out_buf_len
+ 120 | );
+ 121 | 
+ 122 | /**
+ 123 |  * Parses a Harvard Apparatus prompt response string.
+ 124 |  */
+ 125 | WET_EXPORT harvard_prompt_t wet_hal_harvard_parse_response(
+ 126 |     const char* resp_buf,
+ 127 |     size_t resp_len
+ 128 | );
+ 129 | 
+ 130 | /**
+ 131 |  * Commands Harvard pump rate and run state.
+ 132 |  * Performs dead-head overpressure interlock check if downstream valve is closed!
+ 133 |  */
+ 134 | WET_EXPORT wet_hal_status_t wet_hal_pump_set_rate(
+ 135 |     wet_hal_driver_t* drv,
+ 136 |     uint8_t pump_id,
+ 137 |     double rate_ul_min,
+ 138 |     uint8_t run_flag
+ 139 | );
+ 140 | 
+ 141 | /**
+ 142 |  * Dispenses a specific volume in µL.
+ 143 |  */
+ 144 | WET_EXPORT wet_hal_status_t wet_hal_pump_dispense(
+ 145 |     wet_hal_driver_t* drv,
+ 146 |     uint8_t pump_id,
+ 147 |     double volume_ul
+ 148 | );
+ 149 | 
+ 150 | /**
+ 151 |  * Immediately stops a pump.
+ 152 |  */
+ 153 | WET_EXPORT wet_hal_status_t wet_hal_pump_stop(
+ 154 |     wet_hal_driver_t* drv,
+ 155 |     uint8_t pump_id
+ 156 | );
+ 157 | 
+ 158 | /**
+ 159 |  * Sets valve state (0 = closed, 1 = open).
+ 160 |  */
+ 161 | WET_EXPORT wet_hal_status_t wet_hal_valve_set_state(
+ 162 |     wet_hal_driver_t* drv,
+ 163 |     uint8_t valve_id,
+ 164 |     uint8_t state
+ 165 | );
+ 166 | 
+ 167 | /**
+ 168 |  * Configures the associated downstream valve for dead-head overpressure protection.
+ 169 |  */
+ 170 | WET_EXPORT void wet_hal_pump_bind_downstream_valve(
+ 171 |     wet_hal_driver_t* drv,
+ 172 |     uint8_t pump_id,
+ 173 |     uint8_t valve_id
+ 174 | );
+ 175 | 
+ 176 | /**
+ 177 |  * Encodes and transmits a CAN frame (ISO 11898-1/2).
+ 178 |  */
+ 179 | WET_EXPORT wet_hal_status_t wet_hal_can_send(
+ 180 |     wet_hal_driver_t* drv,
+ 181 |     const wet_can_frame_t* frame
+ 182 | );
+ 183 | 
+ 184 | /**
+ 185 |  * Receives the next available CAN frame from Rx queue.
+ 186 |  */
+ 187 | WET_EXPORT wet_hal_status_t wet_hal_can_recv(
+ 188 |     wet_hal_driver_t* drv,
+ 189 |     wet_can_frame_t* out_frame
+ 190 | );
+ 191 | 
+ 192 | /**
+ 193 |  * Emits an Emergency (EMCY) frame on the CAN bus.
+ 194 |  */
+ 195 | WET_EXPORT wet_hal_status_t wet_hal_can_send_emcy(
+ 196 |     wet_hal_driver_t* drv,
+ 197 |     uint8_t node_id,
+ 198 |     uint16_t error_code,
+ 199 |     uint8_t error_register
+ 200 | );
+ 201 | 
+ 202 | /**
+ 203 |  * HIL Fault Injection: Inject stall condition, CAN frame drop, or serial timeout.
+ 204 |  */
+ 205 | WET_EXPORT void wet_hal_microfluidics_inject_fault(
+ 206 |     wet_hal_driver_t* drv,
+ 207 |     uint8_t stall,
+ 208 |     uint8_t can_drop,
+ 209 |     uint8_t timeout
+ 210 | );
+ 211 | 
+ 212 | #ifdef __cplusplus
+ 213 | }
+ 214 | #endif
+ 215 | 
+ 216 | #endif /* WET_HAL_PUMP_VALVE_H */
+```
+
+### `native/include/wet_hal_sensirion.h` (153 lines, SHA-256: `c5cadc6f9f2f1b2b...`)
+
+```text
+   1 | #ifndef WET_HAL_SENSIRION_H
+   2 | #define WET_HAL_SENSIRION_H
+   3 | 
+   4 | #include <stdint.h>
+   5 | #include <stddef.h>
+   6 | #include "wet_hal.h"
+   7 | 
+   8 | #ifdef __cplusplus
+   9 | extern "C" {
+  10 | #endif
+  11 | 
+  12 | /* =========================================================================
+  13 |  * Sensirion Liquid Flow Meter Driver Specification
+  14 |  * SLF3x / LPG10 (I2C) & SLI Series (SHDLC over RS-485/RS-232)
+  15 |  * ========================================================================= */
+  16 | 
+  17 | #define SENSIRION_I2C_ADDR_DEFAULT    0x08U
+  18 | #define SENSIRION_CRC8_POLYNOMIAL     0x31U /* x^8 + x^5 + x^4 + 1 */
+  19 | #define SENSIRION_CRC8_INIT           0xFFU
+  20 | 
+  21 | /* I2C 16-bit Command Words */
+  22 | #define SENSIRION_CMD_START_CONT_H2O  0x3608U /* Water / Aqueous continuous */
+  23 | #define SENSIRION_CMD_START_CONT_IPA  0x3615U /* Hydrocarbons / IPA */
+  24 | #define SENSIRION_CMD_STOP_CONT       0x3FF9U /* Stop continuous measurement */
+  25 | #define SENSIRION_CMD_SOFT_RESET      0x0006U /* General call soft reset */
+  26 | 
+  27 | /* SHDLC Protocol Definitions */
+  28 | #define SHDLC_FRAME_START_STOP        0x7EU
+  29 | #define SHDLC_FRAME_ESCAPE            0x7DU
+  30 | #define SHDLC_ESCAPE_MASK             0x20U
+  31 | #define SHDLC_MAX_FRAME_SIZE          256
+  32 | 
+  33 | /* Sensirion Flow Driver State */
+  34 | typedef struct {
+  35 |     /* I2C Sensor Configuration (SLF3x / LPG10) */
+  36 |     uint8_t  i2c_address;
+  37 |     uint16_t active_command;
+  38 |     uint8_t  measurement_active;
+  39 |     float    scale_factor;           /* e.g., 10.0 or 500.0 (uL/min)^-1 */
+  40 |     int16_t  raw_flow_ticks;
+  41 |     double   current_flow_ul_min;
+  42 | 
+  43 |     /* SHDLC State (SLI series) */
+  44 |     uint8_t  shdlc_address;
+  45 |     uint8_t  shdlc_rx_buffer[SHDLC_MAX_FRAME_SIZE];
+  46 |     size_t   shdlc_rx_len;
+  47 |     uint8_t  shdlc_in_frame;
+  48 |     uint8_t  shdlc_escaped;
+  49 | 
+  50 |     /* Telemetry Counters */
+  51 |     uint32_t total_i2c_reads;
+  52 |     uint32_t total_shdlc_frames;
+  53 |     uint32_t crc_errors;
+  54 | 
+  55 |     /* HIL Fault Injection */
+  56 |     uint8_t  fault_corrupt_crc;
+  57 |     uint8_t  fault_nak_address;
+  58 | } sensirion_device_state_t;
+  59 | 
+  60 | /* =========================================================================
+  61 |  * Sensirion Driver APIs
+  62 |  * ========================================================================= */
+  63 | 
+  64 | /**
+  65 |  * Creates and registers a Sensirion Flow Meter driver instance.
+  66 |  */
+  67 | WET_EXPORT wet_hal_driver_t* wet_hal_sensirion_create(wet_hal_mode_t mode);
+  68 | 
+  69 | /**
+  70 |  * Destroys a Sensirion Flow Meter driver instance.
+  71 |  */
+  72 | WET_EXPORT void wet_hal_sensirion_destroy(wet_hal_driver_t* drv);
+  73 | 
+  74 | /**
+  75 |  * Computes Sensirion CRC-8 checksum over buffer (poly 0x31, init 0xFF).
+  76 |  */
+  77 | WET_EXPORT uint8_t wet_hal_sensirion_crc8(const uint8_t* data, size_t len);
+  78 | 
+  79 | /**
+  80 |  * Validates a Sensirion 3-byte measurement word ([MSB] [LSB] [CRC]).
+  81 |  * Returns 1 if CRC matches, 0 otherwise.
+  82 |  */
+  83 | WET_EXPORT int wet_hal_sensirion_validate_crc(const uint8_t word_and_crc[3]);
+  84 | 
+  85 | /**
+  86 |  * Starts continuous measurement on SLF3x / LPG10 sensor (0x3608 for H2O).
+  87 |  */
+  88 | WET_EXPORT wet_hal_status_t wet_hal_sensirion_start_measurement(
+  89 |     wet_hal_driver_t* drv,
+  90 |     uint16_t cmd
+  91 | );
+  92 | 
+  93 | /**
+  94 |  * Stops continuous measurement on SLF3x / LPG10 sensor (0x3FF9).
+  95 |  */
+  96 | WET_EXPORT wet_hal_status_t wet_hal_sensirion_stop_measurement(wet_hal_driver_t* drv);
+  97 | 
+  98 | /**
+  99 |  * Reads instantaneous liquid flow rate in µL/min.
+ 100 |  */
+ 101 | WET_EXPORT wet_hal_status_t wet_hal_sensirion_read_flow(
+ 102 |     wet_hal_driver_t* drv,
+ 103 |     double* out_flow_ul_min
+ 104 | );
+ 105 | 
+ 106 | /**
+ 107 |  * Sets raw flow value for HIL simulation.
+ 108 |  */
+ 109 | WET_EXPORT void wet_hal_sensirion_hil_set_flow(
+ 110 |     wet_hal_driver_t* drv,
+ 111 |     double flow_ul_min
+ 112 | );
+ 113 | 
+ 114 | /**
+ 115 |  * Encodes an SHDLC packet with start/stop flags (0x7E), byte-stuffing, and checksum.
+ 116 |  * Returns length of stuffed frame written to out_buf, or 0 on buffer overflow.
+ 117 |  */
+ 118 | WET_EXPORT size_t wet_hal_shdlc_encode(
+ 119 |     uint8_t address,
+ 120 |     uint8_t command,
+ 121 |     const uint8_t* payload,
+ 122 |     uint8_t payload_len,
+ 123 |     uint8_t* out_buf,
+ 124 |     size_t out_buf_max
+ 125 | );
+ 126 | 
+ 127 | /**
+ 128 |  * Decodes an unstuffed SHDLC packet, verifying start/stop flags and checksum.
+ 129 |  * Returns 1 on success, 0 on checksum error or invalid framing.
+ 130 |  */
+ 131 | WET_EXPORT int wet_hal_shdlc_decode(
+ 132 |     const uint8_t* raw_buf,
+ 133 |     size_t raw_len,
+ 134 |     uint8_t* out_address,
+ 135 |     uint8_t* out_command,
+ 136 |     uint8_t* out_payload,
+ 137 |     uint8_t* out_payload_len
+ 138 | );
+ 139 | 
+ 140 | /**
+ 141 |  * HIL Fault Injection: Inject simulated CRC corruption or I2C bus NAK.
+ 142 |  */
+ 143 | WET_EXPORT void wet_hal_sensirion_inject_fault(
+ 144 |     wet_hal_driver_t* drv,
+ 145 |     uint8_t corrupt_crc,
+ 146 |     uint8_t nak_addr
+ 147 | );
+ 148 | 
+ 149 | #ifdef __cplusplus
+ 150 | }
+ 151 | #endif
+ 152 | 
+ 153 | #endif /* WET_HAL_SENSIRION_H */
+```
+
+### `native/include/wet_scheduler.h` (136 lines, SHA-256: `ae755ab83f92e024...`)
+
+```text
+   1 | /**
+   2 |  * WetLang Hard Real-Time Sub-100 µs Execution Scheduler
+   3 |  * Header Interface (native/include/wet_scheduler.h)
+   4 |  *
+   5 |  * Deterministic C99 execution scheduler operating at 10 kHz (100 µs period):
+   6 |  *  - Dedicated real-time thread with core pinning (SetThreadAffinityMask)
+   7 |  *  - Process & thread priority elevation (REALTIME_PRIORITY_CLASS / THREAD_PRIORITY_TIME_CRITICAL)
+   8 |  *  - High-resolution hardware monotonic timer (QPC / QPF)
+   9 |  *  - Hybrid precision pacing: bytecode/ODE compute + calibrated spin-wait tail (_mm_pause)
+  10 |  *  - Cacheline-aligned (64-byte) lockless SPSC ring buffers for telemetry & stimulus injection
+  11 |  *  - Static memory arena: zero heap allocations during real-time stepping
+  12 |  */
+  13 | 
+  14 | #ifndef WET_SCHEDULER_H
+  15 | #define WET_SCHEDULER_H
+  16 | 
+  17 | #include "wetvm_api.h"
+  18 | #include "wetvm_types.h"
+  19 | #include "wetvm_vm.h"
+  20 | 
+  21 | #ifdef __cplusplus
+  22 | extern "C" {
+  23 | #endif
+  24 | 
+  25 | typedef struct wet_vm_instance wet_vm_instance_t;
+  26 | 
+  27 | /* Scheduler Configuration Options */
+  28 | typedef struct {
+  29 |     uint32_t target_period_us;         /* Nominal tick period in microseconds (default: 100 µs = 10 kHz) */
+  30 | 
+  31 |     /**
+  32 |      * target_core: Physical/logical CPU core index for thread affinity mask (default: 1).
+  33 |      *
+  34 |      * ARCHITECTURAL GUIDANCE FOR HETEROGENEOUS HYBRID PROCESSORS:
+  35 |      * On modern heterogeneous x86 architectures (e.g. Intel 12th-15th Gen Alder Lake,
+  36 |      * Raptor Lake, Arrow Lake, and Intel Core Ultra / Lunar Lake), the processor combines
+  37 |      * Performance Cores (P-cores, typically logical cores 0-3) and Efficient Cores
+  38 |      * (E-cores / LP-E cores, typically logical cores 4+).
+  39 |      *
+  40 |      * CRITICAL: target_core MUST be pinned to a Performance Core (P-core, typically logical
+  41 |      * cores 0–3). Benchmarks on heterogeneous hardware show that Efficient Cores (E-cores)
+  42 |      * exhibit:
+  43 |      *   - +55% compute latency (13–14 µs vs 8.8 µs on P-cores)
+  44 |      *   - Highly elevated jitter (>300 µs P99.9) violating the sub-100 µs real-time contract
+  45 |      *   - Consistent deadline overruns (4–17 overruns per 5k ticks under 10 kHz load).
+  46 |      * Core 0 typically handles operating system DPCs and hardware interrupts; therefore,
+  47 |      * logical Cores 1, 2, or 3 are the strongly recommended targets for hard real-time execution.
+  48 |      */
+  49 |     uint32_t target_core;
+  50 |     uint32_t priority_class;           /* Windows priority class (default: 0x00000100 REALTIME_PRIORITY_CLASS) */
+  51 |     int32_t  thread_priority;          /* Thread priority level (default: 15 THREAD_PRIORITY_TIME_CRITICAL) */
+  52 |     uint8_t  enable_core_pinning;      /* 1 = pin thread to target_core, 0 = no pinning */
+  53 |     uint8_t  enable_priority_elevation;/* 1 = elevate to REALTIME/TIME_CRITICAL, 0 = normal */
+  54 |     uint32_t telemetry_queue_capacity; /* Power-of-2 capacity for telemetry SPSC ring buffer (default: 1024) */
+  55 |     uint32_t stimulus_queue_capacity;  /* Power-of-2 capacity for stimulus SPSC ring buffer (default: 256) */
+  56 |     uint64_t total_ticks;              /* Number of ticks to execute in benchmark/run (0 = indefinite) */
+  57 | } wet_scheduler_config_t;
+  58 | 
+  59 | /* Asynchronous Stimulus Command injected through lockless SPSC queue */
+  60 | typedef struct {
+  61 |     uint8_t  channel;         /* MEA electrode channel (0..63) */
+  62 |     float    voltage_v;       /* Stimulation voltage amplitude (V) */
+  63 |     float    phase1_ms;       /* Cathodic pulse duration (ms) */
+  64 |     float    phase2_ms;       /* Anodic counter-charge duration (ms) */
+  65 |     uint64_t tick_scheduled;  /* Execution tick target (0 = immediate next tick) */
+  66 | } wet_stim_command_t;
+  67 | 
+  68 | /* Latency & Jitter Performance Statistics */
+  69 | typedef struct {
+  70 |     uint64_t total_ticks;
+  71 |     double   min_compute_us;
+  72 |     double   max_compute_us;
+  73 |     double   mean_compute_us;
+  74 |     double   min_period_us;
+  75 |     double   max_period_us;
+  76 |     double   mean_period_us;
+  77 |     double   mean_jitter_us;
+  78 |     double   p50_jitter_us;
+  79 |     double   p95_jitter_us;
+  80 |     double   p99_jitter_us;
+  81 |     double   p999_jitter_us;
+  82 |     double   max_jitter_us;
+  83 |     uint64_t deadline_overruns; /* Count of ticks where compute duration > target_period */
+  84 |     uint64_t telemetry_dropped; /* Count of telemetry frames dropped due to full SPSC queue */
+  85 |     uint64_t stimuli_injected;  /* Count of stimuli popped from SPSC queue and delivered to VM */
+  86 | } wet_scheduler_stats_t;
+  87 | 
+  88 | /* Opaque Scheduler Instance Pointer */
+  89 | typedef struct wet_scheduler wet_scheduler_t;
+  90 | 
+  91 | /* Public C-ABI API Functions */
+  92 | WET_EXPORT wet_scheduler_t* wet_scheduler_create(wet_vm_instance_t* vm, const wet_scheduler_config_t* config);
+  93 | WET_EXPORT wet_status_t wet_scheduler_start(wet_scheduler_t* sched);
+  94 | 
+  95 | /**
+  96 |  * Executes a single isochronous real-time tick step.
+  97 |  *
+  98 |  * PHASE SLIP STABILITY TRADE-OFF (Isochronous Pacing vs. Catch-Up Storms):
+  99 |  * The scheduler deadline calculation evaluates:
+ 100 |  *   if (sched->next_deadline_qpc == 0 ||
+ 101 |  *       start_qpc > (sched->next_deadline_qpc + sched->period_qpc * 2)) {
+ 102 |  *       sched->next_deadline_qpc = start_qpc + sched->period_qpc;
+ 103 |  *   } else {
+ 104 |  *       sched->next_deadline_qpc += sched->period_qpc;
+ 105 |  *   }
+ 106 |  *
+ 107 |  * DESIGN RATIONALE:
+ 108 |  * Under quiescent conditions, accumulating next_deadline_qpc += period_qpc maintains
+ 109 |  * zero cumulative phase drift across thousands of cycles (<0.005% drift).
+ 110 |  * However, on non-RTOS desktop operating systems (e.g. Windows/Linux without PREEMPT_RT),
+ 111 |  * transient kernel DPCs, graphics driver stalls, or System Management Interrupts (SMIs)
+ 112 |  * can intermittently stall user-space threads for >200 µs (more than 2 full periods at 10 kHz).
+ 113 |  *
+ 114 |  * If the scheduler strictly maintained absolute wallclock cumulative phase lock without
+ 115 |  * resynchronization, returning from an OS stall would trigger a catastrophic "catch-up storm":
+ 116 |  * the scheduler would execute dozens of consecutive ticks with zero slack to recover lost time.
+ 117 |  * In wetware electrophysiology and microfluidics, back-to-back stimulation pulses violate
+ 118 |  * biological refractory windows (2.0 ms) and destabilize ODE numerical integration.
+ 119 |  *
+ 120 |  * Therefore, WetLang intentionally resynchronizes the deadline forward when a lag exceeding
+ 121 |  * two periods (>200 µs) occurs. This trades absolute cumulative wallclock phase lock during
+ 122 |  * severe OS stalls for period stability and biophysical execution safety.
+ 123 |  */
+ 124 | WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched);
+ 125 | WET_EXPORT wet_status_t wet_scheduler_stop(wet_scheduler_t* sched);
+ 126 | WET_EXPORT wet_status_t wet_scheduler_get_stats(const wet_scheduler_t* sched, wet_scheduler_stats_t* out_stats);
+ 127 | WET_EXPORT wet_status_t wet_scheduler_poll_telemetry(wet_scheduler_t* sched, wet_telemetry_t* out_telem);
+ 128 | WET_EXPORT wet_status_t wet_scheduler_push_stimulus(wet_scheduler_t* sched, const wet_stim_command_t* cmd);
+ 129 | WET_EXPORT wet_status_t wet_scheduler_benchmark(wet_scheduler_t* sched, uint32_t total_ticks, wet_scheduler_stats_t* out_stats);
+ 130 | WET_EXPORT void wet_scheduler_destroy(wet_scheduler_t* sched);
+ 131 | 
+ 132 | #ifdef __cplusplus
+ 133 | }
+ 134 | #endif
+ 135 | 
+ 136 | #endif /* WET_SCHEDULER_H */
+```
+
+### `native/include/wetvm_api.h` (301 lines, SHA-256: `1ce7d24e459ec9bb...`)
 
 ```text
    1 | #ifndef WETVM_API_H
@@ -5926,11 +8044,31 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
  274 |     uint64_t rec_mask
  275 | );
  276 | 
- 277 | #ifdef __cplusplus
- 278 | }
- 279 | #endif
- 280 | 
- 281 | #endif /* WETVM_API_H */
+ 277 | /**
+ 278 |  * Milestone 2 Biophysics Live Synapse Matrix Introspection:
+ 279 |  * Copies the dense 64x64 synaptic conductance matrix (nS) from VM biophysics state
+ 280 |  * into caller-allocated buffer (float[64][64] = 4096 floats).
+ 281 |  */
+ 282 | WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
+ 283 |     const wet_vm_t* vm,
+ 284 |     float* out_matrix,
+ 285 |     size_t out_capacity_floats
+ 286 | );
+ 287 | 
+ 288 | /**
+ 289 |  * Queries single synaptic conductance weight between pre and post neurons in nS.
+ 290 |  */
+ 291 | WET_EXPORT float wet_vm_get_synapse_weight(
+ 292 |     const wet_vm_t* vm,
+ 293 |     uint8_t pre,
+ 294 |     uint8_t post
+ 295 | );
+ 296 | 
+ 297 | #ifdef __cplusplus
+ 298 | }
+ 299 | #endif
+ 300 | 
+ 301 | #endif /* WETVM_API_H */
 ```
 
 ### `native/include/wetvm_types.h` (177 lines, SHA-256: `90dc6be4f81eb942...`)
@@ -6115,7 +8253,7 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
  177 | #endif /* WETVM_TYPES_H */
 ```
 
-### `native/include/wetvm_vm.h` (140 lines, SHA-256: `15209c34328bb979...`)
+### `native/include/wetvm_vm.h` (146 lines, SHA-256: `e769cd7ca730fe3f...`)
 
 ```text
    1 | #ifndef WETVM_VM_H
@@ -6169,95 +8307,101 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   49 |     uint64_t ticks_under_supervisor;
   50 | } wet_life_supervisor_t;
   51 | 
-  52 | /* Internal VM instance structure */
-  53 | struct wet_vm_instance {
-  54 |     wet_vm_config_t config;
-  55 | 
-  56 |     /* Raw bytecode buffer */
-  57 |     uint8_t* bytecode_raw;
-  58 |     size_t   bytecode_size;
-  59 | 
-  60 |     /* Bytecode Stream section pointers */
-  61 |     const uint8_t* code;
-  62 |     size_t         code_size;
-  63 |     size_t         pc;
-  64 | 
-  65 |     /* Constant Pool */
-  66 |     wet_constant_entry_t* constants;
-  67 |     size_t                num_constants;
-  68 | 
-  69 |     /* Operand Stack */
-  70 |     wet_value_t* stack;
-  71 |     size_t       sp;         /* Stack pointer: index of next free slot */
-  72 |     size_t       max_stack;
-  73 | 
-  74 |     /* Local Variables */
-  75 |     wet_value_t* locals;
-  76 |     size_t       max_locals;
-  77 | 
-  78 |     /* Call Stack for CALL / RET */
-  79 |     wet_call_frame_t* call_stack;
-  80 |     size_t            call_sp;
-  81 |     size_t            max_call_depth;
-  82 | 
-  83 |     /* Execution State */
-  84 |     uint64_t current_tick;
-  85 |     double   sim_time_ms;
-  86 |     int64_t  sim_time_us;        /* Microsecond monotonic time (avoids float32 loss) */
-  87 |     int      is_halted;
-  88 |     int      is_finished;
-  89 |     uint16_t sleep_ticks_remaining;
-  90 |     uint8_t  arena_allocated;    /* 1 if created in static arena memory */
-  91 | 
-  92 |     /* Channel States (64 channels) */
-  93 |     float    voltages[64];
-  94 |     uint8_t  spikes[64];
-  95 |     float    last_charge_nc[64];
-  96 |     float    discharge_charge_nc[64];
-  97 |     float    population_rate_hz;
-  98 | 
-  99 |     /* Grid topology */
- 100 |     uint8_t  grid_rows;
- 101 |     uint8_t  grid_cols;
- 102 | 
- 103 |     /* Embedded Biophysical Digital Twin (M3) & Hardware Watchdog Interlocks (M4) */
- 104 |     bio_state_t       bio;
- 105 |     interlock_state_t interlocks;
- 106 |     uint16_t          loaded_capabilities;
- 107 | 
- 108 |     /* Ring-0 Autonomous Life Support Supervisor */
- 109 |     wet_life_supervisor_t life_supervisor;
+  52 | /* Forward declaration for Hardware Abstraction Layer context */
+  53 | struct wet_hal_context;
+  54 | 
+  55 | /* Internal VM instance structure */
+  56 | struct wet_vm_instance {
+  57 |     wet_vm_config_t config;
+  58 | 
+  59 |     /* Raw bytecode buffer */
+  60 |     uint8_t* bytecode_raw;
+  61 |     size_t   bytecode_size;
+  62 | 
+  63 |     /* Bytecode Stream section pointers */
+  64 |     const uint8_t* code;
+  65 |     size_t         code_size;
+  66 |     size_t         pc;
+  67 | 
+  68 |     /* Constant Pool */
+  69 |     wet_constant_entry_t* constants;
+  70 |     size_t                num_constants;
+  71 | 
+  72 |     /* Operand Stack */
+  73 |     wet_value_t* stack;
+  74 |     size_t       sp;         /* Stack pointer: index of next free slot */
+  75 |     size_t       max_stack;
+  76 | 
+  77 |     /* Local Variables */
+  78 |     wet_value_t* locals;
+  79 |     size_t       max_locals;
+  80 | 
+  81 |     /* Call Stack for CALL / RET */
+  82 |     wet_call_frame_t* call_stack;
+  83 |     size_t            call_sp;
+  84 |     size_t            max_call_depth;
+  85 | 
+  86 |     /* Execution State */
+  87 |     uint64_t current_tick;
+  88 |     double   sim_time_ms;
+  89 |     int64_t  sim_time_us;        /* Microsecond monotonic time (avoids float32 loss) */
+  90 |     int      is_halted;
+  91 |     int      is_finished;
+  92 |     uint16_t sleep_ticks_remaining;
+  93 |     uint8_t  arena_allocated;    /* 1 if created in static arena memory */
+  94 | 
+  95 |     /* Channel States (64 channels) */
+  96 |     float    voltages[64];
+  97 |     uint8_t  spikes[64];
+  98 |     float    last_charge_nc[64];
+  99 |     float    discharge_charge_nc[64];
+ 100 |     float    population_rate_hz;
+ 101 | 
+ 102 |     /* Grid topology */
+ 103 |     uint8_t  grid_rows;
+ 104 |     uint8_t  grid_cols;
+ 105 | 
+ 106 |     /* Embedded Biophysical Digital Twin (M3) & Hardware Watchdog Interlocks (M4) */
+ 107 |     bio_state_t       bio;
+ 108 |     interlock_state_t interlocks;
+ 109 |     uint16_t          loaded_capabilities;
  110 | 
- 111 |     /* Cyber-Physical Hardware Actuator State (M5 HAL) */
- 112 |     float    pump_rates_ul_min[8];
- 113 |     float    pump_dispensed_ul[8];
- 114 |     uint8_t  valve_states[8];
- 115 |     int32_t  motor_positions[4];
- 116 |     float    motor_speeds_rpm[4];
- 117 |     float    ambient_temperature_c;
- 118 |     float    fluid_pressure_kpa[4];
- 119 | 
- 120 |     /* Phase 3 Environmental & Cyber-Physical Sensors */
- 121 |     float    ph_level;              /* e.g. 7.40 */
- 122 |     float    dissolved_oxygen_pct;  /* e.g. 95.0 % */
- 123 |     float    dissolved_co2_pct;     /* e.g. 5.0 % */
- 124 |     uint8_t  bubble_detected[8];    /* 1 if bubble detected on tubing line */
- 125 |     float    fluid_flow_rate_ul_min[8]; /* flow sensor readouts */
- 126 | 
- 127 |     /* Error reporting buffer */
- 128 |     char     last_error[256];
- 129 | };
- 130 | 
- 131 | /* Internal VM execution and validation declarations */
- 132 | uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc);
- 133 | wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem);
- 134 | wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len);
- 135 | 
- 136 | #ifdef __cplusplus
- 137 | }
- 138 | #endif
- 139 | 
- 140 | #endif /* WETVM_VM_H */
+ 111 |     /* Ring-0 Autonomous Life Support Supervisor */
+ 112 |     wet_life_supervisor_t life_supervisor;
+ 113 | 
+ 114 |     /* Cyber-Physical Hardware Actuator State (M5 HAL) */
+ 115 |     float    pump_rates_ul_min[8];
+ 116 |     float    pump_dispensed_ul[8];
+ 117 |     uint8_t  valve_states[8];
+ 118 |     int32_t  motor_positions[4];
+ 119 |     float    motor_speeds_rpm[4];
+ 120 |     float    ambient_temperature_c;
+ 121 |     float    fluid_pressure_kpa[4];
+ 122 | 
+ 123 |     /* Phase 3 Environmental & Cyber-Physical Sensors */
+ 124 |     float    ph_level;              /* e.g. 7.40 */
+ 125 |     float    dissolved_oxygen_pct;  /* e.g. 95.0 % */
+ 126 |     float    dissolved_co2_pct;     /* e.g. 5.0 % */
+ 127 |     uint8_t  bubble_detected[8];    /* 1 if bubble detected on tubing line */
+ 128 |     float    fluid_flow_rate_ul_min[8]; /* flow sensor readouts */
+ 129 | 
+ 130 |     /* Hardware Abstraction Layer Context (M1 HAL) */
+ 131 |     struct wet_hal_context* hal;
+ 132 | 
+ 133 |     /* Error reporting buffer */
+ 134 |     char     last_error[256];
+ 135 | };
+ 136 | 
+ 137 | /* Internal VM execution and validation declarations */
+ 138 | uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc);
+ 139 | wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem);
+ 140 | wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len);
+ 141 | 
+ 142 | #ifdef __cplusplus
+ 143 | }
+ 144 | #endif
+ 145 | 
+ 146 | #endif /* WETVM_VM_H */
 ```
 
 ### `native/src/biophysics.c` (540 lines, SHA-256: `9f12d3ca6c10cd88...`)
@@ -7124,7 +9268,2702 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
  314 | }
 ```
 
-### `native/src/wetvm_api.c` (577 lines, SHA-256: `e0a7b379e7531e37...`)
+### `native/src/wet_hal.c` (489 lines, SHA-256: `f975ddf0fa223c9c...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_hal.h"
+   3 | #include "../include/wetvm_vm.h"
+   4 | #include "../include/biophysics.h"
+   5 | 
+   6 | #if defined(_WIN32)
+   7 | typedef union _LARGE_INTEGER {
+   8 |     struct {
+   9 |         uint32_t LowPart;
+  10 |         int32_t  HighPart;
+  11 |     } s;
+  12 |     int64_t QuadPart;
+  13 | } LARGE_INTEGER;
+  14 | 
+  15 | #ifdef __cplusplus
+  16 | extern "C" {
+  17 | #endif
+  18 | int __stdcall QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount);
+  19 | int __stdcall QueryPerformanceFrequency(LARGE_INTEGER* lpFrequency);
+  20 | #ifdef __cplusplus
+  21 | }
+  22 | #endif
+  23 | #else
+  24 | #include <time.h>
+  25 | #endif
+  26 | 
+  27 | /* Monotonic time helper using genuine hardware high-resolution timing */
+  28 | #if defined(_WIN32)
+  29 | uint64_t wet_hal_get_time_us(void) {
+  30 |     static LARGE_INTEGER s_freq;
+  31 |     static int s_inited = 0;
+  32 |     if (!s_inited) {
+  33 |         QueryPerformanceFrequency(&s_freq);
+  34 |         s_inited = 1;
+  35 |     }
+  36 |     LARGE_INTEGER counter;
+  37 |     QueryPerformanceCounter(&counter);
+  38 |     return (uint64_t)((counter.QuadPart * 1000000ULL) / s_freq.QuadPart);
+  39 | }
+  40 | #else
+  41 | uint64_t wet_hal_get_time_us(void) {
+  42 |     struct timespec ts;
+  43 |     clock_gettime(CLOCK_MONOTONIC, &ts);
+  44 |     return (uint64_t)(ts.tv_sec * 1000000ULL + ts.tv_nsec / 1000ULL);
+  45 | }
+  46 | #endif
+  47 | 
+  48 | /* =========================================================================
+  49 |  * HAL Core Lifecycle Implementation
+  50 |  * ========================================================================= */
+  51 | 
+  52 | wet_hal_context_t* wet_hal_create(wet_hal_mode_t mode, const wet_hal_config_t* config) {
+  53 |     wet_hal_context_t* hal = (wet_hal_context_t*)calloc(1, sizeof(wet_hal_context_t));
+  54 |     if (!hal) return NULL;
+  55 | 
+  56 |     hal->mode = mode;
+  57 |     if (config) {
+  58 |         hal->config = *config;
+  59 |     } else {
+  60 |         hal->config.mode = mode;
+  61 |         hal->config.max_ephys_channels = 64;
+  62 |         hal->config.num_pumps = 8;
+  63 |         hal->config.num_valves = 8;
+  64 |         hal->config.num_flow_sensors = 8;
+  65 |         hal->config.enable_dead_head_protection = 1;
+  66 |         hal->config.enable_crowbar_fastpath = 1;
+  67 |         for (int i = 0; i < 8; ++i) {
+  68 |             hal->config.valve_for_pump[i] = 0xFF;
+  69 |         }
+  70 |     }
+  71 | 
+  72 |     /* Open default valves 0..7 as open or closed */
+  73 |     for (int i = 0; i < 8; ++i) {
+  74 |         hal->valve_states[i] = 1; /* Default open for perfusion lines */
+  75 |         hal->pump_rates_ul_min[i] = 0.0f;
+  76 |         hal->flow_rates_ul_min[i] = 0.0;
+  77 |     }
+  78 | 
+  79 |     return hal;
+  80 | }
+  81 | 
+  82 | void wet_hal_destroy(wet_hal_context_t* hal) {
+  83 |     if (!hal) return;
+  84 | 
+  85 |     /* Shutdown all registered drivers */
+  86 |     for (uint32_t i = 0; i < hal->driver_count; ++i) {
+  87 |         if (hal->drivers[i] && hal->drivers[i]->ops && hal->drivers[i]->ops->shutdown) {
+  88 |             hal->drivers[i]->ops->shutdown(hal->drivers[i]);
+  89 |         }
+  90 |     }
+  91 | 
+  92 |     free(hal);
+  93 | }
+  94 | 
+  95 | wet_hal_status_t wet_hal_init(wet_vm_t* vm, wet_hal_mode_t mode, const wet_hal_config_t* config) {
+  96 |     if (!vm) return WET_HAL_ERR_NULL_PTR;
+  97 | 
+  98 |     wet_hal_context_t* hal = wet_hal_create(mode, config);
+  99 |     if (!hal) return WET_HAL_ERR_IO;
+ 100 | 
+ 101 |     return wet_hal_attach(vm, hal);
+ 102 | }
+ 103 | 
+ 104 | wet_hal_status_t wet_hal_attach(wet_vm_t* vm, wet_hal_context_t* hal) {
+ 105 |     if (!vm) return WET_HAL_ERR_NULL_PTR;
+ 106 | 
+ 107 |     vm->hal = hal;
+ 108 |     if (hal) {
+ 109 |         hal->vm = vm;
+ 110 |     }
+ 111 |     return WET_HAL_OK;
+ 112 | }
+ 113 | 
+ 114 | wet_hal_context_t* wet_hal_get_context(wet_vm_t* vm) {
+ 115 |     if (!vm) return NULL;
+ 116 |     return vm->hal;
+ 117 | }
+ 118 | 
+ 119 | wet_hal_status_t wet_hal_set_mode(wet_hal_context_t* hal, wet_hal_mode_t mode) {
+ 120 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 121 |     if (mode > WET_HAL_MODE_HIL_LOOPBACK) return WET_HAL_ERR_INVALID_MODE;
+ 122 | 
+ 123 |     hal->mode = mode;
+ 124 |     hal->config.mode = mode;
+ 125 | 
+ 126 |     /* Propagate mode to all registered drivers */
+ 127 |     for (uint32_t i = 0; i < hal->driver_count; ++i) {
+ 128 |         if (hal->drivers[i]) {
+ 129 |             hal->drivers[i]->mode = mode;
+ 130 |         }
+ 131 |     }
+ 132 |     return WET_HAL_OK;
+ 133 | }
+ 134 | 
+ 135 | wet_hal_mode_t wet_hal_get_mode(const wet_hal_context_t* hal) {
+ 136 |     if (!hal) return WET_HAL_MODE_SIMULATED;
+ 137 |     return hal->mode;
+ 138 | }
+ 139 | 
+ 140 | wet_hal_status_t wet_hal_register_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver) {
+ 141 |     if (!hal || !driver) return WET_HAL_ERR_NULL_PTR;
+ 142 |     if (hal->driver_count >= WET_HAL_MAX_DRIVERS) return WET_HAL_ERR_BUFFER_FULL;
+ 143 | 
+ 144 |     /* Check for duplicate registration */
+ 145 |     for (uint32_t i = 0; i < hal->driver_count; ++i) {
+ 146 |         if (hal->drivers[i] == driver) {
+ 147 |             return WET_HAL_OK;
+ 148 |         }
+ 149 |     }
+ 150 | 
+ 151 |     hal->drivers[hal->driver_count++] = driver;
+ 152 |     driver->mode = hal->mode;
+ 153 | 
+ 154 |     /* Bind fast direct routing slots */
+ 155 |     switch (driver->driver_type) {
+ 156 |         case WET_HAL_DRIVER_EPHYS:
+ 157 |             if (!hal->ephys_driver) hal->ephys_driver = driver;
+ 158 |             break;
+ 159 |         case WET_HAL_DRIVER_PUMP:
+ 160 |             if (!hal->pump_driver) hal->pump_driver = driver;
+ 161 |             break;
+ 162 |         case WET_HAL_DRIVER_VALVE:
+ 163 |             if (!hal->valve_driver) hal->valve_driver = driver;
+ 164 |             break;
+ 165 |         case WET_HAL_DRIVER_FLOW:
+ 166 |             if (!hal->flow_driver) hal->flow_driver = driver;
+ 167 |             break;
+ 168 |         case WET_HAL_DRIVER_CAN_BUS:
+ 169 |             if (!hal->can_driver) hal->can_driver = driver;
+ 170 |             break;
+ 171 |         default:
+ 172 |             break;
+ 173 |     }
+ 174 | 
+ 175 |     /* Initialize driver if not already initialized */
+ 176 |     if (!driver->is_initialized && driver->ops && driver->ops->init) {
+ 177 |         wet_hal_status_t st = driver->ops->init(driver, NULL);
+ 178 |         if (st == WET_HAL_OK) {
+ 179 |             driver->is_initialized = 1;
+ 180 |             driver->is_active = 1;
+ 181 |         }
+ 182 |         return st;
+ 183 |     }
+ 184 | 
+ 185 |     driver->is_active = 1;
+ 186 |     return WET_HAL_OK;
+ 187 | }
+ 188 | 
+ 189 | wet_hal_status_t wet_hal_unregister_driver(wet_hal_context_t* hal, wet_hal_driver_t* driver) {
+ 190 |     if (!hal || !driver) return WET_HAL_ERR_NULL_PTR;
+ 191 | 
+ 192 |     for (uint32_t i = 0; i < hal->driver_count; ++i) {
+ 193 |         if (hal->drivers[i] == driver) {
+ 194 |             /* Clear specialized slot if matching */
+ 195 |             if (hal->ephys_driver == driver) hal->ephys_driver = NULL;
+ 196 |             if (hal->pump_driver == driver)  hal->pump_driver = NULL;
+ 197 |             if (hal->valve_driver == driver) hal->valve_driver = NULL;
+ 198 |             if (hal->flow_driver == driver)  hal->flow_driver = NULL;
+ 199 |             if (hal->can_driver == driver)   hal->can_driver = NULL;
+ 200 | 
+ 201 |             /* Shift array left */
+ 202 |             for (uint32_t j = i; j < hal->driver_count - 1; ++j) {
+ 203 |                 hal->drivers[j] = hal->drivers[j + 1];
+ 204 |             }
+ 205 |             hal->drivers[hal->driver_count - 1] = NULL;
+ 206 |             hal->driver_count--;
+ 207 |             driver->is_active = 0;
+ 208 |             return WET_HAL_OK;
+ 209 |         }
+ 210 |     }
+ 211 |     return WET_HAL_ERR_DRIVER_NOT_FOUND;
+ 212 | }
+ 213 | 
+ 214 | wet_hal_driver_t* wet_hal_find_driver(wet_hal_context_t* hal, wet_hal_driver_type_t type) {
+ 215 |     if (!hal) return NULL;
+ 216 |     switch (type) {
+ 217 |         case WET_HAL_DRIVER_EPHYS:   return hal->ephys_driver;
+ 218 |         case WET_HAL_DRIVER_PUMP:    return hal->pump_driver;
+ 219 |         case WET_HAL_DRIVER_VALVE:   return hal->valve_driver;
+ 220 |         case WET_HAL_DRIVER_FLOW:    return hal->flow_driver;
+ 221 |         case WET_HAL_DRIVER_CAN_BUS: return hal->can_driver;
+ 222 |         default: break;
+ 223 |     }
+ 224 |     for (uint32_t i = 0; i < hal->driver_count; ++i) {
+ 225 |         if (hal->drivers[i] && hal->drivers[i]->driver_type == type) {
+ 226 |             return hal->drivers[i];
+ 227 |         }
+ 228 |     }
+ 229 |     return NULL;
+ 230 | }
+ 231 | 
+ 232 | /* =========================================================================
+ 233 |  * Actuator & Sensor Routing Implementation
+ 234 |  * ========================================================================= */
+ 235 | 
+ 236 | wet_hal_status_t wet_hal_write_pump(wet_hal_context_t* hal, uint8_t pump_id, double rate_ul_min, uint8_t run_flag) {
+ 237 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 238 |     if (pump_id >= 8) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 239 | 
+ 240 |     /* Check Dead-Head Overpressure Interlock: If valve is closed and rate > 0, reject immediately! */
+ 241 |     if (hal->config.enable_dead_head_protection && run_flag && rate_ul_min > 0.0) {
+ 242 |         uint8_t target_valve = pump_id;
+ 243 |         if (hal->config.valve_for_pump[pump_id] < 8) {
+ 244 |             target_valve = hal->config.valve_for_pump[pump_id];
+ 245 |         }
+ 246 |         if (hal->valve_states[target_valve] == 0) {
+ 247 |             return WET_HAL_ERR_DEAD_HEAD;
+ 248 |         }
+ 249 |     }
+ 250 | 
+ 251 |     hal->pump_rates_ul_min[pump_id] = (float)rate_ul_min;
+ 252 |     hal->telemetry.total_rs232_commands++;
+ 253 | 
+ 254 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->pump_driver) {
+ 255 |         /* In simulated mode or no pump driver, update internal VM registers */
+ 256 |         if (hal->vm) {
+ 257 |             hal->vm->pump_rates_ul_min[pump_id] = (float)rate_ul_min;
+ 258 |         }
+ 259 |         return WET_HAL_OK;
+ 260 |     }
+ 261 | 
+ 262 |     /* Dispatch to physical or HIL pump driver */
+ 263 |     if (hal->pump_driver->ops && hal->pump_driver->ops->write_pump) {
+ 264 |         return hal->pump_driver->ops->write_pump(hal->pump_driver, pump_id, rate_ul_min, run_flag);
+ 265 |     }
+ 266 |     return WET_HAL_OK;
+ 267 | }
+ 268 | 
+ 269 | wet_hal_status_t wet_hal_dispense_pump(wet_hal_context_t* hal, uint8_t pump_id, double volume_ul) {
+ 270 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 271 |     if (pump_id >= 8) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 272 | 
+ 273 |     /* Dead-head protection check */
+ 274 |     if (hal->config.enable_dead_head_protection && volume_ul > 0.0) {
+ 275 |         uint8_t target_valve = pump_id;
+ 276 |         if (hal->config.valve_for_pump[pump_id] < 8) {
+ 277 |             target_valve = hal->config.valve_for_pump[pump_id];
+ 278 |         }
+ 279 |         if (hal->valve_states[target_valve] == 0) {
+ 280 |             return WET_HAL_ERR_DEAD_HEAD;
+ 281 |         }
+ 282 |     }
+ 283 | 
+ 284 |     hal->telemetry.total_rs232_commands++;
+ 285 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->pump_driver) {
+ 286 |         if (hal->vm) {
+ 287 |             hal->vm->pump_dispensed_ul[pump_id] += (float)volume_ul;
+ 288 |         }
+ 289 |         return WET_HAL_OK;
+ 290 |     }
+ 291 | 
+ 292 |     if (hal->pump_driver->ops && hal->pump_driver->ops->dispense_volume) {
+ 293 |         return hal->pump_driver->ops->dispense_volume(hal->pump_driver, pump_id, volume_ul);
+ 294 |     }
+ 295 |     return WET_HAL_OK;
+ 296 | }
+ 297 | 
+ 298 | wet_hal_status_t wet_hal_write_valve(wet_hal_context_t* hal, uint8_t valve_id, uint8_t state) {
+ 299 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 300 |     if (valve_id >= 8) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 301 | 
+ 302 |     hal->valve_states[valve_id] = (state != 0) ? 1 : 0;
+ 303 |     if (hal->vm) {
+ 304 |         hal->vm->valve_states[valve_id] = hal->valve_states[valve_id];
+ 305 |     }
+ 306 | 
+ 307 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->valve_driver) {
+ 308 |         return WET_HAL_OK;
+ 309 |     }
+ 310 | 
+ 311 |     if (hal->valve_driver->ops && hal->valve_driver->ops->write_valve) {
+ 312 |         return hal->valve_driver->ops->write_valve(hal->valve_driver, valve_id, state);
+ 313 |     }
+ 314 |     return WET_HAL_OK;
+ 315 | }
+ 316 | 
+ 317 | wet_hal_status_t wet_hal_read_flow(wet_hal_context_t* hal, uint8_t sensor_id, double* out_flow_ul_min) {
+ 318 |     if (!hal || !out_flow_ul_min) return WET_HAL_ERR_NULL_PTR;
+ 319 |     if (sensor_id >= 8) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 320 | 
+ 321 |     hal->telemetry.total_i2c_transactions++;
+ 322 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->flow_driver) {
+ 323 |         if (hal->vm) {
+ 324 |             *out_flow_ul_min = (double)hal->vm->fluid_flow_rate_ul_min[sensor_id];
+ 325 |         } else {
+ 326 |             *out_flow_ul_min = hal->flow_rates_ul_min[sensor_id];
+ 327 |         }
+ 328 |         return WET_HAL_OK;
+ 329 |     }
+ 330 | 
+ 331 |     if (hal->flow_driver->ops && hal->flow_driver->ops->read_flow) {
+ 332 |         wet_hal_status_t st = hal->flow_driver->ops->read_flow(hal->flow_driver, sensor_id, out_flow_ul_min);
+ 333 |         if (st == WET_HAL_OK) {
+ 334 |             hal->flow_rates_ul_min[sensor_id] = *out_flow_ul_min;
+ 335 |             if (hal->vm) {
+ 336 |                 hal->vm->fluid_flow_rate_ul_min[sensor_id] = (float)(*out_flow_ul_min);
+ 337 |             }
+ 338 |         }
+ 339 |         return st;
+ 340 |     }
+ 341 |     *out_flow_ul_min = hal->flow_rates_ul_min[sensor_id];
+ 342 |     return WET_HAL_OK;
+ 343 | }
+ 344 | 
+ 345 | wet_hal_status_t wet_hal_stim_current(wet_hal_context_t* hal, uint16_t channel, int32_t current_pA, uint32_t duration_us) {
+ 346 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 347 |     if (channel >= 64) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 348 | 
+ 349 |     hal->telemetry.total_spi_transactions++;
+ 350 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->ephys_driver) {
+ 351 |         if (hal->vm) {
+ 352 |             /* Convert pA to uA for simulated biophysics: 1 uA = 1,000,000 pA */
+ 353 |             float current_ua = (float)current_pA / 1000000.0f;
+ 354 |             float dur_ms = (float)duration_us / 1000.0f;
+ 355 |             biophysics_schedule_stim_current(&hal->vm->bio, (uint8_t)channel, current_ua, dur_ms, dur_ms, 0.0f);
+ 356 |         }
+ 357 |         return WET_HAL_OK;
+ 358 |     }
+ 359 | 
+ 360 |     if (hal->ephys_driver->ops && hal->ephys_driver->ops->stim_current) {
+ 361 |         return hal->ephys_driver->ops->stim_current(hal->ephys_driver, channel, current_pA, duration_us);
+ 362 |     }
+ 363 |     return WET_HAL_OK;
+ 364 | }
+ 365 | 
+ 366 | wet_hal_status_t wet_hal_stim_voltage(wet_hal_context_t* hal, uint16_t channel, float voltage_v, float p1_ms, float p2_ms) {
+ 367 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 368 |     if (channel >= 64) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 369 | 
+ 370 |     hal->telemetry.total_spi_transactions++;
+ 371 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->ephys_driver) {
+ 372 |         if (hal->vm) {
+ 373 |             biophysics_schedule_stim_ext(&hal->vm->bio, (uint8_t)channel, voltage_v, p1_ms, p2_ms, 0.0f);
+ 374 |         }
+ 375 |         return WET_HAL_OK;
+ 376 |     }
+ 377 | 
+ 378 |     if (hal->ephys_driver->ops && hal->ephys_driver->ops->stim_voltage) {
+ 379 |         return hal->ephys_driver->ops->stim_voltage(hal->ephys_driver, channel, voltage_v, p1_ms, p2_ms);
+ 380 |     }
+ 381 |     return WET_HAL_OK;
+ 382 | }
+ 383 | 
+ 384 | wet_hal_status_t wet_hal_read_spikes(wet_hal_context_t* hal, uint16_t channel, uint8_t* out_spike_flag) {
+ 385 |     if (!hal || !out_spike_flag) return WET_HAL_ERR_NULL_PTR;
+ 386 |     if (channel >= 64) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 387 | 
+ 388 |     if (hal->mode == WET_HAL_MODE_SIMULATED || !hal->ephys_driver) {
+ 389 |         if (hal->vm) {
+ 390 |             *out_spike_flag = hal->vm->spikes[channel];
+ 391 |         } else {
+ 392 |             *out_spike_flag = hal->ephys_spikes[channel];
+ 393 |         }
+ 394 |         return WET_HAL_OK;
+ 395 |     }
+ 396 | 
+ 397 |     if (hal->ephys_driver->ops && hal->ephys_driver->ops->read_ephys) {
+ 398 |         float volts[64];
+ 399 |         uint8_t spks[64];
+ 400 |         wet_hal_status_t st = hal->ephys_driver->ops->read_ephys(hal->ephys_driver, volts, spks, 64);
+ 401 |         if (st == WET_HAL_OK) {
+ 402 |             *out_spike_flag = spks[channel];
+ 403 |         }
+ 404 |         return st;
+ 405 |     }
+ 406 |     *out_spike_flag = hal->ephys_spikes[channel];
+ 407 |     return WET_HAL_OK;
+ 408 | }
+ 409 | 
+ 410 | wet_hal_status_t wet_hal_measure_impedance(wet_hal_context_t* hal, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad) {
+ 411 |     if (!hal || !out_mag_ohms || !out_phase_rad) return WET_HAL_ERR_NULL_PTR;
+ 412 |     if (channel >= 64) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 413 | 
+ 414 |     if (hal->ephys_driver && hal->ephys_driver->ops && hal->ephys_driver->ops->measure_impedance) {
+ 415 |         return hal->ephys_driver->ops->measure_impedance(hal->ephys_driver, channel, freq_hz, out_mag_ohms, out_phase_rad);
+ 416 |     }
+ 417 | 
+ 418 |     /* Fallback default impedance model */
+ 419 |     *out_mag_ohms = 100000.0f; /* 100 kOhm baseline */
+ 420 |     *out_phase_rad = -0.785f;  /* -45 degrees */
+ 421 |     return WET_HAL_OK;
+ 422 | }
+ 423 | 
+ 424 | wet_hal_status_t wet_hal_active_discharge(wet_hal_context_t* hal, uint16_t channel) {
+ 425 |     if (!hal) return WET_HAL_ERR_NULL_PTR;
+ 426 |     if (channel >= 64) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 427 | 
+ 428 |     if (hal->ephys_driver && hal->ephys_driver->ops && hal->ephys_driver->ops->active_discharge) {
+ 429 |         return hal->ephys_driver->ops->active_discharge(hal->ephys_driver, channel);
+ 430 |     }
+ 431 |     return WET_HAL_OK;
+ 432 | }
+ 433 | 
+ 434 | /* =========================================================================
+ 435 |  * Emergency Hardware Crowbar Fast-Path (<100 µs)
+ 436 |  * ========================================================================= */
+ 437 | 
+ 438 | void wet_hal_emergency_crowbar(wet_vm_t* vm, uint32_t trip_reason) {
+ 439 |     if (!vm) return;
+ 440 |     wet_hal_context_t* hal = vm->hal;
+ 441 |     if (!hal) return;
+ 442 | 
+ 443 |     uint64_t start_us = wet_hal_get_time_us();
+ 444 | 
+ 445 |     hal->crowbar_tripped = 1;
+ 446 |     hal->crowbar_reason = trip_reason;
+ 447 |     hal->crowbar_tick = vm->current_tick;
+ 448 |     hal->crowbar_timestamp_us = start_us;
+ 449 |     hal->telemetry.total_crowbar_events++;
+ 450 |     hal->telemetry.last_crowbar_reason = trip_reason;
+ 451 |     hal->telemetry.last_crowbar_timestamp_us = start_us;
+ 452 | 
+ 453 |     /* 1. Instantly zero all pump rates and flow sensor readouts */
+ 454 |     for (int i = 0; i < 8; ++i) {
+ 455 |         hal->pump_rates_ul_min[i] = 0.0f;
+ 456 |         hal->flow_rates_ul_min[i] = 0.0;
+ 457 |         vm->pump_rates_ul_min[i] = 0.0f;
+ 458 |         vm->fluid_flow_rate_ul_min[i] = 0.0f;
+ 459 |     }
+ 460 | 
+ 461 |     /* 2. Disarm all registered hardware drivers via emergency_stop callback */
+ 462 |     for (uint32_t i = 0; i < hal->driver_count; ++i) {
+ 463 |         wet_hal_driver_t* drv = hal->drivers[i];
+ 464 |         if (drv && drv->ops && drv->ops->emergency_stop) {
+ 465 |             drv->ops->emergency_stop(drv, trip_reason);
+ 466 |         }
+ 467 |     }
+ 468 | 
+ 469 |     /* 3. Execute active discharge across all ephys channels to clear Faradaic charge */
+ 470 |     for (uint16_t ch = 0; ch < 64; ++ch) {
+ 471 |         wet_hal_active_discharge(hal, ch);
+ 472 |         vm->discharge_charge_nc[ch] += vm->last_charge_nc[ch];
+ 473 |         vm->last_charge_nc[ch] = 0.0f;
+ 474 |         vm->voltages[ch] = 0.0f;
+ 475 |     }
+ 476 | 
+ 477 |     uint64_t end_us = wet_hal_get_time_us();
+ 478 |     hal->telemetry.crowbar_latency_us = (double)(end_us - start_us);
+ 479 | }
+ 480 | 
+ 481 | wet_hal_telemetry_t* wet_hal_get_telemetry(wet_hal_context_t* hal) {
+ 482 |     if (!hal) return NULL;
+ 483 |     return &hal->telemetry;
+ 484 | }
+ 485 | 
+ 486 | void wet_hal_set_valve_for_pump(wet_hal_context_t* hal, uint8_t pump_id, uint8_t valve_id) {
+ 487 |     if (!hal || pump_id >= 8) return;
+ 488 |     hal->config.valve_for_pump[pump_id] = valve_id;
+ 489 | }
+```
+
+### `native/src/wet_hal_intan.c` (394 lines, SHA-256: `a25facbb372a8c41...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_hal_intan.h"
+   3 | 
+   4 | /* Forward declaration of vtable operations */
+   5 | static wet_hal_status_t intan_op_init(wet_hal_driver_t* drv, void* config);
+   6 | static wet_hal_status_t intan_op_shutdown(wet_hal_driver_t* drv);
+   7 | static wet_hal_status_t intan_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason);
+   8 | static wet_hal_status_t intan_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms);
+   9 | static wet_hal_status_t intan_op_stim_voltage(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms);
+  10 | static wet_hal_status_t intan_op_stim_current(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us);
+  11 | static wet_hal_status_t intan_op_read_ephys(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count);
+  12 | static wet_hal_status_t intan_op_measure_impedance(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad);
+  13 | static wet_hal_status_t intan_op_active_discharge(wet_hal_driver_t* drv, uint16_t channel);
+  14 | 
+  15 | static const wet_hal_ops_t s_intan_ops = {
+  16 |     .init              = intan_op_init,
+  17 |     .shutdown          = intan_op_shutdown,
+  18 |     .emergency_stop    = intan_op_emergency_stop,
+  19 |     .step_tick         = intan_op_step_tick,
+  20 |     .stim_voltage      = intan_op_stim_voltage,
+  21 |     .stim_current      = intan_op_stim_current,
+  22 |     .read_ephys        = intan_op_read_ephys,
+  23 |     .measure_impedance = intan_op_measure_impedance,
+  24 |     .active_discharge  = intan_op_active_discharge,
+  25 |     .write_pump        = NULL,
+  26 |     .dispense_volume   = NULL,
+  27 |     .write_valve       = NULL,
+  28 |     .read_flow         = NULL,
+  29 |     .read_pressure     = NULL,
+  30 | };
+  31 | 
+  32 | /* =========================================================================
+  33 |  * Intan RHS2116 Protocol Implementation
+  34 |  * ========================================================================= */
+  35 | 
+  36 | uint32_t wet_hal_intan_encode_cmd(const intan_spi_command_t* cmd) {
+  37 |     if (!cmd) return 0;
+  38 |     uint32_t word = 0;
+  39 | 
+  40 |     switch (cmd->opcode) {
+  41 |         case INTAN_CMD_CONVERT:
+  42 |             word = ((uint32_t)INTAN_CMD_CONVERT << 24)
+  43 |                  | ((uint32_t)(cmd->flag_m ? 1 : 0) << 23)
+  44 |                  | (((uint32_t)cmd->channel & 0x0FU) << 16);
+  45 |             break;
+  46 | 
+  47 |         case INTAN_CMD_WRITE:
+  48 |             word = ((uint32_t)INTAN_CMD_WRITE << 24)
+  49 |                  | ((uint32_t)(cmd->flag_u ? 1 : 0) << 22)
+  50 |                  | (((uint32_t)cmd->reg & 0x3FU) << 16)
+  51 |                  | ((uint32_t)cmd->data & 0xFFFFU);
+  52 |             break;
+  53 | 
+  54 |         case INTAN_CMD_READ:
+  55 |             word = ((uint32_t)INTAN_CMD_READ << 24)
+  56 |                  | ((uint32_t)(cmd->flag_m ? 1 : 0) << 23)
+  57 |                  | (((uint32_t)cmd->reg & 0x3FU) << 16);
+  58 |             break;
+  59 | 
+  60 |         default:
+  61 |             word = 0;
+  62 |             break;
+  63 |     }
+  64 |     return word;
+  65 | }
+  66 | 
+  67 | void wet_hal_intan_decode_cmd(uint32_t word, intan_spi_command_t* cmd) {
+  68 |     if (!cmd) return;
+  69 |     memset(cmd, 0, sizeof(intan_spi_command_t));
+  70 | 
+  71 |     uint8_t op_prefix = (uint8_t)((word >> 24) & 0xC0U);
+  72 |     cmd->opcode = op_prefix;
+  73 | 
+  74 |     if (op_prefix == INTAN_CMD_CONVERT) {
+  75 |         cmd->flag_m = (uint8_t)((word >> 23) & 1U);
+  76 |         cmd->channel = (uint8_t)((word >> 16) & 0x0FU);
+  77 |     } else if (op_prefix == INTAN_CMD_WRITE) {
+  78 |         cmd->flag_u = (uint8_t)((word >> 22) & 1U);
+  79 |         cmd->reg = (uint8_t)((word >> 16) & 0x3FU);
+  80 |         cmd->data = (uint16_t)(word & 0xFFFFU);
+  81 |     } else if (op_prefix == INTAN_CMD_READ) {
+  82 |         cmd->flag_m = (uint8_t)((word >> 23) & 1U);
+  83 |         cmd->reg = (uint8_t)((word >> 16) & 0x3FU);
+  84 |     }
+  85 | }
+  86 | 
+  87 | uint32_t wet_hal_intan_spi_transfer(wet_hal_driver_t* drv, uint32_t mosi_word) {
+  88 |     if (!drv || !drv->context) return 0xFFFFFFFFU;
+  89 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+  90 | 
+  91 |     state->transaction_count++;
+  92 |     if (state->fault_bus_timeout) {
+  93 |         return 0xFFFFFFFFU; /* Bus floating / timed out */
+  94 |     }
+  95 | 
+  96 |     /* Pipelined MISO delay: shift register (2 command words pipeline) */
+  97 |     uint32_t miso_out = state->rx_pipeline[0];
+  98 |     state->rx_pipeline[0] = state->rx_pipeline[1];
+  99 | 
+ 100 |     /* Decode incoming MOSI command to generate corresponding future response */
+ 101 |     intan_spi_command_t cmd;
+ 102 |     wet_hal_intan_decode_cmd(mosi_word, &cmd);
+ 103 | 
+ 104 |     uint32_t response_val = 0;
+ 105 | 
+ 106 |     if (cmd.flag_m) {
+ 107 |         state->compliance_rail_mask = 0; /* M flag clears compliance rail */
+ 108 |     }
+ 109 | 
+ 110 |     if (cmd.opcode == INTAN_CMD_CONVERT) {
+ 111 |         /* Convert channel analog potential: 16-bit ADC count */
+ 112 |         uint8_t ch = cmd.channel;
+ 113 |         if (ch < INTAN_RHS2116_NUM_CHANNELS) {
+ 114 |             /* Simulated reading: baseline resting potential + impedance */
+ 115 |             int16_t adc_val = (int16_t)(-1400); /* ~ -70 mV baseline */
+ 116 |             response_val = ((uint32_t)ch << 16) | ((uint16_t)adc_val);
+ 117 |         }
+ 118 |     } else if (cmd.opcode == INTAN_CMD_READ) {
+ 119 |         uint8_t reg = cmd.reg;
+ 120 |         if (reg < 64) {
+ 121 |             response_val = ((uint32_t)reg << 16) | state->registers[reg];
+ 122 |         }
+ 123 |     } else if (cmd.opcode == INTAN_CMD_WRITE) {
+ 124 |         uint8_t reg = cmd.reg;
+ 125 |         if (reg < 64) {
+ 126 |             state->registers[reg] = cmd.data;
+ 127 |             response_val = ((uint32_t)reg << 16) | cmd.data;
+ 128 |         }
+ 129 |     }
+ 130 | 
+ 131 |     /* Inject SPI bit error if requested */
+ 132 |     if (state->fault_spi_crc_error) {
+ 133 |         response_val ^= 0x00010000U;
+ 134 |     }
+ 135 | 
+ 136 |     state->rx_pipeline[1] = response_val;
+ 137 |     return miso_out;
+ 138 | }
+ 139 | 
+ 140 | wet_hal_driver_t* wet_hal_intan_create(wet_hal_mode_t mode) {
+ 141 |     wet_hal_driver_t* drv = (wet_hal_driver_t*)calloc(1, sizeof(wet_hal_driver_t));
+ 142 |     if (!drv) return NULL;
+ 143 | 
+ 144 |     intan_device_state_t* state = (intan_device_state_t*)calloc(1, sizeof(intan_device_state_t));
+ 145 |     if (!state) {
+ 146 |         free(drv);
+ 147 |         return NULL;
+ 148 |     }
+ 149 | 
+ 150 |     /* Initialize default state */
+ 151 |     for (int i = 0; i < INTAN_RHS2116_NUM_CHANNELS; ++i) {
+ 152 |         state->channels[i].impedance_ohms = 150000.0f; /* 150 kOhm typical */
+ 153 |         state->channels[i].impedance_phase_rad = -0.785f; /* -45 deg capacitive */
+ 154 |         state->channels[i].range = INTAN_RANGE_1X;
+ 155 |     }
+ 156 |     state->zcheck_freq_hz = 1000.0f;
+ 157 |     state->zcheck_probe_current_pA = 100000.0f; /* 100 nA */
+ 158 | 
+ 159 |     /* Copy name */
+ 160 |     const char* name = "Intan_RHS2116";
+ 161 |     for (int i = 0; i < 31 && name[i]; ++i) drv->name[i] = name[i];
+ 162 |     drv->driver_type = WET_HAL_DRIVER_EPHYS;
+ 163 |     drv->mode = mode;
+ 164 |     drv->ops = &s_intan_ops;
+ 165 |     drv->context = state;
+ 166 | 
+ 167 |     return drv;
+ 168 | }
+ 169 | 
+ 170 | void wet_hal_intan_destroy(wet_hal_driver_t* drv) {
+ 171 |     if (!drv) return;
+ 172 |     if (drv->context) free(drv->context);
+ 173 |     free(drv);
+ 174 | }
+ 175 | 
+ 176 | wet_hal_status_t wet_hal_intan_set_stim_current(
+ 177 |     wet_hal_driver_t* drv,
+ 178 |     uint8_t channel,
+ 179 |     int32_t current_pA,
+ 180 |     uint32_t duration_us
+ 181 | ) {
+ 182 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 183 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 184 | 
+ 185 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 186 | 
+ 187 |     /* Current limit check: 10 nA (10,000 pA) to 2.55 mA (2,550,000,000 pA) */
+ 188 |     int64_t abs_pA = current_pA < 0 ? -(int64_t)current_pA : (int64_t)current_pA;
+ 189 |     if (abs_pA > 0 && abs_pA < 10000) {
+ 190 |         abs_pA = 10000; /* Minimum 10 nA step */
+ 191 |     }
+ 192 |     if (abs_pA > 2550000000LL) {
+ 193 |         abs_pA = 2550000000LL; /* Clamp to 2.55 mA */
+ 194 |     }
+ 195 | 
+ 196 |     /* Select current range */
+ 197 |     intan_current_range_t range;
+ 198 |     uint8_t dac_val;
+ 199 | 
+ 200 |     if (abs_pA <= 2550000) {
+ 201 |         range = INTAN_RANGE_1X; /* 10 nA step */
+ 202 |         dac_val = (uint8_t)(abs_pA / 10000);
+ 203 |     } else if (abs_pA <= 25500000) {
+ 204 |         range = INTAN_RANGE_10X; /* 100 nA step */
+ 205 |         dac_val = (uint8_t)(abs_pA / 100000);
+ 206 |     } else {
+ 207 |         range = INTAN_RANGE_100X; /* 10 uA step */
+ 208 |         dac_val = (uint8_t)(abs_pA / 10000000);
+ 209 |     }
+ 210 | 
+ 211 |     state->channels[channel].range = range;
+ 212 |     state->channels[channel].dac_val_p1 = dac_val;
+ 213 |     state->channels[channel].current_pA = current_pA;
+ 214 |     state->channels[channel].duration_us = duration_us;
+ 215 |     state->channels[channel].enabled = (abs_pA > 0) ? 1 : 0;
+ 216 | 
+ 217 |     /* Compliance Rail Detection: V = I * Z */
+ 218 |     double current_amps = (double)current_pA * 1e-12;
+ 219 |     double compliance_v = wet_fabs(current_amps * (double)state->channels[channel].impedance_ohms);
+ 220 | 
+ 221 |     if (compliance_v >= (double)INTAN_COMPLIANCE_RAIL_VOLT || state->fault_force_compliance_rail) {
+ 222 |         state->compliance_rail_mask |= (1U << channel);
+ 223 |         state->total_compliance_trips++;
+ 224 |         return WET_HAL_ERR_COMPLIANCE_RAILED;
+ 225 |     }
+ 226 | 
+ 227 |     /* Encode and perform SPI WRITE with U update flag */
+ 228 |     intan_spi_command_t cmd;
+ 229 |     cmd.opcode = INTAN_CMD_WRITE;
+ 230 |     cmd.flag_u = 1; /* Synchronously latch DAC update */
+ 231 |     cmd.reg = (uint8_t)((current_pA < 0 ? 48 : 32) + channel); /* Positive DACs (32..47) or Negative DACs (48..63) */
+ 232 |     cmd.data = ((uint16_t)range << 8) | (uint16_t)dac_val;
+ 233 |     uint32_t word = wet_hal_intan_encode_cmd(&cmd);
+ 234 |     wet_hal_intan_spi_transfer(drv, word);
+ 235 | 
+ 236 |     return WET_HAL_OK;
+ 237 | }
+ 238 | 
+ 239 | uint16_t wet_hal_intan_get_compliance_status(wet_hal_driver_t* drv) {
+ 240 |     if (!drv || !drv->context) return 0;
+ 241 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 242 |     return state->compliance_rail_mask;
+ 243 | }
+ 244 | 
+ 245 | void wet_hal_intan_clear_compliance(wet_hal_driver_t* drv) {
+ 246 |     if (!drv || !drv->context) return;
+ 247 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 248 |     state->compliance_rail_mask = 0;
+ 249 | 
+ 250 |     /* Execute CONVERT with M flag */
+ 251 |     intan_spi_command_t cmd;
+ 252 |     cmd.opcode = INTAN_CMD_CONVERT;
+ 253 |     cmd.flag_m = 1;
+ 254 |     cmd.channel = 0;
+ 255 |     uint32_t word = wet_hal_intan_encode_cmd(&cmd);
+ 256 |     wet_hal_intan_spi_transfer(drv, word);
+ 257 | }
+ 258 | 
+ 259 | wet_hal_status_t wet_hal_intan_measure_impedance(
+ 260 |     wet_hal_driver_t* drv,
+ 261 |     uint8_t channel,
+ 262 |     float freq_hz,
+ 263 |     float* out_mag_ohms,
+ 264 |     float* out_phase_rad
+ 265 | ) {
+ 266 |     if (!drv || !drv->context || !out_mag_ohms || !out_phase_rad) return WET_HAL_ERR_NULL_PTR;
+ 267 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 268 | 
+ 269 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 270 | 
+ 271 |     /* 1 kHz in-situ impedance check */
+ 272 |     state->zcheck_freq_hz = freq_hz > 0.0f ? freq_hz : 1000.0f;
+ 273 |     *out_mag_ohms = state->channels[channel].impedance_ohms;
+ 274 |     *out_phase_rad = state->channels[channel].impedance_phase_rad;
+ 275 |     return WET_HAL_OK;
+ 276 | }
+ 277 | 
+ 278 | wet_hal_status_t wet_hal_intan_set_charge_recovery(
+ 279 |     wet_hal_driver_t* drv,
+ 280 |     uint8_t channel,
+ 281 |     uint8_t enable
+ 282 | ) {
+ 283 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 284 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 285 | 
+ 286 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 287 |     state->channels[channel].charge_recovery_on = enable ? 1 : 0;
+ 288 |     return WET_HAL_OK;
+ 289 | }
+ 290 | 
+ 291 | void wet_hal_intan_inject_fault(
+ 292 |     wet_hal_driver_t* drv,
+ 293 |     uint8_t force_rail,
+ 294 |     uint8_t spi_error,
+ 295 |     uint8_t bus_timeout
+ 296 | ) {
+ 297 |     if (!drv || !drv->context) return;
+ 298 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 299 |     state->fault_force_compliance_rail = force_rail;
+ 300 |     state->fault_spi_crc_error = spi_error;
+ 301 |     state->fault_bus_timeout = bus_timeout;
+ 302 | }
+ 303 | 
+ 304 | /* =========================================================================
+ 305 |  * Vtable Callbacks
+ 306 |  * ========================================================================= */
+ 307 | 
+ 308 | static wet_hal_status_t intan_op_init(wet_hal_driver_t* drv, void* config) {
+ 309 |     (void)config;
+ 310 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 311 |     drv->is_initialized = 1;
+ 312 |     drv->is_active = 1;
+ 313 |     return WET_HAL_OK;
+ 314 | }
+ 315 | 
+ 316 | static wet_hal_status_t intan_op_shutdown(wet_hal_driver_t* drv) {
+ 317 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 318 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 319 |     for (int i = 0; i < INTAN_RHS2116_NUM_CHANNELS; ++i) {
+ 320 |         state->channels[i].enabled = 0;
+ 321 |         state->channels[i].current_pA = 0;
+ 322 |         state->channels[i].charge_recovery_on = 1;
+ 323 |     }
+ 324 |     drv->is_active = 0;
+ 325 |     return WET_HAL_OK;
+ 326 | }
+ 327 | 
+ 328 | static wet_hal_status_t intan_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason) {
+ 329 |     (void)reason;
+ 330 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 331 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 332 | 
+ 333 |     /* Zero all DAC amplitudes immediately and activate charge recovery switches */
+ 334 |     for (int i = 0; i < INTAN_RHS2116_NUM_CHANNELS; ++i) {
+ 335 |         state->channels[i].dac_val_p1 = 0;
+ 336 |         state->channels[i].dac_val_p2 = 0;
+ 337 |         state->channels[i].current_pA = 0;
+ 338 |         state->channels[i].enabled = 0;
+ 339 |         state->channels[i].charge_recovery_on = 1;
+ 340 |     }
+ 341 |     return WET_HAL_OK;
+ 342 | }
+ 343 | 
+ 344 | static wet_hal_status_t intan_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms) {
+ 345 |     (void)current_tick;
+ 346 |     (void)dt_ms;
+ 347 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 348 |     return WET_HAL_OK;
+ 349 | }
+ 350 | 
+ 351 | static wet_hal_status_t intan_op_stim_voltage(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms) {
+ 352 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 353 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 354 | 
+ 355 |     intan_device_state_t* state = (intan_device_state_t*)drv->context;
+ 356 |     /* Convert voltage to equivalent current using channel impedance */
+ 357 |     float z_ohms = state->channels[channel].impedance_ohms;
+ 358 |     if (z_ohms <= 0.0f) z_ohms = 150000.0f;
+ 359 |     double current_amps = (double)voltage_v / (double)z_ohms;
+ 360 |     int32_t current_pA = (int32_t)(current_amps * 1e12);
+ 361 | 
+ 362 |     uint32_t duration_us = (uint32_t)((p1_ms + p2_ms) * 1000.0);
+ 363 |     if (duration_us == 0) duration_us = 1000;
+ 364 | 
+ 365 |     return wet_hal_intan_set_stim_current(drv, (uint8_t)channel, current_pA, duration_us);
+ 366 | }
+ 367 | 
+ 368 | static wet_hal_status_t intan_op_stim_current(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us) {
+ 369 |     if (!drv) return WET_HAL_ERR_NULL_PTR;
+ 370 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 371 |     return wet_hal_intan_set_stim_current(drv, (uint8_t)channel, current_pA, duration_us);
+ 372 | }
+ 373 | 
+ 374 | static wet_hal_status_t intan_op_read_ephys(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count) {
+ 375 |     if (!drv || !voltages_out || !spikes_out) return WET_HAL_ERR_NULL_PTR;
+ 376 |     uint32_t count = channel_count < INTAN_RHS2116_NUM_CHANNELS ? channel_count : INTAN_RHS2116_NUM_CHANNELS;
+ 377 |     for (uint32_t i = 0; i < count; ++i) {
+ 378 |         voltages_out[i] = -0.070f; /* -70 mV */
+ 379 |         spikes_out[i] = 0;
+ 380 |     }
+ 381 |     return WET_HAL_OK;
+ 382 | }
+ 383 | 
+ 384 | static wet_hal_status_t intan_op_measure_impedance(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad) {
+ 385 |     if (!drv) return WET_HAL_ERR_NULL_PTR;
+ 386 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 387 |     return wet_hal_intan_measure_impedance(drv, (uint8_t)channel, freq_hz, out_mag_ohms, out_phase_rad);
+ 388 | }
+ 389 | 
+ 390 | static wet_hal_status_t intan_op_active_discharge(wet_hal_driver_t* drv, uint16_t channel) {
+ 391 |     if (!drv) return WET_HAL_ERR_NULL_PTR;
+ 392 |     if (channel >= INTAN_RHS2116_NUM_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 393 |     return wet_hal_intan_set_charge_recovery(drv, (uint8_t)channel, 1);
+ 394 | }
+```
+
+### `native/src/wet_hal_maxwell.c` (357 lines, SHA-256: `e9c265c923734f46...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_hal_maxwell.h"
+   3 | 
+   4 | /* Forward declaration of vtable operations */
+   5 | static wet_hal_status_t maxwell_op_init(wet_hal_driver_t* drv, void* config);
+   6 | static wet_hal_status_t maxwell_op_shutdown(wet_hal_driver_t* drv);
+   7 | static wet_hal_status_t maxwell_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason);
+   8 | static wet_hal_status_t maxwell_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms);
+   9 | static wet_hal_status_t maxwell_op_stim_voltage(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms);
+  10 | static wet_hal_status_t maxwell_op_stim_current(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us);
+  11 | static wet_hal_status_t maxwell_op_read_ephys(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count);
+  12 | static wet_hal_status_t maxwell_op_measure_impedance(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad);
+  13 | static wet_hal_status_t maxwell_op_active_discharge(wet_hal_driver_t* drv, uint16_t channel);
+  14 | 
+  15 | static const wet_hal_ops_t s_maxwell_ops = {
+  16 |     .init              = maxwell_op_init,
+  17 |     .shutdown          = maxwell_op_shutdown,
+  18 |     .emergency_stop    = maxwell_op_emergency_stop,
+  19 |     .step_tick         = maxwell_op_step_tick,
+  20 |     .stim_voltage      = maxwell_op_stim_voltage,
+  21 |     .stim_current      = maxwell_op_stim_current,
+  22 |     .read_ephys        = maxwell_op_read_ephys,
+  23 |     .measure_impedance = maxwell_op_measure_impedance,
+  24 |     .active_discharge  = maxwell_op_active_discharge,
+  25 |     .write_pump        = NULL,
+  26 |     .dispense_volume   = NULL,
+  27 |     .write_valve       = NULL,
+  28 |     .read_flow         = NULL,
+  29 |     .read_pressure     = NULL,
+  30 | };
+  31 | 
+  32 | /* =========================================================================
+  33 |  * MaxWell MaxOne HD-MEA Implementation
+  34 |  * ========================================================================= */
+  35 | 
+  36 | wet_hal_driver_t* wet_hal_maxwell_create(wet_hal_mode_t mode) {
+  37 |     wet_hal_driver_t* drv = (wet_hal_driver_t*)calloc(1, sizeof(wet_hal_driver_t));
+  38 |     if (!drv) return NULL;
+  39 | 
+  40 |     maxwell_device_state_t* state = (maxwell_device_state_t*)calloc(1, sizeof(maxwell_device_state_t));
+  41 |     if (!state) {
+  42 |         free(drv);
+  43 |         return NULL;
+  44 |     }
+  45 | 
+  46 |     /* Initialize default 1-to-1 routing for first 1024 electrodes */
+  47 |     for (uint32_t ch = 0; ch < MAXWELL_RECORDING_CHANNELS; ++ch) {
+  48 |         state->routing_matrix[ch] = (uint16_t)ch;
+  49 |         state->channel_active[ch] = 1;
+  50 |         state->channel_voltages[ch] = -0.070f; /* -70 mV baseline */
+  51 |         state->channel_spikes[ch] = 0;
+  52 |     }
+  53 |     state->sequence_state = MAXWELL_SEQ_IDLE;
+  54 | 
+  55 |     const char* name = "MaxWell_MaxOne";
+  56 |     for (int i = 0; i < 31 && name[i]; ++i) drv->name[i] = name[i];
+  57 |     drv->driver_type = WET_HAL_DRIVER_EPHYS;
+  58 |     drv->mode = mode;
+  59 |     drv->ops = &s_maxwell_ops;
+  60 |     drv->context = state;
+  61 | 
+  62 |     return drv;
+  63 | }
+  64 | 
+  65 | void wet_hal_maxwell_destroy(wet_hal_driver_t* drv) {
+  66 |     if (!drv) return;
+  67 |     if (drv->context) free(drv->context);
+  68 |     free(drv);
+  69 | }
+  70 | 
+  71 | wet_hal_status_t wet_hal_maxwell_route_channels(
+  72 |     wet_hal_driver_t* drv,
+  73 |     const uint16_t* electrode_indices,
+  74 |     uint32_t count
+  75 | ) {
+  76 |     if (!drv || !drv->context || !electrode_indices) return WET_HAL_ERR_NULL_PTR;
+  77 |     if (count > MAXWELL_RECORDING_CHANNELS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+  78 | 
+  79 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+  80 | 
+  81 |     for (uint32_t ch = 0; ch < count; ++ch) {
+  82 |         uint16_t elec_idx = electrode_indices[ch];
+  83 |         if (elec_idx >= MAXWELL_TOTAL_ELECTRODES) {
+  84 |             return WET_HAL_ERR_OUT_OF_BOUNDS;
+  85 |         }
+  86 |         state->routing_matrix[ch] = elec_idx;
+  87 |         state->channel_active[ch] = 1;
+  88 |     }
+  89 |     return WET_HAL_OK;
+  90 | }
+  91 | 
+  92 | wet_hal_status_t wet_hal_maxwell_connect_stim(
+  93 |     wet_hal_driver_t* drv,
+  94 |     uint8_t stim_unit,
+  95 |     uint16_t electrode_id
+  96 | ) {
+  97 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+  98 |     if (stim_unit >= MAXWELL_STIMULATION_UNITS || electrode_id >= MAXWELL_TOTAL_ELECTRODES) {
+  99 |         return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 100 |     }
+ 101 | 
+ 102 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 103 |     state->stim_units[stim_unit].connected_electrode = electrode_id;
+ 104 |     state->stim_units[stim_unit].is_connected = 1;
+ 105 |     return WET_HAL_OK;
+ 106 | }
+ 107 | 
+ 108 | void wet_hal_maxwell_sequence_clear(wet_hal_driver_t* drv) {
+ 109 |     if (!drv || !drv->context) return;
+ 110 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 111 |     state->sequence_length = 0;
+ 112 |     state->sequence_playback_index = 0;
+ 113 |     state->sequence_state = MAXWELL_SEQ_IDLE;
+ 114 | }
+ 115 | 
+ 116 | wet_hal_status_t wet_hal_maxwell_sequence_append(
+ 117 |     wet_hal_driver_t* drv,
+ 118 |     uint32_t timestamp_us,
+ 119 |     uint8_t stim_unit,
+ 120 |     uint16_t electrode_id,
+ 121 |     float voltage_mv,
+ 122 |     uint16_t duration_us
+ 123 | ) {
+ 124 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 125 |     if (stim_unit >= MAXWELL_STIMULATION_UNITS || electrode_id >= MAXWELL_TOTAL_ELECTRODES) {
+ 126 |         return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 127 |     }
+ 128 | 
+ 129 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 130 |     if (state->sequence_length >= MAXWELL_MAX_SEQUENCE_STEPS) {
+ 131 |         return WET_HAL_ERR_BUFFER_FULL;
+ 132 |     }
+ 133 | 
+ 134 |     /* 1. Strict Voltage Limit Clamping: <= 1000 mV */
+ 135 |     float clamped_mv = voltage_mv;
+ 136 |     if (clamped_mv > MAXWELL_VOLTAGE_LIMIT_MV) {
+ 137 |         clamped_mv = MAXWELL_VOLTAGE_LIMIT_MV;
+ 138 |         state->voltage_clamp_events++;
+ 139 |     } else if (clamped_mv < -MAXWELL_VOLTAGE_LIMIT_MV) {
+ 140 |         clamped_mv = -MAXWELL_VOLTAGE_LIMIT_MV;
+ 141 |         state->voltage_clamp_events++;
+ 142 |     }
+ 143 | 
+ 144 |     /* 2. Platinum Charge Injection Capacity Protection:
+ 145 |      * Area = 132.25 um^2 = 1.3225e-6 cm^2.
+ 146 |      * Pt safe CIC = 0.10 mC/cm^2 = 0.10e-3 C/cm^2.
+ 147 |      * Q_max = 0.10e-3 * 1.3225e-6 C = 0.13225 nC.
+ 148 |      * Phase charge: Q = (V_clamped / Z_elec) * duration.
+ 149 |      * Assuming baseline Pt microelectrode impedance Z ~ 300 kOhm (0.3 MOhm):
+ 150 |      * I = V / Z = (clamped_mv / 300) uA.
+ 151 |      * Q (nC) = I (uA) * t (ms) = (clamped_mv / 300.0) * (duration_us / 1000.0). */
+ 152 |     float dur_ms = (float)duration_us / 1000.0f;
+ 153 |     float abs_mv = wet_fabsf(clamped_mv);
+ 154 |     float phase_charge_nc = (abs_mv / 300.0f) * dur_ms;
+ 155 | 
+ 156 |     if (phase_charge_nc > MAXWELL_MAX_PHASE_CHARGE_NC || state->fault_force_charge_violation) {
+ 157 |         state->charge_limit_violations++;
+ 158 |         return WET_HAL_ERR_INTERLOCK;
+ 159 |     }
+ 160 | 
+ 161 |     /* Convert clamped voltage to 335 DAC bits */
+ 162 |     int16_t dac_val = (int16_t)((clamped_mv / MAXWELL_VOLTAGE_LIMIT_MV) * (float)MAXWELL_MAX_DAC_BITS);
+ 163 | 
+ 164 |     maxwell_seq_step_t* step = &state->sequence_buffer[state->sequence_length++];
+ 165 |     step->timestamp_us = timestamp_us;
+ 166 |     step->stim_unit_id = stim_unit;
+ 167 |     step->electrode_id = electrode_id;
+ 168 |     step->dac_val = dac_val;
+ 169 |     step->phase_duration_us = duration_us;
+ 170 | 
+ 171 |     return WET_HAL_OK;
+ 172 | }
+ 173 | 
+ 174 | wet_hal_status_t wet_hal_maxwell_sequence_arm(wet_hal_driver_t* drv) {
+ 175 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 176 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 177 |     if (state->sequence_length == 0) return WET_HAL_ERR_IO;
+ 178 | 
+ 179 |     state->sequence_playback_index = 0;
+ 180 |     state->sequence_state = MAXWELL_SEQ_ARMED;
+ 181 |     return WET_HAL_OK;
+ 182 | }
+ 183 | 
+ 184 | wet_hal_status_t wet_hal_maxwell_sequence_start(wet_hal_driver_t* drv) {
+ 185 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 186 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 187 |     if (state->sequence_state != MAXWELL_SEQ_ARMED) return WET_HAL_ERR_IO;
+ 188 | 
+ 189 |     state->sequence_state = MAXWELL_SEQ_RUNNING;
+ 190 |     state->sequence_start_time_us = wet_hal_get_time_us();
+ 191 |     return WET_HAL_OK;
+ 192 | }
+ 193 | 
+ 194 | maxwell_seq_state_t wet_hal_maxwell_sequence_get_state(wet_hal_driver_t* drv) {
+ 195 |     if (!drv || !drv->context) return MAXWELL_SEQ_ERROR;
+ 196 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 197 |     return state->sequence_state;
+ 198 | }
+ 199 | 
+ 200 | wet_hal_status_t wet_hal_maxwell_stim_voltage(
+ 201 |     wet_hal_driver_t* drv,
+ 202 |     uint8_t stim_unit,
+ 203 |     uint16_t electrode_id,
+ 204 |     float voltage_mv,
+ 205 |     float phase1_ms,
+ 206 |     float phase2_ms
+ 207 | ) {
+ 208 |     (void)phase2_ms;
+ 209 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 210 |     if (stim_unit >= MAXWELL_STIMULATION_UNITS || electrode_id >= MAXWELL_TOTAL_ELECTRODES) {
+ 211 |         return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 212 |     }
+ 213 | 
+ 214 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 215 | 
+ 216 |     /* Clamp voltage to +/- 1000 mV */
+ 217 |     float clamped_mv = voltage_mv;
+ 218 |     if (clamped_mv > MAXWELL_VOLTAGE_LIMIT_MV) {
+ 219 |         clamped_mv = MAXWELL_VOLTAGE_LIMIT_MV;
+ 220 |         state->voltage_clamp_events++;
+ 221 |     } else if (clamped_mv < -MAXWELL_VOLTAGE_LIMIT_MV) {
+ 222 |         clamped_mv = -MAXWELL_VOLTAGE_LIMIT_MV;
+ 223 |         state->voltage_clamp_events++;
+ 224 |     }
+ 225 | 
+ 226 |     /* Check Pt charge injection capacity */
+ 227 |     float abs_mv = wet_fabsf(clamped_mv);
+ 228 |     float phase_charge_nc = (abs_mv / 300.0f) * phase1_ms;
+ 229 | 
+ 230 |     if (phase_charge_nc > MAXWELL_MAX_PHASE_CHARGE_NC || state->fault_force_charge_violation) {
+ 231 |         state->charge_limit_violations++;
+ 232 |         return WET_HAL_ERR_INTERLOCK;
+ 233 |     }
+ 234 | 
+ 235 |     int16_t dac_val = (int16_t)((clamped_mv / MAXWELL_VOLTAGE_LIMIT_MV) * (float)MAXWELL_MAX_DAC_BITS);
+ 236 |     state->stim_units[stim_unit].connected_electrode = electrode_id;
+ 237 |     state->stim_units[stim_unit].is_connected = 1;
+ 238 |     state->stim_units[stim_unit].current_dac_val = dac_val;
+ 239 |     state->stim_units[stim_unit].phase1_charge_nc = phase_charge_nc;
+ 240 | 
+ 241 |     return WET_HAL_OK;
+ 242 | }
+ 243 | 
+ 244 | void wet_hal_maxwell_inject_fault(
+ 245 |     wet_hal_driver_t* drv,
+ 246 |     uint8_t force_charge_violation,
+ 247 |     uint8_t drop_frames
+ 248 | ) {
+ 249 |     if (!drv || !drv->context) return;
+ 250 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 251 |     state->fault_force_charge_violation = force_charge_violation;
+ 252 |     state->fault_bus_dropped_frame = drop_frames;
+ 253 | }
+ 254 | 
+ 255 | /* =========================================================================
+ 256 |  * Vtable Callbacks
+ 257 |  * ========================================================================= */
+ 258 | 
+ 259 | static wet_hal_status_t maxwell_op_init(wet_hal_driver_t* drv, void* config) {
+ 260 |     (void)config;
+ 261 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 262 |     drv->is_initialized = 1;
+ 263 |     drv->is_active = 1;
+ 264 |     return WET_HAL_OK;
+ 265 | }
+ 266 | 
+ 267 | static wet_hal_status_t maxwell_op_shutdown(wet_hal_driver_t* drv) {
+ 268 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 269 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 270 |     for (int i = 0; i < MAXWELL_STIMULATION_UNITS; ++i) {
+ 271 |         state->stim_units[i].is_connected = 0;
+ 272 |         state->stim_units[i].current_dac_val = 0;
+ 273 |     }
+ 274 |     state->sequence_state = MAXWELL_SEQ_IDLE;
+ 275 |     drv->is_active = 0;
+ 276 |     return WET_HAL_OK;
+ 277 | }
+ 278 | 
+ 279 | static wet_hal_status_t maxwell_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason) {
+ 280 |     (void)reason;
+ 281 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 282 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 283 | 
+ 284 |     /* Disconnect and zero all 32 stimulation units; clear sequence buffer */
+ 285 |     for (int i = 0; i < MAXWELL_STIMULATION_UNITS; ++i) {
+ 286 |         state->stim_units[i].current_dac_val = 0;
+ 287 |         state->stim_units[i].is_connected = 0;
+ 288 |     }
+ 289 |     state->sequence_state = MAXWELL_SEQ_IDLE;
+ 290 |     state->sequence_playback_index = 0;
+ 291 |     return WET_HAL_OK;
+ 292 | }
+ 293 | 
+ 294 | static wet_hal_status_t maxwell_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms) {
+ 295 |     (void)current_tick;
+ 296 |     (void)dt_ms;
+ 297 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 298 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 299 | 
+ 300 |     if (state->sequence_state == MAXWELL_SEQ_RUNNING) {
+ 301 |         /* Advance sequence playback */
+ 302 |         if (state->sequence_playback_index < state->sequence_length) {
+ 303 |             state->sequence_playback_index++;
+ 304 |         }
+ 305 |         if (state->sequence_playback_index >= state->sequence_length) {
+ 306 |             state->sequence_state = MAXWELL_SEQ_DONE;
+ 307 |         }
+ 308 |     }
+ 309 |     return WET_HAL_OK;
+ 310 | }
+ 311 | 
+ 312 | static wet_hal_status_t maxwell_op_stim_voltage(wet_hal_driver_t* drv, uint16_t channel, float voltage_v, float p1_ms, float p2_ms) {
+ 313 |     if (!drv) return WET_HAL_ERR_NULL_PTR;
+ 314 |     uint8_t stim_unit = (uint8_t)(channel % MAXWELL_STIMULATION_UNITS);
+ 315 |     float voltage_mv = voltage_v * 1000.0f;
+ 316 |     return wet_hal_maxwell_stim_voltage(drv, stim_unit, channel, voltage_mv, p1_ms, p2_ms);
+ 317 | }
+ 318 | 
+ 319 | static wet_hal_status_t maxwell_op_stim_current(wet_hal_driver_t* drv, uint16_t channel, int32_t current_pA, uint32_t duration_us) {
+ 320 |     if (!drv) return WET_HAL_ERR_NULL_PTR;
+ 321 |     /* Approximate voltage from current: V = I * Z (with Z ~ 300 kOhm) */
+ 322 |     double current_amps = (double)current_pA * 1e-12;
+ 323 |     double voltage_v = current_amps * 300000.0;
+ 324 |     float dur_ms = (float)duration_us / 1000.0f;
+ 325 |     return maxwell_op_stim_voltage(drv, channel, (float)voltage_v, dur_ms, dur_ms);
+ 326 | }
+ 327 | 
+ 328 | static wet_hal_status_t maxwell_op_read_ephys(wet_hal_driver_t* drv, float* voltages_out, uint8_t* spikes_out, uint32_t channel_count) {
+ 329 |     if (!drv || !voltages_out || !spikes_out) return WET_HAL_ERR_NULL_PTR;
+ 330 |     uint32_t count = channel_count < MAXWELL_RECORDING_CHANNELS ? channel_count : MAXWELL_RECORDING_CHANNELS;
+ 331 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 332 | 
+ 333 |     for (uint32_t i = 0; i < count; ++i) {
+ 334 |         voltages_out[i] = state->channel_voltages[i];
+ 335 |         spikes_out[i] = state->channel_spikes[i];
+ 336 |     }
+ 337 |     return WET_HAL_OK;
+ 338 | }
+ 339 | 
+ 340 | static wet_hal_status_t maxwell_op_measure_impedance(wet_hal_driver_t* drv, uint16_t channel, float freq_hz, float* out_mag_ohms, float* out_phase_rad) {
+ 341 |     (void)channel;
+ 342 |     (void)freq_hz;
+ 343 |     if (!drv || !out_mag_ohms || !out_phase_rad) return WET_HAL_ERR_NULL_PTR;
+ 344 |     *out_mag_ohms = 300000.0f; /* 300 kOhm typical for 132.25 um^2 Pt */
+ 345 |     *out_phase_rad = -0.785f;
+ 346 |     return WET_HAL_OK;
+ 347 | }
+ 348 | 
+ 349 | static wet_hal_status_t maxwell_op_active_discharge(wet_hal_driver_t* drv, uint16_t channel) {
+ 350 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 351 |     uint8_t stim_unit = (uint8_t)(channel % MAXWELL_STIMULATION_UNITS);
+ 352 |     maxwell_device_state_t* state = (maxwell_device_state_t*)drv->context;
+ 353 |     state->stim_units[stim_unit].current_dac_val = 0;
+ 354 |     state->stim_units[stim_unit].phase1_charge_nc = 0.0f;
+ 355 |     state->stim_units[stim_unit].phase2_charge_nc = 0.0f;
+ 356 |     return WET_HAL_OK;
+ 357 | }
+```
+
+### `native/src/wet_hal_pump_valve.c` (463 lines, SHA-256: `0643ab7ba9b8e772...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_hal_pump_valve.h"
+   3 | 
+   4 | /* Forward declaration of vtable operations */
+   5 | static wet_hal_status_t microfluidics_op_init(wet_hal_driver_t* drv, void* config);
+   6 | static wet_hal_status_t microfluidics_op_shutdown(wet_hal_driver_t* drv);
+   7 | static wet_hal_status_t microfluidics_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason);
+   8 | static wet_hal_status_t microfluidics_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms);
+   9 | static wet_hal_status_t microfluidics_op_write_pump(wet_hal_driver_t* drv, uint8_t pump_id, double rate_ul_min, uint8_t run_flag);
+  10 | static wet_hal_status_t microfluidics_op_dispense_volume(wet_hal_driver_t* drv, uint8_t pump_id, double volume_ul);
+  11 | static wet_hal_status_t microfluidics_op_write_valve(wet_hal_driver_t* drv, uint8_t valve_id, uint8_t state);
+  12 | static wet_hal_status_t microfluidics_op_read_flow(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min);
+  13 | static wet_hal_status_t microfluidics_op_read_pressure(wet_hal_driver_t* drv, uint8_t port_id, float* out_kpa);
+  14 | 
+  15 | static const wet_hal_ops_t s_microfluidics_ops = {
+  16 |     .init              = microfluidics_op_init,
+  17 |     .shutdown          = microfluidics_op_shutdown,
+  18 |     .emergency_stop    = microfluidics_op_emergency_stop,
+  19 |     .step_tick         = microfluidics_op_step_tick,
+  20 |     .stim_voltage      = NULL,
+  21 |     .stim_current      = NULL,
+  22 |     .read_ephys        = NULL,
+  23 |     .measure_impedance = NULL,
+  24 |     .active_discharge  = NULL,
+  25 |     .write_pump        = microfluidics_op_write_pump,
+  26 |     .dispense_volume   = microfluidics_op_dispense_volume,
+  27 |     .write_valve       = microfluidics_op_write_valve,
+  28 |     .read_flow         = microfluidics_op_read_flow,
+  29 |     .read_pressure     = microfluidics_op_read_pressure,
+  30 | };
+  31 | 
+  32 | /* =========================================================================
+  33 |  * Harvard Apparatus RS-232 & CAN Implementation
+  34 |  * ========================================================================= */
+  35 | 
+  36 | int wet_hal_harvard_format_cmd(
+  37 |     uint8_t address,
+  38 |     uint8_t fast_mode,
+  39 |     const char* cmd_name,
+  40 |     const char* args,
+  41 |     char* out_buf,
+  42 |     size_t out_buf_len
+  43 | ) {
+  44 |     if (!cmd_name || !out_buf || out_buf_len < 4) return -1;
+  45 | 
+  46 |     size_t pos = 0;
+  47 | 
+  48 |     /* 1. Daisy-chain address prefix if non-zero: e.g. "01 " */
+  49 |     if (address > 0) {
+  50 |         if (pos + 3 >= out_buf_len) return -1;
+  51 |         out_buf[pos++] = (char)('0' + (address / 10) % 10);
+  52 |         out_buf[pos++] = (char)('0' + (address % 10));
+  53 |         out_buf[pos++] = ' ';
+  54 |     }
+  55 | 
+  56 |     /* 2. Fast mode prefix '@' (bypasses screen update for <50 ms response) */
+  57 |     if (fast_mode) {
+  58 |         if (pos + 1 >= out_buf_len) return -1;
+  59 |         out_buf[pos++] = '@';
+  60 |     }
+  61 | 
+  62 |     /* 3. Command name */
+  63 |     for (size_t i = 0; cmd_name[i] != '\0'; ++i) {
+  64 |         if (pos + 1 >= out_buf_len) return -1;
+  65 |         out_buf[pos++] = cmd_name[i];
+  66 |     }
+  67 | 
+  68 |     /* 4. Arguments if present */
+  69 |     if (args && args[0] != '\0') {
+  70 |         if (pos + 1 >= out_buf_len) return -1;
+  71 |         out_buf[pos++] = ' ';
+  72 |         for (size_t i = 0; args[i] != '\0'; ++i) {
+  73 |             if (pos + 1 >= out_buf_len) return -1;
+  74 |             out_buf[pos++] = args[i];
+  75 |         }
+  76 |     }
+  77 | 
+  78 |     /* 5. Terminator '\r' */
+  79 |     if (pos + 1 >= out_buf_len) return -1;
+  80 |     out_buf[pos++] = '\r';
+  81 |     out_buf[pos] = '\0';
+  82 | 
+  83 |     return (int)pos;
+  84 | }
+  85 | 
+  86 | harvard_prompt_t wet_hal_harvard_parse_response(
+  87 |     const char* resp_buf,
+  88 |     size_t resp_len
+  89 | ) {
+  90 |     if (!resp_buf || resp_len == 0) return HARVARD_PROMPT_INVALID;
+  91 | 
+  92 |     /* Skip trailing whitespace / newlines */
+  93 |     size_t end = resp_len;
+  94 |     while (end > 0 && (resp_buf[end - 1] == ' ' || resp_buf[end - 1] == '\t' ||
+  95 |                        resp_buf[end - 1] == '\r' || resp_buf[end - 1] == '\n' ||
+  96 |                        resp_buf[end - 1] == '\0')) {
+  97 |         end--;
+  98 |     }
+  99 |     if (end == 0) return HARVARD_PROMPT_INVALID;
+ 100 | 
+ 101 |     size_t p = end - 1;
+ 102 |     char c = resp_buf[p];
+ 103 | 
+ 104 |     /* Check prefix before prompt: optional address digits or preceding delimiter */
+ 105 |     size_t pre = p;
+ 106 |     if (c == '*' && pre > 0 && resp_buf[pre - 1] == 'T') {
+ 107 |         pre--;
+ 108 |     }
+ 109 |     while (pre > 0 && resp_buf[pre - 1] >= '0' && resp_buf[pre - 1] <= '9') {
+ 110 |         pre--;
+ 111 |     }
+ 112 |     if (pre > 0) {
+ 113 |         char before = resp_buf[pre - 1];
+ 114 |         if (before != ' ' && before != '\t' && before != '\r' && before != '\n') {
+ 115 |             return HARVARD_PROMPT_INVALID;
+ 116 |         }
+ 117 |     }
+ 118 | 
+ 119 |     if (c == ':') return HARVARD_PROMPT_IDLE;
+ 120 |     if (c == '>') return HARVARD_PROMPT_INFUSING;
+ 121 |     if (c == '<') return HARVARD_PROMPT_WITHDRAWING;
+ 122 |     if (c == '*') {
+ 123 |         if (p > 0 && resp_buf[p - 1] == 'T') {
+ 124 |             return HARVARD_PROMPT_TARGET_DONE;
+ 125 |         }
+ 126 |         return HARVARD_PROMPT_STALLED;
+ 127 |     }
+ 128 | 
+ 129 |     return HARVARD_PROMPT_INVALID;
+ 130 | }
+ 131 | 
+ 132 | wet_hal_driver_t* wet_hal_microfluidics_create(wet_hal_mode_t mode) {
+ 133 |     wet_hal_driver_t* drv = (wet_hal_driver_t*)calloc(1, sizeof(wet_hal_driver_t));
+ 134 |     if (!drv) return NULL;
+ 135 | 
+ 136 |     microfluidic_state_t* state = (microfluidic_state_t*)calloc(1, sizeof(microfluidic_state_t));
+ 137 |     if (!state) {
+ 138 |         free(drv);
+ 139 |         return NULL;
+ 140 |     }
+ 141 | 
+ 142 |     state->dead_head_enabled = 1;
+ 143 |     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
+ 144 |         state->pumps[i].address = (uint8_t)i;
+ 145 |         state->pumps[i].fast_mode = 1;
+ 146 |         state->valve_for_pump[i] = (uint8_t)i; /* 1-to-1 default valve pairing */
+ 147 |         state->valve_states[i] = 1;            /* Default open */
+ 148 |     }
+ 149 | 
+ 150 |     const char* name = "Microfluidics_HAL";
+ 151 |     for (int i = 0; i < 31 && name[i]; ++i) drv->name[i] = name[i];
+ 152 |     drv->driver_type = WET_HAL_DRIVER_PUMP;
+ 153 |     drv->mode = mode;
+ 154 |     drv->ops = &s_microfluidics_ops;
+ 155 |     drv->context = state;
+ 156 | 
+ 157 |     return drv;
+ 158 | }
+ 159 | 
+ 160 | void wet_hal_microfluidics_destroy(wet_hal_driver_t* drv) {
+ 161 |     if (!drv) return;
+ 162 |     if (drv->context) free(drv->context);
+ 163 |     free(drv);
+ 164 | }
+ 165 | 
+ 166 | wet_hal_status_t wet_hal_pump_set_rate(
+ 167 |     wet_hal_driver_t* drv,
+ 168 |     uint8_t pump_id,
+ 169 |     double rate_ul_min,
+ 170 |     uint8_t run_flag
+ 171 | ) {
+ 172 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 173 |     if (pump_id >= WET_MAX_PUMPS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 174 | 
+ 175 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 176 | 
+ 177 |     /* Check Dead-Head Overpressure Interlock:
+ 178 |      * If pump is commanded to run (rate > 0 and run_flag), verify downstream valve is OPEN. */
+ 179 |     if (state->dead_head_enabled && run_flag && rate_ul_min > 0.0) {
+ 180 |         uint8_t valve_id = state->valve_for_pump[pump_id];
+ 181 |         if (valve_id < WET_MAX_VALVES && state->valve_states[valve_id] == 0) {
+ 182 |             state->dead_head_trip_count++;
+ 183 |             return WET_HAL_ERR_DEAD_HEAD;
+ 184 |         }
+ 185 |     }
+ 186 | 
+ 187 |     if (state->fault_inject_stall) {
+ 188 |         state->pumps[pump_id].is_stalled = 1;
+ 189 |         state->pumps[pump_id].is_running = 0;
+ 190 |         return WET_HAL_ERR_IO;
+ 191 |     }
+ 192 | 
+ 193 |     state->pumps[pump_id].rate_ul_min = rate_ul_min;
+ 194 |     state->pumps[pump_id].is_running = run_flag ? 1 : 0;
+ 195 |     state->total_rs232_tx++;
+ 196 | 
+ 197 |     return WET_HAL_OK;
+ 198 | }
+ 199 | 
+ 200 | wet_hal_status_t wet_hal_pump_dispense(
+ 201 |     wet_hal_driver_t* drv,
+ 202 |     uint8_t pump_id,
+ 203 |     double volume_ul
+ 204 | ) {
+ 205 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 206 |     if (pump_id >= WET_MAX_PUMPS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 207 | 
+ 208 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 209 | 
+ 210 |     /* Dead-Head check */
+ 211 |     if (state->dead_head_enabled && volume_ul > 0.0) {
+ 212 |         uint8_t valve_id = state->valve_for_pump[pump_id];
+ 213 |         if (valve_id < WET_MAX_VALVES && state->valve_states[valve_id] == 0) {
+ 214 |             state->dead_head_trip_count++;
+ 215 |             return WET_HAL_ERR_DEAD_HEAD;
+ 216 |         }
+ 217 |     }
+ 218 | 
+ 219 |     state->pumps[pump_id].infused_volume_ul += volume_ul;
+ 220 |     state->total_rs232_tx++;
+ 221 |     return WET_HAL_OK;
+ 222 | }
+ 223 | 
+ 224 | wet_hal_status_t wet_hal_pump_stop(
+ 225 |     wet_hal_driver_t* drv,
+ 226 |     uint8_t pump_id
+ 227 | ) {
+ 228 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 229 |     if (pump_id >= WET_MAX_PUMPS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 230 | 
+ 231 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 232 |     state->pumps[pump_id].is_running = 0;
+ 233 |     state->pumps[pump_id].rate_ul_min = 0.0;
+ 234 |     state->total_rs232_tx++;
+ 235 |     return WET_HAL_OK;
+ 236 | }
+ 237 | 
+ 238 | wet_hal_status_t wet_hal_valve_set_state(
+ 239 |     wet_hal_driver_t* drv,
+ 240 |     uint8_t valve_id,
+ 241 |     uint8_t val_state
+ 242 | ) {
+ 243 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 244 |     if (valve_id >= WET_MAX_VALVES) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 245 | 
+ 246 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 247 |     state->valve_states[valve_id] = (val_state != 0) ? 1 : 0;
+ 248 |     return WET_HAL_OK;
+ 249 | }
+ 250 | 
+ 251 | void wet_hal_pump_bind_downstream_valve(
+ 252 |     wet_hal_driver_t* drv,
+ 253 |     uint8_t pump_id,
+ 254 |     uint8_t valve_id
+ 255 | ) {
+ 256 |     if (!drv || !drv->context) return;
+ 257 |     if (pump_id >= WET_MAX_PUMPS || valve_id >= WET_MAX_VALVES) return;
+ 258 | 
+ 259 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 260 |     state->valve_for_pump[pump_id] = valve_id;
+ 261 | }
+ 262 | 
+ 263 | wet_hal_status_t wet_hal_can_send(
+ 264 |     wet_hal_driver_t* drv,
+ 265 |     const wet_can_frame_t* frame
+ 266 | ) {
+ 267 |     if (!drv || !drv->context || !frame) return WET_HAL_ERR_NULL_PTR;
+ 268 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 269 | 
+ 270 |     /* Enforce ISO 11898-1 limits & ID boundaries */
+ 271 |     if (frame->dlc > 8) {
+ 272 |         return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 273 |     }
+ 274 |     if (!frame->is_extended && frame->id > 0x7FFU) {
+ 275 |         return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 276 |     }
+ 277 |     if (frame->is_extended && frame->id > 0x1FFFFFFFU) {
+ 278 |         return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 279 |     }
+ 280 | 
+ 281 |     if (state->fault_inject_can_drop) {
+ 282 |         return WET_HAL_OK; /* Mock frame drop */
+ 283 |     }
+ 284 | 
+ 285 |     if (state->can_tx_count >= WET_CAN_QUEUE_CAPACITY) {
+ 286 |         return WET_HAL_ERR_BUFFER_FULL;
+ 287 |     }
+ 288 | 
+ 289 |     state->can_tx_queue[state->can_tx_tail] = *frame;
+ 290 |     state->can_tx_tail = (state->can_tx_tail + 1) % WET_CAN_QUEUE_CAPACITY;
+ 291 |     state->can_tx_count++;
+ 292 |     state->total_can_frames_tx++;
+ 293 | 
+ 294 |     /* In HIL loopback mode, copy transmitted frame into RX queue for bidirectional loopback */
+ 295 |     if (drv->mode == WET_HAL_MODE_HIL_LOOPBACK) {
+ 296 |         if (state->can_rx_count < WET_CAN_QUEUE_CAPACITY) {
+ 297 |             state->can_rx_queue[state->can_rx_tail] = *frame;
+ 298 |             state->can_rx_tail = (state->can_rx_tail + 1) % WET_CAN_QUEUE_CAPACITY;
+ 299 |             state->can_rx_count++;
+ 300 |         }
+ 301 |     }
+ 302 | 
+ 303 |     /* In HIL loopback mode, automatically handle Process Data Objects (PDOs) ONLY for standard 11-bit frames */
+ 304 |     if (!frame->is_extended) {
+ 305 |         uint32_t base_id = frame->id & ~0x7FU;
+ 306 |         uint8_t node_id = (uint8_t)(frame->id & 0x7FU);
+ 307 | 
+ 308 |         if (base_id == CAN_ID_RPDO1_BASE && node_id < WET_MAX_PUMPS) {
+ 309 |             /* RPDO1: Float32 rate + 1 byte run flag */
+ 310 |             if (frame->dlc >= 5) {
+ 311 |                 float rate;
+ 312 |                 memcpy(&rate, frame->data, sizeof(float));
+ 313 |                 uint8_t run_flag = frame->data[4];
+ 314 |                 wet_hal_pump_set_rate(drv, node_id, (double)rate, run_flag);
+ 315 |             }
+ 316 |         } else if (base_id == CAN_ID_RPDO2_BASE) {
+ 317 |             /* RPDO2: Valve bitmask */
+ 318 |             if (frame->dlc >= 1) {
+ 319 |                 uint8_t mask = frame->data[0];
+ 320 |                 for (uint8_t v = 0; v < WET_MAX_VALVES; ++v) {
+ 321 |                     state->valve_states[v] = (mask & (1U << v)) ? 1 : 0;
+ 322 |                 }
+ 323 |             }
+ 324 |         }
+ 325 |     }
+ 326 | 
+ 327 |     return WET_HAL_OK;
+ 328 | }
+ 329 | 
+ 330 | wet_hal_status_t wet_hal_can_recv(
+ 331 |     wet_hal_driver_t* drv,
+ 332 |     wet_can_frame_t* out_frame
+ 333 | ) {
+ 334 |     if (!drv || !drv->context || !out_frame) return WET_HAL_ERR_NULL_PTR;
+ 335 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 336 | 
+ 337 |     if (state->can_rx_count == 0) {
+ 338 |         return WET_HAL_ERR_TIMEOUT;
+ 339 |     }
+ 340 | 
+ 341 |     *out_frame = state->can_rx_queue[state->can_rx_head];
+ 342 |     state->can_rx_head = (state->can_rx_head + 1) % WET_CAN_QUEUE_CAPACITY;
+ 343 |     state->can_rx_count--;
+ 344 |     state->total_can_frames_rx++;
+ 345 | 
+ 346 |     return WET_HAL_OK;
+ 347 | }
+ 348 | 
+ 349 | wet_hal_status_t wet_hal_can_send_emcy(
+ 350 |     wet_hal_driver_t* drv,
+ 351 |     uint8_t node_id,
+ 352 |     uint16_t error_code,
+ 353 |     uint8_t error_register
+ 354 | ) {
+ 355 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 356 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 357 | 
+ 358 |     wet_can_frame_t frame;
+ 359 |     memset(&frame, 0, sizeof(frame));
+ 360 |     frame.id = CAN_ID_EMCY_BASE + (node_id & 0x7FU);
+ 361 |     frame.is_extended = 0;
+ 362 |     frame.dlc = 8;
+ 363 |     frame.data[0] = (uint8_t)(error_code & 0xFFU);
+ 364 |     frame.data[1] = (uint8_t)((error_code >> 8) & 0xFFU);
+ 365 |     frame.data[2] = error_register;
+ 366 | 
+ 367 |     state->total_emcy_frames++;
+ 368 |     return wet_hal_can_send(drv, &frame);
+ 369 | }
+ 370 | 
+ 371 | void wet_hal_microfluidics_inject_fault(
+ 372 |     wet_hal_driver_t* drv,
+ 373 |     uint8_t stall,
+ 374 |     uint8_t can_drop,
+ 375 |     uint8_t timeout
+ 376 | ) {
+ 377 |     if (!drv || !drv->context) return;
+ 378 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 379 |     state->fault_inject_stall = stall;
+ 380 |     state->fault_inject_can_drop = can_drop;
+ 381 |     state->fault_inject_rs232_timeout = timeout;
+ 382 | }
+ 383 | 
+ 384 | /* =========================================================================
+ 385 |  * Vtable Callbacks
+ 386 |  * ========================================================================= */
+ 387 | 
+ 388 | static wet_hal_status_t microfluidics_op_init(wet_hal_driver_t* drv, void* config) {
+ 389 |     (void)config;
+ 390 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 391 |     drv->is_initialized = 1;
+ 392 |     drv->is_active = 1;
+ 393 |     return WET_HAL_OK;
+ 394 | }
+ 395 | 
+ 396 | static wet_hal_status_t microfluidics_op_shutdown(wet_hal_driver_t* drv) {
+ 397 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 398 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 399 |     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
+ 400 |         state->pumps[i].is_running = 0;
+ 401 |         state->pumps[i].rate_ul_min = 0.0;
+ 402 |     }
+ 403 |     drv->is_active = 0;
+ 404 |     return WET_HAL_OK;
+ 405 | }
+ 406 | 
+ 407 | static wet_hal_status_t microfluidics_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason) {
+ 408 |     (void)reason;
+ 409 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 410 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 411 | 
+ 412 |     /* Instantly halt all 8 syringe pumps */
+ 413 |     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
+ 414 |         state->pumps[i].is_running = 0;
+ 415 |         state->pumps[i].rate_ul_min = 0.0;
+ 416 |     }
+ 417 | 
+ 418 |     /* Broadcast CAN emergency stop frame */
+ 419 |     wet_hal_can_send_emcy(drv, 0, 0x1000, 0x01);
+ 420 |     return WET_HAL_OK;
+ 421 | }
+ 422 | 
+ 423 | static wet_hal_status_t microfluidics_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms) {
+ 424 |     (void)current_tick;
+ 425 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 426 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 427 | 
+ 428 |     /* Integrate infused volume */
+ 429 |     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
+ 430 |         if (state->pumps[i].is_running) {
+ 431 |             double vol_tick = state->pumps[i].rate_ul_min * (dt_ms / 60000.0);
+ 432 |             state->pumps[i].infused_volume_ul += vol_tick;
+ 433 |         }
+ 434 |     }
+ 435 |     return WET_HAL_OK;
+ 436 | }
+ 437 | 
+ 438 | static wet_hal_status_t microfluidics_op_write_pump(wet_hal_driver_t* drv, uint8_t pump_id, double rate_ul_min, uint8_t run_flag) {
+ 439 |     return wet_hal_pump_set_rate(drv, pump_id, rate_ul_min, run_flag);
+ 440 | }
+ 441 | 
+ 442 | static wet_hal_status_t microfluidics_op_dispense_volume(wet_hal_driver_t* drv, uint8_t pump_id, double volume_ul) {
+ 443 |     return wet_hal_pump_dispense(drv, pump_id, volume_ul);
+ 444 | }
+ 445 | 
+ 446 | static wet_hal_status_t microfluidics_op_write_valve(wet_hal_driver_t* drv, uint8_t valve_id, uint8_t state) {
+ 447 |     return wet_hal_valve_set_state(drv, valve_id, state);
+ 448 | }
+ 449 | 
+ 450 | static wet_hal_status_t microfluidics_op_read_flow(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min) {
+ 451 |     if (!drv || !drv->context || !out_flow_ul_min) return WET_HAL_ERR_NULL_PTR;
+ 452 |     if (sensor_id >= WET_MAX_PUMPS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+ 453 |     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+ 454 |     *out_flow_ul_min = state->pumps[sensor_id].is_running ? state->pumps[sensor_id].rate_ul_min : 0.0;
+ 455 |     return WET_HAL_OK;
+ 456 | }
+ 457 | 
+ 458 | static wet_hal_status_t microfluidics_op_read_pressure(wet_hal_driver_t* drv, uint8_t port_id, float* out_kpa) {
+ 459 |     (void)port_id;
+ 460 |     if (!drv || !out_kpa) return WET_HAL_ERR_NULL_PTR;
+ 461 |     *out_kpa = 101.325f; /* 1 atm nominal */
+ 462 |     return WET_HAL_OK;
+ 463 | }
+```
+
+### `native/src/wet_hal_sensirion.c` (332 lines, SHA-256: `19293c38932593af...`)
+
+```text
+   1 | #include "../include/wet_crt.h"
+   2 | #include "../include/wet_hal_sensirion.h"
+   3 | 
+   4 | /* Forward declaration of vtable operations */
+   5 | static wet_hal_status_t sensirion_op_init(wet_hal_driver_t* drv, void* config);
+   6 | static wet_hal_status_t sensirion_op_shutdown(wet_hal_driver_t* drv);
+   7 | static wet_hal_status_t sensirion_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason);
+   8 | static wet_hal_status_t sensirion_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms);
+   9 | static wet_hal_status_t sensirion_op_read_flow(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min);
+  10 | 
+  11 | static const wet_hal_ops_t s_sensirion_ops = {
+  12 |     .init              = sensirion_op_init,
+  13 |     .shutdown          = sensirion_op_shutdown,
+  14 |     .emergency_stop    = sensirion_op_emergency_stop,
+  15 |     .step_tick         = sensirion_op_step_tick,
+  16 |     .stim_voltage      = NULL,
+  17 |     .stim_current      = NULL,
+  18 |     .read_ephys        = NULL,
+  19 |     .measure_impedance = NULL,
+  20 |     .active_discharge  = NULL,
+  21 |     .write_pump        = NULL,
+  22 |     .dispense_volume   = NULL,
+  23 |     .write_valve       = NULL,
+  24 |     .read_flow         = sensirion_op_read_flow,
+  25 |     .read_pressure     = NULL,
+  26 | };
+  27 | 
+  28 | /* =========================================================================
+  29 |  * Sensirion CRC-8 Algorithm (Poly 0x31: x^8 + x^5 + x^4 + 1, Init 0xFF)
+  30 |  * ========================================================================= */
+  31 | 
+  32 | uint8_t wet_hal_sensirion_crc8(const uint8_t* data, size_t len) {
+  33 |     if (!data) return 0;
+  34 |     uint8_t crc = SENSIRION_CRC8_INIT;
+  35 | 
+  36 |     for (size_t i = 0; i < len; ++i) {
+  37 |         crc ^= data[i];
+  38 |         for (int b = 0; b < 8; ++b) {
+  39 |             if (crc & 0x80U) {
+  40 |                 crc = (uint8_t)((crc << 1) ^ SENSIRION_CRC8_POLYNOMIAL);
+  41 |             } else {
+  42 |                 crc = (uint8_t)(crc << 1);
+  43 |             }
+  44 |         }
+  45 |     }
+  46 |     return crc;
+  47 | }
+  48 | 
+  49 | int wet_hal_sensirion_validate_crc(const uint8_t word_and_crc[3]) {
+  50 |     if (!word_and_crc) return 0;
+  51 |     uint8_t computed = wet_hal_sensirion_crc8(word_and_crc, 2);
+  52 |     return (computed == word_and_crc[2]) ? 1 : 0;
+  53 | }
+  54 | 
+  55 | /* =========================================================================
+  56 |  * Sensirion SHDLC Protocol (SLI Series RS-485 / RS-232)
+  57 |  * ========================================================================= */
+  58 | 
+  59 | size_t wet_hal_shdlc_encode(
+  60 |     uint8_t address,
+  61 |     uint8_t command,
+  62 |     const uint8_t* payload,
+  63 |     uint8_t payload_len,
+  64 |     uint8_t* out_buf,
+  65 |     size_t out_buf_max
+  66 | ) {
+  67 |     if (!out_buf || out_buf_max < 6) return 0;
+  68 | 
+  69 |     /* Compute checksum: ~((address + command + length + sum(payload)) & 0xFF) */
+  70 |     uint32_t sum = address + command + payload_len;
+  71 |     for (uint8_t i = 0; i < payload_len; ++i) {
+  72 |         sum += payload ? payload[i] : 0;
+  73 |     }
+  74 |     uint8_t checksum = (uint8_t)(~(sum & 0xFFU));
+  75 | 
+  76 |     size_t pos = 0;
+  77 |     out_buf[pos++] = SHDLC_FRAME_START_STOP;
+  78 | 
+  79 |     /* Helper lambda to stuff a single byte */
+  80 |     #define STUFF_BYTE(b) do { \
+  81 |         uint8_t val = (uint8_t)(b); \
+  82 |         if (val == 0x7E || val == 0x7D || val == 0x11 || val == 0x13) { \
+  83 |             if (pos + 2 >= out_buf_max) return 0; \
+  84 |             out_buf[pos++] = SHDLC_FRAME_ESCAPE; \
+  85 |             out_buf[pos++] = (uint8_t)(val ^ SHDLC_ESCAPE_MASK); \
+  86 |         } else { \
+  87 |             if (pos + 1 >= out_buf_max) return 0; \
+  88 |             out_buf[pos++] = val; \
+  89 |         } \
+  90 |     } while (0)
+  91 | 
+  92 |     STUFF_BYTE(address);
+  93 |     STUFF_BYTE(command);
+  94 |     STUFF_BYTE(payload_len);
+  95 | 
+  96 |     for (uint8_t i = 0; i < payload_len; ++i) {
+  97 |         STUFF_BYTE(payload[i]);
+  98 |     }
+  99 | 
+ 100 |     STUFF_BYTE(checksum);
+ 101 | 
+ 102 |     if (pos >= out_buf_max) return 0;
+ 103 |     out_buf[pos++] = SHDLC_FRAME_START_STOP;
+ 104 | 
+ 105 |     #undef STUFF_BYTE
+ 106 |     return pos;
+ 107 | }
+ 108 | 
+ 109 | int wet_hal_shdlc_decode(
+ 110 |     const uint8_t* raw_buf,
+ 111 |     size_t raw_len,
+ 112 |     uint8_t* out_address,
+ 113 |     uint8_t* out_command,
+ 114 |     uint8_t* out_payload,
+ 115 |     uint8_t* out_payload_len
+ 116 | ) {
+ 117 |     if (!raw_buf || raw_len < 6 || !out_address || !out_command || !out_payload || !out_payload_len) {
+ 118 |         return 0;
+ 119 |     }
+ 120 | 
+ 121 |     /* Verify framing delimiters */
+ 122 |     if (raw_buf[0] != SHDLC_FRAME_START_STOP || raw_buf[raw_len - 1] != SHDLC_FRAME_START_STOP) {
+ 123 |         return 0;
+ 124 |     }
+ 125 | 
+ 126 |     /* Unstuff bytes between start and stop */
+ 127 |     uint8_t unstuffed[SHDLC_MAX_FRAME_SIZE];
+ 128 |     size_t un_len = 0;
+ 129 |     size_t i = 1;
+ 130 | 
+ 131 |     while (i < raw_len - 1) {
+ 132 |         uint8_t b = raw_buf[i++];
+ 133 |         if (b == SHDLC_FRAME_ESCAPE) {
+ 134 |             if (i >= raw_len - 1) return 0; /* Malformed escape */
+ 135 |             uint8_t esc_b = raw_buf[i++];
+ 136 |             if (esc_b != 0x5E && esc_b != 0x5D && esc_b != 0x31 && esc_b != 0x33) {
+ 137 |                 return 0; /* Illegal stuffing sequence: reject frame immediately */
+ 138 |             }
+ 139 |             unstuffed[un_len++] = (uint8_t)(esc_b ^ SHDLC_ESCAPE_MASK);
+ 140 |         } else {
+ 141 |             unstuffed[un_len++] = b;
+ 142 |         }
+ 143 |         if (un_len >= SHDLC_MAX_FRAME_SIZE) return 0;
+ 144 |     }
+ 145 | 
+ 146 |     /* Need at least address (1), command (1), length (1), checksum (1) = 4 bytes */
+ 147 |     if (un_len < 4) return 0;
+ 148 | 
+ 149 |     uint8_t addr = unstuffed[0];
+ 150 |     uint8_t cmd  = unstuffed[1];
+ 151 |     uint8_t plen = unstuffed[2];
+ 152 |     uint8_t rx_chk = unstuffed[un_len - 1];
+ 153 | 
+ 154 |     if (un_len != (size_t)(3 + plen + 1)) {
+ 155 |         return 0; /* Length mismatch */
+ 156 |     }
+ 157 | 
+ 158 |     /* Verify checksum */
+ 159 |     uint32_t sum = 0;
+ 160 |     for (size_t k = 0; k < un_len - 1; ++k) {
+ 161 |         sum += unstuffed[k];
+ 162 |     }
+ 163 |     uint8_t expected_chk = (uint8_t)(~(sum & 0xFFU));
+ 164 |     if (rx_chk != expected_chk) {
+ 165 |         return 0; /* Checksum failure */
+ 166 |     }
+ 167 | 
+ 168 |     *out_address = addr;
+ 169 |     *out_command = cmd;
+ 170 |     *out_payload_len = plen;
+ 171 |     for (uint8_t p = 0; p < plen; ++p) {
+ 172 |         out_payload[p] = unstuffed[3 + p];
+ 173 |     }
+ 174 |     return 1;
+ 175 | }
+ 176 | 
+ 177 | /* =========================================================================
+ 178 |  * Sensirion Driver Implementation
+ 179 |  * ========================================================================= */
+ 180 | 
+ 181 | wet_hal_driver_t* wet_hal_sensirion_create(wet_hal_mode_t mode) {
+ 182 |     wet_hal_driver_t* drv = (wet_hal_driver_t*)calloc(1, sizeof(wet_hal_driver_t));
+ 183 |     if (!drv) return NULL;
+ 184 | 
+ 185 |     sensirion_device_state_t* state = (sensirion_device_state_t*)calloc(1, sizeof(sensirion_device_state_t));
+ 186 |     if (!state) {
+ 187 |         free(drv);
+ 188 |         return NULL;
+ 189 |     }
+ 190 | 
+ 191 |     state->i2c_address = SENSIRION_I2C_ADDR_DEFAULT;
+ 192 |     state->scale_factor = 10.0f; /* 10 (uL/min)^-1 for SLF3S-0600x -> 0.1 uL/min resolution */
+ 193 |     state->current_flow_ul_min = 0.0;
+ 194 |     state->measurement_active = 0;
+ 195 |     state->shdlc_address = 0x00;
+ 196 | 
+ 197 |     const char* name = "Sensirion_SLF3x";
+ 198 |     for (int i = 0; i < 31 && name[i]; ++i) drv->name[i] = name[i];
+ 199 |     drv->driver_type = WET_HAL_DRIVER_FLOW;
+ 200 |     drv->mode = mode;
+ 201 |     drv->ops = &s_sensirion_ops;
+ 202 |     drv->context = state;
+ 203 | 
+ 204 |     return drv;
+ 205 | }
+ 206 | 
+ 207 | void wet_hal_sensirion_destroy(wet_hal_driver_t* drv) {
+ 208 |     if (!drv) return;
+ 209 |     if (drv->context) free(drv->context);
+ 210 |     free(drv);
+ 211 | }
+ 212 | 
+ 213 | wet_hal_status_t wet_hal_sensirion_start_measurement(
+ 214 |     wet_hal_driver_t* drv,
+ 215 |     uint16_t cmd
+ 216 | ) {
+ 217 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 218 |     sensirion_device_state_t* state = (sensirion_device_state_t*)drv->context;
+ 219 | 
+ 220 |     if (state->fault_nak_address) {
+ 221 |         return WET_HAL_ERR_IO;
+ 222 |     }
+ 223 | 
+ 224 |     state->active_command = cmd;
+ 225 |     state->measurement_active = 1;
+ 226 |     return WET_HAL_OK;
+ 227 | }
+ 228 | 
+ 229 | wet_hal_status_t wet_hal_sensirion_stop_measurement(wet_hal_driver_t* drv) {
+ 230 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 231 |     sensirion_device_state_t* state = (sensirion_device_state_t*)drv->context;
+ 232 | 
+ 233 |     state->active_command = SENSIRION_CMD_STOP_CONT;
+ 234 |     state->measurement_active = 0;
+ 235 |     return WET_HAL_OK;
+ 236 | }
+ 237 | 
+ 238 | wet_hal_status_t wet_hal_sensirion_read_flow(
+ 239 |     wet_hal_driver_t* drv,
+ 240 |     double* out_flow_ul_min
+ 241 | ) {
+ 242 |     if (!drv || !drv->context || !out_flow_ul_min) return WET_HAL_ERR_NULL_PTR;
+ 243 |     sensirion_device_state_t* state = (sensirion_device_state_t*)drv->context;
+ 244 | 
+ 245 |     state->total_i2c_reads++;
+ 246 | 
+ 247 |     if (state->fault_nak_address) {
+ 248 |         return WET_HAL_ERR_IO;
+ 249 |     }
+ 250 | 
+ 251 |     /* Convert current flow to raw 16-bit signed integer word */
+ 252 |     int16_t raw_flow = (int16_t)(state->current_flow_ul_min * (double)state->scale_factor);
+ 253 |     state->raw_flow_ticks = raw_flow;
+ 254 | 
+ 255 |     uint8_t packet[3];
+ 256 |     packet[0] = (uint8_t)((raw_flow >> 8) & 0xFFU);
+ 257 |     packet[1] = (uint8_t)(raw_flow & 0xFFU);
+ 258 |     packet[2] = wet_hal_sensirion_crc8(packet, 2);
+ 259 | 
+ 260 |     /* Check CRC fault injection */
+ 261 |     if (state->fault_corrupt_crc) {
+ 262 |         packet[2] ^= 0x55U; /* Invert CRC bits */
+ 263 |     }
+ 264 | 
+ 265 |     if (!wet_hal_sensirion_validate_crc(packet)) {
+ 266 |         state->crc_errors++;
+ 267 |         return WET_HAL_ERR_CRC_MISMATCH;
+ 268 |     }
+ 269 | 
+ 270 |     int16_t rx_raw = (int16_t)(((uint16_t)packet[0] << 8) | (uint16_t)packet[1]);
+ 271 |     *out_flow_ul_min = (double)rx_raw / (double)state->scale_factor;
+ 272 |     return WET_HAL_OK;
+ 273 | }
+ 274 | 
+ 275 | void wet_hal_sensirion_hil_set_flow(
+ 276 |     wet_hal_driver_t* drv,
+ 277 |     double flow_ul_min
+ 278 | ) {
+ 279 |     if (!drv || !drv->context) return;
+ 280 |     sensirion_device_state_t* state = (sensirion_device_state_t*)drv->context;
+ 281 |     state->current_flow_ul_min = flow_ul_min;
+ 282 | }
+ 283 | 
+ 284 | void wet_hal_sensirion_inject_fault(
+ 285 |     wet_hal_driver_t* drv,
+ 286 |     uint8_t corrupt_crc,
+ 287 |     uint8_t nak_addr
+ 288 | ) {
+ 289 |     if (!drv || !drv->context) return;
+ 290 |     sensirion_device_state_t* state = (sensirion_device_state_t*)drv->context;
+ 291 |     state->fault_corrupt_crc = corrupt_crc;
+ 292 |     state->fault_nak_address = nak_addr;
+ 293 | }
+ 294 | 
+ 295 | /* =========================================================================
+ 296 |  * Vtable Callbacks
+ 297 |  * ========================================================================= */
+ 298 | 
+ 299 | static wet_hal_status_t sensirion_op_init(wet_hal_driver_t* drv, void* config) {
+ 300 |     (void)config;
+ 301 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 302 |     drv->is_initialized = 1;
+ 303 |     drv->is_active = 1;
+ 304 |     return WET_HAL_OK;
+ 305 | }
+ 306 | 
+ 307 | static wet_hal_status_t sensirion_op_shutdown(wet_hal_driver_t* drv) {
+ 308 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 309 |     wet_hal_sensirion_stop_measurement(drv);
+ 310 |     drv->is_active = 0;
+ 311 |     return WET_HAL_OK;
+ 312 | }
+ 313 | 
+ 314 | static wet_hal_status_t sensirion_op_emergency_stop(wet_hal_driver_t* drv, uint32_t reason) {
+ 315 |     (void)reason;
+ 316 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 317 |     sensirion_device_state_t* state = (sensirion_device_state_t*)drv->context;
+ 318 |     state->current_flow_ul_min = 0.0;
+ 319 |     return wet_hal_sensirion_stop_measurement(drv);
+ 320 | }
+ 321 | 
+ 322 | static wet_hal_status_t sensirion_op_step_tick(wet_hal_driver_t* drv, uint64_t current_tick, double dt_ms) {
+ 323 |     (void)current_tick;
+ 324 |     (void)dt_ms;
+ 325 |     if (!drv || !drv->context) return WET_HAL_ERR_NULL_PTR;
+ 326 |     return WET_HAL_OK;
+ 327 | }
+ 328 | 
+ 329 | static wet_hal_status_t sensirion_op_read_flow(wet_hal_driver_t* drv, uint8_t sensor_id, double* out_flow_ul_min) {
+ 330 |     (void)sensor_id;
+ 331 |     return wet_hal_sensirion_read_flow(drv, out_flow_ul_min);
+ 332 | }
+```
+
+### `native/src/wet_scheduler.c` (630 lines, SHA-256: `1fc17137ae23e515...`)
+
+```text
+   1 | /**
+   2 |  * WetLang Hard Real-Time Sub-100 µs Execution Scheduler
+   3 |  * Implementation (native/src/wet_scheduler.c)
+   4 |  *
+   5 |  * Deterministic C99 execution scheduler operating at 10 kHz (100 µs period):
+   6 |  *  - Dedicated real-time thread with core pinning (SetThreadAffinityMask)
+   7 |  *  - Process & thread priority elevation (REALTIME_PRIORITY_CLASS / THREAD_PRIORITY_TIME_CRITICAL)
+   8 |  *  - High-resolution hardware monotonic timer (QueryPerformanceCounter / QueryPerformanceFrequency)
+   9 |  *  - Hybrid precision pacing: bytecode/ODE compute + calibrated spin-wait tail (_mm_pause)
+  10 |  *  - Cacheline-aligned (64-byte) lockless SPSC ring buffers for telemetry & stimulus injection
+  11 |  *  - Static memory arena: zero heap allocations during real-time stepping
+  12 |  */
+  13 | 
+  14 | #include "../include/wet_crt.h"
+  15 | #include "../include/wet_scheduler.h"
+  16 | #include "../include/wetvm_vm.h"
+  17 | #include "../include/biophysics.h"
+  18 | 
+  19 | #define WET_CACHELINE_SIZE 64
+  20 | #define WET_DEFAULT_SAMPLE_CAPACITY 100000
+  21 | 
+  22 | #if defined(_WIN32)
+  23 | typedef union _LARGE_INTEGER {
+  24 |     struct {
+  25 |         uint32_t LowPart;
+  26 |         int32_t  HighPart;
+  27 |     } s;
+  28 |     int64_t QuadPart;
+  29 | } LARGE_INTEGER;
+  30 | 
+  31 | typedef void* HANDLE;
+  32 | typedef unsigned long DWORD;
+  33 | typedef uint64_t DWORD_PTR;
+  34 | typedef int BOOL;
+  35 | 
+  36 | #ifdef __cplusplus
+  37 | extern "C" {
+  38 | #endif
+  39 | int __stdcall QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount);
+  40 | int __stdcall QueryPerformanceFrequency(LARGE_INTEGER* lpFrequency);
+  41 | HANDLE __stdcall GetCurrentThread(void);
+  42 | HANDLE __stdcall GetCurrentProcess(void);
+  43 | DWORD_PTR __stdcall SetThreadAffinityMask(HANDLE hThread, DWORD_PTR dwThreadAffinityMask);
+  44 | BOOL __stdcall SetPriorityClass(HANDLE hProcess, DWORD dwPriorityClass);
+  45 | BOOL __stdcall SetThreadPriority(HANDLE hThread, int nPriority);
+  46 | HANDLE __stdcall CreateThread(void* lpThreadAttributes, size_t dwStackSize, void* lpStartAddress, void* lpParameter, DWORD dwCreationFlags, DWORD* lpThreadId);
+  47 | DWORD __stdcall WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
+  48 | BOOL __stdcall CloseHandle(HANDLE hObject);
+  49 | void __stdcall Sleep(DWORD dwMilliseconds);
+  50 | #ifdef __cplusplus
+  51 | }
+  52 | #endif
+  53 | #else
+  54 | #include <time.h>
+  55 | #include <pthread.h>
+  56 | #include <sched.h>
+  57 | #endif
+  58 | 
+  59 | /* Calibrated processor instruction pipeline pause */
+  60 | static inline void wet_cpu_pause(void) {
+  61 | #if defined(__clang__) || defined(__GNUC__)
+  62 |     __builtin_ia32_pause();
+  63 | #elif defined(_MSC_VER)
+  64 |     _mm_pause();
+  65 | #elif defined(__aarch64__)
+  66 |     __asm__ __volatile__("isb\n");
+  67 | #else
+  68 |     /* NOP fallback */
+  69 | #endif
+  70 | }
+  71 | 
+  72 | /* Atomic Acquire/Release Memory Barriers */
+  73 | static inline uint32_t wet_atomic_load_u32_acquire(const volatile uint32_t* ptr) {
+  74 | #if defined(__GNUC__) || defined(__clang__)
+  75 |     return __atomic_load_n(ptr, __ATOMIC_ACQUIRE);
+  76 | #else
+  77 |     return *ptr;
+  78 | #endif
+  79 | }
+  80 | 
+  81 | static inline void wet_atomic_store_u32_release(volatile uint32_t* ptr, uint32_t val) {
+  82 | #if defined(__GNUC__) || defined(__clang__)
+  83 |     __atomic_store_n(ptr, val, __ATOMIC_RELEASE);
+  84 | #else
+  85 |     *ptr = val;
+  86 | #endif
+  87 | }
+  88 | 
+  89 | /* =========================================================================
+  90 |  * Lockless Single-Producer Single-Consumer (SPSC) Ring Buffer
+  91 |  * Cacheline-aligned (64-byte padding) to eliminate false sharing
+  92 |  * ========================================================================= */
+  93 | 
+  94 | typedef struct {
+  95 |     /* Producer cache line */
+  96 |     volatile uint32_t head;
+  97 |     uint8_t           _pad0[WET_CACHELINE_SIZE - sizeof(uint32_t)];
+  98 | 
+  99 |     /* Consumer cache line */
+ 100 |     volatile uint32_t tail;
+ 101 |     uint8_t           _pad1[WET_CACHELINE_SIZE - sizeof(uint32_t)];
+ 102 | 
+ 103 |     /* Metadata */
+ 104 |     uint32_t capacity;
+ 105 |     uint32_t mask;
+ 106 |     size_t   elem_size;
+ 107 |     uint8_t* buffer;
+ 108 | } wet_spsc_ring_t;
+ 109 | 
+ 110 | static int wet_spsc_init(wet_spsc_ring_t* ring, uint32_t capacity, size_t elem_size) {
+ 111 |     uint32_t cap = 1;
+ 112 |     while (cap < capacity) cap <<= 1;
+ 113 |     ring->capacity = cap;
+ 114 |     ring->mask = cap - 1;
+ 115 |     ring->elem_size = elem_size;
+ 116 |     ring->head = 0;
+ 117 |     ring->tail = 0;
+ 118 |     ring->buffer = (uint8_t*)calloc(cap, elem_size);
+ 119 |     return (ring->buffer != NULL);
+ 120 | }
+ 121 | 
+ 122 | static void wet_spsc_free(wet_spsc_ring_t* ring) {
+ 123 |     if (ring->buffer) {
+ 124 |         free(ring->buffer);
+ 125 |         ring->buffer = NULL;
+ 126 |     }
+ 127 | }
+ 128 | 
+ 129 | static inline int wet_spsc_push(wet_spsc_ring_t* ring, const void* item) {
+ 130 |     uint32_t head = ring->head;
+ 131 |     uint32_t tail = wet_atomic_load_u32_acquire(&ring->tail);
+ 132 |     if ((head - tail) >= ring->capacity) {
+ 133 |         return 0; /* Ring buffer full */
+ 134 |     }
+ 135 |     memcpy(ring->buffer + (head & ring->mask) * ring->elem_size, item, ring->elem_size);
+ 136 |     wet_atomic_store_u32_release(&ring->head, head + 1);
+ 137 |     return 1;
+ 138 | }
+ 139 | 
+ 140 | static inline int wet_spsc_pop(wet_spsc_ring_t* ring, void* out_item) {
+ 141 |     uint32_t tail = ring->tail;
+ 142 |     uint32_t head = wet_atomic_load_u32_acquire(&ring->head);
+ 143 |     if (tail == head) {
+ 144 |         return 0; /* Ring buffer empty */
+ 145 |     }
+ 146 |     memcpy(out_item, ring->buffer + (tail & ring->mask) * ring->elem_size, ring->elem_size);
+ 147 |     wet_atomic_store_u32_release(&ring->tail, tail + 1);
+ 148 |     return 1;
+ 149 | }
+ 150 | 
+ 151 | /* =========================================================================
+ 152 |  * Scheduler Internal Structure
+ 153 |  * ========================================================================= */
+ 154 | 
+ 155 | struct wet_scheduler {
+ 156 |     wet_vm_instance_t*     vm;
+ 157 |     wet_scheduler_config_t config;
+ 158 |     wet_scheduler_stats_t  stats;
+ 159 | 
+ 160 |     /* SPSC Ring Buffers */
+ 161 |     wet_spsc_ring_t        telem_ring;
+ 162 |     wet_spsc_ring_t        stim_ring;
+ 163 | 
+ 164 |     /* High-Resolution Monotonic Timer State */
+ 165 |     int64_t                qpf_freq;
+ 166 |     double                 qpc_per_us;
+ 167 |     int64_t                period_qpc;
+ 168 |     int64_t                next_deadline_qpc;
+ 169 | 
+ 170 |     /* Execution State */
+ 171 |     volatile uint32_t      is_running;
+ 172 |     volatile uint32_t      stop_requested;
+ 173 |     uint8_t                thread_initialized;
+ 174 | #if defined(_WIN32)
+ 175 |     HANDLE                 thread_handle;
+ 176 | #else
+ 177 |     pthread_t              thread_handle;
+ 178 | #endif
+ 179 | 
+ 180 |     /* Benchmark Sample Buffers */
+ 181 |     uint32_t               sample_capacity;
+ 182 |     uint32_t               sample_count;
+ 183 |     double*                sample_jitters_us;
+ 184 |     double*                sample_computes_us;
+ 185 |     double*                sample_periods_us;
+ 186 | 
+ 187 |     /* Running Accumulators for Online Means */
+ 188 |     double                 sum_compute_us;
+ 189 |     double                 sum_period_us;
+ 190 |     double                 sum_jitter_us;
+ 191 | };
+ 192 | 
+ 193 | /* Fast in-place quicksort for doubles (used for exact percentile calculation) */
+ 194 | static void wet_sort_doubles(double* arr, int left, int right) {
+ 195 |     if (left >= right) return;
+ 196 |     double pivot = arr[(left + right) / 2];
+ 197 |     int i = left;
+ 198 |     int j = right;
+ 199 |     while (i <= j) {
+ 200 |         while (arr[i] < pivot) i++;
+ 201 |         while (arr[j] > pivot) j--;
+ 202 |         if (i <= j) {
+ 203 |             double tmp = arr[i];
+ 204 |             arr[i] = arr[j];
+ 205 |             arr[j] = tmp;
+ 206 |             i++;
+ 207 |             j--;
+ 208 |         }
+ 209 |     }
+ 210 |     if (left < j)  wet_sort_doubles(arr, left, j);
+ 211 |     if (i < right) wet_sort_doubles(arr, i, right);
+ 212 | }
+ 213 | 
+ 214 | /* =========================================================================
+ 215 |  * Thread Worker Procedure
+ 216 |  * ========================================================================= */
+ 217 | 
+ 218 | #if defined(_WIN32)
+ 219 | static DWORD __stdcall wet_scheduler_thread_proc(void* param) {
+ 220 |     wet_scheduler_t* sched = (wet_scheduler_t*)param;
+ 221 |     if (!sched) return 1;
+ 222 | 
+ 223 |     /* 1. Core Pinning */
+ 224 |     if (sched->config.enable_core_pinning) {
+ 225 |         DWORD_PTR mask = (1ULL << (sched->config.target_core % 64));
+ 226 |         SetThreadAffinityMask(GetCurrentThread(), mask);
+ 227 |     }
+ 228 | 
+ 229 |     /* 2. Process & Thread Priority Elevation */
+ 230 |     if (sched->config.enable_priority_elevation) {
+ 231 |         if (!SetPriorityClass(GetCurrentProcess(), sched->config.priority_class)) {
+ 232 |             /* Fallback to HIGH_PRIORITY_CLASS if REALTIME permission is restricted */
+ 233 |             SetPriorityClass(GetCurrentProcess(), 0x00000080);
+ 234 |         }
+ 235 |         SetThreadPriority(GetCurrentThread(), sched->config.thread_priority);
+ 236 |     }
+ 237 | 
+ 238 |     sched->is_running = 1;
+ 239 | 
+ 240 |     /* Real-Time Stepping Loop */
+ 241 |     while (!wet_atomic_load_u32_acquire(&sched->stop_requested)) {
+ 242 |         if (sched->vm && (sched->vm->is_halted || sched->vm->is_finished)) {
+ 243 |             break;
+ 244 |         }
+ 245 | 
+ 246 |         wet_status_t st = wet_scheduler_step(sched);
+ 247 |         if (st != WET_OK && st != WET_ERR_HALTED) {
+ 248 |             break;
+ 249 |         }
+ 250 | 
+ 251 |         if (sched->config.total_ticks > 0 && sched->stats.total_ticks >= sched->config.total_ticks) {
+ 252 |             break;
+ 253 |         }
+ 254 |     }
+ 255 | 
+ 256 |     sched->is_running = 0;
+ 257 |     return 0;
+ 258 | }
+ 259 | #else
+ 260 | static void* wet_scheduler_thread_proc(void* param) {
+ 261 |     wet_scheduler_t* sched = (wet_scheduler_t*)param;
+ 262 |     if (!sched) return NULL;
+ 263 | 
+ 264 |     if (sched->config.enable_core_pinning) {
+ 265 |         cpu_set_t cpuset;
+ 266 |         CPU_ZERO(&cpuset);
+ 267 |         CPU_SET(sched->config.target_core, &cpuset);
+ 268 |         pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+ 269 |     }
+ 270 | 
+ 271 |     sched->is_running = 1;
+ 272 |     while (!wet_atomic_load_u32_acquire(&sched->stop_requested)) {
+ 273 |         if (sched->vm && (sched->vm->is_halted || sched->vm->is_finished)) {
+ 274 |             break;
+ 275 |         }
+ 276 |         wet_status_t st = wet_scheduler_step(sched);
+ 277 |         if (st != WET_OK && st != WET_ERR_HALTED) break;
+ 278 |         if (sched->config.total_ticks > 0 && sched->stats.total_ticks >= sched->config.total_ticks) break;
+ 279 |     }
+ 280 |     sched->is_running = 0;
+ 281 |     return NULL;
+ 282 | }
+ 283 | #endif
+ 284 | 
+ 285 | /* =========================================================================
+ 286 |  * Public C-ABI API Implementation
+ 287 |  * ========================================================================= */
+ 288 | 
+ 289 | WET_EXPORT wet_scheduler_t* wet_scheduler_create(wet_vm_instance_t* vm, const wet_scheduler_config_t* config) {
+ 290 |     wet_scheduler_t* sched = (wet_scheduler_t*)calloc(1, sizeof(wet_scheduler_t));
+ 291 |     if (!sched) return NULL;
+ 292 | 
+ 293 |     sched->vm = vm;
+ 294 | 
+ 295 |     /* Apply default configuration */
+ 296 |     if (config) {
+ 297 |         sched->config = *config;
+ 298 |     } else {
+ 299 |         sched->config.target_period_us = 100; /* 100 µs = 10 kHz */
+ 300 |         sched->config.target_core = 1;
+ 301 |         sched->config.priority_class = 0x00000100; /* REALTIME_PRIORITY_CLASS */
+ 302 |         sched->config.thread_priority = 15;        /* THREAD_PRIORITY_TIME_CRITICAL */
+ 303 |         sched->config.enable_core_pinning = 1;
+ 304 |         sched->config.enable_priority_elevation = 1;
+ 305 |         sched->config.telemetry_queue_capacity = 1024;
+ 306 |         sched->config.stimulus_queue_capacity = 256;
+ 307 |         sched->config.total_ticks = 0;
+ 308 |     }
+ 309 | 
+ 310 |     if (sched->config.target_period_us == 0) sched->config.target_period_us = 100;
+ 311 |     if (sched->config.telemetry_queue_capacity == 0) sched->config.telemetry_queue_capacity = 1024;
+ 312 |     if (sched->config.stimulus_queue_capacity == 0) sched->config.stimulus_queue_capacity = 256;
+ 313 | 
+ 314 |     /* Initialize SPSC Ring Buffers */
+ 315 |     if (!wet_spsc_init(&sched->telem_ring, sched->config.telemetry_queue_capacity, sizeof(wet_telemetry_t))) {
+ 316 |         free(sched);
+ 317 |         return NULL;
+ 318 |     }
+ 319 | 
+ 320 |     if (!wet_spsc_init(&sched->stim_ring, sched->config.stimulus_queue_capacity, sizeof(wet_stim_command_t))) {
+ 321 |         wet_spsc_free(&sched->telem_ring);
+ 322 |         free(sched);
+ 323 |         return NULL;
+ 324 |     }
+ 325 | 
+ 326 |     /* Initialize High-Resolution Monotonic Hardware Clock */
+ 327 | #if defined(_WIN32)
+ 328 |     LARGE_INTEGER qpf;
+ 329 |     QueryPerformanceFrequency(&qpf);
+ 330 |     sched->qpf_freq = qpf.QuadPart;
+ 331 |     sched->qpc_per_us = (double)qpf.QuadPart / 1000000.0;
+ 332 |     sched->period_qpc = (int64_t)((double)sched->config.target_period_us * sched->qpc_per_us);
+ 333 | #else
+ 334 |     sched->qpf_freq = 1000000000ULL;
+ 335 |     sched->qpc_per_us = 1000.0;
+ 336 |     sched->period_qpc = (int64_t)(sched->config.target_period_us * 1000ULL);
+ 337 | #endif
+ 338 | 
+ 339 |     /* Allocate Sample Buffers for Jitter / Latency Statistics */
+ 340 |     sched->sample_capacity = WET_DEFAULT_SAMPLE_CAPACITY;
+ 341 |     sched->sample_jitters_us = (double*)malloc(sched->sample_capacity * sizeof(double));
+ 342 |     sched->sample_computes_us = (double*)malloc(sched->sample_capacity * sizeof(double));
+ 343 |     sched->sample_periods_us = (double*)malloc(sched->sample_capacity * sizeof(double));
+ 344 | 
+ 345 |     /* Pre-fault and commit all memory pages in advance to eliminate demand-paging faults in hot loop */
+ 346 |     if (sched->sample_jitters_us)  memset(sched->sample_jitters_us, 0, sched->sample_capacity * sizeof(double));
+ 347 |     if (sched->sample_computes_us) memset(sched->sample_computes_us, 0, sched->sample_capacity * sizeof(double));
+ 348 |     if (sched->sample_periods_us)  memset(sched->sample_periods_us, 0, sched->sample_capacity * sizeof(double));
+ 349 | 
+ 350 |     /* Initialize stats */
+ 351 |     sched->stats.min_compute_us = 1e9;
+ 352 |     sched->stats.min_period_us = 1e9;
+ 353 | 
+ 354 |     return sched;
+ 355 | }
+ 356 | 
+ 357 | WET_EXPORT wet_status_t wet_scheduler_start(wet_scheduler_t* sched) {
+ 358 |     if (!sched) return WET_ERR_NULL_PTR;
+ 359 |     if (sched->is_running) return WET_OK;
+ 360 | 
+ 361 |     sched->stop_requested = 0;
+ 362 |     sched->next_deadline_qpc = 0;
+ 363 | 
+ 364 | #if defined(_WIN32)
+ 365 |     DWORD thread_id = 0;
+ 366 |     sched->thread_handle = CreateThread(NULL, 0, wet_scheduler_thread_proc, sched, 0, &thread_id);
+ 367 |     if (!sched->thread_handle) {
+ 368 |         return WET_ERR_ALLOC_FAILED;
+ 369 |     }
+ 370 | #else
+ 371 |     if (pthread_create(&sched->thread_handle, NULL, wet_scheduler_thread_proc, sched) != 0) {
+ 372 |         return WET_ERR_ALLOC_FAILED;
+ 373 |     }
+ 374 | #endif
+ 375 | 
+ 376 |     sched->thread_initialized = 1;
+ 377 |     return WET_OK;
+ 378 | }
+ 379 | 
+ 380 | WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched) {
+ 381 |     if (!sched) return WET_ERR_NULL_PTR;
+ 382 |     if (!sched->vm) return WET_ERR_NULL_PTR;
+ 383 | 
+ 384 |     /* Timestamp at tick start */
+ 385 | #if defined(_WIN32)
+ 386 |     LARGE_INTEGER t_start;
+ 387 |     QueryPerformanceCounter(&t_start);
+ 388 |     int64_t start_qpc = t_start.QuadPart;
+ 389 | #else
+ 390 |     struct timespec ts_start;
+ 391 |     clock_gettime(CLOCK_MONOTONIC_RAW, &ts_start);
+ 392 |     int64_t start_qpc = (int64_t)ts_start.tv_sec * 1000000000ULL + ts_start.tv_nsec;
+ 393 | #endif
+ 394 | 
+ 395 |     /* Maintain isochronous deadline.
+ 396 |      * Trade-off: If lag exceeds 2 periods (>200 µs), resynchronize forward to avoid
+ 397 |      * catastrophic catch-up storms at the expense of wallclock phase slip. */
+ 398 |     if (sched->next_deadline_qpc == 0 || start_qpc > (sched->next_deadline_qpc + sched->period_qpc * 2)) {
+ 399 |         sched->next_deadline_qpc = start_qpc + sched->period_qpc;
+ 400 |     } else {
+ 401 |         sched->next_deadline_qpc += sched->period_qpc;
+ 402 |     }
+ 403 | 
+ 404 |     /* 1. Drain incoming asynchronous stimuli from SPSC ring buffer */
+ 405 |     wet_stim_command_t stim_cmd;
+ 406 |     while (wet_spsc_pop(&sched->stim_ring, &stim_cmd)) {
+ 407 |         if (stim_cmd.channel < sched->vm->config.channel_count) {
+ 408 |             wet_inject_stimulus(sched->vm, stim_cmd.channel, stim_cmd.voltage_v, stim_cmd.phase1_ms, stim_cmd.phase2_ms);
+ 409 |             sched->stats.stimuli_injected++;
+ 410 |         }
+ 411 |     }
+ 412 | 
+ 413 |     /* 2. Execute compute step (C99 Bytecode + Biophysical COBA-LIF ODE + Watchdogs) */
+ 414 |     wet_telemetry_t telem;
+ 415 |     wet_status_t status = wet_vm_step_internal(sched->vm, &telem);
+ 416 | 
+ 417 |     /* 3. Non-blocking stream telemetry to host SPSC queue */
+ 418 |     if (!wet_spsc_push(&sched->telem_ring, &telem)) {
+ 419 |         sched->stats.telemetry_dropped++;
+ 420 |     }
+ 421 | 
+ 422 |     /* 4. Measure compute latency */
+ 423 | #if defined(_WIN32)
+ 424 |     LARGE_INTEGER t_compute;
+ 425 |     QueryPerformanceCounter(&t_compute);
+ 426 |     double compute_us = (double)(t_compute.QuadPart - start_qpc) / sched->qpc_per_us;
+ 427 | #else
+ 428 |     struct timespec ts_comp;
+ 429 |     clock_gettime(CLOCK_MONOTONIC_RAW, &ts_comp);
+ 430 |     int64_t comp_qpc = (int64_t)ts_comp.tv_sec * 1000000000ULL + ts_comp.tv_nsec;
+ 431 |     double compute_us = (double)(comp_qpc - start_qpc) / sched->qpc_per_us;
+ 432 | #endif
+ 433 | 
+ 434 |     /* 5. Check deadline overrun (compute duration exceeding target period) */
+ 435 |     if (compute_us > (double)sched->config.target_period_us) {
+ 436 |         sched->stats.deadline_overruns++;
+ 437 |     }
+ 438 | 
+ 439 | #if defined(_WIN32)
+ 440 |     /* 6. Hybrid precision pacing: calibrated spin-wait tail using _mm_pause().
+ 441 |      * STRICTLY ZERO Sleep() in the hot real-time execution loop. */
+ 442 |     if (t_compute.QuadPart < sched->next_deadline_qpc) {
+ 443 |         LARGE_INTEGER t_now;
+ 444 |         do {
+ 445 |             wet_cpu_pause();
+ 446 |             QueryPerformanceCounter(&t_now);
+ 447 |         } while (t_now.QuadPart < sched->next_deadline_qpc);
+ 448 |     }
+ 449 | 
+ 450 |     /* 7. Measure actual period and jitter */
+ 451 |     LARGE_INTEGER t_end;
+ 452 |     QueryPerformanceCounter(&t_end);
+ 453 |     double actual_period_us = (double)(t_end.QuadPart - start_qpc) / sched->qpc_per_us;
+ 454 | #else
+ 455 |     if (comp_qpc < sched->next_deadline_qpc) {
+ 456 |         struct timespec ts_now;
+ 457 |         do {
+ 458 |             wet_cpu_pause();
+ 459 |             clock_gettime(CLOCK_MONOTONIC_RAW, &ts_now);
+ 460 |         } while (((int64_t)ts_now.tv_sec * 1000000000ULL + ts_now.tv_nsec) < sched->next_deadline_qpc);
+ 461 |     }
+ 462 |     struct timespec ts_end;
+ 463 |     clock_gettime(CLOCK_MONOTONIC_RAW, &ts_end);
+ 464 |     int64_t end_qpc = (int64_t)ts_end.tv_sec * 1000000000ULL + ts_end.tv_nsec;
+ 465 |     double actual_period_us = (double)(end_qpc - start_qpc) / sched->qpc_per_us;
+ 466 | #endif
+ 467 | 
+ 468 |     double jitter_us = wet_fabs(actual_period_us - (double)sched->config.target_period_us);
+ 469 | 
+ 470 |     /* 8. Record metrics */
+ 471 |     sched->stats.total_ticks++;
+ 472 |     sched->sum_compute_us += compute_us;
+ 473 |     sched->sum_period_us += actual_period_us;
+ 474 |     sched->sum_jitter_us += jitter_us;
+ 475 | 
+ 476 |     if (compute_us < sched->stats.min_compute_us) sched->stats.min_compute_us = compute_us;
+ 477 |     if (compute_us > sched->stats.max_compute_us) sched->stats.max_compute_us = compute_us;
+ 478 | 
+ 479 |     if (actual_period_us < sched->stats.min_period_us) sched->stats.min_period_us = actual_period_us;
+ 480 |     if (actual_period_us > sched->stats.max_period_us) sched->stats.max_period_us = actual_period_us;
+ 481 | 
+ 482 |     if (jitter_us > sched->stats.max_jitter_us) sched->stats.max_jitter_us = jitter_us;
+ 483 | 
+ 484 |     /* Append to sample buffer */
+ 485 |     if (sched->sample_count < sched->sample_capacity) {
+ 486 |         sched->sample_jitters_us[sched->sample_count] = jitter_us;
+ 487 |         sched->sample_computes_us[sched->sample_count] = compute_us;
+ 488 |         sched->sample_periods_us[sched->sample_count] = actual_period_us;
+ 489 |         sched->sample_count++;
+ 490 |     }
+ 491 | 
+ 492 |     return status;
+ 493 | }
+ 494 | 
+ 495 | WET_EXPORT wet_status_t wet_scheduler_stop(wet_scheduler_t* sched) {
+ 496 |     if (!sched) return WET_ERR_NULL_PTR;
+ 497 | 
+ 498 |     wet_atomic_store_u32_release(&sched->stop_requested, 1);
+ 499 | 
+ 500 |     if (sched->thread_initialized) {
+ 501 | #if defined(_WIN32)
+ 502 |         if (sched->thread_handle) {
+ 503 |             WaitForSingleObject(sched->thread_handle, 5000);
+ 504 |             CloseHandle(sched->thread_handle);
+ 505 |             sched->thread_handle = NULL;
+ 506 |         }
+ 507 | #else
+ 508 |         if (sched->thread_handle) {
+ 509 |             pthread_join(sched->thread_handle, NULL);
+ 510 |         }
+ 511 | #endif
+ 512 |         sched->thread_initialized = 0;
+ 513 |     }
+ 514 | 
+ 515 |     sched->is_running = 0;
+ 516 |     return WET_OK;
+ 517 | }
+ 518 | 
+ 519 | WET_EXPORT wet_status_t wet_scheduler_get_stats(const wet_scheduler_t* sched, wet_scheduler_stats_t* out_stats) {
+ 520 |     if (!sched || !out_stats) return WET_ERR_NULL_PTR;
+ 521 | 
+ 522 |     *out_stats = sched->stats;
+ 523 | 
+ 524 |     uint64_t n = sched->stats.total_ticks;
+ 525 |     if (n > 0) {
+ 526 |         out_stats->mean_compute_us = sched->sum_compute_us / (double)n;
+ 527 |         out_stats->mean_period_us = sched->sum_period_us / (double)n;
+ 528 |         out_stats->mean_jitter_us = sched->sum_jitter_us / (double)n;
+ 529 |     }
+ 530 | 
+ 531 |     /* Compute exact percentiles from sample buffer */
+ 532 |     if (sched->sample_count > 0) {
+ 533 |         uint32_t cnt = sched->sample_count;
+ 534 |         double* sorted = (double*)malloc(cnt * sizeof(double));
+ 535 |         if (sorted) {
+ 536 |             memcpy(sorted, sched->sample_jitters_us, cnt * sizeof(double));
+ 537 |             wet_sort_doubles(sorted, 0, (int)cnt - 1);
+ 538 | 
+ 539 |             out_stats->p50_jitter_us = sorted[(size_t)(cnt * 0.50)];
+ 540 |             out_stats->p95_jitter_us = sorted[(size_t)(cnt * 0.95)];
+ 541 |             out_stats->p99_jitter_us = sorted[(size_t)(cnt * 0.99)];
+ 542 |             out_stats->p999_jitter_us = sorted[(size_t)(cnt * 0.999)];
+ 543 |             out_stats->max_jitter_us = sorted[cnt - 1];
+ 544 | 
+ 545 |             free(sorted);
+ 546 |         }
+ 547 |     }
+ 548 | 
+ 549 |     return WET_OK;
+ 550 | }
+ 551 | 
+ 552 | WET_EXPORT wet_status_t wet_scheduler_poll_telemetry(wet_scheduler_t* sched, wet_telemetry_t* out_telem) {
+ 553 |     if (!sched || !out_telem) return WET_ERR_NULL_PTR;
+ 554 |     if (wet_spsc_pop(&sched->telem_ring, out_telem)) {
+ 555 |         return WET_OK;
+ 556 |     }
+ 557 |     return WET_ERR_NULL_PTR; /* No telemetry available */
+ 558 | }
+ 559 | 
+ 560 | WET_EXPORT wet_status_t wet_scheduler_push_stimulus(wet_scheduler_t* sched, const wet_stim_command_t* cmd) {
+ 561 |     if (!sched || !cmd) return WET_ERR_NULL_PTR;
+ 562 |     if (wet_spsc_push(&sched->stim_ring, cmd)) {
+ 563 |         return WET_OK;
+ 564 |     }
+ 565 |     return WET_ERR_ALLOC_FAILED; /* Stimulus ring buffer full */
+ 566 | }
+ 567 | 
+ 568 | WET_EXPORT wet_status_t wet_scheduler_benchmark(
+ 569 |     wet_scheduler_t* sched,
+ 570 |     uint32_t total_ticks,
+ 571 |     wet_scheduler_stats_t* out_stats
+ 572 | ) {
+ 573 |     if (!sched) return WET_ERR_NULL_PTR;
+ 574 | 
+ 575 |     /* Apply thread affinity and priority on benchmark caller thread if not backgrounded */
+ 576 | #if defined(_WIN32)
+ 577 |     if (sched->config.enable_core_pinning) {
+ 578 |         DWORD_PTR mask = (1ULL << (sched->config.target_core % 64));
+ 579 |         SetThreadAffinityMask(GetCurrentThread(), mask);
+ 580 |     }
+ 581 |     if (sched->config.enable_priority_elevation) {
+ 582 |         if (!SetPriorityClass(GetCurrentProcess(), sched->config.priority_class)) {
+ 583 |             SetPriorityClass(GetCurrentProcess(), 0x00000080);
+ 584 |         }
+ 585 |         SetThreadPriority(GetCurrentThread(), sched->config.thread_priority);
+ 586 |     }
+ 587 | #endif
+ 588 | 
+ 589 |     /* Warm-up ticks to ensure hardware instruction/data caches and branch predictors are primed */
+ 590 |     for (int w = 0; w < 10; ++w) {
+ 591 |         wet_scheduler_step(sched);
+ 592 |     }
+ 593 | 
+ 594 |     /* Reset metrics after warm-up */
+ 595 |     memset(&sched->stats, 0, sizeof(sched->stats));
+ 596 |     sched->stats.min_compute_us = 1e9;
+ 597 |     sched->stats.min_period_us = 1e9;
+ 598 |     sched->sample_count = 0;
+ 599 |     sched->sum_compute_us = 0.0;
+ 600 |     sched->sum_period_us = 0.0;
+ 601 |     sched->sum_jitter_us = 0.0;
+ 602 |     sched->next_deadline_qpc = 0;
+ 603 |     sched->is_running = 1;
+ 604 | 
+ 605 |     for (uint32_t i = 0; i < total_ticks; ++i) {
+ 606 |         wet_status_t st = wet_scheduler_step(sched);
+ 607 |         if (st != WET_OK && st != WET_ERR_HALTED) {
+ 608 |             sched->is_running = 0;
+ 609 |             return st;
+ 610 |         }
+ 611 |     }
+ 612 | 
+ 613 |     sched->is_running = 0;
+ 614 |     return wet_scheduler_get_stats(sched, out_stats);
+ 615 | }
+ 616 | 
+ 617 | WET_EXPORT void wet_scheduler_destroy(wet_scheduler_t* sched) {
+ 618 |     if (!sched) return;
+ 619 | 
+ 620 |     wet_scheduler_stop(sched);
+ 621 | 
+ 622 |     wet_spsc_free(&sched->telem_ring);
+ 623 |     wet_spsc_free(&sched->stim_ring);
+ 624 | 
+ 625 |     if (sched->sample_jitters_us)  free(sched->sample_jitters_us);
+ 626 |     if (sched->sample_computes_us) free(sched->sample_computes_us);
+ 627 |     if (sched->sample_periods_us)  free(sched->sample_periods_us);
+ 628 | 
+ 629 |     free(sched);
+ 630 | }
+```
+
+### `native/src/wetvm_api.c` (613 lines, SHA-256: `8971d78775e796a5...`)
 
 ```text
    1 | #ifndef WET_BUILDING_DLL
@@ -7135,2536 +11974,2642 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
    6 | #include "../include/wetvm_types.h"
    7 | #include "../include/wetvm_api.h"
    8 | #include "../include/wetvm_vm.h"
-   9 | 
-  10 | #if defined(_WIN32)
-  11 | int _fltused = 0x9875;
-  12 | #endif
-  13 | 
-  14 | /* Forward declarations of internal functions in wetvm_vm.c */
-  15 | extern wet_status_t wet_vm_load_bytecode_internal(
-  16 |     struct wet_vm_instance* vm,
-  17 |     const uint8_t* code_bytes,
-  18 |     size_t size,
-  19 |     char* err_buf,
-  20 |     size_t err_buf_len
-  21 | );
-  22 | 
-  23 | extern wet_status_t wet_verify_bytecode_internal(
-  24 |     const uint8_t* bytecode,
-  25 |     size_t size,
-  26 |     char* err_buf,
-  27 |     size_t err_buf_len
-  28 | );
-  29 | 
-  30 | extern wet_status_t wet_vm_snapshot_internal(
-  31 |     const struct wet_vm_instance* vm,
-  32 |     uint8_t* buffer,
-  33 |     size_t* inout_len
-  34 | );
-  35 | 
-  36 | extern wet_status_t wet_vm_restore_internal(
-  37 |     struct wet_vm_instance* vm,
-  38 |     const uint8_t* buffer,
-  39 |     size_t len
-  40 | );
-  41 | 
-  42 | WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
-  43 |     struct wet_vm_instance* vm = (struct wet_vm_instance*)calloc(1, sizeof(struct wet_vm_instance));
-  44 |     if (!vm) return NULL;
-  45 | 
-  46 |     /* Apply configuration with sensible defaults */
-  47 |     if (config) {
-  48 |         vm->config.dt_ms = (config->dt_ms > 0.0) ? config->dt_ms : 0.1;
-  49 |         vm->config.max_stack_depth = (config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
-  50 |         vm->config.max_locals = (config->max_locals > 0) ? config->max_locals : 256;
-  51 |         vm->config.channel_count = (config->channel_count > 0 && config->channel_count <= 64)
-  52 |                                     ? config->channel_count : 64;
-  53 |         vm->config.max_ops_per_tick = (config->max_ops_per_tick > 0) ? config->max_ops_per_tick : 100000U;
-  54 |     } else {
-  55 |         vm->config.dt_ms = 0.1;
-  56 |         vm->config.max_stack_depth = 1024;
-  57 |         vm->config.max_locals = 256;
-  58 |         vm->config.channel_count = 64;
-  59 |         vm->config.max_ops_per_tick = 100000U;
-  60 |     }
-  61 | 
-  62 |     vm->max_stack = vm->config.max_stack_depth;
-  63 |     vm->stack = (wet_value_t*)calloc(vm->max_stack, sizeof(wet_value_t));
-  64 |     if (!vm->stack) {
-  65 |         free(vm);
-  66 |         return NULL;
-  67 |     }
-  68 | 
-  69 |     vm->max_locals = vm->config.max_locals;
-  70 |     vm->locals = (wet_value_t*)calloc(vm->max_locals, sizeof(wet_value_t));
-  71 |     if (!vm->locals) {
-  72 |         free(vm->stack);
-  73 |         free(vm);
-  74 |         return NULL;
-  75 |     }
-  76 | 
-  77 |     vm->max_call_depth = 64;
-  78 |     vm->call_stack = (wet_call_frame_t*)calloc(vm->max_call_depth, sizeof(wet_call_frame_t));
-  79 |     if (!vm->call_stack) {
-  80 |         free(vm->locals);
-  81 |         free(vm->stack);
-  82 |         free(vm);
-  83 |         return NULL;
-  84 |     }
-  85 | 
-  86 |     vm->grid_rows = 8;
-  87 |     vm->grid_cols = 8;
-  88 |     vm->last_error[0] = '\0';
-  89 | 
-  90 |     /* Initialize cyber-physical life support actuator states */
-  91 |     vm->ambient_temperature_c = 37.0f;
-  92 |     for (int p = 0; p < 4; ++p) {
-  93 |         vm->fluid_pressure_kpa[p] = 101.325f;
-  94 |     }
-  95 | 
-  96 |     /* Ring-0 Life Support Supervisor Initialization */
-  97 |     vm->life_supervisor.supervisor_active = 1;
-  98 |     vm->life_supervisor.maintenance_temperature_c = 37.0f;
-  99 |     for (int i = 0; i < 8; ++i) {
- 100 |         vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
- 101 |     }
- 102 | 
- 103 |     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
- 104 |     interlocks_init(&vm->interlocks);
- 105 | 
- 106 |     return vm;
- 107 | }
- 108 | 
- 109 | WET_EXPORT wet_vm_t* wet_create_vm_arena(
- 110 |     void* arena_buf,
- 111 |     size_t arena_bytes,
- 112 |     const wet_vm_config_t* config
- 113 | ) {
- 114 |     if (!arena_buf) return NULL;
- 115 | 
- 116 |     uint32_t stack_depth = (config && config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
- 117 |     uint32_t max_locals = (config && config->max_locals > 0) ? config->max_locals : 256;
- 118 |     uint32_t call_depth = 64;
- 119 | 
- 120 |     size_t needed = sizeof(struct wet_vm_instance)
- 121 |                   + (size_t)stack_depth * sizeof(wet_value_t)
- 122 |                   + (size_t)max_locals * sizeof(wet_value_t)
- 123 |                   + (size_t)call_depth * sizeof(wet_call_frame_t);
- 124 | 
- 125 |     if (arena_bytes < needed) return NULL;
- 126 | 
- 127 |     uint8_t* ptr = (uint8_t*)arena_buf;
- 128 |     struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
- 129 |     ptr += sizeof(struct wet_vm_instance);
- 130 |     memset(vm, 0, sizeof(struct wet_vm_instance));
- 131 | 
- 132 |     vm->arena_allocated = 1;
- 133 |     if (config) {
- 134 |         vm->config = *config;
- 135 |         if (vm->config.dt_ms <= 0.0) vm->config.dt_ms = 0.1;
- 136 |         if (vm->config.max_stack_depth == 0) vm->config.max_stack_depth = stack_depth;
- 137 |         if (vm->config.max_locals == 0) vm->config.max_locals = max_locals;
- 138 |         if (vm->config.channel_count == 0) vm->config.channel_count = 64;
- 139 |         if (vm->config.max_ops_per_tick == 0) vm->config.max_ops_per_tick = 100000U;
- 140 |     } else {
- 141 |         vm->config.dt_ms = 0.1;
- 142 |         vm->config.max_stack_depth = stack_depth;
- 143 |         vm->config.max_locals = max_locals;
- 144 |         vm->config.channel_count = 64;
- 145 |         vm->config.max_ops_per_tick = 100000U;
- 146 |     }
- 147 | 
- 148 |     vm->max_stack = stack_depth;
- 149 |     vm->stack = (wet_value_t*)ptr;
- 150 |     ptr += (size_t)stack_depth * sizeof(wet_value_t);
- 151 | 
- 152 |     vm->max_locals = max_locals;
- 153 |     vm->locals = (wet_value_t*)ptr;
- 154 |     ptr += (size_t)max_locals * sizeof(wet_value_t);
- 155 | 
- 156 |     vm->max_call_depth = call_depth;
- 157 |     vm->call_stack = (wet_call_frame_t*)ptr;
- 158 | 
- 159 |     vm->grid_rows = 8;
- 160 |     vm->grid_cols = 8;
- 161 |     vm->last_error[0] = '\0';
- 162 |     vm->ambient_temperature_c = 37.0f;
- 163 |     for (int p = 0; p < 4; ++p) {
- 164 |         vm->fluid_pressure_kpa[p] = 101.325f;
- 165 |     }
- 166 | 
- 167 |     vm->life_supervisor.supervisor_active = 1;
- 168 |     vm->life_supervisor.maintenance_temperature_c = 37.0f;
- 169 |     for (int i = 0; i < 8; ++i) {
- 170 |         vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
- 171 |     }
- 172 | 
- 173 |     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
- 174 |     interlocks_init(&vm->interlocks);
- 175 | 
- 176 |     return vm;
- 177 | }
- 178 | 
- 179 | WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
- 180 |     if (!vm) return;
- 181 | 
- 182 |     if (vm->constants) {
- 183 |         for (size_t i = 0; i < vm->num_constants; ++i) {
- 184 |             if (vm->constants[i].str_alloc) {
- 185 |                 free(vm->constants[i].str_alloc);
- 186 |                 vm->constants[i].str_alloc = NULL;
- 187 |             }
- 188 |         }
- 189 |         free(vm->constants);
- 190 |         vm->constants = NULL;
- 191 |     }
- 192 | 
- 193 |     if (vm->bytecode_raw) {
- 194 |         free(vm->bytecode_raw);
- 195 |         vm->bytecode_raw = NULL;
- 196 |     }
- 197 | 
- 198 |     if (!vm->arena_allocated) {
- 199 |         if (vm->stack) {
- 200 |             free(vm->stack);
- 201 |             vm->stack = NULL;
- 202 |         }
+   9 | #include "../include/wet_hal.h"
+  10 | 
+  11 | #if defined(_WIN32)
+  12 | int _fltused = 0x9875;
+  13 | #endif
+  14 | 
+  15 | /* Forward declarations of internal functions in wetvm_vm.c */
+  16 | extern wet_status_t wet_vm_load_bytecode_internal(
+  17 |     struct wet_vm_instance* vm,
+  18 |     const uint8_t* code_bytes,
+  19 |     size_t size,
+  20 |     char* err_buf,
+  21 |     size_t err_buf_len
+  22 | );
+  23 | 
+  24 | extern wet_status_t wet_verify_bytecode_internal(
+  25 |     const uint8_t* bytecode,
+  26 |     size_t size,
+  27 |     char* err_buf,
+  28 |     size_t err_buf_len
+  29 | );
+  30 | 
+  31 | extern wet_status_t wet_vm_snapshot_internal(
+  32 |     const struct wet_vm_instance* vm,
+  33 |     uint8_t* buffer,
+  34 |     size_t* inout_len
+  35 | );
+  36 | 
+  37 | extern wet_status_t wet_vm_restore_internal(
+  38 |     struct wet_vm_instance* vm,
+  39 |     const uint8_t* buffer,
+  40 |     size_t len
+  41 | );
+  42 | 
+  43 | WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
+  44 |     struct wet_vm_instance* vm = (struct wet_vm_instance*)calloc(1, sizeof(struct wet_vm_instance));
+  45 |     if (!vm) return NULL;
+  46 | 
+  47 |     /* Apply configuration with sensible defaults */
+  48 |     if (config) {
+  49 |         vm->config.dt_ms = (config->dt_ms > 0.0) ? config->dt_ms : 0.1;
+  50 |         vm->config.max_stack_depth = (config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
+  51 |         vm->config.max_locals = (config->max_locals > 0) ? config->max_locals : 256;
+  52 |         vm->config.channel_count = (config->channel_count > 0 && config->channel_count <= 64)
+  53 |                                     ? config->channel_count : 64;
+  54 |         vm->config.max_ops_per_tick = (config->max_ops_per_tick > 0) ? config->max_ops_per_tick : 100000U;
+  55 |     } else {
+  56 |         vm->config.dt_ms = 0.1;
+  57 |         vm->config.max_stack_depth = 1024;
+  58 |         vm->config.max_locals = 256;
+  59 |         vm->config.channel_count = 64;
+  60 |         vm->config.max_ops_per_tick = 100000U;
+  61 |     }
+  62 | 
+  63 |     vm->max_stack = vm->config.max_stack_depth;
+  64 |     vm->stack = (wet_value_t*)calloc(vm->max_stack, sizeof(wet_value_t));
+  65 |     if (!vm->stack) {
+  66 |         free(vm);
+  67 |         return NULL;
+  68 |     }
+  69 | 
+  70 |     vm->max_locals = vm->config.max_locals;
+  71 |     vm->locals = (wet_value_t*)calloc(vm->max_locals, sizeof(wet_value_t));
+  72 |     if (!vm->locals) {
+  73 |         free(vm->stack);
+  74 |         free(vm);
+  75 |         return NULL;
+  76 |     }
+  77 | 
+  78 |     vm->max_call_depth = 64;
+  79 |     vm->call_stack = (wet_call_frame_t*)calloc(vm->max_call_depth, sizeof(wet_call_frame_t));
+  80 |     if (!vm->call_stack) {
+  81 |         free(vm->locals);
+  82 |         free(vm->stack);
+  83 |         free(vm);
+  84 |         return NULL;
+  85 |     }
+  86 | 
+  87 |     vm->grid_rows = 8;
+  88 |     vm->grid_cols = 8;
+  89 |     vm->last_error[0] = '\0';
+  90 | 
+  91 |     /* Initialize cyber-physical life support actuator states */
+  92 |     vm->ambient_temperature_c = 37.0f;
+  93 |     for (int p = 0; p < 4; ++p) {
+  94 |         vm->fluid_pressure_kpa[p] = 101.325f;
+  95 |     }
+  96 | 
+  97 |     /* Ring-0 Life Support Supervisor Initialization */
+  98 |     vm->life_supervisor.supervisor_active = 1;
+  99 |     vm->life_supervisor.maintenance_temperature_c = 37.0f;
+ 100 |     for (int i = 0; i < 8; ++i) {
+ 101 |         vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
+ 102 |     }
+ 103 | 
+ 104 |     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
+ 105 |     interlocks_init(&vm->interlocks);
+ 106 | 
+ 107 |     return vm;
+ 108 | }
+ 109 | 
+ 110 | WET_EXPORT wet_vm_t* wet_create_vm_arena(
+ 111 |     void* arena_buf,
+ 112 |     size_t arena_bytes,
+ 113 |     const wet_vm_config_t* config
+ 114 | ) {
+ 115 |     if (!arena_buf) return NULL;
+ 116 | 
+ 117 |     uint32_t stack_depth = (config && config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
+ 118 |     uint32_t max_locals = (config && config->max_locals > 0) ? config->max_locals : 256;
+ 119 |     uint32_t call_depth = 64;
+ 120 | 
+ 121 |     size_t needed = sizeof(struct wet_vm_instance)
+ 122 |                   + (size_t)stack_depth * sizeof(wet_value_t)
+ 123 |                   + (size_t)max_locals * sizeof(wet_value_t)
+ 124 |                   + (size_t)call_depth * sizeof(wet_call_frame_t);
+ 125 | 
+ 126 |     if (arena_bytes < needed) return NULL;
+ 127 | 
+ 128 |     uint8_t* ptr = (uint8_t*)arena_buf;
+ 129 |     struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
+ 130 |     ptr += sizeof(struct wet_vm_instance);
+ 131 |     memset(vm, 0, sizeof(struct wet_vm_instance));
+ 132 | 
+ 133 |     vm->arena_allocated = 1;
+ 134 |     if (config) {
+ 135 |         vm->config = *config;
+ 136 |         if (vm->config.dt_ms <= 0.0) vm->config.dt_ms = 0.1;
+ 137 |         if (vm->config.max_stack_depth == 0) vm->config.max_stack_depth = stack_depth;
+ 138 |         if (vm->config.max_locals == 0) vm->config.max_locals = max_locals;
+ 139 |         if (vm->config.channel_count == 0) vm->config.channel_count = 64;
+ 140 |         if (vm->config.max_ops_per_tick == 0) vm->config.max_ops_per_tick = 100000U;
+ 141 |     } else {
+ 142 |         vm->config.dt_ms = 0.1;
+ 143 |         vm->config.max_stack_depth = stack_depth;
+ 144 |         vm->config.max_locals = max_locals;
+ 145 |         vm->config.channel_count = 64;
+ 146 |         vm->config.max_ops_per_tick = 100000U;
+ 147 |     }
+ 148 | 
+ 149 |     vm->max_stack = stack_depth;
+ 150 |     vm->stack = (wet_value_t*)ptr;
+ 151 |     ptr += (size_t)stack_depth * sizeof(wet_value_t);
+ 152 | 
+ 153 |     vm->max_locals = max_locals;
+ 154 |     vm->locals = (wet_value_t*)ptr;
+ 155 |     ptr += (size_t)max_locals * sizeof(wet_value_t);
+ 156 | 
+ 157 |     vm->max_call_depth = call_depth;
+ 158 |     vm->call_stack = (wet_call_frame_t*)ptr;
+ 159 | 
+ 160 |     vm->grid_rows = 8;
+ 161 |     vm->grid_cols = 8;
+ 162 |     vm->last_error[0] = '\0';
+ 163 |     vm->ambient_temperature_c = 37.0f;
+ 164 |     for (int p = 0; p < 4; ++p) {
+ 165 |         vm->fluid_pressure_kpa[p] = 101.325f;
+ 166 |     }
+ 167 | 
+ 168 |     vm->life_supervisor.supervisor_active = 1;
+ 169 |     vm->life_supervisor.maintenance_temperature_c = 37.0f;
+ 170 |     for (int i = 0; i < 8; ++i) {
+ 171 |         vm->life_supervisor.maintenance_perfusion_ul_min[i] = 1.5f;
+ 172 |     }
+ 173 | 
+ 174 |     biophysics_init(&vm->bio, vm->config.dt_ms, 0);
+ 175 |     interlocks_init(&vm->interlocks);
+ 176 | 
+ 177 |     return vm;
+ 178 | }
+ 179 | 
+ 180 | WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
+ 181 |     if (!vm) return;
+ 182 | 
+ 183 |     if (vm->hal) {
+ 184 |         wet_hal_destroy(vm->hal);
+ 185 |         vm->hal = NULL;
+ 186 |     }
+ 187 | 
+ 188 |     if (vm->constants) {
+ 189 |         for (size_t i = 0; i < vm->num_constants; ++i) {
+ 190 |             if (vm->constants[i].str_alloc) {
+ 191 |                 free(vm->constants[i].str_alloc);
+ 192 |                 vm->constants[i].str_alloc = NULL;
+ 193 |             }
+ 194 |         }
+ 195 |         free(vm->constants);
+ 196 |         vm->constants = NULL;
+ 197 |     }
+ 198 | 
+ 199 |     if (vm->bytecode_raw) {
+ 200 |         free(vm->bytecode_raw);
+ 201 |         vm->bytecode_raw = NULL;
+ 202 |     }
  203 | 
- 204 |         if (vm->locals) {
- 205 |             free(vm->locals);
- 206 |             vm->locals = NULL;
- 207 |         }
- 208 | 
- 209 |         if (vm->call_stack) {
- 210 |             free(vm->call_stack);
- 211 |             vm->call_stack = NULL;
- 212 |         }
- 213 | 
- 214 |         free(vm);
- 215 |     }
- 216 | }
- 217 | 
- 218 | WET_EXPORT wet_status_t wet_load_bytecode(
- 219 |     wet_vm_t* vm,
- 220 |     const uint8_t* code_bytes,
- 221 |     size_t size,
- 222 |     char* err_buf,
- 223 |     size_t err_buf_len
- 224 | ) {
- 225 |     if (!vm) {
- 226 |         if (err_buf && err_buf_len > 0) {
- 227 |             snprintf(err_buf, err_buf_len, "Null VM pointer");
- 228 |         }
- 229 |         return WET_ERR_NULL_PTR;
- 230 |     }
- 231 |     return wet_vm_load_bytecode_internal(vm, code_bytes, size, err_buf, err_buf_len);
- 232 | }
- 233 | 
- 234 | WET_EXPORT wet_status_t wet_step_tick(
- 235 |     wet_vm_t* vm,
- 236 |     wet_telemetry_t* out_telem
- 237 | ) {
- 238 |     if (!vm) return WET_ERR_NULL_PTR;
- 239 |     return wet_vm_step_internal(vm, out_telem);
- 240 | }
- 241 | 
- 242 | WET_EXPORT wet_status_t wet_run_ticks(
- 243 |     wet_vm_t* vm,
- 244 |     uint32_t ticks,
- 245 |     uint32_t* executed_ticks,
- 246 |     wet_telemetry_t* out_telem
- 247 | ) {
- 248 |     if (!vm) return WET_ERR_NULL_PTR;
- 249 | 
- 250 |     uint32_t executed = 0;
- 251 |     wet_status_t status = WET_OK;
- 252 | 
- 253 |     for (uint32_t i = 0; i < ticks; ++i) {
- 254 |         status = wet_vm_step_internal(vm, out_telem);
- 255 |         if (status != WET_OK) {
- 256 |             break;
- 257 |         }
- 258 |         executed++;
- 259 |     }
- 260 | 
- 261 |     if (executed_ticks) {
- 262 |         *executed_ticks = executed;
- 263 |     }
- 264 | 
- 265 |     return status;
- 266 | }
- 267 | 
- 268 | WET_EXPORT wet_status_t wet_inject_stimulus(
- 269 |     wet_vm_t* vm,
- 270 |     uint8_t channel,
- 271 |     float voltage_v,
- 272 |     float phase1_ms,
- 273 |     float phase2_ms
- 274 | ) {
- 275 |     if (!vm) return WET_ERR_NULL_PTR;
- 276 |     if (channel >= vm->config.channel_count) {
- 277 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 278 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
- 279 |         return WET_ERR_OUT_OF_BOUNDS_CH;
- 280 |     }
- 281 |     if (vm->interlocks.locked) {
- 282 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 283 |         return WET_ERR_INTERLOCK_LOCKED;
- 284 |     }
- 285 | 
- 286 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage_v, channel)) {
- 287 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 288 |                  "Capability denied for wet_inject_stimulus on ch %u (req %.2fV)", channel, voltage_v);
- 289 |         return WET_ERR_CAPABILITY_DENIED;
+ 204 |     if (!vm->arena_allocated) {
+ 205 |         if (vm->stack) {
+ 206 |             free(vm->stack);
+ 207 |             vm->stack = NULL;
+ 208 |         }
+ 209 | 
+ 210 |         if (vm->locals) {
+ 211 |             free(vm->locals);
+ 212 |             vm->locals = NULL;
+ 213 |         }
+ 214 | 
+ 215 |         if (vm->call_stack) {
+ 216 |             free(vm->call_stack);
+ 217 |             vm->call_stack = NULL;
+ 218 |         }
+ 219 | 
+ 220 |         free(vm);
+ 221 |     }
+ 222 | }
+ 223 | 
+ 224 | WET_EXPORT wet_status_t wet_load_bytecode(
+ 225 |     wet_vm_t* vm,
+ 226 |     const uint8_t* code_bytes,
+ 227 |     size_t size,
+ 228 |     char* err_buf,
+ 229 |     size_t err_buf_len
+ 230 | ) {
+ 231 |     if (!vm) {
+ 232 |         if (err_buf && err_buf_len > 0) {
+ 233 |             snprintf(err_buf, err_buf_len, "Null VM pointer");
+ 234 |         }
+ 235 |         return WET_ERR_NULL_PTR;
+ 236 |     }
+ 237 |     return wet_vm_load_bytecode_internal(vm, code_bytes, size, err_buf, err_buf_len);
+ 238 | }
+ 239 | 
+ 240 | WET_EXPORT wet_status_t wet_step_tick(
+ 241 |     wet_vm_t* vm,
+ 242 |     wet_telemetry_t* out_telem
+ 243 | ) {
+ 244 |     if (!vm) return WET_ERR_NULL_PTR;
+ 245 |     return wet_vm_step_internal(vm, out_telem);
+ 246 | }
+ 247 | 
+ 248 | WET_EXPORT wet_status_t wet_run_ticks(
+ 249 |     wet_vm_t* vm,
+ 250 |     uint32_t ticks,
+ 251 |     uint32_t* executed_ticks,
+ 252 |     wet_telemetry_t* out_telem
+ 253 | ) {
+ 254 |     if (!vm) return WET_ERR_NULL_PTR;
+ 255 | 
+ 256 |     uint32_t executed = 0;
+ 257 |     wet_status_t status = WET_OK;
+ 258 | 
+ 259 |     for (uint32_t i = 0; i < ticks; ++i) {
+ 260 |         status = wet_vm_step_internal(vm, out_telem);
+ 261 |         if (status != WET_OK) {
+ 262 |             break;
+ 263 |         }
+ 264 |         executed++;
+ 265 |     }
+ 266 | 
+ 267 |     if (executed_ticks) {
+ 268 |         *executed_ticks = executed;
+ 269 |     }
+ 270 | 
+ 271 |     return status;
+ 272 | }
+ 273 | 
+ 274 | WET_EXPORT wet_status_t wet_inject_stimulus(
+ 275 |     wet_vm_t* vm,
+ 276 |     uint8_t channel,
+ 277 |     float voltage_v,
+ 278 |     float phase1_ms,
+ 279 |     float phase2_ms
+ 280 | ) {
+ 281 |     if (!vm) return WET_ERR_NULL_PTR;
+ 282 |     if (channel >= vm->config.channel_count) {
+ 283 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 284 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+ 285 |         return WET_ERR_OUT_OF_BOUNDS_CH;
+ 286 |     }
+ 287 |     if (vm->interlocks.locked) {
+ 288 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 289 |         return WET_ERR_INTERLOCK_LOCKED;
  290 |     }
  291 | 
- 292 |     /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
- 293 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
- 294 |         float q_p1 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase1_ms;
- 295 |         float q_p2 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase2_ms;
- 296 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
- 297 |             vm->interlocks.locked = 1;
- 298 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
- 299 |             vm->interlocks.tripped_channel = channel;
- 300 |             vm->interlocks.trip_tick = vm->current_tick;
- 301 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
- 302 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
- 303 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
- 304 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
- 305 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 306 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
- 307 |         }
- 308 |     }
- 309 | 
- 310 |     /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
- 311 |     bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
- 312 |     if (prev_p->active && prev_p->phase2_ticks_left > 0) {
- 313 |         float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
- 314 |         vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
- 315 |     }
- 316 | 
- 317 |     float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage_v);
- 318 |     biophysics_schedule_stim(&vm->bio, channel, clamped_v, phase1_ms, phase2_ms);
- 319 |     vm->voltages[channel] = clamped_v;
- 320 |     float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
- 321 |     vm->last_charge_nc[channel] = i_ma * (phase1_ms - phase2_ms);
- 322 |     return WET_OK;
- 323 | }
- 324 | 
- 325 | WET_EXPORT wet_status_t wet_get_telemetry(
- 326 |     wet_vm_t* vm,
- 327 |     wet_telemetry_t* out_telem
- 328 | ) {
- 329 |     if (!vm || !out_telem) return WET_ERR_NULL_PTR;
+ 292 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage_v, channel)) {
+ 293 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 294 |                  "Capability denied for wet_inject_stimulus on ch %u (req %.2fV)", channel, voltage_v);
+ 295 |         return WET_ERR_CAPABILITY_DENIED;
+ 296 |     }
+ 297 | 
+ 298 |     /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
+ 299 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
+ 300 |         float q_p1 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase1_ms;
+ 301 |         float q_p2 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase2_ms;
+ 302 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+ 303 |             vm->interlocks.locked = 1;
+ 304 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+ 305 |             vm->interlocks.tripped_channel = channel;
+ 306 |             vm->interlocks.trip_tick = vm->current_tick;
+ 307 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
+ 308 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+ 309 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+ 310 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+ 311 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 312 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+ 313 |         }
+ 314 |     }
+ 315 | 
+ 316 |     /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
+ 317 |     bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
+ 318 |     if (prev_p->active && prev_p->phase2_ticks_left > 0) {
+ 319 |         float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
+ 320 |         vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+ 321 |     }
+ 322 | 
+ 323 |     float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage_v);
+ 324 |     biophysics_schedule_stim(&vm->bio, channel, clamped_v, phase1_ms, phase2_ms);
+ 325 |     vm->voltages[channel] = clamped_v;
+ 326 |     float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
+ 327 |     vm->last_charge_nc[channel] = i_ma * (phase1_ms - phase2_ms);
+ 328 |     return WET_OK;
+ 329 | }
  330 | 
- 331 |     out_telem->current_tick = vm->current_tick;
- 332 |     out_telem->sim_time_ms = vm->sim_time_ms;
- 333 |     out_telem->population_rate_hz = vm->population_rate_hz;
- 334 |     memcpy(out_telem->voltages, vm->voltages, sizeof(float) * 64);
- 335 |     memcpy(out_telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
- 336 |     memcpy(out_telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
- 337 | 
- 338 |     return WET_OK;
- 339 | }
- 340 | 
- 341 | WET_EXPORT wet_status_t wet_get_actuator_telemetry(
- 342 |     wet_vm_t* vm,
- 343 |     wet_actuator_telemetry_t* out_act_telem
- 344 | ) {
- 345 |     if (!vm || !out_act_telem) return WET_ERR_NULL_PTR;
+ 331 | WET_EXPORT wet_status_t wet_get_telemetry(
+ 332 |     wet_vm_t* vm,
+ 333 |     wet_telemetry_t* out_telem
+ 334 | ) {
+ 335 |     if (!vm || !out_telem) return WET_ERR_NULL_PTR;
+ 336 | 
+ 337 |     out_telem->current_tick = vm->current_tick;
+ 338 |     out_telem->sim_time_ms = vm->sim_time_ms;
+ 339 |     out_telem->population_rate_hz = vm->population_rate_hz;
+ 340 |     memcpy(out_telem->voltages, vm->voltages, sizeof(float) * 64);
+ 341 |     memcpy(out_telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
+ 342 |     memcpy(out_telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
+ 343 | 
+ 344 |     return WET_OK;
+ 345 | }
  346 | 
- 347 |     for (int i = 0; i < 8; ++i) {
- 348 |         out_act_telem->pump_rates_ul_min[i] = vm->pump_rates_ul_min[i];
- 349 |         out_act_telem->pump_dispensed_ul[i] = vm->pump_dispensed_ul[i];
- 350 |         out_act_telem->valve_states[i] = vm->valve_states[i];
- 351 |     }
- 352 |     for (int i = 0; i < 4; ++i) {
- 353 |         out_act_telem->motor_positions[i] = vm->motor_positions[i];
- 354 |         out_act_telem->motor_speeds_rpm[i] = vm->motor_speeds_rpm[i];
- 355 |         out_act_telem->fluid_pressure_kpa[i] = vm->fluid_pressure_kpa[i];
- 356 |     }
- 357 |     out_act_telem->ambient_temperature_c = vm->ambient_temperature_c;
- 358 |     return WET_OK;
- 359 | }
- 360 | 
- 361 | WET_EXPORT const char* wet_get_last_error(wet_vm_t* vm) {
- 362 |     if (!vm) return "NULL VM pointer";
- 363 |     return vm->last_error;
- 364 | }
- 365 | 
- 366 | WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
- 367 |     switch (status) {
- 368 |         case WET_OK:
- 369 |             return "WET_OK: Operation successful";
- 370 |         case WET_ERR_INVALID_MAGIC:
- 371 |             return "WET_ERR_INVALID_MAGIC: Invalid WBC header magic";
- 372 |         case WET_ERR_CRC_MISMATCH:
- 373 |             return "WET_ERR_CRC_MISMATCH: Bytecode CRC32 checksum mismatch";
- 374 |         case WET_ERR_UNSUPPORTED_VERSION:
- 375 |             return "WET_ERR_UNSUPPORTED_VERSION: Unsupported bytecode version";
- 376 |         case WET_ERR_MALFORMED_SECTION:
- 377 |             return "WET_ERR_MALFORMED_SECTION: Malformed bytecode or section table";
- 378 |         case WET_ERR_STACK_OVERFLOW:
- 379 |             return "WET_ERR_STACK_OVERFLOW: Operand stack overflow";
- 380 |         case WET_ERR_STACK_UNDERFLOW:
- 381 |             return "WET_ERR_STACK_UNDERFLOW: Operand stack underflow";
- 382 |         case WET_ERR_INVALID_OPCODE:
- 383 |             return "WET_ERR_INVALID_OPCODE: Unrecognized or invalid opcode";
- 384 |         case WET_ERR_OUT_OF_BOUNDS_CH:
- 385 |             return "WET_ERR_OUT_OF_BOUNDS_CH: Channel index out of bounds";
- 386 |         case WET_ERR_DIVISION_BY_ZERO:
- 387 |             return "WET_ERR_DIVISION_BY_ZERO: Division by zero";
- 388 |         case WET_ERR_NULL_PTR:
- 389 |             return "WET_ERR_NULL_PTR: Null pointer argument";
- 390 |         case WET_ERR_ALLOC_FAILED:
- 391 |             return "WET_ERR_ALLOC_FAILED: Memory allocation failed";
- 392 |         case WET_ERR_HALTED:
- 393 |             return "WET_ERR_HALTED: Virtual machine is halted";
- 394 |         case WET_ERR_CHARGE_IMBALANCE:
- 395 |             return "WET_ERR_CHARGE_IMBALANCE: Net charge imbalance exceeded safety threshold (0.5 nC over 10 ms)";
- 396 |         case WET_ERR_EPILEPTIFORM_RUNAWAY:
- 397 |             return "WET_ERR_EPILEPTIFORM_RUNAWAY: Epileptiform runaway firing breaker tripped (>150 Hz on >35% channels for 50 ms)";
- 398 |         case WET_ERR_CAPABILITY_DENIED:
- 399 |             return "WET_ERR_CAPABILITY_DENIED: Capability permission denied by bytecode security manifest";
- 400 |         case WET_ERR_INTERLOCK_LOCKED:
- 401 |             return "WET_ERR_INTERLOCK_LOCKED: Hardware interlock locked out; all stimulation disabled";
- 402 |         case WET_ERR_CHARGE_DENSITY_EXCEEDED:
- 403 |             return "WET_ERR_CHARGE_DENSITY_EXCEEDED: Single-phase charge density exceeded Shannon safety limit";
- 404 |         case WET_ERR_FOCAL_EXCITOTOXICITY:
- 405 |             return "WET_ERR_FOCAL_EXCITOTOXICITY: Focal excitotoxicity limit exceeded";
- 406 |         case WET_ERR_SHEAR_STRESS_EXCEEDED:
- 407 |             return "WET_ERR_SHEAR_STRESS_EXCEEDED: Requested microfluidic pump rate exceeds safe shear stress limit (15.0 uL/min)";
- 408 |         case WET_ERR_SECURITY_UNTRUSTED:
- 409 |             return "WET_ERR_SECURITY_UNTRUSTED: Bytecode failed cryptographic security signature verification";
- 410 |         case WET_ERR_ACTUATOR_FAULT:
- 411 |             return "WET_ERR_ACTUATOR_FAULT: Cyber-physical actuator execution fault or invalid parameter";
- 412 |         case WET_ERR_THERMAL_LIMIT:
- 413 |             return "WET_ERR_THERMAL_LIMIT: Temperature exceeded maximum biological threshold (38.0 C)";
- 414 |         case WET_ERR_BUBBLE_DETECTED:
- 415 |             return "WET_ERR_BUBBLE_DETECTED: Fluidic optical bubble detector tripped (cavitation hazard)";
- 416 |         case WET_ERR_COMPLIANCE_RAILED:
- 417 |             return "WET_ERR_COMPLIANCE_RAILED: Stimulator output voltage saturated ASIC compliance rail (+/-7.0 V)";
- 418 |         case WET_ERR_BYTECODE_VERIFICATION:
- 419 |             return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
- 420 |         default:
- 421 |             return "WET_ERR_UNKNOWN: Unknown error status";
- 422 |     }
- 423 | }
- 424 | 
- 425 | /* =========================================================================
- 426 |  * Phase 3 Hardware Readiness & Safety Implementations
- 427 |  * ========================================================================= */
- 428 | 
- 429 | WET_EXPORT void wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2) {
- 430 |     if (!vm) return;
- 431 |     interlocks_configure_electrode(&vm->interlocks, material, area_um2);
- 432 | }
- 433 | 
- 434 | WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
- 435 |     if (!vm) return;
- 436 |     interlocks_active_discharge(&vm->interlocks, channel);
- 437 | }
- 438 | 
- 439 | WET_EXPORT void wet_active_discharge_all(wet_vm_t* vm) {
- 440 |     if (!vm) return;
- 441 |     interlocks_active_discharge_all(&vm->interlocks);
- 442 | }
- 443 | 
- 444 | WET_EXPORT void wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable) {
- 445 |     if (!vm) return;
- 446 |     interlocks_enable_dead_head_protection(&vm->interlocks, enable);
- 447 | }
- 448 | 
- 449 | WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
- 450 |     if (!vm) return;
- 451 |     vm->life_supervisor.supervisor_active = 0;
- 452 |     for (int p = 0; p < 8; ++p) {
- 453 |         vm->pump_rates_ul_min[p] = 0.0f;
- 454 |     }
- 455 | }
- 456 | 
- 457 | WET_EXPORT void wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
- 458 |     if (!vm) return;
- 459 |     biophysics_set_blanking_window(&vm->bio, blanking_ms, enable_spatial);
- 460 | }
- 461 | 
- 462 | WET_EXPORT wet_status_t wet_inject_current_stimulus(
- 463 |     wet_vm_t* vm,
- 464 |     uint8_t channel,
- 465 |     float current_ua,
- 466 |     float phase1_ms,
- 467 |     float phase2_ms
- 468 | ) {
- 469 |     if (!vm) return WET_ERR_NULL_PTR;
- 470 |     if (channel >= vm->config.channel_count) {
- 471 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 472 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
- 473 |         return WET_ERR_OUT_OF_BOUNDS_CH;
- 474 |     }
- 475 |     if (vm->interlocks.locked) {
- 476 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 477 |         return WET_ERR_INTERLOCK_LOCKED;
- 478 |     }
- 479 | 
- 480 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
- 481 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 482 |                  "Capability denied for wet_inject_current_stimulus on ch %u", channel);
- 483 |         return WET_ERR_CAPABILITY_DENIED;
+ 347 | WET_EXPORT wet_status_t wet_get_actuator_telemetry(
+ 348 |     wet_vm_t* vm,
+ 349 |     wet_actuator_telemetry_t* out_act_telem
+ 350 | ) {
+ 351 |     if (!vm || !out_act_telem) return WET_ERR_NULL_PTR;
+ 352 | 
+ 353 |     for (int i = 0; i < 8; ++i) {
+ 354 |         out_act_telem->pump_rates_ul_min[i] = vm->pump_rates_ul_min[i];
+ 355 |         out_act_telem->pump_dispensed_ul[i] = vm->pump_dispensed_ul[i];
+ 356 |         out_act_telem->valve_states[i] = vm->valve_states[i];
+ 357 |     }
+ 358 |     for (int i = 0; i < 4; ++i) {
+ 359 |         out_act_telem->motor_positions[i] = vm->motor_positions[i];
+ 360 |         out_act_telem->motor_speeds_rpm[i] = vm->motor_speeds_rpm[i];
+ 361 |         out_act_telem->fluid_pressure_kpa[i] = vm->fluid_pressure_kpa[i];
+ 362 |     }
+ 363 |     out_act_telem->ambient_temperature_c = vm->ambient_temperature_c;
+ 364 |     return WET_OK;
+ 365 | }
+ 366 | 
+ 367 | WET_EXPORT const char* wet_get_last_error(wet_vm_t* vm) {
+ 368 |     if (!vm) return "NULL VM pointer";
+ 369 |     return vm->last_error;
+ 370 | }
+ 371 | 
+ 372 | WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
+ 373 |     switch (status) {
+ 374 |         case WET_OK:
+ 375 |             return "WET_OK: Operation successful";
+ 376 |         case WET_ERR_INVALID_MAGIC:
+ 377 |             return "WET_ERR_INVALID_MAGIC: Invalid WBC header magic";
+ 378 |         case WET_ERR_CRC_MISMATCH:
+ 379 |             return "WET_ERR_CRC_MISMATCH: Bytecode CRC32 checksum mismatch";
+ 380 |         case WET_ERR_UNSUPPORTED_VERSION:
+ 381 |             return "WET_ERR_UNSUPPORTED_VERSION: Unsupported bytecode version";
+ 382 |         case WET_ERR_MALFORMED_SECTION:
+ 383 |             return "WET_ERR_MALFORMED_SECTION: Malformed bytecode or section table";
+ 384 |         case WET_ERR_STACK_OVERFLOW:
+ 385 |             return "WET_ERR_STACK_OVERFLOW: Operand stack overflow";
+ 386 |         case WET_ERR_STACK_UNDERFLOW:
+ 387 |             return "WET_ERR_STACK_UNDERFLOW: Operand stack underflow";
+ 388 |         case WET_ERR_INVALID_OPCODE:
+ 389 |             return "WET_ERR_INVALID_OPCODE: Unrecognized or invalid opcode";
+ 390 |         case WET_ERR_OUT_OF_BOUNDS_CH:
+ 391 |             return "WET_ERR_OUT_OF_BOUNDS_CH: Channel index out of bounds";
+ 392 |         case WET_ERR_DIVISION_BY_ZERO:
+ 393 |             return "WET_ERR_DIVISION_BY_ZERO: Division by zero";
+ 394 |         case WET_ERR_NULL_PTR:
+ 395 |             return "WET_ERR_NULL_PTR: Null pointer argument";
+ 396 |         case WET_ERR_ALLOC_FAILED:
+ 397 |             return "WET_ERR_ALLOC_FAILED: Memory allocation failed";
+ 398 |         case WET_ERR_HALTED:
+ 399 |             return "WET_ERR_HALTED: Virtual machine is halted";
+ 400 |         case WET_ERR_CHARGE_IMBALANCE:
+ 401 |             return "WET_ERR_CHARGE_IMBALANCE: Net charge imbalance exceeded safety threshold (0.5 nC over 10 ms)";
+ 402 |         case WET_ERR_EPILEPTIFORM_RUNAWAY:
+ 403 |             return "WET_ERR_EPILEPTIFORM_RUNAWAY: Epileptiform runaway firing breaker tripped (>150 Hz on >35% channels for 50 ms)";
+ 404 |         case WET_ERR_CAPABILITY_DENIED:
+ 405 |             return "WET_ERR_CAPABILITY_DENIED: Capability permission denied by bytecode security manifest";
+ 406 |         case WET_ERR_INTERLOCK_LOCKED:
+ 407 |             return "WET_ERR_INTERLOCK_LOCKED: Hardware interlock locked out; all stimulation disabled";
+ 408 |         case WET_ERR_CHARGE_DENSITY_EXCEEDED:
+ 409 |             return "WET_ERR_CHARGE_DENSITY_EXCEEDED: Single-phase charge density exceeded Shannon safety limit";
+ 410 |         case WET_ERR_FOCAL_EXCITOTOXICITY:
+ 411 |             return "WET_ERR_FOCAL_EXCITOTOXICITY: Focal excitotoxicity limit exceeded";
+ 412 |         case WET_ERR_SHEAR_STRESS_EXCEEDED:
+ 413 |             return "WET_ERR_SHEAR_STRESS_EXCEEDED: Requested microfluidic pump rate exceeds safe shear stress limit (15.0 uL/min)";
+ 414 |         case WET_ERR_SECURITY_UNTRUSTED:
+ 415 |             return "WET_ERR_SECURITY_UNTRUSTED: Bytecode failed cryptographic security signature verification";
+ 416 |         case WET_ERR_ACTUATOR_FAULT:
+ 417 |             return "WET_ERR_ACTUATOR_FAULT: Cyber-physical actuator execution fault or invalid parameter";
+ 418 |         case WET_ERR_THERMAL_LIMIT:
+ 419 |             return "WET_ERR_THERMAL_LIMIT: Temperature exceeded maximum biological threshold (38.0 C)";
+ 420 |         case WET_ERR_BUBBLE_DETECTED:
+ 421 |             return "WET_ERR_BUBBLE_DETECTED: Fluidic optical bubble detector tripped (cavitation hazard)";
+ 422 |         case WET_ERR_COMPLIANCE_RAILED:
+ 423 |             return "WET_ERR_COMPLIANCE_RAILED: Stimulator output voltage saturated ASIC compliance rail (+/-7.0 V)";
+ 424 |         case WET_ERR_BYTECODE_VERIFICATION:
+ 425 |             return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
+ 426 |         default:
+ 427 |             return "WET_ERR_UNKNOWN: Unknown error status";
+ 428 |     }
+ 429 | }
+ 430 | 
+ 431 | /* =========================================================================
+ 432 |  * Phase 3 Hardware Readiness & Safety Implementations
+ 433 |  * ========================================================================= */
+ 434 | 
+ 435 | WET_EXPORT void wet_configure_electrode(wet_vm_t* vm, uint8_t material, float area_um2) {
+ 436 |     if (!vm) return;
+ 437 |     interlocks_configure_electrode(&vm->interlocks, material, area_um2);
+ 438 | }
+ 439 | 
+ 440 | WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
+ 441 |     if (!vm) return;
+ 442 |     interlocks_active_discharge(&vm->interlocks, channel);
+ 443 | }
+ 444 | 
+ 445 | WET_EXPORT void wet_active_discharge_all(wet_vm_t* vm) {
+ 446 |     if (!vm) return;
+ 447 |     interlocks_active_discharge_all(&vm->interlocks);
+ 448 | }
+ 449 | 
+ 450 | WET_EXPORT void wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable) {
+ 451 |     if (!vm) return;
+ 452 |     interlocks_enable_dead_head_protection(&vm->interlocks, enable);
+ 453 | }
+ 454 | 
+ 455 | WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
+ 456 |     if (!vm) return;
+ 457 |     vm->life_supervisor.supervisor_active = 0;
+ 458 |     for (int p = 0; p < 8; ++p) {
+ 459 |         vm->pump_rates_ul_min[p] = 0.0f;
+ 460 |     }
+ 461 | }
+ 462 | 
+ 463 | WET_EXPORT void wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
+ 464 |     if (!vm) return;
+ 465 |     biophysics_set_blanking_window(&vm->bio, blanking_ms, enable_spatial);
+ 466 | }
+ 467 | 
+ 468 | WET_EXPORT wet_status_t wet_inject_current_stimulus(
+ 469 |     wet_vm_t* vm,
+ 470 |     uint8_t channel,
+ 471 |     float current_ua,
+ 472 |     float phase1_ms,
+ 473 |     float phase2_ms
+ 474 | ) {
+ 475 |     if (!vm) return WET_ERR_NULL_PTR;
+ 476 |     if (channel >= vm->config.channel_count) {
+ 477 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 478 |                  "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+ 479 |         return WET_ERR_OUT_OF_BOUNDS_CH;
+ 480 |     }
+ 481 |     if (vm->interlocks.locked) {
+ 482 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 483 |         return WET_ERR_INTERLOCK_LOCKED;
  484 |     }
  485 | 
- 486 |     /* Randles Interface check: V_elec = I * Rs + V_dl */
- 487 |     float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
- 488 |     wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
- 489 |     if (comp_st != WET_OK) {
- 490 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 491 |         return comp_st;
- 492 |     }
- 493 | 
- 494 |     /* Shannon charge density limit */
- 495 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
- 496 |         float q_p1 = fabsf(current_ua) * 1e-3f * phase1_ms;
- 497 |         float q_p2 = fabsf(current_ua) * 1e-3f * phase2_ms;
- 498 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
- 499 |             vm->interlocks.locked = 1;
- 500 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
- 501 |             vm->interlocks.tripped_channel = channel;
- 502 |             vm->interlocks.trip_tick = vm->current_tick;
- 503 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
- 504 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
- 505 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
- 506 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
- 507 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 508 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
- 509 |         }
- 510 |     }
- 511 | 
- 512 |     biophysics_schedule_stim_current(&vm->bio, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
- 513 |     vm->voltages[channel] = v_elec;
- 514 |     vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (phase1_ms - phase2_ms);
- 515 |     return WET_OK;
- 516 | }
+ 486 |     if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
+ 487 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 488 |                  "Capability denied for wet_inject_current_stimulus on ch %u", channel);
+ 489 |         return WET_ERR_CAPABILITY_DENIED;
+ 490 |     }
+ 491 | 
+ 492 |     /* Randles Interface check: V_elec = I * Rs + V_dl */
+ 493 |     float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+ 494 |     wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
+ 495 |     if (comp_st != WET_OK) {
+ 496 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 497 |         return comp_st;
+ 498 |     }
+ 499 | 
+ 500 |     /* Shannon charge density limit */
+ 501 |     if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
+ 502 |         float q_p1 = fabsf(current_ua) * 1e-3f * phase1_ms;
+ 503 |         float q_p2 = fabsf(current_ua) * 1e-3f * phase2_ms;
+ 504 |         if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+ 505 |             vm->interlocks.locked = 1;
+ 506 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+ 507 |             vm->interlocks.tripped_channel = channel;
+ 508 |             vm->interlocks.trip_tick = vm->current_tick;
+ 509 |             vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
+ 510 |             snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+ 511 |                      "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+ 512 |                      channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+ 513 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 514 |             return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+ 515 |         }
+ 516 |     }
  517 | 
- 518 | WET_EXPORT wet_status_t wet_verify_bytecode(
- 519 |     const uint8_t* bytecode,
- 520 |     size_t size,
- 521 |     char* err_buf,
- 522 |     size_t err_buf_len
- 523 | ) {
- 524 |     return wet_verify_bytecode_internal(bytecode, size, err_buf, err_buf_len);
- 525 | }
- 526 | 
- 527 | WET_EXPORT wet_status_t wet_vm_snapshot(
- 528 |     const wet_vm_t* vm,
- 529 |     uint8_t* buffer,
- 530 |     size_t* inout_len
- 531 | ) {
- 532 |     return wet_vm_snapshot_internal(vm, buffer, inout_len);
- 533 | }
- 534 | 
- 535 | WET_EXPORT wet_status_t wet_vm_restore(
- 536 |     wet_vm_t* vm,
- 537 |     const uint8_t* buffer,
- 538 |     size_t len
- 539 | ) {
- 540 |     return wet_vm_restore_internal(vm, buffer, len);
- 541 | }
- 542 | 
- 543 | WET_EXPORT void wet_set_environmental_sensors(
- 544 |     wet_vm_t* vm,
- 545 |     float ph,
- 546 |     float do_pct,
- 547 |     float co2_pct,
- 548 |     uint8_t bubble_sensor_id,
- 549 |     uint8_t bubble_state,
- 550 |     float flow_rate_ul_min
- 551 | ) {
- 552 |     if (!vm) return;
- 553 |     if (ph > 0.0f) vm->ph_level = ph;
- 554 |     if (do_pct > 0.0f) vm->dissolved_oxygen_pct = do_pct;
- 555 |     if (co2_pct > 0.0f) vm->dissolved_co2_pct = co2_pct;
- 556 |     if (bubble_sensor_id < 8) {
- 557 |         vm->bubble_detected[bubble_sensor_id] = bubble_state ? 1 : 0;
- 558 |         vm->fluid_flow_rate_ul_min[bubble_sensor_id] = flow_rate_ul_min;
- 559 |     }
- 560 | }
- 561 | 
- 562 | WET_EXPORT void wet_set_temperature(
- 563 |     wet_vm_t* vm,
- 564 |     float temp_c
- 565 | ) {
- 566 |     if (!vm) return;
- 567 |     vm->ambient_temperature_c = temp_c;
- 568 | }
- 569 | 
- 570 | WET_EXPORT void wet_set_channel_banks(
- 571 |     wet_vm_t* vm,
- 572 |     uint64_t ref_mask,
- 573 |     uint64_t rec_mask
- 574 | ) {
- 575 |     if (!vm) return;
- 576 |     interlocks_set_channel_banks(&vm->interlocks, ref_mask, rec_mask);
- 577 | }
+ 518 |     biophysics_schedule_stim_current(&vm->bio, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
+ 519 |     vm->voltages[channel] = v_elec;
+ 520 |     vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (phase1_ms - phase2_ms);
+ 521 |     return WET_OK;
+ 522 | }
+ 523 | 
+ 524 | WET_EXPORT wet_status_t wet_verify_bytecode(
+ 525 |     const uint8_t* bytecode,
+ 526 |     size_t size,
+ 527 |     char* err_buf,
+ 528 |     size_t err_buf_len
+ 529 | ) {
+ 530 |     return wet_verify_bytecode_internal(bytecode, size, err_buf, err_buf_len);
+ 531 | }
+ 532 | 
+ 533 | WET_EXPORT wet_status_t wet_vm_snapshot(
+ 534 |     const wet_vm_t* vm,
+ 535 |     uint8_t* buffer,
+ 536 |     size_t* inout_len
+ 537 | ) {
+ 538 |     return wet_vm_snapshot_internal(vm, buffer, inout_len);
+ 539 | }
+ 540 | 
+ 541 | WET_EXPORT wet_status_t wet_vm_restore(
+ 542 |     wet_vm_t* vm,
+ 543 |     const uint8_t* buffer,
+ 544 |     size_t len
+ 545 | ) {
+ 546 |     return wet_vm_restore_internal(vm, buffer, len);
+ 547 | }
+ 548 | 
+ 549 | WET_EXPORT void wet_set_environmental_sensors(
+ 550 |     wet_vm_t* vm,
+ 551 |     float ph,
+ 552 |     float do_pct,
+ 553 |     float co2_pct,
+ 554 |     uint8_t bubble_sensor_id,
+ 555 |     uint8_t bubble_state,
+ 556 |     float flow_rate_ul_min
+ 557 | ) {
+ 558 |     if (!vm) return;
+ 559 |     if (ph > 0.0f) vm->ph_level = ph;
+ 560 |     if (do_pct > 0.0f) vm->dissolved_oxygen_pct = do_pct;
+ 561 |     if (co2_pct > 0.0f) vm->dissolved_co2_pct = co2_pct;
+ 562 |     if (bubble_sensor_id < 8) {
+ 563 |         vm->bubble_detected[bubble_sensor_id] = bubble_state ? 1 : 0;
+ 564 |         vm->fluid_flow_rate_ul_min[bubble_sensor_id] = flow_rate_ul_min;
+ 565 |     }
+ 566 | }
+ 567 | 
+ 568 | WET_EXPORT void wet_set_temperature(
+ 569 |     wet_vm_t* vm,
+ 570 |     float temp_c
+ 571 | ) {
+ 572 |     if (!vm) return;
+ 573 |     vm->ambient_temperature_c = temp_c;
+ 574 | }
+ 575 | 
+ 576 | WET_EXPORT void wet_set_channel_banks(
+ 577 |     wet_vm_t* vm,
+ 578 |     uint64_t ref_mask,
+ 579 |     uint64_t rec_mask
+ 580 | ) {
+ 581 |     if (!vm) return;
+ 582 |     interlocks_set_channel_banks(&vm->interlocks, ref_mask, rec_mask);
+ 583 | }
+ 584 | 
+ 585 | WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
+ 586 |     const wet_vm_t* vm,
+ 587 |     float* out_matrix,
+ 588 |     size_t out_capacity_floats
+ 589 | ) {
+ 590 |     if (!vm || !out_matrix) return WET_ERR_NULL_PTR;
+ 591 |     if (out_capacity_floats < (size_t)(BIO_NUM_NEURONS * BIO_NUM_NEURONS)) {
+ 592 |         return WET_ERR_OUT_OF_BOUNDS_CH;
+ 593 |     }
+ 594 |     for (size_t i = 0; i < BIO_NUM_NEURONS; ++i) {
+ 595 |         for (size_t j = 0; j < BIO_NUM_NEURONS; ++j) {
+ 596 |             if (vm->bio.synapses[i][j].exists) {
+ 597 |                 out_matrix[i * BIO_NUM_NEURONS + j] = vm->bio.synapses[i][j].weight_ns;
+ 598 |             } else {
+ 599 |                 out_matrix[i * BIO_NUM_NEURONS + j] = 0.0f;
+ 600 |             }
+ 601 |         }
+ 602 |     }
+ 603 |     return WET_OK;
+ 604 | }
+ 605 | 
+ 606 | WET_EXPORT float wet_vm_get_synapse_weight(
+ 607 |     const wet_vm_t* vm,
+ 608 |     uint8_t pre,
+ 609 |     uint8_t post
+ 610 | ) {
+ 611 |     if (!vm || pre >= BIO_NUM_NEURONS || post >= BIO_NUM_NEURONS) return 0.0f;
+ 612 |     return biophysics_get_weight(&vm->bio, pre, post);
+ 613 | }
 ```
 
-### `native/src/wetvm_vm.c` (1953 lines, SHA-256: `a55c9f22bb0f1d78...`)
+### `native/src/wetvm_vm.c` (2023 lines, SHA-256: `4cce51ec2f893ada...`)
 
 ```text
    1 | #include "../include/wet_crt.h"
    2 | #include "../include/wetvm_types.h"
    3 | #include "../include/wetvm_api.h"
    4 | #include "../include/wetvm_vm.h"
-   5 | 
-   6 | /* Unaligned Little-Endian Memory Readers (prevents hardware faults on ARM/RISC-V) */
-   7 | static inline uint16_t wet_read_u16_le(const void* p) {
-   8 |     uint16_t val;
-   9 |     memcpy(&val, p, sizeof(val));
-  10 |     return val;
-  11 | }
-  12 | static inline int16_t wet_read_i16_le(const void* p) {
-  13 |     int16_t val;
-  14 |     memcpy(&val, p, sizeof(val));
-  15 |     return val;
-  16 | }
-  17 | static inline uint32_t wet_read_u32_le(const void* p) {
-  18 |     uint32_t val;
-  19 |     memcpy(&val, p, sizeof(val));
-  20 |     return val;
-  21 | }
-  22 | static inline int32_t wet_read_i32_le(const void* p) {
-  23 |     int32_t val;
-  24 |     memcpy(&val, p, sizeof(val));
-  25 |     return val;
-  26 | }
-  27 | static inline float wet_read_f32_le(const void* p) {
-  28 |     float val;
-  29 |     memcpy(&val, p, sizeof(val));
-  30 |     return val;
-  31 | }
-  32 | 
-  33 | /* =========================================================================
-  34 |  * IEEE 802.3 CRC32 Implementation
-  35 |  * ========================================================================= */
-  36 | 
-  37 | uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc) {
-  38 |     uint32_t crc = ~initial_crc;
-  39 |     for (size_t i = 0; i < length; ++i) {
-  40 |         crc ^= data[i];
-  41 |         for (int k = 0; k < 8; ++k) {
-  42 |             crc = (crc >> 1) ^ (0xEDB88320u & -(int32_t)(crc & 1));
-  43 |         }
-  44 |     }
-  45 |     return ~crc;
-  46 | }
-  47 | 
-  48 | /* =========================================================================
-  49 |  * Stack Management Helpers
-  50 |  * ========================================================================= */
-  51 | 
-  52 | static inline wet_status_t push_val(struct wet_vm_instance* vm, wet_value_t val) {
-  53 |     if (vm->sp >= vm->max_stack) {
-  54 |         snprintf(vm->last_error, sizeof(vm->last_error),
-  55 |                  "Operand stack overflow (limit %u reached)", (unsigned)vm->max_stack);
-  56 |         return WET_ERR_STACK_OVERFLOW;
-  57 |     }
-  58 |     vm->stack[vm->sp++] = val;
-  59 |     return WET_OK;
-  60 | }
-  61 | 
-  62 | static inline wet_status_t pop_val(struct wet_vm_instance* vm, wet_value_t* out_val) {
-  63 |     if (vm->sp == 0) {
-  64 |         snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow");
-  65 |         return WET_ERR_STACK_UNDERFLOW;
-  66 |     }
-  67 |     *out_val = vm->stack[--vm->sp];
-  68 |     return WET_OK;
-  69 | }
-  70 | 
-  71 | static inline float to_float(const wet_value_t* v) {
-  72 |     if (v->type == WET_VAL_FLOAT) {
-  73 |         return v->as.f_val;
-  74 |     }
-  75 |     if (v->type == WET_VAL_INT) {
-  76 |         return (float)v->as.i_val;
-  77 |     }
-  78 |     return 0.0f;
-  79 | }
-  80 | 
-  81 | static inline int32_t to_int(const wet_value_t* v) {
-  82 |     if (v->type == WET_VAL_INT) {
-  83 |         return v->as.i_val;
-  84 |     }
-  85 |     if (v->type == WET_VAL_FLOAT) {
-  86 |         return (int32_t)v->as.f_val;
-  87 |     }
-  88 |     return 0;
-  89 | }
-  90 | 
-  91 | static inline int is_truthy(const wet_value_t* v) {
-  92 |     if (v->type == WET_VAL_INT) {
-  93 |         return v->as.i_val != 0;
-  94 |     }
-  95 |     if (v->type == WET_VAL_FLOAT) {
-  96 |         return v->as.f_val != 0.0f;
-  97 |     }
-  98 |     if (v->type == WET_VAL_STRING) {
-  99 |         return v->as.s_val.len > 0;
- 100 |     }
- 101 |     return 0;
- 102 | }
- 103 | 
- 104 | /* =========================================================================
- 105 |  * Bytecode Loading and Verification
- 106 |  * ========================================================================= */
- 107 | 
- 108 | static void cleanup_constants(struct wet_vm_instance* vm) {
- 109 |     if (vm->constants) {
- 110 |         for (size_t i = 0; i < vm->num_constants; ++i) {
- 111 |             if (vm->constants[i].str_alloc) {
- 112 |                 free(vm->constants[i].str_alloc);
- 113 |                 vm->constants[i].str_alloc = NULL;
- 114 |             }
- 115 |         }
- 116 |         free(vm->constants);
- 117 |         vm->constants = NULL;
- 118 |         vm->num_constants = 0;
- 119 |     }
- 120 | }
- 121 | 
- 122 | static void cleanup_bytecode(struct wet_vm_instance* vm) {
- 123 |     cleanup_constants(vm);
- 124 |     if (vm->bytecode_raw) {
- 125 |         free(vm->bytecode_raw);
- 126 |         vm->bytecode_raw = NULL;
- 127 |         vm->bytecode_size = 0;
- 128 |     }
- 129 |     vm->code = NULL;
- 130 |     vm->code_size = 0;
- 131 | }
- 132 | 
- 133 | wet_status_t wet_vm_load_bytecode_internal(
- 134 |     struct wet_vm_instance* vm,
- 135 |     const uint8_t* code_bytes,
- 136 |     size_t size,
- 137 |     char* err_buf,
- 138 |     size_t err_buf_len
- 139 | ) {
- 140 |     if (!vm || !code_bytes) {
- 141 |         if (err_buf && err_buf_len > 0) {
- 142 |             snprintf(err_buf, err_buf_len, "Null pointer argument to wet_load_bytecode");
- 143 |         }
- 144 |         return WET_ERR_NULL_PTR;
- 145 |     }
- 146 | 
- 147 |     if (size < WET_HEADER_SIZE) {
- 148 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 149 |                  "Bytecode binary truncated: size %zu < header size %d", size, WET_HEADER_SIZE);
- 150 |         if (err_buf && err_buf_len > 0) {
- 151 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
- 152 |         }
- 153 |         return WET_ERR_MALFORMED_SECTION;
- 154 |     }
- 155 | 
- 156 |     const wet_bytecode_header_t* hdr = (const wet_bytecode_header_t*)code_bytes;
- 157 | 
- 158 |     /* 1. Verify Magic "WETB" */
- 159 |     if (hdr->magic[0] != 'W' || hdr->magic[1] != 'E' ||
- 160 |         hdr->magic[2] != 'T' || hdr->magic[3] != 'B') {
- 161 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 162 |                  "Invalid magic 0x%02X%02X%02X%02X (expected 'WETB')",
- 163 |                  hdr->magic[0], hdr->magic[1], hdr->magic[2], hdr->magic[3]);
- 164 |         if (err_buf && err_buf_len > 0) {
- 165 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
- 166 |         }
- 167 |         return WET_ERR_INVALID_MAGIC;
- 168 |     }
- 169 | 
- 170 |     /* 2. Verify Version */
- 171 |     if (hdr->version_major != WET_VERSION_MAJOR || hdr->version_minor != WET_VERSION_MINOR) {
- 172 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 173 |                  "Unsupported bytecode version %u.%u (expected %u.%u)",
- 174 |                  hdr->version_major, hdr->version_minor,
- 175 |                  WET_VERSION_MAJOR, WET_VERSION_MINOR);
- 176 |         if (err_buf && err_buf_len > 0) {
- 177 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
- 178 |         }
- 179 |         return WET_ERR_UNSUPPORTED_VERSION;
- 180 |     }
- 181 | 
- 182 |     /* 3. Verify File Size */
- 183 |     if (hdr->file_size != size) {
- 184 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 185 |                  "File size mismatch: header reports %u bytes, got %zu bytes",
- 186 |                  hdr->file_size, size);
- 187 |         if (err_buf && err_buf_len > 0) {
- 188 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
- 189 |         }
- 190 |         return WET_ERR_MALFORMED_SECTION;
- 191 |     }
- 192 | 
- 193 |     /* 4. Verify CRC32 Checksum (computed with CRC field at offset 12 zeroed) */
- 194 |     uint32_t expected_crc = hdr->checksum_crc32;
- 195 |     uint32_t calc_crc = wet_compute_crc32(code_bytes, 12, 0);
- 196 |     uint8_t zero_field[4] = {0, 0, 0, 0};
- 197 |     calc_crc = wet_compute_crc32(zero_field, 4, calc_crc);
- 198 |     if (size > 16) {
- 199 |         calc_crc = wet_compute_crc32(code_bytes + 16, size - 16, calc_crc);
- 200 |     }
- 201 | 
- 202 |     if (calc_crc != expected_crc) {
- 203 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 204 |                  "CRC32 mismatch: header has 0x%08X, calculated 0x%08X",
- 205 |                  expected_crc, calc_crc);
- 206 |         if (err_buf && err_buf_len > 0) {
- 207 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
- 208 |         }
- 209 |         return WET_ERR_CRC_MISMATCH;
- 210 |     }
- 211 | 
- 212 |     /* 5. Validate Section Table Bounds */
- 213 |     size_t sec_table_size = (size_t)hdr->num_sections * WET_SECTION_ENTRY_SIZE;
- 214 |     if (WET_HEADER_SIZE + sec_table_size > size) {
- 215 |         snprintf(vm->last_error, sizeof(vm->last_error),
- 216 |                  "Section table exceeds file boundary (%u sections)", hdr->num_sections);
- 217 |         if (err_buf && err_buf_len > 0) {
- 218 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
- 219 |         }
- 220 |         return WET_ERR_MALFORMED_SECTION;
- 221 |     }
- 222 | 
- 223 |     /* Clean up previous bytecode and allocate buffer for new bytecode */
- 224 |     cleanup_bytecode(vm);
- 225 |     vm->bytecode_raw = (uint8_t*)malloc(size);
- 226 |     if (!vm->bytecode_raw) {
- 227 |         snprintf(vm->last_error, sizeof(vm->last_error), "Memory allocation failed for bytecode");
- 228 |         return WET_ERR_ALLOC_FAILED;
- 229 |     }
- 230 |     memcpy(vm->bytecode_raw, code_bytes, size);
- 231 |     vm->bytecode_size = size;
- 232 | 
- 233 |     /* Parse Section Table */
- 234 |     const wet_section_header_t* sections =
- 235 |         (const wet_section_header_t*)(vm->bytecode_raw + WET_HEADER_SIZE);
- 236 | 
- 237 |     const uint8_t* code_ptr = NULL;
- 238 |     size_t code_len = 0;
- 239 | 
- 240 |     for (uint32_t i = 0; i < hdr->num_sections; ++i) {
- 241 |         uint16_t stype = sections[i].section_type;
- 242 |         uint32_t off = sections[i].offset;
- 243 |         uint32_t s_size = sections[i].size;
- 244 | 
- 245 |         if ((size_t)off + s_size > size) {
- 246 |             snprintf(vm->last_error, sizeof(vm->last_error),
- 247 |                      "Section %u (type %u) extends beyond file boundary", i, stype);
- 248 |             cleanup_bytecode(vm);
- 249 |             return WET_ERR_MALFORMED_SECTION;
- 250 |         }
- 251 | 
- 252 |         const uint8_t* sec_data = vm->bytecode_raw + off;
- 253 | 
- 254 |         if (stype == WET_SEC_CONSTANT_POOL) {
- 255 |             /* Unpack Constant Pool */
- 256 |             if (s_size < 4) {
- 257 |                 snprintf(vm->last_error, sizeof(vm->last_error), "Constant pool truncated");
- 258 |                 cleanup_bytecode(vm);
- 259 |                 return WET_ERR_MALFORMED_SECTION;
- 260 |             }
- 261 |             uint32_t num_consts = wet_read_u32_le(sec_data);
- 262 |             size_t c_pos = 4;
- 263 | 
- 264 |             vm->constants = (wet_constant_entry_t*)calloc(num_consts, sizeof(wet_constant_entry_t));
- 265 |             if (!vm->constants && num_consts > 0) {
- 266 |                 cleanup_bytecode(vm);
- 267 |                 return WET_ERR_ALLOC_FAILED;
- 268 |             }
- 269 |             vm->num_constants = num_consts;
- 270 | 
- 271 |             for (uint32_t c = 0; c < num_consts; ++c) {
- 272 |                 if (c_pos >= s_size) {
- 273 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Constant pool out of data");
- 274 |                     cleanup_bytecode(vm);
- 275 |                     return WET_ERR_MALFORMED_SECTION;
- 276 |                 }
- 277 |                 uint8_t tag = sec_data[c_pos++];
- 278 |                 vm->constants[c].val.type = tag;
- 279 | 
- 280 |                 if (tag == WET_VAL_INT) {
- 281 |                     if (c_pos + 4 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
- 282 |                     vm->constants[c].val.as.i_val = wet_read_i32_le(sec_data + c_pos);
- 283 |                     c_pos += 4;
- 284 |                 } else if (tag == WET_VAL_FLOAT) {
- 285 |                     if (c_pos + 4 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
- 286 |                     vm->constants[c].val.as.f_val = wet_read_f32_le(sec_data + c_pos);
- 287 |                     c_pos += 4;
- 288 |                 } else if (tag == WET_VAL_STRING) {
- 289 |                     if (c_pos + 2 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
- 290 |                     uint16_t str_len = wet_read_u16_le(sec_data + c_pos);
- 291 |                     c_pos += 2;
- 292 |                     if (c_pos + str_len > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
- 293 |                     char* sbuf = (char*)malloc(str_len + 1);
- 294 |                     if (!sbuf) { cleanup_bytecode(vm); return WET_ERR_ALLOC_FAILED; }
- 295 |                     memcpy(sbuf, sec_data + c_pos, str_len);
- 296 |                     sbuf[str_len] = '\0';
- 297 |                     vm->constants[c].str_alloc = sbuf;
- 298 |                     vm->constants[c].val.as.s_val.str = sbuf;
- 299 |                     vm->constants[c].val.as.s_val.len = str_len;
- 300 |                     c_pos += str_len;
- 301 |                 }
- 302 |             }
- 303 |         } else if (stype == WET_SEC_TOPOLOGY_CONFIG) {
- 304 |             if (s_size >= 8) {
- 305 |                 /* struct: channels (uint32), rows (uint16), cols (uint16) */
- 306 |                 vm->grid_rows = (uint8_t)wet_read_u16_le(sec_data + 4);
- 307 |                 vm->grid_cols = (uint8_t)wet_read_u16_le(sec_data + 6);
- 308 |             }
- 309 |         } else if (stype == WET_SEC_BYTECODE_STREAM) {
- 310 |             code_ptr = sec_data;
- 311 |             code_len = s_size;
- 312 |         }
- 313 |     }
- 314 | 
- 315 |     if (!code_ptr && code_len == 0) {
- 316 |         /* Bytecode section might be empty */
- 317 |         vm->code = vm->bytecode_raw;
- 318 |         vm->code_size = 0;
- 319 |     } else {
- 320 |         vm->code = code_ptr;
- 321 |         vm->code_size = code_len;
- 322 |     }
- 323 | 
- 324 |     /* Reset registers and runtime state */
- 325 |     vm->pc = 0;
- 326 |     vm->sp = 0;
- 327 |     vm->call_sp = 0;
- 328 |     vm->is_halted = 0;
- 329 |     vm->is_finished = 0;
- 330 |     vm->sleep_ticks_remaining = 0;
- 331 |     vm->current_tick = 0;
- 332 |     vm->sim_time_ms = 0.0;
- 333 |     vm->last_error[0] = '\0';
- 334 | 
- 335 |     vm->loaded_capabilities = hdr->capabilities;
- 336 |     biophysics_reset(&vm->bio);
- 337 |     interlocks_init(&vm->interlocks);
- 338 |     interlocks_set_capabilities(&vm->interlocks, hdr->capabilities, hdr->channel_count);
- 339 |     memset(vm->discharge_charge_nc, 0, sizeof(vm->discharge_charge_nc));
- 340 | 
- 341 |     /* Clear local variables */
- 342 |     if (vm->locals) {
- 343 |         memset(vm->locals, 0, sizeof(wet_value_t) * vm->max_locals);
- 344 |     }
- 345 | 
- 346 |     /* Clear channel outputs */
- 347 |     memset(vm->voltages, 0, sizeof(vm->voltages));
- 348 |     memset(vm->spikes, 0, sizeof(vm->spikes));
- 349 |     memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
- 350 |     vm->population_rate_hz = 0.0f;
- 351 | 
- 352 |     return WET_OK;
- 353 | }
- 354 | 
- 355 | /* =========================================================================
- 356 |  * Telemetry Snapshot Population
- 357 |  * ========================================================================= */
- 358 | 
- 359 | static void populate_telemetry(const struct wet_vm_instance* vm, wet_telemetry_t* telem) {
- 360 |     if (!telem) return;
- 361 |     telem->current_tick = vm->current_tick;
- 362 |     telem->sim_time_ms = vm->sim_time_ms;
- 363 |     telem->population_rate_hz = vm->population_rate_hz;
- 364 |     memcpy(telem->voltages, vm->voltages, sizeof(float) * 64);
- 365 |     memcpy(telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
- 366 |     memcpy(telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
- 367 | }
- 368 | 
- 369 | static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_telemetry_t* out_telem) {
- 370 |     if (vm->interlocks.locked) {
- 371 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 372 |         return WET_ERR_INTERLOCK_LOCKED;
- 373 |     }
- 374 | 
- 375 |     /* Dead-heading valve-pump overpressure check */
- 376 |     if (vm->interlocks.dead_head_protection_enabled) {
- 377 |         for (int p = 0; p < 8; ++p) {
- 378 |             if (vm->pump_rates_ul_min[p] > 0.0f) {
- 379 |                 uint8_t v = vm->interlocks.pump_valve_mapping[p];
- 380 |                 if (v < 8 && vm->valve_states[v] == 0) {
- 381 |                     vm->interlocks.locked = 1;
- 382 |                     vm->interlocks.trip_reason = INTERLOCK_TRIP_DEAD_HEAD_PRESSURE;
- 383 |                     snprintf(vm->last_error, sizeof(vm->last_error),
- 384 |                              "ERR_DEAD_HEAD_OVERPRESSURE: Pump %d active at %.2f uL/min while downstream valve %d is closed",
- 385 |                              p, (double)vm->pump_rates_ul_min[p], v);
- 386 |                     return WET_ERR_ACTUATOR_FAULT;
- 387 |                 }
- 388 |             }
- 389 |         }
- 390 |     }
- 391 | 
- 392 |     /* Phase 3 Environmental Checks: Thermal Limit (CMOS heating) & Bubble Detection */
- 393 |     if (vm->ambient_temperature_c > INTERLOCK_THERMAL_LIMIT_C) {
- 394 |         wet_status_t th_st = interlocks_check_thermal(&vm->interlocks, vm->current_tick, vm->ambient_temperature_c);
- 395 |         if (th_st != WET_OK) {
- 396 |             biophysics_zero_all_stim(&vm->bio);
- 397 |             vm->is_halted = 1;
- 398 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 399 |             populate_telemetry(vm, out_telem);
- 400 |             return th_st;
- 401 |         }
- 402 |     }
- 403 | 
- 404 |     for (int b = 0; b < 8; ++b) {
- 405 |         if (vm->bubble_detected[b]) {
- 406 |             wet_status_t bub_st = interlocks_check_bubble(&vm->interlocks, vm->current_tick, 1, (uint8_t)b);
- 407 |             if (bub_st != WET_OK) {
- 408 |                 for (int p = 0; p < 8; ++p) vm->pump_rates_ul_min[p] = 0.0f;
- 409 |                 biophysics_zero_all_stim(&vm->bio);
- 410 |                 vm->is_halted = 1;
- 411 |                 snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 412 |                 populate_telemetry(vm, out_telem);
- 413 |                 return bub_st;
- 414 |             }
- 415 |         }
- 416 |     }
- 417 | 
- 418 |     /* 1. Advance in-silico biophysics by 1 tick (dt = 0.1 ms) */
- 419 |     biophysics_step_tick(&vm->bio);
- 420 |     for (int ch = 0; ch < 64; ++ch) {
- 421 |         if (vm->discharge_charge_nc[ch] != 0.0f) {
- 422 |             vm->bio.tick_charge_nc[ch] += vm->discharge_charge_nc[ch];
- 423 |             vm->discharge_charge_nc[ch] = 0.0f;
- 424 |         }
- 425 |     }
- 426 |     vm->current_tick++;
- 427 |     vm->sim_time_ms = (double)vm->current_tick * vm->config.dt_ms;
- 428 |     vm->sim_time_us = (int64_t)((double)vm->current_tick * vm->config.dt_ms * 1000.0 + 0.5);
- 429 | 
- 430 |     /* 2. Check sliding charge balance watchdog */
- 431 |     wet_status_t il_st = interlocks_record_charge_tick(
- 432 |         &vm->interlocks, vm->current_tick, vm->bio.tick_charge_nc
- 433 |     );
- 434 |     if (il_st != WET_OK) {
- 435 |         biophysics_zero_all_stim(&vm->bio);
- 436 |         memset(vm->voltages, 0, sizeof(vm->voltages));
- 437 |         memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
- 438 |         memset(vm->bio.ext_stim_v, 0, sizeof(vm->bio.ext_stim_v));
- 439 |         memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
- 440 |         memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
- 441 |         vm->is_halted = 1;
- 442 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 443 |         populate_telemetry(vm, out_telem);
- 444 |         return il_st;
- 445 |     }
- 446 | 
- 447 |     /* 3. Check epileptiform runaway breaker */
- 448 |     il_st = interlocks_check_epileptiform(
- 449 |         &vm->interlocks, vm->current_tick, vm->bio.channel_rate_hz
- 450 |     );
- 451 |     if (il_st != WET_OK) {
- 452 |         biophysics_zero_all_stim(&vm->bio);
- 453 |         memset(vm->voltages, 0, sizeof(vm->voltages));
- 454 |         memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
- 455 |         memset(vm->bio.ext_stim_v, 0, sizeof(vm->bio.ext_stim_v));
- 456 |         memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
- 457 |         memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
- 458 |         vm->is_halted = 1;
- 459 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 460 |         populate_telemetry(vm, out_telem);
- 461 |         return il_st;
- 462 |     }
- 463 | 
- 464 |     /* 4. Sync outputs to VM registers & telemetry snapshot */
- 465 |     memcpy(vm->voltages, vm->bio.mea_voltage_v, sizeof(float) * 64);
- 466 |     memcpy(vm->spikes, vm->bio.spikes_now, sizeof(uint8_t) * 64);
- 467 |     memcpy(vm->last_charge_nc, vm->bio.tick_charge_nc, sizeof(float) * 64);
- 468 |     vm->population_rate_hz = vm->bio.population_rate_hz;
- 469 | 
- 470 |     populate_telemetry(vm, out_telem);
- 471 |     return WET_OK;
- 472 | }
- 473 | 
- 474 | /* =========================================================================
- 475 |  * Cycle-Accurate Execution Stepper
- 476 |  * ========================================================================= */
- 477 | 
- 478 | wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem) {
- 479 |     if (!vm) return WET_ERR_NULL_PTR;
- 480 | 
- 481 |     if (vm->interlocks.locked) {
- 482 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
- 483 |         return WET_ERR_INTERLOCK_LOCKED;
- 484 |     }
+   5 | #include "../include/wet_hal.h"
+   6 | 
+   7 | /* Unaligned Little-Endian Memory Readers (prevents hardware faults on ARM/RISC-V) */
+   8 | static inline uint16_t wet_read_u16_le(const void* p) {
+   9 |     uint16_t val;
+  10 |     memcpy(&val, p, sizeof(val));
+  11 |     return val;
+  12 | }
+  13 | static inline int16_t wet_read_i16_le(const void* p) {
+  14 |     int16_t val;
+  15 |     memcpy(&val, p, sizeof(val));
+  16 |     return val;
+  17 | }
+  18 | static inline uint32_t wet_read_u32_le(const void* p) {
+  19 |     uint32_t val;
+  20 |     memcpy(&val, p, sizeof(val));
+  21 |     return val;
+  22 | }
+  23 | static inline int32_t wet_read_i32_le(const void* p) {
+  24 |     int32_t val;
+  25 |     memcpy(&val, p, sizeof(val));
+  26 |     return val;
+  27 | }
+  28 | static inline float wet_read_f32_le(const void* p) {
+  29 |     float val;
+  30 |     memcpy(&val, p, sizeof(val));
+  31 |     return val;
+  32 | }
+  33 | 
+  34 | /* =========================================================================
+  35 |  * IEEE 802.3 CRC32 Implementation
+  36 |  * ========================================================================= */
+  37 | 
+  38 | uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc) {
+  39 |     uint32_t crc = ~initial_crc;
+  40 |     for (size_t i = 0; i < length; ++i) {
+  41 |         crc ^= data[i];
+  42 |         for (int k = 0; k < 8; ++k) {
+  43 |             crc = (crc >> 1) ^ (0xEDB88320u & -(int32_t)(crc & 1));
+  44 |         }
+  45 |     }
+  46 |     return ~crc;
+  47 | }
+  48 | 
+  49 | /* =========================================================================
+  50 |  * Stack Management Helpers
+  51 |  * ========================================================================= */
+  52 | 
+  53 | static inline wet_status_t push_val(struct wet_vm_instance* vm, wet_value_t val) {
+  54 |     if (vm->sp >= vm->max_stack) {
+  55 |         snprintf(vm->last_error, sizeof(vm->last_error),
+  56 |                  "Operand stack overflow (limit %u reached)", (unsigned)vm->max_stack);
+  57 |         return WET_ERR_STACK_OVERFLOW;
+  58 |     }
+  59 |     vm->stack[vm->sp++] = val;
+  60 |     return WET_OK;
+  61 | }
+  62 | 
+  63 | static inline wet_status_t pop_val(struct wet_vm_instance* vm, wet_value_t* out_val) {
+  64 |     if (vm->sp == 0) {
+  65 |         snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow");
+  66 |         return WET_ERR_STACK_UNDERFLOW;
+  67 |     }
+  68 |     *out_val = vm->stack[--vm->sp];
+  69 |     return WET_OK;
+  70 | }
+  71 | 
+  72 | static inline float to_float(const wet_value_t* v) {
+  73 |     if (v->type == WET_VAL_FLOAT) {
+  74 |         return v->as.f_val;
+  75 |     }
+  76 |     if (v->type == WET_VAL_INT) {
+  77 |         return (float)v->as.i_val;
+  78 |     }
+  79 |     return 0.0f;
+  80 | }
+  81 | 
+  82 | static inline int32_t to_int(const wet_value_t* v) {
+  83 |     if (v->type == WET_VAL_INT) {
+  84 |         return v->as.i_val;
+  85 |     }
+  86 |     if (v->type == WET_VAL_FLOAT) {
+  87 |         return (int32_t)v->as.f_val;
+  88 |     }
+  89 |     return 0;
+  90 | }
+  91 | 
+  92 | static inline int is_truthy(const wet_value_t* v) {
+  93 |     if (v->type == WET_VAL_INT) {
+  94 |         return v->as.i_val != 0;
+  95 |     }
+  96 |     if (v->type == WET_VAL_FLOAT) {
+  97 |         return v->as.f_val != 0.0f;
+  98 |     }
+  99 |     if (v->type == WET_VAL_STRING) {
+ 100 |         return v->as.s_val.len > 0;
+ 101 |     }
+ 102 |     return 0;
+ 103 | }
+ 104 | 
+ 105 | /* =========================================================================
+ 106 |  * Bytecode Loading and Verification
+ 107 |  * ========================================================================= */
+ 108 | 
+ 109 | static void cleanup_constants(struct wet_vm_instance* vm) {
+ 110 |     if (vm->constants) {
+ 111 |         for (size_t i = 0; i < vm->num_constants; ++i) {
+ 112 |             if (vm->constants[i].str_alloc) {
+ 113 |                 free(vm->constants[i].str_alloc);
+ 114 |                 vm->constants[i].str_alloc = NULL;
+ 115 |             }
+ 116 |         }
+ 117 |         free(vm->constants);
+ 118 |         vm->constants = NULL;
+ 119 |         vm->num_constants = 0;
+ 120 |     }
+ 121 | }
+ 122 | 
+ 123 | static void cleanup_bytecode(struct wet_vm_instance* vm) {
+ 124 |     cleanup_constants(vm);
+ 125 |     if (vm->bytecode_raw) {
+ 126 |         free(vm->bytecode_raw);
+ 127 |         vm->bytecode_raw = NULL;
+ 128 |         vm->bytecode_size = 0;
+ 129 |     }
+ 130 |     vm->code = NULL;
+ 131 |     vm->code_size = 0;
+ 132 | }
+ 133 | 
+ 134 | wet_status_t wet_vm_load_bytecode_internal(
+ 135 |     struct wet_vm_instance* vm,
+ 136 |     const uint8_t* code_bytes,
+ 137 |     size_t size,
+ 138 |     char* err_buf,
+ 139 |     size_t err_buf_len
+ 140 | ) {
+ 141 |     if (!vm || !code_bytes) {
+ 142 |         if (err_buf && err_buf_len > 0) {
+ 143 |             snprintf(err_buf, err_buf_len, "Null pointer argument to wet_load_bytecode");
+ 144 |         }
+ 145 |         return WET_ERR_NULL_PTR;
+ 146 |     }
+ 147 | 
+ 148 |     if (size < WET_HEADER_SIZE) {
+ 149 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 150 |                  "Bytecode binary truncated: size %zu < header size %d", size, WET_HEADER_SIZE);
+ 151 |         if (err_buf && err_buf_len > 0) {
+ 152 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+ 153 |         }
+ 154 |         return WET_ERR_MALFORMED_SECTION;
+ 155 |     }
+ 156 | 
+ 157 |     const wet_bytecode_header_t* hdr = (const wet_bytecode_header_t*)code_bytes;
+ 158 | 
+ 159 |     /* 1. Verify Magic "WETB" */
+ 160 |     if (hdr->magic[0] != 'W' || hdr->magic[1] != 'E' ||
+ 161 |         hdr->magic[2] != 'T' || hdr->magic[3] != 'B') {
+ 162 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 163 |                  "Invalid magic 0x%02X%02X%02X%02X (expected 'WETB')",
+ 164 |                  hdr->magic[0], hdr->magic[1], hdr->magic[2], hdr->magic[3]);
+ 165 |         if (err_buf && err_buf_len > 0) {
+ 166 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+ 167 |         }
+ 168 |         return WET_ERR_INVALID_MAGIC;
+ 169 |     }
+ 170 | 
+ 171 |     /* 2. Verify Version */
+ 172 |     if (hdr->version_major != WET_VERSION_MAJOR || hdr->version_minor != WET_VERSION_MINOR) {
+ 173 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 174 |                  "Unsupported bytecode version %u.%u (expected %u.%u)",
+ 175 |                  hdr->version_major, hdr->version_minor,
+ 176 |                  WET_VERSION_MAJOR, WET_VERSION_MINOR);
+ 177 |         if (err_buf && err_buf_len > 0) {
+ 178 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+ 179 |         }
+ 180 |         return WET_ERR_UNSUPPORTED_VERSION;
+ 181 |     }
+ 182 | 
+ 183 |     /* 3. Verify File Size */
+ 184 |     if (hdr->file_size != size) {
+ 185 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 186 |                  "File size mismatch: header reports %u bytes, got %zu bytes",
+ 187 |                  hdr->file_size, size);
+ 188 |         if (err_buf && err_buf_len > 0) {
+ 189 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+ 190 |         }
+ 191 |         return WET_ERR_MALFORMED_SECTION;
+ 192 |     }
+ 193 | 
+ 194 |     /* 4. Verify CRC32 Checksum (computed with CRC field at offset 12 zeroed) */
+ 195 |     uint32_t expected_crc = hdr->checksum_crc32;
+ 196 |     uint32_t calc_crc = wet_compute_crc32(code_bytes, 12, 0);
+ 197 |     uint8_t zero_field[4] = {0, 0, 0, 0};
+ 198 |     calc_crc = wet_compute_crc32(zero_field, 4, calc_crc);
+ 199 |     if (size > 16) {
+ 200 |         calc_crc = wet_compute_crc32(code_bytes + 16, size - 16, calc_crc);
+ 201 |     }
+ 202 | 
+ 203 |     if (calc_crc != expected_crc) {
+ 204 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 205 |                  "CRC32 mismatch: header has 0x%08X, calculated 0x%08X",
+ 206 |                  expected_crc, calc_crc);
+ 207 |         if (err_buf && err_buf_len > 0) {
+ 208 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+ 209 |         }
+ 210 |         return WET_ERR_CRC_MISMATCH;
+ 211 |     }
+ 212 | 
+ 213 |     /* 5. Validate Section Table Bounds */
+ 214 |     size_t sec_table_size = (size_t)hdr->num_sections * WET_SECTION_ENTRY_SIZE;
+ 215 |     if (WET_HEADER_SIZE + sec_table_size > size) {
+ 216 |         snprintf(vm->last_error, sizeof(vm->last_error),
+ 217 |                  "Section table exceeds file boundary (%u sections)", hdr->num_sections);
+ 218 |         if (err_buf && err_buf_len > 0) {
+ 219 |             snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+ 220 |         }
+ 221 |         return WET_ERR_MALFORMED_SECTION;
+ 222 |     }
+ 223 | 
+ 224 |     /* Clean up previous bytecode and allocate buffer for new bytecode */
+ 225 |     cleanup_bytecode(vm);
+ 226 |     vm->bytecode_raw = (uint8_t*)malloc(size);
+ 227 |     if (!vm->bytecode_raw) {
+ 228 |         snprintf(vm->last_error, sizeof(vm->last_error), "Memory allocation failed for bytecode");
+ 229 |         return WET_ERR_ALLOC_FAILED;
+ 230 |     }
+ 231 |     memcpy(vm->bytecode_raw, code_bytes, size);
+ 232 |     vm->bytecode_size = size;
+ 233 | 
+ 234 |     /* Parse Section Table */
+ 235 |     const wet_section_header_t* sections =
+ 236 |         (const wet_section_header_t*)(vm->bytecode_raw + WET_HEADER_SIZE);
+ 237 | 
+ 238 |     const uint8_t* code_ptr = NULL;
+ 239 |     size_t code_len = 0;
+ 240 | 
+ 241 |     for (uint32_t i = 0; i < hdr->num_sections; ++i) {
+ 242 |         uint16_t stype = sections[i].section_type;
+ 243 |         uint32_t off = sections[i].offset;
+ 244 |         uint32_t s_size = sections[i].size;
+ 245 | 
+ 246 |         if ((size_t)off + s_size > size) {
+ 247 |             snprintf(vm->last_error, sizeof(vm->last_error),
+ 248 |                      "Section %u (type %u) extends beyond file boundary", i, stype);
+ 249 |             cleanup_bytecode(vm);
+ 250 |             return WET_ERR_MALFORMED_SECTION;
+ 251 |         }
+ 252 | 
+ 253 |         const uint8_t* sec_data = vm->bytecode_raw + off;
+ 254 | 
+ 255 |         if (stype == WET_SEC_CONSTANT_POOL) {
+ 256 |             /* Unpack Constant Pool */
+ 257 |             if (s_size < 4) {
+ 258 |                 snprintf(vm->last_error, sizeof(vm->last_error), "Constant pool truncated");
+ 259 |                 cleanup_bytecode(vm);
+ 260 |                 return WET_ERR_MALFORMED_SECTION;
+ 261 |             }
+ 262 |             uint32_t num_consts = wet_read_u32_le(sec_data);
+ 263 |             size_t c_pos = 4;
+ 264 | 
+ 265 |             vm->constants = (wet_constant_entry_t*)calloc(num_consts, sizeof(wet_constant_entry_t));
+ 266 |             if (!vm->constants && num_consts > 0) {
+ 267 |                 cleanup_bytecode(vm);
+ 268 |                 return WET_ERR_ALLOC_FAILED;
+ 269 |             }
+ 270 |             vm->num_constants = num_consts;
+ 271 | 
+ 272 |             for (uint32_t c = 0; c < num_consts; ++c) {
+ 273 |                 if (c_pos >= s_size) {
+ 274 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Constant pool out of data");
+ 275 |                     cleanup_bytecode(vm);
+ 276 |                     return WET_ERR_MALFORMED_SECTION;
+ 277 |                 }
+ 278 |                 uint8_t tag = sec_data[c_pos++];
+ 279 |                 vm->constants[c].val.type = tag;
+ 280 | 
+ 281 |                 if (tag == WET_VAL_INT) {
+ 282 |                     if (c_pos + 4 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+ 283 |                     vm->constants[c].val.as.i_val = wet_read_i32_le(sec_data + c_pos);
+ 284 |                     c_pos += 4;
+ 285 |                 } else if (tag == WET_VAL_FLOAT) {
+ 286 |                     if (c_pos + 4 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+ 287 |                     vm->constants[c].val.as.f_val = wet_read_f32_le(sec_data + c_pos);
+ 288 |                     c_pos += 4;
+ 289 |                 } else if (tag == WET_VAL_STRING) {
+ 290 |                     if (c_pos + 2 > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+ 291 |                     uint16_t str_len = wet_read_u16_le(sec_data + c_pos);
+ 292 |                     c_pos += 2;
+ 293 |                     if (c_pos + str_len > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
+ 294 |                     char* sbuf = (char*)malloc(str_len + 1);
+ 295 |                     if (!sbuf) { cleanup_bytecode(vm); return WET_ERR_ALLOC_FAILED; }
+ 296 |                     memcpy(sbuf, sec_data + c_pos, str_len);
+ 297 |                     sbuf[str_len] = '\0';
+ 298 |                     vm->constants[c].str_alloc = sbuf;
+ 299 |                     vm->constants[c].val.as.s_val.str = sbuf;
+ 300 |                     vm->constants[c].val.as.s_val.len = str_len;
+ 301 |                     c_pos += str_len;
+ 302 |                 }
+ 303 |             }
+ 304 |         } else if (stype == WET_SEC_TOPOLOGY_CONFIG) {
+ 305 |             if (s_size >= 8) {
+ 306 |                 /* struct: channels (uint32), rows (uint16), cols (uint16) */
+ 307 |                 vm->grid_rows = (uint8_t)wet_read_u16_le(sec_data + 4);
+ 308 |                 vm->grid_cols = (uint8_t)wet_read_u16_le(sec_data + 6);
+ 309 |             }
+ 310 |         } else if (stype == WET_SEC_BYTECODE_STREAM) {
+ 311 |             code_ptr = sec_data;
+ 312 |             code_len = s_size;
+ 313 |         }
+ 314 |     }
+ 315 | 
+ 316 |     if (!code_ptr && code_len == 0) {
+ 317 |         /* Bytecode section might be empty */
+ 318 |         vm->code = vm->bytecode_raw;
+ 319 |         vm->code_size = 0;
+ 320 |     } else {
+ 321 |         vm->code = code_ptr;
+ 322 |         vm->code_size = code_len;
+ 323 |     }
+ 324 | 
+ 325 |     /* Reset registers and runtime state */
+ 326 |     vm->pc = 0;
+ 327 |     vm->sp = 0;
+ 328 |     vm->call_sp = 0;
+ 329 |     vm->is_halted = 0;
+ 330 |     vm->is_finished = 0;
+ 331 |     vm->sleep_ticks_remaining = 0;
+ 332 |     vm->current_tick = 0;
+ 333 |     vm->sim_time_ms = 0.0;
+ 334 |     vm->last_error[0] = '\0';
+ 335 | 
+ 336 |     vm->loaded_capabilities = hdr->capabilities;
+ 337 |     biophysics_reset(&vm->bio);
+ 338 |     interlocks_init(&vm->interlocks);
+ 339 |     interlocks_set_capabilities(&vm->interlocks, hdr->capabilities, hdr->channel_count);
+ 340 |     memset(vm->discharge_charge_nc, 0, sizeof(vm->discharge_charge_nc));
+ 341 | 
+ 342 |     /* Clear local variables */
+ 343 |     if (vm->locals) {
+ 344 |         memset(vm->locals, 0, sizeof(wet_value_t) * vm->max_locals);
+ 345 |     }
+ 346 | 
+ 347 |     /* Clear channel outputs */
+ 348 |     memset(vm->voltages, 0, sizeof(vm->voltages));
+ 349 |     memset(vm->spikes, 0, sizeof(vm->spikes));
+ 350 |     memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
+ 351 |     vm->population_rate_hz = 0.0f;
+ 352 | 
+ 353 |     return WET_OK;
+ 354 | }
+ 355 | 
+ 356 | /* =========================================================================
+ 357 |  * Telemetry Snapshot Population
+ 358 |  * ========================================================================= */
+ 359 | 
+ 360 | static void populate_telemetry(const struct wet_vm_instance* vm, wet_telemetry_t* telem) {
+ 361 |     if (!telem) return;
+ 362 |     telem->current_tick = vm->current_tick;
+ 363 |     telem->sim_time_ms = vm->sim_time_ms;
+ 364 |     telem->population_rate_hz = vm->population_rate_hz;
+ 365 |     memcpy(telem->voltages, vm->voltages, sizeof(float) * 64);
+ 366 |     memcpy(telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
+ 367 |     memcpy(telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
+ 368 | }
+ 369 | 
+ 370 | static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_telemetry_t* out_telem) {
+ 371 |     if (vm->interlocks.locked) {
+ 372 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 373 |         return WET_ERR_INTERLOCK_LOCKED;
+ 374 |     }
+ 375 | 
+ 376 |     /* Dead-heading valve-pump overpressure check */
+ 377 |     if (vm->interlocks.dead_head_protection_enabled) {
+ 378 |         for (int p = 0; p < 8; ++p) {
+ 379 |             if (vm->pump_rates_ul_min[p] > 0.0f) {
+ 380 |                 uint8_t v = vm->interlocks.pump_valve_mapping[p];
+ 381 |                 if (v < 8 && vm->valve_states[v] == 0) {
+ 382 |                     vm->interlocks.locked = 1;
+ 383 |                     vm->interlocks.trip_reason = INTERLOCK_TRIP_DEAD_HEAD_PRESSURE;
+ 384 |                     if (vm->hal) {
+ 385 |                         wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_DEAD_HEAD_PRESSURE);
+ 386 |                     }
+ 387 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+ 388 |                              "ERR_DEAD_HEAD_OVERPRESSURE: Pump %d active at %.2f uL/min while downstream valve %d is closed",
+ 389 |                              p, (double)vm->pump_rates_ul_min[p], v);
+ 390 |                     return WET_ERR_ACTUATOR_FAULT;
+ 391 |                 }
+ 392 |             }
+ 393 |         }
+ 394 |     }
+ 395 | 
+ 396 |     /* Phase 3 Environmental Checks: Thermal Limit (CMOS heating) & Bubble Detection */
+ 397 |     if (vm->ambient_temperature_c > INTERLOCK_THERMAL_LIMIT_C) {
+ 398 |         wet_status_t th_st = interlocks_check_thermal(&vm->interlocks, vm->current_tick, vm->ambient_temperature_c);
+ 399 |         if (th_st != WET_OK) {
+ 400 |             biophysics_zero_all_stim(&vm->bio);
+ 401 |             vm->is_halted = 1;
+ 402 |             if (vm->hal) {
+ 403 |                 wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+ 404 |             }
+ 405 |             snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 406 |             populate_telemetry(vm, out_telem);
+ 407 |             return th_st;
+ 408 |         }
+ 409 |     }
+ 410 | 
+ 411 |     for (int b = 0; b < 8; ++b) {
+ 412 |         if (vm->bubble_detected[b]) {
+ 413 |             wet_status_t bub_st = interlocks_check_bubble(&vm->interlocks, vm->current_tick, 1, (uint8_t)b);
+ 414 |             if (bub_st != WET_OK) {
+ 415 |                 for (int p = 0; p < 8; ++p) vm->pump_rates_ul_min[p] = 0.0f;
+ 416 |                 biophysics_zero_all_stim(&vm->bio);
+ 417 |                 vm->is_halted = 1;
+ 418 |                 if (vm->hal) {
+ 419 |                     wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+ 420 |                 }
+ 421 |                 snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 422 |                 populate_telemetry(vm, out_telem);
+ 423 |                 return bub_st;
+ 424 |             }
+ 425 |         }
+ 426 |     }
+ 427 | 
+ 428 |     /* 1. Advance in-silico biophysics by 1 tick (dt = 0.1 ms) */
+ 429 |     biophysics_step_tick(&vm->bio);
+ 430 |     for (int ch = 0; ch < 64; ++ch) {
+ 431 |         if (vm->discharge_charge_nc[ch] != 0.0f) {
+ 432 |             vm->bio.tick_charge_nc[ch] += vm->discharge_charge_nc[ch];
+ 433 |             vm->discharge_charge_nc[ch] = 0.0f;
+ 434 |         }
+ 435 |     }
+ 436 |     vm->current_tick++;
+ 437 |     vm->sim_time_ms = (double)vm->current_tick * vm->config.dt_ms;
+ 438 |     vm->sim_time_us = (int64_t)((double)vm->current_tick * vm->config.dt_ms * 1000.0 + 0.5);
+ 439 | 
+ 440 |     /* 2. Check sliding charge balance watchdog */
+ 441 |     wet_status_t il_st = interlocks_record_charge_tick(
+ 442 |         &vm->interlocks, vm->current_tick, vm->bio.tick_charge_nc
+ 443 |     );
+ 444 |     if (il_st != WET_OK) {
+ 445 |         biophysics_zero_all_stim(&vm->bio);
+ 446 |         memset(vm->voltages, 0, sizeof(vm->voltages));
+ 447 |         memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
+ 448 |         memset(vm->bio.ext_stim_v, 0, sizeof(vm->bio.ext_stim_v));
+ 449 |         memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
+ 450 |         memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
+ 451 |         vm->is_halted = 1;
+ 452 |         if (vm->hal) {
+ 453 |             wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+ 454 |         }
+ 455 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 456 |         populate_telemetry(vm, out_telem);
+ 457 |         return il_st;
+ 458 |     }
+ 459 | 
+ 460 |     /* 3. Check epileptiform runaway breaker */
+ 461 |     il_st = interlocks_check_epileptiform(
+ 462 |         &vm->interlocks, vm->current_tick, vm->bio.channel_rate_hz
+ 463 |     );
+ 464 |     if (il_st != WET_OK) {
+ 465 |         biophysics_zero_all_stim(&vm->bio);
+ 466 |         memset(vm->voltages, 0, sizeof(vm->voltages));
+ 467 |         memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
+ 468 |         memset(vm->bio.ext_stim_v, 0, sizeof(vm->bio.ext_stim_v));
+ 469 |         memset(vm->bio.mea_voltage_v, 0, sizeof(vm->bio.mea_voltage_v));
+ 470 |         memset(vm->bio.tick_charge_nc, 0, sizeof(vm->bio.tick_charge_nc));
+ 471 |         vm->is_halted = 1;
+ 472 |         if (vm->hal) {
+ 473 |             wet_hal_emergency_crowbar(vm, vm->interlocks.trip_reason);
+ 474 |         }
+ 475 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 476 |         populate_telemetry(vm, out_telem);
+ 477 |         return il_st;
+ 478 |     }
+ 479 | 
+ 480 |     /* 4. Sync outputs to VM registers & telemetry snapshot */
+ 481 |     memcpy(vm->voltages, vm->bio.mea_voltage_v, sizeof(float) * 64);
+ 482 |     memcpy(vm->spikes, vm->bio.spikes_now, sizeof(uint8_t) * 64);
+ 483 |     memcpy(vm->last_charge_nc, vm->bio.tick_charge_nc, sizeof(float) * 64);
+ 484 |     vm->population_rate_hz = vm->bio.population_rate_hz;
  485 | 
- 486 |     if (vm->is_halted) {
- 487 |         if (vm->life_supervisor.supervisor_active) {
- 488 |             /* Ring-0 Life Support Supervisor: Maintain baseline nutrient perfusion & temperature */
- 489 |             for (int p = 0; p < 8; ++p) {
- 490 |                 if (vm->pump_rates_ul_min[p] == 0.0f) {
- 491 |                     vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
- 492 |                 }
- 493 |             }
- 494 |             vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
- 495 |             vm->life_supervisor.ticks_under_supervisor++;
- 496 |         }
- 497 |         snprintf(vm->last_error, sizeof(vm->last_error), "VM is halted");
- 498 |         return WET_ERR_HALTED;
- 499 |     }
- 500 | 
- 501 |     /* If bytecode execution has finished or reached end, continue free-running biological stepping */
- 502 |     if (vm->is_finished || vm->pc >= vm->code_size) {
+ 486 |     populate_telemetry(vm, out_telem);
+ 487 |     return WET_OK;
+ 488 | }
+ 489 | 
+ 490 | /* =========================================================================
+ 491 |  * Cycle-Accurate Execution Stepper
+ 492 |  * ========================================================================= */
+ 493 | 
+ 494 | wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem) {
+ 495 |     if (!vm) return WET_ERR_NULL_PTR;
+ 496 | 
+ 497 |     if (vm->interlocks.locked) {
+ 498 |         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+ 499 |         return WET_ERR_INTERLOCK_LOCKED;
+ 500 |     }
+ 501 | 
+ 502 |     if (vm->is_halted) {
  503 |         if (vm->life_supervisor.supervisor_active) {
- 504 |             for (int p = 0; p < 8; ++p) {
- 505 |                 if (vm->pump_rates_ul_min[p] == 0.0f) {
- 506 |                     vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
- 507 |                 }
- 508 |             }
- 509 |             vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
- 510 |             vm->life_supervisor.ticks_under_supervisor++;
- 511 |         }
- 512 |         return advance_simulation_tick(vm, out_telem);
- 513 |     }
- 514 | 
- 515 |     /* Handle ongoing SLEEP_TICKS decrement */
- 516 |     if (vm->sleep_ticks_remaining > 0) {
- 517 |         vm->sleep_ticks_remaining--;
- 518 |         return advance_simulation_tick(vm, out_telem);
- 519 |     }
- 520 | 
- 521 |     /* Dispatch instructions until a tick yield (SYNC_TICK, SLEEP_TICKS, HALT) */
- 522 |     uint32_t instr_count = 0;
- 523 |     uint32_t max_ops = vm->config.max_ops_per_tick ? vm->config.max_ops_per_tick : 100000U;
- 524 |     while (!vm->is_halted && !vm->is_finished) {
- 525 |         if (++instr_count > max_ops) {
- 526 |             biophysics_zero_all_stim(&vm->bio);
- 527 |             vm->interlocks.locked = 1;
- 528 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CAPABILITY_VIOLATION;
- 529 |             if (max_ops == 100000U) {
- 530 |                 snprintf(vm->last_error, sizeof(vm->last_error),
- 531 |                          "WET_ERR_WATCHDOG_TIMEOUT: Exceeded 100,000 instructions in a single tick");
- 532 |             } else {
- 533 |                 snprintf(vm->last_error, sizeof(vm->last_error),
- 534 |                          "WET_ERR_WATCHDOG_TIMEOUT: Exceeded %u instructions in a single tick", max_ops);
- 535 |             }
- 536 |             return WET_ERR_WATCHDOG_TIMEOUT;
- 537 |         }
- 538 | 
- 539 |         if (vm->pc >= vm->code_size) {
- 540 |             /* End of bytecode reached: advance simulation tick */
- 541 |             vm->is_finished = 1;
- 542 |             return advance_simulation_tick(vm, out_telem);
- 543 |         }
- 544 | 
- 545 |         size_t instr_pc = vm->pc;
- 546 |         uint8_t op = vm->code[instr_pc];
- 547 | 
- 548 |         switch ((wet_opcode_t)op) {
- 549 |             case WET_OP_NOP: {
- 550 |                 vm->pc = instr_pc + 1;
- 551 |                 break;
- 552 |             }
- 553 | 
- 554 |             case WET_OP_HALT: {
- 555 |                 vm->is_finished = 1;
- 556 |                 vm->pc = instr_pc + 1;
- 557 |                 if (vm->life_supervisor.supervisor_active) {
- 558 |                     for (int p = 0; p < 8; ++p) {
- 559 |                         if (vm->pump_rates_ul_min[p] == 0.0f) {
- 560 |                             vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
- 561 |                         }
- 562 |                     }
- 563 |                     vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
- 564 |                     vm->life_supervisor.ticks_under_supervisor++;
- 565 |                 }
- 566 |                 return advance_simulation_tick(vm, out_telem);
- 567 |             }
- 568 | 
- 569 |             case WET_OP_SYNC_TICK: {
- 570 |                 vm->pc = instr_pc + 1;
- 571 |                 return advance_simulation_tick(vm, out_telem);
- 572 |             }
- 573 | 
- 574 |             case WET_OP_SLEEP_TICKS: {
- 575 |                 if (instr_pc + 3 > vm->code_size) {
- 576 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated SLEEP_TICKS operand");
- 577 |                     return WET_ERR_INVALID_OPCODE;
- 578 |                 }
- 579 |                 uint16_t ticks = wet_read_u16_le(vm->code + instr_pc + 1);
- 580 |                 vm->pc = instr_pc + 3;
- 581 | 
- 582 |                 if (ticks > 1) {
- 583 |                     vm->sleep_ticks_remaining = ticks - 1;
- 584 |                 }
- 585 |                 return advance_simulation_tick(vm, out_telem);
- 586 |             }
- 587 | 
- 588 |             case WET_OP_PUSH_CONST: {
- 589 |                 if (instr_pc + 3 > vm->code_size) {
- 590 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_CONST operand");
- 591 |                     return WET_ERR_INVALID_OPCODE;
- 592 |                 }
- 593 |                 uint16_t idx = wet_read_u16_le(vm->code + instr_pc + 1);
- 594 |                 vm->pc = instr_pc + 3;
- 595 |                 if (idx >= vm->num_constants) {
- 596 |                     snprintf(vm->last_error, sizeof(vm->last_error),
- 597 |                              "Constant pool index %u out of range (%zu)", idx, vm->num_constants);
- 598 |                     return WET_ERR_INVALID_OPCODE;
- 599 |                 }
- 600 |                 wet_status_t st = push_val(vm, vm->constants[idx].val);
- 601 |                 if (st != WET_OK) return st;
- 602 |                 break;
- 603 |             }
- 604 | 
- 605 |             case WET_OP_PUSH_INT: {
- 606 |                 if (instr_pc + 5 > vm->code_size) {
- 607 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_INT operand");
- 608 |                     return WET_ERR_INVALID_OPCODE;
- 609 |                 }
- 610 |                 int32_t val = wet_read_i32_le(vm->code + instr_pc + 1);
- 611 |                 vm->pc = instr_pc + 5;
- 612 |                 wet_value_t v;
- 613 |                 v.type = WET_VAL_INT;
- 614 |                 v.as.i_val = val;
- 615 |                 wet_status_t st = push_val(vm, v);
- 616 |                 if (st != WET_OK) return st;
- 617 |                 break;
- 618 |             }
- 619 | 
- 620 |             case WET_OP_PUSH_FLOAT: {
- 621 |                 if (instr_pc + 5 > vm->code_size) {
- 622 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_FLOAT operand");
- 623 |                     return WET_ERR_INVALID_OPCODE;
- 624 |                 }
- 625 |                 float val = wet_read_f32_le(vm->code + instr_pc + 1);
- 626 |                 vm->pc = instr_pc + 5;
- 627 |                 wet_value_t v;
- 628 |                 v.type = WET_VAL_FLOAT;
- 629 |                 v.as.f_val = val;
- 630 |                 wet_status_t st = push_val(vm, v);
- 631 |                 if (st != WET_OK) return st;
- 632 |                 break;
- 633 |             }
- 634 | 
- 635 |             case WET_OP_POP: {
- 636 |                 vm->pc = instr_pc + 1;
- 637 |                 wet_value_t dummy;
- 638 |                 wet_status_t st = pop_val(vm, &dummy);
- 639 |                 if (st != WET_OK) return st;
- 640 |                 break;
- 641 |             }
- 642 | 
- 643 |             case WET_OP_DUP: {
- 644 |                 vm->pc = instr_pc + 1;
- 645 |                 if (vm->sp == 0) {
- 646 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow on DUP");
- 647 |                     return WET_ERR_STACK_UNDERFLOW;
- 648 |                 }
- 649 |                 wet_value_t top = vm->stack[vm->sp - 1];
- 650 |                 wet_status_t st = push_val(vm, top);
- 651 |                 if (st != WET_OK) return st;
- 652 |                 break;
- 653 |             }
- 654 | 
- 655 |             case WET_OP_SWAP: {
- 656 |                 vm->pc = instr_pc + 1;
- 657 |                 if (vm->sp < 2) {
- 658 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow on SWAP");
- 659 |                     return WET_ERR_STACK_UNDERFLOW;
- 660 |                 }
- 661 |                 wet_value_t a = vm->stack[vm->sp - 1];
- 662 |                 vm->stack[vm->sp - 1] = vm->stack[vm->sp - 2];
- 663 |                 vm->stack[vm->sp - 2] = a;
- 664 |                 break;
- 665 |             }
- 666 | 
- 667 |             case WET_OP_LOAD_LOCAL: {
- 668 |                 if (instr_pc + 3 > vm->code_size) {
- 669 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated LOAD_LOCAL operand");
- 670 |                     return WET_ERR_INVALID_OPCODE;
- 671 |                 }
- 672 |                 uint16_t slot = wet_read_u16_le(vm->code + instr_pc + 1);
- 673 |                 vm->pc = instr_pc + 3;
- 674 |                 if (slot >= vm->max_locals) {
- 675 |                     snprintf(vm->last_error, sizeof(vm->last_error),
- 676 |                              "Local slot %u out of bounds (%zu)", slot, vm->max_locals);
- 677 |                     return WET_ERR_INVALID_OPCODE;
- 678 |                 }
- 679 |                 wet_status_t st = push_val(vm, vm->locals[slot]);
- 680 |                 if (st != WET_OK) return st;
- 681 |                 break;
- 682 |             }
- 683 | 
- 684 |             case WET_OP_STORE_LOCAL: {
- 685 |                 if (instr_pc + 3 > vm->code_size) {
- 686 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STORE_LOCAL operand");
- 687 |                     return WET_ERR_INVALID_OPCODE;
- 688 |                 }
- 689 |                 uint16_t slot = wet_read_u16_le(vm->code + instr_pc + 1);
- 690 |                 vm->pc = instr_pc + 3;
- 691 |                 if (slot >= vm->max_locals) {
- 692 |                     snprintf(vm->last_error, sizeof(vm->last_error),
- 693 |                              "Local slot %u out of bounds (%zu)", slot, vm->max_locals);
- 694 |                     return WET_ERR_INVALID_OPCODE;
- 695 |                 }
- 696 |                 wet_value_t val;
- 697 |                 wet_status_t st = pop_val(vm, &val);
- 698 |                 if (st != WET_OK) return st;
- 699 |                 vm->locals[slot] = val;
- 700 |                 break;
- 701 |             }
- 702 | 
- 703 |             case WET_OP_ADD_I: {
- 704 |                 vm->pc = instr_pc + 1;
- 705 |                 wet_value_t b, a;
- 706 |                 wet_status_t st = pop_val(vm, &b);
- 707 |                 if (st != WET_OK) return st;
- 708 |                 st = pop_val(vm, &a);
- 709 |                 if (st != WET_OK) return st;
- 710 |                 wet_value_t res;
- 711 |                 res.type = WET_VAL_INT;
- 712 |                 res.as.i_val = to_int(&a) + to_int(&b);
- 713 |                 st = push_val(vm, res);
+ 504 |             /* Ring-0 Life Support Supervisor: Maintain baseline nutrient perfusion & temperature */
+ 505 |             for (int p = 0; p < 8; ++p) {
+ 506 |                 if (vm->pump_rates_ul_min[p] == 0.0f) {
+ 507 |                     vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
+ 508 |                 }
+ 509 |             }
+ 510 |             vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
+ 511 |             vm->life_supervisor.ticks_under_supervisor++;
+ 512 |         }
+ 513 |         snprintf(vm->last_error, sizeof(vm->last_error), "VM is halted");
+ 514 |         return WET_ERR_HALTED;
+ 515 |     }
+ 516 | 
+ 517 |     /* If bytecode execution has finished or reached end, continue free-running biological stepping */
+ 518 |     if (vm->is_finished || vm->pc >= vm->code_size) {
+ 519 |         if (vm->life_supervisor.supervisor_active) {
+ 520 |             for (int p = 0; p < 8; ++p) {
+ 521 |                 if (vm->pump_rates_ul_min[p] == 0.0f) {
+ 522 |                     vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
+ 523 |                 }
+ 524 |             }
+ 525 |             vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
+ 526 |             vm->life_supervisor.ticks_under_supervisor++;
+ 527 |         }
+ 528 |         return advance_simulation_tick(vm, out_telem);
+ 529 |     }
+ 530 | 
+ 531 |     /* Handle ongoing SLEEP_TICKS decrement */
+ 532 |     if (vm->sleep_ticks_remaining > 0) {
+ 533 |         vm->sleep_ticks_remaining--;
+ 534 |         return advance_simulation_tick(vm, out_telem);
+ 535 |     }
+ 536 | 
+ 537 |     /* Dispatch instructions until a tick yield (SYNC_TICK, SLEEP_TICKS, HALT) */
+ 538 |     uint32_t instr_count = 0;
+ 539 |     uint32_t max_ops = vm->config.max_ops_per_tick ? vm->config.max_ops_per_tick : 100000U;
+ 540 |     while (!vm->is_halted && !vm->is_finished) {
+ 541 |         if (++instr_count > max_ops) {
+ 542 |             biophysics_zero_all_stim(&vm->bio);
+ 543 |             vm->interlocks.locked = 1;
+ 544 |             vm->interlocks.trip_reason = INTERLOCK_TRIP_CAPABILITY_VIOLATION;
+ 545 |             if (max_ops == 100000U) {
+ 546 |                 snprintf(vm->last_error, sizeof(vm->last_error),
+ 547 |                          "WET_ERR_WATCHDOG_TIMEOUT: Exceeded 100,000 instructions in a single tick");
+ 548 |             } else {
+ 549 |                 snprintf(vm->last_error, sizeof(vm->last_error),
+ 550 |                          "WET_ERR_WATCHDOG_TIMEOUT: Exceeded %u instructions in a single tick", max_ops);
+ 551 |             }
+ 552 |             return WET_ERR_WATCHDOG_TIMEOUT;
+ 553 |         }
+ 554 | 
+ 555 |         if (vm->pc >= vm->code_size) {
+ 556 |             /* End of bytecode reached: advance simulation tick */
+ 557 |             vm->is_finished = 1;
+ 558 |             return advance_simulation_tick(vm, out_telem);
+ 559 |         }
+ 560 | 
+ 561 |         size_t instr_pc = vm->pc;
+ 562 |         uint8_t op = vm->code[instr_pc];
+ 563 | 
+ 564 |         switch ((wet_opcode_t)op) {
+ 565 |             case WET_OP_NOP: {
+ 566 |                 vm->pc = instr_pc + 1;
+ 567 |                 break;
+ 568 |             }
+ 569 | 
+ 570 |             case WET_OP_HALT: {
+ 571 |                 vm->is_finished = 1;
+ 572 |                 vm->pc = instr_pc + 1;
+ 573 |                 if (vm->life_supervisor.supervisor_active) {
+ 574 |                     for (int p = 0; p < 8; ++p) {
+ 575 |                         if (vm->pump_rates_ul_min[p] == 0.0f) {
+ 576 |                             vm->pump_rates_ul_min[p] = vm->life_supervisor.maintenance_perfusion_ul_min[p];
+ 577 |                         }
+ 578 |                     }
+ 579 |                     vm->ambient_temperature_c = vm->life_supervisor.maintenance_temperature_c;
+ 580 |                     vm->life_supervisor.ticks_under_supervisor++;
+ 581 |                 }
+ 582 |                 return advance_simulation_tick(vm, out_telem);
+ 583 |             }
+ 584 | 
+ 585 |             case WET_OP_SYNC_TICK: {
+ 586 |                 vm->pc = instr_pc + 1;
+ 587 |                 return advance_simulation_tick(vm, out_telem);
+ 588 |             }
+ 589 | 
+ 590 |             case WET_OP_SLEEP_TICKS: {
+ 591 |                 if (instr_pc + 3 > vm->code_size) {
+ 592 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated SLEEP_TICKS operand");
+ 593 |                     return WET_ERR_INVALID_OPCODE;
+ 594 |                 }
+ 595 |                 uint16_t ticks = wet_read_u16_le(vm->code + instr_pc + 1);
+ 596 |                 vm->pc = instr_pc + 3;
+ 597 | 
+ 598 |                 if (ticks > 1) {
+ 599 |                     vm->sleep_ticks_remaining = ticks - 1;
+ 600 |                 }
+ 601 |                 return advance_simulation_tick(vm, out_telem);
+ 602 |             }
+ 603 | 
+ 604 |             case WET_OP_PUSH_CONST: {
+ 605 |                 if (instr_pc + 3 > vm->code_size) {
+ 606 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_CONST operand");
+ 607 |                     return WET_ERR_INVALID_OPCODE;
+ 608 |                 }
+ 609 |                 uint16_t idx = wet_read_u16_le(vm->code + instr_pc + 1);
+ 610 |                 vm->pc = instr_pc + 3;
+ 611 |                 if (idx >= vm->num_constants) {
+ 612 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+ 613 |                              "Constant pool index %u out of range (%zu)", idx, vm->num_constants);
+ 614 |                     return WET_ERR_INVALID_OPCODE;
+ 615 |                 }
+ 616 |                 wet_status_t st = push_val(vm, vm->constants[idx].val);
+ 617 |                 if (st != WET_OK) return st;
+ 618 |                 break;
+ 619 |             }
+ 620 | 
+ 621 |             case WET_OP_PUSH_INT: {
+ 622 |                 if (instr_pc + 5 > vm->code_size) {
+ 623 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_INT operand");
+ 624 |                     return WET_ERR_INVALID_OPCODE;
+ 625 |                 }
+ 626 |                 int32_t val = wet_read_i32_le(vm->code + instr_pc + 1);
+ 627 |                 vm->pc = instr_pc + 5;
+ 628 |                 wet_value_t v;
+ 629 |                 v.type = WET_VAL_INT;
+ 630 |                 v.as.i_val = val;
+ 631 |                 wet_status_t st = push_val(vm, v);
+ 632 |                 if (st != WET_OK) return st;
+ 633 |                 break;
+ 634 |             }
+ 635 | 
+ 636 |             case WET_OP_PUSH_FLOAT: {
+ 637 |                 if (instr_pc + 5 > vm->code_size) {
+ 638 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUSH_FLOAT operand");
+ 639 |                     return WET_ERR_INVALID_OPCODE;
+ 640 |                 }
+ 641 |                 float val = wet_read_f32_le(vm->code + instr_pc + 1);
+ 642 |                 vm->pc = instr_pc + 5;
+ 643 |                 wet_value_t v;
+ 644 |                 v.type = WET_VAL_FLOAT;
+ 645 |                 v.as.f_val = val;
+ 646 |                 wet_status_t st = push_val(vm, v);
+ 647 |                 if (st != WET_OK) return st;
+ 648 |                 break;
+ 649 |             }
+ 650 | 
+ 651 |             case WET_OP_POP: {
+ 652 |                 vm->pc = instr_pc + 1;
+ 653 |                 wet_value_t dummy;
+ 654 |                 wet_status_t st = pop_val(vm, &dummy);
+ 655 |                 if (st != WET_OK) return st;
+ 656 |                 break;
+ 657 |             }
+ 658 | 
+ 659 |             case WET_OP_DUP: {
+ 660 |                 vm->pc = instr_pc + 1;
+ 661 |                 if (vm->sp == 0) {
+ 662 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow on DUP");
+ 663 |                     return WET_ERR_STACK_UNDERFLOW;
+ 664 |                 }
+ 665 |                 wet_value_t top = vm->stack[vm->sp - 1];
+ 666 |                 wet_status_t st = push_val(vm, top);
+ 667 |                 if (st != WET_OK) return st;
+ 668 |                 break;
+ 669 |             }
+ 670 | 
+ 671 |             case WET_OP_SWAP: {
+ 672 |                 vm->pc = instr_pc + 1;
+ 673 |                 if (vm->sp < 2) {
+ 674 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Operand stack underflow on SWAP");
+ 675 |                     return WET_ERR_STACK_UNDERFLOW;
+ 676 |                 }
+ 677 |                 wet_value_t a = vm->stack[vm->sp - 1];
+ 678 |                 vm->stack[vm->sp - 1] = vm->stack[vm->sp - 2];
+ 679 |                 vm->stack[vm->sp - 2] = a;
+ 680 |                 break;
+ 681 |             }
+ 682 | 
+ 683 |             case WET_OP_LOAD_LOCAL: {
+ 684 |                 if (instr_pc + 3 > vm->code_size) {
+ 685 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated LOAD_LOCAL operand");
+ 686 |                     return WET_ERR_INVALID_OPCODE;
+ 687 |                 }
+ 688 |                 uint16_t slot = wet_read_u16_le(vm->code + instr_pc + 1);
+ 689 |                 vm->pc = instr_pc + 3;
+ 690 |                 if (slot >= vm->max_locals) {
+ 691 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+ 692 |                              "Local slot %u out of bounds (%zu)", slot, vm->max_locals);
+ 693 |                     return WET_ERR_INVALID_OPCODE;
+ 694 |                 }
+ 695 |                 wet_status_t st = push_val(vm, vm->locals[slot]);
+ 696 |                 if (st != WET_OK) return st;
+ 697 |                 break;
+ 698 |             }
+ 699 | 
+ 700 |             case WET_OP_STORE_LOCAL: {
+ 701 |                 if (instr_pc + 3 > vm->code_size) {
+ 702 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STORE_LOCAL operand");
+ 703 |                     return WET_ERR_INVALID_OPCODE;
+ 704 |                 }
+ 705 |                 uint16_t slot = wet_read_u16_le(vm->code + instr_pc + 1);
+ 706 |                 vm->pc = instr_pc + 3;
+ 707 |                 if (slot >= vm->max_locals) {
+ 708 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+ 709 |                              "Local slot %u out of bounds (%zu)", slot, vm->max_locals);
+ 710 |                     return WET_ERR_INVALID_OPCODE;
+ 711 |                 }
+ 712 |                 wet_value_t val;
+ 713 |                 wet_status_t st = pop_val(vm, &val);
  714 |                 if (st != WET_OK) return st;
- 715 |                 break;
- 716 |             }
- 717 | 
- 718 |             case WET_OP_SUB_I: {
- 719 |                 vm->pc = instr_pc + 1;
- 720 |                 wet_value_t b, a;
- 721 |                 wet_status_t st = pop_val(vm, &b);
- 722 |                 if (st != WET_OK) return st;
- 723 |                 st = pop_val(vm, &a);
- 724 |                 if (st != WET_OK) return st;
- 725 |                 wet_value_t res;
- 726 |                 res.type = WET_VAL_INT;
- 727 |                 res.as.i_val = to_int(&a) - to_int(&b);
- 728 |                 st = push_val(vm, res);
- 729 |                 if (st != WET_OK) return st;
- 730 |                 break;
- 731 |             }
- 732 | 
- 733 |             case WET_OP_MUL_I: {
- 734 |                 vm->pc = instr_pc + 1;
- 735 |                 wet_value_t b, a;
- 736 |                 wet_status_t st = pop_val(vm, &b);
- 737 |                 if (st != WET_OK) return st;
- 738 |                 st = pop_val(vm, &a);
- 739 |                 if (st != WET_OK) return st;
- 740 |                 wet_value_t res;
- 741 |                 res.type = WET_VAL_INT;
- 742 |                 res.as.i_val = to_int(&a) * to_int(&b);
- 743 |                 st = push_val(vm, res);
- 744 |                 if (st != WET_OK) return st;
- 745 |                 break;
- 746 |             }
- 747 | 
- 748 |             case WET_OP_DIV_I: {
- 749 |                 vm->pc = instr_pc + 1;
- 750 |                 wet_value_t b, a;
- 751 |                 wet_status_t st = pop_val(vm, &b);
- 752 |                 if (st != WET_OK) return st;
- 753 |                 st = pop_val(vm, &a);
- 754 |                 if (st != WET_OK) return st;
- 755 |                 int32_t b_val = to_int(&b);
- 756 |                 if (b_val == 0) {
- 757 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Integer division by zero");
- 758 |                     return WET_ERR_DIVISION_BY_ZERO;
- 759 |                 }
- 760 |                 wet_value_t res;
- 761 |                 res.type = WET_VAL_INT;
- 762 |                 res.as.i_val = to_int(&a) / b_val;
- 763 |                 st = push_val(vm, res);
- 764 |                 if (st != WET_OK) return st;
- 765 |                 break;
- 766 |             }
- 767 | 
- 768 |             case WET_OP_ADD_F: {
- 769 |                 vm->pc = instr_pc + 1;
- 770 |                 wet_value_t b, a;
- 771 |                 wet_status_t st = pop_val(vm, &b);
- 772 |                 if (st != WET_OK) return st;
- 773 |                 st = pop_val(vm, &a);
- 774 |                 if (st != WET_OK) return st;
- 775 |                 wet_value_t res;
- 776 |                 res.type = WET_VAL_FLOAT;
- 777 |                 res.as.f_val = to_float(&a) + to_float(&b);
- 778 |                 st = push_val(vm, res);
- 779 |                 if (st != WET_OK) return st;
- 780 |                 break;
- 781 |             }
- 782 | 
- 783 |             case WET_OP_SUB_F: {
- 784 |                 vm->pc = instr_pc + 1;
- 785 |                 wet_value_t b, a;
- 786 |                 wet_status_t st = pop_val(vm, &b);
- 787 |                 if (st != WET_OK) return st;
- 788 |                 st = pop_val(vm, &a);
- 789 |                 if (st != WET_OK) return st;
- 790 |                 wet_value_t res;
- 791 |                 res.type = WET_VAL_FLOAT;
- 792 |                 res.as.f_val = to_float(&a) - to_float(&b);
- 793 |                 st = push_val(vm, res);
- 794 |                 if (st != WET_OK) return st;
- 795 |                 break;
- 796 |             }
- 797 | 
- 798 |             case WET_OP_MUL_F: {
- 799 |                 vm->pc = instr_pc + 1;
- 800 |                 wet_value_t b, a;
- 801 |                 wet_status_t st = pop_val(vm, &b);
- 802 |                 if (st != WET_OK) return st;
- 803 |                 st = pop_val(vm, &a);
- 804 |                 if (st != WET_OK) return st;
- 805 |                 wet_value_t res;
- 806 |                 res.type = WET_VAL_FLOAT;
- 807 |                 res.as.f_val = to_float(&a) * to_float(&b);
- 808 |                 st = push_val(vm, res);
- 809 |                 if (st != WET_OK) return st;
- 810 |                 break;
- 811 |             }
- 812 | 
- 813 |             case WET_OP_DIV_F: {
- 814 |                 vm->pc = instr_pc + 1;
- 815 |                 wet_value_t b, a;
- 816 |                 wet_status_t st = pop_val(vm, &b);
- 817 |                 if (st != WET_OK) return st;
- 818 |                 st = pop_val(vm, &a);
- 819 |                 if (st != WET_OK) return st;
- 820 |                 float b_val = to_float(&b);
- 821 |                 if (fabsf(b_val) < 1e-15f) {
- 822 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Floating point division by zero");
- 823 |                     return WET_ERR_DIVISION_BY_ZERO;
- 824 |                 }
- 825 |                 wet_value_t res;
- 826 |                 res.type = WET_VAL_FLOAT;
- 827 |                 res.as.f_val = to_float(&a) / b_val;
- 828 |                 st = push_val(vm, res);
- 829 |                 if (st != WET_OK) return st;
- 830 |                 break;
- 831 |             }
- 832 | 
- 833 |             case WET_OP_NEG: {
- 834 |                 vm->pc = instr_pc + 1;
- 835 |                 wet_value_t a;
- 836 |                 wet_status_t st = pop_val(vm, &a);
- 837 |                 if (st != WET_OK) return st;
- 838 |                 wet_value_t res;
- 839 |                 if (a.type == WET_VAL_FLOAT) {
- 840 |                     res.type = WET_VAL_FLOAT;
- 841 |                     res.as.f_val = -a.as.f_val;
- 842 |                 } else {
- 843 |                     res.type = WET_VAL_INT;
- 844 |                     res.as.i_val = -to_int(&a);
- 845 |                 }
- 846 |                 st = push_val(vm, res);
- 847 |                 if (st != WET_OK) return st;
- 848 |                 break;
- 849 |             }
- 850 | 
- 851 |             case WET_OP_MOD_I: {
- 852 |                 vm->pc = instr_pc + 1;
- 853 |                 wet_value_t b, a;
- 854 |                 wet_status_t st = pop_val(vm, &b);
- 855 |                 if (st != WET_OK) return st;
- 856 |                 st = pop_val(vm, &a);
- 857 |                 if (st != WET_OK) return st;
- 858 |                 int32_t b_val = to_int(&b);
- 859 |                 if (b_val == 0) {
- 860 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Integer modulo by zero");
- 861 |                     return WET_ERR_DIVISION_BY_ZERO;
- 862 |                 }
- 863 |                 wet_value_t res;
- 864 |                 res.type = WET_VAL_INT;
- 865 |                 res.as.i_val = to_int(&a) % b_val;
- 866 |                 st = push_val(vm, res);
- 867 |                 if (st != WET_OK) return st;
- 868 |                 break;
- 869 |             }
- 870 | 
- 871 |             case WET_OP_CMP_EQ:
- 872 |             case WET_OP_CMP_NE:
- 873 |             case WET_OP_CMP_LT:
- 874 |             case WET_OP_CMP_LE:
- 875 |             case WET_OP_CMP_GT:
- 876 |             case WET_OP_CMP_GE: {
- 877 |                 vm->pc = instr_pc + 1;
- 878 |                 wet_value_t b, a;
- 879 |                 wet_status_t st = pop_val(vm, &b);
- 880 |                 if (st != WET_OK) return st;
- 881 |                 st = pop_val(vm, &a);
- 882 |                 if (st != WET_OK) return st;
- 883 | 
- 884 |                 int cmp_res = 0;
- 885 |                 if (a.type == WET_VAL_FLOAT || b.type == WET_VAL_FLOAT) {
- 886 |                     float fa = to_float(&a);
- 887 |                     float fb = to_float(&b);
- 888 |                     switch ((wet_opcode_t)op) {
- 889 |                         case WET_OP_CMP_EQ: cmp_res = (fa == fb); break;
- 890 |                         case WET_OP_CMP_NE: cmp_res = (fa != fb); break;
- 891 |                         case WET_OP_CMP_LT: cmp_res = (fa <  fb); break;
- 892 |                         case WET_OP_CMP_LE: cmp_res = (fa <= fb); break;
- 893 |                         case WET_OP_CMP_GT: cmp_res = (fa >  fb); break;
- 894 |                         case WET_OP_CMP_GE: cmp_res = (fa >= fb); break;
- 895 |                         default: break;
- 896 |                     }
- 897 |                 } else {
- 898 |                     int32_t ia = to_int(&a);
- 899 |                     int32_t ib = to_int(&b);
- 900 |                     switch ((wet_opcode_t)op) {
- 901 |                         case WET_OP_CMP_EQ: cmp_res = (ia == ib); break;
- 902 |                         case WET_OP_CMP_NE: cmp_res = (ia != ib); break;
- 903 |                         case WET_OP_CMP_LT: cmp_res = (ia <  ib); break;
- 904 |                         case WET_OP_CMP_LE: cmp_res = (ia <= ib); break;
- 905 |                         case WET_OP_CMP_GT: cmp_res = (ia >  ib); break;
- 906 |                         case WET_OP_CMP_GE: cmp_res = (ia >= ib); break;
- 907 |                         default: break;
- 908 |                     }
- 909 |                 }
- 910 | 
- 911 |                 wet_value_t res;
- 912 |                 res.type = WET_VAL_INT;
- 913 |                 res.as.i_val = cmp_res ? 1 : 0;
- 914 |                 st = push_val(vm, res);
- 915 |                 if (st != WET_OK) return st;
- 916 |                 break;
- 917 |             }
- 918 | 
- 919 |             case WET_OP_JMP: {
- 920 |                 if (instr_pc + 3 > vm->code_size) {
- 921 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP operand");
- 922 |                     return WET_ERR_INVALID_OPCODE;
- 923 |                 }
- 924 |                 int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
- 925 |                 int64_t target = (int64_t)instr_pc + offset;
- 926 |                 if (target < 0 || (size_t)target > vm->code_size) {
- 927 |                     snprintf(vm->last_error, sizeof(vm->last_error), "JMP target %lld out of range", (long long)target);
- 928 |                     return WET_ERR_INVALID_OPCODE;
- 929 |                 }
- 930 |                 vm->pc = (size_t)target;
- 931 |                 break;
- 932 |             }
- 933 | 
- 934 |             case WET_OP_JMP_IF_TRUE: {
- 935 |                 if (instr_pc + 3 > vm->code_size) {
- 936 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP_IF_TRUE operand");
- 937 |                     return WET_ERR_INVALID_OPCODE;
- 938 |                 }
- 939 |                 int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
- 940 |                 wet_value_t cond;
- 941 |                 wet_status_t st = pop_val(vm, &cond);
- 942 |                 if (st != WET_OK) return st;
- 943 | 
- 944 |                 if (is_truthy(&cond)) {
- 945 |                     int64_t target = (int64_t)instr_pc + offset;
- 946 |                     if (target < 0 || (size_t)target > vm->code_size) {
- 947 |                         snprintf(vm->last_error, sizeof(vm->last_error), "JMP_IF_TRUE target %lld out of range", (long long)target);
- 948 |                         return WET_ERR_INVALID_OPCODE;
- 949 |                     }
- 950 |                     vm->pc = (size_t)target;
- 951 |                 } else {
- 952 |                     vm->pc = instr_pc + 3;
- 953 |                 }
- 954 |                 break;
- 955 |             }
- 956 | 
- 957 |             case WET_OP_JMP_IF_FALSE: {
- 958 |                 if (instr_pc + 3 > vm->code_size) {
- 959 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP_IF_FALSE operand");
- 960 |                     return WET_ERR_INVALID_OPCODE;
- 961 |                 }
- 962 |                 int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
- 963 |                 wet_value_t cond;
- 964 |                 wet_status_t st = pop_val(vm, &cond);
- 965 |                 if (st != WET_OK) return st;
- 966 | 
- 967 |                 if (!is_truthy(&cond)) {
- 968 |                     int64_t target = (int64_t)instr_pc + offset;
- 969 |                     if (target < 0 || (size_t)target > vm->code_size) {
- 970 |                         snprintf(vm->last_error, sizeof(vm->last_error), "JMP_IF_FALSE target %lld out of range", (long long)target);
- 971 |                         return WET_ERR_INVALID_OPCODE;
- 972 |                     }
- 973 |                     vm->pc = (size_t)target;
- 974 |                 } else {
- 975 |                     vm->pc = instr_pc + 3;
- 976 |                 }
- 977 |                 break;
- 978 |             }
- 979 | 
- 980 |             case WET_OP_CALL: {
- 981 |                 if (instr_pc + 4 > vm->code_size) {
- 982 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated CALL operand");
- 983 |                     return WET_ERR_INVALID_OPCODE;
- 984 |                 }
- 985 |                 uint16_t fn_idx = wet_read_u16_le(vm->code + instr_pc + 1);
- 986 |                 uint8_t argc = *(const uint8_t*)(vm->code + instr_pc + 3);
- 987 | 
- 988 |                 if (fn_idx > 0 && fn_idx < vm->code_size) {
- 989 |                     /* User-defined function call */
- 990 |                     if (vm->call_sp >= vm->max_call_depth) {
- 991 |                         snprintf(vm->last_error, sizeof(vm->last_error), "Call stack overflow (depth %zu)", vm->call_sp);
- 992 |                         return WET_ERR_STACK_OVERFLOW;
- 993 |                     }
- 994 |                     vm->call_stack[vm->call_sp++].return_pc = instr_pc + 4;
- 995 |                     vm->pc = fn_idx;
- 996 |                 } else {
- 997 |                     /* Handle builtin / external function call: pop arguments, push default 0 */
- 998 |                     vm->pc = instr_pc + 4;
- 999 |                     for (uint8_t a = 0; a < argc; ++a) {
-1000 |                         wet_value_t dummy;
-1001 |                         pop_val(vm, &dummy);
-1002 |                     }
-1003 |                     wet_value_t ret_val;
-1004 |                     ret_val.type = WET_VAL_INT;
-1005 |                     ret_val.as.i_val = 0;
-1006 |                     push_val(vm, ret_val);
-1007 |                 }
-1008 |                 break;
-1009 |             }
-1010 | 
-1011 |             case WET_OP_RET: {
-1012 |                 if (vm->call_sp > 0) {
-1013 |                     vm->call_sp--;
-1014 |                     vm->pc = vm->call_stack[vm->call_sp].return_pc;
-1015 |                 } else {
-1016 |                     vm->pc = instr_pc + 1;
-1017 |                 }
-1018 |                 break;
-1019 |             }
-1020 | 
-1021 |             case WET_OP_STIM_BIPHASIC: {
-1022 |                 if (instr_pc + 2 > vm->code_size) {
-1023 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STIM_BIPHASIC operand");
-1024 |                     return WET_ERR_INVALID_OPCODE;
-1025 |                 }
-1026 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
-1027 |                 vm->pc = instr_pc + 2;
-1028 | 
-1029 |                 /* Pop arguments: interphase, phase2, phase1, voltage */
-1030 |                 wet_value_t v_interphase, v_p2, v_p1, v_volt;
-1031 |                 wet_status_t st = pop_val(vm, &v_interphase);
-1032 |                 if (st != WET_OK) return st;
-1033 |                 st = pop_val(vm, &v_p2);
-1034 |                 if (st != WET_OK) return st;
-1035 |                 st = pop_val(vm, &v_p1);
-1036 |                 if (st != WET_OK) return st;
-1037 |                 st = pop_val(vm, &v_volt);
-1038 |                 if (st != WET_OK) return st;
-1039 | 
-1040 |                 if (channel == 0xFF) {
-1041 |                     /* Dynamic channel index popped from stack */
-1042 |                     wet_value_t v_ch;
-1043 |                     st = pop_val(vm, &v_ch);
-1044 |                     if (st != WET_OK) return st;
-1045 |                     int32_t c_idx = to_int(&v_ch);
-1046 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
-1047 |                         snprintf(vm->last_error, sizeof(vm->last_error),
-1048 |                                  "Electrode channel %d out of bounds (max %u)",
-1049 |                                  c_idx, vm->config.channel_count);
-1050 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
-1051 |                     }
-1052 |                     channel = (uint8_t)c_idx;
-1053 |                 } else if (channel >= vm->config.channel_count) {
-1054 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1055 |                              "Electrode channel %u out of bounds (max %u)",
-1056 |                              channel, vm->config.channel_count);
-1057 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1058 |                 }
-1059 | 
-1060 |                 float voltage = to_float(&v_volt);
-1061 |                 float p1_ms = to_float(&v_p1);
-1062 |                 float p2_ms = to_float(&v_p2);
-1063 |                 float ip_ms = to_float(&v_interphase);
-1064 | 
-1065 |                 if (vm->interlocks.locked) {
-1066 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-1067 |                     return WET_ERR_INTERLOCK_LOCKED;
-1068 |                 }
-1069 | 
-1070 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage, channel)) {
-1071 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1072 |                              "Capability denied for STIM_BIPHASIC on ch %u (req %.2fV)", channel, voltage);
-1073 |                     return WET_ERR_CAPABILITY_DENIED;
+ 715 |                 vm->locals[slot] = val;
+ 716 |                 break;
+ 717 |             }
+ 718 | 
+ 719 |             case WET_OP_ADD_I: {
+ 720 |                 vm->pc = instr_pc + 1;
+ 721 |                 wet_value_t b, a;
+ 722 |                 wet_status_t st = pop_val(vm, &b);
+ 723 |                 if (st != WET_OK) return st;
+ 724 |                 st = pop_val(vm, &a);
+ 725 |                 if (st != WET_OK) return st;
+ 726 |                 wet_value_t res;
+ 727 |                 res.type = WET_VAL_INT;
+ 728 |                 res.as.i_val = to_int(&a) + to_int(&b);
+ 729 |                 st = push_val(vm, res);
+ 730 |                 if (st != WET_OK) return st;
+ 731 |                 break;
+ 732 |             }
+ 733 | 
+ 734 |             case WET_OP_SUB_I: {
+ 735 |                 vm->pc = instr_pc + 1;
+ 736 |                 wet_value_t b, a;
+ 737 |                 wet_status_t st = pop_val(vm, &b);
+ 738 |                 if (st != WET_OK) return st;
+ 739 |                 st = pop_val(vm, &a);
+ 740 |                 if (st != WET_OK) return st;
+ 741 |                 wet_value_t res;
+ 742 |                 res.type = WET_VAL_INT;
+ 743 |                 res.as.i_val = to_int(&a) - to_int(&b);
+ 744 |                 st = push_val(vm, res);
+ 745 |                 if (st != WET_OK) return st;
+ 746 |                 break;
+ 747 |             }
+ 748 | 
+ 749 |             case WET_OP_MUL_I: {
+ 750 |                 vm->pc = instr_pc + 1;
+ 751 |                 wet_value_t b, a;
+ 752 |                 wet_status_t st = pop_val(vm, &b);
+ 753 |                 if (st != WET_OK) return st;
+ 754 |                 st = pop_val(vm, &a);
+ 755 |                 if (st != WET_OK) return st;
+ 756 |                 wet_value_t res;
+ 757 |                 res.type = WET_VAL_INT;
+ 758 |                 res.as.i_val = to_int(&a) * to_int(&b);
+ 759 |                 st = push_val(vm, res);
+ 760 |                 if (st != WET_OK) return st;
+ 761 |                 break;
+ 762 |             }
+ 763 | 
+ 764 |             case WET_OP_DIV_I: {
+ 765 |                 vm->pc = instr_pc + 1;
+ 766 |                 wet_value_t b, a;
+ 767 |                 wet_status_t st = pop_val(vm, &b);
+ 768 |                 if (st != WET_OK) return st;
+ 769 |                 st = pop_val(vm, &a);
+ 770 |                 if (st != WET_OK) return st;
+ 771 |                 int32_t b_val = to_int(&b);
+ 772 |                 if (b_val == 0) {
+ 773 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Integer division by zero");
+ 774 |                     return WET_ERR_DIVISION_BY_ZERO;
+ 775 |                 }
+ 776 |                 wet_value_t res;
+ 777 |                 res.type = WET_VAL_INT;
+ 778 |                 res.as.i_val = to_int(&a) / b_val;
+ 779 |                 st = push_val(vm, res);
+ 780 |                 if (st != WET_OK) return st;
+ 781 |                 break;
+ 782 |             }
+ 783 | 
+ 784 |             case WET_OP_ADD_F: {
+ 785 |                 vm->pc = instr_pc + 1;
+ 786 |                 wet_value_t b, a;
+ 787 |                 wet_status_t st = pop_val(vm, &b);
+ 788 |                 if (st != WET_OK) return st;
+ 789 |                 st = pop_val(vm, &a);
+ 790 |                 if (st != WET_OK) return st;
+ 791 |                 wet_value_t res;
+ 792 |                 res.type = WET_VAL_FLOAT;
+ 793 |                 res.as.f_val = to_float(&a) + to_float(&b);
+ 794 |                 st = push_val(vm, res);
+ 795 |                 if (st != WET_OK) return st;
+ 796 |                 break;
+ 797 |             }
+ 798 | 
+ 799 |             case WET_OP_SUB_F: {
+ 800 |                 vm->pc = instr_pc + 1;
+ 801 |                 wet_value_t b, a;
+ 802 |                 wet_status_t st = pop_val(vm, &b);
+ 803 |                 if (st != WET_OK) return st;
+ 804 |                 st = pop_val(vm, &a);
+ 805 |                 if (st != WET_OK) return st;
+ 806 |                 wet_value_t res;
+ 807 |                 res.type = WET_VAL_FLOAT;
+ 808 |                 res.as.f_val = to_float(&a) - to_float(&b);
+ 809 |                 st = push_val(vm, res);
+ 810 |                 if (st != WET_OK) return st;
+ 811 |                 break;
+ 812 |             }
+ 813 | 
+ 814 |             case WET_OP_MUL_F: {
+ 815 |                 vm->pc = instr_pc + 1;
+ 816 |                 wet_value_t b, a;
+ 817 |                 wet_status_t st = pop_val(vm, &b);
+ 818 |                 if (st != WET_OK) return st;
+ 819 |                 st = pop_val(vm, &a);
+ 820 |                 if (st != WET_OK) return st;
+ 821 |                 wet_value_t res;
+ 822 |                 res.type = WET_VAL_FLOAT;
+ 823 |                 res.as.f_val = to_float(&a) * to_float(&b);
+ 824 |                 st = push_val(vm, res);
+ 825 |                 if (st != WET_OK) return st;
+ 826 |                 break;
+ 827 |             }
+ 828 | 
+ 829 |             case WET_OP_DIV_F: {
+ 830 |                 vm->pc = instr_pc + 1;
+ 831 |                 wet_value_t b, a;
+ 832 |                 wet_status_t st = pop_val(vm, &b);
+ 833 |                 if (st != WET_OK) return st;
+ 834 |                 st = pop_val(vm, &a);
+ 835 |                 if (st != WET_OK) return st;
+ 836 |                 float b_val = to_float(&b);
+ 837 |                 if (fabsf(b_val) < 1e-15f) {
+ 838 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Floating point division by zero");
+ 839 |                     return WET_ERR_DIVISION_BY_ZERO;
+ 840 |                 }
+ 841 |                 wet_value_t res;
+ 842 |                 res.type = WET_VAL_FLOAT;
+ 843 |                 res.as.f_val = to_float(&a) / b_val;
+ 844 |                 st = push_val(vm, res);
+ 845 |                 if (st != WET_OK) return st;
+ 846 |                 break;
+ 847 |             }
+ 848 | 
+ 849 |             case WET_OP_NEG: {
+ 850 |                 vm->pc = instr_pc + 1;
+ 851 |                 wet_value_t a;
+ 852 |                 wet_status_t st = pop_val(vm, &a);
+ 853 |                 if (st != WET_OK) return st;
+ 854 |                 wet_value_t res;
+ 855 |                 if (a.type == WET_VAL_FLOAT) {
+ 856 |                     res.type = WET_VAL_FLOAT;
+ 857 |                     res.as.f_val = -a.as.f_val;
+ 858 |                 } else {
+ 859 |                     res.type = WET_VAL_INT;
+ 860 |                     res.as.i_val = -to_int(&a);
+ 861 |                 }
+ 862 |                 st = push_val(vm, res);
+ 863 |                 if (st != WET_OK) return st;
+ 864 |                 break;
+ 865 |             }
+ 866 | 
+ 867 |             case WET_OP_MOD_I: {
+ 868 |                 vm->pc = instr_pc + 1;
+ 869 |                 wet_value_t b, a;
+ 870 |                 wet_status_t st = pop_val(vm, &b);
+ 871 |                 if (st != WET_OK) return st;
+ 872 |                 st = pop_val(vm, &a);
+ 873 |                 if (st != WET_OK) return st;
+ 874 |                 int32_t b_val = to_int(&b);
+ 875 |                 if (b_val == 0) {
+ 876 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Integer modulo by zero");
+ 877 |                     return WET_ERR_DIVISION_BY_ZERO;
+ 878 |                 }
+ 879 |                 wet_value_t res;
+ 880 |                 res.type = WET_VAL_INT;
+ 881 |                 res.as.i_val = to_int(&a) % b_val;
+ 882 |                 st = push_val(vm, res);
+ 883 |                 if (st != WET_OK) return st;
+ 884 |                 break;
+ 885 |             }
+ 886 | 
+ 887 |             case WET_OP_CMP_EQ:
+ 888 |             case WET_OP_CMP_NE:
+ 889 |             case WET_OP_CMP_LT:
+ 890 |             case WET_OP_CMP_LE:
+ 891 |             case WET_OP_CMP_GT:
+ 892 |             case WET_OP_CMP_GE: {
+ 893 |                 vm->pc = instr_pc + 1;
+ 894 |                 wet_value_t b, a;
+ 895 |                 wet_status_t st = pop_val(vm, &b);
+ 896 |                 if (st != WET_OK) return st;
+ 897 |                 st = pop_val(vm, &a);
+ 898 |                 if (st != WET_OK) return st;
+ 899 | 
+ 900 |                 int cmp_res = 0;
+ 901 |                 if (a.type == WET_VAL_FLOAT || b.type == WET_VAL_FLOAT) {
+ 902 |                     float fa = to_float(&a);
+ 903 |                     float fb = to_float(&b);
+ 904 |                     switch ((wet_opcode_t)op) {
+ 905 |                         case WET_OP_CMP_EQ: cmp_res = (fa == fb); break;
+ 906 |                         case WET_OP_CMP_NE: cmp_res = (fa != fb); break;
+ 907 |                         case WET_OP_CMP_LT: cmp_res = (fa <  fb); break;
+ 908 |                         case WET_OP_CMP_LE: cmp_res = (fa <= fb); break;
+ 909 |                         case WET_OP_CMP_GT: cmp_res = (fa >  fb); break;
+ 910 |                         case WET_OP_CMP_GE: cmp_res = (fa >= fb); break;
+ 911 |                         default: break;
+ 912 |                     }
+ 913 |                 } else {
+ 914 |                     int32_t ia = to_int(&a);
+ 915 |                     int32_t ib = to_int(&b);
+ 916 |                     switch ((wet_opcode_t)op) {
+ 917 |                         case WET_OP_CMP_EQ: cmp_res = (ia == ib); break;
+ 918 |                         case WET_OP_CMP_NE: cmp_res = (ia != ib); break;
+ 919 |                         case WET_OP_CMP_LT: cmp_res = (ia <  ib); break;
+ 920 |                         case WET_OP_CMP_LE: cmp_res = (ia <= ib); break;
+ 921 |                         case WET_OP_CMP_GT: cmp_res = (ia >  ib); break;
+ 922 |                         case WET_OP_CMP_GE: cmp_res = (ia >= ib); break;
+ 923 |                         default: break;
+ 924 |                     }
+ 925 |                 }
+ 926 | 
+ 927 |                 wet_value_t res;
+ 928 |                 res.type = WET_VAL_INT;
+ 929 |                 res.as.i_val = cmp_res ? 1 : 0;
+ 930 |                 st = push_val(vm, res);
+ 931 |                 if (st != WET_OK) return st;
+ 932 |                 break;
+ 933 |             }
+ 934 | 
+ 935 |             case WET_OP_JMP: {
+ 936 |                 if (instr_pc + 3 > vm->code_size) {
+ 937 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP operand");
+ 938 |                     return WET_ERR_INVALID_OPCODE;
+ 939 |                 }
+ 940 |                 int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
+ 941 |                 int64_t target = (int64_t)instr_pc + offset;
+ 942 |                 if (target < 0 || (size_t)target > vm->code_size) {
+ 943 |                     snprintf(vm->last_error, sizeof(vm->last_error), "JMP target %lld out of range", (long long)target);
+ 944 |                     return WET_ERR_INVALID_OPCODE;
+ 945 |                 }
+ 946 |                 vm->pc = (size_t)target;
+ 947 |                 break;
+ 948 |             }
+ 949 | 
+ 950 |             case WET_OP_JMP_IF_TRUE: {
+ 951 |                 if (instr_pc + 3 > vm->code_size) {
+ 952 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP_IF_TRUE operand");
+ 953 |                     return WET_ERR_INVALID_OPCODE;
+ 954 |                 }
+ 955 |                 int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
+ 956 |                 wet_value_t cond;
+ 957 |                 wet_status_t st = pop_val(vm, &cond);
+ 958 |                 if (st != WET_OK) return st;
+ 959 | 
+ 960 |                 if (is_truthy(&cond)) {
+ 961 |                     int64_t target = (int64_t)instr_pc + offset;
+ 962 |                     if (target < 0 || (size_t)target > vm->code_size) {
+ 963 |                         snprintf(vm->last_error, sizeof(vm->last_error), "JMP_IF_TRUE target %lld out of range", (long long)target);
+ 964 |                         return WET_ERR_INVALID_OPCODE;
+ 965 |                     }
+ 966 |                     vm->pc = (size_t)target;
+ 967 |                 } else {
+ 968 |                     vm->pc = instr_pc + 3;
+ 969 |                 }
+ 970 |                 break;
+ 971 |             }
+ 972 | 
+ 973 |             case WET_OP_JMP_IF_FALSE: {
+ 974 |                 if (instr_pc + 3 > vm->code_size) {
+ 975 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated JMP_IF_FALSE operand");
+ 976 |                     return WET_ERR_INVALID_OPCODE;
+ 977 |                 }
+ 978 |                 int16_t offset = wet_read_i16_le(vm->code + instr_pc + 1);
+ 979 |                 wet_value_t cond;
+ 980 |                 wet_status_t st = pop_val(vm, &cond);
+ 981 |                 if (st != WET_OK) return st;
+ 982 | 
+ 983 |                 if (!is_truthy(&cond)) {
+ 984 |                     int64_t target = (int64_t)instr_pc + offset;
+ 985 |                     if (target < 0 || (size_t)target > vm->code_size) {
+ 986 |                         snprintf(vm->last_error, sizeof(vm->last_error), "JMP_IF_FALSE target %lld out of range", (long long)target);
+ 987 |                         return WET_ERR_INVALID_OPCODE;
+ 988 |                     }
+ 989 |                     vm->pc = (size_t)target;
+ 990 |                 } else {
+ 991 |                     vm->pc = instr_pc + 3;
+ 992 |                 }
+ 993 |                 break;
+ 994 |             }
+ 995 | 
+ 996 |             case WET_OP_CALL: {
+ 997 |                 if (instr_pc + 4 > vm->code_size) {
+ 998 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated CALL operand");
+ 999 |                     return WET_ERR_INVALID_OPCODE;
+1000 |                 }
+1001 |                 uint16_t fn_idx = wet_read_u16_le(vm->code + instr_pc + 1);
+1002 |                 uint8_t argc = *(const uint8_t*)(vm->code + instr_pc + 3);
+1003 | 
+1004 |                 if (fn_idx > 0 && fn_idx < vm->code_size) {
+1005 |                     /* User-defined function call */
+1006 |                     if (vm->call_sp >= vm->max_call_depth) {
+1007 |                         snprintf(vm->last_error, sizeof(vm->last_error), "Call stack overflow (depth %zu)", vm->call_sp);
+1008 |                         return WET_ERR_STACK_OVERFLOW;
+1009 |                     }
+1010 |                     vm->call_stack[vm->call_sp++].return_pc = instr_pc + 4;
+1011 |                     vm->pc = fn_idx;
+1012 |                 } else {
+1013 |                     /* Handle builtin / external function call: pop arguments, push default 0 */
+1014 |                     vm->pc = instr_pc + 4;
+1015 |                     for (uint8_t a = 0; a < argc; ++a) {
+1016 |                         wet_value_t dummy;
+1017 |                         pop_val(vm, &dummy);
+1018 |                     }
+1019 |                     wet_value_t ret_val;
+1020 |                     ret_val.type = WET_VAL_INT;
+1021 |                     ret_val.as.i_val = 0;
+1022 |                     push_val(vm, ret_val);
+1023 |                 }
+1024 |                 break;
+1025 |             }
+1026 | 
+1027 |             case WET_OP_RET: {
+1028 |                 if (vm->call_sp > 0) {
+1029 |                     vm->call_sp--;
+1030 |                     vm->pc = vm->call_stack[vm->call_sp].return_pc;
+1031 |                 } else {
+1032 |                     vm->pc = instr_pc + 1;
+1033 |                 }
+1034 |                 break;
+1035 |             }
+1036 | 
+1037 |             case WET_OP_STIM_BIPHASIC: {
+1038 |                 if (instr_pc + 2 > vm->code_size) {
+1039 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STIM_BIPHASIC operand");
+1040 |                     return WET_ERR_INVALID_OPCODE;
+1041 |                 }
+1042 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+1043 |                 vm->pc = instr_pc + 2;
+1044 | 
+1045 |                 /* Pop arguments: interphase, phase2, phase1, voltage */
+1046 |                 wet_value_t v_interphase, v_p2, v_p1, v_volt;
+1047 |                 wet_status_t st = pop_val(vm, &v_interphase);
+1048 |                 if (st != WET_OK) return st;
+1049 |                 st = pop_val(vm, &v_p2);
+1050 |                 if (st != WET_OK) return st;
+1051 |                 st = pop_val(vm, &v_p1);
+1052 |                 if (st != WET_OK) return st;
+1053 |                 st = pop_val(vm, &v_volt);
+1054 |                 if (st != WET_OK) return st;
+1055 | 
+1056 |                 if (channel == 0xFF) {
+1057 |                     /* Dynamic channel index popped from stack */
+1058 |                     wet_value_t v_ch;
+1059 |                     st = pop_val(vm, &v_ch);
+1060 |                     if (st != WET_OK) return st;
+1061 |                     int32_t c_idx = to_int(&v_ch);
+1062 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+1063 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1064 |                                  "Electrode channel %d out of bounds (max %u)",
+1065 |                                  c_idx, vm->config.channel_count);
+1066 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
+1067 |                     }
+1068 |                     channel = (uint8_t)c_idx;
+1069 |                 } else if (channel >= vm->config.channel_count) {
+1070 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1071 |                              "Electrode channel %u out of bounds (max %u)",
+1072 |                              channel, vm->config.channel_count);
+1073 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
 1074 |                 }
 1075 | 
-1076 |                 /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
-1077 |                 if (p1_ms > 0.0f && p2_ms > 0.0f) {
-1078 |                     float q_phase1 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p1_ms;
-1079 |                     float q_phase2 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p2_ms;
-1080 |                     if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
-1081 |                         vm->interlocks.locked = 1;
-1082 |                         vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
-1083 |                         vm->interlocks.tripped_channel = channel;
-1084 |                         vm->interlocks.trip_tick = vm->current_tick;
-1085 |                         vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
-1086 |                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-1087 |                                  "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
-1088 |                                  channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
-1089 |                         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-1090 |                         return WET_ERR_CHARGE_DENSITY_EXCEEDED;
-1091 |                     }
-1092 |                 }
-1093 | 
-1094 |                 /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
-1095 |                 bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
-1096 |                 if (prev_p->active && prev_p->phase2_ticks_left > 0) {
-1097 |                     float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
-1098 |                     vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
-1099 |                 }
-1100 | 
-1101 |                 float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage);
-1102 |                 biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
-1103 |                 vm->voltages[channel] = clamped_v;
-1104 |                 /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
-1105 |                 float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
-1106 |                 vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
-1107 |                 break;
-1108 |             }
-1109 | 
-1110 |             case WET_OP_READ_SPIKES: {
-1111 |                 if (instr_pc + 2 > vm->code_size) {
-1112 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_SPIKES operand");
-1113 |                     return WET_ERR_INVALID_OPCODE;
-1114 |                 }
-1115 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
-1116 |                 vm->pc = instr_pc + 2;
-1117 | 
-1118 |                 wet_value_t window;
-1119 |                 wet_status_t st = pop_val(vm, &window);
-1120 |                 if (st != WET_OK) return st;
-1121 | 
-1122 |                 if (channel == 0xFF) {
-1123 |                     /* Dynamic channel index popped from stack */
-1124 |                     wet_value_t v_ch;
-1125 |                     st = pop_val(vm, &v_ch);
-1126 |                     if (st != WET_OK) return st;
-1127 |                     int32_t c_idx = to_int(&v_ch);
-1128 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
-1129 |                         snprintf(vm->last_error, sizeof(vm->last_error),
-1130 |                                  "Electrode channel %d out of bounds (max %u)",
-1131 |                                  c_idx, vm->config.channel_count);
-1132 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
-1133 |                     }
-1134 |                     channel = (uint8_t)c_idx;
-1135 |                 } else if (channel >= vm->config.channel_count) {
-1136 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1137 |                              "Electrode channel %u out of bounds (max %u)",
-1138 |                              channel, vm->config.channel_count);
-1139 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1140 |                 }
-1141 | 
-1142 |                 float window_ms = to_float(&window);
-1143 |                 uint32_t cnt = biophysics_get_spikes_window(&vm->bio, channel, window_ms);
-1144 | 
-1145 |                 wet_value_t spike_res;
-1146 |                 spike_res.type = WET_VAL_INT;
-1147 |                 spike_res.as.i_val = (int32_t)cnt;
-1148 |                 st = push_val(vm, spike_res);
-1149 |                 if (st != WET_OK) return st;
-1150 |                 break;
-1151 |             }
-1152 | 
-1153 |             case WET_OP_READ_VOLTAGE: {
-1154 |                 if (instr_pc + 2 > vm->code_size) {
-1155 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_VOLTAGE operand");
-1156 |                     return WET_ERR_INVALID_OPCODE;
-1157 |                 }
-1158 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
-1159 |                 vm->pc = instr_pc + 2;
-1160 | 
-1161 |                 if (channel == 0xFF) {
-1162 |                     /* Dynamic channel index popped from stack */
-1163 |                     wet_value_t v_ch;
-1164 |                     wet_status_t st = pop_val(vm, &v_ch);
-1165 |                     if (st != WET_OK) return st;
-1166 |                     int32_t c_idx = to_int(&v_ch);
-1167 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
-1168 |                         snprintf(vm->last_error, sizeof(vm->last_error),
-1169 |                                  "Electrode channel %d out of bounds (max %u)",
-1170 |                                  c_idx, vm->config.channel_count);
-1171 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
-1172 |                     }
-1173 |                     channel = (uint8_t)c_idx;
-1174 |                 } else if (channel >= vm->config.channel_count) {
-1175 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1176 |                              "Electrode channel %u out of bounds (max %u)",
-1177 |                              channel, vm->config.channel_count);
-1178 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1076 |                 float voltage = to_float(&v_volt);
+1077 |                 float p1_ms = to_float(&v_p1);
+1078 |                 float p2_ms = to_float(&v_p2);
+1079 |                 float ip_ms = to_float(&v_interphase);
+1080 | 
+1081 |                 if (vm->interlocks.locked) {
+1082 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1083 |                     return WET_ERR_INTERLOCK_LOCKED;
+1084 |                 }
+1085 | 
+1086 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage, channel)) {
+1087 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1088 |                              "Capability denied for STIM_BIPHASIC on ch %u (req %.2fV)", channel, voltage);
+1089 |                     return WET_ERR_CAPABILITY_DENIED;
+1090 |                 }
+1091 | 
+1092 |                 /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
+1093 |                 if (p1_ms > 0.0f && p2_ms > 0.0f) {
+1094 |                     float q_phase1 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p1_ms;
+1095 |                     float q_phase2 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p2_ms;
+1096 |                     if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+1097 |                         vm->interlocks.locked = 1;
+1098 |                         vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+1099 |                         vm->interlocks.tripped_channel = channel;
+1100 |                         vm->interlocks.trip_tick = vm->current_tick;
+1101 |                         vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+1102 |                         if (vm->hal) {
+1103 |                             wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+1104 |                         }
+1105 |                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+1106 |                                  "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+1107 |                                  channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+1108 |                         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1109 |                         return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+1110 |                     }
+1111 |                 }
+1112 | 
+1113 |                 /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
+1114 |                 bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
+1115 |                 if (prev_p->active && prev_p->phase2_ticks_left > 0) {
+1116 |                     float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
+1117 |                     vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+1118 |                 }
+1119 | 
+1120 |                 float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage);
+1121 |                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+1122 |                     wet_hal_stim_voltage(vm->hal, (uint16_t)channel, clamped_v, p1_ms, p2_ms);
+1123 |                 }
+1124 |                 biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
+1125 |                 vm->voltages[channel] = clamped_v;
+1126 |                 /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
+1127 |                 float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
+1128 |                 vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
+1129 |                 break;
+1130 |             }
+1131 | 
+1132 |             case WET_OP_READ_SPIKES: {
+1133 |                 if (instr_pc + 2 > vm->code_size) {
+1134 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_SPIKES operand");
+1135 |                     return WET_ERR_INVALID_OPCODE;
+1136 |                 }
+1137 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+1138 |                 vm->pc = instr_pc + 2;
+1139 | 
+1140 |                 wet_value_t window;
+1141 |                 wet_status_t st = pop_val(vm, &window);
+1142 |                 if (st != WET_OK) return st;
+1143 | 
+1144 |                 if (channel == 0xFF) {
+1145 |                     /* Dynamic channel index popped from stack */
+1146 |                     wet_value_t v_ch;
+1147 |                     st = pop_val(vm, &v_ch);
+1148 |                     if (st != WET_OK) return st;
+1149 |                     int32_t c_idx = to_int(&v_ch);
+1150 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+1151 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1152 |                                  "Electrode channel %d out of bounds (max %u)",
+1153 |                                  c_idx, vm->config.channel_count);
+1154 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
+1155 |                     }
+1156 |                     channel = (uint8_t)c_idx;
+1157 |                 } else if (channel >= vm->config.channel_count) {
+1158 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1159 |                              "Electrode channel %u out of bounds (max %u)",
+1160 |                              channel, vm->config.channel_count);
+1161 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1162 |                 }
+1163 | 
+1164 |                 float window_ms = to_float(&window);
+1165 |                 uint32_t cnt = biophysics_get_spikes_window(&vm->bio, channel, window_ms);
+1166 | 
+1167 |                 wet_value_t spike_res;
+1168 |                 spike_res.type = WET_VAL_INT;
+1169 |                 spike_res.as.i_val = (int32_t)cnt;
+1170 |                 st = push_val(vm, spike_res);
+1171 |                 if (st != WET_OK) return st;
+1172 |                 break;
+1173 |             }
+1174 | 
+1175 |             case WET_OP_READ_VOLTAGE: {
+1176 |                 if (instr_pc + 2 > vm->code_size) {
+1177 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_VOLTAGE operand");
+1178 |                     return WET_ERR_INVALID_OPCODE;
 1179 |                 }
-1180 | 
-1181 |                 wet_value_t volt_res;
-1182 |                 volt_res.type = WET_VAL_FLOAT;
-1183 |                 volt_res.as.f_val = vm->bio.mea_voltage_v[channel];
-1184 |                 wet_status_t st = push_val(vm, volt_res);
-1185 |                 if (st != WET_OK) return st;
-1186 |                 break;
-1187 |             }
-1188 | 
-1189 |             case WET_OP_MODULATE_STDP: {
-1190 |                 if (instr_pc + 3 > vm->code_size) {
-1191 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MODULATE_STDP operand");
-1192 |                     return WET_ERR_INVALID_OPCODE;
-1193 |                 }
-1194 |                 uint8_t pre = *(const uint8_t*)(vm->code + instr_pc + 1);
-1195 |                 uint8_t post = *(const uint8_t*)(vm->code + instr_pc + 2);
-1196 |                 vm->pc = instr_pc + 3;
-1197 | 
-1198 |                 wet_value_t delta_w;
-1199 |                 wet_status_t st = pop_val(vm, &delta_w);
-1200 |                 if (st != WET_OK) return st;
-1201 | 
-1202 |                 if (pre == 0xFF && post == 0xFF) {
-1203 |                     /* Dynamic pre/post channels popped from stack */
-1204 |                     wet_value_t v_post, v_pre;
-1205 |                     st = pop_val(vm, &v_post);
-1206 |                     if (st != WET_OK) return st;
-1207 |                     st = pop_val(vm, &v_pre);
-1208 |                     if (st != WET_OK) return st;
-1209 |                     int32_t pre_idx = to_int(&v_pre);
-1210 |                     int32_t post_idx = to_int(&v_post);
-1211 |                     if (pre_idx < 0 || (uint32_t)pre_idx >= vm->config.channel_count ||
-1212 |                         post_idx < 0 || (uint32_t)post_idx >= vm->config.channel_count) {
-1213 |                         snprintf(vm->last_error, sizeof(vm->last_error),
-1214 |                                  "STDP dynamic channels (%d, %d) out of bounds (max %u)",
-1215 |                                  pre_idx, post_idx, vm->config.channel_count);
-1216 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
-1217 |                     }
-1218 |                     pre = (uint8_t)pre_idx;
-1219 |                     post = (uint8_t)post_idx;
-1220 |                 } else if (pre >= vm->config.channel_count || post >= vm->config.channel_count) {
-1221 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1222 |                              "STDP channels (%u, %u) out of bounds (max %u)",
-1223 |                              pre, post, vm->config.channel_count);
-1224 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1225 |                 }
-1226 | 
-1227 |                 if (vm->interlocks.locked) {
-1228 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-1229 |                     return WET_ERR_INTERLOCK_LOCKED;
-1230 |                 }
-1231 | 
-1232 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_MODULATE_STDP, 0.0f, pre)) {
-1233 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1234 |                              "Capability denied for MODULATE_STDP");
-1235 |                     return WET_ERR_CAPABILITY_DENIED;
-1236 |                 }
-1237 | 
-1238 |                 float dw = to_float(&delta_w);
-1239 |                 if (pre == 0 && post == 0) {
-1240 |                     vm->bio.stdp_lr_scale = dw;
-1241 |                 } else if (pre != post) {
-1242 |                     biophysics_modulate_stdp(&vm->bio, pre, post, dw);
-1243 |                 }
-1244 |                 break;
-1245 |             }
-1246 | 
-1247 |             case WET_OP_GET_POP_RATE: {
-1248 |                 vm->pc = instr_pc + 1;
-1249 |                 wet_value_t window;
-1250 |                 wet_status_t st = pop_val(vm, &window);
-1251 |                 if (st != WET_OK) return st;
-1252 | 
-1253 |                 wet_value_t rate_res;
-1254 |                 rate_res.type = WET_VAL_FLOAT;
-1255 |                 rate_res.as.f_val = vm->bio.population_rate_hz;
-1256 |                 st = push_val(vm, rate_res);
-1257 |                 if (st != WET_OK) return st;
-1258 |                 break;
-1259 |             }
-1260 | 
-1261 |             case WET_OP_MEA_CONFIG: {
-1262 |                 if (instr_pc + 3 > vm->code_size) {
-1263 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MEA_CONFIG operand");
-1264 |                     return WET_ERR_INVALID_OPCODE;
+1180 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+1181 |                 vm->pc = instr_pc + 2;
+1182 | 
+1183 |                 if (channel == 0xFF) {
+1184 |                     /* Dynamic channel index popped from stack */
+1185 |                     wet_value_t v_ch;
+1186 |                     wet_status_t st = pop_val(vm, &v_ch);
+1187 |                     if (st != WET_OK) return st;
+1188 |                     int32_t c_idx = to_int(&v_ch);
+1189 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+1190 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1191 |                                  "Electrode channel %d out of bounds (max %u)",
+1192 |                                  c_idx, vm->config.channel_count);
+1193 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
+1194 |                     }
+1195 |                     channel = (uint8_t)c_idx;
+1196 |                 } else if (channel >= vm->config.channel_count) {
+1197 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1198 |                              "Electrode channel %u out of bounds (max %u)",
+1199 |                              channel, vm->config.channel_count);
+1200 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1201 |                 }
+1202 | 
+1203 |                 wet_value_t volt_res;
+1204 |                 volt_res.type = WET_VAL_FLOAT;
+1205 |                 volt_res.as.f_val = vm->bio.mea_voltage_v[channel];
+1206 |                 wet_status_t st = push_val(vm, volt_res);
+1207 |                 if (st != WET_OK) return st;
+1208 |                 break;
+1209 |             }
+1210 | 
+1211 |             case WET_OP_MODULATE_STDP: {
+1212 |                 if (instr_pc + 3 > vm->code_size) {
+1213 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MODULATE_STDP operand");
+1214 |                     return WET_ERR_INVALID_OPCODE;
+1215 |                 }
+1216 |                 uint8_t pre = *(const uint8_t*)(vm->code + instr_pc + 1);
+1217 |                 uint8_t post = *(const uint8_t*)(vm->code + instr_pc + 2);
+1218 |                 vm->pc = instr_pc + 3;
+1219 | 
+1220 |                 wet_value_t delta_w;
+1221 |                 wet_status_t st = pop_val(vm, &delta_w);
+1222 |                 if (st != WET_OK) return st;
+1223 | 
+1224 |                 if (pre == 0xFF && post == 0xFF) {
+1225 |                     /* Dynamic pre/post channels popped from stack */
+1226 |                     wet_value_t v_post, v_pre;
+1227 |                     st = pop_val(vm, &v_post);
+1228 |                     if (st != WET_OK) return st;
+1229 |                     st = pop_val(vm, &v_pre);
+1230 |                     if (st != WET_OK) return st;
+1231 |                     int32_t pre_idx = to_int(&v_pre);
+1232 |                     int32_t post_idx = to_int(&v_post);
+1233 |                     if (pre_idx < 0 || (uint32_t)pre_idx >= vm->config.channel_count ||
+1234 |                         post_idx < 0 || (uint32_t)post_idx >= vm->config.channel_count) {
+1235 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1236 |                                  "STDP dynamic channels (%d, %d) out of bounds (max %u)",
+1237 |                                  pre_idx, post_idx, vm->config.channel_count);
+1238 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
+1239 |                     }
+1240 |                     pre = (uint8_t)pre_idx;
+1241 |                     post = (uint8_t)post_idx;
+1242 |                 } else if (pre >= vm->config.channel_count || post >= vm->config.channel_count) {
+1243 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1244 |                              "STDP channels (%u, %u) out of bounds (max %u)",
+1245 |                              pre, post, vm->config.channel_count);
+1246 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1247 |                 }
+1248 | 
+1249 |                 if (vm->interlocks.locked) {
+1250 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1251 |                     return WET_ERR_INTERLOCK_LOCKED;
+1252 |                 }
+1253 | 
+1254 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_MODULATE_STDP, 0.0f, pre)) {
+1255 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1256 |                              "Capability denied for MODULATE_STDP");
+1257 |                     return WET_ERR_CAPABILITY_DENIED;
+1258 |                 }
+1259 | 
+1260 |                 float dw = to_float(&delta_w);
+1261 |                 if (pre == 0 && post == 0) {
+1262 |                     vm->bio.stdp_lr_scale = dw;
+1263 |                 } else if (pre != post) {
+1264 |                     biophysics_modulate_stdp(&vm->bio, pre, post, dw);
 1265 |                 }
-1266 |                 uint8_t rows = *(const uint8_t*)(vm->code + instr_pc + 1);
-1267 |                 uint8_t cols = *(const uint8_t*)(vm->code + instr_pc + 2);
-1268 |                 vm->pc = instr_pc + 3;
-1269 |                 vm->grid_rows = rows;
-1270 |                 vm->grid_cols = cols;
-1271 |                 break;
-1272 |             }
-1273 | 
-1274 |             case WET_OP_PUMP_SET_RATE: {
-1275 |                 if (instr_pc + 6 > vm->code_size) {
-1276 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUMP_SET_RATE operand");
-1277 |                     return WET_ERR_INVALID_OPCODE;
-1278 |                 }
-1279 |                 uint8_t pump_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1280 |                 float rate_ul_min;
-1281 |                 memcpy(&rate_ul_min, vm->code + instr_pc + 2, sizeof(float));
-1282 |                 vm->pc = instr_pc + 6;
-1283 | 
-1284 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_PUMP_SET_RATE, 0.0f, pump_id)) {
-1285 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1286 |                              "Capability denied for PUMP_SET_RATE (requires CAP_MICROFLUIDICS)");
-1287 |                     return WET_ERR_CAPABILITY_DENIED;
-1288 |                 }
-1289 | 
-1290 |                 if (pump_id >= 8) {
-1291 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Pump ID %u out of bounds (max 7)", pump_id);
-1292 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1293 |                 }
-1294 | 
-1295 |                 if (rate_ul_min < 0.0f || rate_ul_min > 15.0f) {
-1296 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1297 |                              "ERR_SHEAR_STRESS_EXCEEDED: Requested pump rate %.2f uL/min exceeds safe hydrodynamic limit (0..15.0 uL/min)",
-1298 |                              (double)rate_ul_min);
-1299 |                     return WET_ERR_SHEAR_STRESS_EXCEEDED;
+1266 |                 break;
+1267 |             }
+1268 | 
+1269 |             case WET_OP_GET_POP_RATE: {
+1270 |                 vm->pc = instr_pc + 1;
+1271 |                 wet_value_t window;
+1272 |                 wet_status_t st = pop_val(vm, &window);
+1273 |                 if (st != WET_OK) return st;
+1274 | 
+1275 |                 wet_value_t rate_res;
+1276 |                 rate_res.type = WET_VAL_FLOAT;
+1277 |                 rate_res.as.f_val = vm->bio.population_rate_hz;
+1278 |                 st = push_val(vm, rate_res);
+1279 |                 if (st != WET_OK) return st;
+1280 |                 break;
+1281 |             }
+1282 | 
+1283 |             case WET_OP_MEA_CONFIG: {
+1284 |                 if (instr_pc + 3 > vm->code_size) {
+1285 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MEA_CONFIG operand");
+1286 |                     return WET_ERR_INVALID_OPCODE;
+1287 |                 }
+1288 |                 uint8_t rows = *(const uint8_t*)(vm->code + instr_pc + 1);
+1289 |                 uint8_t cols = *(const uint8_t*)(vm->code + instr_pc + 2);
+1290 |                 vm->pc = instr_pc + 3;
+1291 |                 vm->grid_rows = rows;
+1292 |                 vm->grid_cols = cols;
+1293 |                 break;
+1294 |             }
+1295 | 
+1296 |             case WET_OP_PUMP_SET_RATE: {
+1297 |                 if (instr_pc + 6 > vm->code_size) {
+1298 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUMP_SET_RATE operand");
+1299 |                     return WET_ERR_INVALID_OPCODE;
 1300 |                 }
-1301 | 
-1302 |                 vm->pump_rates_ul_min[pump_id] = rate_ul_min;
-1303 |                 break;
-1304 |             }
+1301 |                 uint8_t pump_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1302 |                 float rate_ul_min;
+1303 |                 memcpy(&rate_ul_min, vm->code + instr_pc + 2, sizeof(float));
+1304 |                 vm->pc = instr_pc + 6;
 1305 | 
-1306 |             case WET_OP_PUMP_DISPENSE: {
-1307 |                 if (instr_pc + 6 > vm->code_size) {
-1308 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUMP_DISPENSE operand");
-1309 |                     return WET_ERR_INVALID_OPCODE;
+1306 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_PUMP_SET_RATE, 0.0f, pump_id)) {
+1307 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1308 |                              "Capability denied for PUMP_SET_RATE (requires CAP_MICROFLUIDICS)");
+1309 |                     return WET_ERR_CAPABILITY_DENIED;
 1310 |                 }
-1311 |                 uint8_t pump_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1312 |                 float volume_ul;
-1313 |                 memcpy(&volume_ul, vm->code + instr_pc + 2, sizeof(float));
-1314 |                 vm->pc = instr_pc + 6;
-1315 | 
-1316 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_PUMP_DISPENSE, 0.0f, pump_id)) {
-1317 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1318 |                              "Capability denied for PUMP_DISPENSE (requires CAP_MICROFLUIDICS)");
-1319 |                     return WET_ERR_CAPABILITY_DENIED;
-1320 |                 }
-1321 | 
-1322 |                 if (pump_id >= 8) {
-1323 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Pump ID %u out of bounds (max 7)", pump_id);
-1324 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1325 |                 }
-1326 | 
-1327 |                 if (volume_ul <= 0.0f || volume_ul > 500.0f) {
-1328 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1329 |                              "ERR_ACTUATOR_FAULT: Invalid dispense volume %.2f uL (allowed: 0.1..500.0 uL)",
-1330 |                              (double)volume_ul);
-1331 |                     return WET_ERR_ACTUATOR_FAULT;
+1311 | 
+1312 |                 if (pump_id >= 8) {
+1313 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Pump ID %u out of bounds (max 7)", pump_id);
+1314 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1315 |                 }
+1316 | 
+1317 |                 if (rate_ul_min < 0.0f || rate_ul_min > 15.0f) {
+1318 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1319 |                              "ERR_SHEAR_STRESS_EXCEEDED: Requested pump rate %.2f uL/min exceeds safe hydrodynamic limit (0..15.0 uL/min)",
+1320 |                              (double)rate_ul_min);
+1321 |                     return WET_ERR_SHEAR_STRESS_EXCEEDED;
+1322 |                 }
+1323 | 
+1324 |                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+1325 |                     wet_hal_status_t hst = wet_hal_write_pump(vm->hal, pump_id, (double)rate_ul_min, 1);
+1326 |                     if (hst == WET_HAL_ERR_DEAD_HEAD) {
+1327 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1328 |                                  "ERR_ACTUATOR_FAULT: Dead-head overpressure interlock tripped on pump %u (downstream valve closed)",
+1329 |                                  pump_id);
+1330 |                         return WET_ERR_ACTUATOR_FAULT;
+1331 |                     }
 1332 |                 }
 1333 | 
-1334 |                 vm->pump_dispensed_ul[pump_id] += volume_ul;
+1334 |                 vm->pump_rates_ul_min[pump_id] = rate_ul_min;
 1335 |                 break;
 1336 |             }
 1337 | 
-1338 |             case WET_OP_VALVE_SET: {
-1339 |                 if (instr_pc + 3 > vm->code_size) {
-1340 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated VALVE_SET operand");
+1338 |             case WET_OP_PUMP_DISPENSE: {
+1339 |                 if (instr_pc + 6 > vm->code_size) {
+1340 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated PUMP_DISPENSE operand");
 1341 |                     return WET_ERR_INVALID_OPCODE;
 1342 |                 }
-1343 |                 uint8_t valve_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1344 |                 uint8_t state = *(const uint8_t*)(vm->code + instr_pc + 2);
-1345 |                 vm->pc = instr_pc + 3;
-1346 | 
-1347 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_VALVE_SET, 0.0f, valve_id)) {
-1348 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1349 |                              "Capability denied for VALVE_SET (requires CAP_MICROFLUIDICS)");
-1350 |                     return WET_ERR_CAPABILITY_DENIED;
-1351 |                 }
-1352 | 
-1353 |                 if (valve_id >= 8) {
-1354 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Valve ID %u out of bounds (max 7)", valve_id);
-1355 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1356 |                 }
-1357 | 
-1358 |                 vm->valve_states[valve_id] = (state != 0) ? 1 : 0;
-1359 |                 break;
-1360 |             }
-1361 | 
-1362 |             case WET_OP_MOTOR_STEP: {
-1363 |                 if (instr_pc + 10 > vm->code_size) {
-1364 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MOTOR_STEP operand");
-1365 |                     return WET_ERR_INVALID_OPCODE;
-1366 |                 }
-1367 |                 uint8_t motor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1368 |                 int32_t steps;
-1369 |                 float speed_rpm;
-1370 |                 memcpy(&steps, vm->code + instr_pc + 2, sizeof(int32_t));
-1371 |                 memcpy(&speed_rpm, vm->code + instr_pc + 6, sizeof(float));
-1372 |                 vm->pc = instr_pc + 10;
-1373 | 
-1374 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_MOTOR_STEP, 0.0f, motor_id)) {
-1375 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1376 |                              "Capability denied for MOTOR_STEP (requires CAP_MOTOR_ACTUATION)");
-1377 |                     return WET_ERR_CAPABILITY_DENIED;
-1378 |                 }
+1343 |                 uint8_t pump_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1344 |                 float volume_ul;
+1345 |                 memcpy(&volume_ul, vm->code + instr_pc + 2, sizeof(float));
+1346 |                 vm->pc = instr_pc + 6;
+1347 | 
+1348 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_PUMP_DISPENSE, 0.0f, pump_id)) {
+1349 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1350 |                              "Capability denied for PUMP_DISPENSE (requires CAP_MICROFLUIDICS)");
+1351 |                     return WET_ERR_CAPABILITY_DENIED;
+1352 |                 }
+1353 | 
+1354 |                 if (pump_id >= 8) {
+1355 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Pump ID %u out of bounds (max 7)", pump_id);
+1356 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1357 |                 }
+1358 | 
+1359 |                 if (volume_ul <= 0.0f || volume_ul > 500.0f) {
+1360 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1361 |                              "ERR_ACTUATOR_FAULT: Invalid dispense volume %.2f uL (allowed: 0.1..500.0 uL)",
+1362 |                              (double)volume_ul);
+1363 |                     return WET_ERR_ACTUATOR_FAULT;
+1364 |                 }
+1365 | 
+1366 |                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+1367 |                     wet_hal_status_t hst = wet_hal_dispense_pump(vm->hal, pump_id, (double)volume_ul);
+1368 |                     if (hst == WET_HAL_ERR_DEAD_HEAD) {
+1369 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1370 |                                  "ERR_ACTUATOR_FAULT: Dead-head overpressure interlock tripped on pump %u (downstream valve closed)",
+1371 |                                  pump_id);
+1372 |                         return WET_ERR_ACTUATOR_FAULT;
+1373 |                     }
+1374 |                 }
+1375 | 
+1376 |                 vm->pump_dispensed_ul[pump_id] += volume_ul;
+1377 |                 break;
+1378 |             }
 1379 | 
-1380 |                 if (motor_id >= 4) {
-1381 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Motor ID %u out of bounds (max 3)", motor_id);
-1382 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1383 |                 }
-1384 | 
-1385 |                 vm->motor_positions[motor_id] += steps;
-1386 |                 vm->motor_speeds_rpm[motor_id] = speed_rpm;
-1387 |                 break;
-1388 |             }
-1389 | 
-1390 |             case WET_OP_READ_PRESSURE: {
-1391 |                 if (instr_pc + 2 > vm->code_size) {
-1392 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_PRESSURE operand");
-1393 |                     return WET_ERR_INVALID_OPCODE;
-1394 |                 }
-1395 |                 uint8_t port_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1396 |                 vm->pc = instr_pc + 2;
-1397 | 
-1398 |                 if (port_id >= 4) port_id = 0;
-1399 |                 wet_value_t p_val;
-1400 |                 p_val.type = WET_VAL_FLOAT;
-1401 |                 p_val.as.f_val = vm->fluid_pressure_kpa[port_id];
-1402 |                 wet_status_t st = push_val(vm, p_val);
-1403 |                 if (st != WET_OK) return st;
-1404 |                 break;
-1405 |             }
-1406 | 
-1407 |             case WET_OP_READ_TEMPERATURE: {
-1408 |                 vm->pc = instr_pc + 1;
-1409 |                 wet_value_t t_val;
-1410 |                 t_val.type = WET_VAL_FLOAT;
-1411 |                 t_val.as.f_val = vm->ambient_temperature_c;
-1412 |                 wet_status_t st = push_val(vm, t_val);
-1413 |                 if (st != WET_OK) return st;
-1414 |                 break;
-1415 |             }
-1416 | 
-1417 |             case WET_OP_STIM_CURRENT: {
-1418 |                 if (instr_pc + 6 > vm->code_size) {
-1419 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STIM_CURRENT operand");
-1420 |                     return WET_ERR_INVALID_OPCODE;
-1421 |                 }
-1422 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
-1423 |                 float current_ua;
-1424 |                 memcpy(&current_ua, vm->code + instr_pc + 2, sizeof(float));
-1425 |                 vm->pc = instr_pc + 6;
-1426 | 
-1427 |                 /* Pop duration arguments: interphase, phase2, phase1 */
-1428 |                 wet_value_t v_interphase, v_p2, v_p1;
-1429 |                 wet_status_t st = pop_val(vm, &v_interphase);
-1430 |                 if (st != WET_OK) return st;
-1431 |                 st = pop_val(vm, &v_p2);
-1432 |                 if (st != WET_OK) return st;
-1433 |                 st = pop_val(vm, &v_p1);
-1434 |                 if (st != WET_OK) return st;
+1380 |             case WET_OP_VALVE_SET: {
+1381 |                 if (instr_pc + 3 > vm->code_size) {
+1382 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated VALVE_SET operand");
+1383 |                     return WET_ERR_INVALID_OPCODE;
+1384 |                 }
+1385 |                 uint8_t valve_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1386 |                 uint8_t state = *(const uint8_t*)(vm->code + instr_pc + 2);
+1387 |                 vm->pc = instr_pc + 3;
+1388 | 
+1389 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_VALVE_SET, 0.0f, valve_id)) {
+1390 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1391 |                              "Capability denied for VALVE_SET (requires CAP_MICROFLUIDICS)");
+1392 |                     return WET_ERR_CAPABILITY_DENIED;
+1393 |                 }
+1394 | 
+1395 |                 if (valve_id >= 8) {
+1396 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Valve ID %u out of bounds (max 7)", valve_id);
+1397 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1398 |                 }
+1399 | 
+1400 |                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+1401 |                     wet_hal_write_valve(vm->hal, valve_id, state);
+1402 |                 }
+1403 | 
+1404 |                 vm->valve_states[valve_id] = (state != 0) ? 1 : 0;
+1405 |                 break;
+1406 |             }
+1407 | 
+1408 |             case WET_OP_MOTOR_STEP: {
+1409 |                 if (instr_pc + 10 > vm->code_size) {
+1410 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated MOTOR_STEP operand");
+1411 |                     return WET_ERR_INVALID_OPCODE;
+1412 |                 }
+1413 |                 uint8_t motor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1414 |                 int32_t steps;
+1415 |                 float speed_rpm;
+1416 |                 memcpy(&steps, vm->code + instr_pc + 2, sizeof(int32_t));
+1417 |                 memcpy(&speed_rpm, vm->code + instr_pc + 6, sizeof(float));
+1418 |                 vm->pc = instr_pc + 10;
+1419 | 
+1420 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_MOTOR_STEP, 0.0f, motor_id)) {
+1421 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1422 |                              "Capability denied for MOTOR_STEP (requires CAP_MOTOR_ACTUATION)");
+1423 |                     return WET_ERR_CAPABILITY_DENIED;
+1424 |                 }
+1425 | 
+1426 |                 if (motor_id >= 4) {
+1427 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Motor ID %u out of bounds (max 3)", motor_id);
+1428 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1429 |                 }
+1430 | 
+1431 |                 vm->motor_positions[motor_id] += steps;
+1432 |                 vm->motor_speeds_rpm[motor_id] = speed_rpm;
+1433 |                 break;
+1434 |             }
 1435 | 
-1436 |                 if (channel == 0xFF) {
-1437 |                     wet_value_t v_ch;
-1438 |                     st = pop_val(vm, &v_ch);
-1439 |                     if (st != WET_OK) return st;
-1440 |                     int32_t c_idx = to_int(&v_ch);
-1441 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
-1442 |                         snprintf(vm->last_error, sizeof(vm->last_error),
-1443 |                                  "Electrode channel %d out of bounds (max %u)",
-1444 |                                  c_idx, vm->config.channel_count);
-1445 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
-1446 |                     }
-1447 |                     channel = (uint8_t)c_idx;
-1448 |                 } else if (channel >= vm->config.channel_count) {
-1449 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1450 |                              "Electrode channel %u out of bounds (max %u)",
-1451 |                              channel, vm->config.channel_count);
-1452 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
-1453 |                 }
-1454 | 
-1455 |                 if (vm->interlocks.locked) {
-1456 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-1457 |                     return WET_ERR_INTERLOCK_LOCKED;
-1458 |                 }
-1459 | 
-1460 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
-1461 |                     snprintf(vm->last_error, sizeof(vm->last_error),
-1462 |                              "Capability denied for STIM_CURRENT on ch %u (ref/rec bank restricted or missing CAP_STIMULATION)", channel);
-1463 |                     return WET_ERR_CAPABILITY_DENIED;
-1464 |                 }
-1465 | 
-1466 |                 float p1_ms = to_float(&v_p1);
-1467 |                 float p2_ms = to_float(&v_p2);
-1468 |                 float ip_ms = to_float(&v_interphase);
-1469 | 
-1470 |                 /* Randles Interface: V_elec = I * Rs + V_dl */
-1471 |                 float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
-1472 |                 wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
-1473 |                 if (comp_st != WET_OK) {
-1474 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-1475 |                     return comp_st;
-1476 |                 }
-1477 | 
-1478 |                 /* Per-phase charge density check: Q (nC) = I (uA) * t (ms) */
-1479 |                 if (p1_ms > 0.0f && p2_ms > 0.0f) {
-1480 |                     float q_phase1 = wet_fabsf(current_ua) * 1e-3f * p1_ms;
-1481 |                     float q_phase2 = wet_fabsf(current_ua) * 1e-3f * p2_ms;
-1482 |                     if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
-1483 |                         vm->interlocks.locked = 1;
-1484 |                         vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
-1485 |                         vm->interlocks.tripped_channel = channel;
-1486 |                         vm->interlocks.trip_tick = vm->current_tick;
-1487 |                         vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
-1488 |                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-1489 |                                  "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
-1490 |                                  channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
-1491 |                         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-1492 |                         return WET_ERR_CHARGE_DENSITY_EXCEEDED;
-1493 |                     }
-1494 |                 }
-1495 | 
-1496 |                 biophysics_schedule_stim_current(&vm->bio, channel, current_ua, p1_ms, p2_ms, ip_ms);
-1497 |                 vm->voltages[channel] = v_elec;
-1498 |                 vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
-1499 |                 break;
-1500 |             }
-1501 | 
-1502 |             case WET_OP_READ_PH: {
-1503 |                 vm->pc = instr_pc + 1;
-1504 |                 wet_value_t ph_val;
-1505 |                 ph_val.type = WET_VAL_FLOAT;
-1506 |                 ph_val.as.f_val = vm->ph_level > 0.0f ? vm->ph_level : 7.40f;
-1507 |                 wet_status_t st = push_val(vm, ph_val);
-1508 |                 if (st != WET_OK) return st;
-1509 |                 break;
-1510 |             }
+1436 |             case WET_OP_READ_PRESSURE: {
+1437 |                 if (instr_pc + 2 > vm->code_size) {
+1438 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_PRESSURE operand");
+1439 |                     return WET_ERR_INVALID_OPCODE;
+1440 |                 }
+1441 |                 uint8_t port_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1442 |                 vm->pc = instr_pc + 2;
+1443 | 
+1444 |                 if (port_id >= 4) port_id = 0;
+1445 |                 wet_value_t p_val;
+1446 |                 p_val.type = WET_VAL_FLOAT;
+1447 |                 p_val.as.f_val = vm->fluid_pressure_kpa[port_id];
+1448 |                 wet_status_t st = push_val(vm, p_val);
+1449 |                 if (st != WET_OK) return st;
+1450 |                 break;
+1451 |             }
+1452 | 
+1453 |             case WET_OP_READ_TEMPERATURE: {
+1454 |                 vm->pc = instr_pc + 1;
+1455 |                 wet_value_t t_val;
+1456 |                 t_val.type = WET_VAL_FLOAT;
+1457 |                 t_val.as.f_val = vm->ambient_temperature_c;
+1458 |                 wet_status_t st = push_val(vm, t_val);
+1459 |                 if (st != WET_OK) return st;
+1460 |                 break;
+1461 |             }
+1462 | 
+1463 |             case WET_OP_STIM_CURRENT: {
+1464 |                 if (instr_pc + 6 > vm->code_size) {
+1465 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated STIM_CURRENT operand");
+1466 |                     return WET_ERR_INVALID_OPCODE;
+1467 |                 }
+1468 |                 uint8_t channel = *(const uint8_t*)(vm->code + instr_pc + 1);
+1469 |                 float current_ua;
+1470 |                 memcpy(&current_ua, vm->code + instr_pc + 2, sizeof(float));
+1471 |                 vm->pc = instr_pc + 6;
+1472 | 
+1473 |                 /* Pop duration arguments: interphase, phase2, phase1 */
+1474 |                 wet_value_t v_interphase, v_p2, v_p1;
+1475 |                 wet_status_t st = pop_val(vm, &v_interphase);
+1476 |                 if (st != WET_OK) return st;
+1477 |                 st = pop_val(vm, &v_p2);
+1478 |                 if (st != WET_OK) return st;
+1479 |                 st = pop_val(vm, &v_p1);
+1480 |                 if (st != WET_OK) return st;
+1481 | 
+1482 |                 if (channel == 0xFF) {
+1483 |                     wet_value_t v_ch;
+1484 |                     st = pop_val(vm, &v_ch);
+1485 |                     if (st != WET_OK) return st;
+1486 |                     int32_t c_idx = to_int(&v_ch);
+1487 |                     if (c_idx < 0 || (uint32_t)c_idx >= vm->config.channel_count) {
+1488 |                         snprintf(vm->last_error, sizeof(vm->last_error),
+1489 |                                  "Electrode channel %d out of bounds (max %u)",
+1490 |                                  c_idx, vm->config.channel_count);
+1491 |                         return WET_ERR_OUT_OF_BOUNDS_CH;
+1492 |                     }
+1493 |                     channel = (uint8_t)c_idx;
+1494 |                 } else if (channel >= vm->config.channel_count) {
+1495 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1496 |                              "Electrode channel %u out of bounds (max %u)",
+1497 |                              channel, vm->config.channel_count);
+1498 |                     return WET_ERR_OUT_OF_BOUNDS_CH;
+1499 |                 }
+1500 | 
+1501 |                 if (vm->interlocks.locked) {
+1502 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1503 |                     return WET_ERR_INTERLOCK_LOCKED;
+1504 |                 }
+1505 | 
+1506 |                 if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
+1507 |                     snprintf(vm->last_error, sizeof(vm->last_error),
+1508 |                              "Capability denied for STIM_CURRENT on ch %u (ref/rec bank restricted or missing CAP_STIMULATION)", channel);
+1509 |                     return WET_ERR_CAPABILITY_DENIED;
+1510 |                 }
 1511 | 
-1512 |             case WET_OP_READ_DO: {
-1513 |                 vm->pc = instr_pc + 1;
-1514 |                 wet_value_t do_val;
-1515 |                 do_val.type = WET_VAL_FLOAT;
-1516 |                 do_val.as.f_val = vm->dissolved_oxygen_pct > 0.0f ? vm->dissolved_oxygen_pct : 95.0f;
-1517 |                 wet_status_t st = push_val(vm, do_val);
-1518 |                 if (st != WET_OK) return st;
-1519 |                 break;
-1520 |             }
-1521 | 
-1522 |             case WET_OP_READ_CO2: {
-1523 |                 vm->pc = instr_pc + 1;
-1524 |                 wet_value_t co2_val;
-1525 |                 co2_val.type = WET_VAL_FLOAT;
-1526 |                 co2_val.as.f_val = vm->dissolved_co2_pct > 0.0f ? vm->dissolved_co2_pct : 5.0f;
-1527 |                 wet_status_t st = push_val(vm, co2_val);
-1528 |                 if (st != WET_OK) return st;
-1529 |                 break;
-1530 |             }
-1531 | 
-1532 |             case WET_OP_READ_BUBBLE: {
-1533 |                 if (instr_pc + 2 > vm->code_size) {
-1534 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_BUBBLE operand");
-1535 |                     return WET_ERR_INVALID_OPCODE;
-1536 |                 }
-1537 |                 uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1538 |                 vm->pc = instr_pc + 2;
-1539 |                 if (sensor_id >= 8) sensor_id = 0;
-1540 |                 wet_value_t b_val;
-1541 |                 b_val.type = WET_VAL_INT;
-1542 |                 b_val.as.i_val = vm->bubble_detected[sensor_id] ? 1 : 0;
-1543 |                 wet_status_t st = push_val(vm, b_val);
-1544 |                 if (st != WET_OK) return st;
-1545 |                 break;
-1546 |             }
-1547 | 
-1548 |             case WET_OP_READ_FLOW: {
-1549 |                 if (instr_pc + 2 > vm->code_size) {
-1550 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_FLOW operand");
-1551 |                     return WET_ERR_INVALID_OPCODE;
-1552 |                 }
-1553 |                 uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
-1554 |                 vm->pc = instr_pc + 2;
-1555 |                 if (sensor_id >= 8) sensor_id = 0;
-1556 |                 wet_value_t f_val;
-1557 |                 f_val.type = WET_VAL_FLOAT;
-1558 |                 f_val.as.f_val = vm->fluid_flow_rate_ul_min[sensor_id];
-1559 |                 wet_status_t st = push_val(vm, f_val);
-1560 |                 if (st != WET_OK) return st;
-1561 |                 break;
-1562 |             }
-1563 | 
-1564 |             default: {
-1565 |                 snprintf(vm->last_error, sizeof(vm->last_error),
-1566 |                          "Unrecognized or invalid opcode 0x%02X at pc %zu", op, instr_pc);
-1567 |                 return WET_ERR_INVALID_OPCODE;
-1568 |             }
-1569 |         }
-1570 |     }
-1571 | 
-1572 |     populate_telemetry(vm, out_telem);
-1573 |     return WET_OK;
-1574 | }
-1575 | 
-1576 | /* =========================================================================
-1577 |  * Phase 3: Standalone C99 Load-Time Bytecode Verifier
-1578 |  * ========================================================================= */
-1579 | 
-1580 | wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len) {
-1581 |     if (!bytecode) {
-1582 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Null bytecode pointer");
-1583 |         return WET_ERR_NULL_PTR;
-1584 |     }
-1585 |     if (size < WET_HEADER_SIZE) {
-1586 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Bytecode size %zu smaller than 32-byte header", size);
-1587 |         return WET_ERR_INVALID_MAGIC;
-1588 |     }
-1589 | 
-1590 |     if (memcmp(bytecode, WET_HEADER_MAGIC, 4) != 0) {
-1591 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Invalid header magic (expected WETB)");
-1592 |         return WET_ERR_INVALID_MAGIC;
-1593 |     }
-1594 | 
-1595 |     uint8_t v_maj = bytecode[4];
-1596 |     uint8_t v_min = bytecode[5];
-1597 |     if (v_maj != WET_VERSION_MAJOR || v_min != WET_VERSION_MINOR) {
-1598 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Unsupported version %u.%u (expected 1.0)", v_maj, v_min);
-1599 |         return WET_ERR_UNSUPPORTED_VERSION;
-1600 |     }
-1601 | 
-1602 |     uint32_t file_size = wet_read_u32_le(bytecode + 8);
-1603 |     uint32_t stored_crc = wet_read_u32_le(bytecode + 12);
-1604 |     uint32_t num_sections = wet_read_u32_le(bytecode + 16);
-1605 | 
-1606 |     if (file_size > size) {
-1607 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Declared file size %u exceeds buffer %zu", file_size, size);
-1608 |         return WET_ERR_MALFORMED_SECTION;
-1609 |     }
-1610 | 
-1611 |     /* CRC32 check: copy header, zero bytes 12..15, compute CRC */
-1612 |     uint8_t hdr_copy[WET_HEADER_SIZE];
-1613 |     memcpy(hdr_copy, bytecode, WET_HEADER_SIZE);
-1614 |     memset(hdr_copy + 12, 0, 4);
-1615 |     uint32_t crc = wet_compute_crc32(hdr_copy, WET_HEADER_SIZE, 0);
-1616 |     if (file_size > WET_HEADER_SIZE) {
-1617 |         crc = wet_compute_crc32(bytecode + WET_HEADER_SIZE, file_size - WET_HEADER_SIZE, crc);
-1618 |     }
-1619 |     if (crc != stored_crc) {
-1620 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "CRC32 mismatch (computed 0x%08X != stored 0x%08X)", crc, stored_crc);
-1621 |         return WET_ERR_CRC_MISMATCH;
-1622 |     }
-1623 | 
-1624 |     size_t sec_table_end = WET_HEADER_SIZE + (size_t)num_sections * WET_SECTION_ENTRY_SIZE;
-1625 |     if (sec_table_end > file_size) {
-1626 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Section table overflows file bounds");
-1627 |         return WET_ERR_MALFORMED_SECTION;
-1628 |     }
-1629 | 
-1630 |     const uint8_t* code_ptr = NULL;
-1631 |     size_t code_size = 0;
-1632 |     size_t num_constants = 0;
+1512 |                 float p1_ms = to_float(&v_p1);
+1513 |                 float p2_ms = to_float(&v_p2);
+1514 |                 float ip_ms = to_float(&v_interphase);
+1515 | 
+1516 |                 /* Randles Interface: V_elec = I * Rs + V_dl */
+1517 |                 float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+1518 |                 wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
+1519 |                 if (comp_st != WET_OK) {
+1520 |                     snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1521 |                     return comp_st;
+1522 |                 }
+1523 | 
+1524 |                 /* Per-phase charge density check: Q (nC) = I (uA) * t (ms) */
+1525 |                 if (p1_ms > 0.0f && p2_ms > 0.0f) {
+1526 |                     float q_phase1 = wet_fabsf(current_ua) * 1e-3f * p1_ms;
+1527 |                     float q_phase2 = wet_fabsf(current_ua) * 1e-3f * p2_ms;
+1528 |                     if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+1529 |                         vm->interlocks.locked = 1;
+1530 |                         vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+1531 |                         vm->interlocks.tripped_channel = channel;
+1532 |                         vm->interlocks.trip_tick = vm->current_tick;
+1533 |                         vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+1534 |                         if (vm->hal) {
+1535 |                             wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+1536 |                         }
+1537 |                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+1538 |                                  "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+1539 |                                  channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+1540 |                         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1541 |                         return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+1542 |                     }
+1543 |                 }
+1544 | 
+1545 |                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+1546 |                     int32_t cur_pA = (int32_t)(current_ua * 1e6f);
+1547 |                     uint32_t dur_us = (uint32_t)(p1_ms * 1000.0f);
+1548 |                     wet_hal_status_t hst = wet_hal_stim_current(vm->hal, (uint16_t)channel, cur_pA, dur_us);
+1549 |                     if (hst == WET_HAL_ERR_COMPLIANCE_RAILED) {
+1550 |                         vm->interlocks.locked = 1;
+1551 |                         vm->interlocks.trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
+1552 |                         vm->interlocks.tripped_channel = channel;
+1553 |                         vm->interlocks.trip_tick = vm->current_tick;
+1554 |                         snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+1555 |                                  "ERR_COMPLIANCE_RAILED: Channel %u compliance rail tripped on hardware driver (~7.0V limit)", channel);
+1556 |                         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+1557 |                         wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_COMPLIANCE_RAILED);
+1558 |                         return WET_ERR_COMPLIANCE_RAILED;
+1559 |                     }
+1560 |                 }
+1561 | 
+1562 |                 biophysics_schedule_stim_current(&vm->bio, channel, current_ua, p1_ms, p2_ms, ip_ms);
+1563 |                 vm->voltages[channel] = v_elec;
+1564 |                 vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
+1565 |                 break;
+1566 |             }
+1567 | 
+1568 |             case WET_OP_READ_PH: {
+1569 |                 vm->pc = instr_pc + 1;
+1570 |                 wet_value_t ph_val;
+1571 |                 ph_val.type = WET_VAL_FLOAT;
+1572 |                 ph_val.as.f_val = vm->ph_level > 0.0f ? vm->ph_level : 7.40f;
+1573 |                 wet_status_t st = push_val(vm, ph_val);
+1574 |                 if (st != WET_OK) return st;
+1575 |                 break;
+1576 |             }
+1577 | 
+1578 |             case WET_OP_READ_DO: {
+1579 |                 vm->pc = instr_pc + 1;
+1580 |                 wet_value_t do_val;
+1581 |                 do_val.type = WET_VAL_FLOAT;
+1582 |                 do_val.as.f_val = vm->dissolved_oxygen_pct > 0.0f ? vm->dissolved_oxygen_pct : 95.0f;
+1583 |                 wet_status_t st = push_val(vm, do_val);
+1584 |                 if (st != WET_OK) return st;
+1585 |                 break;
+1586 |             }
+1587 | 
+1588 |             case WET_OP_READ_CO2: {
+1589 |                 vm->pc = instr_pc + 1;
+1590 |                 wet_value_t co2_val;
+1591 |                 co2_val.type = WET_VAL_FLOAT;
+1592 |                 co2_val.as.f_val = vm->dissolved_co2_pct > 0.0f ? vm->dissolved_co2_pct : 5.0f;
+1593 |                 wet_status_t st = push_val(vm, co2_val);
+1594 |                 if (st != WET_OK) return st;
+1595 |                 break;
+1596 |             }
+1597 | 
+1598 |             case WET_OP_READ_BUBBLE: {
+1599 |                 if (instr_pc + 2 > vm->code_size) {
+1600 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_BUBBLE operand");
+1601 |                     return WET_ERR_INVALID_OPCODE;
+1602 |                 }
+1603 |                 uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1604 |                 vm->pc = instr_pc + 2;
+1605 |                 if (sensor_id >= 8) sensor_id = 0;
+1606 |                 wet_value_t b_val;
+1607 |                 b_val.type = WET_VAL_INT;
+1608 |                 b_val.as.i_val = vm->bubble_detected[sensor_id] ? 1 : 0;
+1609 |                 wet_status_t st = push_val(vm, b_val);
+1610 |                 if (st != WET_OK) return st;
+1611 |                 break;
+1612 |             }
+1613 | 
+1614 |             case WET_OP_READ_FLOW: {
+1615 |                 if (instr_pc + 2 > vm->code_size) {
+1616 |                     snprintf(vm->last_error, sizeof(vm->last_error), "Truncated READ_FLOW operand");
+1617 |                     return WET_ERR_INVALID_OPCODE;
+1618 |                 }
+1619 |                 uint8_t sensor_id = *(const uint8_t*)(vm->code + instr_pc + 1);
+1620 |                 vm->pc = instr_pc + 2;
+1621 |                 if (sensor_id >= 8) sensor_id = 0;
+1622 |                 double flow_val = (double)vm->fluid_flow_rate_ul_min[sensor_id];
+1623 |                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+1624 |                     wet_hal_read_flow(vm->hal, sensor_id, &flow_val);
+1625 |                 }
+1626 |                 wet_value_t f_val;
+1627 |                 f_val.type = WET_VAL_FLOAT;
+1628 |                 f_val.as.f_val = (float)flow_val;
+1629 |                 wet_status_t st = push_val(vm, f_val);
+1630 |                 if (st != WET_OK) return st;
+1631 |                 break;
+1632 |             }
 1633 | 
-1634 |     for (uint32_t s = 0; s < num_sections; ++s) {
-1635 |         const uint8_t* entry = bytecode + WET_HEADER_SIZE + s * WET_SECTION_ENTRY_SIZE;
-1636 |         uint16_t sec_type = wet_read_u16_le(entry);
-1637 |         uint32_t sec_offset = wet_read_u32_le(entry + 4);
-1638 |         uint32_t sec_size = wet_read_u32_le(entry + 8);
-1639 | 
-1640 |         if ((size_t)sec_offset + sec_size > file_size || sec_offset < sec_table_end) {
-1641 |             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Section %u (type %u) out of bounds", s, sec_type);
-1642 |             return WET_ERR_MALFORMED_SECTION;
-1643 |         }
-1644 | 
-1645 |         if (sec_type == WET_SEC_BYTECODE_STREAM) {
-1646 |             code_ptr = bytecode + sec_offset;
-1647 |             code_size = sec_size;
-1648 |         } else if (sec_type == WET_SEC_CONSTANT_POOL) {
-1649 |             if (sec_size >= 4) {
-1650 |                 uint32_t declared_entries = wet_read_u32_le(bytecode + sec_offset);
-1651 |                 const uint8_t* cp = bytecode + sec_offset + 4;
-1652 |                 size_t cp_remain = sec_size - 4;
-1653 |                 while (cp_remain > 0) {
-1654 |                     uint8_t ctype = *cp;
-1655 |                     cp++; cp_remain--;
-1656 |                     if (ctype == WET_VAL_INT || ctype == WET_VAL_FLOAT) {
-1657 |                         if (cp_remain < 4) {
-1658 |                             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Malformed constant pool");
-1659 |                             return WET_ERR_MALFORMED_SECTION;
-1660 |                         }
-1661 |                         cp += 4; cp_remain -= 4;
-1662 |                     } else if (ctype == WET_VAL_STRING) {
-1663 |                         if (cp_remain < 2) {
-1664 |                             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Malformed string in constant pool");
-1665 |                             return WET_ERR_MALFORMED_SECTION;
-1666 |                         }
-1667 |                         uint16_t slen = wet_read_u16_le(cp);
-1668 |                         cp += 2; cp_remain -= 2;
-1669 |                         if (cp_remain < slen) {
-1670 |                             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "String payload overflows constant pool");
-1671 |                             return WET_ERR_MALFORMED_SECTION;
-1672 |                         }
-1673 |                         cp += slen; cp_remain -= slen;
-1674 |                     } else {
-1675 |                         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Unknown constant type %u", ctype);
-1676 |                         return WET_ERR_MALFORMED_SECTION;
-1677 |                     }
-1678 |                     num_constants++;
-1679 |                 }
-1680 |             }
-1681 |         }
-1682 |     }
-1683 | 
-1684 |     if (!code_ptr || code_size == 0) {
-1685 |         return WET_OK;
-1686 |     }
-1687 | 
-1688 |     uint8_t* is_start = (uint8_t*)malloc(code_size);
-1689 |     if (!is_start) {
-1690 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Failed to allocate verifier bitmap (%zu bytes)", code_size);
-1691 |         return WET_ERR_ALLOC_FAILED;
+1634 |             default: {
+1635 |                 snprintf(vm->last_error, sizeof(vm->last_error),
+1636 |                          "Unrecognized or invalid opcode 0x%02X at pc %zu", op, instr_pc);
+1637 |                 return WET_ERR_INVALID_OPCODE;
+1638 |             }
+1639 |         }
+1640 |     }
+1641 | 
+1642 |     populate_telemetry(vm, out_telem);
+1643 |     return WET_OK;
+1644 | }
+1645 | 
+1646 | /* =========================================================================
+1647 |  * Phase 3: Standalone C99 Load-Time Bytecode Verifier
+1648 |  * ========================================================================= */
+1649 | 
+1650 | wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len) {
+1651 |     if (!bytecode) {
+1652 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Null bytecode pointer");
+1653 |         return WET_ERR_NULL_PTR;
+1654 |     }
+1655 |     if (size < WET_HEADER_SIZE) {
+1656 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Bytecode size %zu smaller than 32-byte header", size);
+1657 |         return WET_ERR_INVALID_MAGIC;
+1658 |     }
+1659 | 
+1660 |     if (memcmp(bytecode, WET_HEADER_MAGIC, 4) != 0) {
+1661 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Invalid header magic (expected WETB)");
+1662 |         return WET_ERR_INVALID_MAGIC;
+1663 |     }
+1664 | 
+1665 |     uint8_t v_maj = bytecode[4];
+1666 |     uint8_t v_min = bytecode[5];
+1667 |     if (v_maj != WET_VERSION_MAJOR || v_min != WET_VERSION_MINOR) {
+1668 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Unsupported version %u.%u (expected 1.0)", v_maj, v_min);
+1669 |         return WET_ERR_UNSUPPORTED_VERSION;
+1670 |     }
+1671 | 
+1672 |     uint32_t file_size = wet_read_u32_le(bytecode + 8);
+1673 |     uint32_t stored_crc = wet_read_u32_le(bytecode + 12);
+1674 |     uint32_t num_sections = wet_read_u32_le(bytecode + 16);
+1675 | 
+1676 |     if (file_size > size) {
+1677 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Declared file size %u exceeds buffer %zu", file_size, size);
+1678 |         return WET_ERR_MALFORMED_SECTION;
+1679 |     }
+1680 | 
+1681 |     /* CRC32 check: copy header, zero bytes 12..15, compute CRC */
+1682 |     uint8_t hdr_copy[WET_HEADER_SIZE];
+1683 |     memcpy(hdr_copy, bytecode, WET_HEADER_SIZE);
+1684 |     memset(hdr_copy + 12, 0, 4);
+1685 |     uint32_t crc = wet_compute_crc32(hdr_copy, WET_HEADER_SIZE, 0);
+1686 |     if (file_size > WET_HEADER_SIZE) {
+1687 |         crc = wet_compute_crc32(bytecode + WET_HEADER_SIZE, file_size - WET_HEADER_SIZE, crc);
+1688 |     }
+1689 |     if (crc != stored_crc) {
+1690 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "CRC32 mismatch (computed 0x%08X != stored 0x%08X)", crc, stored_crc);
+1691 |         return WET_ERR_CRC_MISMATCH;
 1692 |     }
-1693 |     memset(is_start, 0, code_size);
-1694 | 
-1695 |     /* Pass 1: Decode opcodes and check instruction sizes */
-1696 |     size_t pc = 0;
-1697 |     while (pc < code_size) {
-1698 |         is_start[pc] = 1;
-1699 |         uint8_t op = code_ptr[pc];
-1700 |         size_t ilen = 1;
-1701 | 
-1702 |         switch ((wet_opcode_t)op) {
-1703 |             case WET_OP_NOP:
-1704 |             case WET_OP_HALT:
-1705 |             case WET_OP_SYNC_TICK:
-1706 |             case WET_OP_POP:
-1707 |             case WET_OP_DUP:
-1708 |             case WET_OP_SWAP:
-1709 |             case WET_OP_ADD_I:
-1710 |             case WET_OP_SUB_I:
-1711 |             case WET_OP_MUL_I:
-1712 |             case WET_OP_DIV_I:
-1713 |             case WET_OP_ADD_F:
-1714 |             case WET_OP_SUB_F:
-1715 |             case WET_OP_MUL_F:
-1716 |             case WET_OP_DIV_F:
-1717 |             case WET_OP_NEG:
-1718 |             case WET_OP_MOD_I:
-1719 |             case WET_OP_CMP_EQ:
-1720 |             case WET_OP_CMP_NE:
-1721 |             case WET_OP_CMP_LT:
-1722 |             case WET_OP_CMP_LE:
-1723 |             case WET_OP_CMP_GT:
-1724 |             case WET_OP_CMP_GE:
-1725 |             case WET_OP_RET:
-1726 |             case WET_OP_GET_POP_RATE:
-1727 |             case WET_OP_READ_TEMPERATURE:
-1728 |             case WET_OP_READ_PH:
-1729 |             case WET_OP_READ_DO:
-1730 |             case WET_OP_READ_CO2:
-1731 |                 ilen = 1;
-1732 |                 break;
-1733 | 
-1734 |             case WET_OP_STIM_BIPHASIC:
-1735 |             case WET_OP_READ_SPIKES:
-1736 |             case WET_OP_READ_VOLTAGE:
-1737 |             case WET_OP_READ_PRESSURE:
-1738 |             case WET_OP_READ_BUBBLE:
-1739 |             case WET_OP_READ_FLOW:
-1740 |                 ilen = 2;
-1741 |                 break;
-1742 | 
-1743 |             case WET_OP_SLEEP_TICKS:
-1744 |             case WET_OP_LOAD_LOCAL:
-1745 |             case WET_OP_STORE_LOCAL:
-1746 |             case WET_OP_JMP:
-1747 |             case WET_OP_JMP_IF_TRUE:
-1748 |             case WET_OP_JMP_IF_FALSE:
-1749 |             case WET_OP_MODULATE_STDP:
-1750 |             case WET_OP_MEA_CONFIG:
-1751 |             case WET_OP_VALVE_SET:
-1752 |                 ilen = 3;
-1753 |                 break;
-1754 | 
-1755 |             case WET_OP_PUSH_CONST:
-1756 |                 ilen = 3;
-1757 |                 if (pc + 3 <= code_size) {
-1758 |                     uint16_t c_idx = wet_read_u16_le(code_ptr + pc + 1);
-1759 |                     if (c_idx >= num_constants) {
-1760 |                         if (err_buf && err_buf_len > 0)
-1761 |                             snprintf(err_buf, err_buf_len, "Constant index %u out of range (%zu)", c_idx, num_constants);
-1762 |                         free(is_start);
-1763 |                         return WET_ERR_BYTECODE_VERIFICATION;
-1764 |                     }
-1765 |                 }
-1766 |                 break;
-1767 | 
-1768 |             case WET_OP_CALL:
-1769 |                 ilen = 4;
-1770 |                 break;
+1693 | 
+1694 |     size_t sec_table_end = WET_HEADER_SIZE + (size_t)num_sections * WET_SECTION_ENTRY_SIZE;
+1695 |     if (sec_table_end > file_size) {
+1696 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Section table overflows file bounds");
+1697 |         return WET_ERR_MALFORMED_SECTION;
+1698 |     }
+1699 | 
+1700 |     const uint8_t* code_ptr = NULL;
+1701 |     size_t code_size = 0;
+1702 |     size_t num_constants = 0;
+1703 | 
+1704 |     for (uint32_t s = 0; s < num_sections; ++s) {
+1705 |         const uint8_t* entry = bytecode + WET_HEADER_SIZE + s * WET_SECTION_ENTRY_SIZE;
+1706 |         uint16_t sec_type = wet_read_u16_le(entry);
+1707 |         uint32_t sec_offset = wet_read_u32_le(entry + 4);
+1708 |         uint32_t sec_size = wet_read_u32_le(entry + 8);
+1709 | 
+1710 |         if ((size_t)sec_offset + sec_size > file_size || sec_offset < sec_table_end) {
+1711 |             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Section %u (type %u) out of bounds", s, sec_type);
+1712 |             return WET_ERR_MALFORMED_SECTION;
+1713 |         }
+1714 | 
+1715 |         if (sec_type == WET_SEC_BYTECODE_STREAM) {
+1716 |             code_ptr = bytecode + sec_offset;
+1717 |             code_size = sec_size;
+1718 |         } else if (sec_type == WET_SEC_CONSTANT_POOL) {
+1719 |             if (sec_size >= 4) {
+1720 |                 uint32_t declared_entries = wet_read_u32_le(bytecode + sec_offset);
+1721 |                 const uint8_t* cp = bytecode + sec_offset + 4;
+1722 |                 size_t cp_remain = sec_size - 4;
+1723 |                 while (cp_remain > 0) {
+1724 |                     uint8_t ctype = *cp;
+1725 |                     cp++; cp_remain--;
+1726 |                     if (ctype == WET_VAL_INT || ctype == WET_VAL_FLOAT) {
+1727 |                         if (cp_remain < 4) {
+1728 |                             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Malformed constant pool");
+1729 |                             return WET_ERR_MALFORMED_SECTION;
+1730 |                         }
+1731 |                         cp += 4; cp_remain -= 4;
+1732 |                     } else if (ctype == WET_VAL_STRING) {
+1733 |                         if (cp_remain < 2) {
+1734 |                             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Malformed string in constant pool");
+1735 |                             return WET_ERR_MALFORMED_SECTION;
+1736 |                         }
+1737 |                         uint16_t slen = wet_read_u16_le(cp);
+1738 |                         cp += 2; cp_remain -= 2;
+1739 |                         if (cp_remain < slen) {
+1740 |                             if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "String payload overflows constant pool");
+1741 |                             return WET_ERR_MALFORMED_SECTION;
+1742 |                         }
+1743 |                         cp += slen; cp_remain -= slen;
+1744 |                     } else {
+1745 |                         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Unknown constant type %u", ctype);
+1746 |                         return WET_ERR_MALFORMED_SECTION;
+1747 |                     }
+1748 |                     num_constants++;
+1749 |                 }
+1750 |             }
+1751 |         }
+1752 |     }
+1753 | 
+1754 |     if (!code_ptr || code_size == 0) {
+1755 |         return WET_OK;
+1756 |     }
+1757 | 
+1758 |     uint8_t* is_start = (uint8_t*)malloc(code_size);
+1759 |     if (!is_start) {
+1760 |         if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Failed to allocate verifier bitmap (%zu bytes)", code_size);
+1761 |         return WET_ERR_ALLOC_FAILED;
+1762 |     }
+1763 |     memset(is_start, 0, code_size);
+1764 | 
+1765 |     /* Pass 1: Decode opcodes and check instruction sizes */
+1766 |     size_t pc = 0;
+1767 |     while (pc < code_size) {
+1768 |         is_start[pc] = 1;
+1769 |         uint8_t op = code_ptr[pc];
+1770 |         size_t ilen = 1;
 1771 | 
-1772 |             case WET_OP_PUSH_INT:
-1773 |             case WET_OP_PUSH_FLOAT:
-1774 |                 ilen = 5;
-1775 |                 break;
-1776 | 
-1777 |             case WET_OP_PUMP_SET_RATE:
-1778 |             case WET_OP_PUMP_DISPENSE:
-1779 |             case WET_OP_STIM_CURRENT:
-1780 |                 ilen = 6;
-1781 |                 break;
-1782 | 
-1783 |             case WET_OP_MOTOR_STEP:
-1784 |                 ilen = 10;
-1785 |                 break;
-1786 | 
-1787 |             default:
-1788 |                 if (err_buf && err_buf_len > 0)
-1789 |                     snprintf(err_buf, err_buf_len, "Invalid opcode 0x%02X at offset %zu", op, pc);
-1790 |                 free(is_start);
-1791 |                 return WET_ERR_INVALID_OPCODE;
-1792 |         }
-1793 | 
-1794 |         if (pc + ilen > code_size) {
-1795 |             if (err_buf && err_buf_len > 0)
-1796 |                 snprintf(err_buf, err_buf_len, "Truncated instruction (opcode 0x%02X needs %zu bytes, only %zu left)", op, ilen, code_size - pc);
-1797 |             free(is_start);
-1798 |             return WET_ERR_BYTECODE_VERIFICATION;
-1799 |         }
-1800 |         pc += ilen;
-1801 |     }
-1802 | 
-1803 |     /* Pass 2: Verify branch target alignment */
-1804 |     pc = 0;
-1805 |     while (pc < code_size) {
-1806 |         uint8_t op = code_ptr[pc];
-1807 |         if (op == WET_OP_JMP || op == WET_OP_JMP_IF_TRUE || op == WET_OP_JMP_IF_FALSE) {
-1808 |             int16_t offset = wet_read_i16_le(code_ptr + pc + 1);
-1809 |             int64_t target = (int64_t)pc + offset;
-1810 |             if (target < 0 || (size_t)target >= code_size) {
-1811 |                 if (err_buf && err_buf_len > 0)
-1812 |                     snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld out of code range [0, %zu)", pc, (long long)target, code_size);
-1813 |                 free(is_start);
-1814 |                 return WET_ERR_BYTECODE_VERIFICATION;
-1815 |             }
-1816 |             if (!is_start[target]) {
-1817 |                 if (err_buf && err_buf_len > 0)
-1818 |                     snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld lands in middle of instruction", pc, (long long)target);
-1819 |                 free(is_start);
-1820 |                 return WET_ERR_BYTECODE_VERIFICATION;
-1821 |             }
-1822 |             pc += 3;
-1823 |         } else {
-1824 |             size_t next_pc = pc + 1;
-1825 |             while (next_pc < code_size && !is_start[next_pc]) next_pc++;
-1826 |             pc = next_pc;
-1827 |         }
-1828 |     }
-1829 | 
-1830 |     free(is_start);
-1831 |     return WET_OK;
-1832 | }
-1833 | 
-1834 | /* =========================================================================
-1835 |  * Phase 3: Live State Checkpointing & Hot-Swap
-1836 |  * ========================================================================= */
+1772 |         switch ((wet_opcode_t)op) {
+1773 |             case WET_OP_NOP:
+1774 |             case WET_OP_HALT:
+1775 |             case WET_OP_SYNC_TICK:
+1776 |             case WET_OP_POP:
+1777 |             case WET_OP_DUP:
+1778 |             case WET_OP_SWAP:
+1779 |             case WET_OP_ADD_I:
+1780 |             case WET_OP_SUB_I:
+1781 |             case WET_OP_MUL_I:
+1782 |             case WET_OP_DIV_I:
+1783 |             case WET_OP_ADD_F:
+1784 |             case WET_OP_SUB_F:
+1785 |             case WET_OP_MUL_F:
+1786 |             case WET_OP_DIV_F:
+1787 |             case WET_OP_NEG:
+1788 |             case WET_OP_MOD_I:
+1789 |             case WET_OP_CMP_EQ:
+1790 |             case WET_OP_CMP_NE:
+1791 |             case WET_OP_CMP_LT:
+1792 |             case WET_OP_CMP_LE:
+1793 |             case WET_OP_CMP_GT:
+1794 |             case WET_OP_CMP_GE:
+1795 |             case WET_OP_RET:
+1796 |             case WET_OP_GET_POP_RATE:
+1797 |             case WET_OP_READ_TEMPERATURE:
+1798 |             case WET_OP_READ_PH:
+1799 |             case WET_OP_READ_DO:
+1800 |             case WET_OP_READ_CO2:
+1801 |                 ilen = 1;
+1802 |                 break;
+1803 | 
+1804 |             case WET_OP_STIM_BIPHASIC:
+1805 |             case WET_OP_READ_SPIKES:
+1806 |             case WET_OP_READ_VOLTAGE:
+1807 |             case WET_OP_READ_PRESSURE:
+1808 |             case WET_OP_READ_BUBBLE:
+1809 |             case WET_OP_READ_FLOW:
+1810 |                 ilen = 2;
+1811 |                 break;
+1812 | 
+1813 |             case WET_OP_SLEEP_TICKS:
+1814 |             case WET_OP_LOAD_LOCAL:
+1815 |             case WET_OP_STORE_LOCAL:
+1816 |             case WET_OP_JMP:
+1817 |             case WET_OP_JMP_IF_TRUE:
+1818 |             case WET_OP_JMP_IF_FALSE:
+1819 |             case WET_OP_MODULATE_STDP:
+1820 |             case WET_OP_MEA_CONFIG:
+1821 |             case WET_OP_VALVE_SET:
+1822 |                 ilen = 3;
+1823 |                 break;
+1824 | 
+1825 |             case WET_OP_PUSH_CONST:
+1826 |                 ilen = 3;
+1827 |                 if (pc + 3 <= code_size) {
+1828 |                     uint16_t c_idx = wet_read_u16_le(code_ptr + pc + 1);
+1829 |                     if (c_idx >= num_constants) {
+1830 |                         if (err_buf && err_buf_len > 0)
+1831 |                             snprintf(err_buf, err_buf_len, "Constant index %u out of range (%zu)", c_idx, num_constants);
+1832 |                         free(is_start);
+1833 |                         return WET_ERR_BYTECODE_VERIFICATION;
+1834 |                     }
+1835 |                 }
+1836 |                 break;
 1837 | 
-1838 | #define WET_SNAPSHOT_MAGIC 0x53544557U /* 'W','E','T','S' */
-1839 | #define WET_SNAPSHOT_VERSION 1
-1840 | 
-1841 | #pragma pack(push, 1)
-1842 | typedef struct {
-1843 |     uint32_t magic;
-1844 |     uint32_t version;
-1845 |     uint32_t payload_bytes;
-1846 |     uint64_t current_tick;
-1847 |     double   sim_time_ms;
-1848 |     int64_t  sim_time_us;
-1849 |     float    v_m_mv[64];
-1850 |     float    v_thresh_mv[64];
-1851 |     float    g_exc_ns[64];
-1852 |     float    g_inh_ns[64];
-1853 |     float    g_ahp_ns[64];
-1854 |     uint16_t refract_ticks[64];
-1855 |     float    trace_pre[64];
-1856 |     float    trace_post[64];
-1857 |     float    v_double_layer_v[64];
-1858 |     float    q_accum[64];
-1859 |     float    cumulative_unbounded_dc_nc[64];
-1860 |     float    syn_weights_ns[64][64];
-1861 |     float    syn_u_stp[64][64];
-1862 |     float    syn_x_stp[64][64];
-1863 |     float    pump_dispensed_ul[8];
-1864 | } wet_vm_snapshot_payload_t;
-1865 | #pragma pack(pop)
-1866 | 
-1867 | wet_status_t wet_vm_snapshot_internal(const struct wet_vm_instance* vm, uint8_t* buffer, size_t* inout_len) {
-1868 |     if (!vm || !inout_len) return WET_ERR_NULL_PTR;
-1869 | 
-1870 |     size_t req_size = sizeof(wet_vm_snapshot_payload_t);
-1871 |     if (!buffer) {
-1872 |         *inout_len = req_size;
-1873 |         return WET_OK;
-1874 |     }
-1875 |     if (*inout_len < req_size) {
-1876 |         *inout_len = req_size;
-1877 |         return WET_ERR_ALLOC_FAILED;
-1878 |     }
-1879 | 
-1880 |     wet_vm_snapshot_payload_t* snap = (wet_vm_snapshot_payload_t*)buffer;
-1881 |     memset(snap, 0, sizeof(*snap));
-1882 |     snap->magic = WET_SNAPSHOT_MAGIC;
-1883 |     snap->version = WET_SNAPSHOT_VERSION;
-1884 |     snap->payload_bytes = (uint32_t)req_size;
-1885 |     snap->current_tick = vm->current_tick;
-1886 |     snap->sim_time_ms = vm->sim_time_ms;
-1887 |     snap->sim_time_us = vm->sim_time_us;
-1888 | 
-1889 |     memcpy(snap->v_m_mv, vm->bio.v_m_mv, sizeof(snap->v_m_mv));
-1890 |     memcpy(snap->v_thresh_mv, vm->bio.v_thresh_mv, sizeof(snap->v_thresh_mv));
-1891 |     memcpy(snap->g_exc_ns, vm->bio.g_exc_ns, sizeof(snap->g_exc_ns));
-1892 |     memcpy(snap->g_inh_ns, vm->bio.g_inh_ns, sizeof(snap->g_inh_ns));
-1893 |     memcpy(snap->g_ahp_ns, vm->bio.g_ahp_ns, sizeof(snap->g_ahp_ns));
-1894 |     memcpy(snap->refract_ticks, vm->bio.refract_ticks, sizeof(snap->refract_ticks));
-1895 |     memcpy(snap->trace_pre, vm->bio.trace_pre, sizeof(snap->trace_pre));
-1896 |     memcpy(snap->trace_post, vm->bio.trace_post, sizeof(snap->trace_post));
-1897 |     memcpy(snap->v_double_layer_v, vm->bio.v_double_layer_v, sizeof(snap->v_double_layer_v));
-1898 |     memcpy(snap->q_accum, vm->interlocks.q_accum, sizeof(snap->q_accum));
-1899 |     memcpy(snap->cumulative_unbounded_dc_nc, vm->interlocks.cumulative_unbounded_dc_nc, sizeof(snap->cumulative_unbounded_dc_nc));
-1900 |     memcpy(snap->pump_dispensed_ul, vm->pump_dispensed_ul, sizeof(snap->pump_dispensed_ul));
-1901 | 
-1902 |     for (int i = 0; i < 64; ++i) {
-1903 |         for (int j = 0; j < 64; ++j) {
-1904 |             snap->syn_weights_ns[i][j] = vm->bio.synapses[i][j].weight_ns;
-1905 |             snap->syn_u_stp[i][j] = vm->bio.synapses[i][j].u_stp;
-1906 |             snap->syn_x_stp[i][j] = vm->bio.synapses[i][j].x_stp;
-1907 |         }
-1908 |     }
-1909 | 
-1910 |     *inout_len = req_size;
-1911 |     return WET_OK;
-1912 | }
-1913 | 
-1914 | wet_status_t wet_vm_restore_internal(struct wet_vm_instance* vm, const uint8_t* buffer, size_t len) {
-1915 |     if (!vm || !buffer) return WET_ERR_NULL_PTR;
-1916 |     if (len < sizeof(wet_vm_snapshot_payload_t)) {
-1917 |         snprintf(vm->last_error, sizeof(vm->last_error), "Snapshot buffer too small (%zu < %zu)", len, sizeof(wet_vm_snapshot_payload_t));
-1918 |         return WET_ERR_MALFORMED_SECTION;
-1919 |     }
-1920 | 
-1921 |     const wet_vm_snapshot_payload_t* snap = (const wet_vm_snapshot_payload_t*)buffer;
-1922 |     if (snap->magic != WET_SNAPSHOT_MAGIC || snap->version != WET_SNAPSHOT_VERSION) {
-1923 |         snprintf(vm->last_error, sizeof(vm->last_error), "Invalid snapshot magic or version");
-1924 |         return WET_ERR_INVALID_MAGIC;
-1925 |     }
-1926 | 
-1927 |     vm->current_tick = snap->current_tick;
-1928 |     vm->sim_time_ms = snap->sim_time_ms;
-1929 |     vm->sim_time_us = snap->sim_time_us;
-1930 | 
-1931 |     memcpy(vm->bio.v_m_mv, snap->v_m_mv, sizeof(snap->v_m_mv));
-1932 |     memcpy(vm->bio.v_thresh_mv, snap->v_thresh_mv, sizeof(snap->v_thresh_mv));
-1933 |     memcpy(vm->bio.g_exc_ns, snap->g_exc_ns, sizeof(snap->g_exc_ns));
-1934 |     memcpy(vm->bio.g_inh_ns, snap->g_inh_ns, sizeof(snap->g_inh_ns));
-1935 |     memcpy(vm->bio.g_ahp_ns, snap->g_ahp_ns, sizeof(snap->g_ahp_ns));
-1936 |     memcpy(vm->bio.refract_ticks, snap->refract_ticks, sizeof(snap->refract_ticks));
-1937 |     memcpy(vm->bio.trace_pre, snap->trace_pre, sizeof(snap->trace_pre));
-1938 |     memcpy(vm->bio.trace_post, snap->trace_post, sizeof(snap->trace_post));
-1939 |     memcpy(vm->bio.v_double_layer_v, snap->v_double_layer_v, sizeof(snap->v_double_layer_v));
-1940 |     memcpy(vm->interlocks.q_accum, snap->q_accum, sizeof(snap->q_accum));
-1941 |     memcpy(vm->interlocks.cumulative_unbounded_dc_nc, snap->cumulative_unbounded_dc_nc, sizeof(snap->cumulative_unbounded_dc_nc));
-1942 |     memcpy(vm->pump_dispensed_ul, snap->pump_dispensed_ul, sizeof(snap->pump_dispensed_ul));
-1943 | 
-1944 |     for (int i = 0; i < 64; ++i) {
-1945 |         for (int j = 0; j < 64; ++j) {
-1946 |             vm->bio.synapses[i][j].weight_ns = snap->syn_weights_ns[i][j];
-1947 |             vm->bio.synapses[i][j].u_stp = snap->syn_u_stp[i][j];
-1948 |             vm->bio.synapses[i][j].x_stp = snap->syn_x_stp[i][j];
-1949 |         }
-1950 |     }
-1951 | 
-1952 |     return WET_OK;
-1953 | }
+1838 |             case WET_OP_CALL:
+1839 |                 ilen = 4;
+1840 |                 break;
+1841 | 
+1842 |             case WET_OP_PUSH_INT:
+1843 |             case WET_OP_PUSH_FLOAT:
+1844 |                 ilen = 5;
+1845 |                 break;
+1846 | 
+1847 |             case WET_OP_PUMP_SET_RATE:
+1848 |             case WET_OP_PUMP_DISPENSE:
+1849 |             case WET_OP_STIM_CURRENT:
+1850 |                 ilen = 6;
+1851 |                 break;
+1852 | 
+1853 |             case WET_OP_MOTOR_STEP:
+1854 |                 ilen = 10;
+1855 |                 break;
+1856 | 
+1857 |             default:
+1858 |                 if (err_buf && err_buf_len > 0)
+1859 |                     snprintf(err_buf, err_buf_len, "Invalid opcode 0x%02X at offset %zu", op, pc);
+1860 |                 free(is_start);
+1861 |                 return WET_ERR_INVALID_OPCODE;
+1862 |         }
+1863 | 
+1864 |         if (pc + ilen > code_size) {
+1865 |             if (err_buf && err_buf_len > 0)
+1866 |                 snprintf(err_buf, err_buf_len, "Truncated instruction (opcode 0x%02X needs %zu bytes, only %zu left)", op, ilen, code_size - pc);
+1867 |             free(is_start);
+1868 |             return WET_ERR_BYTECODE_VERIFICATION;
+1869 |         }
+1870 |         pc += ilen;
+1871 |     }
+1872 | 
+1873 |     /* Pass 2: Verify branch target alignment */
+1874 |     pc = 0;
+1875 |     while (pc < code_size) {
+1876 |         uint8_t op = code_ptr[pc];
+1877 |         if (op == WET_OP_JMP || op == WET_OP_JMP_IF_TRUE || op == WET_OP_JMP_IF_FALSE) {
+1878 |             int16_t offset = wet_read_i16_le(code_ptr + pc + 1);
+1879 |             int64_t target = (int64_t)pc + offset;
+1880 |             if (target < 0 || (size_t)target >= code_size) {
+1881 |                 if (err_buf && err_buf_len > 0)
+1882 |                     snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld out of code range [0, %zu)", pc, (long long)target, code_size);
+1883 |                 free(is_start);
+1884 |                 return WET_ERR_BYTECODE_VERIFICATION;
+1885 |             }
+1886 |             if (!is_start[target]) {
+1887 |                 if (err_buf && err_buf_len > 0)
+1888 |                     snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld lands in middle of instruction", pc, (long long)target);
+1889 |                 free(is_start);
+1890 |                 return WET_ERR_BYTECODE_VERIFICATION;
+1891 |             }
+1892 |             pc += 3;
+1893 |         } else {
+1894 |             size_t next_pc = pc + 1;
+1895 |             while (next_pc < code_size && !is_start[next_pc]) next_pc++;
+1896 |             pc = next_pc;
+1897 |         }
+1898 |     }
+1899 | 
+1900 |     free(is_start);
+1901 |     return WET_OK;
+1902 | }
+1903 | 
+1904 | /* =========================================================================
+1905 |  * Phase 3: Live State Checkpointing & Hot-Swap
+1906 |  * ========================================================================= */
+1907 | 
+1908 | #define WET_SNAPSHOT_MAGIC 0x53544557U /* 'W','E','T','S' */
+1909 | #define WET_SNAPSHOT_VERSION 1
+1910 | 
+1911 | #pragma pack(push, 1)
+1912 | typedef struct {
+1913 |     uint32_t magic;
+1914 |     uint32_t version;
+1915 |     uint32_t payload_bytes;
+1916 |     uint64_t current_tick;
+1917 |     double   sim_time_ms;
+1918 |     int64_t  sim_time_us;
+1919 |     float    v_m_mv[64];
+1920 |     float    v_thresh_mv[64];
+1921 |     float    g_exc_ns[64];
+1922 |     float    g_inh_ns[64];
+1923 |     float    g_ahp_ns[64];
+1924 |     uint16_t refract_ticks[64];
+1925 |     float    trace_pre[64];
+1926 |     float    trace_post[64];
+1927 |     float    v_double_layer_v[64];
+1928 |     float    q_accum[64];
+1929 |     float    cumulative_unbounded_dc_nc[64];
+1930 |     float    syn_weights_ns[64][64];
+1931 |     float    syn_u_stp[64][64];
+1932 |     float    syn_x_stp[64][64];
+1933 |     float    pump_dispensed_ul[8];
+1934 | } wet_vm_snapshot_payload_t;
+1935 | #pragma pack(pop)
+1936 | 
+1937 | wet_status_t wet_vm_snapshot_internal(const struct wet_vm_instance* vm, uint8_t* buffer, size_t* inout_len) {
+1938 |     if (!vm || !inout_len) return WET_ERR_NULL_PTR;
+1939 | 
+1940 |     size_t req_size = sizeof(wet_vm_snapshot_payload_t);
+1941 |     if (!buffer) {
+1942 |         *inout_len = req_size;
+1943 |         return WET_OK;
+1944 |     }
+1945 |     if (*inout_len < req_size) {
+1946 |         *inout_len = req_size;
+1947 |         return WET_ERR_ALLOC_FAILED;
+1948 |     }
+1949 | 
+1950 |     wet_vm_snapshot_payload_t* snap = (wet_vm_snapshot_payload_t*)buffer;
+1951 |     memset(snap, 0, sizeof(*snap));
+1952 |     snap->magic = WET_SNAPSHOT_MAGIC;
+1953 |     snap->version = WET_SNAPSHOT_VERSION;
+1954 |     snap->payload_bytes = (uint32_t)req_size;
+1955 |     snap->current_tick = vm->current_tick;
+1956 |     snap->sim_time_ms = vm->sim_time_ms;
+1957 |     snap->sim_time_us = vm->sim_time_us;
+1958 | 
+1959 |     memcpy(snap->v_m_mv, vm->bio.v_m_mv, sizeof(snap->v_m_mv));
+1960 |     memcpy(snap->v_thresh_mv, vm->bio.v_thresh_mv, sizeof(snap->v_thresh_mv));
+1961 |     memcpy(snap->g_exc_ns, vm->bio.g_exc_ns, sizeof(snap->g_exc_ns));
+1962 |     memcpy(snap->g_inh_ns, vm->bio.g_inh_ns, sizeof(snap->g_inh_ns));
+1963 |     memcpy(snap->g_ahp_ns, vm->bio.g_ahp_ns, sizeof(snap->g_ahp_ns));
+1964 |     memcpy(snap->refract_ticks, vm->bio.refract_ticks, sizeof(snap->refract_ticks));
+1965 |     memcpy(snap->trace_pre, vm->bio.trace_pre, sizeof(snap->trace_pre));
+1966 |     memcpy(snap->trace_post, vm->bio.trace_post, sizeof(snap->trace_post));
+1967 |     memcpy(snap->v_double_layer_v, vm->bio.v_double_layer_v, sizeof(snap->v_double_layer_v));
+1968 |     memcpy(snap->q_accum, vm->interlocks.q_accum, sizeof(snap->q_accum));
+1969 |     memcpy(snap->cumulative_unbounded_dc_nc, vm->interlocks.cumulative_unbounded_dc_nc, sizeof(snap->cumulative_unbounded_dc_nc));
+1970 |     memcpy(snap->pump_dispensed_ul, vm->pump_dispensed_ul, sizeof(snap->pump_dispensed_ul));
+1971 | 
+1972 |     for (int i = 0; i < 64; ++i) {
+1973 |         for (int j = 0; j < 64; ++j) {
+1974 |             snap->syn_weights_ns[i][j] = vm->bio.synapses[i][j].weight_ns;
+1975 |             snap->syn_u_stp[i][j] = vm->bio.synapses[i][j].u_stp;
+1976 |             snap->syn_x_stp[i][j] = vm->bio.synapses[i][j].x_stp;
+1977 |         }
+1978 |     }
+1979 | 
+1980 |     *inout_len = req_size;
+1981 |     return WET_OK;
+1982 | }
+1983 | 
+1984 | wet_status_t wet_vm_restore_internal(struct wet_vm_instance* vm, const uint8_t* buffer, size_t len) {
+1985 |     if (!vm || !buffer) return WET_ERR_NULL_PTR;
+1986 |     if (len < sizeof(wet_vm_snapshot_payload_t)) {
+1987 |         snprintf(vm->last_error, sizeof(vm->last_error), "Snapshot buffer too small (%zu < %zu)", len, sizeof(wet_vm_snapshot_payload_t));
+1988 |         return WET_ERR_MALFORMED_SECTION;
+1989 |     }
+1990 | 
+1991 |     const wet_vm_snapshot_payload_t* snap = (const wet_vm_snapshot_payload_t*)buffer;
+1992 |     if (snap->magic != WET_SNAPSHOT_MAGIC || snap->version != WET_SNAPSHOT_VERSION) {
+1993 |         snprintf(vm->last_error, sizeof(vm->last_error), "Invalid snapshot magic or version");
+1994 |         return WET_ERR_INVALID_MAGIC;
+1995 |     }
+1996 | 
+1997 |     vm->current_tick = snap->current_tick;
+1998 |     vm->sim_time_ms = snap->sim_time_ms;
+1999 |     vm->sim_time_us = snap->sim_time_us;
+2000 | 
+2001 |     memcpy(vm->bio.v_m_mv, snap->v_m_mv, sizeof(snap->v_m_mv));
+2002 |     memcpy(vm->bio.v_thresh_mv, snap->v_thresh_mv, sizeof(snap->v_thresh_mv));
+2003 |     memcpy(vm->bio.g_exc_ns, snap->g_exc_ns, sizeof(snap->g_exc_ns));
+2004 |     memcpy(vm->bio.g_inh_ns, snap->g_inh_ns, sizeof(snap->g_inh_ns));
+2005 |     memcpy(vm->bio.g_ahp_ns, snap->g_ahp_ns, sizeof(snap->g_ahp_ns));
+2006 |     memcpy(vm->bio.refract_ticks, snap->refract_ticks, sizeof(snap->refract_ticks));
+2007 |     memcpy(vm->bio.trace_pre, snap->trace_pre, sizeof(snap->trace_pre));
+2008 |     memcpy(vm->bio.trace_post, snap->trace_post, sizeof(snap->trace_post));
+2009 |     memcpy(vm->bio.v_double_layer_v, snap->v_double_layer_v, sizeof(snap->v_double_layer_v));
+2010 |     memcpy(vm->interlocks.q_accum, snap->q_accum, sizeof(snap->q_accum));
+2011 |     memcpy(vm->interlocks.cumulative_unbounded_dc_nc, snap->cumulative_unbounded_dc_nc, sizeof(snap->cumulative_unbounded_dc_nc));
+2012 |     memcpy(vm->pump_dispensed_ul, snap->pump_dispensed_ul, sizeof(snap->pump_dispensed_ul));
+2013 | 
+2014 |     for (int i = 0; i < 64; ++i) {
+2015 |         for (int j = 0; j < 64; ++j) {
+2016 |             vm->bio.synapses[i][j].weight_ns = snap->syn_weights_ns[i][j];
+2017 |             vm->bio.synapses[i][j].u_stp = snap->syn_u_stp[i][j];
+2018 |             vm->bio.synapses[i][j].x_stp = snap->syn_x_stp[i][j];
+2019 |         }
+2020 |     }
+2021 | 
+2022 |     return WET_OK;
+2023 | }
 ```
 
-### `native/build.py` (208 lines, SHA-256: `c1492b8c733b046b...`)
+### `native/build.py` (253 lines, SHA-256: `d80faddc3126e4c4...`)
 
 ```text
    1 | #!/usr/bin/env python3
@@ -9714,167 +14659,212 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   45 | memcmp
   46 | strlen
   47 | strncpy
-  48 | _snprintf
-  49 | _vsnprintf
-  50 | """
-  51 |     output_def.write_text(def_content, encoding="utf-8")
-  52 |     cmd = [
-  53 |         dlltool_path,
-  54 |         "-d", str(output_def),
-  55 |         "-l", str(output_lib),
-  56 |         "-m", "i386:x86-64"
-  57 |     ]
-  58 |     res = subprocess.run(cmd, capture_output=True, text=True)
-  59 |     return res.returncode == 0 and output_lib.exists()
-  60 | 
-  61 | 
-  62 | def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, out_dll: Path) -> bool:
-  63 |     print(f"Building with Clang: {clang_path}")
-  64 |     bin_dir = out_dll.parent
-  65 |     bin_dir.mkdir(parents=True, exist_ok=True)
+  48 | strcpy
+  49 | strcat
+  50 | strcmp
+  51 | strncmp
+  52 | sprintf
+  53 | _snprintf
+  54 | _vsnprintf
+  55 | qsort
+  56 | """
+  57 |     output_def.write_text(def_content, encoding="utf-8")
+  58 |     cmd = [
+  59 |         dlltool_path,
+  60 |         "-d", str(output_def),
+  61 |         "-l", str(output_lib),
+  62 |         "-m", "i386:x86-64"
+  63 |     ]
+  64 |     res = subprocess.run(cmd, capture_output=True, text=True)
+  65 |     return res.returncode == 0 and output_lib.exists()
   66 | 
-  67 |     # Check if we need standalone msvcrt import library on Windows
-  68 |     extra_link_args = []
-  69 |     if sys.platform == "win32":
-  70 |         # Look for llvm-dlltool next to clang
-  71 |         clang_dir = Path(clang_path).parent
-  72 |         dlltool_path = find_executable("llvm-dlltool", [clang_dir])
-  73 |         msvcrt_lib = bin_dir / "msvcrt.lib"
-  74 |         msvcrt_def = bin_dir / "msvcrt.def"
-  75 | 
-  76 |         if dlltool_path:
-  77 |             if not msvcrt_lib.exists() or msvcrt_lib.stat().st_size == 0:
-  78 |                 generate_msvcrt_import_lib(dlltool_path, msvcrt_lib, msvcrt_def)
-  79 |             if msvcrt_lib.exists():
-  80 |                 extra_link_args = ["-nostdlib", "-Xlinker", "/noentry", str(msvcrt_lib)]
-  81 | 
-  82 |     cmd = [
-  83 |         clang_path,
-  84 |         "-O3",
-  85 |         "-shared",
-  86 |         "-DWET_BUILDING_DLL",
-  87 |         f"-I{include_dir}",
-  88 |         "-o", str(out_dll),
-  89 |         *[str(f) for f in src_files],
-  90 |         *extra_link_args
-  91 |     ]
-  92 | 
-  93 |     res = subprocess.run(cmd, capture_output=True, text=True)
-  94 |     if res.returncode != 0:
-  95 |         print(f"Clang build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
-  96 |         return False
-  97 |     return out_dll.exists()
-  98 | 
+  67 | 
+  68 | def generate_kernel32_import_lib(dlltool_path: str, output_lib: Path, output_def: Path) -> bool:
+  69 |     """Generates an import library for Windows kernel32.dll using llvm-dlltool."""
+  70 |     def_content = """LIBRARY kernel32.dll
+  71 | EXPORTS
+  72 | QueryPerformanceCounter
+  73 | QueryPerformanceFrequency
+  74 | CreateThread
+  75 | WaitForSingleObject
+  76 | CloseHandle
+  77 | GetCurrentThread
+  78 | GetCurrentProcess
+  79 | SetThreadAffinityMask
+  80 | SetPriorityClass
+  81 | SetThreadPriority
+  82 | Sleep
+  83 | """
+  84 |     output_def.write_text(def_content, encoding="utf-8")
+  85 |     cmd = [
+  86 |         dlltool_path,
+  87 |         "-d", str(output_def),
+  88 |         "-l", str(output_lib),
+  89 |         "-m", "i386:x86-64"
+  90 |     ]
+  91 |     res = subprocess.run(cmd, capture_output=True, text=True)
+  92 |     return res.returncode == 0 and output_lib.exists()
+  93 | 
+  94 | 
+  95 | def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, out_dll: Path) -> bool:
+  96 |     print(f"Building with Clang: {clang_path}")
+  97 |     bin_dir = out_dll.parent
+  98 |     bin_dir.mkdir(parents=True, exist_ok=True)
   99 | 
- 100 | def build_with_gcc(gcc_path: str, src_files: list[Path], include_dir: Path, out_dll: Path) -> bool:
- 101 |     print(f"Building with GCC: {gcc_path}")
- 102 |     bin_dir = out_dll.parent
- 103 |     bin_dir.mkdir(parents=True, exist_ok=True)
- 104 | 
- 105 |     cmd = [
- 106 |         gcc_path,
- 107 |         "-shared",
- 108 |         "-fPIC" if sys.platform != "win32" else "",
- 109 |         "-DWET_BUILDING_DLL",
- 110 |         f"-I{include_dir}",
- 111 |         "-o", str(out_dll),
- 112 |         *[str(f) for f in src_files]
- 113 |     ]
- 114 |     cmd = [arg for arg in cmd if arg]
- 115 |     res = subprocess.run(cmd, capture_output=True, text=True)
- 116 |     if res.returncode != 0:
- 117 |         print(f"GCC build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
- 118 |         return False
- 119 |     return out_dll.exists()
+ 100 |     # Check if we need standalone msvcrt / kernel32 import libraries on Windows
+ 101 |     extra_link_args = []
+ 102 |     if sys.platform == "win32":
+ 103 |         # Look for llvm-dlltool next to clang
+ 104 |         clang_dir = Path(clang_path).parent
+ 105 |         dlltool_path = find_executable("llvm-dlltool", [clang_dir])
+ 106 |         msvcrt_lib = bin_dir / "msvcrt.lib"
+ 107 |         msvcrt_def = bin_dir / "msvcrt.def"
+ 108 |         kernel32_lib = bin_dir / "kernel32.lib"
+ 109 |         kernel32_def = bin_dir / "kernel32.def"
+ 110 | 
+ 111 |         if dlltool_path:
+ 112 |             if not msvcrt_lib.exists() or msvcrt_lib.stat().st_size == 0 or not msvcrt_def.exists() or "qsort" not in msvcrt_def.read_text(encoding="utf-8"):
+ 113 |                 generate_msvcrt_import_lib(dlltool_path, msvcrt_lib, msvcrt_def)
+ 114 |             if not kernel32_lib.exists() or kernel32_lib.stat().st_size == 0 or not kernel32_def.exists() or "CreateThread" not in kernel32_def.read_text(encoding="utf-8"):
+ 115 |                 generate_kernel32_import_lib(dlltool_path, kernel32_lib, kernel32_def)
+ 116 |             if msvcrt_lib.exists() and kernel32_lib.exists():
+ 117 |                 extra_link_args = ["-nostdlib", "-Xlinker", "/noentry", str(msvcrt_lib), str(kernel32_lib)]
+ 118 |             elif msvcrt_lib.exists():
+ 119 |                 extra_link_args = ["-nostdlib", "-Xlinker", "/noentry", str(msvcrt_lib)]
  120 | 
- 121 | 
- 122 | def build_with_msvc(cl_path: str, src_files: list[Path], include_dir: Path, out_dll: Path) -> bool:
- 123 |     print(f"Building with MSVC: {cl_path}")
- 124 |     bin_dir = out_dll.parent
- 125 |     bin_dir.mkdir(parents=True, exist_ok=True)
- 126 | 
- 127 |     cmd = [
- 128 |         cl_path,
- 129 |         "/LD",
- 130 |         "/DWET_BUILDING_DLL",
- 131 |         f"/I{include_dir}",
- 132 |         *[str(f) for f in src_files],
- 133 |         f"/Fe:{out_dll}"
- 134 |     ]
- 135 |     res = subprocess.run(cmd, capture_output=True, text=True)
- 136 |     if res.returncode != 0:
- 137 |         print(f"MSVC build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
- 138 |         return False
- 139 |     return out_dll.exists()
- 140 | 
- 141 | 
- 142 | def build_native_runtime() -> Path:
- 143 |     proj_root = get_project_root()
- 144 |     native_dir = proj_root / "native"
- 145 |     include_dir = native_dir / "include"
- 146 |     src_dir = native_dir / "src"
- 147 |     bin_dir = native_dir / "bin"
- 148 |     bin_dir.mkdir(parents=True, exist_ok=True)
- 149 | 
- 150 |     src_files = [
- 151 |         src_dir / "wetvm_api.c",
- 152 |         src_dir / "wetvm_vm.c",
- 153 |         src_dir / "biophysics.c",
- 154 |         src_dir / "interlocks.c",
- 155 |     ]
- 156 |     for sf in src_files:
- 157 |         if not sf.exists():
- 158 |             raise FileNotFoundError(f"Source file not found: {sf}")
+ 121 |     cmd = [
+ 122 |         clang_path,
+ 123 |         "-O3",
+ 124 |         "-shared",
+ 125 |         "-DWET_BUILDING_DLL",
+ 126 |         f"-I{include_dir}",
+ 127 |         "-o", str(out_dll),
+ 128 |         *[str(f) for f in src_files],
+ 129 |         *extra_link_args
+ 130 |     ]
+ 131 | 
+ 132 |     res = subprocess.run(cmd, capture_output=True, text=True)
+ 133 |     if res.returncode != 0:
+ 134 |         print(f"Clang build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
+ 135 |         return False
+ 136 |     return out_dll.exists()
+ 137 | 
+ 138 | 
+ 139 | def build_with_gcc(gcc_path: str, src_files: list[Path], include_dir: Path, out_dll: Path) -> bool:
+ 140 |     print(f"Building with GCC: {gcc_path}")
+ 141 |     bin_dir = out_dll.parent
+ 142 |     bin_dir.mkdir(parents=True, exist_ok=True)
+ 143 | 
+ 144 |     cmd = [
+ 145 |         gcc_path,
+ 146 |         "-shared",
+ 147 |         "-fPIC" if sys.platform != "win32" else "",
+ 148 |         "-DWET_BUILDING_DLL",
+ 149 |         f"-I{include_dir}",
+ 150 |         "-o", str(out_dll),
+ 151 |         *[str(f) for f in src_files]
+ 152 |     ]
+ 153 |     cmd = [arg for arg in cmd if arg]
+ 154 |     res = subprocess.run(cmd, capture_output=True, text=True)
+ 155 |     if res.returncode != 0:
+ 156 |         print(f"GCC build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
+ 157 |         return False
+ 158 |     return out_dll.exists()
  159 | 
- 160 |     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
- 161 |     out_dll = bin_dir / f"wetvm{ext}"
- 162 |     fallback_dll = native_dir / f"wetvm{ext}"
- 163 | 
- 164 |     # Search for compilers in order of preference
- 165 |     # 1. MSVC cl.exe
- 166 |     cl_exe = find_executable("cl")
- 167 |     if cl_exe and build_with_msvc(cl_exe, src_files, include_dir, out_dll):
- 168 |         shutil.copy2(out_dll, fallback_dll)
- 169 |         print(f"Successfully compiled shared library: {out_dll}")
- 170 |         return out_dll
- 171 | 
- 172 |     # 2. Clang
- 173 |     extra_clang_paths = [
- 174 |         r"C:\Program Files\LLVM\bin",
- 175 |         r"C:\LLVM\bin",
- 176 |         r"C:\msys64\mingw64\bin",
- 177 |         r"C:\msys64\ucrt64\bin"
- 178 |     ]
- 179 |     clang_exe = find_executable("clang", extra_clang_paths)
- 180 |     if clang_exe and build_with_clang(clang_exe, src_files, include_dir, out_dll):
- 181 |         shutil.copy2(out_dll, fallback_dll)
- 182 |         print(f"Successfully compiled shared library: {out_dll}")
- 183 |         return out_dll
- 184 | 
- 185 |     # 3. GCC
- 186 |     extra_gcc_paths = [
- 187 |         r"C:\msys64\mingw64\bin",
- 188 |         r"C:\msys64\ucrt64\bin",
- 189 |         r"C:\mingw64\bin",
- 190 |         r"C:\TDM-GCC-64\bin"
- 191 |     ]
- 192 |     gcc_exe = find_executable("gcc", extra_gcc_paths)
- 193 |     if gcc_exe and build_with_gcc(gcc_exe, src_files, include_dir, out_dll):
- 194 |         shutil.copy2(out_dll, fallback_dll)
- 195 |         print(f"Successfully compiled shared library: {out_dll}")
- 196 |         return out_dll
- 197 | 
- 198 |     raise RuntimeError("No suitable C compiler found (MSVC cl.exe, Clang, or GCC).")
- 199 | 
- 200 | 
- 201 | if __name__ == "__main__":
- 202 |     try:
- 203 |         path = build_native_runtime()
- 204 |         print(f"BUILD SUCCESS: {path}")
- 205 |         sys.exit(0)
- 206 |     except Exception as e:
- 207 |         print(f"BUILD ERROR: {e}", file=sys.stderr)
- 208 |         sys.exit(1)
+ 160 | 
+ 161 | def build_with_msvc(cl_path: str, src_files: list[Path], include_dir: Path, out_dll: Path) -> bool:
+ 162 |     print(f"Building with MSVC: {cl_path}")
+ 163 |     bin_dir = out_dll.parent
+ 164 |     bin_dir.mkdir(parents=True, exist_ok=True)
+ 165 | 
+ 166 |     cmd = [
+ 167 |         cl_path,
+ 168 |         "/LD",
+ 169 |         "/DWET_BUILDING_DLL",
+ 170 |         f"/I{include_dir}",
+ 171 |         *[str(f) for f in src_files],
+ 172 |         f"/Fe:{out_dll}"
+ 173 |     ]
+ 174 |     res = subprocess.run(cmd, capture_output=True, text=True)
+ 175 |     if res.returncode != 0:
+ 176 |         print(f"MSVC build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
+ 177 |         return False
+ 178 |     return out_dll.exists()
+ 179 | 
+ 180 | 
+ 181 | def build_native_runtime() -> Path:
+ 182 |     proj_root = get_project_root()
+ 183 |     native_dir = proj_root / "native"
+ 184 |     include_dir = native_dir / "include"
+ 185 |     src_dir = native_dir / "src"
+ 186 |     bin_dir = native_dir / "bin"
+ 187 |     bin_dir.mkdir(parents=True, exist_ok=True)
+ 188 | 
+ 189 |     src_files = [
+ 190 |         src_dir / "wetvm_api.c",
+ 191 |         src_dir / "wetvm_vm.c",
+ 192 |         src_dir / "biophysics.c",
+ 193 |         src_dir / "interlocks.c",
+ 194 |         src_dir / "wet_hal.c",
+ 195 |         src_dir / "wet_hal_intan.c",
+ 196 |         src_dir / "wet_hal_maxwell.c",
+ 197 |         src_dir / "wet_hal_pump_valve.c",
+ 198 |         src_dir / "wet_hal_sensirion.c",
+ 199 |         src_dir / "wet_scheduler.c",
+ 200 |     ]
+ 201 |     for sf in src_files:
+ 202 |         if not sf.exists():
+ 203 |             raise FileNotFoundError(f"Source file not found: {sf}")
+ 204 | 
+ 205 |     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
+ 206 |     out_dll = bin_dir / f"wetvm{ext}"
+ 207 |     fallback_dll = native_dir / f"wetvm{ext}"
+ 208 | 
+ 209 |     # Search for compilers in order of preference
+ 210 |     # 1. MSVC cl.exe
+ 211 |     cl_exe = find_executable("cl")
+ 212 |     if cl_exe and build_with_msvc(cl_exe, src_files, include_dir, out_dll):
+ 213 |         shutil.copy2(out_dll, fallback_dll)
+ 214 |         print(f"Successfully compiled shared library: {out_dll}")
+ 215 |         return out_dll
+ 216 | 
+ 217 |     # 2. Clang
+ 218 |     extra_clang_paths = [
+ 219 |         r"C:\Program Files\LLVM\bin",
+ 220 |         r"C:\LLVM\bin",
+ 221 |         r"C:\msys64\mingw64\bin",
+ 222 |         r"C:\msys64\ucrt64\bin"
+ 223 |     ]
+ 224 |     clang_exe = find_executable("clang", extra_clang_paths)
+ 225 |     if clang_exe and build_with_clang(clang_exe, src_files, include_dir, out_dll):
+ 226 |         shutil.copy2(out_dll, fallback_dll)
+ 227 |         print(f"Successfully compiled shared library: {out_dll}")
+ 228 |         return out_dll
+ 229 | 
+ 230 |     # 3. GCC
+ 231 |     extra_gcc_paths = [
+ 232 |         r"C:\msys64\mingw64\bin",
+ 233 |         r"C:\msys64\ucrt64\bin",
+ 234 |         r"C:\mingw64\bin",
+ 235 |         r"C:\TDM-GCC-64\bin"
+ 236 |     ]
+ 237 |     gcc_exe = find_executable("gcc", extra_gcc_paths)
+ 238 |     if gcc_exe and build_with_gcc(gcc_exe, src_files, include_dir, out_dll):
+ 239 |         shutil.copy2(out_dll, fallback_dll)
+ 240 |         print(f"Successfully compiled shared library: {out_dll}")
+ 241 |         return out_dll
+ 242 | 
+ 243 |     raise RuntimeError("No suitable C compiler found (MSVC cl.exe, Clang, or GCC).")
+ 244 | 
+ 245 | 
+ 246 | if __name__ == "__main__":
+ 247 |     try:
+ 248 |         path = build_native_runtime()
+ 249 |         print(f"BUILD SUCCESS: {path}")
+ 250 |         sys.exit(0)
+ 251 |     except Exception as e:
+ 252 |         print(f"BUILD ERROR: {e}", file=sys.stderr)
+ 253 |         sys.exit(1)
 ```
 
 ### `native/interlocks.py` (90 lines, SHA-256: `5831e4240793de59...`)
@@ -9972,7 +14962,7 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   90 |         return self.diagnostic_report
 ```
 
-### `bindings/__init__.py` (32 lines, SHA-256: `80f25ac8bdcf5460...`)
+### `bindings/__init__.py` (42 lines, SHA-256: `7cfb2e1e1803c122...`)
 
 ```text
    1 | """
@@ -9994,22 +14984,32 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   17 |     WetTelemetryView,
   18 |     WetVMError,
   19 | )
-  20 | 
-  21 | __all__ = [
-  22 |     "WetVM",
-  23 |     "WetRuntime",
-  24 |     "WetVMConfig",
-  25 |     "WetTelemetry",
-  26 |     "WetTelemetryView",
-  27 |     "WetStatus",
-  28 |     "WetVMError",
-  29 |     "WetVMFFI",
-  30 |     "load_wetvm_lib",
-  31 |     "get_wetvm_lib",
-  32 | ]
+  20 | from bindings.scheduler import (
+  21 |     WetScheduler,
+  22 |     WetSchedulerConfig,
+  23 |     WetSchedulerStats,
+  24 |     WetStimCommand,
+  25 | )
+  26 | 
+  27 | __all__ = [
+  28 |     "WetVM",
+  29 |     "WetRuntime",
+  30 |     "WetVMConfig",
+  31 |     "WetTelemetry",
+  32 |     "WetTelemetryView",
+  33 |     "WetStatus",
+  34 |     "WetVMError",
+  35 |     "WetVMFFI",
+  36 |     "load_wetvm_lib",
+  37 |     "get_wetvm_lib",
+  38 |     "WetScheduler",
+  39 |     "WetSchedulerConfig",
+  40 |     "WetSchedulerStats",
+  41 |     "WetStimCommand",
+  42 | ]
 ```
 
-### `bindings/ffi.py` (455 lines, SHA-256: `3e86aa73a89b7236...`)
+### `bindings/ffi.py` (1127 lines, SHA-256: `57f28e802ac68829...`)
 
 ```text
    1 | """
@@ -10020,7 +15020,7 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
    6 | import os
    7 | import sys
    8 | import ctypes
-   9 | from ctypes import c_void_p, c_char_p, c_int, c_uint8, c_uint32, c_uint64, c_double, c_float, c_size_t, POINTER
+   9 | from ctypes import c_void_p, c_char_p, c_int, c_int32, c_uint8, c_uint16, c_uint32, c_uint64, c_double, c_float, c_size_t, POINTER
   10 | from enum import IntEnum
   11 | from pathlib import Path
   12 | from typing import Optional, Tuple
@@ -10062,414 +15062,1086 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   48 |     WET_ERR_BYTECODE_VERIFICATION = 27
   49 | 
   50 | 
-  51 | # =========================================================================
-  52 | # C Struct Mirrors
-  53 | # =========================================================================
-  54 | 
-  55 | class WetVMConfig(ctypes.Structure):
-  56 |     """Mirror of C wet_vm_config_t (28 bytes)."""
-  57 |     _fields_ = [
-  58 |         ("dt_ms", c_double),
-  59 |         ("max_stack_depth", c_uint32),
-  60 |         ("max_locals", c_uint32),
-  61 |         ("channel_count", c_uint32),
-  62 |         ("max_ops_per_tick", c_uint32),
-  63 |     ]
+  51 | class WetHalMode(IntEnum):
+  52 |     WET_HAL_MODE_SIMULATED    = 0
+  53 |     WET_HAL_MODE_PHYSICAL     = 1
+  54 |     WET_HAL_MODE_HIL_LOOPBACK = 2
+  55 | 
+  56 | 
+  57 | class WetHalDriverType(IntEnum):
+  58 |     WET_HAL_DRIVER_EPHYS   = 1
+  59 |     WET_HAL_DRIVER_PUMP    = 2
+  60 |     WET_HAL_DRIVER_VALVE   = 3
+  61 |     WET_HAL_DRIVER_FLOW    = 4
+  62 |     WET_HAL_DRIVER_CAN_BUS = 5
+  63 | 
   64 | 
-  65 |     def __init__(
-  66 |         self,
-  67 |         dt_ms: float = 0.1,
-  68 |         max_stack_depth: int = 1024,
-  69 |         max_locals: int = 256,
-  70 |         channel_count: int = 64,
-  71 |         max_ops_per_tick: int = 100000
-  72 |     ):
-  73 |         super().__init__(
-  74 |             dt_ms=dt_ms,
-  75 |             max_stack_depth=max_stack_depth,
-  76 |             max_locals=max_locals,
-  77 |             channel_count=channel_count,
-  78 |             max_ops_per_tick=max_ops_per_tick
-  79 |         )
+  65 | class WetHalStatus(IntEnum):
+  66 |     WET_HAL_OK                   = 0
+  67 |     WET_HAL_ERR_NULL_PTR         = -1
+  68 |     WET_HAL_ERR_INVALID_MODE     = -2
+  69 |     WET_HAL_ERR_DRIVER_NOT_FOUND = -3
+  70 |     WET_HAL_ERR_IO               = -4
+  71 |     WET_HAL_ERR_TIMEOUT          = -5
+  72 |     WET_HAL_ERR_CRC_MISMATCH     = -6
+  73 |     WET_HAL_ERR_COMPLIANCE_RAILED= -7
+  74 |     WET_HAL_ERR_INTERLOCK        = -8
+  75 |     WET_HAL_ERR_DEAD_HEAD        = -9
+  76 |     WET_HAL_ERR_OUT_OF_BOUNDS    = -10
+  77 |     WET_HAL_ERR_BUS_BUSY         = -11
+  78 |     WET_HAL_ERR_NOT_SUPPORTED    = -12
+  79 |     WET_HAL_ERR_BUFFER_FULL      = -13
   80 | 
   81 | 
-  82 | class WetTelemetry(ctypes.Structure):
-  83 |     """Mirror of C wet_telemetry_t (600 bytes with 8-byte alignment padding)."""
+  82 | class WetHalConfig(ctypes.Structure):
+  83 |     """Mirror of C wet_hal_config_t."""
   84 |     _fields_ = [
-  85 |         ("current_tick", c_uint64),
-  86 |         ("sim_time_ms", c_double),
-  87 |         ("voltages", c_float * 64),
-  88 |         ("spikes", c_uint8 * 64),
-  89 |         ("population_rate_hz", c_float),
-  90 |         ("last_charge_nc", c_float * 64),
-  91 |     ]
-  92 | 
-  93 |     @property
-  94 |     def tick_index(self) -> int:
-  95 |         return int(self.current_tick)
-  96 | 
-  97 |     @property
-  98 |     def channel_voltages(self) -> np.ndarray:
-  99 |         arr = np.ctypeslib.as_array(self.voltages)
- 100 |         arr.flags.writeable = False
- 101 |         return arr
- 102 | 
- 103 |     @property
- 104 |     def spike_raster(self) -> np.ndarray:
- 105 |         arr = np.ctypeslib.as_array(self.spikes)
- 106 |         return arr
- 107 | 
- 108 |     @property
- 109 |     def net_charge(self) -> np.ndarray:
- 110 |         arr = np.ctypeslib.as_array(self.last_charge_nc)
- 111 |         return arr
- 112 | 
- 113 |     @property
- 114 |     def last_charge(self) -> np.ndarray:
- 115 |         arr = np.ctypeslib.as_array(self.last_charge_nc)
- 116 |         return arr
- 117 | 
- 118 | 
- 119 | class WetActuatorTelemetry(ctypes.Structure):
- 120 |     """Mirror of C wet_actuator_telemetry_t."""
- 121 |     _fields_ = [
- 122 |         ("pump_rates_ul_min", c_float * 8),
- 123 |         ("pump_dispensed_ul", c_float * 8),
- 124 |         ("valve_states", c_uint8 * 8),
- 125 |         ("motor_positions", c_int * 4),
- 126 |         ("motor_speeds_rpm", c_float * 4),
- 127 |         ("ambient_temperature_c", c_float),
- 128 |         ("fluid_pressure_kpa", c_float * 4),
- 129 |     ]
- 130 | 
- 131 |     @property
- 132 |     def pump_rates(self) -> np.ndarray:
- 133 |         return np.ctypeslib.as_array(self.pump_rates_ul_min)
+  85 |         ("mode", c_int),
+  86 |         ("max_ephys_channels", c_uint32),
+  87 |         ("num_pumps", c_uint32),
+  88 |         ("num_valves", c_uint32),
+  89 |         ("num_flow_sensors", c_uint32),
+  90 |         ("enable_dead_head_protection", c_uint8),
+  91 |         ("enable_crowbar_fastpath", c_uint8),
+  92 |         ("valve_for_pump", c_uint8 * 8),
+  93 |     ]
+  94 | 
+  95 |     def __init__(
+  96 |         self,
+  97 |         mode: int = 0,
+  98 |         max_ephys_channels: int = 64,
+  99 |         num_pumps: int = 8,
+ 100 |         num_valves: int = 8,
+ 101 |         num_flow_sensors: int = 8,
+ 102 |         enable_dead_head_protection: int = 1,
+ 103 |         enable_crowbar_fastpath: int = 1,
+ 104 |         valve_for_pump = None,
+ 105 |     ):
+ 106 |         v = (c_uint8 * 8)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF)
+ 107 |         if valve_for_pump is not None:
+ 108 |             for i, val in enumerate(valve_for_pump):
+ 109 |                 v[i] = val
+ 110 |         super().__init__(
+ 111 |             mode=mode,
+ 112 |             max_ephys_channels=max_ephys_channels,
+ 113 |             num_pumps=num_pumps,
+ 114 |             num_valves=num_valves,
+ 115 |             num_flow_sensors=num_flow_sensors,
+ 116 |             enable_dead_head_protection=enable_dead_head_protection,
+ 117 |             enable_crowbar_fastpath=enable_crowbar_fastpath,
+ 118 |             valve_for_pump=v,
+ 119 |         )
+ 120 | 
+ 121 | 
+ 122 | class WetHalTelemetry(ctypes.Structure):
+ 123 |     """Mirror of C wet_hal_telemetry_t."""
+ 124 |     _fields_ = [
+ 125 |         ("total_spi_transactions", c_uint64),
+ 126 |         ("total_i2c_transactions", c_uint64),
+ 127 |         ("total_rs232_commands", c_uint64),
+ 128 |         ("total_can_frames", c_uint64),
+ 129 |         ("total_crowbar_events", c_uint64),
+ 130 |         ("last_crowbar_timestamp_us", c_uint64),
+ 131 |         ("last_crowbar_reason", c_uint32),
+ 132 |         ("crowbar_latency_us", c_double),
+ 133 |     ]
  134 | 
- 135 |     @property
- 136 |     def pump_dispensed(self) -> np.ndarray:
- 137 |         return np.ctypeslib.as_array(self.pump_dispensed_ul)
- 138 | 
- 139 |     @property
- 140 |     def valves(self) -> np.ndarray:
- 141 |         return np.ctypeslib.as_array(self.valve_states)
- 142 | 
- 143 |     @property
- 144 |     def motors(self) -> np.ndarray:
- 145 |         return np.ctypeslib.as_array(self.motor_positions)
- 146 | 
- 147 | 
- 148 | # =========================================================================
- 149 | # Shared Library Loader
- 150 | # =========================================================================
- 151 | 
- 152 | def _find_library_path() -> Path:
- 153 |     env_path = os.environ.get("WETVM_LIBRARY_PATH")
- 154 |     if env_path and Path(env_path).is_file():
- 155 |         return Path(env_path)
- 156 | 
- 157 |     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
- 158 |     lib_name = f"wetvm{ext}"
- 159 | 
- 160 |     # Search candidates
- 161 |     curr_dir = Path(__file__).resolve().parent
- 162 |     candidates = [
- 163 |         curr_dir.parent / "bin" / lib_name,
- 164 |         curr_dir.parent / "native" / "bin" / lib_name,
- 165 |         curr_dir.parent.parent / "bin" / lib_name,
- 166 |         curr_dir.parent.parent / "native" / "bin" / lib_name,
- 167 |         curr_dir / lib_name,
- 168 |         Path.cwd() / "native" / "bin" / lib_name,
- 169 |         Path.cwd() / "bin" / lib_name,
- 170 |         Path.cwd() / "native" / lib_name,
+ 135 | 
+ 136 | class WetHalContext(ctypes.Structure):
+ 137 |     """Mirror of C wet_hal_context_t."""
+ 138 |     _fields_ = [
+ 139 |         ("mode", c_int),
+ 140 |         ("config", WetHalConfig),
+ 141 |         ("vm", c_void_p),
+ 142 |         ("drivers", c_void_p * 16),
+ 143 |         ("driver_count", c_uint32),
+ 144 |         ("ephys_driver", c_void_p),
+ 145 |         ("pump_driver", c_void_p),
+ 146 |         ("valve_driver", c_void_p),
+ 147 |         ("flow_driver", c_void_p),
+ 148 |         ("can_driver", c_void_p),
+ 149 |         ("pump_rates_ul_min", c_float * 8),
+ 150 |         ("valve_states", c_uint8 * 8),
+ 151 |         ("flow_rates_ul_min", c_double * 8),
+ 152 |         ("ephys_voltages", c_float * 64),
+ 153 |         ("ephys_spikes", c_uint8 * 64),
+ 154 |         ("crowbar_tripped", c_uint8),
+ 155 |         ("crowbar_reason", c_uint32),
+ 156 |         ("crowbar_tick", c_uint64),
+ 157 |         ("crowbar_timestamp_us", c_uint64),
+ 158 |         ("telemetry", WetHalTelemetry),
+ 159 |     ]
+ 160 | 
+ 161 | 
+ 162 | class WetCanFrame(ctypes.Structure):
+ 163 |     """Mirror of C wet_can_frame_t."""
+ 164 |     _fields_ = [
+ 165 |         ("id", c_uint32),
+ 166 |         ("is_extended", c_uint8),
+ 167 |         ("is_rtr", c_uint8),
+ 168 |         ("dlc", c_uint8),
+ 169 |         ("data", c_uint8 * 8),
+ 170 |         ("timestamp_us", c_uint64),
  171 |     ]
  172 | 
- 173 |     for cand in candidates:
- 174 |         if cand.is_file():
- 175 |             return cand
- 176 | 
- 177 |     # Attempt to build automatically if not found
- 178 |     build_script = curr_dir.parent / "native" / "build.py"
- 179 |     if build_script.is_file():
- 180 |         import subprocess
- 181 |         res = subprocess.run([sys.executable, str(build_script)], capture_output=True, text=True)
- 182 |         if res.returncode == 0:
- 183 |             for cand in candidates:
- 184 |                 if cand.is_file():
- 185 |                     return cand
- 186 | 
- 187 |     raise FileNotFoundError(
- 188 |         f"Could not locate {lib_name}. Run 'python native/build.py' first or set WETVM_LIBRARY_PATH."
- 189 |     )
- 190 | 
- 191 | 
- 192 | def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
- 193 |     path = lib_path if lib_path is not None else _find_library_path()
- 194 |     lib = ctypes.CDLL(str(path))
- 195 | 
- 196 |     # wet_vm_t* wet_create_vm(const wet_vm_config_t* config)
- 197 |     lib.wet_create_vm.restype = c_void_p
- 198 |     lib.wet_create_vm.argtypes = [POINTER(WetVMConfig)]
- 199 | 
- 200 |     # void wet_free_vm(wet_vm_t* vm)
- 201 |     lib.wet_free_vm.restype = None
- 202 |     lib.wet_free_vm.argtypes = [c_void_p]
+ 173 | 
+ 174 | # =========================================================================
+ 175 | # C Struct Mirrors
+ 176 | # =========================================================================
+ 177 | 
+ 178 | class WetVMConfig(ctypes.Structure):
+ 179 |     """Mirror of C wet_vm_config_t (28 bytes)."""
+ 180 |     _fields_ = [
+ 181 |         ("dt_ms", c_double),
+ 182 |         ("max_stack_depth", c_uint32),
+ 183 |         ("max_locals", c_uint32),
+ 184 |         ("channel_count", c_uint32),
+ 185 |         ("max_ops_per_tick", c_uint32),
+ 186 |     ]
+ 187 | 
+ 188 |     def __init__(
+ 189 |         self,
+ 190 |         dt_ms: float = 0.1,
+ 191 |         max_stack_depth: int = 1024,
+ 192 |         max_locals: int = 256,
+ 193 |         channel_count: int = 64,
+ 194 |         max_ops_per_tick: int = 100000
+ 195 |     ):
+ 196 |         super().__init__(
+ 197 |             dt_ms=dt_ms,
+ 198 |             max_stack_depth=max_stack_depth,
+ 199 |             max_locals=max_locals,
+ 200 |             channel_count=channel_count,
+ 201 |             max_ops_per_tick=max_ops_per_tick
+ 202 |         )
  203 | 
- 204 |     # wet_status_t wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)
- 205 |     lib.wet_load_bytecode.restype = c_int
- 206 |     lib.wet_load_bytecode.argtypes = [c_void_p, POINTER(c_uint8), c_size_t, c_char_p, c_size_t]
- 207 | 
- 208 |     # wet_status_t wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)
- 209 |     lib.wet_step_tick.restype = c_int
- 210 |     lib.wet_step_tick.argtypes = [c_void_p, POINTER(WetTelemetry)]
- 211 | 
- 212 |     # wet_status_t wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)
- 213 |     lib.wet_run_ticks.restype = c_int
- 214 |     lib.wet_run_ticks.argtypes = [c_void_p, c_uint32, POINTER(c_uint32), POINTER(WetTelemetry)]
+ 204 | 
+ 205 | class WetTelemetry(ctypes.Structure):
+ 206 |     """Mirror of C wet_telemetry_t (600 bytes with 8-byte alignment padding)."""
+ 207 |     _fields_ = [
+ 208 |         ("current_tick", c_uint64),
+ 209 |         ("sim_time_ms", c_double),
+ 210 |         ("voltages", c_float * 64),
+ 211 |         ("spikes", c_uint8 * 64),
+ 212 |         ("population_rate_hz", c_float),
+ 213 |         ("last_charge_nc", c_float * 64),
+ 214 |     ]
  215 | 
- 216 |     # wet_status_t wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)
- 217 |     lib.wet_inject_stimulus.restype = c_int
- 218 |     lib.wet_inject_stimulus.argtypes = [c_void_p, c_uint8, c_float, c_float, c_float]
+ 216 |     @property
+ 217 |     def tick_index(self) -> int:
+ 218 |         return int(self.current_tick)
  219 | 
- 220 |     # wet_status_t wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)
- 221 |     lib.wet_get_telemetry.restype = c_int
- 222 |     lib.wet_get_telemetry.argtypes = [c_void_p, POINTER(WetTelemetry)]
- 223 | 
- 224 |     # const char* wet_get_last_error(wet_vm_t* vm)
- 225 |     lib.wet_get_last_error.restype = c_char_p
- 226 |     lib.wet_get_last_error.argtypes = [c_void_p]
- 227 | 
- 228 |     # const char* wet_status_to_string(wet_status_t status)
- 229 |     lib.wet_status_to_string.restype = c_char_p
- 230 |     lib.wet_status_to_string.argtypes = [c_int]
- 231 | 
- 232 |     # wet_status_t wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)
- 233 |     if hasattr(lib, "wet_get_actuator_telemetry"):
- 234 |         lib.wet_get_actuator_telemetry.restype = c_int
- 235 |         lib.wet_get_actuator_telemetry.argtypes = [c_void_p, POINTER(WetActuatorTelemetry)]
- 236 | 
- 237 |     # Phase 3 C-ABI Functions
- 238 |     if hasattr(lib, "wet_create_vm_arena"):
- 239 |         lib.wet_create_vm_arena.restype = c_void_p
- 240 |         lib.wet_create_vm_arena.argtypes = [c_void_p, c_size_t, POINTER(WetVMConfig)]
+ 220 |     @property
+ 221 |     def channel_voltages(self) -> np.ndarray:
+ 222 |         arr = np.ctypeslib.as_array(self.voltages)
+ 223 |         arr.flags.writeable = False
+ 224 |         return arr
+ 225 | 
+ 226 |     @property
+ 227 |     def spike_raster(self) -> np.ndarray:
+ 228 |         arr = np.ctypeslib.as_array(self.spikes)
+ 229 |         return arr
+ 230 | 
+ 231 |     @property
+ 232 |     def net_charge(self) -> np.ndarray:
+ 233 |         arr = np.ctypeslib.as_array(self.last_charge_nc)
+ 234 |         return arr
+ 235 | 
+ 236 |     @property
+ 237 |     def last_charge(self) -> np.ndarray:
+ 238 |         arr = np.ctypeslib.as_array(self.last_charge_nc)
+ 239 |         return arr
+ 240 | 
  241 | 
- 242 |     if hasattr(lib, "wet_configure_electrode"):
- 243 |         lib.wet_configure_electrode.restype = None
- 244 |         lib.wet_configure_electrode.argtypes = [c_void_p, c_uint8, c_float]
- 245 | 
- 246 |     if hasattr(lib, "wet_active_discharge"):
- 247 |         lib.wet_active_discharge.restype = None
- 248 |         lib.wet_active_discharge.argtypes = [c_void_p, c_uint8]
- 249 | 
- 250 |     if hasattr(lib, "wet_active_discharge_all"):
- 251 |         lib.wet_active_discharge_all.restype = None
- 252 |         lib.wet_active_discharge_all.argtypes = [c_void_p]
+ 242 | class WetActuatorTelemetry(ctypes.Structure):
+ 243 |     """Mirror of C wet_actuator_telemetry_t."""
+ 244 |     _fields_ = [
+ 245 |         ("pump_rates_ul_min", c_float * 8),
+ 246 |         ("pump_dispensed_ul", c_float * 8),
+ 247 |         ("valve_states", c_uint8 * 8),
+ 248 |         ("motor_positions", c_int * 4),
+ 249 |         ("motor_speeds_rpm", c_float * 4),
+ 250 |         ("ambient_temperature_c", c_float),
+ 251 |         ("fluid_pressure_kpa", c_float * 4),
+ 252 |     ]
  253 | 
- 254 |     if hasattr(lib, "wet_enable_dead_head_protection"):
- 255 |         lib.wet_enable_dead_head_protection.restype = None
- 256 |         lib.wet_enable_dead_head_protection.argtypes = [c_void_p, c_uint8]
+ 254 |     @property
+ 255 |     def pump_rates(self) -> np.ndarray:
+ 256 |         return np.ctypeslib.as_array(self.pump_rates_ul_min)
  257 | 
- 258 |     if hasattr(lib, "wet_life_supervisor_shutdown"):
- 259 |         lib.wet_life_supervisor_shutdown.restype = None
- 260 |         lib.wet_life_supervisor_shutdown.argtypes = [c_void_p]
+ 258 |     @property
+ 259 |     def pump_dispensed(self) -> np.ndarray:
+ 260 |         return np.ctypeslib.as_array(self.pump_dispensed_ul)
  261 | 
- 262 |     if hasattr(lib, "wet_configure_blanking"):
- 263 |         lib.wet_configure_blanking.restype = None
- 264 |         lib.wet_configure_blanking.argtypes = [c_void_p, c_float, c_uint8]
+ 262 |     @property
+ 263 |     def valves(self) -> np.ndarray:
+ 264 |         return np.ctypeslib.as_array(self.valve_states)
  265 | 
- 266 |     if hasattr(lib, "wet_inject_current_stimulus"):
- 267 |         lib.wet_inject_current_stimulus.restype = c_int
- 268 |         lib.wet_inject_current_stimulus.argtypes = [c_void_p, c_uint8, c_float, c_float, c_float]
+ 266 |     @property
+ 267 |     def motors(self) -> np.ndarray:
+ 268 |         return np.ctypeslib.as_array(self.motor_positions)
  269 | 
- 270 |     if hasattr(lib, "wet_verify_bytecode"):
- 271 |         lib.wet_verify_bytecode.restype = c_int
- 272 |         lib.wet_verify_bytecode.argtypes = [POINTER(c_uint8), c_size_t, c_char_p, c_size_t]
- 273 | 
- 274 |     if hasattr(lib, "wet_vm_snapshot"):
- 275 |         lib.wet_vm_snapshot.restype = c_int
- 276 |         lib.wet_vm_snapshot.argtypes = [c_void_p, POINTER(c_uint8), POINTER(c_size_t)]
- 277 | 
- 278 |     if hasattr(lib, "wet_vm_restore"):
- 279 |         lib.wet_vm_restore.restype = c_int
- 280 |         lib.wet_vm_restore.argtypes = [c_void_p, POINTER(c_uint8), c_size_t]
- 281 | 
- 282 |     if hasattr(lib, "wet_set_environmental_sensors"):
- 283 |         lib.wet_set_environmental_sensors.restype = None
- 284 |         lib.wet_set_environmental_sensors.argtypes = [c_void_p, c_float, c_float, c_float, c_uint8, c_uint8, c_float]
- 285 | 
- 286 |     if hasattr(lib, "wet_set_temperature"):
- 287 |         lib.wet_set_temperature.restype = None
- 288 |         lib.wet_set_temperature.argtypes = [c_void_p, c_float]
- 289 | 
- 290 |     if hasattr(lib, "wet_set_channel_banks"):
- 291 |         lib.wet_set_channel_banks.restype = None
- 292 |         lib.wet_set_channel_banks.argtypes = [c_void_p, c_uint64, c_uint64]
- 293 | 
- 294 |     return lib
+ 270 | 
+ 271 | # =========================================================================
+ 272 | # Shared Library Loader
+ 273 | # =========================================================================
+ 274 | 
+ 275 | def _find_library_path() -> Path:
+ 276 |     env_path = os.environ.get("WETVM_LIBRARY_PATH")
+ 277 |     if env_path and Path(env_path).is_file():
+ 278 |         return Path(env_path)
+ 279 | 
+ 280 |     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
+ 281 |     lib_name = f"wetvm{ext}"
+ 282 | 
+ 283 |     # Search candidates
+ 284 |     curr_dir = Path(__file__).resolve().parent
+ 285 |     candidates = [
+ 286 |         curr_dir.parent / "bin" / lib_name,
+ 287 |         curr_dir.parent / "native" / "bin" / lib_name,
+ 288 |         curr_dir.parent.parent / "bin" / lib_name,
+ 289 |         curr_dir.parent.parent / "native" / "bin" / lib_name,
+ 290 |         curr_dir / lib_name,
+ 291 |         Path.cwd() / "native" / "bin" / lib_name,
+ 292 |         Path.cwd() / "bin" / lib_name,
+ 293 |         Path.cwd() / "native" / lib_name,
+ 294 |     ]
  295 | 
- 296 | 
- 297 | def get_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
- 298 |     """Alias for load_wetvm_lib."""
- 299 |     return load_wetvm_lib(lib_path)
- 300 | 
- 301 | 
- 302 | class WetVMFFI:
- 303 |     """Low-level FFI helper wrapper matching E2E test interface."""
- 304 |     def __init__(self, lib_path: Optional[Path] = None):
- 305 |         self.lib = get_wetvm_lib(lib_path)
- 306 | 
- 307 |     def get_version(self) -> int:
- 308 |         return 0x0100
+ 296 |     for cand in candidates:
+ 297 |         if cand.is_file():
+ 298 |             return cand
+ 299 | 
+ 300 |     # Attempt to build automatically if not found
+ 301 |     build_script = curr_dir.parent / "native" / "build.py"
+ 302 |     if build_script.is_file():
+ 303 |         import subprocess
+ 304 |         res = subprocess.run([sys.executable, str(build_script)], capture_output=True, text=True)
+ 305 |         if res.returncode == 0:
+ 306 |             for cand in candidates:
+ 307 |                 if cand.is_file():
+ 308 |                     return cand
  309 | 
- 310 |     def create_vm(self, config: Optional[WetVMConfig] = None) -> ctypes.c_void_p:
- 311 |         cfg_ptr = ctypes.byref(config) if config is not None else None
- 312 |         return self.lib.wet_create_vm(cfg_ptr)
+ 310 |     raise FileNotFoundError(
+ 311 |         f"Could not locate {lib_name}. Run 'python native/build.py' first or set WETVM_LIBRARY_PATH."
+ 312 |     )
  313 | 
- 314 |     def free_vm(self, vm: ctypes.c_void_p) -> None:
- 315 |         self.lib.wet_free_vm(vm)
- 316 | 
- 317 |     def allocate_telemetry(self) -> WetTelemetry:
- 318 |         return WetTelemetry()
- 319 | 
- 320 |     def step_tick(self, vm: ctypes.c_void_p, telem: WetTelemetry) -> int:
- 321 |         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
- 322 |         return self.lib.wet_step_tick(vm, telem_ptr)
- 323 | 
- 324 |     def run_ticks(self, vm: ctypes.c_void_p, ticks: int, telem: WetTelemetry) -> Tuple[int, int]:
- 325 |         executed = ctypes.c_uint32(0)
- 326 |         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
- 327 |         status = self.lib.wet_run_ticks(vm, ctypes.c_uint32(ticks), ctypes.byref(executed), telem_ptr)
- 328 |         return status, int(executed.value)
- 329 | 
- 330 |     def inject_stimulus(
- 331 |         self,
- 332 |         vm: ctypes.c_void_p,
- 333 |         channel: int,
- 334 |         voltage_v: float,
- 335 |         p1_ms: float = 0.5,
- 336 |         p2_ms: float = 0.5
- 337 |     ) -> int:
- 338 |         return self.lib.wet_inject_stimulus(
- 339 |             vm,
- 340 |             ctypes.c_uint8(channel),
- 341 |             ctypes.c_float(voltage_v),
- 342 |             ctypes.c_float(p1_ms),
- 343 |             ctypes.c_float(p2_ms)
- 344 |         )
- 345 | 
- 346 |     def get_last_error(self, vm: Optional[ctypes.c_void_p] = None) -> str:
- 347 |         if vm:
- 348 |             err = self.lib.wet_get_last_error(vm)
- 349 |             return err.decode("utf-8", errors="replace") if err else ""
- 350 |         return ""
- 351 | 
- 352 |     def status_to_string(self, status: int) -> str:
- 353 |         s = self.lib.wet_status_to_string(int(status))
- 354 |         return s.decode("utf-8", errors="replace") if s else str(status)
- 355 | 
- 356 |     def load_bytecode(self, vm: ctypes.c_void_p, bytecode: bytes) -> int:
- 357 |         c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
- 358 |         err_buf = ctypes.create_string_buffer(512)
- 359 |         return self.lib.wet_load_bytecode(vm, c_bytes, len(bytecode), err_buf, len(err_buf))
- 360 | 
- 361 |     def get_telemetry(self, vm: ctypes.c_void_p, telem: WetTelemetry) -> int:
- 362 |         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
- 363 |         return self.lib.wet_get_telemetry(vm, telem_ptr)
+ 314 | 
+ 315 | def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
+ 316 |     path = lib_path if lib_path is not None else _find_library_path()
+ 317 |     lib = ctypes.CDLL(str(path))
+ 318 | 
+ 319 |     # wet_vm_t* wet_create_vm(const wet_vm_config_t* config)
+ 320 |     lib.wet_create_vm.restype = c_void_p
+ 321 |     lib.wet_create_vm.argtypes = [POINTER(WetVMConfig)]
+ 322 | 
+ 323 |     # void wet_free_vm(wet_vm_t* vm)
+ 324 |     lib.wet_free_vm.restype = None
+ 325 |     lib.wet_free_vm.argtypes = [c_void_p]
+ 326 | 
+ 327 |     # wet_status_t wet_load_bytecode(wet_vm_t* vm, const uint8_t* code_bytes, size_t size, char* err_buf, size_t err_buf_len)
+ 328 |     lib.wet_load_bytecode.restype = c_int
+ 329 |     lib.wet_load_bytecode.argtypes = [c_void_p, POINTER(c_uint8), c_size_t, c_char_p, c_size_t]
+ 330 | 
+ 331 |     # wet_status_t wet_step_tick(wet_vm_t* vm, wet_telemetry_t* out_telem)
+ 332 |     lib.wet_step_tick.restype = c_int
+ 333 |     lib.wet_step_tick.argtypes = [c_void_p, POINTER(WetTelemetry)]
+ 334 | 
+ 335 |     # wet_status_t wet_run_ticks(wet_vm_t* vm, uint32_t ticks, uint32_t* executed_ticks, wet_telemetry_t* out_telem)
+ 336 |     lib.wet_run_ticks.restype = c_int
+ 337 |     lib.wet_run_ticks.argtypes = [c_void_p, c_uint32, POINTER(c_uint32), POINTER(WetTelemetry)]
+ 338 | 
+ 339 |     # wet_status_t wet_inject_stimulus(wet_vm_t* vm, uint8_t channel, float voltage_v, float phase1_ms, float phase2_ms)
+ 340 |     lib.wet_inject_stimulus.restype = c_int
+ 341 |     lib.wet_inject_stimulus.argtypes = [c_void_p, c_uint8, c_float, c_float, c_float]
+ 342 | 
+ 343 |     # wet_status_t wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)
+ 344 |     lib.wet_get_telemetry.restype = c_int
+ 345 |     lib.wet_get_telemetry.argtypes = [c_void_p, POINTER(WetTelemetry)]
+ 346 | 
+ 347 |     # const char* wet_get_last_error(wet_vm_t* vm)
+ 348 |     lib.wet_get_last_error.restype = c_char_p
+ 349 |     lib.wet_get_last_error.argtypes = [c_void_p]
+ 350 | 
+ 351 |     # const char* wet_status_to_string(wet_status_t status)
+ 352 |     lib.wet_status_to_string.restype = c_char_p
+ 353 |     lib.wet_status_to_string.argtypes = [c_int]
+ 354 | 
+ 355 |     # wet_status_t wet_get_actuator_telemetry(wet_vm_t* vm, wet_actuator_telemetry_t* out_act_telem)
+ 356 |     if hasattr(lib, "wet_get_actuator_telemetry"):
+ 357 |         lib.wet_get_actuator_telemetry.restype = c_int
+ 358 |         lib.wet_get_actuator_telemetry.argtypes = [c_void_p, POINTER(WetActuatorTelemetry)]
+ 359 | 
+ 360 |     # Phase 3 C-ABI Functions
+ 361 |     if hasattr(lib, "wet_create_vm_arena"):
+ 362 |         lib.wet_create_vm_arena.restype = c_void_p
+ 363 |         lib.wet_create_vm_arena.argtypes = [c_void_p, c_size_t, POINTER(WetVMConfig)]
  364 | 
- 365 |     def create_vm_arena(self, arena_bytes: int, config: Optional[WetVMConfig] = None) -> Tuple[ctypes.c_void_p, ctypes.Array]:
- 366 |         """Creates a VM using a pre-allocated static ctypes byte buffer (zero heap malloc)."""
- 367 |         buf = (ctypes.c_uint8 * arena_bytes)()
- 368 |         cfg_ptr = ctypes.byref(config) if config is not None else None
- 369 |         vm = self.lib.wet_create_vm_arena(ctypes.byref(buf), ctypes.c_size_t(arena_bytes), cfg_ptr)
- 370 |         return vm, buf
- 371 | 
- 372 |     def configure_electrode(self, vm: ctypes.c_void_p, material: int, area_um2: float) -> None:
- 373 |         self.lib.wet_configure_electrode(vm, ctypes.c_uint8(material), ctypes.c_float(area_um2))
- 374 | 
- 375 |     def active_discharge(self, vm: ctypes.c_void_p, channel: int) -> None:
- 376 |         self.lib.wet_active_discharge(vm, ctypes.c_uint8(channel))
- 377 | 
- 378 |     def active_discharge_all(self, vm: ctypes.c_void_p) -> None:
- 379 |         self.lib.wet_active_discharge_all(vm)
+ 365 |     if hasattr(lib, "wet_configure_electrode"):
+ 366 |         lib.wet_configure_electrode.restype = None
+ 367 |         lib.wet_configure_electrode.argtypes = [c_void_p, c_uint8, c_float]
+ 368 | 
+ 369 |     if hasattr(lib, "wet_active_discharge"):
+ 370 |         lib.wet_active_discharge.restype = None
+ 371 |         lib.wet_active_discharge.argtypes = [c_void_p, c_uint8]
+ 372 | 
+ 373 |     if hasattr(lib, "wet_active_discharge_all"):
+ 374 |         lib.wet_active_discharge_all.restype = None
+ 375 |         lib.wet_active_discharge_all.argtypes = [c_void_p]
+ 376 | 
+ 377 |     if hasattr(lib, "wet_enable_dead_head_protection"):
+ 378 |         lib.wet_enable_dead_head_protection.restype = None
+ 379 |         lib.wet_enable_dead_head_protection.argtypes = [c_void_p, c_uint8]
  380 | 
- 381 |     def enable_dead_head_protection(self, vm: ctypes.c_void_p, enable: bool) -> None:
- 382 |         self.lib.wet_enable_dead_head_protection(vm, ctypes.c_uint8(1 if enable else 0))
- 383 | 
- 384 |     def life_supervisor_shutdown(self, vm: ctypes.c_void_p) -> None:
- 385 |         self.lib.wet_life_supervisor_shutdown(vm)
- 386 | 
- 387 |     def configure_blanking(self, vm: ctypes.c_void_p, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
- 388 |         self.lib.wet_configure_blanking(vm, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
- 389 | 
- 390 |     def inject_current_stimulus(
- 391 |         self,
- 392 |         vm: ctypes.c_void_p,
- 393 |         channel: int,
- 394 |         current_ua: float,
- 395 |         p1_ms: float = 0.5,
- 396 |         p2_ms: float = 0.5
- 397 |     ) -> int:
- 398 |         return self.lib.wet_inject_current_stimulus(
- 399 |             vm,
- 400 |             ctypes.c_uint8(channel),
- 401 |             ctypes.c_float(current_ua),
- 402 |             ctypes.c_float(p1_ms),
- 403 |             ctypes.c_float(p2_ms)
- 404 |         )
- 405 | 
- 406 |     def verify_bytecode(self, bytecode: bytes) -> Tuple[int, str]:
- 407 |         c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
- 408 |         err_buf = ctypes.create_string_buffer(512)
- 409 |         st = self.lib.wet_verify_bytecode(c_bytes, ctypes.c_size_t(len(bytecode)), err_buf, ctypes.c_size_t(len(err_buf)))
- 410 |         msg = err_buf.value.decode("utf-8", errors="replace")
- 411 |         return st, msg
+ 381 |     if hasattr(lib, "wet_life_supervisor_shutdown"):
+ 382 |         lib.wet_life_supervisor_shutdown.restype = None
+ 383 |         lib.wet_life_supervisor_shutdown.argtypes = [c_void_p]
+ 384 | 
+ 385 |     if hasattr(lib, "wet_configure_blanking"):
+ 386 |         lib.wet_configure_blanking.restype = None
+ 387 |         lib.wet_configure_blanking.argtypes = [c_void_p, c_float, c_uint8]
+ 388 | 
+ 389 |     if hasattr(lib, "wet_inject_current_stimulus"):
+ 390 |         lib.wet_inject_current_stimulus.restype = c_int
+ 391 |         lib.wet_inject_current_stimulus.argtypes = [c_void_p, c_uint8, c_float, c_float, c_float]
+ 392 | 
+ 393 |     if hasattr(lib, "wet_verify_bytecode"):
+ 394 |         lib.wet_verify_bytecode.restype = c_int
+ 395 |         lib.wet_verify_bytecode.argtypes = [POINTER(c_uint8), c_size_t, c_char_p, c_size_t]
+ 396 | 
+ 397 |     if hasattr(lib, "wet_vm_snapshot"):
+ 398 |         lib.wet_vm_snapshot.restype = c_int
+ 399 |         lib.wet_vm_snapshot.argtypes = [c_void_p, POINTER(c_uint8), POINTER(c_size_t)]
+ 400 | 
+ 401 |     if hasattr(lib, "wet_vm_restore"):
+ 402 |         lib.wet_vm_restore.restype = c_int
+ 403 |         lib.wet_vm_restore.argtypes = [c_void_p, POINTER(c_uint8), c_size_t]
+ 404 | 
+ 405 |     if hasattr(lib, "wet_set_environmental_sensors"):
+ 406 |         lib.wet_set_environmental_sensors.restype = None
+ 407 |         lib.wet_set_environmental_sensors.argtypes = [c_void_p, c_float, c_float, c_float, c_uint8, c_uint8, c_float]
+ 408 | 
+ 409 |     if hasattr(lib, "wet_set_temperature"):
+ 410 |         lib.wet_set_temperature.restype = None
+ 411 |         lib.wet_set_temperature.argtypes = [c_void_p, c_float]
  412 | 
- 413 |     def snapshot(self, vm: ctypes.c_void_p) -> bytes:
- 414 |         needed_len = ctypes.c_size_t(0)
- 415 |         self.lib.wet_vm_snapshot(vm, None, ctypes.byref(needed_len))
- 416 |         buf = (ctypes.c_uint8 * needed_len.value)()
- 417 |         st = self.lib.wet_vm_snapshot(vm, buf, ctypes.byref(needed_len))
- 418 |         if st != 0:
- 419 |             raise RuntimeError(f"Snapshot failed with status {st}")
- 420 |         return bytes(buf)
+ 413 |     if hasattr(lib, "wet_set_channel_banks"):
+ 414 |         lib.wet_set_channel_banks.restype = None
+ 415 |         lib.wet_set_channel_banks.argtypes = [c_void_p, c_uint64, c_uint64]
+ 416 | 
+ 417 |     # Milestone 2: Biophysics Live Synaptic Inspection
+ 418 |     if hasattr(lib, "wet_vm_get_synapse_matrix"):
+ 419 |         lib.wet_vm_get_synapse_matrix.restype = c_int
+ 420 |         lib.wet_vm_get_synapse_matrix.argtypes = [c_void_p, POINTER(c_float), c_size_t]
  421 | 
- 422 |     def restore(self, vm: ctypes.c_void_p, data: bytes) -> int:
- 423 |         c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
- 424 |         return self.lib.wet_vm_restore(vm, c_bytes, ctypes.c_size_t(len(data)))
+ 422 |     if hasattr(lib, "wet_vm_get_synapse_weight"):
+ 423 |         lib.wet_vm_get_synapse_weight.restype = c_float
+ 424 |         lib.wet_vm_get_synapse_weight.argtypes = [c_void_p, c_uint8, c_uint8]
  425 | 
- 426 |     def set_environmental_sensors(
- 427 |         self,
- 428 |         vm: ctypes.c_void_p,
- 429 |         ph: float = 7.4,
- 430 |         do_pct: float = 95.0,
- 431 |         co2_pct: float = 5.0,
- 432 |         bubble_sensor_id: int = 0,
- 433 |         bubble_state: bool = False,
- 434 |         flow_rate_ul_min: float = 1.5
- 435 |     ) -> None:
- 436 |         self.lib.wet_set_environmental_sensors(
- 437 |             vm,
- 438 |             ctypes.c_float(ph),
- 439 |             ctypes.c_float(do_pct),
- 440 |             ctypes.c_float(co2_pct),
- 441 |             ctypes.c_uint8(bubble_sensor_id),
- 442 |             ctypes.c_uint8(1 if bubble_state else 0),
- 443 |             ctypes.c_float(flow_rate_ul_min)
- 444 |         )
- 445 | 
- 446 |     def set_temperature(self, vm: ctypes.c_void_p, temp_c: float) -> None:
- 447 |         self.lib.wet_set_temperature(vm, ctypes.c_float(temp_c))
- 448 | 
- 449 |     def set_channel_banks(
- 450 |         self,
- 451 |         vm: ctypes.c_void_p,
- 452 |         ref_mask: int = 0,
- 453 |         rec_mask: int = 0
- 454 |     ) -> None:
- 455 |         self.lib.wet_set_channel_banks(vm, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))
+ 426 |     # Milestone 1: Physical HAL Core APIs
+ 427 |     if hasattr(lib, "wet_hal_create"):
+ 428 |         lib.wet_hal_create.restype = c_void_p
+ 429 |         lib.wet_hal_create.argtypes = [c_int, POINTER(WetHalConfig)]
+ 430 | 
+ 431 |     if hasattr(lib, "wet_hal_destroy"):
+ 432 |         lib.wet_hal_destroy.restype = None
+ 433 |         lib.wet_hal_destroy.argtypes = [c_void_p]
+ 434 | 
+ 435 |     if hasattr(lib, "wet_hal_init"):
+ 436 |         lib.wet_hal_init.restype = c_int
+ 437 |         lib.wet_hal_init.argtypes = [c_void_p, c_int, POINTER(WetHalConfig)]
+ 438 | 
+ 439 |     if hasattr(lib, "wet_hal_attach"):
+ 440 |         lib.wet_hal_attach.restype = c_int
+ 441 |         lib.wet_hal_attach.argtypes = [c_void_p, c_void_p]
+ 442 | 
+ 443 |     if hasattr(lib, "wet_hal_get_context"):
+ 444 |         lib.wet_hal_get_context.restype = c_void_p
+ 445 |         lib.wet_hal_get_context.argtypes = [c_void_p]
+ 446 | 
+ 447 |     if hasattr(lib, "wet_hal_set_mode"):
+ 448 |         lib.wet_hal_set_mode.restype = c_int
+ 449 |         lib.wet_hal_set_mode.argtypes = [c_void_p, c_int]
+ 450 | 
+ 451 |     if hasattr(lib, "wet_hal_get_mode"):
+ 452 |         lib.wet_hal_get_mode.restype = c_int
+ 453 |         lib.wet_hal_get_mode.argtypes = [c_void_p]
+ 454 | 
+ 455 |     if hasattr(lib, "wet_hal_register_driver"):
+ 456 |         lib.wet_hal_register_driver.restype = c_int
+ 457 |         lib.wet_hal_register_driver.argtypes = [c_void_p, c_void_p]
+ 458 | 
+ 459 |     if hasattr(lib, "wet_hal_unregister_driver"):
+ 460 |         lib.wet_hal_unregister_driver.restype = c_int
+ 461 |         lib.wet_hal_unregister_driver.argtypes = [c_void_p, c_void_p]
+ 462 | 
+ 463 |     if hasattr(lib, "wet_hal_find_driver"):
+ 464 |         lib.wet_hal_find_driver.restype = c_void_p
+ 465 |         lib.wet_hal_find_driver.argtypes = [c_void_p, c_int]
+ 466 | 
+ 467 |     if hasattr(lib, "wet_hal_write_pump"):
+ 468 |         lib.wet_hal_write_pump.restype = c_int
+ 469 |         lib.wet_hal_write_pump.argtypes = [c_void_p, c_uint8, c_double, c_uint8]
+ 470 | 
+ 471 |     if hasattr(lib, "wet_hal_dispense_pump"):
+ 472 |         lib.wet_hal_dispense_pump.restype = c_int
+ 473 |         lib.wet_hal_dispense_pump.argtypes = [c_void_p, c_uint8, c_double]
+ 474 | 
+ 475 |     if hasattr(lib, "wet_hal_write_valve"):
+ 476 |         lib.wet_hal_write_valve.restype = c_int
+ 477 |         lib.wet_hal_write_valve.argtypes = [c_void_p, c_uint8, c_uint8]
+ 478 | 
+ 479 |     if hasattr(lib, "wet_hal_read_flow"):
+ 480 |         lib.wet_hal_read_flow.restype = c_int
+ 481 |         lib.wet_hal_read_flow.argtypes = [c_void_p, c_uint8, POINTER(c_double)]
+ 482 | 
+ 483 |     if hasattr(lib, "wet_hal_stim_current"):
+ 484 |         lib.wet_hal_stim_current.restype = c_int
+ 485 |         lib.wet_hal_stim_current.argtypes = [c_void_p, c_uint16, ctypes.c_int32, c_uint32]
+ 486 | 
+ 487 |     if hasattr(lib, "wet_hal_stim_voltage"):
+ 488 |         lib.wet_hal_stim_voltage.restype = c_int
+ 489 |         lib.wet_hal_stim_voltage.argtypes = [c_void_p, c_uint16, c_float, c_float, c_float]
+ 490 | 
+ 491 |     if hasattr(lib, "wet_hal_read_spikes"):
+ 492 |         lib.wet_hal_read_spikes.restype = c_int
+ 493 |         lib.wet_hal_read_spikes.argtypes = [c_void_p, c_uint16, POINTER(c_uint8)]
+ 494 | 
+ 495 |     if hasattr(lib, "wet_hal_measure_impedance"):
+ 496 |         lib.wet_hal_measure_impedance.restype = c_int
+ 497 |         lib.wet_hal_measure_impedance.argtypes = [c_void_p, c_uint16, c_float, POINTER(c_float), POINTER(c_float)]
+ 498 | 
+ 499 |     if hasattr(lib, "wet_hal_active_discharge"):
+ 500 |         lib.wet_hal_active_discharge.restype = c_int
+ 501 |         lib.wet_hal_active_discharge.argtypes = [c_void_p, c_uint16]
+ 502 | 
+ 503 |     if hasattr(lib, "wet_hal_emergency_crowbar"):
+ 504 |         lib.wet_hal_emergency_crowbar.restype = None
+ 505 |         lib.wet_hal_emergency_crowbar.argtypes = [c_void_p, c_uint32]
+ 506 | 
+ 507 |     if hasattr(lib, "wet_hal_get_time_us"):
+ 508 |         lib.wet_hal_get_time_us.restype = c_uint64
+ 509 |         lib.wet_hal_get_time_us.argtypes = []
+ 510 | 
+ 511 |     if hasattr(lib, "wet_hal_get_telemetry"):
+ 512 |         lib.wet_hal_get_telemetry.restype = POINTER(WetHalTelemetry)
+ 513 |         lib.wet_hal_get_telemetry.argtypes = [c_void_p]
+ 514 | 
+ 515 |     if hasattr(lib, "wet_hal_set_valve_for_pump"):
+ 516 |         lib.wet_hal_set_valve_for_pump.restype = None
+ 517 |         lib.wet_hal_set_valve_for_pump.argtypes = [c_void_p, c_uint8, c_uint8]
+ 518 | 
+ 519 |     # Intan RHS2116 APIs
+ 520 |     if hasattr(lib, "wet_hal_intan_create"):
+ 521 |         lib.wet_hal_intan_create.restype = c_void_p
+ 522 |         lib.wet_hal_intan_create.argtypes = [c_int]
+ 523 | 
+ 524 |     if hasattr(lib, "wet_hal_intan_destroy"):
+ 525 |         lib.wet_hal_intan_destroy.restype = None
+ 526 |         lib.wet_hal_intan_destroy.argtypes = [c_void_p]
+ 527 | 
+ 528 |     if hasattr(lib, "wet_hal_intan_spi_transfer"):
+ 529 |         lib.wet_hal_intan_spi_transfer.restype = c_uint32
+ 530 |         lib.wet_hal_intan_spi_transfer.argtypes = [c_void_p, c_uint32]
+ 531 | 
+ 532 |     if hasattr(lib, "wet_hal_intan_set_stim_current"):
+ 533 |         lib.wet_hal_intan_set_stim_current.restype = c_int
+ 534 |         lib.wet_hal_intan_set_stim_current.argtypes = [c_void_p, c_uint8, ctypes.c_int32, c_uint32]
+ 535 | 
+ 536 |     if hasattr(lib, "wet_hal_intan_get_compliance_status"):
+ 537 |         lib.wet_hal_intan_get_compliance_status.restype = ctypes.c_uint16
+ 538 |         lib.wet_hal_intan_get_compliance_status.argtypes = [c_void_p]
+ 539 | 
+ 540 |     if hasattr(lib, "wet_hal_intan_clear_compliance"):
+ 541 |         lib.wet_hal_intan_clear_compliance.restype = None
+ 542 |         lib.wet_hal_intan_clear_compliance.argtypes = [c_void_p]
+ 543 | 
+ 544 |     if hasattr(lib, "wet_hal_intan_measure_impedance"):
+ 545 |         lib.wet_hal_intan_measure_impedance.restype = c_int
+ 546 |         lib.wet_hal_intan_measure_impedance.argtypes = [c_void_p, c_uint8, c_float, POINTER(c_float), POINTER(c_float)]
+ 547 | 
+ 548 |     if hasattr(lib, "wet_hal_intan_set_charge_recovery"):
+ 549 |         lib.wet_hal_intan_set_charge_recovery.restype = c_int
+ 550 |         lib.wet_hal_intan_set_charge_recovery.argtypes = [c_void_p, c_uint8, c_uint8]
+ 551 | 
+ 552 |     if hasattr(lib, "wet_hal_intan_inject_fault"):
+ 553 |         lib.wet_hal_intan_inject_fault.restype = None
+ 554 |         lib.wet_hal_intan_inject_fault.argtypes = [c_void_p, c_uint8, c_uint8, c_uint8]
+ 555 | 
+ 556 |     # MaxWell MaxOne APIs
+ 557 |     if hasattr(lib, "wet_hal_maxwell_create"):
+ 558 |         lib.wet_hal_maxwell_create.restype = c_void_p
+ 559 |         lib.wet_hal_maxwell_create.argtypes = [c_int]
+ 560 | 
+ 561 |     if hasattr(lib, "wet_hal_maxwell_destroy"):
+ 562 |         lib.wet_hal_maxwell_destroy.restype = None
+ 563 |         lib.wet_hal_maxwell_destroy.argtypes = [c_void_p]
+ 564 | 
+ 565 |     if hasattr(lib, "wet_hal_maxwell_route_channels"):
+ 566 |         lib.wet_hal_maxwell_route_channels.restype = c_int
+ 567 |         lib.wet_hal_maxwell_route_channels.argtypes = [c_void_p, POINTER(ctypes.c_uint16), c_uint32]
+ 568 | 
+ 569 |     if hasattr(lib, "wet_hal_maxwell_connect_stim"):
+ 570 |         lib.wet_hal_maxwell_connect_stim.restype = c_int
+ 571 |         lib.wet_hal_maxwell_connect_stim.argtypes = [c_void_p, c_uint8, ctypes.c_uint16]
+ 572 | 
+ 573 |     if hasattr(lib, "wet_hal_maxwell_sequence_clear"):
+ 574 |         lib.wet_hal_maxwell_sequence_clear.restype = None
+ 575 |         lib.wet_hal_maxwell_sequence_clear.argtypes = [c_void_p]
+ 576 | 
+ 577 |     if hasattr(lib, "wet_hal_maxwell_sequence_append"):
+ 578 |         lib.wet_hal_maxwell_sequence_append.restype = c_int
+ 579 |         lib.wet_hal_maxwell_sequence_append.argtypes = [c_void_p, c_uint32, c_uint8, ctypes.c_uint16, c_float, ctypes.c_uint16]
+ 580 | 
+ 581 |     if hasattr(lib, "wet_hal_maxwell_sequence_arm"):
+ 582 |         lib.wet_hal_maxwell_sequence_arm.restype = c_int
+ 583 |         lib.wet_hal_maxwell_sequence_arm.argtypes = [c_void_p]
+ 584 | 
+ 585 |     if hasattr(lib, "wet_hal_maxwell_sequence_start"):
+ 586 |         lib.wet_hal_maxwell_sequence_start.restype = c_int
+ 587 |         lib.wet_hal_maxwell_sequence_start.argtypes = [c_void_p]
+ 588 | 
+ 589 |     if hasattr(lib, "wet_hal_maxwell_sequence_get_state"):
+ 590 |         lib.wet_hal_maxwell_sequence_get_state.restype = c_int
+ 591 |         lib.wet_hal_maxwell_sequence_get_state.argtypes = [c_void_p]
+ 592 | 
+ 593 |     if hasattr(lib, "wet_hal_maxwell_stim_voltage"):
+ 594 |         lib.wet_hal_maxwell_stim_voltage.restype = c_int
+ 595 |         lib.wet_hal_maxwell_stim_voltage.argtypes = [c_void_p, c_uint8, ctypes.c_uint16, c_float, c_float, c_float]
+ 596 | 
+ 597 |     if hasattr(lib, "wet_hal_maxwell_inject_fault"):
+ 598 |         lib.wet_hal_maxwell_inject_fault.restype = None
+ 599 |         lib.wet_hal_maxwell_inject_fault.argtypes = [c_void_p, c_uint8, c_uint8]
+ 600 | 
+ 601 |     # Microfluidics & CAN APIs
+ 602 |     if hasattr(lib, "wet_hal_microfluidics_create"):
+ 603 |         lib.wet_hal_microfluidics_create.restype = c_void_p
+ 604 |         lib.wet_hal_microfluidics_create.argtypes = [c_int]
+ 605 | 
+ 606 |     if hasattr(lib, "wet_hal_microfluidics_destroy"):
+ 607 |         lib.wet_hal_microfluidics_destroy.restype = None
+ 608 |         lib.wet_hal_microfluidics_destroy.argtypes = [c_void_p]
+ 609 | 
+ 610 |     if hasattr(lib, "wet_hal_harvard_format_cmd"):
+ 611 |         lib.wet_hal_harvard_format_cmd.restype = c_int
+ 612 |         lib.wet_hal_harvard_format_cmd.argtypes = [c_uint8, c_uint8, c_char_p, c_char_p, c_char_p, c_size_t]
+ 613 | 
+ 614 |     if hasattr(lib, "wet_hal_harvard_parse_response"):
+ 615 |         lib.wet_hal_harvard_parse_response.restype = c_int
+ 616 |         lib.wet_hal_harvard_parse_response.argtypes = [c_char_p, c_size_t]
+ 617 | 
+ 618 |     if hasattr(lib, "wet_hal_pump_set_rate"):
+ 619 |         lib.wet_hal_pump_set_rate.restype = c_int
+ 620 |         lib.wet_hal_pump_set_rate.argtypes = [c_void_p, c_uint8, c_double, c_uint8]
+ 621 | 
+ 622 |     if hasattr(lib, "wet_hal_pump_dispense"):
+ 623 |         lib.wet_hal_pump_dispense.restype = c_int
+ 624 |         lib.wet_hal_pump_dispense.argtypes = [c_void_p, c_uint8, c_double]
+ 625 | 
+ 626 |     if hasattr(lib, "wet_hal_pump_stop"):
+ 627 |         lib.wet_hal_pump_stop.restype = c_int
+ 628 |         lib.wet_hal_pump_stop.argtypes = [c_void_p, c_uint8]
+ 629 | 
+ 630 |     if hasattr(lib, "wet_hal_valve_set_state"):
+ 631 |         lib.wet_hal_valve_set_state.restype = c_int
+ 632 |         lib.wet_hal_valve_set_state.argtypes = [c_void_p, c_uint8, c_uint8]
+ 633 | 
+ 634 |     if hasattr(lib, "wet_hal_pump_bind_downstream_valve"):
+ 635 |         lib.wet_hal_pump_bind_downstream_valve.restype = None
+ 636 |         lib.wet_hal_pump_bind_downstream_valve.argtypes = [c_void_p, c_uint8, c_uint8]
+ 637 | 
+ 638 |     if hasattr(lib, "wet_hal_can_send"):
+ 639 |         lib.wet_hal_can_send.restype = c_int
+ 640 |         lib.wet_hal_can_send.argtypes = [c_void_p, POINTER(WetCanFrame)]
+ 641 | 
+ 642 |     if hasattr(lib, "wet_hal_can_recv"):
+ 643 |         lib.wet_hal_can_recv.restype = c_int
+ 644 |         lib.wet_hal_can_recv.argtypes = [c_void_p, POINTER(WetCanFrame)]
+ 645 | 
+ 646 |     if hasattr(lib, "wet_hal_can_send_emcy"):
+ 647 |         lib.wet_hal_can_send_emcy.restype = c_int
+ 648 |         lib.wet_hal_can_send_emcy.argtypes = [c_void_p, c_uint8, ctypes.c_uint16, c_uint8]
+ 649 | 
+ 650 |     if hasattr(lib, "wet_hal_microfluidics_inject_fault"):
+ 651 |         lib.wet_hal_microfluidics_inject_fault.restype = None
+ 652 |         lib.wet_hal_microfluidics_inject_fault.argtypes = [c_void_p, c_uint8, c_uint8, c_uint8]
+ 653 | 
+ 654 |     # Sensirion Flow Meter APIs
+ 655 |     if hasattr(lib, "wet_hal_sensirion_create"):
+ 656 |         lib.wet_hal_sensirion_create.restype = c_void_p
+ 657 |         lib.wet_hal_sensirion_create.argtypes = [c_int]
+ 658 | 
+ 659 |     if hasattr(lib, "wet_hal_sensirion_destroy"):
+ 660 |         lib.wet_hal_sensirion_destroy.restype = None
+ 661 |         lib.wet_hal_sensirion_destroy.argtypes = [c_void_p]
+ 662 | 
+ 663 |     if hasattr(lib, "wet_hal_sensirion_crc8"):
+ 664 |         lib.wet_hal_sensirion_crc8.restype = c_uint8
+ 665 |         lib.wet_hal_sensirion_crc8.argtypes = [POINTER(c_uint8), c_size_t]
+ 666 | 
+ 667 |     if hasattr(lib, "wet_hal_sensirion_validate_crc"):
+ 668 |         lib.wet_hal_sensirion_validate_crc.restype = c_int
+ 669 |         lib.wet_hal_sensirion_validate_crc.argtypes = [POINTER(c_uint8)]
+ 670 | 
+ 671 |     if hasattr(lib, "wet_hal_sensirion_start_measurement"):
+ 672 |         lib.wet_hal_sensirion_start_measurement.restype = c_int
+ 673 |         lib.wet_hal_sensirion_start_measurement.argtypes = [c_void_p, ctypes.c_uint16]
+ 674 | 
+ 675 |     if hasattr(lib, "wet_hal_sensirion_stop_measurement"):
+ 676 |         lib.wet_hal_sensirion_stop_measurement.restype = c_int
+ 677 |         lib.wet_hal_sensirion_stop_measurement.argtypes = [c_void_p]
+ 678 | 
+ 679 |     if hasattr(lib, "wet_hal_sensirion_read_flow"):
+ 680 |         lib.wet_hal_sensirion_read_flow.restype = c_int
+ 681 |         lib.wet_hal_sensirion_read_flow.argtypes = [c_void_p, POINTER(c_double)]
+ 682 | 
+ 683 |     if hasattr(lib, "wet_hal_sensirion_hil_set_flow"):
+ 684 |         lib.wet_hal_sensirion_hil_set_flow.restype = None
+ 685 |         lib.wet_hal_sensirion_hil_set_flow.argtypes = [c_void_p, c_double]
+ 686 | 
+ 687 |     if hasattr(lib, "wet_hal_shdlc_encode"):
+ 688 |         lib.wet_hal_shdlc_encode.restype = c_size_t
+ 689 |         lib.wet_hal_shdlc_encode.argtypes = [c_uint8, c_uint8, POINTER(c_uint8), c_uint8, POINTER(c_uint8), c_size_t]
+ 690 | 
+ 691 |     if hasattr(lib, "wet_hal_shdlc_decode"):
+ 692 |         lib.wet_hal_shdlc_decode.restype = c_int
+ 693 |         lib.wet_hal_shdlc_decode.argtypes = [POINTER(c_uint8), c_size_t, POINTER(c_uint8), POINTER(c_uint8), POINTER(c_uint8), POINTER(c_uint8)]
+ 694 | 
+ 695 |     if hasattr(lib, "wet_hal_sensirion_inject_fault"):
+ 696 |         lib.wet_hal_sensirion_inject_fault.restype = None
+ 697 |         lib.wet_hal_sensirion_inject_fault.argtypes = [c_void_p, c_uint8, c_uint8]
+ 698 | 
+ 699 |     return lib
+ 700 | 
+ 701 | 
+ 702 | def get_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
+ 703 |     """Alias for load_wetvm_lib."""
+ 704 |     return load_wetvm_lib(lib_path)
+ 705 | 
+ 706 | 
+ 707 | class WetVMFFI:
+ 708 |     """Low-level FFI helper wrapper matching E2E test interface."""
+ 709 |     def __init__(self, lib_path: Optional[Path] = None):
+ 710 |         self.lib = get_wetvm_lib(lib_path)
+ 711 | 
+ 712 |     def get_version(self) -> int:
+ 713 |         return 0x0100
+ 714 | 
+ 715 |     def create_vm(self, config: Optional[WetVMConfig] = None) -> ctypes.c_void_p:
+ 716 |         cfg_ptr = ctypes.byref(config) if config is not None else None
+ 717 |         return self.lib.wet_create_vm(cfg_ptr)
+ 718 | 
+ 719 |     def free_vm(self, vm: ctypes.c_void_p) -> None:
+ 720 |         self.lib.wet_free_vm(vm)
+ 721 | 
+ 722 |     def allocate_telemetry(self) -> WetTelemetry:
+ 723 |         return WetTelemetry()
+ 724 | 
+ 725 |     def step_tick(self, vm: ctypes.c_void_p, telem: WetTelemetry) -> int:
+ 726 |         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
+ 727 |         return self.lib.wet_step_tick(vm, telem_ptr)
+ 728 | 
+ 729 |     def run_ticks(self, vm: ctypes.c_void_p, ticks: int, telem: WetTelemetry) -> Tuple[int, int]:
+ 730 |         executed = ctypes.c_uint32(0)
+ 731 |         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
+ 732 |         status = self.lib.wet_run_ticks(vm, ctypes.c_uint32(ticks), ctypes.byref(executed), telem_ptr)
+ 733 |         return status, int(executed.value)
+ 734 | 
+ 735 |     def inject_stimulus(
+ 736 |         self,
+ 737 |         vm: ctypes.c_void_p,
+ 738 |         channel: int,
+ 739 |         voltage_v: float,
+ 740 |         p1_ms: float = 0.5,
+ 741 |         p2_ms: float = 0.5
+ 742 |     ) -> int:
+ 743 |         return self.lib.wet_inject_stimulus(
+ 744 |             vm,
+ 745 |             ctypes.c_uint8(channel),
+ 746 |             ctypes.c_float(voltage_v),
+ 747 |             ctypes.c_float(p1_ms),
+ 748 |             ctypes.c_float(p2_ms)
+ 749 |         )
+ 750 | 
+ 751 |     def get_last_error(self, vm: Optional[ctypes.c_void_p] = None) -> str:
+ 752 |         if vm:
+ 753 |             err = self.lib.wet_get_last_error(vm)
+ 754 |             return err.decode("utf-8", errors="replace") if err else ""
+ 755 |         return ""
+ 756 | 
+ 757 |     def status_to_string(self, status: int) -> str:
+ 758 |         s = self.lib.wet_status_to_string(int(status))
+ 759 |         return s.decode("utf-8", errors="replace") if s else str(status)
+ 760 | 
+ 761 |     def load_bytecode(self, vm: ctypes.c_void_p, bytecode: bytes) -> int:
+ 762 |         c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
+ 763 |         err_buf = ctypes.create_string_buffer(512)
+ 764 |         return self.lib.wet_load_bytecode(vm, c_bytes, len(bytecode), err_buf, len(err_buf))
+ 765 | 
+ 766 |     def get_telemetry(self, vm: ctypes.c_void_p, telem: WetTelemetry) -> int:
+ 767 |         telem_ptr = ctypes.byref(telem) if isinstance(telem, WetTelemetry) else telem
+ 768 |         return self.lib.wet_get_telemetry(vm, telem_ptr)
+ 769 | 
+ 770 |     def create_vm_arena(self, arena_bytes: int, config: Optional[WetVMConfig] = None) -> Tuple[ctypes.c_void_p, ctypes.Array]:
+ 771 |         """Creates a VM using a pre-allocated static ctypes byte buffer (zero heap malloc)."""
+ 772 |         buf = (ctypes.c_uint8 * arena_bytes)()
+ 773 |         cfg_ptr = ctypes.byref(config) if config is not None else None
+ 774 |         vm = self.lib.wet_create_vm_arena(ctypes.byref(buf), ctypes.c_size_t(arena_bytes), cfg_ptr)
+ 775 |         return vm, buf
+ 776 | 
+ 777 |     def configure_electrode(self, vm: ctypes.c_void_p, material: int, area_um2: float) -> None:
+ 778 |         self.lib.wet_configure_electrode(vm, ctypes.c_uint8(material), ctypes.c_float(area_um2))
+ 779 | 
+ 780 |     def active_discharge(self, vm: ctypes.c_void_p, channel: int) -> None:
+ 781 |         self.lib.wet_active_discharge(vm, ctypes.c_uint8(channel))
+ 782 | 
+ 783 |     def active_discharge_all(self, vm: ctypes.c_void_p) -> None:
+ 784 |         self.lib.wet_active_discharge_all(vm)
+ 785 | 
+ 786 |     def enable_dead_head_protection(self, vm: ctypes.c_void_p, enable: bool) -> None:
+ 787 |         self.lib.wet_enable_dead_head_protection(vm, ctypes.c_uint8(1 if enable else 0))
+ 788 | 
+ 789 |     def life_supervisor_shutdown(self, vm: ctypes.c_void_p) -> None:
+ 790 |         self.lib.wet_life_supervisor_shutdown(vm)
+ 791 | 
+ 792 |     def configure_blanking(self, vm: ctypes.c_void_p, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
+ 793 |         self.lib.wet_configure_blanking(vm, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
+ 794 | 
+ 795 |     def inject_current_stimulus(
+ 796 |         self,
+ 797 |         vm: ctypes.c_void_p,
+ 798 |         channel: int,
+ 799 |         current_ua: float,
+ 800 |         p1_ms: float = 0.5,
+ 801 |         p2_ms: float = 0.5
+ 802 |     ) -> int:
+ 803 |         return self.lib.wet_inject_current_stimulus(
+ 804 |             vm,
+ 805 |             ctypes.c_uint8(channel),
+ 806 |             ctypes.c_float(current_ua),
+ 807 |             ctypes.c_float(p1_ms),
+ 808 |             ctypes.c_float(p2_ms)
+ 809 |         )
+ 810 | 
+ 811 |     def verify_bytecode(self, bytecode: bytes) -> Tuple[int, str]:
+ 812 |         c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
+ 813 |         err_buf = ctypes.create_string_buffer(512)
+ 814 |         st = self.lib.wet_verify_bytecode(c_bytes, ctypes.c_size_t(len(bytecode)), err_buf, ctypes.c_size_t(len(err_buf)))
+ 815 |         msg = err_buf.value.decode("utf-8", errors="replace")
+ 816 |         return st, msg
+ 817 | 
+ 818 |     def snapshot(self, vm: ctypes.c_void_p) -> bytes:
+ 819 |         needed_len = ctypes.c_size_t(0)
+ 820 |         self.lib.wet_vm_snapshot(vm, None, ctypes.byref(needed_len))
+ 821 |         buf = (ctypes.c_uint8 * needed_len.value)()
+ 822 |         st = self.lib.wet_vm_snapshot(vm, buf, ctypes.byref(needed_len))
+ 823 |         if st != 0:
+ 824 |             raise RuntimeError(f"Snapshot failed with status {st}")
+ 825 |         return bytes(buf)
+ 826 | 
+ 827 |     def restore(self, vm: ctypes.c_void_p, data: bytes) -> int:
+ 828 |         c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
+ 829 |         return self.lib.wet_vm_restore(vm, c_bytes, ctypes.c_size_t(len(data)))
+ 830 | 
+ 831 |     def set_environmental_sensors(
+ 832 |         self,
+ 833 |         vm: ctypes.c_void_p,
+ 834 |         ph: float = 7.4,
+ 835 |         do_pct: float = 95.0,
+ 836 |         co2_pct: float = 5.0,
+ 837 |         bubble_sensor_id: int = 0,
+ 838 |         bubble_state: bool = False,
+ 839 |         flow_rate_ul_min: float = 1.5
+ 840 |     ) -> None:
+ 841 |         self.lib.wet_set_environmental_sensors(
+ 842 |             vm,
+ 843 |             ctypes.c_float(ph),
+ 844 |             ctypes.c_float(do_pct),
+ 845 |             ctypes.c_float(co2_pct),
+ 846 |             ctypes.c_uint8(bubble_sensor_id),
+ 847 |             ctypes.c_uint8(1 if bubble_state else 0),
+ 848 |             ctypes.c_float(flow_rate_ul_min)
+ 849 |         )
+ 850 | 
+ 851 |     def set_temperature(self, vm: ctypes.c_void_p, temp_c: float) -> None:
+ 852 |         self.lib.wet_set_temperature(vm, ctypes.c_float(temp_c))
+ 853 | 
+ 854 |     def set_channel_banks(
+ 855 |         self,
+ 856 |         vm: ctypes.c_void_p,
+ 857 |         ref_mask: int = 0,
+ 858 |         rec_mask: int = 0
+ 859 |     ) -> None:
+ 860 |         self.lib.wet_set_channel_banks(vm, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))
+ 861 | 
+ 862 |     # =========================================================================
+ 863 |     # Milestone 1: Physical Hardware Abstraction Layer (HAL) FFI Methods
+ 864 |     # =========================================================================
+ 865 | 
+ 866 |     def hal_create(self, mode: int = 2, config: Optional[WetHalConfig] = None):
+ 867 |         cfg_ptr = ctypes.byref(config) if config is not None else None
+ 868 |         ptr = self.lib.wet_hal_create(ctypes.c_int(mode), cfg_ptr)
+ 869 |         return ctypes.cast(ptr, ctypes.POINTER(WetHalContext)) if ptr else None
+ 870 | 
+ 871 |     def hal_destroy(self, hal: ctypes.c_void_p) -> None:
+ 872 |         self.lib.wet_hal_destroy(hal)
+ 873 | 
+ 874 |     def hal_get_telemetry(self, hal: ctypes.c_void_p) -> Optional[WetHalTelemetry]:
+ 875 |         if hasattr(self.lib, "wet_hal_get_telemetry"):
+ 876 |             p = self.lib.wet_hal_get_telemetry(hal)
+ 877 |             return p.contents if p else None
+ 878 |         return None
+ 879 | 
+ 880 |     def hal_set_valve_for_pump(self, hal: ctypes.c_void_p, pump_id: int, valve_id: int) -> None:
+ 881 |         if hasattr(self.lib, "wet_hal_set_valve_for_pump"):
+ 882 |             self.lib.wet_hal_set_valve_for_pump(hal, ctypes.c_uint8(pump_id), ctypes.c_uint8(valve_id))
+ 883 | 
+ 884 |     def hal_init(self, vm: ctypes.c_void_p, mode: int = 2, config: Optional[WetHalConfig] = None) -> int:
+ 885 |         cfg_ptr = ctypes.byref(config) if config is not None else None
+ 886 |         return self.lib.wet_hal_init(vm, ctypes.c_int(mode), cfg_ptr)
+ 887 | 
+ 888 |     def hal_attach(self, vm: ctypes.c_void_p, hal: ctypes.c_void_p) -> int:
+ 889 |         return self.lib.wet_hal_attach(vm, hal)
+ 890 | 
+ 891 |     def hal_get_context(self, vm: ctypes.c_void_p) -> ctypes.c_void_p:
+ 892 |         return self.lib.wet_hal_get_context(vm)
+ 893 | 
+ 894 |     def hal_set_mode(self, hal: ctypes.c_void_p, mode: int) -> int:
+ 895 |         return self.lib.wet_hal_set_mode(hal, ctypes.c_int(mode))
+ 896 | 
+ 897 |     def hal_get_mode(self, hal: ctypes.c_void_p) -> int:
+ 898 |         return self.lib.wet_hal_get_mode(hal)
+ 899 | 
+ 900 |     def hal_register_driver(self, hal: ctypes.c_void_p, driver: ctypes.c_void_p) -> int:
+ 901 |         return self.lib.wet_hal_register_driver(hal, driver)
+ 902 | 
+ 903 |     def hal_unregister_driver(self, hal: ctypes.c_void_p, driver: ctypes.c_void_p) -> int:
+ 904 |         return self.lib.wet_hal_unregister_driver(hal, driver)
+ 905 | 
+ 906 |     def hal_find_driver(self, hal: ctypes.c_void_p, driver_type: int) -> ctypes.c_void_p:
+ 907 |         return self.lib.wet_hal_find_driver(hal, ctypes.c_int(driver_type))
+ 908 | 
+ 909 |     def hal_write_pump(self, hal: ctypes.c_void_p, pump_id: int, rate_ul_min: float, run_flag: int = 1) -> int:
+ 910 |         return self.lib.wet_hal_write_pump(hal, ctypes.c_uint8(pump_id), ctypes.c_double(rate_ul_min), ctypes.c_uint8(run_flag))
+ 911 | 
+ 912 |     def hal_dispense_pump(self, hal: ctypes.c_void_p, pump_id: int, volume_ul: float) -> int:
+ 913 |         return self.lib.wet_hal_dispense_pump(hal, ctypes.c_uint8(pump_id), ctypes.c_double(volume_ul))
+ 914 | 
+ 915 |     def hal_write_valve(self, hal: ctypes.c_void_p, valve_id: int, state: int) -> int:
+ 916 |         return self.lib.wet_hal_write_valve(hal, ctypes.c_uint8(valve_id), ctypes.c_uint8(state))
+ 917 | 
+ 918 |     def hal_read_flow(self, hal: ctypes.c_void_p, sensor_id: int = 0) -> Tuple[int, float]:
+ 919 |         val = ctypes.c_double(0.0)
+ 920 |         st = self.lib.wet_hal_read_flow(hal, ctypes.c_uint8(sensor_id), ctypes.byref(val))
+ 921 |         return st, float(val.value)
+ 922 | 
+ 923 |     def hal_stim_current(self, hal: ctypes.c_void_p, channel: int, current_pA: int, duration_us: int) -> int:
+ 924 |         return self.lib.wet_hal_stim_current(hal, ctypes.c_uint16(channel), ctypes.c_int32(current_pA), ctypes.c_uint32(duration_us))
+ 925 | 
+ 926 |     def hal_stim_voltage(self, hal: ctypes.c_void_p, channel: int, voltage_v: float, p1_ms: float = 0.5, p2_ms: float = 0.5) -> int:
+ 927 |         return self.lib.wet_hal_stim_voltage(hal, ctypes.c_uint16(channel), ctypes.c_float(voltage_v), ctypes.c_float(p1_ms), ctypes.c_float(p2_ms))
+ 928 | 
+ 929 |     def hal_read_spikes(self, hal: ctypes.c_void_p, channel: int) -> Tuple[int, int]:
+ 930 |         spk = ctypes.c_uint8(0)
+ 931 |         st = self.lib.wet_hal_read_spikes(hal, ctypes.c_uint16(channel), ctypes.byref(spk))
+ 932 |         return st, int(spk.value)
+ 933 | 
+ 934 |     def hal_measure_impedance(self, hal: ctypes.c_void_p, channel: int, freq_hz: float = 1000.0) -> Tuple[int, float, float]:
+ 935 |         mag = ctypes.c_float(0.0)
+ 936 |         phase = ctypes.c_float(0.0)
+ 937 |         st = self.lib.wet_hal_measure_impedance(hal, ctypes.c_uint16(channel), ctypes.c_float(freq_hz), ctypes.byref(mag), ctypes.byref(phase))
+ 938 |         return st, float(mag.value), float(phase.value)
+ 939 | 
+ 940 |     def hal_active_discharge(self, hal: ctypes.c_void_p, channel: int) -> int:
+ 941 |         return self.lib.wet_hal_active_discharge(hal, ctypes.c_uint16(channel))
+ 942 | 
+ 943 |     def hal_emergency_crowbar(self, vm: ctypes.c_void_p, trip_reason: int = 1) -> None:
+ 944 |         self.lib.wet_hal_emergency_crowbar(vm, ctypes.c_uint32(trip_reason))
+ 945 | 
+ 946 |     # Intan RHS2116 Driver
+ 947 |     def intan_create(self, mode: int = 2) -> ctypes.c_void_p:
+ 948 |         return self.lib.wet_hal_intan_create(ctypes.c_int(mode))
+ 949 | 
+ 950 |     def intan_destroy(self, drv: ctypes.c_void_p) -> None:
+ 951 |         self.lib.wet_hal_intan_destroy(drv)
+ 952 | 
+ 953 |     def intan_spi_transfer(self, drv: ctypes.c_void_p, mosi_word: int) -> int:
+ 954 |         return int(self.lib.wet_hal_intan_spi_transfer(drv, ctypes.c_uint32(mosi_word)))
+ 955 | 
+ 956 |     def intan_set_stim_current(self, drv: ctypes.c_void_p, channel: int, current_pA: int, duration_us: int) -> int:
+ 957 |         return self.lib.wet_hal_intan_set_stim_current(drv, ctypes.c_uint8(channel), ctypes.c_int32(current_pA), ctypes.c_uint32(duration_us))
+ 958 | 
+ 959 |     def intan_get_compliance_status(self, drv: ctypes.c_void_p) -> int:
+ 960 |         return int(self.lib.wet_hal_intan_get_compliance_status(drv))
+ 961 | 
+ 962 |     def intan_clear_compliance(self, drv: ctypes.c_void_p) -> None:
+ 963 |         self.lib.wet_hal_intan_clear_compliance(drv)
+ 964 | 
+ 965 |     def intan_measure_impedance(self, drv: ctypes.c_void_p, channel: int, freq_hz: float = 1000.0) -> Tuple[int, float, float]:
+ 966 |         mag = ctypes.c_float(0.0)
+ 967 |         phase = ctypes.c_float(0.0)
+ 968 |         st = self.lib.wet_hal_intan_measure_impedance(drv, ctypes.c_uint8(channel), ctypes.c_float(freq_hz), ctypes.byref(mag), ctypes.byref(phase))
+ 969 |         return st, float(mag.value), float(phase.value)
+ 970 | 
+ 971 |     def intan_set_charge_recovery(self, drv: ctypes.c_void_p, channel: int, enable: bool) -> int:
+ 972 |         return self.lib.wet_hal_intan_set_charge_recovery(drv, ctypes.c_uint8(channel), ctypes.c_uint8(1 if enable else 0))
+ 973 | 
+ 974 |     def intan_inject_fault(self, drv: ctypes.c_void_p, force_rail: bool = False, spi_error: bool = False, timeout: bool = False) -> None:
+ 975 |         self.lib.wet_hal_intan_inject_fault(drv, ctypes.c_uint8(1 if force_rail else 0), ctypes.c_uint8(1 if spi_error else 0), ctypes.c_uint8(1 if timeout else 0))
+ 976 | 
+ 977 |     # MaxWell MaxOne Driver
+ 978 |     def maxwell_create(self, mode: int = 2) -> ctypes.c_void_p:
+ 979 |         return self.lib.wet_hal_maxwell_create(ctypes.c_int(mode))
+ 980 | 
+ 981 |     def maxwell_destroy(self, drv: ctypes.c_void_p) -> None:
+ 982 |         self.lib.wet_hal_maxwell_destroy(drv)
+ 983 | 
+ 984 |     def maxwell_route_channels(self, drv: ctypes.c_void_p, electrode_indices: list[int]) -> int:
+ 985 |         c_arr = (ctypes.c_uint16 * len(electrode_indices))(*electrode_indices)
+ 986 |         return self.lib.wet_hal_maxwell_route_channels(drv, c_arr, ctypes.c_uint32(len(electrode_indices)))
+ 987 | 
+ 988 |     def maxwell_connect_stim(self, drv: ctypes.c_void_p, stim_unit: int, electrode_id: int) -> int:
+ 989 |         return self.lib.wet_hal_maxwell_connect_stim(drv, ctypes.c_uint8(stim_unit), ctypes.c_uint16(electrode_id))
+ 990 | 
+ 991 |     def maxwell_sequence_clear(self, drv: ctypes.c_void_p) -> None:
+ 992 |         self.lib.wet_hal_maxwell_sequence_clear(drv)
+ 993 | 
+ 994 |     def maxwell_sequence_append(self, drv: ctypes.c_void_p, timestamp_us: int, stim_unit: int, electrode_id: int, voltage_mv: float, duration_us: int) -> int:
+ 995 |         return self.lib.wet_hal_maxwell_sequence_append(drv, ctypes.c_uint32(timestamp_us), ctypes.c_uint8(stim_unit), ctypes.c_uint16(electrode_id), ctypes.c_float(voltage_mv), ctypes.c_uint16(duration_us))
+ 996 | 
+ 997 |     def maxwell_sequence_arm(self, drv: ctypes.c_void_p) -> int:
+ 998 |         return self.lib.wet_hal_maxwell_sequence_arm(drv)
+ 999 | 
+1000 |     def maxwell_sequence_start(self, drv: ctypes.c_void_p) -> int:
+1001 |         return self.lib.wet_hal_maxwell_sequence_start(drv)
+1002 | 
+1003 |     def maxwell_sequence_get_state(self, drv: ctypes.c_void_p) -> int:
+1004 |         return self.lib.wet_hal_maxwell_sequence_get_state(drv)
+1005 | 
+1006 |     def maxwell_stim_voltage(self, drv: ctypes.c_void_p, stim_unit: int, electrode_id: int, voltage_mv: float, p1_ms: float = 0.5, p2_ms: float = 0.5) -> int:
+1007 |         return self.lib.wet_hal_maxwell_stim_voltage(drv, ctypes.c_uint8(stim_unit), ctypes.c_uint16(electrode_id), ctypes.c_float(voltage_mv), ctypes.c_float(p1_ms), ctypes.c_float(p2_ms))
+1008 | 
+1009 |     def maxwell_inject_fault(self, drv: ctypes.c_void_p, force_charge_violation: bool = False, drop_frames: bool = False) -> None:
+1010 |         self.lib.wet_hal_maxwell_inject_fault(drv, ctypes.c_uint8(1 if force_charge_violation else 0), ctypes.c_uint8(1 if drop_frames else 0))
+1011 | 
+1012 |     # Microfluidics Driver
+1013 |     def microfluidics_create(self, mode: int = 2) -> ctypes.c_void_p:
+1014 |         return self.lib.wet_hal_microfluidics_create(ctypes.c_int(mode))
+1015 | 
+1016 |     def microfluidics_destroy(self, drv: ctypes.c_void_p) -> None:
+1017 |         self.lib.wet_hal_microfluidics_destroy(drv)
+1018 | 
+1019 |     def harvard_format_cmd(self, address: int, fast_mode: bool, cmd_name: str, args: str = "") -> str:
+1020 |         buf = ctypes.create_string_buffer(128)
+1021 |         ret = self.lib.wet_hal_harvard_format_cmd(
+1022 |             ctypes.c_uint8(address),
+1023 |             ctypes.c_uint8(1 if fast_mode else 0),
+1024 |             cmd_name.encode("utf-8"),
+1025 |             args.encode("utf-8"),
+1026 |             buf,
+1027 |             ctypes.c_size_t(len(buf))
+1028 |         )
+1029 |         return buf.value.decode("utf-8", errors="replace") if ret >= 0 else ""
+1030 | 
+1031 |     def harvard_parse_response(self, resp: str) -> str:
+1032 |         c_str = resp.encode("utf-8")
+1033 |         prompt = self.lib.wet_hal_harvard_parse_response(c_str, ctypes.c_size_t(len(c_str)))
+1034 |         return chr(prompt) if prompt > 0 else "?"
+1035 | 
+1036 |     def pump_set_rate(self, drv: ctypes.c_void_p, pump_id: int, rate_ul_min: float, run_flag: int = 1) -> int:
+1037 |         return self.lib.wet_hal_pump_set_rate(drv, ctypes.c_uint8(pump_id), ctypes.c_double(rate_ul_min), ctypes.c_uint8(run_flag))
+1038 | 
+1039 |     def pump_dispense(self, drv: ctypes.c_void_p, pump_id: int, volume_ul: float) -> int:
+1040 |         return self.lib.wet_hal_pump_dispense(drv, ctypes.c_uint8(pump_id), ctypes.c_double(volume_ul))
+1041 | 
+1042 |     def pump_stop(self, drv: ctypes.c_void_p, pump_id: int) -> int:
+1043 |         return self.lib.wet_hal_pump_stop(drv, ctypes.c_uint8(pump_id))
+1044 | 
+1045 |     def valve_set_state(self, drv: ctypes.c_void_p, valve_id: int, state: int) -> int:
+1046 |         return self.lib.wet_hal_valve_set_state(drv, ctypes.c_uint8(valve_id), ctypes.c_uint8(state))
+1047 | 
+1048 |     def pump_bind_downstream_valve(self, drv: ctypes.c_void_p, pump_id: int, valve_id: int) -> None:
+1049 |         self.lib.wet_hal_pump_bind_downstream_valve(drv, ctypes.c_uint8(pump_id), ctypes.c_uint8(valve_id))
+1050 | 
+1051 |     def can_send(self, drv: ctypes.c_void_p, frame: WetCanFrame) -> int:
+1052 |         return self.lib.wet_hal_can_send(drv, ctypes.byref(frame))
+1053 | 
+1054 |     def can_recv(self, drv: ctypes.c_void_p) -> Tuple[int, Optional[WetCanFrame]]:
+1055 |         f = WetCanFrame()
+1056 |         st = self.lib.wet_hal_can_recv(drv, ctypes.byref(f))
+1057 |         return st, f if st == 0 else None
+1058 | 
+1059 |     def can_send_emcy(self, drv: ctypes.c_void_p, node_id: int, error_code: int, error_register: int = 0) -> int:
+1060 |         return self.lib.wet_hal_can_send_emcy(drv, ctypes.c_uint8(node_id), ctypes.c_uint16(error_code), ctypes.c_uint8(error_register))
+1061 | 
+1062 |     def microfluidics_inject_fault(self, drv: ctypes.c_void_p, stall: bool = False, can_drop: bool = False, timeout: bool = False) -> None:
+1063 |         self.lib.wet_hal_microfluidics_inject_fault(drv, ctypes.c_uint8(1 if stall else 0), ctypes.c_uint8(1 if can_drop else 0), ctypes.c_uint8(1 if timeout else 0))
+1064 | 
+1065 |     # Sensirion Flow Meter Driver
+1066 |     def sensirion_create(self, mode: int = 2) -> ctypes.c_void_p:
+1067 |         return self.lib.wet_hal_sensirion_create(ctypes.c_int(mode))
+1068 | 
+1069 |     def sensirion_destroy(self, drv: ctypes.c_void_p) -> None:
+1070 |         self.lib.wet_hal_sensirion_destroy(drv)
+1071 | 
+1072 |     def sensirion_crc8(self, data: bytes) -> int:
+1073 |         c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
+1074 |         return int(self.lib.wet_hal_sensirion_crc8(c_bytes, ctypes.c_size_t(len(data))))
+1075 | 
+1076 |     def sensirion_validate_crc(self, word_and_crc: bytes) -> bool:
+1077 |         c_bytes = (ctypes.c_uint8 * len(word_and_crc)).from_buffer_copy(word_and_crc)
+1078 |         return bool(self.lib.wet_hal_sensirion_validate_crc(c_bytes))
+1079 | 
+1080 |     def sensirion_start_measurement(self, drv: ctypes.c_void_p, cmd: int = 0x3608) -> int:
+1081 |         return self.lib.wet_hal_sensirion_start_measurement(drv, ctypes.c_uint16(cmd))
+1082 | 
+1083 |     def sensirion_stop_measurement(self, drv: ctypes.c_void_p) -> int:
+1084 |         return self.lib.wet_hal_sensirion_stop_measurement(drv)
+1085 | 
+1086 |     def sensirion_read_flow(self, drv: ctypes.c_void_p) -> Tuple[int, float]:
+1087 |         val = ctypes.c_double(0.0)
+1088 |         st = self.lib.wet_hal_sensirion_read_flow(drv, ctypes.byref(val))
+1089 |         return st, float(val.value)
+1090 | 
+1091 |     def sensirion_hil_set_flow(self, drv: ctypes.c_void_p, flow_ul_min: float) -> None:
+1092 |         self.lib.wet_hal_sensirion_hil_set_flow(drv, ctypes.c_double(flow_ul_min))
+1093 | 
+1094 |     def shdlc_encode(self, address: int, command: int, payload: bytes) -> bytes:
+1095 |         p_len = len(payload)
+1096 |         c_payload = (ctypes.c_uint8 * p_len).from_buffer_copy(payload) if p_len > 0 else None
+1097 |         out_buf = (ctypes.c_uint8 * 256)()
+1098 |         enc_len = self.lib.wet_hal_shdlc_encode(
+1099 |             ctypes.c_uint8(address),
+1100 |             ctypes.c_uint8(command),
+1101 |             c_payload,
+1102 |             ctypes.c_uint8(p_len),
+1103 |             out_buf,
+1104 |             ctypes.c_size_t(len(out_buf))
+1105 |         )
+1106 |         return bytes(out_buf[:enc_len])
+1107 | 
+1108 |     def shdlc_decode(self, raw_bytes: bytes) -> Tuple[bool, int, int, bytes]:
+1109 |         c_raw = (ctypes.c_uint8 * len(raw_bytes)).from_buffer_copy(raw_bytes)
+1110 |         addr = ctypes.c_uint8(0)
+1111 |         cmd = ctypes.c_uint8(0)
+1112 |         payload = (ctypes.c_uint8 * 256)()
+1113 |         plen = ctypes.c_uint8(0)
+1114 |         ok = self.lib.wet_hal_shdlc_decode(
+1115 |             c_raw,
+1116 |             ctypes.c_size_t(len(raw_bytes)),
+1117 |             ctypes.byref(addr),
+1118 |             ctypes.byref(cmd),
+1119 |             payload,
+1120 |             ctypes.byref(plen)
+1121 |         )
+1122 |         if ok:
+1123 |             return True, int(addr.value), int(cmd.value), bytes(payload[:plen.value])
+1124 |         return False, 0, 0, b""
+1125 | 
+1126 |     def sensirion_inject_fault(self, drv: ctypes.c_void_p, corrupt_crc: bool = False, nak_addr: bool = False) -> None:
+1127 |         self.lib.wet_hal_sensirion_inject_fault(drv, ctypes.c_uint8(1 if corrupt_crc else 0), ctypes.c_uint8(1 if nak_addr else 0))
 ```
 
-### `bindings/runtime.py` (450 lines, SHA-256: `cc6968f7e98f5d23...`)
+### `bindings/runtime.py` (505 lines, SHA-256: `b6ce663da7e4f589...`)
 
 ```text
    1 | """
@@ -10488,440 +16160,802 @@ Covers all 34 core source files across `compiler/`, `native/include/`, `native/s
   14 |     WetVMConfig,
   15 |     WetTelemetry,
   16 |     WetActuatorTelemetry,
-  17 | )
-  18 | 
-  19 | 
-  20 | class WetVMError(RuntimeError):
-  21 |     """Exception raised for WetVM execution or validation errors."""
-  22 |     def __init__(self, status: WetStatus, message: str):
-  23 |         super().__init__(f"[{status.name}] {message}")
-  24 |         self.status = status
-  25 |         self.raw_message = message
-  26 | 
-  27 | 
-  28 | class WetTelemetryView:
-  29 |     """Wrapper around WetTelemetry providing convenient properties and array views."""
-  30 |     def __init__(self, raw: WetTelemetry):
-  31 |         self._raw = raw
-  32 | 
-  33 |     @property
-  34 |     def current_tick(self) -> int:
-  35 |         return int(self._raw.current_tick)
-  36 | 
-  37 |     @property
-  38 |     def tick_index(self) -> int:
-  39 |         return int(self._raw.current_tick)
-  40 | 
-  41 |     @property
-  42 |     def sim_time_ms(self) -> float:
-  43 |         return float(self._raw.sim_time_ms)
-  44 | 
-  45 |     @property
-  46 |     def population_rate_hz(self) -> float:
-  47 |         return float(self._raw.population_rate_hz)
-  48 | 
-  49 |     @property
-  50 |     def channel_voltages(self) -> np.ndarray:
-  51 |         arr = np.ctypeslib.as_array(self._raw.voltages)
-  52 |         arr.flags.writeable = False
-  53 |         return arr
-  54 | 
-  55 |     @property
-  56 |     def spike_raster(self) -> np.ndarray:
-  57 |         arr = np.ctypeslib.as_array(self._raw.spikes)
-  58 |         return arr
-  59 | 
-  60 |     @property
-  61 |     def last_charge_nc(self) -> np.ndarray:
-  62 |         arr = np.ctypeslib.as_array(self._raw.last_charge_nc)
-  63 |         return arr
-  64 | 
-  65 |     def get(self, key: str, default: object = None) -> object:
-  66 |         """Dictionary-like get method for telemetry attributes."""
-  67 |         if hasattr(self, key):
-  68 |             val = getattr(self, key)
-  69 |             return val() if callable(val) else val
-  70 |         return default
-  71 | 
-  72 |     def __getitem__(self, key: str) -> object:
-  73 |         """Dictionary-like indexer for telemetry attributes."""
-  74 |         if hasattr(self, key):
-  75 |             val = getattr(self, key)
-  76 |             return val() if callable(val) else val
-  77 |         raise KeyError(key)
-  78 | 
-  79 | 
-  80 | class WetVM:
-  81 |     """
-  82 |     High-level Python wrapper for the native WetVM execution engine.
-  83 |     Supports cycle-accurate stepping, batch tick execution, and zero-copy NumPy views.
+  17 |     WetHalMode,
+  18 |     WetHalConfig,
+  19 |     WetHalStatus,
+  20 | )
+  21 | 
+  22 | 
+  23 | class WetVMError(RuntimeError):
+  24 |     """Exception raised for WetVM execution or validation errors."""
+  25 |     def __init__(self, status: WetStatus, message: str):
+  26 |         super().__init__(f"[{status.name}] {message}")
+  27 |         self.status = status
+  28 |         self.raw_message = message
+  29 | 
+  30 | 
+  31 | class WetTelemetryView:
+  32 |     """Wrapper around WetTelemetry providing convenient properties and array views."""
+  33 |     def __init__(self, raw: WetTelemetry):
+  34 |         self._raw = raw
+  35 | 
+  36 |     @property
+  37 |     def current_tick(self) -> int:
+  38 |         return int(self._raw.current_tick)
+  39 | 
+  40 |     @property
+  41 |     def tick_index(self) -> int:
+  42 |         return int(self._raw.current_tick)
+  43 | 
+  44 |     @property
+  45 |     def sim_time_ms(self) -> float:
+  46 |         return float(self._raw.sim_time_ms)
+  47 | 
+  48 |     @property
+  49 |     def population_rate_hz(self) -> float:
+  50 |         return float(self._raw.population_rate_hz)
+  51 | 
+  52 |     @property
+  53 |     def channel_voltages(self) -> np.ndarray:
+  54 |         arr = np.ctypeslib.as_array(self._raw.voltages)
+  55 |         arr.flags.writeable = False
+  56 |         return arr
+  57 | 
+  58 |     @property
+  59 |     def spike_raster(self) -> np.ndarray:
+  60 |         arr = np.ctypeslib.as_array(self._raw.spikes)
+  61 |         return arr
+  62 | 
+  63 |     @property
+  64 |     def last_charge_nc(self) -> np.ndarray:
+  65 |         arr = np.ctypeslib.as_array(self._raw.last_charge_nc)
+  66 |         return arr
+  67 | 
+  68 |     def get(self, key: str, default: object = None) -> object:
+  69 |         """Dictionary-like get method for telemetry attributes."""
+  70 |         if hasattr(self, key):
+  71 |             val = getattr(self, key)
+  72 |             return val() if callable(val) else val
+  73 |         return default
+  74 | 
+  75 |     def __getitem__(self, key: str) -> object:
+  76 |         """Dictionary-like indexer for telemetry attributes."""
+  77 |         if hasattr(self, key):
+  78 |             val = getattr(self, key)
+  79 |             return val() if callable(val) else val
+  80 |         raise KeyError(key)
+  81 | 
+  82 | 
+  83 | class WetVM:
   84 |     """
-  85 | 
-  86 |     def __init__(
-  87 |         self,
-  88 |         config: Optional[WetVMConfig] = None,
-  89 |         lib_path: Optional[Union[str, Path]] = None
-  90 |     ):
-  91 |         self._lib = load_wetvm_lib(Path(lib_path) if lib_path else None)
-  92 |         self._config = config if config is not None else WetVMConfig()
-  93 |         self._handle = self._lib.wet_create_vm(ctypes.byref(self._config))
-  94 |         if not self._handle:
-  95 |             raise MemoryError("Failed to allocate native WetVM instance")
-  96 | 
-  97 |         # Persistent telemetry buffer for reuse and zero-copy NumPy mapping
-  98 |         self._telem = WetTelemetry()
-  99 |         self._closed = False
- 100 |         self._is_halted = False
- 101 |         self._bytecode_loaded = False
- 102 | 
- 103 |     def close(self) -> None:
- 104 |         """Frees the native VM resources."""
- 105 |         if not self._closed and self._handle:
- 106 |             self._lib.wet_free_vm(self._handle)
- 107 |             self._handle = None
- 108 |             self._closed = True
- 109 | 
- 110 |     def __enter__(self) -> "WetVM":
- 111 |         return self
+  85 |     High-level Python wrapper for the native WetVM execution engine.
+  86 |     Supports cycle-accurate stepping, batch tick execution, and zero-copy NumPy views.
+  87 |     """
+  88 | 
+  89 |     def __init__(
+  90 |         self,
+  91 |         config: Optional[WetVMConfig] = None,
+  92 |         lib_path: Optional[Union[str, Path]] = None
+  93 |     ):
+  94 |         self._lib = load_wetvm_lib(Path(lib_path) if lib_path else None)
+  95 |         self._config = config if config is not None else WetVMConfig()
+  96 |         self._handle = self._lib.wet_create_vm(ctypes.byref(self._config))
+  97 |         if not self._handle:
+  98 |             raise MemoryError("Failed to allocate native WetVM instance")
+  99 | 
+ 100 |         # Persistent telemetry buffer for reuse and zero-copy NumPy mapping
+ 101 |         self._telem = WetTelemetry()
+ 102 |         self._closed = False
+ 103 |         self._is_halted = False
+ 104 |         self._bytecode_loaded = False
+ 105 | 
+ 106 |     def close(self) -> None:
+ 107 |         """Frees the native VM resources."""
+ 108 |         if not self._closed and self._handle:
+ 109 |             self._lib.wet_free_vm(self._handle)
+ 110 |             self._handle = None
+ 111 |             self._closed = True
  112 | 
- 113 |     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
- 114 |         self.close()
+ 113 |     def __enter__(self) -> "WetVM":
+ 114 |         return self
  115 | 
- 116 |     def __del__(self) -> None:
+ 116 |     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
  117 |         self.close()
  118 | 
- 119 |     def _check_alive(self) -> None:
- 120 |         if self._closed or not self._handle:
- 121 |             raise RuntimeError("WetVM instance is closed")
- 122 | 
- 123 |     def load_bytecode(self, bytecode: Union[bytes, bytearray, str, Path]) -> None:
- 124 |         """
- 125 |         Loads WBC binary bytecode into the VM.
- 126 |         Accepts raw bytes, or a filesystem path to a .wbc file.
+ 119 |     def __del__(self) -> None:
+ 120 |         self.close()
+ 121 | 
+ 122 |     def _check_alive(self) -> None:
+ 123 |         if self._closed or not self._handle:
+ 124 |             raise RuntimeError("WetVM instance is closed")
+ 125 | 
+ 126 |     def load_bytecode(self, bytecode: Union[bytes, bytearray, str, Path]) -> None:
  127 |         """
- 128 |         self._check_alive()
- 129 |         if isinstance(bytecode, (str, Path)):
- 130 |             with open(bytecode, "rb") as f:
- 131 |                 code_data = f.read()
- 132 |         elif isinstance(bytecode, (bytes, bytearray)):
- 133 |             code_data = bytes(bytecode)
- 134 |         else:
- 135 |             raise TypeError(f"Expected bytes or path, got {type(bytecode).__name__}")
- 136 | 
- 137 |         err_buf = ctypes.create_string_buffer(512)
- 138 |         c_bytes = (ctypes.c_uint8 * len(code_data)).from_buffer_copy(code_data)
+ 128 |         Loads WBC binary bytecode into the VM.
+ 129 |         Accepts raw bytes, or a filesystem path to a .wbc file.
+ 130 |         """
+ 131 |         self._check_alive()
+ 132 |         if isinstance(bytecode, (str, Path)):
+ 133 |             with open(bytecode, "rb") as f:
+ 134 |                 code_data = f.read()
+ 135 |         elif isinstance(bytecode, (bytes, bytearray)):
+ 136 |             code_data = bytes(bytecode)
+ 137 |         else:
+ 138 |             raise TypeError(f"Expected bytes or path, got {type(bytecode).__name__}")
  139 | 
- 140 |         status_code = self._lib.wet_load_bytecode(
- 141 |             self._handle,
- 142 |             c_bytes,
- 143 |             len(code_data),
- 144 |             err_buf,
- 145 |             len(err_buf)
- 146 |         )
- 147 | 
- 148 |         status = WetStatus(status_code)
- 149 |         if status != WetStatus.WET_OK:
- 150 |             err_msg = err_buf.value.decode("utf-8", errors="replace")
- 151 |             if not err_msg:
- 152 |                 err_msg = self.last_error() or self._status_to_string(status)
- 153 |             raise WetVMError(status, err_msg)
- 154 | 
- 155 |         self._bytecode_loaded = True
- 156 |         self._is_halted = False
- 157 |         # Sync initial telemetry
- 158 |         self.get_telemetry()
- 159 | 
- 160 |     def load(self, bytecode: Union[bytes, bytearray, str, Path]) -> int:
- 161 |         """Alias for load_bytecode returning 0 on success."""
- 162 |         self.load_bytecode(bytecode)
- 163 |         return 0
- 164 | 
- 165 |     def step_tick(self) -> WetTelemetry:
- 166 |         """
- 167 |         Executes instructions until the next SYNC_TICK, SLEEP_TICKS, or HALT.
- 168 |         Advances simulation time by dt_ms.
+ 140 |         err_buf = ctypes.create_string_buffer(512)
+ 141 |         c_bytes = (ctypes.c_uint8 * len(code_data)).from_buffer_copy(code_data)
+ 142 | 
+ 143 |         status_code = self._lib.wet_load_bytecode(
+ 144 |             self._handle,
+ 145 |             c_bytes,
+ 146 |             len(code_data),
+ 147 |             err_buf,
+ 148 |             len(err_buf)
+ 149 |         )
+ 150 | 
+ 151 |         status = WetStatus(status_code)
+ 152 |         if status != WetStatus.WET_OK:
+ 153 |             err_msg = err_buf.value.decode("utf-8", errors="replace")
+ 154 |             if not err_msg:
+ 155 |                 err_msg = self.last_error() or self._status_to_string(status)
+ 156 |             raise WetVMError(status, err_msg)
+ 157 | 
+ 158 |         self._bytecode_loaded = True
+ 159 |         self._is_halted = False
+ 160 |         # Sync initial telemetry
+ 161 |         self.get_telemetry()
+ 162 | 
+ 163 |     def load(self, bytecode: Union[bytes, bytearray, str, Path]) -> int:
+ 164 |         """Alias for load_bytecode returning 0 on success."""
+ 165 |         self.load_bytecode(bytecode)
+ 166 |         return 0
+ 167 | 
+ 168 |     def step_tick(self) -> WetTelemetry:
  169 |         """
- 170 |         self._check_alive()
- 171 |         if not self._bytecode_loaded:
- 172 |             raise RuntimeError("No bytecode loaded into VM before stepping")
- 173 | 
- 174 |         status_code = self._lib.wet_step_tick(self._handle, ctypes.byref(self._telem))
- 175 |         status = WetStatus(status_code)
+ 170 |         Executes instructions until the next SYNC_TICK, SLEEP_TICKS, or HALT.
+ 171 |         Advances simulation time by dt_ms.
+ 172 |         """
+ 173 |         self._check_alive()
+ 174 |         if not self._bytecode_loaded:
+ 175 |             raise RuntimeError("No bytecode loaded into VM before stepping")
  176 | 
- 177 |         if status == WetStatus.WET_ERR_HALTED:
- 178 |             self._is_halted = True
- 179 |             raise WetVMError(status, "VM is halted")
- 180 |         elif status != WetStatus.WET_OK:
- 181 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
- 182 | 
- 183 |         return self._telem
- 184 | 
- 185 |     def run_ticks(self, ticks: int) -> Tuple[int, WetTelemetry]:
- 186 |         """
- 187 |         Executes up to `ticks` consecutive simulation steps.
- 188 |         Returns (executed_ticks_count, final_telemetry).
+ 177 |         status_code = self._lib.wet_step_tick(self._handle, ctypes.byref(self._telem))
+ 178 |         status = WetStatus(status_code)
+ 179 | 
+ 180 |         if status == WetStatus.WET_ERR_HALTED:
+ 181 |             self._is_halted = True
+ 182 |             raise WetVMError(status, "VM is halted")
+ 183 |         elif status != WetStatus.WET_OK:
+ 184 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
+ 185 | 
+ 186 |         return self._telem
+ 187 | 
+ 188 |     def run_ticks(self, ticks: int) -> Tuple[int, WetTelemetry]:
  189 |         """
- 190 |         self._check_alive()
- 191 |         if not self._bytecode_loaded:
- 192 |             raise RuntimeError("No bytecode loaded into VM before running")
- 193 | 
- 194 |         if ticks < 0:
- 195 |             raise ValueError(f"ticks must be non-negative, got {ticks}")
+ 190 |         Executes up to `ticks` consecutive simulation steps.
+ 191 |         Returns (executed_ticks_count, final_telemetry).
+ 192 |         """
+ 193 |         self._check_alive()
+ 194 |         if not self._bytecode_loaded:
+ 195 |             raise RuntimeError("No bytecode loaded into VM before running")
  196 | 
- 197 |         executed = ctypes.c_uint32(0)
- 198 |         status_code = self._lib.wet_run_ticks(
- 199 |             self._handle,
- 200 |             ctypes.c_uint32(ticks),
- 201 |             ctypes.byref(executed),
- 202 |             ctypes.byref(self._telem)
- 203 |         )
- 204 | 
- 205 |         status = WetStatus(status_code)
- 206 |         if status == WetStatus.WET_ERR_HALTED:
- 207 |             self._is_halted = True
- 208 |         elif status != WetStatus.WET_OK:
- 209 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
- 210 | 
- 211 |         return int(executed.value), self._telem
- 212 | 
- 213 |     def step(self, ticks: int = 1) -> WetTelemetryView:
- 214 |         """Convenience method stepping 1 or more ticks and returning telemetry view."""
- 215 |         self._check_alive()
- 216 |         if not self._bytecode_loaded:
- 217 |             raise RuntimeError("No bytecode loaded into VM before stepping")
- 218 | 
- 219 |         if ticks <= 1:
- 220 |             try:
- 221 |                 self.step_tick()
- 222 |             except WetVMError as e:
- 223 |                 if e.status == WetStatus.WET_ERR_HALTED:
- 224 |                     pass
- 225 |                 else:
- 226 |                     raise
- 227 |         else:
- 228 |             self.run_ticks(ticks)
- 229 |         return WetTelemetryView(self._telem)
- 230 | 
- 231 |     def inject_stimulus(
- 232 |         self,
- 233 |         channel: int,
- 234 |         voltage_v: float,
- 235 |         phase1_ms: float = 0.5,
- 236 |         phase2_ms: float = 0.5
- 237 |     ) -> None:
- 238 |         """Injects biphasic stimulus onto designated MEA channel."""
- 239 |         self._check_alive()
- 240 |         status_code = self._lib.wet_inject_stimulus(
- 241 |             self._handle,
- 242 |             ctypes.c_uint8(channel),
- 243 |             ctypes.c_float(voltage_v),
- 244 |             ctypes.c_float(phase1_ms),
- 245 |             ctypes.c_float(phase2_ms)
- 246 |         )
- 247 |         status = WetStatus(status_code)
- 248 |         if status != WetStatus.WET_OK:
- 249 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
- 250 | 
- 251 |     def get_telemetry(self) -> WetTelemetry:
- 252 |         """Fetches the latest cycle-accurate telemetry snapshot."""
- 253 |         self._check_alive()
- 254 |         status_code = self._lib.wet_get_telemetry(self._handle, ctypes.byref(self._telem))
- 255 |         status = WetStatus(status_code)
- 256 |         if status != WetStatus.WET_OK:
- 257 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
- 258 |         return self._telem
- 259 | 
- 260 |     def get_actuator_telemetry(self) -> WetActuatorTelemetry:
- 261 |         """Fetches the latest cyber-physical actuator telemetry."""
- 262 |         self._check_alive()
- 263 |         act_telem = WetActuatorTelemetry()
- 264 |         status_code = self._lib.wet_get_actuator_telemetry(self._handle, ctypes.byref(act_telem))
- 265 |         status = WetStatus(status_code)
- 266 |         if status != WetStatus.WET_OK:
- 267 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
- 268 |         return act_telem
- 269 | 
- 270 |     def get_voltages_numpy(self) -> np.ndarray:
- 271 |         """
- 272 |         Returns a zero-copy 1D NumPy array view (float32, 64 elements)
- 273 |         mapped directly onto the telemetry voltage buffer.
+ 197 |         if ticks < 0:
+ 198 |             raise ValueError(f"ticks must be non-negative, got {ticks}")
+ 199 | 
+ 200 |         executed = ctypes.c_uint32(0)
+ 201 |         status_code = self._lib.wet_run_ticks(
+ 202 |             self._handle,
+ 203 |             ctypes.c_uint32(ticks),
+ 204 |             ctypes.byref(executed),
+ 205 |             ctypes.byref(self._telem)
+ 206 |         )
+ 207 | 
+ 208 |         status = WetStatus(status_code)
+ 209 |         if status == WetStatus.WET_ERR_HALTED:
+ 210 |             self._is_halted = True
+ 211 |         elif status != WetStatus.WET_OK:
+ 212 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
+ 213 | 
+ 214 |         return int(executed.value), self._telem
+ 215 | 
+ 216 |     def step(self, ticks: int = 1) -> WetTelemetryView:
+ 217 |         """Convenience method stepping 1 or more ticks and returning telemetry view."""
+ 218 |         self._check_alive()
+ 219 |         if not self._bytecode_loaded:
+ 220 |             raise RuntimeError("No bytecode loaded into VM before stepping")
+ 221 | 
+ 222 |         if ticks <= 1:
+ 223 |             try:
+ 224 |                 self.step_tick()
+ 225 |             except WetVMError as e:
+ 226 |                 if e.status == WetStatus.WET_ERR_HALTED:
+ 227 |                     pass
+ 228 |                 else:
+ 229 |                     raise
+ 230 |         else:
+ 231 |             self.run_ticks(ticks)
+ 232 |         return WetTelemetryView(self._telem)
+ 233 | 
+ 234 |     def inject_stimulus(
+ 235 |         self,
+ 236 |         channel: int,
+ 237 |         voltage_v: float,
+ 238 |         phase1_ms: float = 0.5,
+ 239 |         phase2_ms: float = 0.5
+ 240 |     ) -> None:
+ 241 |         """Injects biphasic stimulus onto designated MEA channel."""
+ 242 |         self._check_alive()
+ 243 |         status_code = self._lib.wet_inject_stimulus(
+ 244 |             self._handle,
+ 245 |             ctypes.c_uint8(channel),
+ 246 |             ctypes.c_float(voltage_v),
+ 247 |             ctypes.c_float(phase1_ms),
+ 248 |             ctypes.c_float(phase2_ms)
+ 249 |         )
+ 250 |         status = WetStatus(status_code)
+ 251 |         if status != WetStatus.WET_OK:
+ 252 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
+ 253 | 
+ 254 |     def get_telemetry(self) -> WetTelemetry:
+ 255 |         """Fetches the latest cycle-accurate telemetry snapshot."""
+ 256 |         self._check_alive()
+ 257 |         status_code = self._lib.wet_get_telemetry(self._handle, ctypes.byref(self._telem))
+ 258 |         status = WetStatus(status_code)
+ 259 |         if status != WetStatus.WET_OK:
+ 260 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
+ 261 |         return self._telem
+ 262 | 
+ 263 |     def get_actuator_telemetry(self) -> WetActuatorTelemetry:
+ 264 |         """Fetches the latest cyber-physical actuator telemetry."""
+ 265 |         self._check_alive()
+ 266 |         act_telem = WetActuatorTelemetry()
+ 267 |         status_code = self._lib.wet_get_actuator_telemetry(self._handle, ctypes.byref(act_telem))
+ 268 |         status = WetStatus(status_code)
+ 269 |         if status != WetStatus.WET_OK:
+ 270 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
+ 271 |         return act_telem
+ 272 | 
+ 273 |     def get_voltages_numpy(self) -> np.ndarray:
  274 |         """
- 275 |         arr = np.ctypeslib.as_array(self._telem.voltages)
- 276 |         arr.flags.writeable = False
- 277 |         return arr
- 278 | 
- 279 |     def get_spikes_numpy(self) -> np.ndarray:
- 280 |         """
- 281 |         Returns a zero-copy 1D NumPy array view (uint8, 64 elements)
- 282 |         mapped directly onto the telemetry spike raster buffer.
+ 275 |         Returns a zero-copy 1D NumPy array view (float32, 64 elements)
+ 276 |         mapped directly onto the telemetry voltage buffer.
+ 277 |         """
+ 278 |         arr = np.ctypeslib.as_array(self._telem.voltages)
+ 279 |         arr.flags.writeable = False
+ 280 |         return arr
+ 281 | 
+ 282 |     def get_spikes_numpy(self) -> np.ndarray:
  283 |         """
- 284 |         return np.ctypeslib.as_array(self._telem.spikes)
- 285 | 
- 286 |     def get_charge_numpy(self) -> np.ndarray:
- 287 |         """
- 288 |         Returns a zero-copy 1D NumPy array view (float32, 64 elements)
- 289 |         mapped directly onto the telemetry cumulative charge buffer.
+ 284 |         Returns a zero-copy 1D NumPy array view (uint8, 64 elements)
+ 285 |         mapped directly onto the telemetry spike raster buffer.
+ 286 |         """
+ 287 |         return np.ctypeslib.as_array(self._telem.spikes)
+ 288 | 
+ 289 |     def get_charge_numpy(self) -> np.ndarray:
  290 |         """
- 291 |         return np.ctypeslib.as_array(self._telem.last_charge_nc)
+ 291 |         Returns a zero-copy 1D NumPy array view (float32, 64 elements)
+ 292 |         mapped directly onto the telemetry cumulative charge buffer.
+ 293 |         """
+ 294 |         return np.ctypeslib.as_array(self._telem.last_charge_nc)
+ 295 | 
+ 296 |     def last_error(self) -> str:
+ 297 |         """Returns the last recorded native error message."""
+ 298 |         if not self._handle:
+ 299 |             return "VM is closed"
+ 300 |         err = self._lib.wet_get_last_error(self._handle)
+ 301 |         return err.decode("utf-8", errors="replace") if err else ""
+ 302 | 
+ 303 |     def _status_to_string(self, status: WetStatus) -> str:
+ 304 |         s = self._lib.wet_status_to_string(int(status))
+ 305 |         return s.decode("utf-8", errors="replace") if s else status.name
+ 306 | 
+ 307 |     @property
+ 308 |     def current_tick(self) -> int:
+ 309 |         return int(self._telem.current_tick)
+ 310 | 
+ 311 |     @property
+ 312 |     def tick_index(self) -> int:
+ 313 |         return int(self._telem.current_tick)
+ 314 | 
+ 315 |     @property
+ 316 |     def sim_time_ms(self) -> float:
+ 317 |         return float(self._telem.sim_time_ms)
+ 318 | 
+ 319 |     @property
+ 320 |     def is_halted(self) -> bool:
+ 321 |         return self._is_halted
+ 322 | 
+ 323 |     # Phase 3 Hardware Readiness Methods
+ 324 |     def configure_electrode(self, material: int, area_um2: float) -> None:
+ 325 |         """Configures electrode material and physical geometric surface area."""
+ 326 |         self._check_alive()
+ 327 |         self._lib.wet_configure_electrode(self._handle, ctypes.c_uint8(material), ctypes.c_float(area_um2))
+ 328 | 
+ 329 |     def active_discharge(self, channel: int) -> None:
+ 330 |         """Actuates hardware discharge switch on designated channel to clear accumulated DC charge."""
+ 331 |         self._check_alive()
+ 332 |         self._lib.wet_active_discharge(self._handle, ctypes.c_uint8(channel))
+ 333 | 
+ 334 |     def active_discharge_all(self) -> None:
+ 335 |         """Actuates hardware discharge switch on all 64 channels."""
+ 336 |         self._check_alive()
+ 337 |         self._lib.wet_active_discharge_all(self._handle)
+ 338 | 
+ 339 |     def enable_dead_head_protection(self, enable: bool = True) -> None:
+ 340 |         """Enables microfluidic valve-pump dead-head overpressure interlock."""
+ 341 |         self._check_alive()
+ 342 |         self._lib.wet_enable_dead_head_protection(self._handle, ctypes.c_uint8(1 if enable else 0))
+ 343 | 
+ 344 |     def life_supervisor_shutdown(self, vm: Optional[ctypes.c_void_p] = None) -> None:
+ 345 |         """Terminates Ring-0 Life Support Supervisor autonomous baseline perfusion."""
+ 346 |         self._check_alive()
+ 347 |         self._lib.wet_life_supervisor_shutdown(self._handle)
+ 348 | 
+ 349 |     def configure_blanking(self, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
+ 350 |         """Configures amplifier blanking duration and spatial neighbor crosstalk suppression."""
+ 351 |         self._check_alive()
+ 352 |         self._lib.wet_configure_blanking(self._handle, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
+ 353 | 
+ 354 |     def inject_current_stimulus(
+ 355 |         self,
+ 356 |         channel: int,
+ 357 |         current_ua: float,
+ 358 |         p1_ms: float = 0.5,
+ 359 |         p2_ms: float = 0.5
+ 360 |     ) -> None:
+ 361 |         """Injects constant-current electrical stimulus (uA) through Randles interface."""
+ 362 |         self._check_alive()
+ 363 |         status_code = self._lib.wet_inject_current_stimulus(
+ 364 |             self._handle,
+ 365 |             ctypes.c_uint8(channel),
+ 366 |             ctypes.c_float(current_ua),
+ 367 |             ctypes.c_float(p1_ms),
+ 368 |             ctypes.c_float(p2_ms)
+ 369 |         )
+ 370 |         status = WetStatus(status_code)
+ 371 |         if status != WetStatus.WET_OK:
+ 372 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
+ 373 | 
+ 374 |     def verify_bytecode(self, bytecode: bytes) -> str:
+ 375 |         """Runs the C99 load-time bytecode verifier without loading into VM."""
+ 376 |         c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
+ 377 |         err_buf = ctypes.create_string_buffer(512)
+ 378 |         st = self._lib.wet_verify_bytecode(c_bytes, ctypes.c_size_t(len(bytecode)), err_buf, ctypes.c_size_t(len(err_buf)))
+ 379 |         status = WetStatus(st)
+ 380 |         msg = err_buf.value.decode("utf-8", errors="replace")
+ 381 |         if status != WetStatus.WET_OK:
+ 382 |             raise WetVMError(status, msg or self._status_to_string(status))
+ 383 |         return "OK"
+ 384 | 
+ 385 |     def snapshot(self) -> bytes:
+ 386 |         """Serializes complete dynamic neural state, synaptic matrix, and monotonic clocks."""
+ 387 |         self._check_alive()
+ 388 |         needed_len = ctypes.c_size_t(0)
+ 389 |         self._lib.wet_vm_snapshot(self._handle, None, ctypes.byref(needed_len))
+ 390 |         buf = (ctypes.c_uint8 * needed_len.value)()
+ 391 |         st = self._lib.wet_vm_snapshot(self._handle, buf, ctypes.byref(needed_len))
+ 392 |         status = WetStatus(st)
+ 393 |         if status != WetStatus.WET_OK:
+ 394 |             raise WetVMError(status, self.last_error() or "Snapshot failed")
+ 395 |         return bytes(buf)
+ 396 | 
+ 397 |     def restore(self, data: bytes) -> None:
+ 398 |         """Restores complete neural state and synaptic weights without resetting learned memory."""
+ 399 |         self._check_alive()
+ 400 |         c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
+ 401 |         st = self._lib.wet_vm_restore(self._handle, c_bytes, ctypes.c_size_t(len(data)))
+ 402 |         status = WetStatus(st)
+ 403 |         if status != WetStatus.WET_OK:
+ 404 |             raise WetVMError(status, self.last_error() or "Restore failed")
+ 405 |         self._lib.wet_get_telemetry(self._handle, ctypes.byref(self._telem))
+ 406 | 
+ 407 |     def set_environmental_sensors(
+ 408 |         self,
+ 409 |         ph: float = 7.4,
+ 410 |         do_pct: float = 95.0,
+ 411 |         co2_pct: float = 5.0,
+ 412 |         bubble_sensor_id: int = 0,
+ 413 |         bubble_state: bool = False,
+ 414 |         flow_rate_ul_min: float = 1.5
+ 415 |     ) -> None:
+ 416 |         """Updates simulated or hardware sensor telemetry readings."""
+ 417 |         self._check_alive()
+ 418 |         self._lib.wet_set_environmental_sensors(
+ 419 |             self._handle,
+ 420 |             ctypes.c_float(ph),
+ 421 |             ctypes.c_float(do_pct),
+ 422 |             ctypes.c_float(co2_pct),
+ 423 |             ctypes.c_uint8(bubble_sensor_id),
+ 424 |             ctypes.c_uint8(1 if bubble_state else 0),
+ 425 |             ctypes.c_float(flow_rate_ul_min)
+ 426 |         )
+ 427 | 
+ 428 |     def set_temperature(self, temp_c: float) -> None:
+ 429 |         """Sets simulated or incubator ambient / CMOS die temperature."""
+ 430 |         self._check_alive()
+ 431 |         self._lib.wet_set_temperature(self._handle, ctypes.c_float(temp_c))
+ 432 | 
+ 433 |     def set_channel_banks(
+ 434 |         self,
+ 435 |         ref_channels: list[int] = [],
+ 436 |         rec_only_channels: list[int] = []
+ 437 |     ) -> None:
+ 438 |         """Configures typed channel capability banks (reference and recording-only)."""
+ 439 |         self._check_alive()
+ 440 |         ref_mask = 0
+ 441 |         for ch in ref_channels:
+ 442 |             if 0 <= ch < 64:
+ 443 |                 ref_mask |= (1 << ch)
+ 444 |         rec_mask = 0
+ 445 |         for ch in rec_only_channels:
+ 446 |             if 0 <= ch < 64:
+ 447 |                 rec_mask |= (1 << ch)
+ 448 |         self._lib.wet_set_channel_banks(self._handle, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))
+ 449 | 
+ 450 |     def init_hal(
+ 451 |         self,
+ 452 |         mode: WetHalMode = WetHalMode.WET_HAL_MODE_HIL_LOOPBACK,
+ 453 |         config: Optional[WetHalConfig] = None
+ 454 |     ) -> int:
+ 455 |         """Initializes and attaches Hardware Abstraction Layer (HAL) on VM."""
+ 456 |         self._check_alive()
+ 457 |         cfg_ptr = ctypes.byref(config) if config is not None else None
+ 458 |         return self._lib.wet_hal_init(self._handle, ctypes.c_int(int(mode)), cfg_ptr)
+ 459 | 
+ 460 |     def attach_hal(self, hal: ctypes.c_void_p) -> int:
+ 461 |         """Attaches an existing HAL context to the VM."""
+ 462 |         self._check_alive()
+ 463 |         return self._lib.wet_hal_attach(self._handle, hal)
+ 464 | 
+ 465 |     def get_hal(self) -> ctypes.c_void_p:
+ 466 |         """Returns the HAL context pointer attached to this VM."""
+ 467 |         self._check_alive()
+ 468 |         return self._lib.wet_hal_get_context(self._handle)
+ 469 | 
+ 470 |     def emergency_crowbar(self, trip_reason: int = 1) -> None:
+ 471 |         """Triggers emergency hardware crowbar fast-path (<100 µs)."""
+ 472 |         self._check_alive()
+ 473 |         self._lib.wet_hal_emergency_crowbar(self._handle, ctypes.c_uint32(trip_reason))
+ 474 | 
+ 475 |     def get_synapse_matrix(self) -> np.ndarray:
+ 476 |         """
+ 477 |         Extracts the 64x64 synaptic conductance matrix (nS) from C VM biophysics state.
+ 478 |         Returns a NumPy float32 array of shape (64, 64).
+ 479 |         """
+ 480 |         self._check_alive()
+ 481 |         buf = (ctypes.c_float * (64 * 64))()
+ 482 |         st = self._lib.wet_vm_get_synapse_matrix(
+ 483 |             self._handle,
+ 484 |             buf,
+ 485 |             ctypes.c_size_t(64 * 64)
+ 486 |         )
+ 487 |         if st != WetStatus.WET_OK:
+ 488 |             raise WetVMError(WetStatus(st), self.last_error() or "Failed to read synapse matrix")
+ 489 |         return np.ctypeslib.as_array(buf).reshape((64, 64)).copy()
+ 490 | 
+ 491 |     def get_synapse_weight(self, pre: int, post: int) -> float:
+ 492 |         """
+ 493 |         Queries the synaptic conductance weight between pre and post neurons in nS.
+ 494 |         """
+ 495 |         self._check_alive()
+ 496 |         return float(self._lib.wet_vm_get_synapse_weight(
+ 497 |             self._handle,
+ 498 |             ctypes.c_uint8(pre),
+ 499 |             ctypes.c_uint8(post)
+ 500 |         ))
+ 501 | 
+ 502 | 
+ 503 | class WetRuntime(WetVM):
+ 504 |     """Alias / Subclass of WetVM providing E2E test-suite compatibility."""
+ 505 |     pass
+```
+
+### `bindings/scheduler.py` (302 lines, SHA-256: `a26fa321476c3e7e...`)
+
+```text
+   1 | """
+   2 | WetLang Python ctypes Bindings for Hard Real-Time Sub-100 µs Execution Scheduler
+   3 | Provides high-level object-oriented interface to wet_scheduler C99 runtime.
+   4 | """
+   5 | 
+   6 | from __future__ import annotations
+   7 | 
+   8 | import ctypes
+   9 | import multiprocessing
+  10 | from ctypes import (
+  11 |     c_void_p,
+  12 |     c_uint8,
+  13 |     c_uint32,
+  14 |     c_uint64,
+  15 |     c_int32,
+  16 |     c_double,
+  17 |     c_float,
+  18 |     c_int,
+  19 |     POINTER,
+  20 |     byref,
+  21 | )
+  22 | from dataclasses import dataclass
+  23 | from typing import Optional, Union, Any
+  24 | 
+  25 | from bindings.ffi import load_wetvm_lib, WetStatus, WetTelemetry
+  26 | 
+  27 | 
+  28 | def resolve_p_core(requested_core: Optional[int] = None, allow_e_cores: bool = False) -> int:
+  29 |     """
+  30 |     Selects or validates a Performance Core (P-core) for real-time thread affinity.
+  31 | 
+  32 |     ARCHITECTURAL BACKGROUND:
+  33 |     Modern heterogeneous x86 processors (Intel 12th-15th Gen Alder Lake, Raptor Lake,
+  34 |     Arrow Lake, and Intel Core Ultra / Lunar Lake) integrate high-performance P-cores
+  35 |     and low-power E-cores. E-cores exhibit +55% compute latency (13-14 µs vs 8.8 µs)
+  36 |     and >300 µs jitter, failing hard real-time sub-100 µs guarantees.
+  37 |     
+  38 |     Logical Core 0 typically services host OS interrupts and driver DPCs. Therefore,
+  39 |     Core 1, 2, or 3 are the prime Performance Cores. If no core is requested or an
+  40 |     out-of-range/E-core is specified on hybrid architectures without allow_e_cores,
+  41 |     fallback logic redirects execution to a verified P-core.
+  42 |     """
+  43 |     try:
+  44 |         cpu_count = multiprocessing.cpu_count()
+  45 |     except Exception:
+  46 |         cpu_count = 1
+  47 | 
+  48 |     if requested_core is None:
+  49 |         return 1 if cpu_count > 1 else 0
+  50 | 
+  51 |     if requested_core < 0:
+  52 |         return 1 if cpu_count > 1 else 0
+  53 | 
+  54 |     # If the system has >= 8 logical cores (typical hybrid layout with 4 P-cores + 4 E-cores),
+  55 |     # guard against accidental assignment to E-cores (cores 4+) unless allow_e_cores=True
+  56 |     if not allow_e_cores and cpu_count >= 8 and requested_core >= 4:
+  57 |         p_fallback = requested_core % 4
+  58 |         if p_fallback == 0 and cpu_count > 1:
+  59 |             p_fallback = 1
+  60 |         return p_fallback
+  61 | 
+  62 |     if requested_core >= cpu_count:
+  63 |         return 1 if cpu_count > 1 else 0
+  64 | 
+  65 |     return requested_core
+  66 | 
+  67 | 
+  68 | class WetSchedulerConfig(ctypes.Structure):
+  69 |     """Mirror of C wet_scheduler_config_t."""
+  70 |     _fields_ = [
+  71 |         ("target_period_us", c_uint32),
+  72 |         ("target_core", c_uint32),
+  73 |         ("priority_class", c_uint32),
+  74 |         ("thread_priority", c_int32),
+  75 |         ("enable_core_pinning", c_uint8),
+  76 |         ("enable_priority_elevation", c_uint8),
+  77 |         ("telemetry_queue_capacity", c_uint32),
+  78 |         ("stimulus_queue_capacity", c_uint32),
+  79 |         ("total_ticks", c_uint64),
+  80 |     ]
+  81 | 
+  82 |     def __init__(
+  83 |         self,
+  84 |         target_period_us: int = 100,
+  85 |         target_core: Optional[int] = None,
+  86 |         priority_class: int = 0x00000100,  # REALTIME_PRIORITY_CLASS
+  87 |         thread_priority: int = 15,          # THREAD_PRIORITY_TIME_CRITICAL
+  88 |         enable_core_pinning: bool = True,
+  89 |         enable_priority_elevation: bool = True,
+  90 |         telemetry_queue_capacity: int = 1024,
+  91 |         stimulus_queue_capacity: int = 256,
+  92 |         total_ticks: int = 0,
+  93 |         allow_e_cores: bool = False,
+  94 |     ):
+  95 |         p_core = resolve_p_core(target_core, allow_e_cores=allow_e_cores)
+  96 |         super().__init__(
+  97 |             target_period_us=target_period_us,
+  98 |             target_core=p_core,
+  99 |             priority_class=priority_class,
+ 100 |             thread_priority=thread_priority,
+ 101 |             enable_core_pinning=1 if enable_core_pinning else 0,
+ 102 |             enable_priority_elevation=1 if enable_priority_elevation else 0,
+ 103 |             telemetry_queue_capacity=telemetry_queue_capacity,
+ 104 |             stimulus_queue_capacity=stimulus_queue_capacity,
+ 105 |             total_ticks=total_ticks,
+ 106 |         )
+ 107 | 
+ 108 | 
+ 109 | class WetStimCommand(ctypes.Structure):
+ 110 |     """Mirror of C wet_stim_command_t."""
+ 111 |     _fields_ = [
+ 112 |         ("channel", c_uint8),
+ 113 |         ("voltage_v", c_float),
+ 114 |         ("phase1_ms", c_float),
+ 115 |         ("phase2_ms", c_float),
+ 116 |         ("tick_scheduled", c_uint64),
+ 117 |     ]
+ 118 | 
+ 119 |     def __init__(
+ 120 |         self,
+ 121 |         channel: int = 0,
+ 122 |         voltage_v: float = 0.8,
+ 123 |         phase1_ms: float = 0.2,
+ 124 |         phase2_ms: float = 0.2,
+ 125 |         tick_scheduled: int = 0,
+ 126 |     ):
+ 127 |         super().__init__(
+ 128 |             channel=channel,
+ 129 |             voltage_v=voltage_v,
+ 130 |             phase1_ms=phase1_ms,
+ 131 |             phase2_ms=phase2_ms,
+ 132 |             tick_scheduled=tick_scheduled,
+ 133 |         )
+ 134 | 
+ 135 | 
+ 136 | class WetSchedulerStats(ctypes.Structure):
+ 137 |     """Mirror of C wet_scheduler_stats_t."""
+ 138 |     _fields_ = [
+ 139 |         ("total_ticks", c_uint64),
+ 140 |         ("min_compute_us", c_double),
+ 141 |         ("max_compute_us", c_double),
+ 142 |         ("mean_compute_us", c_double),
+ 143 |         ("min_period_us", c_double),
+ 144 |         ("max_period_us", c_double),
+ 145 |         ("mean_period_us", c_double),
+ 146 |         ("mean_jitter_us", c_double),
+ 147 |         ("p50_jitter_us", c_double),
+ 148 |         ("p95_jitter_us", c_double),
+ 149 |         ("p99_jitter_us", c_double),
+ 150 |         ("p999_jitter_us", c_double),
+ 151 |         ("max_jitter_us", c_double),
+ 152 |         ("deadline_overruns", c_uint64),
+ 153 |         ("telemetry_dropped", c_uint64),
+ 154 |         ("stimuli_injected", c_uint64),
+ 155 |     ]
+ 156 | 
+ 157 |     def as_dict(self) -> dict:
+ 158 |         return {
+ 159 |             "total_ticks": self.total_ticks,
+ 160 |             "min_compute_us": self.min_compute_us,
+ 161 |             "max_compute_us": self.max_compute_us,
+ 162 |             "mean_compute_us": self.mean_compute_us,
+ 163 |             "min_period_us": self.min_period_us,
+ 164 |             "max_period_us": self.max_period_us,
+ 165 |             "mean_period_us": self.mean_period_us,
+ 166 |             "mean_jitter_us": self.mean_jitter_us,
+ 167 |             "p50_jitter_us": self.p50_jitter_us,
+ 168 |             "p95_jitter_us": self.p95_jitter_us,
+ 169 |             "p99_jitter_us": self.p99_jitter_us,
+ 170 |             "p999_jitter_us": self.p999_jitter_us,
+ 171 |             "max_jitter_us": self.max_jitter_us,
+ 172 |             "deadline_overruns": self.deadline_overruns,
+ 173 |             "telemetry_dropped": self.telemetry_dropped,
+ 174 |             "stimuli_injected": self.stimuli_injected,
+ 175 |         }
+ 176 | 
+ 177 | 
+ 178 | def _bind_scheduler_ffi(lib: ctypes.CDLL) -> None:
+ 179 |     """Configures ctypes argtypes and restypes for scheduler functions."""
+ 180 |     lib.wet_scheduler_create.restype = c_void_p
+ 181 |     lib.wet_scheduler_create.argtypes = [c_void_p, POINTER(WetSchedulerConfig)]
+ 182 | 
+ 183 |     lib.wet_scheduler_start.restype = c_int
+ 184 |     lib.wet_scheduler_start.argtypes = [c_void_p]
+ 185 | 
+ 186 |     lib.wet_scheduler_step.restype = c_int
+ 187 |     lib.wet_scheduler_step.argtypes = [c_void_p]
+ 188 | 
+ 189 |     lib.wet_scheduler_stop.restype = c_int
+ 190 |     lib.wet_scheduler_stop.argtypes = [c_void_p]
+ 191 | 
+ 192 |     lib.wet_scheduler_get_stats.restype = c_int
+ 193 |     lib.wet_scheduler_get_stats.argtypes = [c_void_p, POINTER(WetSchedulerStats)]
+ 194 | 
+ 195 |     lib.wet_scheduler_poll_telemetry.restype = c_int
+ 196 |     lib.wet_scheduler_poll_telemetry.argtypes = [c_void_p, POINTER(WetTelemetry)]
+ 197 | 
+ 198 |     lib.wet_scheduler_push_stimulus.restype = c_int
+ 199 |     lib.wet_scheduler_push_stimulus.argtypes = [c_void_p, POINTER(WetStimCommand)]
+ 200 | 
+ 201 |     lib.wet_scheduler_benchmark.restype = c_int
+ 202 |     lib.wet_scheduler_benchmark.argtypes = [c_void_p, c_uint32, POINTER(WetSchedulerStats)]
+ 203 | 
+ 204 |     lib.wet_scheduler_destroy.restype = None
+ 205 |     lib.wet_scheduler_destroy.argtypes = [c_void_p]
+ 206 | 
+ 207 | 
+ 208 | class WetScheduler:
+ 209 |     """
+ 210 |     Python wrapper for the C99 deterministic hard real-time scheduler.
+ 211 |     """
+ 212 |     def __init__(
+ 213 |         self,
+ 214 |         vm_or_runtime: Any,
+ 215 |         config: Optional[WetSchedulerConfig] = None,
+ 216 |         lib: Optional[ctypes.CDLL] = None,
+ 217 |     ):
+ 218 |         self._lib = lib or load_wetvm_lib()
+ 219 |         _bind_scheduler_ffi(self._lib)
+ 220 | 
+ 221 |         if hasattr(vm_or_runtime, "_handle"):
+ 222 |             self._vm_ptr = c_void_p(vm_or_runtime._handle)
+ 223 |         elif hasattr(vm_or_runtime, "vm"):
+ 224 |             v = vm_or_runtime.vm
+ 225 |             self._vm_ptr = c_void_p(v) if isinstance(v, int) else v
+ 226 |         elif hasattr(vm_or_runtime, "_vm"):
+ 227 |             v = vm_or_runtime._vm
+ 228 |             self._vm_ptr = c_void_p(v) if isinstance(v, int) else v
+ 229 |         elif isinstance(vm_or_runtime, int):
+ 230 |             self._vm_ptr = c_void_p(vm_or_runtime)
+ 231 |         else:
+ 232 |             self._vm_ptr = vm_or_runtime
+ 233 | 
+ 234 |         self._config = config or WetSchedulerConfig()
+ 235 |         self._sched = self._lib.wet_scheduler_create(self._vm_ptr, byref(self._config))
+ 236 |         if not self._sched:
+ 237 |             raise RuntimeError("Failed to allocate wet_scheduler_t instance")
+ 238 | 
+ 239 |     @property
+ 240 |     def handle(self) -> c_void_p:
+ 241 |         return self._sched
+ 242 | 
+ 243 |     def start(self) -> None:
+ 244 |         st = self._lib.wet_scheduler_start(self._sched)
+ 245 |         if st != WetStatus.WET_OK:
+ 246 |             raise RuntimeError(f"wet_scheduler_start failed with status {st}")
+ 247 | 
+ 248 |     def step(self) -> int:
+ 249 |         return self._lib.wet_scheduler_step(self._sched)
+ 250 | 
+ 251 |     def stop(self) -> None:
+ 252 |         self._lib.wet_scheduler_stop(self._sched)
+ 253 | 
+ 254 |     def get_stats(self) -> WetSchedulerStats:
+ 255 |         stats = WetSchedulerStats()
+ 256 |         st = self._lib.wet_scheduler_get_stats(self._sched, byref(stats))
+ 257 |         if st != WetStatus.WET_OK:
+ 258 |             raise RuntimeError(f"wet_scheduler_get_stats failed with status {st}")
+ 259 |         return stats
+ 260 | 
+ 261 |     def poll_telemetry(self) -> Optional[WetTelemetry]:
+ 262 |         telem = WetTelemetry()
+ 263 |         st = self._lib.wet_scheduler_poll_telemetry(self._sched, byref(telem))
+ 264 |         if st == WetStatus.WET_OK:
+ 265 |             return telem
+ 266 |         return None
+ 267 | 
+ 268 |     def push_stimulus(
+ 269 |         self,
+ 270 |         channel: int,
+ 271 |         voltage_v: float,
+ 272 |         phase1_ms: float = 0.2,
+ 273 |         phase2_ms: float = 0.2,
+ 274 |         tick_scheduled: int = 0
+ 275 |     ) -> bool:
+ 276 |         cmd = WetStimCommand(
+ 277 |             channel=channel,
+ 278 |             voltage_v=voltage_v,
+ 279 |             phase1_ms=phase1_ms,
+ 280 |             phase2_ms=phase2_ms,
+ 281 |             tick_scheduled=tick_scheduled,
+ 282 |         )
+ 283 |         st = self._lib.wet_scheduler_push_stimulus(self._sched, byref(cmd))
+ 284 |         return st == WetStatus.WET_OK
+ 285 | 
+ 286 |     def benchmark(self, total_ticks: int = 10000) -> WetSchedulerStats:
+ 287 |         stats = WetSchedulerStats()
+ 288 |         st = self._lib.wet_scheduler_benchmark(self._sched, c_uint32(total_ticks), byref(stats))
+ 289 |         if st != WetStatus.WET_OK and st != WetStatus.WET_ERR_HALTED:
+ 290 |             raise RuntimeError(f"wet_scheduler_benchmark failed with status {st}")
+ 291 |         return stats
  292 | 
- 293 |     def last_error(self) -> str:
- 294 |         """Returns the last recorded native error message."""
- 295 |         if not self._handle:
- 296 |             return "VM is closed"
- 297 |         err = self._lib.wet_get_last_error(self._handle)
- 298 |         return err.decode("utf-8", errors="replace") if err else ""
- 299 | 
- 300 |     def _status_to_string(self, status: WetStatus) -> str:
- 301 |         s = self._lib.wet_status_to_string(int(status))
- 302 |         return s.decode("utf-8", errors="replace") if s else status.name
- 303 | 
- 304 |     @property
- 305 |     def current_tick(self) -> int:
- 306 |         return int(self._telem.current_tick)
- 307 | 
- 308 |     @property
- 309 |     def tick_index(self) -> int:
- 310 |         return int(self._telem.current_tick)
- 311 | 
- 312 |     @property
- 313 |     def sim_time_ms(self) -> float:
- 314 |         return float(self._telem.sim_time_ms)
- 315 | 
- 316 |     @property
- 317 |     def is_halted(self) -> bool:
- 318 |         return self._is_halted
- 319 | 
- 320 |     # Phase 3 Hardware Readiness Methods
- 321 |     def configure_electrode(self, material: int, area_um2: float) -> None:
- 322 |         """Configures electrode material and physical geometric surface area."""
- 323 |         self._check_alive()
- 324 |         self._lib.wet_configure_electrode(self._handle, ctypes.c_uint8(material), ctypes.c_float(area_um2))
- 325 | 
- 326 |     def active_discharge(self, channel: int) -> None:
- 327 |         """Actuates hardware discharge switch on designated channel to clear accumulated DC charge."""
- 328 |         self._check_alive()
- 329 |         self._lib.wet_active_discharge(self._handle, ctypes.c_uint8(channel))
- 330 | 
- 331 |     def active_discharge_all(self) -> None:
- 332 |         """Actuates hardware discharge switch on all 64 channels."""
- 333 |         self._check_alive()
- 334 |         self._lib.wet_active_discharge_all(self._handle)
- 335 | 
- 336 |     def enable_dead_head_protection(self, enable: bool = True) -> None:
- 337 |         """Enables microfluidic valve-pump dead-head overpressure interlock."""
- 338 |         self._check_alive()
- 339 |         self._lib.wet_enable_dead_head_protection(self._handle, ctypes.c_uint8(1 if enable else 0))
- 340 | 
- 341 |     def life_supervisor_shutdown(self, vm: Optional[ctypes.c_void_p] = None) -> None:
- 342 |         """Terminates Ring-0 Life Support Supervisor autonomous baseline perfusion."""
- 343 |         self._check_alive()
- 344 |         self._lib.wet_life_supervisor_shutdown(self._handle)
- 345 | 
- 346 |     def configure_blanking(self, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
- 347 |         """Configures amplifier blanking duration and spatial neighbor crosstalk suppression."""
- 348 |         self._check_alive()
- 349 |         self._lib.wet_configure_blanking(self._handle, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
- 350 | 
- 351 |     def inject_current_stimulus(
- 352 |         self,
- 353 |         channel: int,
- 354 |         current_ua: float,
- 355 |         p1_ms: float = 0.5,
- 356 |         p2_ms: float = 0.5
- 357 |     ) -> None:
- 358 |         """Injects constant-current electrical stimulus (uA) through Randles interface."""
- 359 |         self._check_alive()
- 360 |         status_code = self._lib.wet_inject_current_stimulus(
- 361 |             self._handle,
- 362 |             ctypes.c_uint8(channel),
- 363 |             ctypes.c_float(current_ua),
- 364 |             ctypes.c_float(p1_ms),
- 365 |             ctypes.c_float(p2_ms)
- 366 |         )
- 367 |         status = WetStatus(status_code)
- 368 |         if status != WetStatus.WET_OK:
- 369 |             raise WetVMError(status, self.last_error() or self._status_to_string(status))
- 370 | 
- 371 |     def verify_bytecode(self, bytecode: bytes) -> str:
- 372 |         """Runs the C99 load-time bytecode verifier without loading into VM."""
- 373 |         c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
- 374 |         err_buf = ctypes.create_string_buffer(512)
- 375 |         st = self._lib.wet_verify_bytecode(c_bytes, ctypes.c_size_t(len(bytecode)), err_buf, ctypes.c_size_t(len(err_buf)))
- 376 |         status = WetStatus(st)
- 377 |         msg = err_buf.value.decode("utf-8", errors="replace")
- 378 |         if status != WetStatus.WET_OK:
- 379 |             raise WetVMError(status, msg or self._status_to_string(status))
- 380 |         return "OK"
- 381 | 
- 382 |     def snapshot(self) -> bytes:
- 383 |         """Serializes complete dynamic neural state, synaptic matrix, and monotonic clocks."""
- 384 |         self._check_alive()
- 385 |         needed_len = ctypes.c_size_t(0)
- 386 |         self._lib.wet_vm_snapshot(self._handle, None, ctypes.byref(needed_len))
- 387 |         buf = (ctypes.c_uint8 * needed_len.value)()
- 388 |         st = self._lib.wet_vm_snapshot(self._handle, buf, ctypes.byref(needed_len))
- 389 |         status = WetStatus(st)
- 390 |         if status != WetStatus.WET_OK:
- 391 |             raise WetVMError(status, self.last_error() or "Snapshot failed")
- 392 |         return bytes(buf)
- 393 | 
- 394 |     def restore(self, data: bytes) -> None:
- 395 |         """Restores complete neural state and synaptic weights without resetting learned memory."""
- 396 |         self._check_alive()
- 397 |         c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
- 398 |         st = self._lib.wet_vm_restore(self._handle, c_bytes, ctypes.c_size_t(len(data)))
- 399 |         status = WetStatus(st)
- 400 |         if status != WetStatus.WET_OK:
- 401 |             raise WetVMError(status, self.last_error() or "Restore failed")
- 402 |         self._lib.wet_get_telemetry(self._handle, ctypes.byref(self._telem))
- 403 | 
- 404 |     def set_environmental_sensors(
- 405 |         self,
- 406 |         ph: float = 7.4,
- 407 |         do_pct: float = 95.0,
- 408 |         co2_pct: float = 5.0,
- 409 |         bubble_sensor_id: int = 0,
- 410 |         bubble_state: bool = False,
- 411 |         flow_rate_ul_min: float = 1.5
- 412 |     ) -> None:
- 413 |         """Updates simulated or hardware sensor telemetry readings."""
- 414 |         self._check_alive()
- 415 |         self._lib.wet_set_environmental_sensors(
- 416 |             self._handle,
- 417 |             ctypes.c_float(ph),
- 418 |             ctypes.c_float(do_pct),
- 419 |             ctypes.c_float(co2_pct),
- 420 |             ctypes.c_uint8(bubble_sensor_id),
- 421 |             ctypes.c_uint8(1 if bubble_state else 0),
- 422 |             ctypes.c_float(flow_rate_ul_min)
- 423 |         )
- 424 | 
- 425 |     def set_temperature(self, temp_c: float) -> None:
- 426 |         """Sets simulated or incubator ambient / CMOS die temperature."""
- 427 |         self._check_alive()
- 428 |         self._lib.wet_set_temperature(self._handle, ctypes.c_float(temp_c))
- 429 | 
- 430 |     def set_channel_banks(
- 431 |         self,
- 432 |         ref_channels: list[int] = [],
- 433 |         rec_only_channels: list[int] = []
- 434 |     ) -> None:
- 435 |         """Configures typed channel capability banks (reference and recording-only)."""
- 436 |         self._check_alive()
- 437 |         ref_mask = 0
- 438 |         for ch in ref_channels:
- 439 |             if 0 <= ch < 64:
- 440 |                 ref_mask |= (1 << ch)
- 441 |         rec_mask = 0
- 442 |         for ch in rec_only_channels:
- 443 |             if 0 <= ch < 64:
- 444 |                 rec_mask |= (1 << ch)
- 445 |         self._lib.wet_set_channel_banks(self._handle, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))
- 446 | 
- 447 | 
- 448 | class WetRuntime(WetVM):
- 449 |     """Alias / Subclass of WetVM providing E2E test-suite compatibility."""
- 450 |     pass
+ 293 |     def destroy(self) -> None:
+ 294 |         if self._sched:
+ 295 |             self._lib.wet_scheduler_destroy(self._sched)
+ 296 |             self._sched = None
+ 297 | 
+ 298 |     def __enter__(self) -> "WetScheduler":
+ 299 |         return self
+ 300 | 
+ 301 |     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+ 302 |         self.destroy()
 ```
 
 ### `biophysics/__init__.py` (17 lines, SHA-256: `2f45135b6989e595...`)

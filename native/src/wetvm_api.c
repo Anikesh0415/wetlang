@@ -6,6 +6,7 @@
 #include "../include/wetvm_types.h"
 #include "../include/wetvm_api.h"
 #include "../include/wetvm_vm.h"
+#include "../include/wet_hal.h"
 
 #if defined(_WIN32)
 int _fltused = 0x9875;
@@ -178,6 +179,11 @@ WET_EXPORT wet_vm_t* wet_create_vm_arena(
 
 WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
     if (!vm) return;
+
+    if (vm->hal) {
+        wet_hal_destroy(vm->hal);
+        vm->hal = NULL;
+    }
 
     if (vm->constants) {
         for (size_t i = 0; i < vm->num_constants; ++i) {
@@ -574,4 +580,34 @@ WET_EXPORT void wet_set_channel_banks(
 ) {
     if (!vm) return;
     interlocks_set_channel_banks(&vm->interlocks, ref_mask, rec_mask);
+}
+
+WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
+    const wet_vm_t* vm,
+    float* out_matrix,
+    size_t out_capacity_floats
+) {
+    if (!vm || !out_matrix) return WET_ERR_NULL_PTR;
+    if (out_capacity_floats < (size_t)(BIO_NUM_NEURONS * BIO_NUM_NEURONS)) {
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    for (size_t i = 0; i < BIO_NUM_NEURONS; ++i) {
+        for (size_t j = 0; j < BIO_NUM_NEURONS; ++j) {
+            if (vm->bio.synapses[i][j].exists) {
+                out_matrix[i * BIO_NUM_NEURONS + j] = vm->bio.synapses[i][j].weight_ns;
+            } else {
+                out_matrix[i * BIO_NUM_NEURONS + j] = 0.0f;
+            }
+        }
+    }
+    return WET_OK;
+}
+
+WET_EXPORT float wet_vm_get_synapse_weight(
+    const wet_vm_t* vm,
+    uint8_t pre,
+    uint8_t post
+) {
+    if (!vm || pre >= BIO_NUM_NEURONS || post >= BIO_NUM_NEURONS) return 0.0f;
+    return biophysics_get_weight(&vm->bio, pre, post);
 }

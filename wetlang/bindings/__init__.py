@@ -17,6 +17,12 @@ from bindings.runtime import (
     WetTelemetryView,
     WetVMError,
 )
+from bindings.scheduler import (
+    WetScheduler,
+    WetSchedulerConfig,
+    WetSchedulerStats,
+    WetStimCommand,
+)
 
 __all__ = [
     "WetVM",
@@ -29,4 +35,8 @@ __all__ = [
     "WetVMFFI",
     "load_wetvm_lib",
     "get_wetvm_lib",
+    "WetScheduler",
+    "WetSchedulerConfig",
+    "WetSchedulerStats",
+    "WetStimCommand",
 ]

@@ -1,11 +1,11 @@
-# WetLang v1.0 Master Architectural Dossier & Pre-Audit Reference
+# WetLang v1.1 Master Architectural Dossier & Pre-Audit Reference
 ### Comprehensive Verification Register, Biophysical Grounding & Hardware Readiness Scope
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0 Production Release)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0 Production Release)  
 **Lead Architect & Founder:** Anikesh Tiwari (Surat, Gujarat, India)  
 **Target Repository:** `https://github.com/Anikesh0415/wetlang`  
-**Master PDF Compendium:** `WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` (304 Pages, SHA-256: `af8fdcf3590c786ab1ae87391ff2b180ce78d5bb11863859c5c2968e2e8d31db`)  
-**Test Suite Verdict:** **463 / 463 Tests Passing (100.0% Pass Rate)**  
+**Master PDF Compendium:** `WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` (448 Pages, SHA-256: `5a35cc267bb94af8d1d14cef336d540ddbd33005808beabc4a3c556929badc84`)  
+**Test Suite Verdict:** **520 / 520 Tests Passing (100.0% Pass Rate)**  
 **Audit Purpose:** Official pre-audit documentation submission for Phase 3 deep adversarial evaluation, biophysical verification, and hardware-in-the-loop (HIL) certification.
 
 ---
@@ -169,9 +169,9 @@ If $|Q_{\text{accum}}| > Q_{\max}$, stimulation is gated off, tripping `WET_ERR_
 
 ---
 
-## 5. Verification Test Matrix (463 / 463 Tests PASS, 100.0%)
+## 5. Verification Test Matrix (520 / 520 Tests PASS, 100.0%)
 
-The verification test suite spans nine exhaustive test suites executing in simulation and via native bit-exact C99 FFI:
+The verification test suite spans 16 exhaustive test suites executing in simulation, hardware-in-the-loop, and via native bit-exact C99 FFI:
 
 | Test Suite Category | Suite File Path | Test Count | Pass Rate | Scope Verified |
 |:---|:---|:---:|:---:|:---|
@@ -179,13 +179,19 @@ The verification test suite spans nine exhaustive test suites executing in simul
 | **Tier 2: Boundary Stress** | `tests/e2e/test_tier2_boundaries.py` | 140 | 100.0% | Out-of-bounds channels, stack underflow/overflow, extreme current shocks ($\pm 10\text{ nA}$), voltage clamp thresholds. |
 | **Tier 3: Pairwise Combinatorics**| `tests/e2e/test_tier3_pairwise.py` | 28 | 100.0% | Cross-module pairwise interactions ($F_i \times F_j$). |
 | **Tier 4: Benchmark Applications** | `tests/e2e/test_tier4_benchmarks.py` | 5 | 100.0% | Closed-loop active inference, polychronous reservoir, homeostatic stabilization, fault injection, 10,000-tick repeatability. |
-| **Phase 2 Deep Adversarial Suite**| `tests/test_phase2_deep_audit.py` | 16 | 100.0% | 16 red-team attack vectors (1000x SI unit scaling, integer freeze, CFG blowup, unaligned memory loads). |
+| **Static Capability Verifier** | `tests/test_static_verifier.py` | 40 | 100.0% | Symbol scoping, MEA bounds, dimensional algebra, constant-folded clamps, CFG loop-yield evasion resistance. |
+| **Physical HAL Drivers** | `tests/test_hal_drivers.py` | 30 | 100.0% | Intan RHS2116 SPI DAQ, MaxWell MaxOne CMOS HD-MEA, Harvard Apparatus RS-232, CAN-bus valves, Sensirion I2C/SHDLC, and emergency crowbar. |
+| **Neuromorphic NIR Bridge** | `tests/test_nir_bridge.py` | 21 | 100.0% | Bidirectional NIR graph translation (LIF, CubaLIF, Izhikevich), Dale's principle decomposition, and HDF5/JSON roundtrips. |
+| **Parser Diagnostics** | `tests/test_parser_diagnostics.py` | 20 | 100.0% | Parser syntax diagnostics, error recovery, and unexpected token reporting. |
+| **Phase 3 Hardware Readiness** | `tests/test_phase3_hardware_readiness.py` | 18 | 100.0% | HD-MEA Pt water window, DC accumulator, active discharge, 3D Thiele anoxia, geometry-aware shear, Ring-0 supervisor, zero-malloc arena, Ed25519. |
+| **Phase 2 Deep Adversarial Suite**| `tests/test_phase2_deep_audit.py` | 16 | 100.0% | 16 red-team attack vectors from deep audit. |
 | **Remediation Ground-Truth Suite**| `tests/test_audit_remediation.py` | 15 | 100.0% | Direct verification of all 15 audit remediation items (C-01 through H-02). |
-| **Phase 3 Hardware Readiness** | `tests/test_phase3_hardware_readiness.py` | 18 | 100.0% | HD-MEA Pt water window, DC accumulator, active discharge, 3D Thiele anoxia, geometry-aware shear, dead-head interlock, Ring-0 supervisor, zero-malloc arena, Ed25519 signing, Randles current stim, compliance rail interlock, blanking/crosstalk, subnormal clamping, environmental sensors (pH/DO/CO2/flow), thermal interlock, bubble cutoff, C99 verifier, live state snapshot/restore, typed channel banks. |
-| **Cyber-Physical Actuators** | `tests/test_actuators.py` | 8 | 100.0% | Peristaltic pumps, micro-pinch valves, stepper motors, pressure/temperature sensors, shear stress clamp. |
+| **Biophysical ODE Stability** | `tests/test_ode_stability.py` | 13 | 100.0% | Unconditional Exponential Euler numerical ODE stability and convex bounding proofs. |
+| **Hardware Interlocks** | `tests/test_interlocks.py` | 12 | 100.0% | Hardware interlock trip states, DAC zeroing, and lockout recovery. |
+| **Closed-Loop Benchmarks** | `tests/test_benchmarks.py` | 8 | 100.0% | Closed-loop benchmark stability and telemetry validation. |
 | **Universal Connectome** | `tests/test_universal_sandbox.py` | 8 | 100.0% | Scaling from 1 to 1,024 organoids, ring-buffered axonal delay lines, zero-copy graph routing. |
-| **Synthetic Unit Suites** | `tests/test_*.py` | 85 | 100.0% | Lexer tokens, parser diagnostics, ODE stability proofs, interlock trip states. |
-| **GRAND TOTAL** | **All 10 Test Suites Combined** | **463** | **100.0%** | **463 Passed, 0 Failed, 0 Skipped, 0 Flaky** |
+| **Hard Real-Time Scheduler** | `tests/test_rt_scheduler.py` | 6 | 100.0% | C99 10 kHz scheduler, P-core affinity pinning, QPC hardware timer pacing, and 10k-tick stress benchmarks. |
+| **GRAND TOTAL** | **All 16 Test Suites Combined** | **520** | **100.0%** | **520 Passed, 0 Failed, 0 Skipped, 0 Flaky** |
 
 ---
 

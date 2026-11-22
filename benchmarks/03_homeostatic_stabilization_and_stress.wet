@@ -1,0 +1,43 @@
+// Benchmark 03: Homeostatic Stabilization and Stress Adaptation
+// Regulates population firing rate within [15.0, 25.0] Hz under acute perturbation.
+
+grid mea[8, 8];
+channel pace_a = mea[2, 2];
+channel pace_b = mea[5, 5];
+channel inh_a  = mea[1, 1];
+channel inh_b  = mea[6, 6];
+channel stress = mea[4, 4];
+
+int cycle = 0;
+while (cycle < 2000) {
+    // 1. Advance 10 ms (100 ticks)
+    int k = 0;
+    while (k < 100) {
+        sync_tick();
+        k = k + 1;
+    }
+    
+    // 2. Measure instantaneous population firing rate across 64 channels
+    float pop_rate = read_population_rate(10.0);
+    
+    // 3. Homeostatic Closed-Loop Adaptation
+    if (pop_rate < 15.0) {
+        // Hypo-active: Inject gentle pacing pulses to elevate network excitability
+        stim_biphasic(pace_a, 0.4, 0.1, 0.1);
+        stim_biphasic(pace_b, 0.4, 0.1, 0.1);
+        modulate_stdp(1.05);
+    } else if (pop_rate > 25.0) {
+        // Hyper-active: Engage inhibitory interneurons and depress synaptic weights
+        stim_biphasic(inh_a, 0.6, 0.1, 0.1);
+        stim_biphasic(inh_b, 0.6, 0.1, 0.1);
+        modulate_stdp(0.85);
+    }
+    
+    // 4. Acute Stress Injection at Cycle 500 (Simulating severe perturbation)
+    if (cycle == 500) {
+        stim_biphasic(stress, 1.1, 0.2, 0.2);
+    }
+    
+    cycle = cycle + 1;
+    sync_tick();
+}

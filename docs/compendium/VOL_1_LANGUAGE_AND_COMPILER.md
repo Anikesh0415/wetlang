@@ -433,7 +433,7 @@ Optionally appended to the WBC binary is a 32-byte HMAC-SHA256 authenticated sig
   Forward branches (`if`/`else` skip, `while`/`for` exit) emit a placeholder `0` via `emit_jump()` and backpatch with `patch_jump(operand_offset, target_offset)` once the target offset is known. Backward loop edges compute `loop_start - current_offset()` directly.
 - **CRC-32 Verification**: `BytecodeEmitter._build_wbc_binary()` packs the 32-byte header with `checksum_crc32 = 0`, appends the section table and all 5 payloads, computes `zlib.crc32(full_binary) & 0xFFFFFFFF`, and patches the 4-byte little-endian checksum at offset `0x0C` (12). The native loader (`wetvm_vm.c`) computes the identical bitwise IEEE 802.3 CRC-32 (`0xEDB88320`) in three chunks (`[0..11]`, four `0x00` bytes, `[16..size-1]`), rejecting any single-bit tamper with `WET_ERR_CRC_MISMATCH`.
 
-### 6.5 Complete Opcode Reference Table (All 45 Instructions)
+### 6.5 Complete Opcode Reference Table (All 51 Instructions)
 
 Verified directly against `compiler/isa.py`, `native/include/wetvm_types.h`, and `native/src/wetvm_vm.c`:
 
@@ -484,5 +484,43 @@ Verified directly against `compiler/isa.py`, `native/include/wetvm_types.h`, and
 | `0x59` | `MOTOR_STEP` | `<BB` (`axis`, `dir`) | 3 | `[steps, speed] -> []` | Drives precision stepper motor along physical incubator axis. Enforces `CAP_MOTOR_ACTUATION`. Errors: `WET_ERR_CAPABILITY_DENIED`. |
 | `0x5A` | `READ_PRESSURE` | `<B` (`sensor_id`) | 2 | `[] -> [kPa]` | Pushes microfluidic bioreactor chamber pressure (`WET_VAL_FLOAT`, in kPa). |
 | `0x5B` | `READ_TEMPERATURE` | `<B` (`sensor_id`) | 2 | `[] -> [degC]` | Pushes chamber incubator temperature (`WET_VAL_FLOAT`, in degrees Celsius). |
+| `0x5C` | `STIM_CURRENT` | `<Bf` (`channel`, `current_uA`) | 6 | `[interphase, phase2, phase1] -> []` | Delivers constant-current biphasic stimulation in microamperes ($\mu\text{A}$) through equivalent Randles interface model ($R_s + (R_{ct} \parallel C_{dl})$). Evaluates dynamic compliance potential $V_e(t) = I R_s + V_{dl}(t)$ and aborts with `WET_ERR_COMPLIANCE_RAILED` if $|V_e| > 7.0\text{ V}$. Errors: `WET_ERR_OUT_OF_BOUNDS_CH`, `WET_ERR_CAPABILITY_DENIED`, `WET_ERR_COMPLIANCE_RAILED`. |
+| `0x5D` | `READ_PH` | *(none)* | 1 | `[sensor_id] -> [pH]` | Pops sensor ID, pushes measured culture medium pH (`WET_VAL_FLOAT`, e.g. 7.40). |
+| `0x5E` | `READ_DO` | *(none)* | 1 | `[sensor_id] -> [%]` | Pops sensor ID, pushes measured dissolved oxygen saturation percentage (`WET_VAL_FLOAT`, e.g. 95.0%). |
+| `0x5F` | `READ_CO2` | *(none)* | 1 | `[sensor_id] -> [%]` | Pops sensor ID, pushes measured dissolved carbon dioxide percentage (`WET_VAL_FLOAT`, e.g. 5.0%). |
+| `0x60` | `READ_BUBBLE` | `<B` (`sensor_id`) | 2 | `[] -> [0|1]` | Pushes optical bubble detector state (`0 = clear`, `1 = bubble detected`). Used by automated microfluidic cut-off interlock. |
+| `0x61` | `READ_FLOW` | `<B` (`sensor_id`) | 2 | `[] -> [uL/min]` | Pushes real-time microfluidic flow rate from Sensirion thermal mass sensor (`WET_VAL_FLOAT`, in $\mu\text{L/min}$). |
 
 > **Implementation Detail Note:** Notice that `STIM_BIPHASIC` (`0x50`) pops **four** values from the stack (`interphase`, `phase2`, `phase1`, `voltage` in LIFO order, matching `BytecodeEmitter.visit_StimStmtNode()`, which always pushes a `0.0f` default for `interphase` when omitted), and `GET_POP_RATE` (`0x54`) pops one window argument pushed by `read_population_rate(window_ms)`.
+
+---
+
+## 7. Neuromorphic Intermediate Representation (NIR v1.0) Bridge
+
+WetLang v1.1 introduces a production-grade bidirectional translation bridge (`compiler/nir_bridge.py`) conforming to the universal **Neuromorphic Intermediate Representation (NIR v1.0)** standard. This bridge provides direct computational graph interoperability between standard spiking neural network architectures and WetLang's cyber-physical organoid runtime, enabling hybrid wetware-silicon co-simulation and cross-compilation to neuromorphic accelerators (such as Intel Loihi, SynSense Speck, and SpiNNaker).
+
+### 7.1 Supported Computational Primitives & Mappings
+
+The NIR bridge provides loss-free bidirectional transformation between NIR primitive nodes and WetLang AST / `.wbc` structures:
+
+| NIR v1.0 Primitive Node | WetLang Representation | Biophysical Translation Semantics |
+|:---|:---|:---|
+| `Input` / `Output` | `grid mea[r, c]`, `channel` | Maps computational input/output arrays directly to addressable MEA electrode coordinates. |
+| `LIF` / `CubaLIF` | COBA-LIF Neuron Model | Maps membrane time constant $\tau_{\text{mem}} = C_m / g_L$, resting potential $v_{\text{leak}} = E_L$, threshold $v_{\text{thresh}} = V_{\text{thresh}}$, resistance $R = 1/g_L$, and current decay $\tau_{\text{syn}}$. |
+| `Izhikevich` | Regular Spiking (RS) / Fast Spiking (FS) | Maps recovery parameters $a, b, c, d$ to cortical pyramidal and interneuron phenotypes within the in-silico digital twin. |
+| `Linear` / `Affine` | `synapses[pre][post]` Matrix | Maps synaptic weight matrices $W \in \mathbb{R}^{N \times M}$ into WetLang's $64 \times 64$ pairwise conductance matrix with Dale's Principle decomposition. |
+
+### 7.2 Biological Dale's Principle Decomposition
+
+In standard artificial spiking graphs, weights $W_{ij}$ can take arbitrary real values (both positive and negative from a single pre-synaptic unit). Biological neural wetware strictly obeys **Dale's Principle**: an individual neuron releases either excitatory neurotransmitters (e.g. glutamate, opening cation channels) or inhibitory neurotransmitters (e.g. GABA, opening chloride channels), but never both.
+
+The WetLang NIR bridge automatically factors any arbitrary weight matrix $W$ into strictly positive excitatory ($W_+ \ge 0$) and inhibitory ($W_- \ge 0$) projection matrices:
+$$W = W_+ - W_-, \quad W_+ = \max(0, W), \quad W_- = \max(0, -W)$$
+This decomposition guarantees biophysical realizability when converting pre-trained PyTorch/snnTorch spiking networks into executable wetware stimulation protocols.
+
+### 7.3 Loss-Free HDF5 & JSON Serialization
+
+The bridge natively exports and ingests complete graphs using HDF5 (`.nir`) and JSON schemas:
+- **`NIRGraph.to_hdf5(path)`**: Serializes node types, topology edges, and IEEE-754 weight matrices with strict dataset chunking and compression.
+- **`NIRGraph.from_hdf5(path)`**: Ingests external neuromorphic graphs, compiles AST representations, and yields ready-to-execute `.wbc` binaries.
+- **Round-Trip Fidelity**: Verified across 21 test fixtures in `tests/test_nir_bridge.py` ensuring bit-exact topological equivalence.
