@@ -199,6 +199,7 @@ def build_native_runtime() -> Path:
         src_dir / "wet_hal_sensirion.c",
         src_dir / "wet_scheduler.c",
         src_dir / "wet_aer.c",
+        src_dir / "wet_distributed.c",
     ]
     for sf in src_files:
         if not sf.exists():
