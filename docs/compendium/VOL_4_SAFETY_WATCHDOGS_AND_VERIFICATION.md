@@ -171,9 +171,9 @@ All 520 automated tests were executed live on `Python 3.12.10` against the compi
 | **E2E Tier 2** (`test_tier2_boundaries.py`) | `python tests/run_e2e_tests.py` | 140 | 140 | 0 | 0 | — |
 | **E2E Tier 3** (`test_tier3_pairwise.py`) | `python tests/run_e2e_tests.py` | 28 | 28 | 0 | 0 | — |
 | **E2E Tier 4** (`test_tier4_benchmarks.py`) | `python tests/run_e2e_tests.py` | 5 | 5 | 0 | 0 | — |
-| **E2E Subtotal** | `python tests/run_e2e_tests.py` | **313** | **313** | **0** | **0** | **7.062 s** |
-| **Unit & Integration Suite** (`tests/test_*.py`) | `python -m pytest tests/test_*.py -v` | **207** | **207** | **0** | **0** | **6.58 s** |
-| **GRAND TOTAL** | **All Verification Suites** | **520** | **520** | **0** | **0** | **13.64 s** |
+| **E2E Subtotal** | `python tests/run_e2e_tests.py` | **313** | **313** | **0** | **0** | **11.573 s** |
+| **Unit & Integration Suite** (`tests/test_*.py`) | `python -m pytest tests/test_*.py -v` | **207** | **207** | **0** | **0** | **13.94 s** |
+| **GRAND TOTAL** | **All Verification Suites** | **520** | **520** | **0** | **0** | **25.51 s** |
 <!-- LIVE_TEST_END -->
 
 ### 3.2 Tier 1 (Feature Coverage — Category-Partition, 140 Tests) & Tier 2 (Boundary Value Analysis, 140 Tests)

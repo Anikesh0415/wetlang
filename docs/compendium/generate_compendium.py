@@ -37,6 +37,8 @@ COMPENDIUM_DIR = Path(__file__).resolve().parent
 REPO_ROOT = COMPENDIUM_DIR.parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
+if (REPO_ROOT / "wetlang").is_dir() and str(REPO_ROOT / "wetlang") not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT / "wetlang"))
 
 from compiler.emitter import compile_source, disassemble
 from compiler.isa import (
