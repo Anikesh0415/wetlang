@@ -1,9 +1,9 @@
 # Volume VI: Verified Appendices, Checksums, Live Logs & Source Listings
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
-**Generated Programmatically:** `2026-11-22 13:30:15 UTC` by `docs/compendium/generate_compendium.py`  
-**Repository Scope:** 171 tracked files | 2,902,365 bytes | 45,980 text lines
+**Generated Programmatically:** `2026-11-22 13:46:12 UTC` by `docs/compendium/generate_compendium.py`  
+**Repository Scope:** 220 tracked files | 3,782,475 bytes | 63,467 text lines
 
 ---
 
@@ -43,7 +43,7 @@
 | 30 | `docs/AUDIT_EXTERNAL_REVIEW.md` | 31,132 | 413 | `32396889220ebc8dcff5330dec7b0f3f215ed6a3941639a781d82909e7d3314e` |
 | 31 | `docs/language_spec.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
 | 32 | `docs/PHASE2_DEEP_AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
-| 33 | `docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 30,290 | 219 | `613bce1e91140a04801b174515038d6522b173ed67eac6dab6fe5977ef7a9e18` |
+| 33 | `docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 30,348 | 219 | `7988a6f4ddbf431c6fb846a43a7a7bbba6f46b990ec4a1a32e6f8e3d174680dd` |
 | 34 | `examples/sample_closed_loop.wbc` | 525 | BIN | `8a58718093bb37d2e0f1867153fffbd824587f02c0d79e01d4b4705ac0bedc6f` |
 | 35 | `examples/sample_closed_loop.wet` | 411 | 15 | `718976d0535685e8edf39d139722a014f8483069ab806e3506c9b24f9f8c7ad5` |
 | 36 | `legacy_specs/test_wetworld_cuda.py` | 4,873 | 102 | `fb3ce5f34f58dad1f45aba5cfd2a362903daf6d5c448e7af4ccf17100ac6fed8` |
@@ -84,7 +84,7 @@
 | 71 | `native/wetvm.dll` | 74,240 | BIN | `76a6e9243c919473c6dbd54306d52f09404d8877f449da4ea16731974447ed07` |
 | 72 | `PROJECT.md` | 14,727 | 198 | `0ed7cee23597284f347b97dc1c85ba3d001b493489ecd773375aff47aa328d40` |
 | 73 | `pytest.ini` | 95 | 4 | `f99f036c5063c3bba344c0ab687e6d0c0eb585764b8fcfaddd6fd34958e58c5f` |
-| 74 | `README.md` | 11,071 | 225 | `5dee24cff7b6eb106f9f6fc180d56847319cdf98eeeebea2838acda600457f61` |
+| 74 | `README.md` | 11,769 | 227 | `31669126f89bf3b8b741d7a007464b1322d0eba65fbc0d5979655481015517e5` |
 | 75 | `sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
 | 76 | `sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
 | 77 | `sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
@@ -112,76 +112,125 @@
 | 99 | `tests/test_static_verifier.py` | 17,470 | 584 | `54ca1aa3eb0d25c2b451224e8bea3be522a566a7502f2c4d7864dce57c770d5f` |
 | 100 | `tests/test_universal_sandbox.py` | 5,725 | 139 | `ab7be8be193420d1d25a3ab3324be9342ee420b20210c3067199c1741832df1d` |
 | 101 | `wetlang_github_release/.gitattributes` | 486 | 19 | `06605de4ccdde7ca2ca17571eb44c8c655f32202de1d7df81c42525f53021a4b` |
-| 102 | `wetlang_github_release/.gitignore` | 373 | 34 | `c4da17fb5574583a5503b2db5f218ff5f9deb20b2bfe4f540447640c8f21a78a` |
-| 103 | `wetlang_github_release/bin/wetlang` | 48 | 2 | `ddb439bcbff7b0a10072988327d74d9bbbfa6186207ce83b2e2e5a750fca677c` |
-| 104 | `wetlang_github_release/bin/wetlang.cmd` | 35 | 2 | `4fd697a7d010293e3287761ec698ebf8c24b1092eb8ff2ed40029c92cefb0582` |
-| 105 | `wetlang_github_release/bin/wetvm.dll` | 48,128 | BIN | `4e4ee81ff60f5ad31fbcaae9c7113aad17bff60fdcae48a3162241feb6a9a1e9` |
-| 106 | `wetlang_github_release/CONTRIBUTING.md` | 1,371 | 35 | `e05ce8218f37cbccd487443e6ed7306ff633ec3c93091d8fcf9f4af802955dd5` |
-| 107 | `wetlang_github_release/docs/AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
-| 108 | `wetlang_github_release/docs/LANGUAGE_SPECIFICATION.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
-| 109 | `wetlang_github_release/docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` | 701,662 | BIN | `e493a944c2bdda14a8b23770200782980ebf8ded4e8dcc41b3ed3f16a648d985` |
-| 110 | `wetlang_github_release/docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 29,586 | 213 | `4ac04cf46819a0cac37b0da7d46618b51e8783918ef18ff738b68c1a836c8bc5` |
-| 111 | `wetlang_github_release/examples/01_single_organoid_baseline.wbc` | 259 | BIN | `d4476a8217f32780adc25d8817e5805fd996267e17caf1be1c7524ae4dc6fc47` |
-| 112 | `wetlang_github_release/examples/01_single_organoid_baseline.wet` | 499 | 18 | `30f38bde068238378589ac7d452824f53fee9ef3d2ee8221194857178748f00a` |
-| 113 | `wetlang_github_release/examples/02_krogh_perfused_organoid.wet` | 593 | 19 | `41de709fd536cd8dffb322193491fc54f36e884ce63abb8aea1811e92c7d919d` |
-| 114 | `wetlang_github_release/examples/03_cyber_physical_actuation.wet` | 875 | 30 | `c7c591df662ff70c603b001e3688bc6bb49d8fe15772015e58d541e5aa357a00` |
-| 115 | `wetlang_github_release/examples/04_multi_organoid_connectome.wet` | 574 | 24 | `cd4c2e7e2420c6200d95f9aafaa2955aca5f70003bae6a7447cb6d060313a93a` |
-| 116 | `wetlang_github_release/examples/05_gymnasium_active_inference.py` | 1,524 | 41 | `ba14f7afba193b87701e83499cc5b1812ff497d35911decef269544047e7c174` |
-| 117 | `wetlang_github_release/examples/06_snntorch_validation.py` | 1,036 | 23 | `4d8f52c84fa79b4b2a4b4b7d90693baadd840247d272285e988dbb6acca9dee0` |
-| 118 | `wetlang_github_release/LICENSE` | 778 | 17 | `ad302ce114a707983380135aa042d5b051caae9ee20ae8c270c8dbaeec8e4171` |
-| 119 | `wetlang_github_release/native/bin/msvcrt.def` | 133 | 14 | `6929efe6f41270f6b761f9fe418501e19326f283227b1325a1495531067c4f5d` |
-| 120 | `wetlang_github_release/native/bin/msvcrt.lib` | 3,052 | BIN | `96433a90f40026af91c44c90fccea1f6dbed4b224461aaf2090f39b57fdc900d` |
-| 121 | `wetlang_github_release/native/bin/wetvm.dll` | 48,128 | BIN | `4e4ee81ff60f5ad31fbcaae9c7113aad17bff60fdcae48a3162241feb6a9a1e9` |
-| 122 | `wetlang_github_release/native/bin/wetvm.lib` | 6,502 | BIN | `b81433f0ffd7f2dcc755ce69cbfe2591aa4393cbdece576ad219dbf4133b5aba` |
-| 123 | `wetlang_github_release/native/build.py` | 6,438 | 208 | `c1492b8c733b046b00a30acd795bb3ffe32b590fa2b9b22469fbd3130d9ea41b` |
-| 124 | `wetlang_github_release/native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
-| 125 | `wetlang_github_release/native/include/interlocks.h` | 7,799 | 165 | `2eeee7b4f3868ac4edf4cffd59eaf1c58d7167b45b98a5a7120912fa7e52f2da` |
-| 126 | `wetlang_github_release/native/include/wet_crt.h` | 2,988 | 101 | `a18377fac4743913679dc09fc6630d42098c1d526441450b91f0160b77a5ee55` |
-| 127 | `wetlang_github_release/native/include/wetvm_api.h` | 7,695 | 281 | `aedad5bea596a707ab57506fc956a9160da2a02150880ea7d4a295d693c9c8ac` |
-| 128 | `wetlang_github_release/native/include/wetvm_types.h` | 6,610 | 177 | `90dc6be4f81eb94219c356bc070d53992ad863aeea0789956bd4405cc10858a3` |
-| 129 | `wetlang_github_release/native/include/wetvm_vm.h` | 4,057 | 140 | `15209c34328bb97947386100096274cf39f7ffbc8e436608b6752c690c5541ed` |
-| 130 | `wetlang_github_release/native/src/biophysics.c` | 23,068 | 540 | `9f12d3ca6c10cd8861cfd27bc1b9f33d6093699f790481d12d9a4299c65e77a6` |
-| 131 | `wetlang_github_release/native/src/interlocks.c` | 12,833 | 314 | `f5b7f88bdfe056916239ff9c51b256da2feac36f5b23f3dcb0095b32e4034fa3` |
-| 132 | `wetlang_github_release/native/src/wetvm_api.c` | 20,749 | 577 | `e0a7b379e7531e3740fa7372061696edb82246f36460e36f0fd8f8dfe85081bb` |
-| 133 | `wetlang_github_release/native/src/wetvm_vm.c` | 83,054 | 1953 | `a55c9f22bb0f1d781f10253f7bfa9050f734132203162210fe60b14a1ace3863` |
-| 134 | `wetlang_github_release/pyproject.toml` | 1,424 | 56 | `8ff6f4d98bb7373af36552b5d4c72ff4fa24d1f5a711c0c2f3f68d7f5226f792` |
-| 135 | `wetlang_github_release/README.md` | 11,071 | 225 | `5dee24cff7b6eb106f9f6fc180d56847319cdf98eeeebea2838acda600457f61` |
-| 136 | `wetlang_github_release/requirements.txt` | 75 | 5 | `6c0084c24660fd7f560241e652a7fab38e715289d6ffcdd53e9e8933d7af96f6` |
-| 137 | `wetlang_github_release/setup.py` | 262 | 13 | `4cf4331fe446579d9be12eb58dc6740ce38212edbddf087ab4718a284fa01082` |
-| 138 | `wetlang_github_release/tests/test_actuators.py` | 987 | 36 | `e0740cc2b9fa7b8475c6f7b6f2001cae3312291bdbc88e08f6fdc620ad5b0951` |
-| 139 | `wetlang_github_release/tests/test_compiler.py` | 965 | 30 | `9f312c9e6fae882410299a7194f6b6c150ddcc1075dbd2fafb910747bde36f82` |
-| 140 | `wetlang_github_release/tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
-| 141 | `wetlang_github_release/tests/test_runtime.py` | 643 | 22 | `7f8381b60a4cca97c68f4e63799cbf16ea489df723f7c6c01752a427af672269` |
-| 142 | `wetlang_github_release/tests/test_sandbox.py` | 1,113 | 31 | `5a2415e1659ca63f9374f5913db18b28721967a0de52e3e0551495ac9ff62884` |
-| 143 | `wetlang_github_release/wetlang/__init__.py` | 1,615 | 54 | `6b256cf5205bc599adf96ec2531211b69c4154205e17f3d48a8860281267b0ee` |
-| 144 | `wetlang_github_release/wetlang/bindings/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
-| 145 | `wetlang_github_release/wetlang/bindings/ffi.py` | 17,236 | 455 | `3e86aa73a89b723672d40d8596c721efd7d399d1a41742dd30df519ca4d32de5` |
-| 146 | `wetlang_github_release/wetlang/bindings/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
-| 147 | `wetlang_github_release/wetlang/biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
-| 148 | `wetlang_github_release/wetlang/biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
-| 149 | `wetlang_github_release/wetlang/biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
-| 150 | `wetlang_github_release/wetlang/biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
-| 151 | `wetlang_github_release/wetlang/biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
-| 152 | `wetlang_github_release/wetlang/biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
-| 153 | `wetlang_github_release/wetlang/cli.py` | 7,244 | 191 | `9cdb73e6406f12c08df57bf394d4e225a9f62584f1b599c26087867265e69ca2` |
-| 154 | `wetlang_github_release/wetlang/compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
-| 155 | `wetlang_github_release/wetlang/compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
-| 156 | `wetlang_github_release/wetlang/compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
-| 157 | `wetlang_github_release/wetlang/compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
-| 158 | `wetlang_github_release/wetlang/compiler/emitter.py` | 39,247 | 951 | `0c0daf0ece1d0a17ff0f04f10373d423dd4605ffea4dbf52a4796b5bff743d60` |
-| 159 | `wetlang_github_release/wetlang/compiler/isa.py` | 5,750 | 185 | `1236dcf84a16009f80c2a0d98a58cf56c8d10a4a7ef061f34a0792b3f0976e0c` |
-| 160 | `wetlang_github_release/wetlang/compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
-| 161 | `wetlang_github_release/wetlang/compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
-| 162 | `wetlang_github_release/wetlang/compiler/semantic.py` | 37,453 | 848 | `cafb5abc9bb024e32c27e8718696c01d79f93b900c0fdcc5f556ad660e739c61` |
-| 163 | `wetlang_github_release/wetlang/compiler/token.py` | 7,461 | 270 | `1cb5c20236fd522b40b4589a77df2cd4b0e0097169e175c563b85a479aa77a6c` |
-| 164 | `wetlang_github_release/wetlang/runtime/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
-| 165 | `wetlang_github_release/wetlang/runtime/ffi.py` | 10,509 | 297 | `6e1717b508cb1fae7d6018f4e29fc0cac5fb94cd3a3acdd4e635d6cd7a4f19cc` |
-| 166 | `wetlang_github_release/wetlang/runtime/runtime.py` | 10,880 | 323 | `7a1b134d8712895e2bfe840e95e2853a62ffdf24f23a6218a0dd0b983728dcaa` |
-| 167 | `wetlang_github_release/wetlang/runtime.py` | 16,560 | 450 | `cc6968f7e98f5d23f78355c84a2876a5ad1837ebd20a2622e35431079af62798` |
-| 168 | `wetlang_github_release/wetlang/sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
-| 169 | `wetlang_github_release/wetlang/sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
-| 170 | `wetlang_github_release/wetlang/sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
-| 171 | `wetlang_github_release/wetlang/sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
+| 102 | `wetlang_github_release/.gitignore` | 379 | 35 | `e16352655b73321e73348d85f754869373f3aeabd9e1781c0b9875656029136f` |
+| 103 | `wetlang_github_release/benchmarks/01_active_inference_closed_loop.wbc` | 1,540 | BIN | `65fa6fd3fbda453cd7ecb53ffb0b2e7a7387aafcbaa3223438da42cc3ba458ec` |
+| 104 | `wetlang_github_release/benchmarks/01_active_inference_closed_loop.wet` | 1,778 | 54 | `8dba4c8f3aedacde3c467c3a4bff80b581523ac37842fde9c85634474eb2b0f7` |
+| 105 | `wetlang_github_release/benchmarks/02_polychronous_reservoir_classifier.wbc` | 1,676 | BIN | `171e9560331c67d7f0fddd97efd985572356233e23e3607d5aefcacd3dfadcb7` |
+| 106 | `wetlang_github_release/benchmarks/02_polychronous_reservoir_classifier.wet` | 1,377 | 49 | `b385c987835dae60a479f77e6ec581a81d8ed8ecf5aa83400704fc6275416511` |
+| 107 | `wetlang_github_release/benchmarks/03_homeostatic_stabilization_and_stress.wbc` | 1,111 | BIN | `e7d2c293becbfebf9f39232d7c0f14439eb8c987a54e4be0282656f0cd02bee4` |
+| 108 | `wetlang_github_release/benchmarks/03_homeostatic_stabilization_and_stress.wet` | 1,326 | 43 | `88646455ff957520a8401921c7d8ee9a22b30b6ed78f889fba178acbaa454be5` |
+| 109 | `wetlang_github_release/bin/wetlang` | 48 | 2 | `ddb439bcbff7b0a10072988327d74d9bbbfa6186207ce83b2e2e5a750fca677c` |
+| 110 | `wetlang_github_release/bin/wetlang.cmd` | 35 | 2 | `4fd697a7d010293e3287761ec698ebf8c24b1092eb8ff2ed40029c92cefb0582` |
+| 111 | `wetlang_github_release/bin/wetvm.dll` | 74,240 | BIN | `c737bd45ae1654097e0b0da9202943f0d5cb996c9aa1a3ac6a5d483ba6cba1bd` |
+| 112 | `wetlang_github_release/CONTRIBUTING.md` | 1,371 | 35 | `e05ce8218f37cbccd487443e6ed7306ff633ec3c93091d8fcf9f4af802955dd5` |
+| 113 | `wetlang_github_release/docs/adversarial_debate.md` | 29,926 | 286 | `80620f350cff9f2e9af1781d27e1718c63cfb5efdad4f6bf57b8c55a63fb62a4` |
+| 114 | `wetlang_github_release/docs/AUDIT_REPORT.md` | 6,094 | 73 | `ac4c405458cd04e0e71bd096b0d9dfd754a9ff92ba6e736ee16f86df2bbe0e32` |
+| 115 | `wetlang_github_release/docs/LANGUAGE_SPECIFICATION.md` | 24,511 | 398 | `55d53316fbed42199073c50ccdadd66ab033e922607d875da348ba889ca05458` |
+| 116 | `wetlang_github_release/docs/WETLANG_MASTER_REFERENCE_COMPENDIUM.pdf` | 701,662 | BIN | `e493a944c2bdda14a8b23770200782980ebf8ded4e8dcc41b3ed3f16a648d985` |
+| 117 | `wetlang_github_release/docs/WETLANG_V1_MASTER_AUDIT_DOSSIER.md` | 30,348 | 219 | `7988a6f4ddbf431c6fb846a43a7a7bbba6f46b990ec4a1a32e6f8e3d174680dd` |
+| 118 | `wetlang_github_release/examples/01_single_organoid_baseline.wbc` | 259 | BIN | `d4476a8217f32780adc25d8817e5805fd996267e17caf1be1c7524ae4dc6fc47` |
+| 119 | `wetlang_github_release/examples/01_single_organoid_baseline.wet` | 499 | 18 | `30f38bde068238378589ac7d452824f53fee9ef3d2ee8221194857178748f00a` |
+| 120 | `wetlang_github_release/examples/02_krogh_perfused_organoid.wet` | 593 | 19 | `41de709fd536cd8dffb322193491fc54f36e884ce63abb8aea1811e92c7d919d` |
+| 121 | `wetlang_github_release/examples/03_cyber_physical_actuation.wet` | 875 | 30 | `c7c591df662ff70c603b001e3688bc6bb49d8fe15772015e58d541e5aa357a00` |
+| 122 | `wetlang_github_release/examples/04_multi_organoid_connectome.wet` | 574 | 24 | `cd4c2e7e2420c6200d95f9aafaa2955aca5f70003bae6a7447cb6d060313a93a` |
+| 123 | `wetlang_github_release/examples/05_gymnasium_active_inference.py` | 1,524 | 41 | `ba14f7afba193b87701e83499cc5b1812ff497d35911decef269544047e7c174` |
+| 124 | `wetlang_github_release/examples/06_snntorch_validation.py` | 1,036 | 23 | `4d8f52c84fa79b4b2a4b4b7d90693baadd840247d272285e988dbb6acca9dee0` |
+| 125 | `wetlang_github_release/LICENSE` | 778 | 17 | `ad302ce114a707983380135aa042d5b051caae9ee20ae8c270c8dbaeec8e4171` |
+| 126 | `wetlang_github_release/native/__init__.py` | 61 | 3 | `d0681b3b7d83c57b6d20bfe602085e1620539b6f082cec5308bcaac40394e318` |
+| 127 | `wetlang_github_release/native/bin/kernel32.def` | 235 | 13 | `c3ccb263de8fa517c0b6fba27d957c083b72b43f29c70902ab60a12c9a76aba5` |
+| 128 | `wetlang_github_release/native/bin/kernel32.lib` | 3,480 | BIN | `9a7fd047c8b062c3e371da22a21a04afba4e3413dc27349ad1ba60a900b72f30` |
+| 129 | `wetlang_github_release/native/bin/msvcrt.def` | 182 | 20 | `15775a186f68afed2dc83e1da279ac9aba5b77549e25f44633b7dcf65ba7e553` |
+| 130 | `wetlang_github_release/native/bin/msvcrt.lib` | 3,984 | BIN | `0abf27283319dc423d0c0ad066308cbe84f78765d3ff61a767d2c382abb699a8` |
+| 131 | `wetlang_github_release/native/bin/wetvm.dll` | 74,240 | BIN | `c737bd45ae1654097e0b0da9202943f0d5cb996c9aa1a3ac6a5d483ba6cba1bd` |
+| 132 | `wetlang_github_release/native/bin/wetvm.lib` | 25,982 | BIN | `f2268a5b382202234ca7718980dfe0966dc88119eea5f3941524c1fbeca246dc` |
+| 133 | `wetlang_github_release/native/build.py` | 8,066 | 253 | `d80faddc3126e4c4ddea917b8d60e86317e90a1da4f4e26d9510b600024dae27` |
+| 134 | `wetlang_github_release/native/include/biophysics.h` | 9,671 | 214 | `c1ff823a6b9772a608a761911e20a36bba3d8a721bf95ef167e63c8c75f628fc` |
+| 135 | `wetlang_github_release/native/include/interlocks.h` | 7,799 | 165 | `2eeee7b4f3868ac4edf4cffd59eaf1c58d7167b45b98a5a7120912fa7e52f2da` |
+| 136 | `wetlang_github_release/native/include/wet_crt.h` | 3,325 | 108 | `3c1a972b9cd8b7c7959e2d7362edb27f211577b535869a752b90d51e41a26f3c` |
+| 137 | `wetlang_github_release/native/include/wet_hal.h` | 8,351 | 191 | `a9a2d1dca0115a12a6cbb7fe2dfbd777e0c936e5abb96dc97ddfba3c9c3e0c6a` |
+| 138 | `wetlang_github_release/native/include/wet_hal_intan.h` | 5,000 | 169 | `15e6a6849d146a2522be660507c0ca896dd40db8b3164b866e5ec5d8fede6a10` |
+| 139 | `wetlang_github_release/native/include/wet_hal_maxwell.h` | 5,292 | 173 | `f5be2fac6cba467d89fd78a8017982cea9cdf18710406fc87bc107dce396df05` |
+| 140 | `wetlang_github_release/native/include/wet_hal_pump_valve.h` | 6,625 | 216 | `5db2b883e4822e33c028397394bc3ebc75b4be823e53b5253528faab68c198c2` |
+| 141 | `wetlang_github_release/native/include/wet_hal_sensirion.h` | 4,384 | 153 | `c5cadc6f9f2f1b2b7d0ea747dc19cce5246f1822519dd02d14092c4f9056144b` |
+| 142 | `wetlang_github_release/native/include/wet_scheduler.h` | 6,890 | 136 | `ae755ab83f92e02449f3bd47eeb7223b47a0ee8efee79bff5020215f4e89be4d` |
+| 143 | `wetlang_github_release/native/include/wetvm_api.h` | 8,240 | 301 | `1ce7d24e459ec9bba04d2779564345d78f0fbd72c79430d083b11ecb00f6cf2a` |
+| 144 | `wetlang_github_release/native/include/wetvm_types.h` | 6,610 | 177 | `90dc6be4f81eb94219c356bc070d53992ad863aeea0789956bd4405cc10858a3` |
+| 145 | `wetlang_github_release/native/include/wetvm_vm.h` | 4,235 | 146 | `e769cd7ca730fe3f32e0731b58dd048350163b60d9e6f48be06a67649ee774d4` |
+| 146 | `wetlang_github_release/native/interlocks.py` | 3,689 | 90 | `5831e4240793de5987e600feed2d8d32a6a294f05587113050968078dfe56b7c` |
+| 147 | `wetlang_github_release/native/src/biophysics.c` | 23,068 | 540 | `9f12d3ca6c10cd8861cfd27bc1b9f33d6093699f790481d12d9a4299c65e77a6` |
+| 148 | `wetlang_github_release/native/src/interlocks.c` | 12,833 | 314 | `f5b7f88bdfe056916239ff9c51b256da2feac36f5b23f3dcb0095b32e4034fa3` |
+| 149 | `wetlang_github_release/native/src/wet_hal.c` | 17,159 | 489 | `f975ddf0fa223c9c723c5b500923c5121c35bbc5668bb8565cc9bd6a0fcdf452` |
+| 150 | `wetlang_github_release/native/src/wet_hal_intan.c` | 15,192 | 394 | `a25facbb372a8c41704e7f9d126cd44945866204928fcaf3ab4f831509178813` |
+| 151 | `wetlang_github_release/native/src/wet_hal_maxwell.c` | 14,303 | 357 | `e9c265c923734f464bf80b17bd7bd6f732492c32b1b2a1f2f390ad633185553a` |
+| 152 | `wetlang_github_release/native/src/wet_hal_pump_valve.c` | 16,066 | 463 | `0643ab7ba9b8e772538af708222527a1b845c6d61f84e941534d97a750c3f68d` |
+| 153 | `wetlang_github_release/native/src/wet_hal_sensirion.c` | 10,766 | 332 | `19293c38932593af4d119653c6ff904c1567163fdd58a80d2e729d08987bf3fe` |
+| 154 | `wetlang_github_release/native/src/wet_scheduler.c` | 22,277 | 630 | `1fc17137ae23e51587879d05f6b311b27aaf4f43598582830e9051b194716df4` |
+| 155 | `wetlang_github_release/native/src/wetvm_api.c` | 21,794 | 613 | `8971d78775e796a52f7b1d5c2f0225f584899cf8bb1ae64e7d32a3c3d6044103` |
+| 156 | `wetlang_github_release/native/src/wetvm_vm.c` | 86,904 | 2023 | `4cce51ec2f893ada95d77421d245e841a9d9cff96c39c371b2aade2aeaa4a095` |
+| 157 | `wetlang_github_release/native/wetvm.dll` | 74,240 | BIN | `c737bd45ae1654097e0b0da9202943f0d5cb996c9aa1a3ac6a5d483ba6cba1bd` |
+| 158 | `wetlang_github_release/PROJECT.md` | 14,727 | 198 | `0ed7cee23597284f347b97dc1c85ba3d001b493489ecd773375aff47aa328d40` |
+| 159 | `wetlang_github_release/pyproject.toml` | 1,424 | 56 | `bf1a96c42071520b00e4568bced3fca5241bc3ac8d59d7c9ec540f2accb14c94` |
+| 160 | `wetlang_github_release/pytest.ini` | 80 | 4 | `f4bf1ab2c2b7363adbb36a4924619319baff715b1cc63cb9de6d252a3d11e4d5` |
+| 161 | `wetlang_github_release/README.md` | 13,102 | 232 | `9aedcb2b6eda33a8ce0f92f58a80e6556bd0a8716bf34761c50d39080804427b` |
+| 162 | `wetlang_github_release/requirements.txt` | 75 | 5 | `6c0084c24660fd7f560241e652a7fab38e715289d6ffcdd53e9e8933d7af96f6` |
+| 163 | `wetlang_github_release/setup.py` | 262 | 13 | `4cf4331fe446579d9be12eb58dc6740ce38212edbddf087ab4718a284fa01082` |
+| 164 | `wetlang_github_release/TEST_INFRA.md` | 5,666 | 71 | `9bfab52507a9ce87deaabb3d4f18f439a8826f28c06fbe67a693ed6b99c69606` |
+| 165 | `wetlang_github_release/TEST_READY.md` | 1,330 | 28 | `033fc27c27d1a17cdbf1378a56d1184ef143b5c632cf553a0ef082a8720b3585` |
+| 166 | `wetlang_github_release/tests/conftest.py` | 248 | 10 | `84fa09784e3171a88012caf158a599110e2d2cc4581ecb8ee07cb514f44ee0ba` |
+| 167 | `wetlang_github_release/tests/e2e/__init__.py` | 890 | 43 | `90fc12f4d49c01d1af12d768fff0eef372150c091fac25a1bf94e252f4da4c1d` |
+| 168 | `wetlang_github_release/tests/e2e/common.py` | 38,914 | 1062 | `faf560dae3b7e1b42a2e333b0e75bd619b00fb71c0ba111d4dcdb1ebaeb9dc24` |
+| 169 | `wetlang_github_release/tests/e2e/test_tier1_features.py` | 74,476 | 1582 | `55a282b60f08cdb5d7a7d45faf7aa57cd700c8796e522a2f4082a8298c2959d1` |
+| 170 | `wetlang_github_release/tests/e2e/test_tier2_boundaries.py` | 82,966 | 1835 | `989e23f9ba080d04d6e04c26126a7c6c0dc26effd7f7d6981ec179f93be57562` |
+| 171 | `wetlang_github_release/tests/e2e/test_tier3_pairwise.py` | 42,694 | 976 | `3008ff114dd1105258c4777d37427bf1a08962647f0615a17989caeacee2f6d8` |
+| 172 | `wetlang_github_release/tests/e2e/test_tier4_benchmarks.py` | 26,398 | 577 | `51287efebd301ab19d55bd630548f109ae5e19fb29d73be9abfeedec665003a3` |
+| 173 | `wetlang_github_release/tests/run_e2e_tests.py` | 11,055 | 322 | `2ca92dbb3cc9c230a7d3cf9d38eede7a55cb77e13aa57fd9ce967b918e5f2c48` |
+| 174 | `wetlang_github_release/tests/test_actuators.py` | 987 | 36 | `e0740cc2b9fa7b8475c6f7b6f2001cae3312291bdbc88e08f6fdc620ad5b0951` |
+| 175 | `wetlang_github_release/tests/test_audit_remediation.py` | 15,595 | 372 | `c5df3ce3eb8584e6f6c013a091613a7a7399983683148336fb370d254de64d10` |
+| 176 | `wetlang_github_release/tests/test_benchmarks.py` | 7,830 | 216 | `415b239383f290b91cca89c402389b8f1d586d3c2081fa0392c4891730e4d04f` |
+| 177 | `wetlang_github_release/tests/test_compiler.py` | 965 | 30 | `9f312c9e6fae882410299a7194f6b6c150ddcc1075dbd2fafb910747bde36f82` |
+| 178 | `wetlang_github_release/tests/test_hal_drivers.py` | 29,061 | 709 | `ca8bf850cd03ce66597afdf9b4ac95e91666bc871cdd03ad6755f3a72e71620d` |
+| 179 | `wetlang_github_release/tests/test_interlocks.py` | 12,556 | 302 | `0dd0fa920d0d8a597a4330fd9da868e2046a7daab6fa11a6ddc9b85d950c1725` |
+| 180 | `wetlang_github_release/tests/test_nir_bridge.py` | 17,608 | 480 | `c922ec35314e3d0c355388cf14c923072fced18bb968fdaad7e0c7922684bbd2` |
+| 181 | `wetlang_github_release/tests/test_ode_stability.py` | 17,095 | 425 | `d401dfe9d0d16c79a2a1d5ce5a6eed3d69a79286a5b83266e1bcaba24883d376` |
+| 182 | `wetlang_github_release/tests/test_parser_diagnostics.py` | 13,059 | 437 | `56a0914159f7f9c6302bba7aaa7ec78bd8d4d820337cf40abde9e3f06948cc3b` |
+| 183 | `wetlang_github_release/tests/test_phase2_deep_audit.py` | 14,468 | 348 | `d2b739b630b6e93a060f7a02c21a3c8bc8c0daa19ec508cc2086cd9d452614a4` |
+| 184 | `wetlang_github_release/tests/test_phase3_hardware_readiness.py` | 23,696 | 515 | `9a9418836d4fe8a96a1c8fda9c7fe69702eb97187229c6d5094166e76e83aa01` |
+| 185 | `wetlang_github_release/tests/test_rt_scheduler.py` | 12,112 | 307 | `9bf6783185ad4b93b74ce3c1a10c0f4ae5bf7693f9488c0108b59e6a322fe5a6` |
+| 186 | `wetlang_github_release/tests/test_runtime.py` | 643 | 22 | `7f8381b60a4cca97c68f4e63799cbf16ea489df723f7c6c01752a427af672269` |
+| 187 | `wetlang_github_release/tests/test_sandbox.py` | 1,113 | 31 | `5a2415e1659ca63f9374f5913db18b28721967a0de52e3e0551495ac9ff62884` |
+| 188 | `wetlang_github_release/tests/test_static_verifier.py` | 17,470 | 584 | `54ca1aa3eb0d25c2b451224e8bea3be522a566a7502f2c4d7864dce57c770d5f` |
+| 189 | `wetlang_github_release/tests/test_universal_sandbox.py` | 5,725 | 139 | `ab7be8be193420d1d25a3ab3324be9342ee420b20210c3067199c1741832df1d` |
+| 190 | `wetlang_github_release/wetlang/__init__.py` | 2,004 | 63 | `3ecc051bf952306bbae884529944b9169392ca30c6b8e781fee56d1bc5abee82` |
+| 191 | `wetlang_github_release/wetlang/bindings/__init__.py` | 798 | 42 | `7cfb2e1e1803c1220d5e90ab609730761d1d3500a35b087e5e5f966260b263d0` |
+| 192 | `wetlang_github_release/wetlang/bindings/ffi.py` | 48,474 | 1127 | `57f28e802ac68829986c36c4ab8c21b0f7c7291f6300722c1bd8e54c9ce7fe96` |
+| 193 | `wetlang_github_release/wetlang/bindings/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
+| 194 | `wetlang_github_release/wetlang/bindings/scheduler.py` | 10,504 | 302 | `a26fa321476c3e7ec4644f3b92c2457bc7fda9669dac9104dab7f5385ca6d0ba` |
+| 195 | `wetlang_github_release/wetlang/biophysics/__init__.py` | 386 | 17 | `2f45135b6989e595f5de6fbdec9752182da1831209ce27d4779056f4baf245cc` |
+| 196 | `wetlang_github_release/wetlang/biophysics/mea_grid.py` | 3,885 | 94 | `d0ccaf43957f0d45139a4ad5410a5d1a70d25e65caec517ad36c6d65985ebc84` |
+| 197 | `wetlang_github_release/wetlang/biophysics/ode_solver.py` | 4,088 | 109 | `2ce4db9b21d3fe8ca193cc3a5d15b47c34aff7f2ab32f175dd617a3e5b0c78c1` |
+| 198 | `wetlang_github_release/wetlang/biophysics/stdp.py` | 2,473 | 70 | `f156f43f0b438efe8042b53c54e9e092202b3499987fbcd23b304f2e96c90b50` |
+| 199 | `wetlang_github_release/wetlang/biophysics/stp.py` | 3,623 | 112 | `ceebb61134d250aad60823ac9f0514cffa3124524c4e9e816ba406fca9c6fb5e` |
+| 200 | `wetlang_github_release/wetlang/biophysics/telemetry.py` | 2,752 | 84 | `7ca0976d1c5d9f3fc88b5e7b5e8b8060d06bfd84e99ba96f75682d5b883501a9` |
+| 201 | `wetlang_github_release/wetlang/cli.py` | 7,244 | 191 | `9cdb73e6406f12c08df57bf394d4e225a9f62584f1b599c26087867265e69ca2` |
+| 202 | `wetlang_github_release/wetlang/compiler/__init__.py` | 2,240 | 123 | `79a50dc641756ee2daf14af80d412259090d2ed7d7abbbdb37f1d130eaa0b725` |
+| 203 | `wetlang_github_release/wetlang/compiler/ast_nodes.py` | 6,125 | 254 | `d81ae7e413aa53a49a9ffc0b06309993b58f9cedb4815138d39f2eb8c6ddfd96` |
+| 204 | `wetlang_github_release/wetlang/compiler/compiler_cli.py` | 3,295 | 104 | `245778ace8d44d4af528d6505dba37937e34cb0dca16706b1c998e16c4ca77c2` |
+| 205 | `wetlang_github_release/wetlang/compiler/crypto_signer.py` | 6,002 | 151 | `fc997ccd07fcb31b5ac0d3c864d290e903cb2b76b6b5772bb1a0d393cbe4d854` |
+| 206 | `wetlang_github_release/wetlang/compiler/emitter.py` | 39,247 | 951 | `0c0daf0ece1d0a17ff0f04f10373d423dd4605ffea4dbf52a4796b5bff743d60` |
+| 207 | `wetlang_github_release/wetlang/compiler/isa.py` | 5,750 | 185 | `1236dcf84a16009f80c2a0d98a58cf56c8d10a4a7ef061f34a0792b3f0976e0c` |
+| 208 | `wetlang_github_release/wetlang/compiler/lexer.py` | 14,228 | 407 | `537066d4e72fece2c7fecdd99eb68cd4496c70c7ddb43b37dc41d3f16e736e67` |
+| 209 | `wetlang_github_release/wetlang/compiler/nir_bridge.py` | 34,942 | 910 | `b8145cffc82cf8a1b0b03845ac0092637a7143b8ee5c2408393ffa264f8b1989` |
+| 210 | `wetlang_github_release/wetlang/compiler/parser.py` | 35,928 | 905 | `779033cb13b290b8f448c7575c8629681492b08e79f06cad0799bffafe3c7347` |
+| 211 | `wetlang_github_release/wetlang/compiler/semantic.py` | 37,453 | 848 | `cafb5abc9bb024e32c27e8718696c01d79f93b900c0fdcc5f556ad660e739c61` |
+| 212 | `wetlang_github_release/wetlang/compiler/token.py` | 7,461 | 270 | `1cb5c20236fd522b40b4589a77df2cd4b0e0097169e175c563b85a479aa77a6c` |
+| 213 | `wetlang_github_release/wetlang/runtime/__init__.py` | 585 | 32 | `80f25ac8bdcf546019300a646ea2035f167a57d8f529b995212677ceab963bb1` |
+| 214 | `wetlang_github_release/wetlang/runtime/ffi.py` | 10,509 | 297 | `6e1717b508cb1fae7d6018f4e29fc0cac5fb94cd3a3acdd4e635d6cd7a4f19cc` |
+| 215 | `wetlang_github_release/wetlang/runtime/runtime.py` | 10,880 | 323 | `7a1b134d8712895e2bfe840e95e2853a62ffdf24f23a6218a0dd0b983728dcaa` |
+| 216 | `wetlang_github_release/wetlang/runtime.py` | 18,677 | 505 | `b6ce663da7e4f5898025be58f5e4da55a1e112298c107dc194f0c8eb9fb694c4` |
+| 217 | `wetlang_github_release/wetlang/sandbox/__init__.py` | 665 | 17 | `d9a19ca91142f3e6aee021869b7d4ec18802570b34a4788bcae422ea27e853f8` |
+| 218 | `wetlang_github_release/wetlang/sandbox/gym_env.py` | 4,742 | 125 | `c2e87b7c1c91b7e6acb1752edb2d20b72e505442971dc3bda654a2e0a1b68544` |
+| 219 | `wetlang_github_release/wetlang/sandbox/snntorch_cross_validation.py` | 3,193 | 89 | `520ebfa09f643e5ecedf6994c8d8964450a960cf76900360c0b8e016011d8e7d` |
+| 220 | `wetlang_github_release/wetlang/sandbox/universal_organoid_sandbox.py` | 9,419 | 245 | `7d6bd7d2f6e452a2c6ada2ec1998d0aac3cdd8ff95cdd395bf8dba5bf77a22bd` |
 
 ---
 
@@ -858,7 +907,7 @@ $ python tests/run_e2e_tests.py  (exit_code=0)
  Working Directory  : D:\WetLang
  Tests Discovered   : 313
 ================================================================================
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_ode_stability_suite_happy took 1.19s
+  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_ode_stability_suite_happy took 1.39s
 
 ================================================================================
  E2E Test Execution Summary
@@ -871,13 +920,13 @@ Tier 3      28          0           0           0           28
 Tier 4      5           0           0           0           5         
 --------------------------------------------------------------------------------
 TOTAL: 313 run | 313 passed | 0 skipped | 0 failed | 0 errors
-Elapsed Time: 6.300 s
+Elapsed Time: 7.049 s
 ================================================================================
 
 [STDERR]
 .........................................................................................................................................................................................................................................................................................................................
 ----------------------------------------------------------------------
-Ran 313 tests in 6.299s
+Ran 313 tests in 7.042s
 
 OK
 ```
@@ -892,101 +941,215 @@ cachedir: .pytest_cache
 rootdir: D:\WetLang
 configfile: pytest.ini
 plugins: anyio-4.14.2, platformdirs-4.12.3
-collecting ... collected 93 items
+collecting ... collected 207 items
 
-tests/test_benchmarks.py::test_compile_benchmark_01_active_inference PASSED [  1%]
-tests/test_benchmarks.py::test_compile_benchmark_02_polychronous_reservoir PASSED [  2%]
-tests/test_benchmarks.py::test_compile_benchmark_03_homeostatic_stabilization PASSED [  3%]
-tests/test_benchmarks.py::test_run_benchmark_01_in_wetvm PASSED          [  4%]
-tests/test_benchmarks.py::test_run_benchmark_02_in_wetvm PASSED          [  5%]
-tests/test_benchmarks.py::test_run_benchmark_03_in_wetvm PASSED          [  6%]
-tests/test_benchmarks.py::test_benchmark_telemetry_jsonl_formatting PASSED [  7%]
-tests/test_benchmarks.py::test_benchmark_telemetry_csv_formatting PASSED [  8%]
-tests/test_interlocks.py::test_voltage_clamp_positive_saturation PASSED  [  9%]
-tests/test_interlocks.py::test_voltage_clamp_negative_saturation PASSED  [ 10%]
-tests/test_interlocks.py::test_voltage_clamp_within_water_window_passthrough PASSED [ 11%]
-tests/test_interlocks.py::test_static_compile_rejection_overvoltage PASSED [ 12%]
-tests/test_interlocks.py::test_static_compile_rejection_undervoltage PASSED [ 13%]
-tests/test_interlocks.py::test_sliding_charge_balance_symmetric_biphasic_no_trip PASSED [ 15%]
-tests/test_interlocks.py::test_sliding_charge_balance_unbalanced_dc_trip_at_100_ticks PASSED [ 16%]
-tests/test_interlocks.py::test_sliding_charge_balance_boundary_threshold PASSED [ 17%]
-tests/test_interlocks.py::test_epileptiform_sub_critical_burst_does_not_trip PASSED [ 18%]
-tests/test_interlocks.py::test_epileptiform_focal_burst_few_channels_does_not_trip PASSED [ 19%]
-tests/test_interlocks.py::test_epileptiform_runaway_trips_at_500_ticks PASSED [ 20%]
-tests/test_interlocks.py::test_failsafe_state_lockout_blocks_further_operations PASSED [ 21%]
-tests/test_ode_stability.py::test_coba_lif_extreme_positive_current_injection PASSED [ 22%]
-tests/test_ode_stability.py::test_coba_lif_extreme_negative_current_injection PASSED [ 23%]
-tests/test_ode_stability.py::test_coba_lif_resting_equilibrium_stability PASSED [ 24%]
-tests/test_ode_stability.py::test_absolute_refractory_clamp_2ms PASSED   [ 25%]
-tests/test_ode_stability.py::test_membrane_clamped_at_reset_during_refractory PASSED [ 26%]
-tests/test_ode_stability.py::test_dynamic_threshold_jump_and_decay PASSED [ 27%]
-tests/test_ode_stability.py::test_slow_ahp_potassium_conductance_decay PASSED [ 29%]
-tests/test_ode_stability.py::test_tsodyks_markram_ee_depression_and_recovery PASSED [ 30%]
-tests/test_ode_stability.py::test_tsodyks_markram_ei_facilitation PASSED [ 31%]
-tests/test_ode_stability.py::test_stdp_weight_hard_clamping PASSED       [ 32%]
-tests/test_ode_stability.py::test_stdp_depression_bias_ratio PASSED      [ 33%]
-tests/test_ode_stability.py::test_dales_principle_conductance_reversal PASSED [ 34%]
-tests/test_ode_stability.py::test_native_wetvm_multi_tick_stability PASSED [ 35%]
-tests/test_parser_diagnostics.py::test_lexer_keywords_and_identifiers PASSED [ 36%]
-tests/test_parser_diagnostics.py::test_lexer_physical_literals_si_scaling PASSED [ 37%]
-tests/test_parser_diagnostics.py::test_lexer_line_column_tracking PASSED [ 38%]
-tests/test_parser_diagnostics.py::test_lexer_comment_skipping PASSED     [ 39%]
-tests/test_parser_diagnostics.py::test_lexer_unterminated_block_comment PASSED [ 40%]
-tests/test_parser_diagnostics.py::test_lexer_unterminated_string PASSED  [ 41%]
-tests/test_parser_diagnostics.py::test_parser_arithmetic_precedence PASSED [ 43%]
-tests/test_parser_diagnostics.py::test_parser_logical_operator_precedence PASSED [ 44%]
-tests/test_parser_diagnostics.py::test_parser_parentheses_override PASSED [ 45%]
-tests/test_parser_diagnostics.py::test_parser_unary_operators PASSED     [ 46%]
-tests/test_parser_diagnostics.py::test_parser_grid_and_channel_declarations PASSED [ 47%]
-tests/test_parser_diagnostics.py::test_parser_function_and_control_flow PASSED [ 48%]
-tests/test_parser_diagnostics.py::test_parser_for_loop PASSED            [ 49%]
-tests/test_parser_diagnostics.py::test_parser_stream_declaration PASSED  [ 50%]
-tests/test_parser_diagnostics.py::test_parser_domain_primitives PASSED   [ 51%]
-tests/test_parser_diagnostics.py::test_parser_error_diagnostics PASSED   [ 52%]
-tests/test_parser_diagnostics.py::test_compiler_bytecode_binary_header_and_disasm PASSED [ 53%]
-tests/test_parser_diagnostics.py::test_compile_benchmark_01 PASSED       [ 54%]
-tests/test_parser_diagnostics.py::test_compile_benchmark_02 PASSED       [ 55%]
-tests/test_parser_diagnostics.py::test_compile_benchmark_03 PASSED       [ 56%]
-tests/test_static_verifier.py::test_symbol_resolution_undeclared_identifier PASSED [ 58%]
-tests/test_static_verifier.py::test_symbol_resolution_redeclared_identifier PASSED [ 59%]
-tests/test_static_verifier.py::test_symbol_resolution_duplicate_function_params PASSED [ 60%]
-tests/test_static_verifier.py::test_mea_coordinates_valid PASSED         [ 61%]
-tests/test_static_verifier.py::test_mea_coordinates_row_out_of_bounds PASSED [ 62%]
-tests/test_static_verifier.py::test_mea_coordinates_col_out_of_bounds PASSED [ 63%]
-tests/test_static_verifier.py::test_mea_coordinates_negative_row PASSED  [ 64%]
-tests/test_static_verifier.py::test_mea_coordinates_negative_col PASSED  [ 65%]
-tests/test_static_verifier.py::test_mea_coordinates_linear_out_of_bounds PASSED [ 66%]
-tests/test_static_verifier.py::test_mea_coordinates_linear_negative PASSED [ 67%]
-tests/test_static_verifier.py::test_mea_coordinates_in_stim_stmt_out_of_bounds PASSED [ 68%]
-tests/test_static_verifier.py::test_dimensional_homogeneous_addition PASSED [ 69%]
-tests/test_static_verifier.py::test_dimensional_incompatible_addition PASSED [ 70%]
-tests/test_static_verifier.py::test_dimensional_multiplication_current_time_to_charge PASSED [ 72%]
-tests/test_static_verifier.py::test_dimensional_incompatible_comparison PASSED [ 73%]
-tests/test_static_verifier.py::test_static_voltage_clamp_valid PASSED    [ 74%]
-tests/test_static_verifier.py::test_static_voltage_clamp_positive_exceeded PASSED [ 75%]
-tests/test_static_verifier.py::test_static_voltage_clamp_negative_exceeded PASSED [ 76%]
-tests/test_static_verifier.py::test_static_voltage_clamp_unitless_float_exceeded PASSED [ 77%]
-tests/test_static_verifier.py::test_loop_yield_bounded_while_loop PASSED [ 78%]
-tests/test_static_verifier.py::test_loop_yield_unbounded_while_loop_rejected PASSED [ 79%]
-tests/test_static_verifier.py::test_loop_yield_unbounded_if_branch_rejected PASSED [ 80%]
-tests/test_static_verifier.py::test_loop_yield_bounded_if_branch_accepted PASSED [ 81%]
-tests/test_static_verifier.py::test_loop_yield_pure_compute_loop_accepted PASSED [ 82%]
-tests/test_static_verifier.py::test_loop_yield_unbounded_for_loop_rejected PASSED [ 83%]
-tests/test_static_verifier.py::test_loop_yield_bounded_for_loop_accepted PASSED [ 84%]
-tests/test_static_verifier.py::test_loop_yield_stream_cycle_unbounded_rejected PASSED [ 86%]
-tests/test_static_verifier.py::test_loop_yield_stream_cycle_bounded_accepted PASSED [ 87%]
-tests/test_static_verifier.py::test_loop_yield_nested_block_unbounded_rejected PASSED [ 88%]
-tests/test_static_verifier.py::test_loop_yield_inner_while_loop_evasion_rejected PASSED [ 89%]
-tests/test_static_verifier.py::test_loop_yield_inner_for_loop_evasion_rejected PASSED [ 90%]
-tests/test_static_verifier.py::test_loop_yield_nested_block_if_without_else_rejected PASSED [ 91%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_01_si_time_scaling PASSED [  0%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_02_integer_arithmetic_precision PASSED [  0%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_03_cfg_reachability_pass3 PASSED [  1%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_04_watchdog_timeout_100k PASSED [  1%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_05_leaky_dc_drift_integrator PASSED [  2%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_06_focal_hyperactivity_breaker PASSED [  2%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_07_charge_density_limit PASSED [  3%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_08_cathodic_first_extracellular_sign PASSED [  3%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_09_lfp_zero_baseline PASSED [  4%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_10_amplifier_blanking PASSED [  4%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_11_dynamic_channel_dispatch PASSED [  5%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_12_user_functions_and_calls PASSED [  5%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_13_boolean_normalization PASSED [  6%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_14_safe_unaligned_memory_access PASSED [  6%]
+tests/test_audit_remediation.py::TestAuditRemediation::test_audit_15_free_running_simulation_ticks PASSED [  7%]
+tests/test_benchmarks.py::test_compile_benchmark_01_active_inference PASSED [  7%]
+tests/test_benchmarks.py::test_compile_benchmark_02_polychronous_reservoir PASSED [  8%]
+tests/test_benchmarks.py::test_compile_benchmark_03_homeostatic_stabilization PASSED [  8%]
+tests/test_benchmarks.py::test_run_benchmark_01_in_wetvm PASSED          [  9%]
+tests/test_benchmarks.py::test_run_benchmark_02_in_wetvm PASSED          [  9%]
+tests/test_benchmarks.py::test_run_benchmark_03_in_wetvm PASSED          [ 10%]
+tests/test_benchmarks.py::test_benchmark_telemetry_jsonl_formatting PASSED [ 10%]
+tests/test_benchmarks.py::test_benchmark_telemetry_csv_formatting PASSED [ 11%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_hal_create_and_destroy PASSED [ 11%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_hal_mode_switching PASSED [ 12%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_driver_registration_and_lookup PASSED [ 12%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_emergency_crowbar_fastpath_sub_100us PASSED [ 13%]
+tests/test_hal_drivers.py::TestHalCoreArchitecture::test_router_valve_mapping_dead_head PASSED [ 13%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_command_encoding_and_decoding PASSED [ 14%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_constant_current_dac_ranges PASSED [ 14%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_compliance_rail_detection_and_clearing PASSED [ 14%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_in_situ_1khz_impedance_check PASSED [ 15%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_active_charge_recovery_switch PASSED [ 15%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_intan_fault_injection PASSED [ 16%]
+tests/test_hal_drivers.py::TestIntanRhs2116Driver::test_intan_voltage_stimulation_duration_and_cathodic_polarity PASSED [ 16%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_routing_matrix_configuration PASSED [ 17%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_sequence_buffering_and_playback PASSED [ 17%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_voltage_clamping_and_charge_injection_protection PASSED [ 18%]
+tests/test_hal_drivers.py::TestMaxWellMaxOneDriver::test_maxwell_connect_stim_and_fault_injection PASSED [ 18%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_harvard_rs232_formatting_and_prompt_parsing PASSED [ 19%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_dead_head_overpressure_interlock PASSED [ 19%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_bus_pdo_and_emergency_frames PASSED [ 20%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_dead_head_recovery_and_fault_injection PASSED [ 20%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_bus_boundary_dlc_and_extended_id_segregation PASSED [ 21%]
+tests/test_hal_drivers.py::TestMicrofluidicProtocols::test_can_hil_bidirectional_loopback PASSED [ 21%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_crc8_algorithm PASSED [ 22%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_i2c_flow_reading PASSED [ 22%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_shdlc_framing_and_byte_stuffing PASSED [ 23%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_nak_and_multiple_crc_vectors PASSED [ 23%]
+tests/test_hal_drivers.py::TestSensirionFlowMeter::test_sensirion_shdlc_illegal_stuffing_rejection PASSED [ 24%]
+tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_with_hal_pump_and_flow_routing PASSED [ 24%]
+tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_bytecode_actuation_with_hal PASSED [ 25%]
+tests/test_hal_drivers.py::TestVmHalIntegration::test_vm_bytecode_dead_head_interlock_trip PASSED [ 25%]
+tests/test_interlocks.py::test_voltage_clamp_positive_saturation PASSED  [ 26%]
+tests/test_interlocks.py::test_voltage_clamp_negative_saturation PASSED  [ 26%]
+tests/test_interlocks.py::test_voltage_clamp_within_water_window_passthrough PASSED [ 27%]
+tests/test_interlocks.py::test_static_compile_rejection_overvoltage PASSED [ 27%]
+tests/test_interlocks.py::test_static_compile_rejection_undervoltage PASSED [ 28%]
+tests/test_interlocks.py::test_sliding_charge_balance_symmetric_biphasic_no_trip PASSED [ 28%]
+tests/test_interlocks.py::test_sliding_charge_balance_unbalanced_dc_trip_at_100_ticks PASSED [ 28%]
+tests/test_interlocks.py::test_sliding_charge_balance_boundary_threshold PASSED [ 29%]
+tests/test_interlocks.py::test_epileptiform_sub_critical_burst_does_not_trip PASSED [ 29%]
+tests/test_interlocks.py::test_epileptiform_focal_burst_few_channels_does_not_trip PASSED [ 30%]
+tests/test_interlocks.py::test_epileptiform_runaway_trips_at_500_ticks PASSED [ 30%]
+tests/test_interlocks.py::test_failsafe_state_lockout_blocks_further_operations PASSED [ 31%]
+tests/test_nir_bridge.py::test_cubalif_biophysical_parameters PASSED     [ 31%]
+tests/test_nir_bridge.py::test_lif_parameters PASSED                     [ 32%]
+tests/test_nir_bridge.py::test_izhikevich_cortical_phenotypes PASSED     [ 32%]
+tests/test_nir_bridge.py::test_dales_principle_valid_matrices PASSED     [ 33%]
+tests/test_nir_bridge.py::test_dales_principle_violation_raises PASSED   [ 33%]
+tests/test_nir_bridge.py::test_decompose_to_dales_principle PASSED       [ 34%]
+tests/test_nir_bridge.py::test_feedforward_topological_sort PASSED       [ 34%]
+tests/test_nir_bridge.py::test_recurrent_graph_detection PASSED          [ 35%]
+tests/test_nir_bridge.py::test_hdf5_serialization_roundtrip PASSED       [ 35%]
+tests/test_nir_bridge.py::test_json_serialization_roundtrip PASSED       [ 36%]
+tests/test_nir_bridge.py::test_nir_to_wet_source_generation PASSED       [ 36%]
+tests/test_nir_bridge.py::test_nir_to_wet_ast PASSED                     [ 37%]
+tests/test_nir_bridge.py::test_nir_to_wet_bytecode_and_native_execution PASSED [ 37%]
+tests/test_nir_bridge.py::test_nir_dimension_validation_exceeding_channels PASSED [ 38%]
+tests/test_nir_bridge.py::test_wet_ast_to_nir PASSED                     [ 38%]
+tests/test_nir_bridge.py::test_wet_bytecode_to_nir PASSED                [ 39%]
+tests/test_nir_bridge.py::test_wet_vm_to_nir PASSED                      [ 39%]
+tests/test_nir_bridge.py::test_vm_get_synapse_matrix_live PASSED         [ 40%]
+tests/test_nir_bridge.py::test_multilayer_feedforward_pipeline PASSED    [ 40%]
+tests/test_nir_bridge.py::test_hdf5_to_bytecode_roundtrip PASSED         [ 41%]
+tests/test_nir_bridge.py::test_affine_dales_principle PASSED             [ 41%]
+tests/test_ode_stability.py::test_coba_lif_extreme_positive_current_injection PASSED [ 42%]
+tests/test_ode_stability.py::test_coba_lif_extreme_negative_current_injection PASSED [ 42%]
+tests/test_ode_stability.py::test_coba_lif_resting_equilibrium_stability PASSED [ 42%]
+tests/test_ode_stability.py::test_absolute_refractory_clamp_2ms PASSED   [ 43%]
+tests/test_ode_stability.py::test_membrane_clamped_at_reset_during_refractory PASSED [ 43%]
+tests/test_ode_stability.py::test_dynamic_threshold_jump_and_decay PASSED [ 44%]
+tests/test_ode_stability.py::test_slow_ahp_potassium_conductance_decay PASSED [ 44%]
+tests/test_ode_stability.py::test_tsodyks_markram_ee_depression_and_recovery PASSED [ 45%]
+tests/test_ode_stability.py::test_tsodyks_markram_ei_facilitation PASSED [ 45%]
+tests/test_ode_stability.py::test_stdp_weight_hard_clamping PASSED       [ 46%]
+tests/test_ode_stability.py::test_stdp_depression_bias_ratio PASSED      [ 46%]
+tests/test_ode_stability.py::test_dales_principle_conductance_reversal PASSED [ 47%]
+tests/test_ode_stability.py::test_native_wetvm_multi_tick_stability PASSED [ 47%]
+tests/test_parser_diagnostics.py::test_lexer_keywords_and_identifiers PASSED [ 48%]
+tests/test_parser_diagnostics.py::test_lexer_physical_literals_si_scaling PASSED [ 48%]
+tests/test_parser_diagnostics.py::test_lexer_line_column_tracking PASSED [ 49%]
+tests/test_parser_diagnostics.py::test_lexer_comment_skipping PASSED     [ 49%]
+tests/test_parser_diagnostics.py::test_lexer_unterminated_block_comment PASSED [ 50%]
+tests/test_parser_diagnostics.py::test_lexer_unterminated_string PASSED  [ 50%]
+tests/test_parser_diagnostics.py::test_parser_arithmetic_precedence PASSED [ 51%]
+tests/test_parser_diagnostics.py::test_parser_logical_operator_precedence PASSED [ 51%]
+tests/test_parser_diagnostics.py::test_parser_parentheses_override PASSED [ 52%]
+tests/test_parser_diagnostics.py::test_parser_unary_operators PASSED     [ 52%]
+tests/test_parser_diagnostics.py::test_parser_grid_and_channel_declarations PASSED [ 53%]
+tests/test_parser_diagnostics.py::test_parser_function_and_control_flow PASSED [ 53%]
+tests/test_parser_diagnostics.py::test_parser_for_loop PASSED            [ 54%]
+tests/test_parser_diagnostics.py::test_parser_stream_declaration PASSED  [ 54%]
+tests/test_parser_diagnostics.py::test_parser_domain_primitives PASSED   [ 55%]
+tests/test_parser_diagnostics.py::test_parser_error_diagnostics PASSED   [ 55%]
+tests/test_parser_diagnostics.py::test_compiler_bytecode_binary_header_and_disasm PASSED [ 56%]
+tests/test_parser_diagnostics.py::test_compile_benchmark_01 PASSED       [ 56%]
+tests/test_parser_diagnostics.py::test_compile_benchmark_02 PASSED       [ 57%]
+tests/test_parser_diagnostics.py::test_compile_benchmark_03 PASSED       [ 57%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_01_wbc_header_truncation PASSED [ 57%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_02_wbc_magic_corruption PASSED [ 58%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_03_wbc_crc32_tamper_detection PASSED [ 58%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_04_wbc_unsupported_version PASSED [ 59%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_05_stimulation_without_capability PASSED [ 59%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_06_microfluidics_without_capability PASSED [ 60%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_07_motor_actuation_without_capability PASSED [ 60%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_08_hydrodynamic_shear_stress_enforcement PASSED [ 61%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_09_compiler_shear_stress_rejection PASSED [ 61%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_10_valid_actuator_telemetry_inspection PASSED [ 62%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_11_cryptographic_signing_and_verification PASSED [ 62%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_12_division_by_zero_safety PASSED [ 63%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_13_stack_underflow_safety PASSED [ 63%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_14_multithreaded_concurrent_vms PASSED [ 64%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_15_hundred_cycle_memory_endurance PASSED [ 64%]
+tests/test_phase2_deep_audit.py::TestPhase2DeepAudit::test_16_full_cyber_physical_closed_loop_program PASSED [ 65%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_01_hd_mea_water_window_clamping PASSED [ 65%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_02_persistent_unbounded_dc_accumulator PASSED [ 66%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_03_active_hardware_discharge_recovery PASSED [ 66%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_04_spherical_diffusion_thiele_anoxia PASSED [ 67%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_05_geometry_aware_shear_stress PASSED [ 67%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_06_dead_heading_valve_pump_interlock PASSED [ 68%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_07_ring0_life_support_supervisor PASSED [ 68%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_08_static_arena_allocation_zero_malloc PASSED [ 69%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_09_ed25519_asymmetric_bytecode_provenance PASSED [ 69%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_10_randles_interface_and_compliance_voltage_interlock PASSED [ 70%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_11_configurable_blanking_and_spatial_crosstalk PASSED [ 70%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_12_subnormal_denormal_conductance_zero_clamping PASSED [ 71%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_13_environmental_sensors_ph_do_co2_flow PASSED [ 71%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_14_cmos_thermal_duty_cycle_interlock PASSED [ 71%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_15_optical_bubble_sensor_pump_halt_interlock PASSED [ 72%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_16_load_time_c99_bytecode_verifier PASSED [ 72%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_17_live_state_checkpointing_and_hot_swap PASSED [ 73%]
+tests/test_phase3_hardware_readiness.py::TestPhase3HardwareReadiness::test_18_typed_channel_banks_static_safety PASSED [ 73%]
+tests/test_rt_scheduler.py::test_scheduler_lifecycle PASSED              [ 74%]
+tests/test_rt_scheduler.py::test_scheduler_context_manager PASSED        [ 74%]
+tests/test_rt_scheduler.py::test_spsc_stimulus_and_telemetry_streaming PASSED [ 75%]
+tests/test_rt_scheduler.py::test_quiescent_hard_realtime_benchmark_10k_ticks PASSED [ 75%]
+tests/test_rt_scheduler.py::test_stress_load_hard_realtime_benchmark_10k_ticks PASSED [ 76%]
+tests/test_rt_scheduler.py::test_isochronous_pacing_zero_cumulative_drift PASSED [ 76%]
+tests/test_static_verifier.py::test_symbol_resolution_undeclared_identifier PASSED [ 77%]
+tests/test_static_verifier.py::test_symbol_resolution_redeclared_identifier PASSED [ 77%]
+tests/test_static_verifier.py::test_symbol_resolution_duplicate_function_params PASSED [ 78%]
+tests/test_static_verifier.py::test_mea_coordinates_valid PASSED         [ 78%]
+tests/test_static_verifier.py::test_mea_coordinates_row_out_of_bounds PASSED [ 79%]
+tests/test_static_verifier.py::test_mea_coordinates_col_out_of_bounds PASSED [ 79%]
+tests/test_static_verifier.py::test_mea_coordinates_negative_row PASSED  [ 80%]
+tests/test_static_verifier.py::test_mea_coordinates_negative_col PASSED  [ 80%]
+tests/test_static_verifier.py::test_mea_coordinates_linear_out_of_bounds PASSED [ 81%]
+tests/test_static_verifier.py::test_mea_coordinates_linear_negative PASSED [ 81%]
+tests/test_static_verifier.py::test_mea_coordinates_in_stim_stmt_out_of_bounds PASSED [ 82%]
+tests/test_static_verifier.py::test_dimensional_homogeneous_addition PASSED [ 82%]
+tests/test_static_verifier.py::test_dimensional_incompatible_addition PASSED [ 83%]
+tests/test_static_verifier.py::test_dimensional_multiplication_current_time_to_charge PASSED [ 83%]
+tests/test_static_verifier.py::test_dimensional_incompatible_comparison PASSED [ 84%]
+tests/test_static_verifier.py::test_static_voltage_clamp_valid PASSED    [ 84%]
+tests/test_static_verifier.py::test_static_voltage_clamp_positive_exceeded PASSED [ 85%]
+tests/test_static_verifier.py::test_static_voltage_clamp_negative_exceeded PASSED [ 85%]
+tests/test_static_verifier.py::test_static_voltage_clamp_unitless_float_exceeded PASSED [ 85%]
+tests/test_static_verifier.py::test_loop_yield_bounded_while_loop PASSED [ 86%]
+tests/test_static_verifier.py::test_loop_yield_unbounded_while_loop_rejected PASSED [ 86%]
+tests/test_static_verifier.py::test_loop_yield_unbounded_if_branch_rejected PASSED [ 87%]
+tests/test_static_verifier.py::test_loop_yield_bounded_if_branch_accepted PASSED [ 87%]
+tests/test_static_verifier.py::test_loop_yield_pure_compute_loop_accepted PASSED [ 88%]
+tests/test_static_verifier.py::test_loop_yield_unbounded_for_loop_rejected PASSED [ 88%]
+tests/test_static_verifier.py::test_loop_yield_bounded_for_loop_accepted PASSED [ 89%]
+tests/test_static_verifier.py::test_loop_yield_stream_cycle_unbounded_rejected PASSED [ 89%]
+tests/test_static_verifier.py::test_loop_yield_stream_cycle_bounded_accepted PASSED [ 90%]
+tests/test_static_verifier.py::test_loop_yield_nested_block_unbounded_rejected PASSED [ 90%]
+tests/test_static_verifier.py::test_loop_yield_inner_while_loop_evasion_rejected PASSED [ 91%]
+tests/test_static_verifier.py::test_loop_yield_inner_for_loop_evasion_rejected PASSED [ 91%]
+tests/test_static_verifier.py::test_loop_yield_nested_block_if_without_else_rejected PASSED [ 92%]
 tests/test_static_verifier.py::test_static_voltage_clamp_constant_folded_addition_exceeded PASSED [ 92%]
 tests/test_static_verifier.py::test_static_voltage_clamp_constant_folded_multiplication_exceeded PASSED [ 93%]
-tests/test_static_verifier.py::test_static_voltage_clamp_variable_constant_exceeded PASSED [ 94%]
-tests/test_static_verifier.py::test_negative_high_voltage_capability_and_manifest PASSED [ 95%]
-tests/test_static_verifier.py::test_mea_coordinates_constant_folded_out_of_bounds PASSED [ 96%]
-tests/test_static_verifier.py::test_mea_coordinates_constant_folded_linear_out_of_bounds PASSED [ 97%]
-tests/test_static_verifier.py::test_mea_coordinates_constant_folded_valid_mapping PASSED [ 98%]
-tests/test_static_verifier.py::test_capability_multi_electrode_threshold PASSED [100%]
+tests/test_static_verifier.py::test_static_voltage_clamp_variable_constant_exceeded PASSED [ 93%]
+tests/test_static_verifier.py::test_negative_high_voltage_capability_and_manifest PASSED [ 94%]
+tests/test_static_verifier.py::test_mea_coordinates_constant_folded_out_of_bounds PASSED [ 94%]
+tests/test_static_verifier.py::test_mea_coordinates_constant_folded_linear_out_of_bounds PASSED [ 95%]
+tests/test_static_verifier.py::test_mea_coordinates_constant_folded_valid_mapping PASSED [ 95%]
+tests/test_static_verifier.py::test_capability_multi_electrode_threshold PASSED [ 96%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_01_single_organoid_sandbox PASSED [ 96%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_02_16_organoid_cluster_sandbox PASSED [ 97%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_03_1024_parametric_cluster_scaling PASSED [ 97%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_04_axonal_conduction_delay_timing PASSED [ 98%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_05_krogh_anoxia_compile_check PASSED [ 98%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_06_gymnasium_env_compliance PASSED [ 99%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_07_gymnasium_active_inference_loop PASSED [ 99%]
+tests/test_universal_sandbox.py::TestUniversalSandbox::test_08_snntorch_biophysical_ode_convergence PASSED [100%]
 
 ============================== warnings summary ===============================
 C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\pytest_plugin.py:14
@@ -997,7 +1160,7 @@ C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio
     from _pytest.python import CallSpec2
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-======================== 93 passed, 1 warning in 0.40s ========================
+======================= 207 passed, 1 warning in 10.07s =======================
 ```
 
 ### D.3 Live 10,000-Tick `wetvm.dll` Latency Microbenchmark
@@ -1009,21 +1172,21 @@ Python        : 3.12.10
 Workload      : benchmarks/01_active_inference_closed_loop.wet (dt = 0.1 ms = 100 us)
 
 [Mode A: Per-Tick Python->C FFI vm.step_tick() x 10,000 ticks]
-  mean   : 10.908 us/tick
-  median : 10.300 us/tick
-  p95    : 12.500 us/tick
-  p99    : 22.700 us/tick
-  min    : 8.100 us/tick
-  max    : 1418.500 us/tick
-  wall   : 110.743 ms (1.0 s simulated time)
+  mean   : 23.074 us/tick
+  median : 19.200 us/tick
+  p95    : 24.600 us/tick
+  p99    : 96.100 us/tick
+  min    : 8.500 us/tick
+  max    : 4550.700 us/tick
+  wall   : 234.959 ms (1.0 s simulated time)
 
 [Mode B: Batched Native C vm.run_ticks(10000) x 10 trials]
-  mean       : 9.628 us/tick
-  median     : 9.785 us/tick
-  min        : 8.543 us/tick
-  max        : 10.587 us/tick
-  throughput : 103869 ticks/sec
-  speedup    : 10.39x real-time
+  mean       : 20.469 us/tick
+  median     : 19.237 us/tick
+  min        : 17.078 us/tick
+  max        : 29.695 us/tick
+  throughput : 48854 ticks/sec
+  speedup    : 4.89x real-time
 ```
 
 ---
