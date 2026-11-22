@@ -42,6 +42,7 @@ void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, flo
 void interlocks_active_discharge(interlock_state_t* il, uint8_t channel) {
     if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
     il->cumulative_unbounded_dc_nc[channel] = 0.0f;
+    il->cumulative_dc_femtocoulombs[channel] = 0;
     il->q_dc[channel] = 0.0f;
 }
 
@@ -49,6 +50,7 @@ void interlocks_active_discharge_all(interlock_state_t* il) {
     if (!il) return;
     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
         il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+        il->cumulative_dc_femtocoulombs[ch] = 0;
         il->q_dc[ch] = 0.0f;
     }
 }
@@ -168,10 +170,13 @@ wet_status_t interlocks_record_charge_tick(
         il->q_dc[ch] = il->q_dc[ch] * INTERLOCK_BLEED_DECAY_PER_TICK + new_q;
         if (wet_fabsf(il->q_dc[ch]) < 1e-7f) il->q_dc[ch] = 0.0f;
 
-        /* Phase 3: Persistent unbounded cumulative DC charge accumulator (zero decay) */
-        il->cumulative_unbounded_dc_nc[ch] += new_q;
+        /* Phase 3: Persistent unbounded cumulative DC charge accumulator (zero decay, exact fixed-point femtoCoulombs) */
+        int64_t delta_fc = (int64_t)((double)new_q * 1000000.0);
+        il->cumulative_dc_femtocoulombs[ch] += delta_fc;
+        il->cumulative_unbounded_dc_nc[ch] = (float)((double)il->cumulative_dc_femtocoulombs[ch] * 1e-6);
         if (wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) < 1e-7f) {
             il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+            il->cumulative_dc_femtocoulombs[ch] = 0;
         }
 
         float charge_limit = il->max_charge_per_phase_nc > 0.0f ? il->max_charge_per_phase_nc : INTERLOCK_CHARGE_LIMIT_NC;

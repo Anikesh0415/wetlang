@@ -92,6 +92,7 @@ typedef struct {
 
     /* Phase 3: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
     float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
+    int64_t  cumulative_dc_femtocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point femtoCoulombs (1 nC = 1e6 fC) - immune to multi-week float32 ULP saturation */
 
     /* Phase 3: Electrode Material & Area Parameterization */
     uint8_t  electrode_material;   /* wet_electrode_material_t */
