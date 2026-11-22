@@ -2,7 +2,7 @@
 """
 WetLang Master Technical Reference & Verification Compendium Generator
 ----------------------------------------------------------------------
-Platform : Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)
+Platform : Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)
 Author   : Anikesh Tiwari (Surat, Gujarat, India)
 
 Responsibilities:
@@ -249,19 +249,23 @@ def run_live_logs() -> Tuple[Dict[str, str], Dict[str, object]]:
     m_e2e = re.search(r"Elapsed Time:\s*([0-9.]+)\s*s", e2e_out)
     metrics["e2e_elapsed_s"] = float(m_e2e.group(1)) if m_e2e else 0.0
 
-    # 2. Synthetic pytest suite
+    # 2. Synthetic & Integration pytest suite (all 12 test modules)
+    pytest_files = [
+        "tests/test_audit_remediation.py",
+        "tests/test_benchmarks.py",
+        "tests/test_hal_drivers.py",
+        "tests/test_interlocks.py",
+        "tests/test_nir_bridge.py",
+        "tests/test_ode_stability.py",
+        "tests/test_parser_diagnostics.py",
+        "tests/test_phase2_deep_audit.py",
+        "tests/test_phase3_hardware_readiness.py",
+        "tests/test_rt_scheduler.py",
+        "tests/test_static_verifier.py",
+        "tests/test_universal_sandbox.py",
+    ]
     res_pyt = subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "pytest",
-            "tests/test_benchmarks.py",
-            "tests/test_interlocks.py",
-            "tests/test_ode_stability.py",
-            "tests/test_parser_diagnostics.py",
-            "tests/test_static_verifier.py",
-            "-v",
-        ],
+        [sys.executable, "-m", "pytest"] + pytest_files + ["-v"],
         cwd=str(REPO_ROOT),
         capture_output=True,
         text=True,
@@ -397,7 +401,7 @@ def sync_volumes_with_live_metrics(metrics: Dict[str, object]) -> None:
     )
     vol2_block = "\n".join([
         "<!-- LIVE_BENCH_START -->",
-        "Measured live on the host workstation running the shipped 39,936-byte `native/bin/wetvm.dll` executing compiled Benchmark 01 (`01_active_inference_closed_loop.wet`, 1,540 bytes, 64-neuron COBA-LIF + AHP + Tsodyks-Markram STP + pairwise STDP + full hardware watchdogs) after CPU/cache warmup (identical single-capture run logged verbatim in Volume VI Appendix D.3):",
+        "Measured live on the host workstation running the shipped 74,240-byte `native/bin/wetvm.dll` executing compiled Benchmark 01 (`01_active_inference_closed_loop.wet`, 1,540 bytes, 64-neuron COBA-LIF + AHP + Tsodyks-Markram STP + pairwise STDP + full hardware watchdogs) after CPU/cache warmup (identical single-capture run logged verbatim in Volume VI Appendix D.3):",
         "",
         f"- **Host Platform**: `{metrics['platform']}` | Architecture: `{metrics['machine']}` | CPU: `{metrics['processor']}` | Python: `{metrics['python']}`",
         "- **Biophysical Real-Time Budget**: `dt = 0.1 ms = 100.000 us/tick` (10,000 ticks = 1.000 s of simulated organoid time)",
@@ -436,8 +440,8 @@ def sync_volumes_with_live_metrics(metrics: Dict[str, object]) -> None:
         "| **E2E Tier 3** (`test_tier3_pairwise.py`) | `python tests/run_e2e_tests.py` | 28 | 28 | 0 | 0 | — |",
         "| **E2E Tier 4** (`test_tier4_benchmarks.py`) | `python tests/run_e2e_tests.py` | 5 | 5 | 0 | 0 | — |",
         f"| **E2E Subtotal** | `python tests/run_e2e_tests.py` | **313** | **313** | **0** | **0** | **{metrics['e2e_elapsed_s']:.3f} s** |",
-        f"| **Synthetic Unit Suite** (`tests/test_*.py`) | `python -m pytest tests/test_*.py -v` | **93** | **93** | **0** | **0** | **{metrics['pytest_elapsed_s']:.2f} s** |",
-        f"| **GRAND TOTAL** | **All Verification Suites** | **406** | **406** | **0** | **0** | **{metrics['total_test_elapsed_s']:.2f} s** |",
+        f"| **Unit & Integration Suite** (`tests/test_*.py`) | `python -m pytest tests/test_*.py -v` | **207** | **207** | **0** | **0** | **{metrics['pytest_elapsed_s']:.2f} s** |",
+        f"| **GRAND TOTAL** | **All Verification Suites** | **520** | **520** | **0** | **0** | **{metrics['total_test_elapsed_s']:.2f} s** |",
         "<!-- LIVE_TEST_END -->",
     ])
     vol4_new = re.sub(
@@ -511,7 +515,7 @@ def generate_vol6_markdown() -> Tuple[Path, Dict[str, object]]:
     parts: List[str] = []
     parts.append("# Volume VI: Verified Appendices, Checksums, Live Logs & Source Listings\n")
     parts.append(
-        "**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)  \n"
+        "**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  \n"
         "**Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  \n"
         f"**Generated Programmatically:** `{ts}` by `docs/compendium/generate_compendium.py`  \n"
         f"**Repository Scope:** {len(manifest)} tracked files | {total_bytes:,} bytes | {total_lines:,} text lines\n"
@@ -826,7 +830,7 @@ def build_master_pdf(
         canvas.drawString(
             margin_l,
             0.22 * inch,
-            "WETWORLD RESEARCH  |  WETLANG NEURAL ORGANOID COMPUTING PLATFORM v1.0.0",
+            "WETWORLD RESEARCH  |  WETLANG NEURAL ORGANOID COMPUTING PLATFORM v1.1.0",
         )
         canvas.drawRightString(page_w - margin_r, 0.22 * inch, "SURAT, GUJARAT, INDIA")
         canvas.restoreState()
@@ -842,7 +846,7 @@ def build_master_pdf(
         canvas.drawString(
             margin_l,
             page_h - 0.46 * inch,
-            "WetLang Master Technical Reference & Verification Compendium (v1.0.0)",
+            "WetLang Master Technical Reference & Verification Compendium (v1.1.0)",
         )
         canvas.drawRightString(page_w - margin_r, page_h - 0.46 * inch, "Wetworld Platform")
         # Footer
@@ -864,7 +868,7 @@ def build_master_pdf(
         bottomMargin=margin_b,
         title="WetLang Master Technical Reference & Verification Compendium",
         author="Anikesh Tiwari (Wetworld)",
-        subject="WetLang v1.0.0 Language Spec, Native C99 VM, Biophysics, Watchdogs & Verified Appendices",
+        subject="WetLang v1.1.0 Language Spec, Native C99 VM, Biophysics, Watchdogs & Verified Appendices",
     )
 
     frame_cover = Frame(margin_l, margin_b, usable_w, page_h - margin_t - margin_b, id="cover")
@@ -958,10 +962,10 @@ def build_master_pdf(
         f"({live_metrics['batch_tput']:,.0f} ticks/s, {live_metrics['batch_rt']:.2f}x real-time @ dt = 0.1 ms)"
     )
     meta_rows = [
-        [Paragraph("<b>Platform &amp; Release</b>", st_tbl_cell), Paragraph("Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)", st_tbl_cell)],
+        [Paragraph("<b>Platform &amp; Release</b>", st_tbl_cell), Paragraph("Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)", st_tbl_cell)],
         [Paragraph("<b>Founder &amp; Lead Architect</b>", st_tbl_cell), Paragraph("Anikesh Tiwari (Surat, Gujarat, India)", st_tbl_cell)],
-        [Paragraph("<b>Verification Baseline</b>", st_tbl_cell), Paragraph("406 / 406 Automated Tests Passing (313 4-Tier E2E + 93 Synthetic Unit Tests)", st_tbl_cell)],
-        [Paragraph("<b>Native Runtime Binary</b>", st_tbl_cell), Paragraph("wetvm.dll — 39,936 bytes (Pure C99, Clang -nostdlib + msvcrt.lib, Zero External Deps)", st_tbl_cell)],
+        [Paragraph("<b>Verification Baseline</b>", st_tbl_cell), Paragraph("520 / 520 Automated Tests Passing (313 4-Tier E2E + 207 Unit &amp; Integration Tests)", st_tbl_cell)],
+        [Paragraph("<b>Native Runtime Binary</b>", st_tbl_cell), Paragraph("wetvm.dll — 74,240 bytes (Pure C99 + HAL Drivers + RT Scheduler, Clang -nostdlib + msvcrt.lib)", st_tbl_cell)],
         [Paragraph("<b>Live Measured Throughput</b>", st_tbl_cell), Paragraph(tput_line, st_tbl_cell)],
         [Paragraph("<b>Empirical Grounding</b>", st_tbl_cell), Paragraph("9 Published Zenodo Papers + Master Textbook + 252.09 GiB FinalSpark fs369 30 kHz Dataset", st_tbl_cell)],
         [Paragraph("<b>Compilation Timestamp</b>", st_tbl_cell), Paragraph(datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), st_tbl_cell)],
@@ -1336,7 +1340,7 @@ def main() -> int:
         ("Volume II", "Native C99 Virtual Machine, C-ABI FFI & Memory Model", COMPENDIUM_DIR / "VOL_2_NATIVE_RUNTIME_AND_FFI.md"),
         ("Volume III", "Biophysical Digital Twin & Empirical Scientific Grounding", COMPENDIUM_DIR / "VOL_3_BIOPHYSICS_AND_EMPIRICAL_GROUNDING.md"),
         ("Volume IV", "Hardware Safety Watchdogs & Test Verification Matrix", COMPENDIUM_DIR / "VOL_4_SAFETY_WATCHDOGS_AND_VERIFICATION.md"),
-        ("Volume V", "Benchmarks, Adversarial Debates, Honest v1.0 Limitations & Hardware Roadmap", COMPENDIUM_DIR / "VOL_5_BENCHMARKS_DEBATES_AND_ROADMAP.md"),
+        ("Volume V", "Benchmarks, Adversarial Debates, Honest v1.1 Limitations & Hardware Roadmap", COMPENDIUM_DIR / "VOL_5_BENCHMARKS_DEBATES_AND_ROADMAP.md"),
         ("Volume VI", "Verified Appendices, Checksums, Live Logs & Source Listings", vol6_path),
     ]
     for _, _, vp in vol_files:

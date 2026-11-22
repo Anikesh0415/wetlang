@@ -2,7 +2,7 @@
 
 **Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
-**Generated Programmatically:** `2026-11-22 13:46:12 UTC` by `docs/compendium/generate_compendium.py`  
+**Generated Programmatically:** `2026-11-22 13:47:26 UTC` by `docs/compendium/generate_compendium.py`  
 **Repository Scope:** 220 tracked files | 3,782,475 bytes | 63,467 text lines
 
 ---
@@ -907,7 +907,6 @@ $ python tests/run_e2e_tests.py  (exit_code=0)
  Working Directory  : D:\WetLang
  Tests Discovered   : 313
 ================================================================================
-  [PERF WARNING] tests.e2e.test_tier1_features.TestTier1SyntheticSuite.test_tier1_f27_ode_stability_suite_happy took 1.39s
 
 ================================================================================
  E2E Test Execution Summary
@@ -920,13 +919,13 @@ Tier 3      28          0           0           0           28
 Tier 4      5           0           0           0           5         
 --------------------------------------------------------------------------------
 TOTAL: 313 run | 313 passed | 0 skipped | 0 failed | 0 errors
-Elapsed Time: 7.049 s
+Elapsed Time: 7.062 s
 ================================================================================
 
 [STDERR]
 .........................................................................................................................................................................................................................................................................................................................
 ----------------------------------------------------------------------
-Ran 313 tests in 7.042s
+Ran 313 tests in 7.070s
 
 OK
 ```
@@ -1160,7 +1159,7 @@ C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio
     from _pytest.python import CallSpec2
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-======================= 207 passed, 1 warning in 10.07s =======================
+======================= 207 passed, 1 warning in 6.58s ========================
 ```
 
 ### D.3 Live 10,000-Tick `wetvm.dll` Latency Microbenchmark
@@ -1172,21 +1171,21 @@ Python        : 3.12.10
 Workload      : benchmarks/01_active_inference_closed_loop.wet (dt = 0.1 ms = 100 us)
 
 [Mode A: Per-Tick Python->C FFI vm.step_tick() x 10,000 ticks]
-  mean   : 23.074 us/tick
-  median : 19.200 us/tick
-  p95    : 24.600 us/tick
-  p99    : 96.100 us/tick
+  mean   : 28.385 us/tick
+  median : 19.300 us/tick
+  p95    : 25.600 us/tick
+  p99    : 88.500 us/tick
   min    : 8.500 us/tick
-  max    : 4550.700 us/tick
-  wall   : 234.959 ms (1.0 s simulated time)
+  max    : 19950.400 us/tick
+  wall   : 287.303 ms (1.0 s simulated time)
 
 [Mode B: Batched Native C vm.run_ticks(10000) x 10 trials]
-  mean       : 20.469 us/tick
-  median     : 19.237 us/tick
-  min        : 17.078 us/tick
-  max        : 29.695 us/tick
-  throughput : 48854 ticks/sec
-  speedup    : 4.89x real-time
+  mean       : 24.746 us/tick
+  median     : 20.582 us/tick
+  min        : 19.220 us/tick
+  max        : 42.435 us/tick
+  throughput : 40410 ticks/sec
+  speedup    : 4.04x real-time
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Volume II: Native C99 Virtual Machine, C-ABI FFI & Memory Model
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
 **Source Scope:** `native/include/wetvm_types.h`, `native/include/wetvm_api.h`, `native/include/wetvm_vm.h`, `native/include/wet_crt.h`, `native/src/wetvm_api.c`, `native/src/wetvm_vm.c`, `native/build.py`, `bindings/ffi.py`, `bindings/runtime.py`
 
@@ -182,20 +182,20 @@ To guarantee zero heap allocations during tick stepping and eliminate C-to-Pytho
 ## 5. Live 10,000-Tick Execution Latency Microbenchmark
 
 <!-- LIVE_BENCH_START -->
-Measured live on the host workstation running the shipped 39,936-byte `native/bin/wetvm.dll` executing compiled Benchmark 01 (`01_active_inference_closed_loop.wet`, 1,540 bytes, 64-neuron COBA-LIF + AHP + Tsodyks-Markram STP + pairwise STDP + full hardware watchdogs) after CPU/cache warmup (identical single-capture run logged verbatim in Volume VI Appendix D.3):
+Measured live on the host workstation running the shipped 74,240-byte `native/bin/wetvm.dll` executing compiled Benchmark 01 (`01_active_inference_closed_loop.wet`, 1,540 bytes, 64-neuron COBA-LIF + AHP + Tsodyks-Markram STP + pairwise STDP + full hardware watchdogs) after CPU/cache warmup (identical single-capture run logged verbatim in Volume VI Appendix D.3):
 
 - **Host Platform**: `Windows-11-10.0.26300-SP0` | Architecture: `AMD64` | CPU: `Intel64 Family 6 Model 189 Stepping 1, GenuineIntel` | Python: `3.12.10`
 - **Biophysical Real-Time Budget**: `dt = 0.1 ms = 100.000 us/tick` (10,000 ticks = 1.000 s of simulated organoid time)
 
 | Execution Mode | Samples | Mean (us/tick) | Median (us/tick) | p95 (us/tick) | p99 (us/tick) | Min (us/tick) | Max (us/tick) | Effective Throughput | Real-Time Speedup |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **Per-Tick FFI (`vm.step_tick()`)** | 10,000 ticks | **10.908** | **10.300** | **12.500** | **22.700** | 8.100 | 1,418.500 | 91,677 ticks/s | **9.17x** |
-| **Batched Native C (`vm.run_ticks(10000)`)** | 10 trials (100,000 ticks) | **9.628** | **9.785** | — | — | 8.543 | 10.587 | **103,869 ticks/s** | **10.39x** |
+| **Per-Tick FFI (`vm.step_tick()`)** | 10,000 ticks | **28.385** | **19.300** | **25.600** | **88.500** | 8.500 | 19,950.400 | 35,230 ticks/s | **3.52x** |
+| **Batched Native C (`vm.run_ticks(10000)`)** | 10 trials (100,000 ticks) | **24.746** | **20.582** | — | — | 19.220 | 42.435 | **40,410 ticks/s** | **4.04x** |
 
 ### Engineering Analysis of Measured Performance
-1. **Real-Time Margin**: Even in unoptimized `-O0` debug-level codegen, `wetvm.dll` executes a full 64-neuron conductance-based network with STP, STDP, volume conduction, and cycle-accurate safety watchdogs **10.39x faster than biological real time** in batched C (`9.628 us` vs `100.0 us` budget) and **9.17x faster than real time** when crossing the Python `ctypes` FFI boundary on every single 0.1 ms tick (`10.908 us`, total wall time `110.743 ms` for 1.0 s of simulated time).
-2. **FFI Boundary Cost**: Comparing single-tick Python FFI mean (`10.908 us`) against batched C mean (`9.628 us`) isolates the per-tick Python + `ctypes` + `perf_counter_ns` overhead at **~1.28 us/tick**.
-3. **Tail Latency Jitter (Critical Real-Time Observation)**: The `max = 1.419 ms` (`1,418.500 us`) outlier on a non-RT Windows 11 desktop OS is caused by Windows thread preemption (and Python GC/OS timer ticks), NOT by C-VM execution variance (batched C 10,000-tick trial averages vary only between `8.543` and `10.587 us/tick`). Hard real-time physical MEA hardware loops cannot rely on user-space Windows scheduling; they require a real-time kernel (`PREEMPT_RT`) or dedicated FPGA/MCU execution (see Volume V).
+1. **Real-Time Margin**: Even in unoptimized `-O0` debug-level codegen, `wetvm.dll` executes a full 64-neuron conductance-based network with STP, STDP, volume conduction, and cycle-accurate safety watchdogs **4.04x faster than biological real time** in batched C (`24.746 us` vs `100.0 us` budget) and **3.52x faster than real time** when crossing the Python `ctypes` FFI boundary on every single 0.1 ms tick (`28.385 us`, total wall time `287.303 ms` for 1.0 s of simulated time).
+2. **FFI Boundary Cost**: Comparing single-tick Python FFI mean (`28.385 us`) against batched C mean (`24.746 us`) isolates the per-tick Python + `ctypes` + `perf_counter_ns` overhead at **~3.64 us/tick**.
+3. **Tail Latency Jitter (Critical Real-Time Observation)**: The `max = 19.950 ms` (`19,950.400 us`) outlier on a non-RT Windows 11 desktop OS is caused by Windows thread preemption (and Python GC/OS timer ticks), NOT by C-VM execution variance (batched C 10,000-tick trial averages vary only between `19.220` and `42.435 us/tick`). Hard real-time physical MEA hardware loops cannot rely on user-space Windows scheduling; they require a real-time kernel (`PREEMPT_RT`) or dedicated FPGA/MCU execution (see Volume V).
 4. **Immediate Optimization Headroom**: `native/build.py` currently omits `-O2`/`-O3` compiler optimization flags, and `biophysics_step_tick()` iterates densely over all `64 x 64 = 4,096` synapse slots while recomputing `wet_exp(-dt / tau_rec_ms)` and `wet_exp(-dt / tau_fac_ms)` per synapse per tick even though only 4 distinct `(tau_rec, tau_fac)` cortical classes exist. Enabling `-O3`, using a Compressed Sparse Row (CSR) synapse list (~800 active synapses instead of 4,096 checks), and hoisting the 4 STP decay factors into a lookup table will reduce native tick latency well below `5 us/tick` (>20x real time).
 <!-- LIVE_BENCH_END -->
 

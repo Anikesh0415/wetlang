@@ -1,6 +1,6 @@
 # Volume III: Biophysical Digital Twin & Empirical Scientific Grounding
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
 **Source Scope:** `native/include/biophysics.h`, `native/src/biophysics.c`, `biophysics/ode_solver.py`, `biophysics/stp.py`, `biophysics/stdp.py`, `biophysics/mea_grid.py`, `biophysics/telemetry.py`, `all_10_zenodo_papers.txt`, FinalSpark `fs369` dataset (`E:\data\fs369\fs369data`)
 
@@ -120,6 +120,20 @@ On every spike of neuron $i$:
    - **Conductance Clamping**: $w \leftarrow \text{clamp}(w + \Delta w,\ 0.0\text{ nS},\ 40.0\text{ nS})$.
    - **Dale's Principle**: Inhibitory presynaptic neurons (`is_excitatory[pre] == 0`) never undergo autonomous STDP weight updates and never flip synaptic sign; conductance magnitude $w \ge 0$ always remains non-negative while excitatory/inhibitory polarity is fixed solely by $E_e = 0\text{ mV}$ vs $E_i = -80\text{ mV}$.
    - **Closed-Loop Neuromodulation**: `MODULATE_STDP(0, 0, scale)` modulates global $\eta_{\text{stdp}} = \texttt{stdp\_lr\_scale}$ (reward/punishment gating), while `MODULATE_STDP(pre, post, dw)` directly perturbs $w_{\text{pre},\text{post}}$ within $[0, 40]\text{ nS}$.
+
+### 4.1 Live Synaptic Matrix Introspection (`wet_vm_get_synapse_matrix`)
+
+To support continuous non-invasive connectome introspection and dynamic plasticity monitoring, WetLang v1.1 exposes live synapse matrix introspection directly across the C-ABI:
+- **Exported C-ABI Function**:
+  ```c
+  WET_EXPORT wet_status_t wet_vm_get_synapse_matrix(
+      const wet_vm_instance_t* vm,
+      float* out_weights,
+      size_t max_count
+  );
+  ```
+- **Zero-Copy Python Binding**: Wrapped in `WetVM.get_synapse_matrix()`, returning a contiguous $(64, 64)$ float32 NumPy array containing the exact active synaptic conductance values $w_{ij} \in [0.0, 40.0]\text{ nS}$ in biological real time.
+- **Dale's Principle Decomposition & Verification**: Enables direct online verification of Dale's principle decomposition ($W = W_+ - W_-$), synaptic drift tracking, and real-time connectivity matrix extraction without interrupting the $10\text{ kHz}$ hard real-time scheduler loop.
 
 ---
 

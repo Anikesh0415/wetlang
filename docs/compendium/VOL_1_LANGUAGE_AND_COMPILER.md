@@ -1,6 +1,6 @@
 # Volume I: WetLang Language Specification & Compiler Internals
 
-**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.0.0)  
+**Platform:** Wetworld — WetLang Neural Organoid Computing Platform (v1.1.0)  
 **Founder & Lead Architect:** Anikesh Tiwari (Surat, Gujarat, India)  
 **Source Scope:** `compiler/token.py`, `compiler/lexer.py`, `compiler/ast_nodes.py`, `compiler/parser.py`, `compiler/semantic.py`, `compiler/isa.py`, `compiler/emitter.py`, `compiler/compiler_cli.py`, `docs/language_spec.md`
 
