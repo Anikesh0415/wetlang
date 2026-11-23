@@ -1,0 +1,524 @@
+"""
+WetLang High-Level Virtual Machine Runtime Wrapper
+Provides object-oriented Python interface with zero-copy NumPy array telemetry views.
+"""
+
+from pathlib import Path
+from typing import Optional, Tuple, Union
+import ctypes
+import numpy as np
+
+from bindings.ffi import (
+    load_wetvm_lib,
+    WetStatus,
+    WetVMConfig,
+    WetTelemetry,
+    WetActuatorTelemetry,
+    WetHalMode,
+    WetHalConfig,
+    WetHalStatus,
+)
+
+
+class WetVMError(RuntimeError):
+    """Exception raised for WetVM execution or validation errors."""
+    def __init__(self, status: WetStatus, message: str):
+        super().__init__(f"[{status.name}] {message}")
+        self.status = status
+        self.raw_message = message
+
+
+class WetTelemetryView:
+    """Wrapper around WetTelemetry providing convenient properties and array views."""
+    def __init__(self, raw: WetTelemetry):
+        self._raw = raw
+
+    @property
+    def current_tick(self) -> int:
+        return int(self._raw.current_tick)
+
+    @property
+    def tick_index(self) -> int:
+        return int(self._raw.current_tick)
+
+    @property
+    def sim_time_ms(self) -> float:
+        return float(self._raw.sim_time_ms)
+
+    @property
+    def population_rate_hz(self) -> float:
+        return float(self._raw.population_rate_hz)
+
+    @property
+    def channel_voltages(self) -> np.ndarray:
+        arr = np.ctypeslib.as_array(self._raw.voltages)
+        arr.flags.writeable = False
+        return arr
+
+    @property
+    def spike_raster(self) -> np.ndarray:
+        arr = np.ctypeslib.as_array(self._raw.spikes)
+        return arr
+
+    @property
+    def last_charge_nc(self) -> np.ndarray:
+        arr = np.ctypeslib.as_array(self._raw.last_charge_nc)
+        return arr
+
+    def get(self, key: str, default: object = None) -> object:
+        """Dictionary-like get method for telemetry attributes."""
+        if hasattr(self, key):
+            val = getattr(self, key)
+            return val() if callable(val) else val
+        return default
+
+    def __getitem__(self, key: str) -> object:
+        """Dictionary-like indexer for telemetry attributes."""
+        if hasattr(self, key):
+            val = getattr(self, key)
+            return val() if callable(val) else val
+        raise KeyError(key)
+
+
+class WetVM:
+    """
+    High-level Python wrapper for the native WetVM execution engine.
+    Supports cycle-accurate stepping, batch tick execution, and zero-copy NumPy views.
+    """
+
+    def __init__(
+        self,
+        config: Optional[WetVMConfig] = None,
+        lib_path: Optional[Union[str, Path]] = None
+    ):
+        self._lib = load_wetvm_lib(Path(lib_path) if lib_path else None)
+        self._config = config if config is not None else WetVMConfig()
+        self._handle = self._lib.wet_create_vm(ctypes.byref(self._config))
+        if not self._handle:
+            raise MemoryError("Failed to allocate native WetVM instance")
+
+        # Persistent telemetry buffer for reuse and zero-copy NumPy mapping
+        self._telem = WetTelemetry()
+        self._closed = False
+        self._is_halted = False
+        self._bytecode_loaded = False
+
+    def close(self) -> None:
+        """Frees the native VM resources."""
+        if not self._closed and self._handle:
+            self._lib.wet_free_vm(self._handle)
+            self._handle = None
+            self._closed = True
+
+    def __enter__(self) -> "WetVM":
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        self.close()
+
+    def __del__(self) -> None:
+        self.close()
+
+    def _check_alive(self) -> None:
+        if self._closed or not self._handle:
+            raise RuntimeError("WetVM instance is closed")
+
+    def load_bytecode(self, bytecode: Union[bytes, bytearray, str, Path]) -> None:
+        """
+        Loads WBC binary bytecode into the VM.
+        Accepts raw bytes, or a filesystem path to a .wbc file.
+        """
+        self._check_alive()
+        if isinstance(bytecode, (str, Path)):
+            with open(bytecode, "rb") as f:
+                code_data = f.read()
+        elif isinstance(bytecode, (bytes, bytearray)):
+            code_data = bytes(bytecode)
+        else:
+            raise TypeError(f"Expected bytes or path, got {type(bytecode).__name__}")
+
+        err_buf = ctypes.create_string_buffer(512)
+        c_bytes = (ctypes.c_uint8 * len(code_data)).from_buffer_copy(code_data)
+
+        status_code = self._lib.wet_load_bytecode(
+            self._handle,
+            c_bytes,
+            len(code_data),
+            err_buf,
+            len(err_buf)
+        )
+
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            err_msg = err_buf.value.decode("utf-8", errors="replace")
+            if not err_msg:
+                err_msg = self.last_error() or self._status_to_string(status)
+            raise WetVMError(status, err_msg)
+
+        self._bytecode_loaded = True
+        self._is_halted = False
+        # Sync initial telemetry
+        self.get_telemetry()
+
+    def load(self, bytecode: Union[bytes, bytearray, str, Path]) -> int:
+        """Alias for load_bytecode returning 0 on success."""
+        self.load_bytecode(bytecode)
+        return 0
+
+    def step_tick(self) -> WetTelemetry:
+        """
+        Executes instructions until the next SYNC_TICK, SLEEP_TICKS, or HALT.
+        Advances simulation time by dt_ms.
+        """
+        self._check_alive()
+        if not self._bytecode_loaded:
+            raise RuntimeError("No bytecode loaded into VM before stepping")
+
+        status_code = self._lib.wet_step_tick(self._handle, ctypes.byref(self._telem))
+        status = WetStatus(status_code)
+
+        if status == WetStatus.WET_ERR_HALTED:
+            self._is_halted = True
+            raise WetVMError(status, "VM is halted")
+        elif status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+        return self._telem
+
+    def run_ticks(self, ticks: int) -> Tuple[int, WetTelemetry]:
+        """
+        Executes up to `ticks` consecutive simulation steps.
+        Returns (executed_ticks_count, final_telemetry).
+        """
+        self._check_alive()
+        if not self._bytecode_loaded:
+            raise RuntimeError("No bytecode loaded into VM before running")
+
+        if ticks < 0:
+            raise ValueError(f"ticks must be non-negative, got {ticks}")
+
+        executed = ctypes.c_uint32(0)
+        status_code = self._lib.wet_run_ticks(
+            self._handle,
+            ctypes.c_uint32(ticks),
+            ctypes.byref(executed),
+            ctypes.byref(self._telem)
+        )
+
+        status = WetStatus(status_code)
+        if status == WetStatus.WET_ERR_HALTED:
+            self._is_halted = True
+        elif status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+        return int(executed.value), self._telem
+
+    def step(self, ticks: int = 1) -> WetTelemetryView:
+        """Convenience method stepping 1 or more ticks and returning telemetry view."""
+        self._check_alive()
+        if not self._bytecode_loaded:
+            raise RuntimeError("No bytecode loaded into VM before stepping")
+
+        if ticks <= 1:
+            try:
+                self.step_tick()
+            except WetVMError as e:
+                if e.status == WetStatus.WET_ERR_HALTED:
+                    pass
+                else:
+                    raise
+        else:
+            self.run_ticks(ticks)
+        return WetTelemetryView(self._telem)
+
+    def inject_stimulus(
+        self,
+        channel: int,
+        voltage_v: float,
+        phase1_ms: float = 0.5,
+        phase2_ms: float = 0.5
+    ) -> None:
+        """Injects biphasic stimulus onto designated MEA channel."""
+        self._check_alive()
+        status_code = self._lib.wet_inject_stimulus(
+            self._handle,
+            ctypes.c_uint8(channel),
+            ctypes.c_float(voltage_v),
+            ctypes.c_float(phase1_ms),
+            ctypes.c_float(phase2_ms)
+        )
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+    def get_telemetry(self) -> WetTelemetry:
+        """Fetches the latest cycle-accurate telemetry snapshot."""
+        self._check_alive()
+        status_code = self._lib.wet_get_telemetry(self._handle, ctypes.byref(self._telem))
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+        return self._telem
+
+    def get_actuator_telemetry(self) -> WetActuatorTelemetry:
+        """Fetches the latest cyber-physical actuator telemetry."""
+        self._check_alive()
+        act_telem = WetActuatorTelemetry()
+        status_code = self._lib.wet_get_actuator_telemetry(self._handle, ctypes.byref(act_telem))
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+        return act_telem
+
+    def get_voltages_numpy(self) -> np.ndarray:
+        """
+        Returns a zero-copy 1D NumPy array view (float32, 64 elements)
+        mapped directly onto the telemetry voltage buffer.
+        """
+        arr = np.ctypeslib.as_array(self._telem.voltages)
+        arr.flags.writeable = False
+        return arr
+
+    def get_spikes_numpy(self) -> np.ndarray:
+        """
+        Returns a zero-copy 1D NumPy array view (uint8, 64 elements)
+        mapped directly onto the telemetry spike raster buffer.
+        """
+        return np.ctypeslib.as_array(self._telem.spikes)
+
+    def get_charge_numpy(self) -> np.ndarray:
+        """
+        Returns a zero-copy 1D NumPy array view (float32, 64 elements)
+        mapped directly onto the telemetry cumulative charge buffer.
+        """
+        return np.ctypeslib.as_array(self._telem.last_charge_nc)
+
+    def last_error(self) -> str:
+        """Returns the last recorded native error message."""
+        if not self._handle:
+            return "VM is closed"
+        err = self._lib.wet_get_last_error(self._handle)
+        return err.decode("utf-8", errors="replace") if err else ""
+
+    def set_electrode_impedance(self, channel: int, z_magnitude_ohms: float, z_phase_rad: float = 0.0, tick: int = 0) -> None:
+        """Sets the dynamic measured impedance of an electrode channel (Project Janus - Sprint Task 3)."""
+        self._check_alive()
+        if hasattr(self._lib, "wet_set_electrode_impedance"):
+            self._lib.wet_set_electrode_impedance(self._handle, ctypes.c_uint8(channel), ctypes.c_float(z_magnitude_ohms), ctypes.c_float(z_phase_rad), ctypes.c_uint64(tick))
+
+    def set_current_density_limit(self, max_ua_cm2: float) -> None:
+        """Sets the maximum safe Faradaic current density limit J (default 30.0 uA/cm^2)."""
+        self._check_alive()
+        if hasattr(self._lib, "wet_set_current_density_limit"):
+            self._lib.wet_set_current_density_limit(self._handle, ctypes.c_float(max_ua_cm2))
+
+    def clamp_voltage_dynamic(self, channel: int, requested_v: float) -> float:
+        """Clamps voltage against both material water-window rails and dynamic impedance current density."""
+        self._check_alive()
+        if hasattr(self._lib, "wet_clamp_voltage_dynamic_vm"):
+            return float(self._lib.wet_clamp_voltage_dynamic_vm(self._handle, ctypes.c_uint8(channel), ctypes.c_float(requested_v)))
+        return float(self._lib.wet_clamp_voltage_vm(self._handle, ctypes.c_float(requested_v)))
+
+    def _status_to_string(self, status: WetStatus) -> str:
+        s = self._lib.wet_status_to_string(int(status))
+        return s.decode("utf-8", errors="replace") if s else status.name
+
+    @property
+    def current_tick(self) -> int:
+        return int(self._telem.current_tick)
+
+    @property
+    def tick_index(self) -> int:
+        return int(self._telem.current_tick)
+
+    @property
+    def sim_time_ms(self) -> float:
+        return float(self._telem.sim_time_ms)
+
+    @property
+    def is_halted(self) -> bool:
+        return self._is_halted
+
+    # Phase 3 Hardware Readiness Methods
+    def configure_electrode(self, material: int, area_um2: float) -> None:
+        """Configures electrode material and physical geometric surface area."""
+        self._check_alive()
+        self._lib.wet_configure_electrode(self._handle, ctypes.c_uint8(material), ctypes.c_float(area_um2))
+
+    def active_discharge(self, channel: int) -> None:
+        """Actuates hardware discharge switch on designated channel to clear accumulated DC charge."""
+        self._check_alive()
+        self._lib.wet_active_discharge(self._handle, ctypes.c_uint8(channel))
+
+    def active_discharge_all(self) -> None:
+        """Actuates hardware discharge switch on all 64 channels."""
+        self._check_alive()
+        self._lib.wet_active_discharge_all(self._handle)
+
+    def enable_dead_head_protection(self, enable: bool = True) -> None:
+        """Enables microfluidic valve-pump dead-head overpressure interlock."""
+        self._check_alive()
+        self._lib.wet_enable_dead_head_protection(self._handle, ctypes.c_uint8(1 if enable else 0))
+
+    def life_supervisor_shutdown(self, vm: Optional[ctypes.c_void_p] = None) -> None:
+        """Terminates Ring-0 Life Support Supervisor autonomous baseline perfusion."""
+        self._check_alive()
+        self._lib.wet_life_supervisor_shutdown(self._handle)
+
+    def configure_blanking(self, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
+        """Configures amplifier blanking duration and spatial neighbor crosstalk suppression."""
+        self._check_alive()
+        self._lib.wet_configure_blanking(self._handle, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
+
+    def inject_current_stimulus(
+        self,
+        channel: int,
+        current_ua: float,
+        p1_ms: float = 0.5,
+        p2_ms: float = 0.5
+    ) -> None:
+        """Injects constant-current electrical stimulus (uA) through Randles interface."""
+        self._check_alive()
+        status_code = self._lib.wet_inject_current_stimulus(
+            self._handle,
+            ctypes.c_uint8(channel),
+            ctypes.c_float(current_ua),
+            ctypes.c_float(p1_ms),
+            ctypes.c_float(p2_ms)
+        )
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+    def verify_bytecode(self, bytecode: bytes) -> str:
+        """Runs the C99 load-time bytecode verifier without loading into VM."""
+        c_bytes = (ctypes.c_uint8 * len(bytecode)).from_buffer_copy(bytecode)
+        err_buf = ctypes.create_string_buffer(512)
+        st = self._lib.wet_verify_bytecode(c_bytes, ctypes.c_size_t(len(bytecode)), err_buf, ctypes.c_size_t(len(err_buf)))
+        status = WetStatus(st)
+        msg = err_buf.value.decode("utf-8", errors="replace")
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, msg or self._status_to_string(status))
+        return "OK"
+
+    def snapshot(self) -> bytes:
+        """Serializes complete dynamic neural state, synaptic matrix, and monotonic clocks."""
+        self._check_alive()
+        needed_len = ctypes.c_size_t(0)
+        self._lib.wet_vm_snapshot(self._handle, None, ctypes.byref(needed_len))
+        buf = (ctypes.c_uint8 * needed_len.value)()
+        st = self._lib.wet_vm_snapshot(self._handle, buf, ctypes.byref(needed_len))
+        status = WetStatus(st)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or "Snapshot failed")
+        return bytes(buf)
+
+    def restore(self, data: bytes) -> None:
+        """Restores complete neural state and synaptic weights without resetting learned memory."""
+        self._check_alive()
+        c_bytes = (ctypes.c_uint8 * len(data)).from_buffer_copy(data)
+        st = self._lib.wet_vm_restore(self._handle, c_bytes, ctypes.c_size_t(len(data)))
+        status = WetStatus(st)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or "Restore failed")
+        self._lib.wet_get_telemetry(self._handle, ctypes.byref(self._telem))
+
+    def set_environmental_sensors(
+        self,
+        ph: float = 7.4,
+        do_pct: float = 95.0,
+        co2_pct: float = 5.0,
+        bubble_sensor_id: int = 0,
+        bubble_state: bool = False,
+        flow_rate_ul_min: float = 1.5
+    ) -> None:
+        """Updates simulated or hardware sensor telemetry readings."""
+        self._check_alive()
+        self._lib.wet_set_environmental_sensors(
+            self._handle,
+            ctypes.c_float(ph),
+            ctypes.c_float(do_pct),
+            ctypes.c_float(co2_pct),
+            ctypes.c_uint8(bubble_sensor_id),
+            ctypes.c_uint8(1 if bubble_state else 0),
+            ctypes.c_float(flow_rate_ul_min)
+        )
+
+    def set_temperature(self, temp_c: float) -> None:
+        """Sets simulated or incubator ambient / CMOS die temperature."""
+        self._check_alive()
+        self._lib.wet_set_temperature(self._handle, ctypes.c_float(temp_c))
+
+    def set_channel_banks(
+        self,
+        ref_channels: list[int] = [],
+        rec_only_channels: list[int] = []
+    ) -> None:
+        """Configures typed channel capability banks (reference and recording-only)."""
+        self._check_alive()
+        ref_mask = 0
+        for ch in ref_channels:
+            if 0 <= ch < 64:
+                ref_mask |= (1 << ch)
+        rec_mask = 0
+        for ch in rec_only_channels:
+            if 0 <= ch < 64:
+                rec_mask |= (1 << ch)
+        self._lib.wet_set_channel_banks(self._handle, ctypes.c_uint64(ref_mask), ctypes.c_uint64(rec_mask))
+
+    def init_hal(
+        self,
+        mode: WetHalMode = WetHalMode.WET_HAL_MODE_HIL_LOOPBACK,
+        config: Optional[WetHalConfig] = None
+    ) -> int:
+        """Initializes and attaches Hardware Abstraction Layer (HAL) on VM."""
+        self._check_alive()
+        cfg_ptr = ctypes.byref(config) if config is not None else None
+        return self._lib.wet_hal_init(self._handle, ctypes.c_int(int(mode)), cfg_ptr)
+
+    def attach_hal(self, hal: ctypes.c_void_p) -> int:
+        """Attaches an existing HAL context to the VM."""
+        self._check_alive()
+        return self._lib.wet_hal_attach(self._handle, hal)
+
+    def get_hal(self) -> ctypes.c_void_p:
+        """Returns the HAL context pointer attached to this VM."""
+        self._check_alive()
+        return self._lib.wet_hal_get_context(self._handle)
+
+    def emergency_crowbar(self, trip_reason: int = 1) -> None:
+        """Triggers emergency hardware crowbar fast-path (<100 µs)."""
+        self._check_alive()
+        self._lib.wet_hal_emergency_crowbar(self._handle, ctypes.c_uint32(trip_reason))
+
+    def get_synapse_matrix(self) -> np.ndarray:
+        """
+        Extracts the 64x64 synaptic conductance matrix (nS) from C VM biophysics state.
+        Returns a NumPy float32 array of shape (64, 64).
+        """
+        self._check_alive()
+        buf = (ctypes.c_float * (64 * 64))()
+        st = self._lib.wet_vm_get_synapse_matrix(
+            self._handle,
+            buf,
+            ctypes.c_size_t(64 * 64)
+        )
+        if st != WetStatus.WET_OK:
+            raise WetVMError(WetStatus(st), self.last_error() or "Failed to read synapse matrix")
+        return np.ctypeslib.as_array(buf).reshape((64, 64)).copy()
+
+    def get_synapse_weight(self, pre: int, post: int) -> float:
+        """
+        Queries the synaptic conductance weight between pre and post neurons in nS.
+        """
+        self._check_alive()
+        return float(self._lib.wet_vm_get_synapse_weight(
+            self._handle,
+            ctypes.c_uint8(pre),
+            ctypes.c_uint8(post)
+        ))
+
+
+class WetRuntime(WetVM):
+    """Alias / Subclass of WetVM providing E2E test-suite compatibility."""
+    pass

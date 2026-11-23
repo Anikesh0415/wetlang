@@ -1,63 +1,44 @@
 """
-WetLang: Domain-Specific Programming Language & Cyber-Physical Engine
-for Neural Organoid Computing on Microelectrode Arrays (MEA) & Microfluidics.
+WetLang - The Neural Organoid Computing Platform & Neuromorphic Runtime
+Project Janus: Dual-Substrate Execution for Biological Wetware & Neuromorphic Silicon.
 """
 
-__version__ = "2.1.0"
-__author__ = "Anikesh Tiwari (Surat, Gujarat, India) / Wetworld"
-__license__ = "Apache-2.0"
-
-import sys
+from typing import Union
 from pathlib import Path
 
-# Add wetlang package root to sys.path
-_pkg_root = Path(__file__).resolve().parent
-if str(_pkg_root) not in sys.path:
-    sys.path.insert(0, str(_pkg_root))
+from compiler.emitter import compile_source, compile_to_embedded_header, Target
+from wetlang.vm import VirtualMachine
+from wetlang import tensors
+from wetlang import gym
 
-from wetlang.compiler.token import Dimension
-from wetlang.compiler.lexer import Lexer
-from wetlang.compiler.parser import Parser
-from wetlang.compiler.semantic import SemanticAnalyzer
-from wetlang.compiler.emitter import BytecodeEmitter, compile_source, disassemble
-from wetlang.compiler.crypto_signer import sign_bytecode, verify_bytecode_signature
-from wetlang.compiler.isa import Opcode, Capability
-from wetlang.compiler.nir_bridge import NIRGraph, validate_dales_principle, decompose_to_dales_principle
+from bindings.ffi import WetStatus, WetVMConfig, WetTelemetry
+from bindings.runtime import WetRuntime, WetVMError
 
-from wetlang.bindings.runtime import WetVM, WetRuntime, WetVMError
-from wetlang.bindings.ffi import WetStatus, WetTelemetry, WetActuatorTelemetry, WetVMConfig
-from wetlang.bindings.scheduler import WetScheduler, WetSchedulerConfig, WetSchedulerStats, WetStimCommand
+__version__ = "2.1.2"
 
-from wetlang.sandbox.universal_organoid_sandbox import UniversalOrganoidSandbox, OrganoidNode
-from wetlang.sandbox.gym_env import WetworldGymEnv
+
+def compile(source: str, target: str = "sim") -> bytes:
+    """Compiles .wet source code string directly to .wbc binary bytecode."""
+    return compile_source(source, target=target)
+
+
+def load(source_or_file: Union[str, Path, bytes], target: str = "sim") -> VirtualMachine:
+    """Loads a .wet source string, .wet file, or .wbc binary into a VirtualMachine."""
+    return VirtualMachine(source_or_file, target=target)
+
 
 __all__ = [
-    "compile_source",
-    "disassemble",
-    "Lexer",
-    "Parser",
-    "SemanticAnalyzer",
-    "BytecodeEmitter",
-    "sign_bytecode",
-    "verify_bytecode_signature",
-    "Opcode",
-    "Capability",
-    "Dimension",
-    "NIRGraph",
-    "validate_dales_principle",
-    "decompose_to_dales_principle",
-    "WetVM",
+    "compile",
+    "compile_to_embedded_header",
+    "load",
+    "VirtualMachine",
+    "Target",
+    "tensors",
+    "gym",
+    "WetStatus",
+    "WetVMConfig",
+    "WetTelemetry",
     "WetRuntime",
     "WetVMError",
-    "WetStatus",
-    "WetTelemetry",
-    "WetActuatorTelemetry",
-    "WetVMConfig",
-    "WetScheduler",
-    "WetSchedulerConfig",
-    "WetSchedulerStats",
-    "WetStimCommand",
-    "UniversalOrganoidSandbox",
-    "OrganoidNode",
-    "WetworldGymEnv",
+    "__version__",
 ]

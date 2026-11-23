@@ -12,6 +12,8 @@ void interlocks_init(interlock_state_t* il) {
     il->v_water_window_high_v = +0.8f; /* Platinum safe anodic limit */
     il->max_charge_per_phase_nc = INTERLOCK_CHARGE_LIMIT_NC; /* Default 0.5 nC */
     il->max_cumulative_dc_nc = INTERLOCK_DC_DRIFT_LIMIT_NC;  /* Default 1.0 nC */
+    il->max_faradaic_current_density_ua_cm2 = 30.0f; /* 30.0 uA/cm^2 safe Faradaic limit */
+    il->dynamic_impedance_clamp_events = 0;
     for (int p = 0; p < 8; ++p) {
         il->pump_valve_mapping[p] = (uint8_t)p;
     }
@@ -174,6 +176,70 @@ float interlocks_clamp_voltage(interlock_state_t* il, float requested_v) {
         return v_low;
     }
     return requested_v;
+}
+
+void interlocks_set_electrode_impedance(
+    interlock_state_t* il,
+    uint8_t channel,
+    float z_magnitude_ohms,
+    float z_phase_rad,
+    uint64_t tick
+) {
+    if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
+    il->impedance[channel].z_magnitude_ohms = (z_magnitude_ohms > 1.0f) ? z_magnitude_ohms : 1.0f;
+    il->impedance[channel].z_phase_rad = z_phase_rad;
+    il->impedance[channel].last_calibration_tick = tick;
+}
+
+void interlocks_set_current_density_limit(interlock_state_t* il, float max_ua_cm2) {
+    if (!il) return;
+    il->max_faradaic_current_density_ua_cm2 = (max_ua_cm2 > 0.0f) ? max_ua_cm2 : 30.0f;
+}
+
+float interlocks_clamp_voltage_dynamic(interlock_state_t* il, uint8_t channel, float requested_v) {
+    if (!il) return requested_v;
+
+    /* 1. First clamp to material-dependent water window rails */
+    float v_clamped = interlocks_clamp_voltage(il, requested_v);
+
+    /* 2. Enforce dynamic adaptive current limiting: I_peak = V_command / Z_magnitude */
+    if (channel < INTERLOCK_NUM_CHANNELS && il->max_faradaic_current_density_ua_cm2 > 0.0f) {
+        float z_mag = il->impedance[channel].z_magnitude_ohms;
+        if (z_mag > 0.0f) {
+            float area_um2 = (il->electrode_area_um2 > 0.0f) ? il->electrode_area_um2 : 5000.0f;
+            float area_cm2 = area_um2 * 1e-8f;
+
+            /* Safe Faradaic current limit in Amperes: I_safe = J_limit (A/cm^2) * Area (cm^2) */
+            float j_limit_a_cm2 = il->max_faradaic_current_density_ua_cm2 * 1e-6f;
+            float i_safe_a = j_limit_a_cm2 * area_cm2;
+
+            /* Maximum allowable dynamic voltage magnitude V_safe = I_safe * Z */
+            float v_safe_mag = i_safe_a * z_mag;
+
+            if (v_safe_mag > 0.0f && wet_fabsf(v_clamped) > v_safe_mag) {
+                float sign = (v_clamped >= 0.0f) ? 1.0f : -1.0f;
+                v_clamped = sign * v_safe_mag;
+                il->clamp_events++;
+                il->dynamic_impedance_clamp_events++;
+            }
+        }
+    }
+    return v_clamped;
+}
+
+int wet_interlock_check_voltage(
+    interlock_state_t* il,
+    uint8_t channel,
+    float requested_v,
+    float* out_clamped_v
+) {
+    if (!il) {
+        if (out_clamped_v) *out_clamped_v = requested_v;
+        return 0;
+    }
+    float clamped = interlocks_clamp_voltage_dynamic(il, channel, requested_v);
+    if (out_clamped_v) *out_clamped_v = clamped;
+    return (wet_fabsf(clamped - requested_v) > 1e-6f) ? 1 : 0;
 }
 
 wet_status_t interlocks_record_charge_tick(

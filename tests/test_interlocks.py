@@ -300,3 +300,39 @@ def test_failsafe_state_lockout_blocks_further_operations():
     
     status3 = watchdog.check_epileptiform(3, [0.0] * 64)
     assert status3 == "ERR_INTERLOCK_LOCKED"
+
+
+# =============================================================================
+# 5. Project Janus - Sprint Task 3: Dynamic Impedance Safeguard Tests
+# =============================================================================
+
+def test_dynamic_impedance_safeguard_nominal_no_clamp():
+    """Verify that nominal electrode impedance (e.g. 500k Ohm) allows nominal subthreshold stimulation."""
+    from bindings.runtime import WetRuntime
+    with WetRuntime() as rt:
+        # Macro electrode: area = 5000 um^2 = 5e-5 cm^2. J_limit = 30 uA/cm^2 -> I_safe = 1.5 nA = 1.5e-9 A.
+        # With Z = 100 MOhm (1e8 Ohm), V_safe = 1.5e-9 * 1e8 = 0.15 V.
+        # With high impedance / standard area, let's configure J_limit = 1000 uA/cm^2 (1 mA/cm^2 typical microstimulation)
+        rt.set_current_density_limit(1000.0) # 1000 uA/cm^2
+        rt.set_electrode_impedance(0, z_magnitude_ohms=100_000.0) # 100 kOhm
+        # Area = 5000 um^2 -> Area_cm2 = 5e-5 cm^2. I_safe = 1000 uA/cm^2 * 5e-5 cm^2 = 0.05 uA = 50 nA.
+        # V_safe = 50e-9 A * 100,000 Ohm = 0.005 V = 5 mV.
+        # Now if Z = 20 MOhm (microelectrode): V_safe = 50e-9 * 20e6 = 1.0 V (above 0.5 V -> passes through).
+        rt.set_electrode_impedance(0, z_magnitude_ohms=20_000_000.0)
+        v_out = rt.clamp_voltage_dynamic(0, 0.5)
+        assert abs(v_out - 0.5) < 1e-4, f"Expected 0.5V passthrough, got {v_out}"
+
+
+def test_dynamic_impedance_safeguard_tissue_rupture_collapse():
+    """Verify that when tissue impedance collapses (e.g. membrane rupture to 500 Ohm), voltage is clamped."""
+    from bindings.runtime import WetRuntime
+    with WetRuntime() as rt:
+        # Default J_limit = 30 uA/cm^2, Area = 5000 um^2 = 5e-5 cm^2 -> I_safe = 1.5 nA.
+        # Normal impedance = 100 kOhm -> V_safe = 0.15 mV.
+        # If impedance collapses to 500 Ohm:
+        # V_safe = 1.5e-9 * 500 = 0.75 uV!
+        rt.set_current_density_limit(30.0)
+        rt.set_electrode_impedance(0, z_magnitude_ohms=500.0) # 500 Ohm rupture
+        v_out = rt.clamp_voltage_dynamic(0, 0.8) # Requesting +0.8V
+        assert v_out < 0.001, f"Expected dynamic clamp below 1mV for 500 Ohm rupture, got {v_out}"
+        assert v_out > 0.0, "Clamped voltage must remain positive"

@@ -303,6 +303,28 @@ WET_EXPORT float wet_clamp_voltage_vm(
     float requested_v
 );
 
+/**
+ * Sprint Task 3: Dynamic Adaptive Voltage Clamping based on Electrode Impedance & Current Density
+ */
+WET_EXPORT void wet_set_electrode_impedance(
+    wet_vm_t* vm,
+    uint8_t channel,
+    float z_magnitude_ohms,
+    float z_phase_rad,
+    uint64_t tick
+);
+
+WET_EXPORT void wet_set_current_density_limit(
+    wet_vm_t* vm,
+    float max_ua_cm2
+);
+
+WET_EXPORT float wet_clamp_voltage_dynamic_vm(
+    wet_vm_t* vm,
+    uint8_t channel,
+    float requested_v
+);
+
 #ifdef __cplusplus
 }
 #endif

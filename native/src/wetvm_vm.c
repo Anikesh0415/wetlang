@@ -1128,7 +1128,7 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                     vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
                 }
 
-                float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage);
+                float clamped_v = interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, voltage);
                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
                     wet_hal_stim_voltage(vm->hal, (uint16_t)channel, clamped_v, p1_ms, p2_ms);
                 }

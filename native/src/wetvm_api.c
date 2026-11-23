@@ -637,3 +637,24 @@ WET_EXPORT float wet_clamp_voltage_vm(wet_vm_t* vm, float requested_v) {
     if (!vm) return requested_v;
     return interlocks_clamp_voltage(&vm->interlocks, requested_v);
 }
+
+WET_EXPORT void wet_set_electrode_impedance(
+    wet_vm_t* vm,
+    uint8_t channel,
+    float z_magnitude_ohms,
+    float z_phase_rad,
+    uint64_t tick
+) {
+    if (!vm) return;
+    interlocks_set_electrode_impedance(&vm->interlocks, channel, z_magnitude_ohms, z_phase_rad, tick);
+}
+
+WET_EXPORT void wet_set_current_density_limit(wet_vm_t* vm, float max_ua_cm2) {
+    if (!vm) return;
+    interlocks_set_current_density_limit(&vm->interlocks, max_ua_cm2);
+}
+
+WET_EXPORT float wet_clamp_voltage_dynamic_vm(wet_vm_t* vm, uint8_t channel, float requested_v) {
+    if (!vm) return requested_v;
+    return interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, requested_v);
+}

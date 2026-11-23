@@ -84,6 +84,13 @@ typedef enum {
     INTERLOCK_TRIP_COMPLIANCE_RAILED   = 11
 } interlock_trip_reason_t;
 
+/* Dynamic Electrode Impedance Structure (Project Janus - Sprint Task 3) */
+typedef struct {
+    float    z_magnitude_ohms;
+    float    z_phase_rad;
+    uint64_t last_calibration_tick;
+} wet_electrode_impedance_t;
+
 typedef struct {
     /* Fail-safe lockout state */
     uint8_t  locked;
@@ -141,6 +148,11 @@ typedef struct {
     /* Typed Channel Banks / Capabilities (Bug C-05 Remediation) */
     uint64_t reference_channels_mask;      /* Cannot be stimulated */
     uint64_t recording_only_channels_mask; /* Cannot be stimulated */
+
+    /* Sprint Task 3: Dynamic Impedance Tracking & Adaptive Current Limiting */
+    wet_electrode_impedance_t impedance[INTERLOCK_NUM_CHANNELS];
+    float    max_faradaic_current_density_ua_cm2; /* Safe Faradaic limit J (default 30.0 uA/cm^2) */
+    uint64_t dynamic_impedance_clamp_events;
 } interlock_state_t;
 
 /* Initialize / reset watchdog state */
@@ -164,6 +176,30 @@ int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, flo
 
 /* Clamp requested stimulation voltage to material water window */
 WET_EXPORT float interlocks_clamp_voltage(interlock_state_t* il, float requested_v);
+
+/* Sprint Task 3: Dynamic Adaptive Voltage Clamping based on Electrode Impedance & Current Density */
+WET_EXPORT void interlocks_set_electrode_impedance(
+    interlock_state_t* il,
+    uint8_t channel,
+    float z_magnitude_ohms,
+    float z_phase_rad,
+    uint64_t tick
+);
+WET_EXPORT void interlocks_set_current_density_limit(
+    interlock_state_t* il,
+    float max_ua_cm2
+);
+WET_EXPORT float interlocks_clamp_voltage_dynamic(
+    interlock_state_t* il,
+    uint8_t channel,
+    float requested_v
+);
+WET_EXPORT int wet_interlock_check_voltage(
+    interlock_state_t* il,
+    uint8_t channel,
+    float requested_v,
+    float* out_clamped_v
+);
 
 /* Advance 10.0 ms charge ring buffer with this tick's per-channel injected charge (nC).
  * Returns WET_OK or WET_ERR_CHARGE_IMBALANCE (locking the watchdog on trip). */
