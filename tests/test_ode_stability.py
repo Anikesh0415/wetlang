@@ -124,7 +124,7 @@ class ReferenceTsodyksMarkramSynapse:
             self.tau_fac_ms = 600.0
         elif syn_class == 2:  # IE (Depressing)
             self.U_base = 0.25
-            self.tau_rec_ms = 500.0
+            self.tau_rec_ms = 700.0  # Gupta et al. 2000 F2 empirical mean (706 ms)
             self.tau_fac_ms = 50.0
         else:                 # II (Moderately depressing)
             self.U_base = 0.30
@@ -143,9 +143,9 @@ class ReferenceTsodyksMarkramSynapse:
 
     def transmit_spike(self) -> float:
         """Process spike and return released conductance delta_g (nS)."""
-        self.u_stp = self.u_stp + self.U_base * (1.0 - self.u_stp)
         release = self.u_stp * self.x_stp
         self.x_stp = max(0.0, min(1.0, self.x_stp - release))
+        self.u_stp = self.u_stp + self.U_base * (1.0 - self.u_stp)
         return self.weight_ns * release
 
 

@@ -45,6 +45,10 @@ static inline double wet_clampd(double x, double lo, double hi) {
     return x;
 }
 
+static inline int64_t wet_llround(double x) {
+    return (x >= 0.0) ? (int64_t)(x + 0.5) : (int64_t)(x - 0.5);
+}
+
 /* Pure C99 deterministic exp(x) via range reduction (Cody-Waite) + minimax polynomial.
  * Accurate to < 1e-6 for all biophysical inputs; zero external libm dependency. */
 static inline double wet_exp(double x) {

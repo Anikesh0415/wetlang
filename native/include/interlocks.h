@@ -104,9 +104,9 @@ typedef struct {
     /* Long-horizon leaky DC charge integrator (10.0 s bleed time constant) */
     float    q_dc[INTERLOCK_NUM_CHANNELS];
 
-    /* Phase 3: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
+    /* Phase 3 & v2.1: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
     float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
-    int64_t  cumulative_dc_femtocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point femtoCoulombs (1 nC = 1e6 fC) - immune to multi-week float32 ULP saturation */
+    int64_t  cumulative_dc_attocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point attoCoulombs (1 nC = 1e9 aC) - eliminates 0.1 fC leakage truncation */
 
     /* Phase 3 & v2.1: Electrode Material & Material-Dependent Water-Window */
     uint8_t  electrode_material;   /* wet_electrode_material_t */

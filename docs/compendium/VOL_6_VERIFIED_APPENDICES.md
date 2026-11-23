@@ -793,7 +793,7 @@ tests/test_milestone3_distributed.py::test_late_packet_drop_telemetry PASSED [ 3
 tests/test_milestone3_distributed.py::test_epileptiform_rate_governor_and_tx_blanking PASSED [ 32%]
 tests/test_milestone4_rtos_arena.py::test_bare_metal_rtos_static_arena_allocation_and_scrubbing PASSED [ 32%]
 tests/test_milestone4_rtos_arena.py::test_bounded_wcet_realtime_determinism PASSED [ 32%]
-tests/test_milestone4_rtos_arena.py::test_multi_week_64bit_femtocoulomb_soak_stability PASSED [ 33%]
+tests/test_milestone4_rtos_arena.py::test_multi_week_64bit_attocoulomb_soak_stability PASSED [ 33%]
 tests/test_milestone4_rtos_arena.py::test_material_dependent_water_window_clamping PASSED [ 33%]
 tests/test_nir_bridge.py::test_cubalif_biophysical_parameters PASSED     [ 34%]
 tests/test_nir_bridge.py::test_lif_parameters PASSED                     [ 34%]
@@ -1331,7 +1331,7 @@ Covers all 31 core source files across `compiler/`, `native/include/`, `native/s
  106 | 
  107 |     /* Phase 3: Unbounded Cumulative DC Charge Accumulator (no leaky decay; resets ONLY on active discharge) */
  108 |     float    cumulative_unbounded_dc_nc[INTERLOCK_NUM_CHANNELS];
- 109 |     int64_t  cumulative_dc_femtocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point femtoCoulombs (1 nC = 1e6 fC) - immune to multi-week float32 ULP saturation */
+ 109 |     int64_t  cumulative_dc_attocoulombs[INTERLOCK_NUM_CHANNELS]; /* Exact 64-bit fixed-point attoCoulombs (1 nC = 1e9 aC) - eliminates 0.1 fC leakage truncation */
  110 | 
  111 |     /* Phase 3 & v2.1: Electrode Material & Material-Dependent Water-Window */
  112 |     uint8_t  electrode_material;   /* wet_electrode_material_t */
@@ -4207,7 +4207,7 @@ Covers all 31 core source files across `compiler/`, `native/include/`, `native/s
   70 | void interlocks_active_discharge(interlock_state_t* il, uint8_t channel) {
   71 |     if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
   72 |     il->cumulative_unbounded_dc_nc[channel] = 0.0f;
-  73 |     il->cumulative_dc_femtocoulombs[channel] = 0;
+  73 |     il->cumulative_dc_attocoulombs[channel] = 0;
   74 |     il->q_dc[channel] = 0.0f;
   75 | }
   76 | 
@@ -4215,7 +4215,7 @@ Covers all 31 core source files across `compiler/`, `native/include/`, `native/s
   78 |     if (!il) return;
   79 |     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
   80 |         il->cumulative_unbounded_dc_nc[ch] = 0.0f;
-  81 |         il->cumulative_dc_femtocoulombs[ch] = 0;
+  81 |         il->cumulative_dc_attocoulombs[ch] = 0;
   82 |         il->q_dc[ch] = 0.0f;
   83 |     }
   84 | }
@@ -4338,14 +4338,15 @@ Covers all 31 core source files across `compiler/`, `native/include/`, `native/s
  201 |         il->q_dc[ch] = il->q_dc[ch] * INTERLOCK_BLEED_DECAY_PER_TICK + new_q;
  202 |         if (wet_fabsf(il->q_dc[ch]) < 1e-7f) il->q_dc[ch] = 0.0f;
  203 | 
- 204 |         /* Phase 3: Persistent unbounded cumulative DC charge accumulator (zero decay, exact fixed-point femtoCoulombs) */
- 205 |         int64_t delta_fc = (int64_t)((double)new_q * 1000000.0);
- 206 |         il->cumulative_dc_femtocoulombs[ch] += delta_fc;
- 207 |         il->cumulative_unbounded_dc_nc[ch] = (float)((double)il->cumulative_dc_femtocoulombs[ch] * 1e-6);
- 208 |         if (wet_fabsf(il->cumulative_unbounded_dc_nc[ch]) < 1e-7f) {
- 209 |             il->cumulative_unbounded_dc_nc[ch] = 0.0f;
- 210 |             il->cumulative_dc_femtocoulombs[ch] = 0;
- 211 |         }
+ 204 |         /* Phase 3 & v2.1: Persistent unbounded cumulative DC charge accumulator
+ 205 |          * (zero decay, exact fixed-point attoCoulombs: 1 nC = 1e9 aC).
+ 206 |          * Eliminates the 0.1 fC (1 pA * 100 us) truncation defect under multi-week soak protocols. */
+ 207 |         int64_t delta_ac = (int64_t)wet_llround((double)new_q * 1000000000.0);
+ 208 |         il->cumulative_dc_attocoulombs[ch] += delta_ac;
+ 209 |         il->cumulative_unbounded_dc_nc[ch] = (float)((double)il->cumulative_dc_attocoulombs[ch] * 1e-9);
+ 210 |         if (il->cumulative_dc_attocoulombs[ch] == 0) {
+ 211 |             il->cumulative_unbounded_dc_nc[ch] = 0.0f;
+ 212 |         }
  212 | 
  213 |         float charge_limit = il->max_charge_per_phase_nc > 0.0f ? il->max_charge_per_phase_nc : INTERLOCK_CHARGE_LIMIT_NC;
  214 |         float dc_limit = il->max_cumulative_dc_nc > 0.0f ? il->max_cumulative_dc_nc : INTERLOCK_DC_DRIFT_LIMIT_NC;

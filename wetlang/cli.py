@@ -179,7 +179,7 @@ def main() -> int:
     elif args.command == "verify":
         return cmd_verify(args)
     elif args.command == "version":
-        print("WetLang Platform v1.0.0 (Freestanding C99 Native Engine)")
+        print("WetLang Platform v2.1.0 (Production Wetware Engine & Runtime)")
         print("Developed by Anikesh Tiwari (Surat, Gujarat, India) / Wetworld")
         return 0
     else:

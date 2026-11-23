@@ -66,14 +66,15 @@ class SynapseSTP:
         x = 1.0
 
         for i in range(count):
-            # Facilitation update on spike arrival
-            u = u + self.U_base * (1.0 - u)
-            # Conductance jump proportional to released vesicles
+            # Conductance jump proportional to released vesicles using current utilization u^-
             g = self.weight_ns * (u * x)
             g_jumps.append(g)
 
             # Vesicle depletion
             x = x - (u * x)
+
+            # Facilitation update on spike arrival for subsequent spikes
+            u = u + self.U_base * (1.0 - u)
 
             # Recovery during inter-spike interval
             if i < count - 1:
@@ -85,7 +86,7 @@ class SynapseSTP:
     def track_utilization(self, count: int, freq_hz: float) -> List[float]:
         """
         Delivers a regular spike train and returns the utilization parameter u
-        immediately after each spike arrival.
+        at each spike arrival.
         """
         if count <= 0:
             return []
@@ -96,8 +97,8 @@ class SynapseSTP:
         u = self.U_base
 
         for i in range(count):
-            u = u + self.U_base * (1.0 - u)
             u_vals.append(u)
+            u = u + self.U_base * (1.0 - u)
 
             if i < count - 1:
                 u = self.U_base + (u - self.U_base) * math.exp(-interval_ms / self.tau_fac_ms)

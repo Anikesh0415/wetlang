@@ -64,10 +64,13 @@ typedef struct {
     /* Micro-pinch / Solenoid Valve States (0=Closed, 1=Open) */
     uint8_t              valve_states[WET_MAX_VALVES];
 
-    /* Dead-Head Overpressure Interlock Configuration */
+    /* Dead-Head Overpressure Interlock Configuration (MEMS Transducer & Throttled Relief) */
     uint8_t              dead_head_enabled;
     uint8_t              valve_for_pump[WET_MAX_PUMPS]; /* Associated downstream valve */
     uint32_t             dead_head_trip_count;
+    float                pressure_kpa[WET_MAX_PUMPS];   /* Inline MEMS pressure transducer */
+    float                max_pressure_kpa;              /* Overpressure burst threshold (e.g. 50.0 kPa) */
+    uint8_t              throttled_bypass_active;       /* High-resistance capillary restrictor relief */
 
     /* CAN-bus Loopback & Queue */
     wet_can_frame_t      can_tx_queue[WET_CAN_QUEUE_CAPACITY];
@@ -197,6 +200,15 @@ WET_EXPORT wet_hal_status_t wet_hal_can_send_emcy(
     uint8_t node_id,
     uint16_t error_code,
     uint8_t error_register
+);
+
+/**
+ * Inline MEMS pressure sensor update (in kPa gauge).
+ */
+WET_EXPORT void wet_hal_pump_set_inline_pressure(
+    wet_hal_driver_t* drv,
+    uint8_t pump_id,
+    float pressure_kpa
 );
 
 /**

@@ -140,11 +140,14 @@ wet_hal_driver_t* wet_hal_microfluidics_create(wet_hal_mode_t mode) {
     }
 
     state->dead_head_enabled = 1;
+    state->max_pressure_kpa = 50.0f; /* 50.0 kPa burst safety limit for PDMS microfluidic bond */
+    state->throttled_bypass_active = 0;
     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
         state->pumps[i].address = (uint8_t)i;
         state->pumps[i].fast_mode = 1;
         state->valve_for_pump[i] = (uint8_t)i; /* 1-to-1 default valve pairing */
         state->valve_states[i] = 1;            /* Default open */
+        state->pressure_kpa[i] = 0.0f;
     }
 
     const char* name = "Microfluidics_HAL";
@@ -175,11 +178,15 @@ wet_hal_status_t wet_hal_pump_set_rate(
     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
 
     /* Check Dead-Head Overpressure Interlock:
-     * If pump is commanded to run (rate > 0 and run_flag), verify downstream valve is OPEN. */
+     * If pump is commanded to run (rate > 0 and run_flag), verify downstream valve is OPEN
+     * and inline MEMS transducer does not report overpressure (> max_pressure_kpa). */
     if (state->dead_head_enabled && run_flag && rate_ul_min > 0.0) {
         uint8_t valve_id = state->valve_for_pump[pump_id];
-        if (valve_id < WET_MAX_VALVES && state->valve_states[valve_id] == 0) {
+        int valve_closed = (valve_id < WET_MAX_VALVES && state->valve_states[valve_id] == 0);
+        int overpressure = (state->pressure_kpa[pump_id] > state->max_pressure_kpa);
+        if (valve_closed || overpressure) {
             state->dead_head_trip_count++;
+            state->throttled_bypass_active = 1; /* Engage high-resistance capillary bypass to prevent recoil shockwave */
             return WET_HAL_ERR_DEAD_HEAD;
         }
     }
@@ -210,8 +217,11 @@ wet_hal_status_t wet_hal_pump_dispense(
     /* Dead-Head check */
     if (state->dead_head_enabled && volume_ul > 0.0) {
         uint8_t valve_id = state->valve_for_pump[pump_id];
-        if (valve_id < WET_MAX_VALVES && state->valve_states[valve_id] == 0) {
+        int valve_closed = (valve_id < WET_MAX_VALVES && state->valve_states[valve_id] == 0);
+        int overpressure = (state->pressure_kpa[pump_id] > state->max_pressure_kpa);
+        if (valve_closed || overpressure) {
             state->dead_head_trip_count++;
+            state->throttled_bypass_active = 1;
             return WET_HAL_ERR_DEAD_HEAD;
         }
     }
@@ -455,9 +465,20 @@ static wet_hal_status_t microfluidics_op_read_flow(wet_hal_driver_t* drv, uint8_
     return WET_HAL_OK;
 }
 
+void wet_hal_pump_set_inline_pressure(
+    wet_hal_driver_t* drv,
+    uint8_t pump_id,
+    float pressure_kpa
+) {
+    if (!drv || !drv->context || pump_id >= WET_MAX_PUMPS) return;
+    microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+    state->pressure_kpa[pump_id] = pressure_kpa;
+}
+
 static wet_hal_status_t microfluidics_op_read_pressure(wet_hal_driver_t* drv, uint8_t port_id, float* out_kpa) {
-    (void)port_id;
-    if (!drv || !out_kpa) return WET_HAL_ERR_NULL_PTR;
-    *out_kpa = 101.325f; /* 1 atm nominal */
+    if (!drv || !drv->context || !out_kpa) return WET_HAL_ERR_NULL_PTR;
+    if (port_id >= WET_MAX_PUMPS) return WET_HAL_ERR_OUT_OF_BOUNDS;
+    microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+    *out_kpa = state->pressure_kpa[port_id];
     return WET_HAL_OK;
 }

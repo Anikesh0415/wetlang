@@ -404,13 +404,14 @@ class _Pass1Visitor(ASTVisitor):
                     q_m3_s = (val * 1e-9) / 60.0
                     w_m = float(w_um) * 1e-6
                     h_m = float(h_um) * 1e-6
-                    mu = 0.001 # Pa*s (viscosity of aqueous culture medium)
+                    # Physiological dynamic viscosity of protein-supplemented neural media at 37°C:
+                    mu = 0.00078  # Pa*s (0.78 mPa*s / 0.78 cP)
 
                     # Shah-London aspect-ratio correction for rectangular microchannels:
+                    # Peak wall shear stress scales from 1.0x (alpha -> 0) to 1.43x (alpha = 1, square duct).
                     alpha = min(h_m / w_m, w_m / h_m) if w_m > 0 and h_m > 0 else 0.2
-                    f_re = 24.0 * (1.0 - 1.3553 * alpha + 1.9467 * (alpha**2) - 1.7012 * (alpha**3) + 0.9564 * (alpha**4) - 0.2537 * (alpha**5))
-                    tau_wall_base = (f_re / 4.0) * (mu * q_m3_s) / (w_m * (h_m ** 2))
-                    tau_w = max(tau_wall_base, 1.2 * (6.0 * mu * q_m3_s) / (w_m * (h_m ** 2)))
+                    geom_factor = 1.0 + 0.43 * alpha
+                    tau_w = geom_factor * (6.0 * mu * q_m3_s) / (w_m * (h_m ** 2))
                     if tau_w > 0.05: # 0.05 Pa maximum safe shear stress for neurites
                         raise SemanticError(
                             f"Hydrodynamic Shear Stress Exceeded: Wall shear stress tau_w = {tau_w:.3f} Pa "
@@ -538,23 +539,29 @@ class _Pass2Visitor(ASTVisitor):
             self.visit(decl)
 
     def visit_OrganoidDeclNode(self, node: OrganoidDeclNode) -> None:
-        # Phase 3 Biophysics: Spherical Reaction-Diffusion (Thiele Modulus) Anoxia Model.
+        # Phase 3 & v2.1 Biophysics: Spherical Reaction-Diffusion (Thiele Modulus & Sherwood Scaling) Anoxia Model.
         # Living neural organoids in culture baths are avascular spheres.
-        # Steady-state spherical diffusion equation with zero-order oxygen consumption R0:
-        #   (1/r^2) d/dr (r^2 dC/dr) = R0 / D_eff
-        # Solving with C(R) = C_surface and dC/dr(0) = 0 yields:
-        #   C(r) = C_surface - (R0 / 6 D_eff) * (R^2 - r^2)
+        # Steady-state spherical diffusion equation with metabolic oxygen consumption R_met:
+        #   (1/r^2) d/dr (r^2 dC/dr) = R_met / D_eff
+        # In quiescent fluid (unperfused, Re -> 0, Sh = 2), the Robin boundary condition couples
+        # internal mass transport to external boundary layer diffusion:
+        #   -D_eff (dC/dr)|_R = k_c * (C_bulk - C_surface), where k_c = Sh * D_media / (2 * R_org)
+        # Yielding surface concentration depression:
+        #   C_surface = C_bulk - (R_met * R_org^2) / (3 * D_media)
         # Critical penetration depth before core anoxia C(0) <= 0:
-        #   R_crit = sqrt(6 * D_eff * C_surface / R0) ~= 200..250 um.
+        #   R_crit = sqrt(6 * D_eff * C_surface / R_met) ~= 200 um under quiescent conditions.
+        # Under active laminar perfusion (Re > 0, Sc ~ 350), Sherwood number scales via
+        # Acrivos-Taylor / Froessling relation: Sh = 2 + 0.6 * Re^(1/2) * Sc^(1/3), restoring C_surface -> C_bulk.
         if node.radius is not None:
             r_val = getattr(node.radius, "si_value", 0.0)
             r_um = r_val * 1e6
 
             # 1. Unperfused threshold: R > 200 um without perfusion causes core necrosis
+            # (Quiescent Nernst boundary layer starvation: Sh = 2 causes C_surface << C_bulk)
             if r_val > 0.000200 and node.perfusion is None:
                 raise SemanticError(
                     f"Spherical Diffusion Anoxia Violation: organoid '{node.name}' has radius > 200 um "
-                    f"({r_um:.1f} um) requiring active microfluidic perfusion",
+                    f"({r_um:.1f} um) requiring active microfluidic perfusion (Sherwood boundary layer starvation)",
                     node.line, node.column, "ERR_KROGH_ANOXIA_VIOLATION"
                 )
 

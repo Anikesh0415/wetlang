@@ -147,6 +147,8 @@ typedef struct {
     float    v_double_layer_v[BIO_NUM_CHANNELS];   /* Instantaneous polarization voltage Vdl(t) */
     float    last_stim_current_ua[BIO_NUM_CHANNELS]; /* Last injected constant current */
     float    max_compliance_voltage_v; /* Maximum ASIC compliance voltage (e.g. 7.0 V) */
+    float    v_water_window_low_v;   /* Material-dependent cathodic limit (e.g. -0.6 V Pt, -0.9 V PEDOT) */
+    float    v_water_window_high_v;  /* Material-dependent anodic limit (e.g. +0.8 V Pt, +0.6 V PEDOT) */
 } bio_state_t;
 
 /* Lifecycle & Simulation Functions */

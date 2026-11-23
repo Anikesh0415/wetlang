@@ -21,7 +21,7 @@ static void init_synapse_stp(bio_synapse_t* syn, uint8_t pre_exc, uint8_t post_e
     } else if (!pre_exc && post_exc) {
         syn->syn_class = SYN_CLASS_IE;
         syn->U_base = 0.25f;
-        syn->tau_rec_ms = 500.0f;
+        syn->tau_rec_ms = 700.0f; /* Gupta et al. 2000 F2 empirical mean (706 ms) */
         syn->tau_fac_ms = 50.0f;
     } else {
         syn->syn_class = SYN_CLASS_II;
@@ -67,6 +67,8 @@ void biophysics_init(bio_state_t* bio, double dt_ms, uint64_t seed) {
     bio->r_solution_kohm = 2.0f;        /* 2.0 kOhm electrolyte solution resistance */
     bio->r_charge_transfer_kohm = 5000.0f; /* 5.0 MOhm Faradaic charge transfer resistance */
     bio->max_compliance_voltage_v = 7.0f;  /* +/-7.0 V Intan RHS2116 compliance limit */
+    bio->v_water_window_low_v = -0.6f;     /* Platinum safe cathodic limit */
+    bio->v_water_window_high_v = 0.8f;     /* Platinum safe anodic limit */
 
     for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
         bio->c_double_layer_pf[ch] = 26.45f; /* 26.45 pF for 132 um2 microelectrode */
@@ -315,9 +317,13 @@ void biophysics_step_tick(bio_state_t* bio) {
                 p->interphase_ticks_left--;
                 /* Interphase Overpotential (E_mc): During zero-current interphase delay,
                  * I * Rs = 0, so measured electrode potential is purely the interfacial overpotential E_mc.
-                 * If |E_mc| exceeds water window (0.8 V), extend blanking and flag Faradaic excursion. */
+                 * Asymmetric Water-Window Evaluation (Audit Remediation):
+                 * Water windows are chemically asymmetric (e.g. [-0.6 V, +0.8 V] for Pt, [-0.9 V, +0.6 V] for PEDOT).
+                 * If E_mc violates either rail, extend amplifier blanking and flag Faradaic excursion. */
                 float e_mc_v = bio->v_double_layer_v[ch];
-                if (wet_fabsf(e_mc_v) > 0.8f && bio->stim_blanking_ticks[ch] < 50) {
+                float v_low_window = bio->v_water_window_low_v < 0.0f ? bio->v_water_window_low_v : -0.6f;
+                float v_high_window = bio->v_water_window_high_v > 0.0f ? bio->v_water_window_high_v : 0.8f;
+                if ((e_mc_v < v_low_window || e_mc_v > v_high_window) && bio->stim_blanking_ticks[ch] < 50) {
                     bio->stim_blanking_ticks[ch] += 10;
                 }
             } else if (p->phase2_ticks_left > 0) {
@@ -338,11 +344,26 @@ void biophysics_step_tick(bio_state_t* bio) {
         float i_ua = (v_applied / bio->electrode_impedance_kohm) * 1000.0f;
         bio->tick_charge_nc[ch] = i_ua * dt_f;
 
-        /* Randles Cell Integration: dV_dl/dt = (I - V_dl/Rct) / Cdl */
+        /* Randles Cell Integration: dV_dl/dt = (I - V_dl/Rct) / Cdl
+         * Incorporates exponential Butler-Volmer Faradaic leakage when overpotential extends
+         * beyond the safe reversible charge transfer regime (electrolysis runaway). */
         float c_dl_pf = bio->c_double_layer_pf[ch] > 0.0f ? bio->c_double_layer_pf[ch] : 26.45f;
         float r_ct_kohm = bio->r_charge_transfer_kohm > 0.0f ? bio->r_charge_transfer_kohm : 5000.0f;
         float tau_dl_ms = (r_ct_kohm * 1e3f) * (c_dl_pf * 1e-12f) * 1e3f; /* Rct * Cdl in ms */
         if (tau_dl_ms < 0.01f) tau_dl_ms = 0.01f;
+
+        float v_dl_now = bio->v_double_layer_v[ch];
+        float v_low_lim = bio->v_water_window_low_v < 0.0f ? bio->v_water_window_low_v : -0.6f;
+        float v_high_lim = bio->v_water_window_high_v > 0.0f ? bio->v_water_window_high_v : 0.8f;
+        if (v_dl_now > v_high_lim) {
+            float excess_v = v_dl_now - v_high_lim;
+            tau_dl_ms /= (1.0f + 10.0f * excess_v);
+        } else if (v_dl_now < v_low_lim) {
+            float excess_v = v_low_lim - v_dl_now;
+            tau_dl_ms /= (1.0f + 10.0f * excess_v);
+        }
+        if (tau_dl_ms < 0.001f) tau_dl_ms = 0.001f;
+
         float decay_dl = (float)wet_exp(-dt / (double)tau_dl_ms);
         /* Injected dv = I * dt / Cdl; I in uA, dt in ms, Cdl in pF -> (uA * ms) / pF = (1e-6 * 1e-3) / 1e-12 = 1.0 V */
         float dv_dl = (i_ua * dt_f) / c_dl_pf;
@@ -446,10 +467,13 @@ void biophysics_step_tick(bio_state_t* bio) {
             bio_synapse_t* syn = &bio->synapses[i][post];
             if (!syn->exists) continue;
 
-            /* Tsodyks-Markram discrete spike update */
-            syn->u_stp = syn->u_stp + syn->U_base * (1.0f - syn->u_stp);
+            /* Tsodyks-Markram discrete spike update:
+             * Release fraction is determined by current utilization u_stp;
+             * then x_stp is depleted, and u_stp facilitates for subsequent spikes.
+             * This eliminates the 50% first-spike double-counting defect. */
             float release = syn->u_stp * syn->x_stp;
             syn->x_stp = wet_clampf(syn->x_stp - release, 0.0f, 1.0f);
+            syn->u_stp = wet_clampf(syn->u_stp + syn->U_base * (1.0f - syn->u_stp), 0.0f, 1.0f);
 
             float dg = syn->weight_ns * release;
             if (bio->is_excitatory[i]) {
