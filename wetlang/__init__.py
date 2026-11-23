@@ -3,8 +3,32 @@ WetLang - The Neural Organoid Computing Platform & Neuromorphic Runtime
 Project Janus: Dual-Substrate Execution for Biological Wetware & Neuromorphic Silicon.
 """
 
-from typing import Union
+import sys
 from pathlib import Path
+
+# Ensure root repository directory is in sys.path
+_root_dir = str(Path(__file__).resolve().parent.parent)
+if _root_dir not in sys.path:
+    sys.path.insert(0, _root_dir)
+
+from typing import Union
+
+import compiler
+import bindings
+import bindings.runtime as _runtime
+import sandbox
+try:
+    import biophysics
+except ImportError:
+    biophysics = None
+
+# Backward-compatibility alias mapping in sys.modules
+sys.modules["wetlang.compiler"] = compiler
+sys.modules["wetlang.bindings"] = bindings
+sys.modules["wetlang.runtime"] = _runtime
+sys.modules["wetlang.sandbox"] = sandbox
+if biophysics:
+    sys.modules["wetlang.biophysics"] = biophysics
 
 from compiler.emitter import compile_source, compile_to_embedded_header, Target
 from wetlang.vm import VirtualMachine
@@ -40,5 +64,9 @@ __all__ = [
     "WetTelemetry",
     "WetRuntime",
     "WetVMError",
+    "compiler",
+    "bindings",
+    "sandbox",
+    "biophysics",
     "__version__",
 ]

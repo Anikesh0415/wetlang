@@ -1,12 +1,14 @@
 """
 WetLang Command-Line Interface (CLI)
 ====================================
-Standard CLI for compiling, running, disassembling, and verifying WetLang programs.
+Standard CLI for compiling, running, disassembling, verifying, and checking WetLang programs.
+Project Janus: Dual-Substrate Execution for Biological Wetware & Neuromorphic Silicon.
+
 Usage:
-  wetlang compile <file.wet> [-o <file.wbc>] [--sign <secret_key>]
+  wetlang compile <file.wet> [-o <file.wbc>] [--target <sim|finalspark|spinnaker|embedded>] [--sign <key>]
   wetlang run <file.wbc | file.wet> [--ticks N] [--dt MS] [--jsonl]
   wetlang disasm <file.wbc>
-  wetlang verify <file.wbc> [--key <secret_key>]
+  wetlang verify <file.wbc> [--key <key>]
   wetlang version
 """
 
@@ -14,12 +16,17 @@ import sys
 import argparse
 from pathlib import Path
 
-from .compiler.lexer import Lexer
-from .compiler.parser import Parser
-from .compiler.semantic import SemanticAnalyzer
-from .compiler.emitter import BytecodeEmitter, disassemble
-from .compiler.crypto_signer import sign_bytecode, verify_bytecode_signature
-from .runtime.runtime import WetRuntime, WetVMError
+# Ensure root repository directory is on sys.path
+_root_dir = str(Path(__file__).resolve().parent.parent)
+if _root_dir not in sys.path:
+    sys.path.insert(0, _root_dir)
+
+from compiler.lexer import Lexer
+from compiler.parser import Parser
+from compiler.semantic import SemanticAnalyzer
+from compiler.emitter import BytecodeEmitter, disassemble, compile_source, Target
+from compiler.crypto_signer import sign_bytecode, verify_bytecode_signature
+from bindings.runtime import WetRuntime, WetVMError
 
 
 def cmd_compile(args) -> int:
@@ -30,19 +37,17 @@ def cmd_compile(args) -> int:
 
     try:
         source_text = src_path.read_text(encoding="utf-8")
-        tokens = Lexer(source_text).tokenize()
-        ast = Parser(tokens).parse()
-        SemanticAnalyzer(ast).analyze()
-        wbc = BytecodeEmitter().compile(ast)
+        target = getattr(args, "target", "sim")
+        wbc = compile_source(source_text, target=target)
 
-        if args.sign:
+        if getattr(args, "sign", None):
             key = args.sign.encode("utf-8")
             wbc = sign_bytecode(wbc, key)
             print(f"[Crypto] Authenticated WBC signed with HMAC-SHA256")
 
         out_path = Path(args.output) if args.output else src_path.with_suffix(".wbc")
         out_path.write_bytes(wbc)
-        print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' ({len(wbc)} bytes)")
+        print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' ({len(wbc)} bytes, target={target})")
         return 0
     except Exception as ex:
         print(f"Compilation Error: {ex}", file=sys.stderr)
@@ -57,12 +62,8 @@ def cmd_run(args) -> int:
 
     try:
         if file_path.suffix.lower() == ".wet":
-            # Auto-compile source first
             source_text = file_path.read_text(encoding="utf-8")
-            tokens = Lexer(source_text).tokenize()
-            ast = Parser(tokens).parse()
-            SemanticAnalyzer(ast).analyze()
-            wbc = BytecodeEmitter().compile(ast)
+            wbc = compile_source(source_text, target="sim")
         else:
             wbc = file_path.read_bytes()
 
@@ -136,7 +137,7 @@ def cmd_verify(args) -> int:
         return 1
 
 
-def main() -> int:
+def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="wetlang",
         description="WetLang: Programming Language for Neural Organoid Computing & Microfluidics"
@@ -147,6 +148,7 @@ def main() -> int:
     p_comp = subparsers.add_parser("compile", help="Compile WetLang source (.wet) into WBC bytecode (.wbc)")
     p_comp.add_argument("source", help="Path to .wet source file")
     p_comp.add_argument("-o", "--output", help="Path to output .wbc binary")
+    p_comp.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded"], default="sim", help="Target architecture (default: sim)")
     p_comp.add_argument("--sign", help="Optional secret key to cryptographically sign binary")
 
     # run
@@ -168,7 +170,7 @@ def main() -> int:
     # version
     subparsers.add_parser("version", help="Print WetLang platform version")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.command == "compile":
         return cmd_compile(args)
@@ -179,7 +181,7 @@ def main() -> int:
     elif args.command == "verify":
         return cmd_verify(args)
     elif args.command == "version":
-        print("WetLang Platform v2.1.0 (Production Wetware Engine & Runtime)")
+        print("WetLang Platform v2.1.2 (Production Wetware Engine & Project Janus)")
         print("Developed by Anikesh Tiwari (Surat, Gujarat, India) / Wetworld")
         return 0
     else:

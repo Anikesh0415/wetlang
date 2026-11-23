@@ -30,6 +30,7 @@ venv/
 *.dll
 !native/bin/wetvm.dll
 !bin/wetvm.dll
+*.exe
 native/bin/*.lib
 native/bin/*.exp
 native/bin/*.def

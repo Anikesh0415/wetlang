@@ -1,0 +1,15 @@
+// Sample WetLang Closed-Loop Stimulation Program
+grid mea[8, 8];
+channel stim_left = mea[0, 2] mode: BiphasicStim;
+channel sense_right = mea[7, 5] mode: SpikeReadout;
+
+let mut step = 0;
+while (step < 100) {
+    let spikes = read_spikes(sense_right, 20.0);
+    if (spikes > 5) {
+        stim_biphasic(stim_left, 0.8 V, 200 us, 200 us);
+        modulate_stdp(1.05);
+    }
+    sync_tick();
+    step = step + 1;
+}
