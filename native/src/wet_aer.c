@@ -37,8 +37,10 @@ int wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t 
     }
 
     /* Check if ring is full */
-    uint32_t next_head = (ring->head + 1) & ring->mask;
-    if (next_head == (ring->tail & ring->mask)) {
+    uint32_t head = ring->head;
+    uint32_t tail = wet_atomic_load_u32_acquire(&ring->tail);
+    uint32_t next_head = (head + 1) & ring->mask;
+    if (next_head == tail) {
         ring->total_dropped++;
         return -2; /* Buffer full */
     }
@@ -66,15 +68,15 @@ int wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t 
     ring->spikes_in_window++;
 
     /* Write 16-byte aligned packet */
-    uint32_t idx = ring->head & ring->mask;
+    uint32_t idx = head & ring->mask;
     ring->buffer[idx].timestamp_tick = tick;
     ring->buffer[idx].channel_id = channel;
     ring->buffer[idx].peak_amplitude_uv = amp_uv;
     ring->buffer[idx].flags = flags;
     ring->buffer[idx].reserved = 0;
 
-    /* Publish head */
-    ring->head = (ring->head + 1) & ring->mask;
+    /* Publish head with memory barrier */
+    wet_atomic_store_u32_release(&ring->head, next_head);
     ring->total_pushed++;
     return 0;
 }
@@ -85,21 +87,28 @@ uint32_t wet_aer_pop_batch(wet_aer_ring_t *ring, wet_aer_packet_t *out_batch, ui
     }
 
     uint32_t popped = 0;
-    while (popped < max_count && (ring->tail != ring->head)) {
-        uint32_t idx = ring->tail & ring->mask;
+    uint32_t tail = ring->tail;
+    uint32_t head = wet_atomic_load_u32_acquire(&ring->head);
+    while (popped < max_count && (tail != head)) {
+        uint32_t idx = tail & ring->mask;
         out_batch[popped] = ring->buffer[idx];
-        ring->tail = (ring->tail + 1) & ring->mask;
+        tail = (tail + 1) & ring->mask;
         popped++;
+    }
+    if (popped > 0) {
+        wet_atomic_store_u32_release(&ring->tail, tail);
     }
     return popped;
 }
 
 uint32_t wet_aer_available(const wet_aer_ring_t *ring) {
     if (!ring) return 0;
-    if (ring->head >= ring->tail) {
-        return ring->head - ring->tail;
+    uint32_t head = wet_atomic_load_u32_acquire(&ring->head);
+    uint32_t tail = wet_atomic_load_u32_acquire(&ring->tail);
+    if (head >= tail) {
+        return head - tail;
     }
-    return ring->capacity - (ring->tail - ring->head);
+    return ring->capacity - (tail - head);
 }
 
 void wet_aer_get_stats(wet_aer_ring_t *ring, uint64_t current_tick, uint64_t *out_total, double *out_rate_hz, double *out_mbps) {

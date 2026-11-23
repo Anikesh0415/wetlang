@@ -58,36 +58,6 @@ BOOL __stdcall VirtualLock(void* lpAddress, size_t dwSize);
 #include <sched.h>
 #endif
 
-/* Calibrated processor instruction pipeline pause */
-static inline void wet_cpu_pause(void) {
-#if defined(__clang__) || defined(__GNUC__)
-    __builtin_ia32_pause();
-#elif defined(_MSC_VER)
-    _mm_pause();
-#elif defined(__aarch64__)
-    __asm__ __volatile__("isb\n");
-#else
-    /* NOP fallback */
-#endif
-}
-
-/* Atomic Acquire/Release Memory Barriers */
-static inline uint32_t wet_atomic_load_u32_acquire(const volatile uint32_t* ptr) {
-#if defined(__GNUC__) || defined(__clang__)
-    return __atomic_load_n(ptr, __ATOMIC_ACQUIRE);
-#else
-    return *ptr;
-#endif
-}
-
-static inline void wet_atomic_store_u32_release(volatile uint32_t* ptr, uint32_t val) {
-#if defined(__GNUC__) || defined(__clang__)
-    __atomic_store_n(ptr, val, __ATOMIC_RELEASE);
-#else
-    *ptr = val;
-#endif
-}
-
 /* =========================================================================
  * Lockless Single-Producer Single-Consumer (SPSC) Ring Buffer
  * Cacheline-aligned (64-byte padding) to eliminate false sharing

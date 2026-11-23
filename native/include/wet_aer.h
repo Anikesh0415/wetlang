@@ -61,11 +61,11 @@ _Static_assert(sizeof(wet_aer_packet_t) == 16, "wet_aer_packet_t must be exactly
 typedef struct {
     /* Producer cacheline */
     uint8_t pad0[WET_AER_CACHELINE_SIZE];
-    uint32_t head;
+    volatile uint32_t head;
     uint8_t pad1[WET_AER_CACHELINE_SIZE - sizeof(uint32_t)];
 
     /* Consumer cacheline */
-    uint32_t tail;
+    volatile uint32_t tail;
     uint8_t pad2[WET_AER_CACHELINE_SIZE - sizeof(uint32_t)];
 
     /* Shared configuration and storage */

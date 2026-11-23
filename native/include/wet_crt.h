@@ -109,4 +109,52 @@ static inline double wet_rng_normal(uint64_t* state) {
     return s - 6.0;
 }
 
+/* Calibrated processor instruction pipeline pause */
+static inline void wet_cpu_pause(void) {
+#if defined(__clang__) || defined(__GNUC__)
+    #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
+        __builtin_ia32_pause();
+    #elif defined(__aarch64__)
+        __asm__ __volatile__("isb\n");
+    #endif
+#elif defined(_MSC_VER)
+    #if defined(_M_X64) || defined(_M_IX86)
+        _mm_pause();
+    #endif
+#endif
+}
+
+/* Atomic Acquire/Release Memory Barriers for Lock-Free Ring Buffers */
+static inline uint32_t wet_atomic_load_u32_acquire(const volatile uint32_t* ptr) {
+#if defined(__GNUC__) || defined(__clang__)
+    return __atomic_load_n(ptr, __ATOMIC_ACQUIRE);
+#else
+    return *ptr;
+#endif
+}
+
+static inline void wet_atomic_store_u32_release(volatile uint32_t* ptr, uint32_t val) {
+#if defined(__GNUC__) || defined(__clang__)
+    __atomic_store_n(ptr, val, __ATOMIC_RELEASE);
+#else
+    *ptr = val;
+#endif
+}
+
+static inline uint64_t wet_atomic_load_u64_acquire(const volatile uint64_t* ptr) {
+#if defined(__GNUC__) || defined(__clang__)
+    return __atomic_load_n(ptr, __ATOMIC_ACQUIRE);
+#else
+    return *ptr;
+#endif
+}
+
+static inline void wet_atomic_store_u64_release(volatile uint64_t* ptr, uint64_t val) {
+#if defined(__GNUC__) || defined(__clang__)
+    __atomic_store_n(ptr, val, __ATOMIC_RELEASE);
+#else
+    *ptr = val;
+#endif
+}
+
 #endif /* WET_CRT_H */

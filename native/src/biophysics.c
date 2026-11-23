@@ -101,8 +101,10 @@ void biophysics_init(bio_state_t* bio, double dt_ms, uint64_t seed) {
     /* 2. Compute 8x8 MEA 3D volume conduction forward pickup matrix */
     const float lambda_um = 120.0f;
     for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
-        float ex = (float)(ch % BIO_GRID_COLS) * BIO_PITCH_UM;
-        float ey = (float)(ch / BIO_GRID_COLS) * BIO_PITCH_UM;
+        int col = ch % BIO_GRID_COLS;
+        int row = ch / BIO_GRID_COLS;
+        float ex = (float)col * BIO_PITCH_UM;
+        float ey = (float)row * BIO_PITCH_UM;
         float ez = 0.0f;
 
         float row_sum = 0.0f;

@@ -52,6 +52,9 @@ strncmp
 sprintf
 _snprintf
 _vsnprintf
+printf
+puts
+abort
 qsort
 """
     output_def.write_text(def_content, encoding="utf-8")
@@ -124,6 +127,7 @@ def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, 
         "-O3",
         "-shared",
         "-DWET_BUILDING_DLL",
+        "-mno-stack-arg-probe",
         f"-I{include_dir}",
         "-o", str(out_dll),
         *[str(f) for f in src_files],
@@ -200,6 +204,7 @@ def build_native_runtime() -> Path:
         src_dir / "wet_scheduler.c",
         src_dir / "wet_aer.c",
         src_dir / "wet_distributed.c",
+        src_dir / "wet_verification.c",
     ]
     for sf in src_files:
         if not sf.exists():
