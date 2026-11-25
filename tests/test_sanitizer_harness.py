@@ -29,11 +29,12 @@ class WetSanitizerResult(ctypes.Structure):
 
 def _load_wetvm():
     proj_root = Path(__file__).resolve().parent.parent
-    dll_path = proj_root / "native" / "bin" / ("wetvm.dll" if sys.platform == "win32" else "wetvm.so")
+    lib_name = "wetvm.dll" if sys.platform == "win32" else ("wetvm.dylib" if sys.platform == "darwin" else "wetvm.so")
+    dll_path = proj_root / "native" / "bin" / lib_name
     if not dll_path.exists():
-        dll_path = proj_root / "native" / ("wetvm.dll" if sys.platform == "win32" else "wetvm.so")
+        dll_path = proj_root / "native" / lib_name
     if not dll_path.exists():
-        dll_path = proj_root / "bin" / ("wetvm.dll" if sys.platform == "win32" else "wetvm.so")
+        dll_path = proj_root / "bin" / lib_name
     return ctypes.CDLL(str(dll_path))
 
 

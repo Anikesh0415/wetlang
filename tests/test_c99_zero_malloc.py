@@ -13,6 +13,7 @@ import glob
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 import pytest
 
@@ -22,7 +23,8 @@ LLVM_NM_PATH = os.path.join(LLVM_BIN_DIR, "llvm-nm.exe")
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 NATIVE_SRC_DIR = os.path.join(REPO_ROOT, "native", "src")
 NATIVE_INC_DIR = os.path.join(REPO_ROOT, "native", "include")
-WETVM_DLL_PATH = os.path.join(REPO_ROOT, "native", "bin", "wetvm.dll")
+_LIB_EXT = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
+WETVM_DLL_PATH = os.path.join(REPO_ROOT, "native", "bin", f"wetvm{_LIB_EXT}")
 
 ALL_C_FILES = [
     "biophysics.c",

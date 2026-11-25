@@ -11,6 +11,15 @@
  *  - Static memory arena: zero heap allocations during real-time stepping
  */
 
+#if !defined(_WIN32)
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
+#if defined(__linux__) && !defined(_GNU_SOURCE)
+#define _GNU_SOURCE
+#endif
+#endif
+
 #include "../include/wet_crt.h"
 #include "../include/wet_scheduler.h"
 #include "../include/wetvm_vm.h"
@@ -288,12 +297,14 @@ static void* wet_scheduler_thread_proc(void* param) {
     wet_scheduler_t* sched = (wet_scheduler_t*)param;
     if (!sched) return NULL;
 
+#if defined(__linux__)
     if (sched->config.enable_core_pinning) {
         cpu_set_t cpuset;
         CPU_ZERO(&cpuset);
         CPU_SET(sched->config.target_core, &cpuset);
         pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
     }
+#endif
 
     sched->is_running = 1;
     while (!wet_atomic_load_u32_acquire(&sched->stop_requested)) {
@@ -483,8 +494,12 @@ WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched) {
     int64_t start_qpc = t_start.QuadPart;
 #else
     struct timespec ts_start;
+#ifdef CLOCK_MONOTONIC_RAW
     clock_gettime(CLOCK_MONOTONIC_RAW, &ts_start);
-    int64_t start_qpc = (int64_t)ts_start.tv_sec * 1000000000ULL + ts_start.tv_nsec;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &ts_start);
+#endif
+    int64_t start_qpc = (int64_t)ts_start.tv_sec * 1000000000LL + (int64_t)ts_start.tv_nsec;
 #endif
 
     /* Maintain isochronous deadline.
@@ -558,8 +573,12 @@ WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched) {
     double compute_us = (double)(t_compute.QuadPart - start_qpc) / sched->qpc_per_us;
 #else
     struct timespec ts_comp;
+#ifdef CLOCK_MONOTONIC_RAW
     clock_gettime(CLOCK_MONOTONIC_RAW, &ts_comp);
-    int64_t comp_qpc = (int64_t)ts_comp.tv_sec * 1000000000ULL + ts_comp.tv_nsec;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &ts_comp);
+#endif
+    int64_t comp_qpc = (int64_t)ts_comp.tv_sec * 1000000000LL + (int64_t)ts_comp.tv_nsec;
     double compute_us = (double)(comp_qpc - start_qpc) / sched->qpc_per_us;
 #endif
 
@@ -588,12 +607,20 @@ WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched) {
         struct timespec ts_now;
         do {
             wet_cpu_pause();
+#ifdef CLOCK_MONOTONIC_RAW
             clock_gettime(CLOCK_MONOTONIC_RAW, &ts_now);
-        } while (((int64_t)ts_now.tv_sec * 1000000000ULL + ts_now.tv_nsec) < sched->next_deadline_qpc);
+#else
+            clock_gettime(CLOCK_MONOTONIC, &ts_now);
+#endif
+        } while (((int64_t)ts_now.tv_sec * 1000000000LL + (int64_t)ts_now.tv_nsec) < sched->next_deadline_qpc);
     }
     struct timespec ts_end;
+#ifdef CLOCK_MONOTONIC_RAW
     clock_gettime(CLOCK_MONOTONIC_RAW, &ts_end);
-    int64_t end_qpc = (int64_t)ts_end.tv_sec * 1000000000ULL + ts_end.tv_nsec;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &ts_end);
+#endif
+    int64_t end_qpc = (int64_t)ts_end.tv_sec * 1000000000LL + (int64_t)ts_end.tv_nsec;
     double actual_period_us = (double)(end_qpc - start_qpc) / sched->qpc_per_us;
 #endif
 
@@ -637,9 +664,7 @@ WET_EXPORT wet_status_t wet_scheduler_stop(wet_scheduler_t* sched) {
             sched->thread_handle = NULL;
         }
 #else
-        if (sched->thread_handle) {
-            pthread_join(sched->thread_handle, NULL);
-        }
+        pthread_join(sched->thread_handle, NULL);
 #endif
         sched->thread_initialized = 0;
     }

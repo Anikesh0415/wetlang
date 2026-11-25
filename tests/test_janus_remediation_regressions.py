@@ -434,7 +434,9 @@ def test_interlocks_nan_inf_charge_and_compliance_c99_harness():
     #include "wet_crt.h"
     #include "interlocks.h"
 
+    #ifdef _WIN32
     int _fltused = 1;
+    #endif
 
     static float make_nan(void) {
         union { uint32_t u; float f; } v = { 0x7FC00000U };
@@ -475,9 +477,10 @@ def test_interlocks_nan_inf_charge_and_compliance_c99_harness():
         return 0;
     }
     """
+    lib_ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
     with tempfile.TemporaryDirectory(prefix="wet_nan_il_", ignore_cleanup_errors=True) as tmp:
         src_p = Path(tmp) / "probe.c"
-        dll_p = Path(tmp) / "probe.dll"
+        dll_p = Path(tmp) / f"probe{lib_ext}"
         src_p.write_text(c_src, encoding="utf-8")
         ok = build_with_clang(
             clang,

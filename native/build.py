@@ -128,11 +128,11 @@ def build_with_clang(clang_path: str, src_files: list[Path], include_dir: Path, 
         "-O3",
         "-shared",
         "-DWET_BUILDING_DLL",
-        "-mno-stack-arg-probe",
+        *(["-mno-stack-arg-probe"] if sys.platform == "win32" else ["-fPIC"]),
         f"-I{include_dir}",
         "-o", str(out_dll),
         *[str(f) for f in src_files],
-        *extra_link_args
+        *(extra_link_args if sys.platform == "win32" else ["-lm", "-lpthread"]),
     ]
 
     res = subprocess.run(cmd, capture_output=True, text=True)
@@ -149,14 +149,15 @@ def build_with_gcc(gcc_path: str, src_files: list[Path], include_dir: Path, out_
 
     cmd = [
         gcc_path,
+        "-O3",
         "-shared",
-        "-fPIC" if sys.platform != "win32" else "",
+        *(["-fPIC"] if sys.platform != "win32" else []),
         "-DWET_BUILDING_DLL",
         f"-I{include_dir}",
         "-o", str(out_dll),
-        *[str(f) for f in src_files]
+        *[str(f) for f in src_files],
+        *(["-lm", "-lpthread"] if sys.platform != "win32" else []),
     ]
-    cmd = [arg for arg in cmd if arg]
     res = subprocess.run(cmd, capture_output=True, text=True)
     if res.returncode != 0:
         print(f"GCC build failed:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}")
