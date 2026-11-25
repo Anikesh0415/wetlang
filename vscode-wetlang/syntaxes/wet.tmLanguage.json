@@ -1,0 +1,177 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "WetLang",
+  "scopeName": "source.wet",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#physical_literals"
+    },
+    {
+      "include": "#numeric_literals"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#delimiters"
+    },
+    {
+      "include": "#identifiers"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.wet",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.wet",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.wet",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.wet",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "physical_literals": {
+      "patterns": [
+        {
+          "name": "constant.numeric.physical.wet",
+          "match": "\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?(uL/min|mL/min|ms|us|mV|uV|uA|nA|pA|nC|pC|Hz|mm|um|uL|mL|rpm|degC|kPa|mmHg|Pa|kOhm|MOhm|Ohm|mS|uS|nS|S|V|A|C|s)\\b"
+        }
+      ]
+    },
+    "numeric_literals": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.wet",
+          "match": "\\b\\d+\\.\\d+(?:[eE][+-]?\\d+)?\\b"
+        },
+        {
+          "name": "constant.numeric.integer.wet",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.wet",
+          "match": "\\b(if|else|while|for|in|return)\\b"
+        },
+        {
+          "name": "keyword.declaration.wet",
+          "match": "\\b(fn|let|mut)\\b"
+        },
+        {
+          "name": "storage.type.primitive.wet",
+          "match": "\\b(int|float|bool|string)\\b"
+        },
+        {
+          "name": "storage.type.dimension.wet",
+          "match": "\\b(Voltage|Current|Time|Frequency|Length|Charge|Resistance|Conductance)\\b"
+        },
+        {
+          "name": "entity.name.type.channel_mode.wet",
+          "match": "\\b(BiphasicStim|SpikeReadout|VoltageSense|Bidirectional|Reference|RecordingOnly)\\b"
+        },
+        {
+          "name": "keyword.hardware.wet",
+          "match": "\\b(grid|channel|mode|organoid|tissue|connect|port|pump|valve|motor|sensor|actuator)\\b"
+        },
+        {
+          "name": "keyword.stream.wet",
+          "match": "\\b(stream|bind|cycle)\\b"
+        },
+        {
+          "name": "support.function.biophysical.wet",
+          "match": "\\b(stim_biphasic|modulate_stdp|sync_tick|read_spikes|read_voltage|pop_firing_rate|read_population_rate|pump_set_rate|pump_dispense|valve_set|valve_open|valve_close|motor_step|read_pressure|read_temperature)\\b"
+        },
+        {
+          "name": "support.function.math.wet",
+          "match": "\\b(exp|log|ln|sqrt|pow|sin|cos|tanh|abs)\\b"
+        },
+        {
+          "name": "constant.language.boolean.wet",
+          "match": "\\b(true|false)\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arrow.wet",
+          "match": "(->|<-)"
+        },
+        {
+          "name": "keyword.operator.range.wet",
+          "match": "\\.\\."
+        },
+        {
+          "name": "keyword.operator.comparison.wet",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "keyword.operator.logical.wet",
+          "match": "(&&|\\|\\||!)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.wet",
+          "match": "(\\+|-|\\*|/|%)"
+        },
+        {
+          "name": "keyword.operator.assignment.wet",
+          "match": "="
+        }
+      ]
+    },
+    "delimiters": {
+      "patterns": [
+        {
+          "name": "punctuation.separator.wet",
+          "match": "[,;:]"
+        },
+        {
+          "name": "punctuation.accessor.wet",
+          "match": "\\."
+        },
+        {
+          "name": "punctuation.bracket.wet",
+          "match": "[\\(\\)\\{\\}\\[\\]]"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "variable.other.wet",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}

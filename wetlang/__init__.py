@@ -41,8 +41,8 @@ from bindings.runtime import WetRuntime, WetVMError
 __version__ = "2.1.2"
 
 
-def compile(source: str, target: str = "sim") -> bytes:
-    """Compiles .wet source code string directly to .wbc binary bytecode."""
+def compile(source: str, target: str = "sim") -> Union[bytes, str]:
+    """Compiles .wet source code string to .wbc bytecode or neuromorphic target script."""
     return compile_source(source, target=target)
 
 

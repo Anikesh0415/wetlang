@@ -15,12 +15,12 @@ from bindings.aer import WetAERPacket, WetAERRing, WetNEODetector, WetCSRMatrix
 
 
 def test_aer_packet_16byte_aligned_layout():
-    """Verify AER packet is exactly 16 bytes: uint64 tick + uint16 channel + int16 amp + uint16 flags + uint16 reserved."""
-    packet = WetAERPacket(timestamp_tick=987654321, channel_id=2048, peak_amplitude_uv=-150, flags=0x0001, reserved=0)
+    """Verify AER packet is exactly 16 bytes: uint64 tick + uint32 channel + int16 amp + uint16 flags."""
+    packet = WetAERPacket(timestamp_tick=987654321, channel_id=2048, peak_amplitude_uv=-150, flags=0x0001)
     raw = bytes(packet)
     assert len(raw) == 16
 
-    tick, ch, amp, flags, res = struct.unpack("<QHhhH", raw)
+    tick, ch, amp, flags = struct.unpack("<QIhH", raw)
     assert tick == 987654321
     assert ch == 2048
     assert amp == -150

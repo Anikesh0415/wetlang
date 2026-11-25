@@ -31,6 +31,8 @@ class VirtualMachine:
         channel_count: int = 64,
         dt_ms: float = 0.1,
     ):
+        if dt_ms <= 0.0:
+            raise ValueError(f"Simulation timestep dt_ms must be strictly positive (got {dt_ms})")
         self.target = target
         self.channel_count = channel_count
         self.dt_ms = dt_ms
@@ -52,6 +54,15 @@ class VirtualMachine:
             self.bytecode = source_or_bytecode
         else:
             raise TypeError(f"Expected source code string, .wet/.wbc filepath, or bytecode bytes, got {type(source_or_bytecode)}")
+
+        if self.channel_count == 64 and len(self.bytecode) >= 32:
+            import struct
+            try:
+                ch_cnt = struct.unpack_from("<I", self.bytecode, 20)[0]
+                if ch_cnt > 0:
+                    self.channel_count = ch_cnt
+            except Exception:
+                pass
 
         self.config = WetVMConfig(dt_ms=self.dt_ms, channel_count=self.channel_count)
         self.runtime = WetRuntime(config=self.config)

@@ -91,6 +91,10 @@ struct wet_vm_instance {
     int      is_finished;
     uint16_t sleep_ticks_remaining;
     uint8_t  arena_allocated;    /* 1 if created in static arena memory */
+    uint8_t* arena_base;         /* Caller-supplied arena base pointer */
+    size_t   arena_total_bytes;  /* Total caller-supplied arena buffer size */
+    size_t   arena_mark_offset;  /* Offset after static stack/locals/call_stack */
+    size_t   arena_bump_offset;  /* Current bump allocator offset inside arena */
 
     /* Channel States (64 channels) */
     float    voltages[64];

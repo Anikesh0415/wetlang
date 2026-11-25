@@ -35,19 +35,17 @@ extern "C" {
 #pragma pack(push, 8)
 typedef struct {
     uint64_t timestamp_tick;    /* 8 bytes: tick count */
-    uint16_t channel_id;        /* 2 bytes: 0..65535 electrode index */
+    uint32_t channel_id;        /* 4 bytes: 0..4,294,967,295 electrode index */
     int16_t  peak_amplitude_uv; /* 2 bytes: spike peak amplitude in microvolts */
     uint16_t flags;             /* 2 bytes: bit 0: burst, bit 1: multi-unit, bit 2: stim-recovery */
-    uint16_t reserved;          /* 2 bytes: padding for strict 16-byte power-of-two alignment */
 } wet_aer_packet_t;
 #pragma pack(pop)
 #else
 typedef struct __attribute__((aligned(8))) {
     uint64_t timestamp_tick;    /* 8 bytes: tick count */
-    uint16_t channel_id;        /* 2 bytes: 0..65535 electrode index */
+    uint32_t channel_id;        /* 4 bytes: 0..4,294,967,295 electrode index */
     int16_t  peak_amplitude_uv; /* 2 bytes: spike peak amplitude in microvolts */
     uint16_t flags;             /* 2 bytes: bit 0: burst, bit 1: multi-unit, bit 2: stim-recovery */
-    uint16_t reserved;          /* 2 bytes: padding for strict 16-byte power-of-two alignment */
 } wet_aer_packet_t;
 #endif
 
@@ -136,7 +134,7 @@ typedef struct {
 
 /* AER Ring Buffer Functions */
 WET_EXPORT int wet_aer_ring_init(wet_aer_ring_t *ring, wet_aer_packet_t *buffer, uint32_t capacity, uint32_t burst_limit_max_hz, uint16_t *ch_counts, uint32_t num_channels);
-WET_EXPORT int wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint16_t channel, int16_t amp_uv, uint16_t flags);
+WET_EXPORT int wet_aer_push(wet_aer_ring_t *ring, uint64_t tick, uint32_t channel, int16_t amp_uv, uint16_t flags);
 WET_EXPORT uint32_t wet_aer_pop_batch(wet_aer_ring_t *ring, wet_aer_packet_t *out_batch, uint32_t max_count);
 WET_EXPORT uint32_t wet_aer_available(const wet_aer_ring_t *ring);
 WET_EXPORT void wet_aer_get_stats(wet_aer_ring_t *ring, uint64_t current_tick, uint64_t *out_total, double *out_rate_hz, double *out_mbps);

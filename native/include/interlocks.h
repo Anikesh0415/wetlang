@@ -172,7 +172,7 @@ wet_status_t interlocks_check_bubble(interlock_state_t* il, uint64_t current_tic
 wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current_tick, uint8_t channel, float v_elec_v);
 
 /* Static authorization check for an opcode against loaded bytecode capabilities */
-int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel);
+int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint32_t channel);
 
 /* Clamp requested stimulation voltage to material water window */
 WET_EXPORT float interlocks_clamp_voltage(interlock_state_t* il, float requested_v);

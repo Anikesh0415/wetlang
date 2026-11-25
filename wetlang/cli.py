@@ -5,7 +5,7 @@ Standard CLI for compiling, running, disassembling, verifying, and checking WetL
 Project Janus: Dual-Substrate Execution for Biological Wetware & Neuromorphic Silicon.
 
 Usage:
-  wetlang compile <file.wet> [-o <file.wbc>] [--target <sim|finalspark|spinnaker|embedded>] [--sign <key>]
+  wetlang compile <file.wet> [-o <output>] [--target <sim|finalspark|spinnaker|embedded|loihi2>] [--sign <key>]
   wetlang run <file.wbc | file.wet> [--ticks N] [--dt MS] [--jsonl]
   wetlang disasm <file.wbc>
   wetlang verify <file.wbc> [--key <key>]
@@ -14,6 +14,7 @@ Usage:
 
 import sys
 import argparse
+import json
 from pathlib import Path
 
 # Ensure root repository directory is on sys.path
@@ -23,7 +24,7 @@ if _root_dir not in sys.path:
 
 from compiler.lexer import Lexer
 from compiler.parser import Parser
-from compiler.semantic import SemanticAnalyzer
+from compiler.semantic import SemanticAnalyzer, check_source, Diagnostic
 from compiler.emitter import BytecodeEmitter, disassemble, compile_source, Target
 from compiler.crypto_signer import sign_bytecode, verify_bytecode_signature
 from bindings.runtime import WetRuntime, WetVMError
@@ -38,17 +39,37 @@ def cmd_compile(args) -> int:
     try:
         source_text = src_path.read_text(encoding="utf-8")
         target = getattr(args, "target", "sim")
-        wbc = compile_source(source_text, target=target)
+        compiled = compile_source(source_text, filename=str(src_path), target=target)
 
-        if getattr(args, "sign", None):
-            key = args.sign.encode("utf-8")
-            wbc = sign_bytecode(wbc, key)
-            print(f"[Crypto] Authenticated WBC signed with HMAC-SHA256")
+        if target in ("loihi2", "spinnaker"):
+            if getattr(args, "sign", None):
+                print("Error: --sign is only supported for binary WBC targets, not Python neuromorphic scripts.", file=sys.stderr)
+                return 1
+            out_path = Path(args.output) if args.output else src_path.with_suffix(".py")
+            out_path.write_text(compiled, encoding="utf-8")
+            label = "Intel Lava script" if target == "loihi2" else "SpiNNaker PyNN script"
+            print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' ({label}, target={target})")
+            return 0
+        elif target == "embedded":
+            from compiler.emitter import emit_c_embedded_header
+            if getattr(args, "sign", None):
+                compiled = sign_bytecode(compiled, args.sign.encode("utf-8"))
+                print(f"[Crypto] Authenticated WBC signed with HMAC-SHA256")
+            header = emit_c_embedded_header(compiled, model_name=src_path.stem, target=target)
+            out_path = Path(args.output) if args.output else src_path.with_suffix(".h")
+            out_path.write_text(header, encoding="utf-8")
+            print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' (C header, target={target}, {len(compiled)} bytes bytecode)")
+            return 0
+        else:
+            if getattr(args, "sign", None):
+                key = args.sign.encode("utf-8")
+                compiled = sign_bytecode(compiled, key)
+                print(f"[Crypto] Authenticated WBC signed with HMAC-SHA256")
 
-        out_path = Path(args.output) if args.output else src_path.with_suffix(".wbc")
-        out_path.write_bytes(wbc)
-        print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' ({len(wbc)} bytes, target={target})")
-        return 0
+            out_path = Path(args.output) if args.output else src_path.with_suffix(".wbc")
+            out_path.write_bytes(compiled)
+            print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' ({len(compiled)} bytes, target={target})")
+            return 0
     except Exception as ex:
         print(f"Compilation Error: {ex}", file=sys.stderr)
         return 1
@@ -137,6 +158,83 @@ def cmd_verify(args) -> int:
         return 1
 
 
+
+def cmd_check(args) -> int:
+    use_stdin = bool(getattr(args, "stdin", False)) or (args.file == "-")
+    display_file = getattr(args, "filename", None) or args.file or "<stdin>"
+    fmt = getattr(args, "format", "text")
+
+    if not use_stdin:
+        if not args.file:
+            if fmt == "json":
+                err = [{
+                    "file": display_file,
+                    "line": 1,
+                    "column": 1,
+                    "severity": "error",
+                    "code": "ERR_FILE_NOT_FOUND",
+                    "message": "No source file or --stdin specified."
+                }]
+                print(json.dumps(err, indent=2))
+            else:
+                print("Error: No source file or --stdin specified.", file=sys.stderr)
+            return 1
+
+        src_path = Path(args.file)
+        if not src_path.is_file():
+            if fmt == "json":
+                err = [{
+                    "file": display_file,
+                    "line": 1,
+                    "column": 1,
+                    "severity": "error",
+                    "code": "ERR_FILE_NOT_FOUND",
+                    "message": f"Source file '{args.file}' not found."
+                }]
+                print(json.dumps(err, indent=2))
+            else:
+                print(f"Error: Source file '{args.file}' not found.", file=sys.stderr)
+            return 1
+
+    try:
+        if use_stdin:
+            source_text = sys.stdin.read()
+            if source_text.startswith("\ufeff"):
+                source_text = source_text[1:]
+        else:
+            source_text = Path(args.file).read_text(encoding="utf-8-sig")
+
+        max_ticks = getattr(args, "max_unsynced_ticks", 1000) or 1000
+        diagnostics = check_source(source_text, filename=str(display_file), max_unsynced_ticks=max_ticks)
+
+        if fmt == "json":
+            diag_dicts = [d.to_dict() for d in diagnostics]
+            print(json.dumps(diag_dicts, indent=2))
+        else:
+            if not diagnostics:
+                print(f"[PASS] No diagnostics found in '{Path(str(display_file)).name}'.")
+            else:
+                for d in diagnostics:
+                    print(f"{d.file}:{d.line}:{d.column}: {d.severity.upper()}: [{d.code}] {d.message}")
+
+        has_errors = any(d.severity == "error" for d in diagnostics)
+        return 1 if has_errors else 0
+    except Exception as ex:
+        if fmt == "json":
+            err = [{
+                "file": str(display_file),
+                "line": 1,
+                "column": 1,
+                "severity": "error",
+                "code": "ERR_INTERNAL",
+                "message": str(ex)
+            }]
+            print(json.dumps(err, indent=2))
+        else:
+            print(f"Linter Error: {ex}", file=sys.stderr)
+        return 1
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="wetlang",
@@ -145,10 +243,10 @@ def main(argv=None) -> int:
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
 
     # compile
-    p_comp = subparsers.add_parser("compile", help="Compile WetLang source (.wet) into WBC bytecode (.wbc)")
+    p_comp = subparsers.add_parser("compile", help="Compile WetLang source (.wet) for a target substrate (.wbc, .py, or .h)")
     p_comp.add_argument("source", help="Path to .wet source file")
-    p_comp.add_argument("-o", "--output", help="Path to output .wbc binary")
-    p_comp.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded"], default="sim", help="Target architecture (default: sim)")
+    p_comp.add_argument("-o", "--output", help="Path to output file (.wbc, .py, or .h)")
+    p_comp.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded", "loihi2"], default="sim", help="Target architecture (default: sim)")
     p_comp.add_argument("--sign", help="Optional secret key to cryptographically sign binary")
 
     # run
@@ -167,6 +265,14 @@ def main(argv=None) -> int:
     p_ver.add_argument("file", help="Path to .wbc binary")
     p_ver.add_argument("--key", required=True, help="HMAC secret key")
 
+    # check
+    p_check = subparsers.add_parser("check", help="Run static linter and safety verification on .wet source")
+    p_check.add_argument("file", nargs="?", default=None, help="Path to .wet source file (or '-' for stdin)")
+    p_check.add_argument("--stdin", action="store_true", help="Read .wet source from standard input")
+    p_check.add_argument("--filename", default=None, help="Display filename for diagnostics when using --stdin")
+    p_check.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    p_check.add_argument("--max-unsynced-ticks", type=int, default=1000, help="Maximum allowed ticks in loop without sync_tick (default: 1000)")
+
     # version
     subparsers.add_parser("version", help="Print WetLang platform version")
 
@@ -180,6 +286,8 @@ def main(argv=None) -> int:
         return cmd_disasm(args)
     elif args.command == "verify":
         return cmd_verify(args)
+    elif args.command == "check":
+        return cmd_check(args)
     elif args.command == "version":
         print("WetLang Platform v2.1.2 (Production Wetware Engine & Project Janus)")
         print("Developed by Anikesh Tiwari (Surat, Gujarat, India) / Wetworld")

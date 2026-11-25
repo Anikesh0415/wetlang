@@ -21,6 +21,9 @@ void interlocks_init(interlock_state_t* il) {
 
 void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2) {
     if (!il) return;
+    if (!wet_isfinite_f(area_um2) || area_um2 <= 0.0f) {
+        area_um2 = 5000.0f;
+    }
     il->electrode_material = material;
     il->electrode_area_um2 = area_um2;
 
@@ -93,8 +96,7 @@ void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enabl
 void interlocks_set_capabilities(interlock_state_t* il, uint16_t caps, uint32_t channel_count) {
     if (!il) return;
     il->authorized_capabilities = caps;
-    il->authorized_channels = (channel_count > 0 && channel_count <= INTERLOCK_NUM_CHANNELS)
-                              ? channel_count : INTERLOCK_NUM_CHANNELS;
+    il->authorized_channels = channel_count > 0 ? channel_count : INTERLOCK_NUM_CHANNELS;
 }
 
 void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint64_t rec_mask) {
@@ -103,7 +105,7 @@ void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint
     il->recording_only_channels_mask = rec_mask;
 }
 
-int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint8_t channel) {
+int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, float voltage_v, uint32_t channel) {
     if (!il) return 0;
     if (il->locked) return 0;
 
@@ -123,12 +125,17 @@ int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, flo
                 (il->recording_only_channels_mask & ch_bit) != 0ULL) {
                 return 0; /* Capability Denied: Channel restricted to reference or recording */
             }
+        } else if (il->reference_channels_mask != 0ULL || il->recording_only_channels_mask != 0ULL) {
+            return 0; /* Fail-safe: bank masks only cover 0..63; deny unverified high channels */
         }
     }
 
     switch ((wet_opcode_t)opcode) {
         case WET_OP_STIM_BIPHASIC:
         case WET_OP_STIM_CURRENT:
+            if (!wet_isfinite_f(voltage_v)) {
+                return 0;
+            }
             if ((il->authorized_capabilities & WET_CAP_STIMULATION) == 0) {
                 return 0;
             }
@@ -164,8 +171,24 @@ int interlocks_check_capability(const interlock_state_t* il, uint8_t opcode, flo
 }
 
 float interlocks_clamp_voltage(interlock_state_t* il, float requested_v) {
-    float v_high = (il && il->v_water_window_high_v > 0.0f) ? il->v_water_window_high_v : 0.8f;
-    float v_low  = (il && il->v_water_window_low_v < 0.0f)  ? il->v_water_window_low_v  : -0.6f;
+    if (!wet_isfinite_f(requested_v)) {
+        if (il) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_VOLTAGE_OVERRIDE;
+            il->clamp_events++;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_VOLTAGE_OVERRIDE: Non-finite (NaN/Inf) stimulation voltage rejected (fail-closed)");
+        }
+        return 0.0f;
+    }
+    if (il && il->locked) {
+        return 0.0f;
+    }
+
+    float v_high = (il && wet_isfinite_f(il->v_water_window_high_v) && il->v_water_window_high_v > 0.0f)
+                   ? il->v_water_window_high_v : 0.8f;
+    float v_low  = (il && wet_isfinite_f(il->v_water_window_low_v) && il->v_water_window_low_v < 0.0f)
+                   ? il->v_water_window_low_v  : -0.6f;
 
     if (requested_v > v_high) {
         if (il) il->clamp_events++;
@@ -186,27 +209,53 @@ void interlocks_set_electrode_impedance(
     uint64_t tick
 ) {
     if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
-    il->impedance[channel].z_magnitude_ohms = (z_magnitude_ohms > 1.0f) ? z_magnitude_ohms : 1.0f;
-    il->impedance[channel].z_phase_rad = z_phase_rad;
+    il->impedance[channel].z_magnitude_ohms = (wet_isfinite_f(z_magnitude_ohms) && z_magnitude_ohms > 1.0f) ? z_magnitude_ohms : 1.0f;
+    il->impedance[channel].z_phase_rad = wet_isfinite_f(z_phase_rad) ? z_phase_rad : 0.0f;
     il->impedance[channel].last_calibration_tick = tick;
 }
 
 void interlocks_set_current_density_limit(interlock_state_t* il, float max_ua_cm2) {
     if (!il) return;
-    il->max_faradaic_current_density_ua_cm2 = (max_ua_cm2 > 0.0f) ? max_ua_cm2 : 30.0f;
+    il->max_faradaic_current_density_ua_cm2 = (wet_isfinite_f(max_ua_cm2) && max_ua_cm2 > 0.0f) ? max_ua_cm2 : 30.0f;
 }
 
 float interlocks_clamp_voltage_dynamic(interlock_state_t* il, uint8_t channel, float requested_v) {
+    if (!wet_isfinite_f(requested_v)) {
+        if (il) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_VOLTAGE_OVERRIDE;
+            il->tripped_channel = channel;
+            il->clamp_events++;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_VOLTAGE_OVERRIDE: ch=%u non-finite (NaN/Inf) voltage rejected (fail-closed)", channel);
+        }
+        return 0.0f;
+    }
     if (!il) return requested_v;
+    if (il->locked) return 0.0f;
 
     /* 1. First clamp to material-dependent water window rails */
     float v_clamped = interlocks_clamp_voltage(il, requested_v);
 
     /* 2. Enforce dynamic adaptive current limiting: I_peak = V_command / Z_magnitude */
-    if (channel < INTERLOCK_NUM_CHANNELS && il->max_faradaic_current_density_ua_cm2 > 0.0f) {
+    if (channel >= INTERLOCK_NUM_CHANNELS) {
+        il->clamp_events++;
+        return 0.0f;
+    }
+    if (wet_isfinite_f(il->max_faradaic_current_density_ua_cm2) && il->max_faradaic_current_density_ua_cm2 > 0.0f) {
         float z_mag = il->impedance[channel].z_magnitude_ohms;
+        if (!wet_isfinite_f(z_mag) || z_mag < 0.0f) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_VOLTAGE_OVERRIDE;
+            il->tripped_channel = channel;
+            il->clamp_events++;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_VOLTAGE_OVERRIDE: ch=%u invalid impedance in dynamic clamp", channel);
+            return 0.0f;
+        }
         if (z_mag > 0.0f) {
-            float area_um2 = (il->electrode_area_um2 > 0.0f) ? il->electrode_area_um2 : 5000.0f;
+            float area_um2 = (wet_isfinite_f(il->electrode_area_um2) && il->electrode_area_um2 > 0.0f)
+                             ? il->electrode_area_um2 : 5000.0f;
             float area_cm2 = area_um2 * 1e-8f;
 
             /* Safe Faradaic current limit in Amperes: I_safe = J_limit (A/cm^2) * Area (cm^2) */
@@ -215,6 +264,13 @@ float interlocks_clamp_voltage_dynamic(interlock_state_t* il, uint8_t channel, f
 
             /* Maximum allowable dynamic voltage magnitude V_safe = I_safe * Z */
             float v_safe_mag = i_safe_a * z_mag;
+            if (!wet_isfinite_f(v_safe_mag) || v_safe_mag < 0.0f) {
+                il->locked = 1;
+                il->trip_reason = INTERLOCK_TRIP_VOLTAGE_OVERRIDE;
+                il->tripped_channel = channel;
+                il->clamp_events++;
+                return 0.0f;
+            }
 
             if (v_safe_mag > 0.0f && wet_fabsf(v_clamped) > v_safe_mag) {
                 float sign = (v_clamped >= 0.0f) ? 1.0f : -1.0f;
@@ -233,13 +289,18 @@ int wet_interlock_check_voltage(
     float requested_v,
     float* out_clamped_v
 ) {
+    if (!wet_isfinite_f(requested_v)) {
+        float clamped = interlocks_clamp_voltage_dynamic(il, channel, requested_v);
+        if (out_clamped_v) *out_clamped_v = clamped;
+        return 1;
+    }
     if (!il) {
         if (out_clamped_v) *out_clamped_v = requested_v;
         return 0;
     }
     float clamped = interlocks_clamp_voltage_dynamic(il, channel, requested_v);
     if (out_clamped_v) *out_clamped_v = clamped;
-    return (wet_fabsf(clamped - requested_v) > 1e-6f) ? 1 : 0;
+    return (!wet_isfinite_f(clamped) || wet_fabsf(clamped - requested_v) > 1e-6f) ? 1 : 0;
 }
 
 wet_status_t interlocks_record_charge_tick(
@@ -256,22 +317,66 @@ wet_status_t interlocks_record_charge_tick(
     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
         float old_q = il->q_ring[ch][head];
         float new_q = tick_charge_nc[ch];
+        if (!wet_isfinite_f(new_q)) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_CHARGE_IMBALANCE;
+            il->tripped_channel = (uint8_t)ch;
+            il->trip_tick = current_tick;
+            il->trip_value = 0.0f;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_CHARGE_IMBALANCE: ch=%d non-finite (NaN/Inf) charge value at tick %llu",
+                     ch, (unsigned long long)current_tick);
+            status = WET_ERR_CHARGE_IMBALANCE;
+            break;
+        }
         il->q_ring[ch][head] = new_q;
 
         /* Recompute exact sum periodically or maintain running sum with drift-free precision */
         float accum = il->q_accum[ch] - old_q + new_q;
+        if (!wet_isfinite_f(accum)) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_CHARGE_IMBALANCE;
+            il->tripped_channel = (uint8_t)ch;
+            il->trip_tick = current_tick;
+            il->trip_value = 0.0f;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_CHARGE_IMBALANCE: ch=%d non-finite charge accumulator at tick %llu",
+                     ch, (unsigned long long)current_tick);
+            status = WET_ERR_CHARGE_IMBALANCE;
+            break;
+        }
         if (wet_fabsf(accum) < 1e-7f) accum = 0.0f;
         il->q_accum[ch] = accum;
 
         /* Long-horizon leaky DC integrator (tau = 10.0 s = 100,000 ticks) */
         il->q_dc[ch] = il->q_dc[ch] * INTERLOCK_BLEED_DECAY_PER_TICK + new_q;
+        if (!wet_isfinite_f(il->q_dc[ch])) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_DC_DRIFT;
+            il->tripped_channel = (uint8_t)ch;
+            il->trip_tick = current_tick;
+            il->trip_value = 0.0f;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_DC_DRIFT: ch=%d non-finite leaky DC accumulator at tick %llu",
+                     ch, (unsigned long long)current_tick);
+            status = WET_ERR_DC_DRIFT;
+            break;
+        }
         if (wet_fabsf(il->q_dc[ch]) < 1e-7f) il->q_dc[ch] = 0.0f;
 
         /* Phase 3 & v2.1: Persistent unbounded cumulative DC charge accumulator
          * (zero decay, exact fixed-point attoCoulombs: 1 nC = 1e9 aC).
          * Eliminates the 0.1 fC (1 pA * 100 us) truncation defect under multi-week soak protocols. */
-        int64_t delta_ac = (int64_t)wet_llround((double)new_q * 1000000000.0);
-        il->cumulative_dc_attocoulombs[ch] += delta_ac;
+        double scaled_ac = wet_clampd((double)new_q * 1000000000.0, -4.0e18, 4.0e18);
+        int64_t delta_ac = wet_llround(scaled_ac);
+        int64_t cur_ac = il->cumulative_dc_attocoulombs[ch];
+        if (delta_ac > 0 && cur_ac > INT64_MAX - delta_ac) {
+            il->cumulative_dc_attocoulombs[ch] = INT64_MAX;
+        } else if (delta_ac < 0 && cur_ac < INT64_MIN - delta_ac) {
+            il->cumulative_dc_attocoulombs[ch] = INT64_MIN;
+        } else {
+            il->cumulative_dc_attocoulombs[ch] = cur_ac + delta_ac;
+        }
         il->cumulative_unbounded_dc_nc[ch] = (float)((double)il->cumulative_dc_attocoulombs[ch] * 1e-9);
         if (il->cumulative_dc_attocoulombs[ch] == 0) {
             il->cumulative_unbounded_dc_nc[ch] = 0.0f;
@@ -321,6 +426,17 @@ wet_status_t interlocks_check_epileptiform(
 
     uint32_t hyper_count = 0U;
     for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
+        if (!wet_isfinite_f(channel_rates_hz[ch])) {
+            il->locked = 1;
+            il->trip_reason = INTERLOCK_TRIP_FOCAL_EXCITOTOXICITY;
+            il->tripped_channel = (uint8_t)ch;
+            il->trip_tick = current_tick;
+            il->trip_value = 0.0f;
+            snprintf(il->diagnostic, sizeof(il->diagnostic),
+                     "ERR_FOCAL_EXCITOTOXICITY: ch=%d non-finite (NaN/Inf) firing rate at tick %llu",
+                     ch, (unsigned long long)current_tick);
+            return WET_ERR_FOCAL_EXCITOTOXICITY;
+        }
         if (channel_rates_hz[ch] >= INTERLOCK_EPILEPSY_RATE_HZ) {
             hyper_count++;
             il->focal_hyperactive_ticks[ch]++;
@@ -366,15 +482,15 @@ wet_status_t interlocks_check_thermal(interlock_state_t* il, uint64_t current_ti
     if (!il) return WET_ERR_NULL_PTR;
     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
 
-    if (temp_c > INTERLOCK_THERMAL_LIMIT_C) {
+    if (!wet_isfinite_f(temp_c) || temp_c > INTERLOCK_THERMAL_LIMIT_C) {
         il->locked = 1;
         il->trip_reason = INTERLOCK_TRIP_THERMAL_LIMIT;
         il->tripped_channel = 0xFF;
         il->trip_tick = current_tick;
-        il->trip_value = temp_c;
+        il->trip_value = wet_isfinite_f(temp_c) ? temp_c : 0.0f;
         snprintf(il->diagnostic, sizeof(il->diagnostic),
                  "ERR_THERMAL_LIMIT: Temperature %.2f C exceeds incubator threshold (38.00 C) at tick %llu",
-                 (double)temp_c, (unsigned long long)current_tick);
+                 (double)il->trip_value, (unsigned long long)current_tick);
         return WET_ERR_THERMAL_LIMIT;
     }
     return WET_OK;
@@ -402,15 +518,15 @@ wet_status_t interlocks_check_compliance(interlock_state_t* il, uint64_t current
     if (!il) return WET_ERR_NULL_PTR;
     if (il->locked) return WET_ERR_INTERLOCK_LOCKED;
 
-    if (wet_fabsf(v_elec_v) > INTERLOCK_COMPLIANCE_LIMIT_V) {
+    if (!wet_isfinite_f(v_elec_v) || wet_fabsf(v_elec_v) > INTERLOCK_COMPLIANCE_LIMIT_V) {
         il->locked = 1;
         il->trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
         il->tripped_channel = channel;
         il->trip_tick = current_tick;
-        il->trip_value = v_elec_v;
+        il->trip_value = wet_isfinite_f(v_elec_v) ? v_elec_v : 0.0f;
         snprintf(il->diagnostic, sizeof(il->diagnostic),
                  "ERR_COMPLIANCE_RAILED: ch=%u electrode potential %.3f V exceeded compliance rail (+/-7.0 V) at tick %llu",
-                 channel, (double)v_elec_v, (unsigned long long)current_tick);
+                 channel, (double)il->trip_value, (unsigned long long)current_tick);
         return WET_ERR_COMPLIANCE_RAILED;
     }
     return WET_OK;

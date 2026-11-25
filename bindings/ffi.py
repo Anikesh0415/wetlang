@@ -46,6 +46,7 @@ class WetStatus(IntEnum):
     WET_ERR_BUBBLE_DETECTED       = 25
     WET_ERR_COMPLIANCE_RAILED     = 26
     WET_ERR_BYTECODE_VERIFICATION = 27
+    WET_ERR_QUEUE_EMPTY           = 28
 
 
 class WetHalMode(IntEnum):
@@ -145,8 +146,20 @@ class WetHalTelemetry(ctypes.Structure):
     ]
 
 
+class WetAsyncCmd(ctypes.Structure):
+    """Mirror of C wet_async_cmd_t (24 bytes)."""
+    _fields_ = [
+        ("cmd_type", c_uint8),
+        ("device_id", c_uint8),
+        ("state", c_uint8),
+        ("padding", c_uint8),
+        ("param_val", c_double),
+        ("submit_tick", c_uint64),
+    ]
+
+
 class WetHalContext(ctypes.Structure):
-    """Mirror of C wet_hal_context_t."""
+    """Mirror of C wet_hal_context_t (2312 bytes)."""
     _fields_ = [
         ("mode", c_int),
         ("config", WetHalConfig),
@@ -161,12 +174,16 @@ class WetHalContext(ctypes.Structure):
         ("pump_rates_ul_min", c_float * 8),
         ("valve_states", c_uint8 * 8),
         ("flow_rates_ul_min", c_double * 8),
+        ("fluid_pressure_kpa", c_float * 8),
         ("ephys_voltages", c_float * 64),
         ("ephys_spikes", c_uint8 * 64),
         ("crowbar_tripped", c_uint8),
         ("crowbar_reason", c_uint32),
         ("crowbar_tick", c_uint64),
         ("crowbar_timestamp_us", c_uint64),
+        ("async_queue", WetAsyncCmd * 64),
+        ("async_head", c_uint32),
+        ("async_tail", c_uint32),
         ("telemetry", WetHalTelemetry),
     ]
 
@@ -358,6 +375,11 @@ def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
     # wet_status_t wet_get_telemetry(wet_vm_t* vm, wet_telemetry_t* out_telem)
     lib.wet_get_telemetry.restype = c_int
     lib.wet_get_telemetry.argtypes = [c_void_p, POINTER(WetTelemetry)]
+
+    # wet_status_t wet_get_spikes_window(const wet_vm_t* vm, uint32_t lookback_ticks, uint32_t* out_counts, size_t out_capacity)
+    if hasattr(lib, "wet_get_spikes_window"):
+        lib.wet_get_spikes_window.restype = c_int
+        lib.wet_get_spikes_window.argtypes = [c_void_p, c_uint32, POINTER(c_uint32), c_size_t]
 
     # const char* wet_get_last_error(wet_vm_t* vm)
     lib.wet_get_last_error.restype = c_char_p

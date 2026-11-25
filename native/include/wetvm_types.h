@@ -71,7 +71,8 @@ typedef enum {
     WET_ERR_THERMAL_LIMIT         = 24,
     WET_ERR_BUBBLE_DETECTED       = 25,
     WET_ERR_COMPLIANCE_RAILED     = 26,
-    WET_ERR_BYTECODE_VERIFICATION = 27
+    WET_ERR_BYTECODE_VERIFICATION = 27,
+    WET_ERR_QUEUE_EMPTY           = 28
 } wet_status_t;
 
 /* Opcode Table (30+ Opcodes) matching compiler/isa.py */

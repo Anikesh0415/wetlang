@@ -1,0 +1,78 @@
+{
+  "name": "wetlang",
+  "displayName": "WetLang",
+  "description": "Official WetLang Language Support & Canonical Linter for Neural Organoid Computing",
+  "version": "2.1.2",
+  "publisher": "finalspark",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "icon": "icons/wetlang.png",
+  "activationEvents": [
+    "onLanguage:wetlang"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "wetlang",
+        "aliases": [
+          "WetLang",
+          "wetlang",
+          "wet"
+        ],
+        "extensions": [
+          ".wet"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "wetlang",
+        "scopeName": "source.wet",
+        "path": "./syntaxes/wet.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "wetlang.check",
+        "title": "WetLang: Run Linter Check"
+      }
+    ],
+    "configuration": {
+      "title": "WetLang",
+      "properties": {
+        "wetlang.linter.executablePath": {
+          "type": "string",
+          "default": "wetlang",
+          "description": "Path to the wetlang CLI executable or python interpreter."
+        },
+        "wetlang.linter.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable canonical WetLang diagnostic linter."
+        },
+        "wetlang.linter.maxUnsyncedTicks": {
+          "type": "integer",
+          "default": 1000,
+          "description": "Maximum number of ticks allowed in a loop lacking sync_tick."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^5.0.0"
+  }
+}

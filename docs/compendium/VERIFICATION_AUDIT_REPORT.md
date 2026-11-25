@@ -3,9 +3,9 @@
 **Auditor:** `DocVerifier` (Independent Ground-Truth Technical Auditor)  
 **Audit Cycle:** Final Re-Audit #2 (Full Sign-Off Verification)  
 **Audit Date:** `2026-11-18`  
-**Target Directory:** `d:\New research\wetworld_language\docs\compendium\`  
-**Ground-Truth Repository:** `d:\New research\wetworld_language\` (62 tracked files, 788,172 bytes, 17,043 text lines)  
-**Empirical Ground-Truth Sources:** `d:\New research\Sovereign_Wetware_Vault\02_Research_Papers_and_Manuscripts\all_10_zenodo_papers.txt`, `E:\data\fs369\fs369data`
+**Target Directory:** `<WETLANG_ROOT>\docs\compendium\`  
+**Ground-Truth Repository:** `<WETLANG_ROOT>\` (62 tracked files, 788,172 bytes, 17,043 text lines)  
+**Empirical Ground-Truth Sources:** `<RESEARCH_VAULT>\02_Research_Papers_and_Manuscripts\all_10_zenodo_papers.txt`, `E:\data\fs369\fs369data`
 
 ---
 

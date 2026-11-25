@@ -49,8 +49,11 @@ WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
         vm->config.dt_ms = (config->dt_ms > 0.0) ? config->dt_ms : 0.1;
         vm->config.max_stack_depth = (config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
         vm->config.max_locals = (config->max_locals > 0) ? config->max_locals : 256;
-        vm->config.channel_count = (config->channel_count > 0 && config->channel_count <= 64)
+        vm->config.channel_count = (config->channel_count > 0)
                                     ? config->channel_count : 64;
+        if (vm->config.channel_count > 64U) {
+            vm->config.channel_count = 64U;
+        }
         vm->config.max_ops_per_tick = (config->max_ops_per_tick > 0) ? config->max_ops_per_tick : 100000U;
         vm->config.min_sequence_counter = config->min_sequence_counter;
     } else {
@@ -114,40 +117,67 @@ WET_EXPORT wet_vm_t* wet_create_vm_arena(
     size_t arena_bytes,
     const wet_vm_config_t* config
 ) {
-    if (!arena_buf) return NULL;
+    if (!arena_buf || arena_bytes == 0) return NULL;
 
-    uint32_t stack_depth = (config && config->max_stack_depth > 0) ? config->max_stack_depth : 1024;
-    uint32_t max_locals = (config && config->max_locals > 0) ? config->max_locals : 256;
-    uint32_t call_depth = 64;
+    uint32_t stack_depth = (config && config->max_stack_depth > 0) ? config->max_stack_depth : 1024U;
+    uint32_t max_locals = (config && config->max_locals > 0) ? config->max_locals : 256U;
+    uint32_t call_depth = 64U;
 
-    size_t needed = sizeof(struct wet_vm_instance)
-                  + (size_t)stack_depth * sizeof(wet_value_t)
-                  + (size_t)max_locals * sizeof(wet_value_t)
-                  + (size_t)call_depth * sizeof(wet_call_frame_t);
+    /* Overflow-safe byte size calculations */
+    if ((size_t)stack_depth > (SIZE_MAX / sizeof(wet_value_t)) / 2U ||
+        (size_t)max_locals > (SIZE_MAX / sizeof(wet_value_t)) / 2U ||
+        (size_t)call_depth > (SIZE_MAX / sizeof(wet_call_frame_t)) / 2U) {
+        return NULL;
+    }
 
-    if (arena_bytes < needed) return NULL;
+    size_t stack_bytes = (size_t)stack_depth * sizeof(wet_value_t);
+    size_t locals_bytes = (size_t)max_locals * sizeof(wet_value_t);
+    size_t call_bytes = (size_t)call_depth * sizeof(wet_call_frame_t);
 
-    /* Align arena to 128 bytes (WET_CACHELINE_SIZE) for DMA & cache coherency */
+    /* Align arena base to 128 bytes (WET_CACHELINE_SIZE) for DMA & cache coherency */
     uint8_t* raw_ptr = (uint8_t*)arena_buf;
     uintptr_t u = (uintptr_t)raw_ptr;
-    uintptr_t aligned_u = (u + 127) & ~((uintptr_t)127);
+    if (u > UINTPTR_MAX - 127U) return NULL;
+    uintptr_t aligned_u = (u + 127U) & ~((uintptr_t)127U);
     size_t align_pad = (size_t)(aligned_u - u);
-    if (arena_bytes < needed + align_pad + 256) return NULL;
+    if (arena_bytes <= align_pad) return NULL;
+    size_t avail = arena_bytes - align_pad;
+
+    size_t vm_sz = sizeof(struct wet_vm_instance);
+    if (vm_sz > SIZE_MAX - 127U) return NULL;
+    size_t off_stack = (vm_sz + 127U) & ~((size_t)127U);
+    if (avail < off_stack) return NULL;
+
+    size_t tail_avail = avail - off_stack;
+    if (stack_bytes > tail_avail) return NULL;
+    tail_avail -= stack_bytes;
+    if (locals_bytes > tail_avail) return NULL;
+    tail_avail -= locals_bytes;
+    if (call_bytes > tail_avail) return NULL;
 
     uint8_t* ptr = (uint8_t*)aligned_u;
     struct wet_vm_instance* vm = (struct wet_vm_instance*)ptr;
-    ptr += sizeof(struct wet_vm_instance);
-    u = (uintptr_t)ptr;
-    ptr = (uint8_t*)((u + 127) & ~((uintptr_t)127));
     memset(vm, 0, sizeof(struct wet_vm_instance));
 
     vm->arena_allocated = 1;
+    vm->arena_base = raw_ptr;
+    vm->arena_total_bytes = arena_bytes;
+    size_t end_rel = off_stack + stack_bytes + locals_bytes + call_bytes;
+    size_t mark_off = align_pad + end_rel;
+    if (mark_off <= arena_bytes - 15U) {
+        mark_off = (mark_off + 15U) & ~((size_t)15U);
+    }
+    if (mark_off > arena_bytes) mark_off = arena_bytes;
+    vm->arena_mark_offset = mark_off;
+    vm->arena_bump_offset = mark_off;
+
     if (config) {
         vm->config = *config;
         if (vm->config.dt_ms <= 0.0) vm->config.dt_ms = 0.1;
         if (vm->config.max_stack_depth == 0) vm->config.max_stack_depth = stack_depth;
         if (vm->config.max_locals == 0) vm->config.max_locals = max_locals;
         if (vm->config.channel_count == 0) vm->config.channel_count = 64;
+        if (vm->config.channel_count > 64U) vm->config.channel_count = 64U;
         if (vm->config.max_ops_per_tick == 0) vm->config.max_ops_per_tick = 100000U;
     } else {
         vm->config.dt_ms = 0.1;
@@ -157,13 +187,14 @@ WET_EXPORT wet_vm_t* wet_create_vm_arena(
         vm->config.max_ops_per_tick = 100000U;
     }
 
+    ptr = (uint8_t*)aligned_u + off_stack;
     vm->max_stack = stack_depth;
     vm->stack = (wet_value_t*)ptr;
-    ptr += (size_t)stack_depth * sizeof(wet_value_t);
+    ptr += stack_bytes;
 
     vm->max_locals = max_locals;
     vm->locals = (wet_value_t*)ptr;
-    ptr += (size_t)max_locals * sizeof(wet_value_t);
+    ptr += locals_bytes;
 
     vm->max_call_depth = call_depth;
     vm->call_stack = (wet_call_frame_t*)ptr;
@@ -196,23 +227,23 @@ WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
         vm->hal = NULL;
     }
 
-    if (vm->constants) {
-        for (size_t i = 0; i < vm->num_constants; ++i) {
-            if (vm->constants[i].str_alloc) {
-                free(vm->constants[i].str_alloc);
-                vm->constants[i].str_alloc = NULL;
-            }
-        }
-        free(vm->constants);
-        vm->constants = NULL;
-    }
-
-    if (vm->bytecode_raw) {
-        free(vm->bytecode_raw);
-        vm->bytecode_raw = NULL;
-    }
-
     if (!vm->arena_allocated) {
+        if (vm->constants) {
+            for (size_t i = 0; i < vm->num_constants; ++i) {
+                if (vm->constants[i].str_alloc) {
+                    free(vm->constants[i].str_alloc);
+                    vm->constants[i].str_alloc = NULL;
+                }
+            }
+            free(vm->constants);
+            vm->constants = NULL;
+        }
+
+        if (vm->bytecode_raw) {
+            free(vm->bytecode_raw);
+            vm->bytecode_raw = NULL;
+        }
+
         if (vm->stack) {
             free(vm->stack);
             vm->stack = NULL;
@@ -231,13 +262,21 @@ WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
         free(vm);
     } else {
         /*
-         * Defense-in-depth: Secure volatile memory scrubbing.
-         * Zeroes the entire VM instance structure to prevent stale stimulation schedules,
-         * cryptographic keys, or stack frames from leaking into future arena allocations.
+         * Defense-in-depth: Secure volatile memory scrubbing across the ENTIRE arena buffer
+         * (instance, stack, locals, call_stack, bytecode_raw, and constant pool).
          */
-        volatile uint8_t* scrub_p = (volatile uint8_t*)vm;
-        for (size_t i = 0; i < sizeof(struct wet_vm_instance); i++) {
-            scrub_p[i] = 0;
+        uint8_t* base = vm->arena_base;
+        size_t total_sz = vm->arena_total_bytes;
+        if (base && total_sz > 0) {
+            volatile uint8_t* scrub_p = (volatile uint8_t*)base;
+            for (size_t i = 0; i < total_sz; ++i) {
+                scrub_p[i] = 0;
+            }
+        } else {
+            volatile uint8_t* scrub_p = (volatile uint8_t*)vm;
+            for (size_t i = 0; i < sizeof(struct wet_vm_instance); i++) {
+                scrub_p[i] = 0;
+            }
         }
     }
 }
@@ -341,7 +380,7 @@ WET_EXPORT wet_status_t wet_inject_stimulus(
         vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
     }
 
-    float clamped_v = interlocks_clamp_voltage(&vm->interlocks, voltage_v);
+    float clamped_v = interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, voltage_v);
     biophysics_schedule_stim(&vm->bio, channel, clamped_v, phase1_ms, phase2_ms);
     vm->voltages[channel] = clamped_v;
     float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
@@ -361,6 +400,38 @@ WET_EXPORT wet_status_t wet_get_telemetry(
     memcpy(out_telem->voltages, vm->voltages, sizeof(float) * 64);
     memcpy(out_telem->spikes, vm->spikes, sizeof(uint8_t) * 64);
     memcpy(out_telem->last_charge_nc, vm->last_charge_nc, sizeof(float) * 64);
+
+    return WET_OK;
+}
+
+WET_EXPORT wet_status_t wet_get_spikes_window(
+    const wet_vm_t* vm,
+    uint32_t lookback_ticks,
+    uint32_t* out_counts,
+    size_t out_capacity
+) {
+    if (!vm || !out_counts) return WET_ERR_NULL_PTR;
+    if (out_capacity == 0) return WET_OK;
+
+    uint32_t n_ticks = lookback_ticks;
+    if (n_ticks > BIO_SPIKE_HISTORY_LEN) {
+        n_ticks = BIO_SPIKE_HISTORY_LEN;
+    }
+
+    size_t n_ch = (out_capacity < BIO_NUM_CHANNELS) ? out_capacity : (size_t)BIO_NUM_CHANNELS;
+    for (size_t ch = 0; ch < n_ch; ++ch) {
+        uint32_t count = 0U;
+        int idx = (int)vm->bio.spike_history_head - 1;
+        for (uint32_t k = 0; k < n_ticks; ++k) {
+            if (idx < 0) idx += BIO_SPIKE_HISTORY_LEN;
+            count += vm->bio.spike_history[ch][idx];
+            idx--;
+        }
+        out_counts[ch] = count;
+    }
+    for (size_t ch = n_ch; ch < out_capacity; ++ch) {
+        out_counts[ch] = 0U;
+    }
 
     return WET_OK;
 }
@@ -444,6 +515,8 @@ WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
             return "WET_ERR_COMPLIANCE_RAILED: Stimulator output voltage saturated ASIC compliance rail (+/-7.0 V)";
         case WET_ERR_BYTECODE_VERIFICATION:
             return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
+        case WET_ERR_QUEUE_EMPTY:
+            return "WET_ERR_QUEUE_EMPTY: Telemetry or command queue is empty";
         default:
             return "WET_ERR_UNKNOWN: Unknown error status";
     }
@@ -459,13 +532,44 @@ WET_EXPORT void wet_configure_electrode(wet_vm_t* vm, uint8_t material, float ar
 }
 
 WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
-    if (!vm) return;
+    if (!vm || channel >= BIO_NUM_CHANNELS) return;
+
+    wet_hal_status_t hal_st = WET_HAL_OK;
+    if (vm->hal != NULL) {
+        hal_st = wet_hal_active_discharge(vm->hal, (uint16_t)channel);
+    }
+
+    bio_stim_pulse_t* p = &vm->bio.stim_pulses[channel];
+    p->active = 0;
+    p->phase1_ticks_left = 0;
+    p->interphase_ticks_left = 0;
+    p->phase2_ticks_left = 0;
+    p->voltage_v = 0.0f;
+    p->phase1_amp_v = 0.0f;
+    p->phase2_amp_v = 0.0f;
+    vm->bio.ext_stim_v[channel] = 0.0f;
+    vm->bio.tick_charge_nc[channel] = 0.0f;
+    vm->bio.last_stim_current_ua[channel] = 0.0f;
+
+    if (vm->bio.stim_blanking_ticks[channel] < vm->bio.default_blanking_ticks) {
+        vm->bio.stim_blanking_ticks[channel] = vm->bio.default_blanking_ticks;
+    }
+
+    if (hal_st == WET_HAL_OK) {
+        vm->bio.v_double_layer_v[channel] = 0.0f;
+    }
+
     interlocks_active_discharge(&vm->interlocks, channel);
+    vm->voltages[channel] = 0.0f;
+    vm->last_charge_nc[channel] = 0.0f;
+    vm->discharge_charge_nc[channel] = 0.0f;
 }
 
 WET_EXPORT void wet_active_discharge_all(wet_vm_t* vm) {
     if (!vm) return;
-    interlocks_active_discharge_all(&vm->interlocks);
+    for (uint8_t ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
+        wet_active_discharge(vm, ch);
+    }
 }
 
 WET_EXPORT void wet_enable_dead_head_protection(wet_vm_t* vm, uint8_t enable) {
@@ -516,6 +620,21 @@ WET_EXPORT wet_status_t wet_inject_current_stimulus(
     if (comp_st != WET_OK) {
         snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
         return comp_st;
+    }
+
+    /* Dynamic EIS Faradaic Current Density Clamp when channel impedance is calibrated */
+    if (channel < INTERLOCK_NUM_CHANNELS &&
+        vm->interlocks.impedance[channel].z_magnitude_ohms > 0.0f &&
+        vm->interlocks.max_faradaic_current_density_ua_cm2 > 0.0f) {
+        float area_um2 = (vm->interlocks.electrode_area_um2 > 0.0f) ? vm->interlocks.electrode_area_um2 : 5000.0f;
+        float i_safe_ua = vm->interlocks.max_faradaic_current_density_ua_cm2 * (area_um2 * 1e-8f);
+        if (i_safe_ua > 0.0f && fabsf(current_ua) > i_safe_ua) {
+            float sign = (current_ua >= 0.0f) ? 1.0f : -1.0f;
+            current_ua = sign * i_safe_ua;
+            vm->interlocks.clamp_events++;
+            vm->interlocks.dynamic_impedance_clamp_events++;
+            v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+        }
     }
 
     /* Shannon charge density limit */

@@ -668,8 +668,8 @@ Sections: 5 | Channels: 64 | Max Charge Bound: 0.50 nC
 $ python tests/run_e2e_tests.py  (exit_code=0)
 ================================================================================
  WetLang Neural Organoid Platform — 4-Tier E2E Test Suite
- Python Interpreter : 3.12.10 (C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\python.exe)
- Working Directory  : D:\WetLang\wetlang_github_release
+ Python Interpreter : 3.12.10 (python)
+ Working Directory  : <WETLANG_RELEASE_ROOT>
  Tests Discovered   : 313
 ================================================================================
   [PERF WARNING] tests.e2e.test_tier1_features.TestTier1Interlocks.test_tier1_f21_counter_reset_on_calm_happy took 1.94s
@@ -706,9 +706,9 @@ OK
 ```text
 $ python -m pytest tests/test_*.py -v  (exit_code=0)
 ============================= test session starts =============================
-platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\python.exe
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- python
 cachedir: .pytest_cache
-rootdir: D:\WetLang\wetlang_github_release
+rootdir: <WETLANG_RELEASE_ROOT>
 configfile: pytest.ini
 plugins: anyio-4.14.2, platformdirs-4.12.3
 collecting ... collected 243 items
@@ -958,8 +958,8 @@ tests/test_universal_sandbox.py::TestUniversalSandbox::test_07_gymnasium_active_
 tests/test_universal_sandbox.py::TestUniversalSandbox::test_08_snntorch_biophysical_ode_convergence PASSED [100%]
 
 ============================== warnings summary ===============================
-C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\pytest_plugin.py:14
-  C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+<site-packages>\anyio\pytest_plugin.py:14
+  <site-packages>\anyio\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
   The CallSpec2 alias will be removed in pytest 10.
   Update imports to use CallSpec instead.
   See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed

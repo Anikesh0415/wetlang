@@ -44,11 +44,14 @@ class WetAERPacket(ctypes.Structure):
     _pack_ = 8
     _fields_ = [
         ("timestamp_tick", ctypes.c_uint64),
-        ("channel_id", ctypes.c_uint16),
+        ("channel_id", ctypes.c_uint32),
         ("peak_amplitude_uv", ctypes.c_int16),
         ("flags", ctypes.c_uint16),
-        ("reserved", ctypes.c_uint16),
     ]
+
+    def __init__(self, *args, **kwargs):
+        kwargs.pop("reserved", None)
+        super().__init__(*args, **kwargs)
 
 
 assert ctypes.sizeof(WetAERPacket) == 16, f"Expected 16 bytes, got {ctypes.sizeof(WetAERPacket)}"
@@ -121,7 +124,7 @@ _LIB.wet_aer_ring_init.restype = ctypes.c_int
 _LIB.wet_aer_push.argtypes = [
     ctypes.POINTER(WetAERRingStruct),
     ctypes.c_uint64,
-    ctypes.c_uint16,
+    ctypes.c_uint32,
     ctypes.c_int16,
     ctypes.c_uint16,
 ]

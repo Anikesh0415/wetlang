@@ -45,7 +45,22 @@ static inline double wet_clampd(double x, double lo, double hi) {
     return x;
 }
 
+static inline int wet_isfinite_f(float x) {
+    uint32_t bits = 0U;
+    memcpy(&bits, &x, sizeof(bits));
+    return (bits & 0x7F800000U) != 0x7F800000U;
+}
+
+static inline int wet_isfinite_d(double x) {
+    uint64_t bits = 0ULL;
+    memcpy(&bits, &x, sizeof(bits));
+    return (bits & 0x7FF0000000000000ULL) != 0x7FF0000000000000ULL;
+}
+
 static inline int64_t wet_llround(double x) {
+    if (!wet_isfinite_d(x)) return 0;
+    if (x >= 4.0e18) return (int64_t)4000000000000000000LL;
+    if (x <= -4.0e18) return (int64_t)(-4000000000000000000LL);
     return (x >= 0.0) ? (int64_t)(x + 0.5) : (int64_t)(x - 0.5);
 }
 

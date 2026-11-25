@@ -106,15 +106,32 @@ static inline int is_truthy(const wet_value_t* v) {
  * Bytecode Loading and Verification
  * ========================================================================= */
 
+static void* arena_alloc_aligned(struct wet_vm_instance* vm, size_t size, size_t align) {
+    if (!vm || !vm->arena_base || size == 0) return NULL;
+    if (align < 1U) align = 1U;
+    size_t mask = align - 1U;
+    if (vm->arena_bump_offset > SIZE_MAX - mask) return NULL;
+    size_t off = (vm->arena_bump_offset + mask) & ~mask;
+    if (off > vm->arena_total_bytes || size > (vm->arena_total_bytes - off)) {
+        return NULL;
+    }
+    void* ptr = vm->arena_base + off;
+    vm->arena_bump_offset = off + size;
+    memset(ptr, 0, size);
+    return ptr;
+}
+
 static void cleanup_constants(struct wet_vm_instance* vm) {
     if (vm->constants) {
-        for (size_t i = 0; i < vm->num_constants; ++i) {
-            if (vm->constants[i].str_alloc) {
-                free(vm->constants[i].str_alloc);
-                vm->constants[i].str_alloc = NULL;
+        if (!vm->arena_allocated) {
+            for (size_t i = 0; i < vm->num_constants; ++i) {
+                if (vm->constants[i].str_alloc) {
+                    free(vm->constants[i].str_alloc);
+                    vm->constants[i].str_alloc = NULL;
+                }
             }
+            free(vm->constants);
         }
-        free(vm->constants);
         vm->constants = NULL;
         vm->num_constants = 0;
     }
@@ -123,9 +140,14 @@ static void cleanup_constants(struct wet_vm_instance* vm) {
 static void cleanup_bytecode(struct wet_vm_instance* vm) {
     cleanup_constants(vm);
     if (vm->bytecode_raw) {
-        free(vm->bytecode_raw);
+        if (!vm->arena_allocated) {
+            free(vm->bytecode_raw);
+        }
         vm->bytecode_raw = NULL;
         vm->bytecode_size = 0;
+    }
+    if (vm->arena_allocated) {
+        vm->arena_bump_offset = vm->arena_mark_offset;
     }
     vm->code = NULL;
     vm->code_size = 0;
@@ -234,7 +256,11 @@ wet_status_t wet_vm_load_bytecode_internal(
 
     /* Clean up previous bytecode and allocate buffer for new bytecode */
     cleanup_bytecode(vm);
-    vm->bytecode_raw = (uint8_t*)malloc(size);
+    if (vm->arena_allocated) {
+        vm->bytecode_raw = (uint8_t*)arena_alloc_aligned(vm, size, 16U);
+    } else {
+        vm->bytecode_raw = (uint8_t*)malloc(size);
+    }
     if (!vm->bytecode_raw) {
         snprintf(vm->last_error, sizeof(vm->last_error), "Memory allocation failed for bytecode");
         return WET_ERR_ALLOC_FAILED;
@@ -273,10 +299,24 @@ wet_status_t wet_vm_load_bytecode_internal(
             uint32_t num_consts = wet_read_u32_le(sec_data);
             size_t c_pos = 4;
 
-            vm->constants = (wet_constant_entry_t*)calloc(num_consts, sizeof(wet_constant_entry_t));
-            if (!vm->constants && num_consts > 0) {
-                cleanup_bytecode(vm);
-                return WET_ERR_ALLOC_FAILED;
+            if (num_consts > 0) {
+                if (vm->arena_allocated) {
+                    if ((size_t)num_consts > (SIZE_MAX / sizeof(wet_constant_entry_t))) {
+                        cleanup_bytecode(vm);
+                        return WET_ERR_ALLOC_FAILED;
+                    }
+                    vm->constants = (wet_constant_entry_t*)arena_alloc_aligned(
+                        vm, (size_t)num_consts * sizeof(wet_constant_entry_t), 16U
+                    );
+                } else {
+                    vm->constants = (wet_constant_entry_t*)calloc(num_consts, sizeof(wet_constant_entry_t));
+                }
+                if (!vm->constants) {
+                    cleanup_bytecode(vm);
+                    return WET_ERR_ALLOC_FAILED;
+                }
+            } else {
+                vm->constants = NULL;
             }
             vm->num_constants = num_consts;
 
@@ -302,7 +342,9 @@ wet_status_t wet_vm_load_bytecode_internal(
                     uint16_t str_len = wet_read_u16_le(sec_data + c_pos);
                     c_pos += 2;
                     if (c_pos + str_len > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
-                    char* sbuf = (char*)malloc(str_len + 1);
+                    char* sbuf = vm->arena_allocated
+                        ? (char*)arena_alloc_aligned(vm, (size_t)str_len + 1U, 1U)
+                        : (char*)malloc((size_t)str_len + 1U);
                     if (!sbuf) { cleanup_bytecode(vm); return WET_ERR_ALLOC_FAILED; }
                     memcpy(sbuf, sec_data + c_pos, str_len);
                     sbuf[str_len] = '\0';
@@ -315,8 +357,18 @@ wet_status_t wet_vm_load_bytecode_internal(
         } else if (stype == WET_SEC_TOPOLOGY_CONFIG) {
             if (s_size >= 8) {
                 /* struct: channels (uint32), rows (uint16), cols (uint16) */
+                uint32_t top_channels = wet_read_u32_le(sec_data);
+                if (top_channels > 64U) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Topology channel count %u exceeds 64-channel MEA limit", top_channels);
+                    cleanup_bytecode(vm);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
                 vm->grid_rows = (uint8_t)wet_read_u16_le(sec_data + 4);
                 vm->grid_cols = (uint8_t)wet_read_u16_le(sec_data + 6);
+                if (top_channels > 0) {
+                    vm->config.channel_count = top_channels;
+                }
             }
         } else if (stype == WET_SEC_BYTECODE_STREAM) {
             code_ptr = sec_data;
@@ -345,6 +397,15 @@ wet_status_t wet_vm_load_bytecode_internal(
     vm->last_error[0] = '\0';
 
     vm->loaded_capabilities = hdr->capabilities;
+    if (hdr->channel_count > 64U) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Header channel count %u exceeds 64-channel MEA limit", hdr->channel_count);
+        cleanup_bytecode(vm);
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    if (hdr->channel_count > 0) {
+        vm->config.channel_count = hdr->channel_count;
+    }
     biophysics_reset(&vm->bio);
     interlocks_init(&vm->interlocks);
     interlocks_set_capabilities(&vm->interlocks, hdr->capabilities, hdr->channel_count);
@@ -736,7 +797,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 if (st != WET_OK) return st;
                 wet_value_t res;
                 res.type = WET_VAL_INT;
-                res.as.i_val = to_int(&a) + to_int(&b);
+                int64_t sum = (int64_t)to_int(&a) + (int64_t)to_int(&b);
+                if (sum > INT32_MAX) sum = INT32_MAX;
+                else if (sum < INT32_MIN) sum = INT32_MIN;
+                res.as.i_val = (int32_t)sum;
                 st = push_val(vm, res);
                 if (st != WET_OK) return st;
                 break;
@@ -751,7 +815,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 if (st != WET_OK) return st;
                 wet_value_t res;
                 res.type = WET_VAL_INT;
-                res.as.i_val = to_int(&a) - to_int(&b);
+                int64_t diff = (int64_t)to_int(&a) - (int64_t)to_int(&b);
+                if (diff > INT32_MAX) diff = INT32_MAX;
+                else if (diff < INT32_MIN) diff = INT32_MIN;
+                res.as.i_val = (int32_t)diff;
                 st = push_val(vm, res);
                 if (st != WET_OK) return st;
                 break;
@@ -766,7 +833,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 if (st != WET_OK) return st;
                 wet_value_t res;
                 res.type = WET_VAL_INT;
-                res.as.i_val = to_int(&a) * to_int(&b);
+                int64_t prod = (int64_t)to_int(&a) * (int64_t)to_int(&b);
+                if (prod > INT32_MAX) prod = INT32_MAX;
+                else if (prod < INT32_MIN) prod = INT32_MIN;
+                res.as.i_val = (int32_t)prod;
                 st = push_val(vm, res);
                 if (st != WET_OK) return st;
                 break;
@@ -1066,6 +1136,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
 
                 if (channel == 0xFF) {
                     /* Dynamic channel index popped from stack */
+                    if (vm->sp == 0) {
+                        snprintf(vm->last_error, sizeof(vm->last_error), "Stack underflow popping dynamic channel");
+                        return WET_ERR_STACK_UNDERFLOW;
+                    }
                     wet_value_t v_ch;
                     st = pop_val(vm, &v_ch);
                     if (st != WET_OK) return st;
@@ -1122,21 +1196,25 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 }
 
                 /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
-                bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
-                if (prev_p->active && prev_p->phase2_ticks_left > 0) {
-                    float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
-                    vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+                if (channel < 64) {
+                    bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
+                    if (prev_p->active && prev_p->phase2_ticks_left > 0) {
+                        float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
+                        vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+                    }
                 }
 
                 float clamped_v = interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, voltage);
                 if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
                     wet_hal_stim_voltage(vm->hal, (uint16_t)channel, clamped_v, p1_ms, p2_ms);
                 }
-                biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
-                vm->voltages[channel] = clamped_v;
-                /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
-                float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
-                vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
+                if (channel < 64) {
+                    biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
+                    vm->voltages[channel] = clamped_v;
+                    /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
+                    float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
+                    vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
+                }
                 break;
             }
 
@@ -1154,6 +1232,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
 
                 if (channel == 0xFF) {
                     /* Dynamic channel index popped from stack */
+                    if (vm->sp == 0) {
+                        snprintf(vm->last_error, sizeof(vm->last_error), "Stack underflow popping dynamic channel");
+                        return WET_ERR_STACK_UNDERFLOW;
+                    }
                     wet_value_t v_ch;
                     st = pop_val(vm, &v_ch);
                     if (st != WET_OK) return st;
@@ -1173,7 +1255,7 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 }
 
                 float window_ms = to_float(&window);
-                uint32_t cnt = biophysics_get_spikes_window(&vm->bio, channel, window_ms);
+                uint32_t cnt = (channel < 64) ? biophysics_get_spikes_window(&vm->bio, channel, window_ms) : 0;
 
                 wet_value_t spike_res;
                 spike_res.type = WET_VAL_INT;
@@ -1213,7 +1295,7 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
 
                 wet_value_t volt_res;
                 volt_res.type = WET_VAL_FLOAT;
-                volt_res.as.f_val = vm->bio.mea_voltage_v[channel];
+                volt_res.as.f_val = (channel < 64) ? vm->bio.mea_voltage_v[channel] : 0.0f;
                 wet_status_t st = push_val(vm, volt_res);
                 if (st != WET_OK) return st;
                 break;
@@ -1532,6 +1614,21 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                     return comp_st;
                 }
 
+                /* Dynamic EIS Faradaic Current Density Clamp when channel impedance is calibrated */
+                if (channel < INTERLOCK_NUM_CHANNELS &&
+                    vm->interlocks.impedance[channel].z_magnitude_ohms > 0.0f &&
+                    vm->interlocks.max_faradaic_current_density_ua_cm2 > 0.0f) {
+                    float area_um2 = (vm->interlocks.electrode_area_um2 > 0.0f) ? vm->interlocks.electrode_area_um2 : 5000.0f;
+                    float i_safe_ua = vm->interlocks.max_faradaic_current_density_ua_cm2 * (area_um2 * 1e-8f);
+                    if (i_safe_ua > 0.0f && wet_fabsf(current_ua) > i_safe_ua) {
+                        float sign = (current_ua >= 0.0f) ? 1.0f : -1.0f;
+                        current_ua = sign * i_safe_ua;
+                        vm->interlocks.clamp_events++;
+                        vm->interlocks.dynamic_impedance_clamp_events++;
+                        v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+                    }
+                }
+
                 /* Per-phase charge density check: Q (nC) = I (uA) * t (ms) */
                 if (p1_ms > 0.0f && p2_ms > 0.0f) {
                     float q_phase1 = wet_fabsf(current_ua) * 1e-3f * p1_ms;
@@ -1571,8 +1668,10 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 }
 
                 biophysics_schedule_stim_current(&vm->bio, channel, current_ua, p1_ms, p2_ms, ip_ms);
-                vm->voltages[channel] = v_elec;
-                vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
+                if (channel < 64) {
+                    vm->voltages[channel] = v_elec;
+                    vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
+                }
                 break;
             }
 

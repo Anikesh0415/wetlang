@@ -17,7 +17,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from compiler.lexer import Lexer, LexerError
 from compiler.parser import Parser, ParseError
 from compiler.semantic import SemanticAnalyzer, SemanticError
-from compiler.emitter import BytecodeEmitter, disassemble, compile_source, emit_c_embedded_header
+from compiler.emitter import (
+    BytecodeEmitter,
+    disassemble,
+    compile_source,
+    emit_c_embedded_header,
+    emit_loihi2,
+    emit_spinnaker,
+)
 from compiler.ast_nodes import ProgramNode, ASTNode
 
 
@@ -53,7 +60,7 @@ def main(argv=None) -> int:
     )
     parser.add_argument("source", help="Input .wet source file path")
     parser.add_argument("-o", "--output", help="Output file path (.wbc binary or .h header)")
-    parser.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded"], default="sim", help="Target architecture (Project Janus)")
+    parser.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded", "loihi2"], default="sim", help="Target architecture (Project Janus)")
     parser.add_argument("--disasm", action="store_true", help="Print disassembly of compiled bytecode")
     parser.add_argument("--dump-ast", action="store_true", help="Dump Abstract Syntax Tree to stdout")
 
@@ -80,19 +87,34 @@ def main(argv=None) -> int:
         analyzer = SemanticAnalyzer(ast)
         analyzer.analyze()
 
-        # Step 4: Emit Bytecode
-        emitter = BytecodeEmitter()
-        bytecode = emitter.compile(ast)
-
-        if args.disasm:
-            print(disassemble(bytecode))
+        # Step 4: Emit Target Output (skip bytecode emission for Python neuromorphic scripts unless --disasm)
+        bytecode = b""
+        if args.target not in ("loihi2", "spinnaker") or args.disasm:
+            emitter = BytecodeEmitter()
+            bytecode = emitter.compile(ast)
+            if args.disasm:
+                print(disassemble(bytecode))
 
         # Write output file
         out_path = args.output
         base, _ = os.path.splitext(args.source)
         model_name = os.path.basename(base)
 
-        if args.target in ("embedded", "spinnaker"):
+        if args.target == "loihi2":
+            if not out_path:
+                out_path = base + ".py"
+            loihi_code = emit_loihi2(ast)
+            with open(out_path, "w", encoding="utf-8") as f:
+                f.write(loihi_code)
+            print(f"Successfully compiled '{args.source}' -> Intel Lava script '{out_path}' (target=loihi2).")
+        elif args.target == "spinnaker":
+            if not out_path:
+                out_path = base + ".py"
+            spinnaker_code = emit_spinnaker(ast)
+            with open(out_path, "w", encoding="utf-8") as f:
+                f.write(spinnaker_code)
+            print(f"Successfully compiled '{args.source}' -> SpiNNaker PyNN script '{out_path}' (target=spinnaker).")
+        elif args.target == "embedded":
             if not out_path:
                 out_path = base + ".h"
             header_content = emit_c_embedded_header(bytecode, model_name=model_name, target=args.target)

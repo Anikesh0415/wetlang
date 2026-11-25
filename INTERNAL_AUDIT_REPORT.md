@@ -4,8 +4,8 @@
 - **Release Version**: `v2.1.2` (Project Janus Multi-Target Silicon Integration)
 - **Target Git Commit**: `2155668f50e4d1b3dcb6914559cc3927b5dabd8f` (`2155668`)
 - **Git Branch**: `main`
-- **Primary Monorepo Directory**: `D:\WetLang`
-- **Release Synchronization Target**: `D:\WetLang\wetlang_github_release`
+- **Primary Monorepo Directory**: `<WETLANG_ROOT>`
+- **Release Synchronization Target**: `<WETLANG_RELEASE_ROOT>`
 - **Audit Date**: 2026-11-23
 - **Audit Methodology**: Adversarial Ground-Truth Empirical Execution & Direct Source Inspection (Zero Facades, Zero Mocks)
 - **Overall Audit Status**: **PRODUCTION SIGN-OFF APPROVED (PASS)**
@@ -16,7 +16,7 @@
 
 This document presents the official, comprehensive internal audit and production sign-off report for the **WetLang v2.1.2** platform release, incorporating the **Project Janus** multi-target silicon emitter, the universal Python wrapper interface, and dynamic Electrochemical Impedance Spectroscopy (EIS) safety safeguards.
 
-The audit was conducted strictly against ground-truth source code, compiled binaries, and live test execution in the active monorepo (`D:\WetLang`) and the Git release mirror (`D:\WetLang\wetlang_github_release`) at commit `2155668`. In compliance with the integrity mandate, no pre-existing test logs or unverified summaries were trusted; every subsystem was directly inspected, built, and executed.
+The audit was conducted strictly against ground-truth source code, compiled binaries, and live test execution in the active monorepo (`<WETLANG_ROOT>`) and the Git release mirror (`<WETLANG_RELEASE_ROOT>`) at commit `2155668`. In compliance with the integrity mandate, no pre-existing test logs or unverified summaries were trusted; every subsystem was directly inspected, built, and executed.
 
 ### Scope of Verification
 The audit encompassed six comprehensive verification domains (Requirements R1 through R6):
@@ -45,7 +45,7 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
 **Verdict**: **PASS**
 
 #### 2.1.1 Pratt Parser Architecture & Grammar Support
-- **Source Inspection**: `D:\WetLang\compiler\token.py` (lines 11–287), `compiler\lexer.py` (lines 26–120), `compiler\parser.py` (lines 49–905).
+- **Source Inspection**: `<WETLANG_ROOT>\compiler\token.py` (lines 11–287), `compiler\lexer.py` (lines 26–120), `compiler\parser.py` (lines 49–905).
 - **Evidence**:
   - The lexer implements a deterministic DFA scanner without regex libraries, tracking 1-based line/column coordinates. It recognizes 12 physical dimensions and 28 unit suffixes (`UNIT_SUFFIXES`), converting values directly to SI base units (`Token.si_value`, `Token.dimension`).
   - The parser implements top-down operator precedence (Pratt parsing) using explicit binding powers:
@@ -64,14 +64,14 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
   - Direct unit suffix binding on numeric literals (`0.8 V`, `200 us`, `50 uL/min`) is parsed cleanly at line 734 without requiring explicit multiplication operators.
 
 #### 2.1.2 Three-Pass Semantic Analyzer
-- **Source Inspection**: `D:\WetLang\compiler\semantic.py` (lines 48–994).
+- **Source Inspection**: `<WETLANG_ROOT>\compiler\semantic.py` (lines 48–994).
 - **Evidence**:
   - **Pass 1 (Topology, Symbols & Hydrodynamics)**: Validates MEA 8x8 electrode coordinates ($[0..7] \times [0..7]$ or linear $0..63$). Rejects stimulation on reference channels (`ERR_STIM_ON_REFERENCE_CHANNEL`) or recording-only channels (`ERR_STIM_ON_RECORDING_CHANNEL`). Calculates microfluidic shear stress using Shah-London rectangular duct friction factors, rejecting flows exceeding physiological limits (`ERR_SHEAR_STRESS_EXCEEDED`).
   - **Pass 2 (Types, Dimensions & Krogh Diffusion)**: Statically clamps stimulation voltages to $|V| \le 1.2\,\text{V}$ (`ERR_STATIC_VOLTAGE_CLAMP_EXCEEDED`). Enforces dimensional arithmetic compatibility (Ohm's Law: $V = I \times R$, $I = V \times G$, $Q = I \times t$). Enforces spherical Krogh-Erlang reaction-diffusion anoxia thresholds ($R > 200\,\mu\text{m}$ unperfused, $R > 250\,\mu\text{m}$ unvascularized).
   - **Pass 3 (Temporal Loop-Yield Post-Dominance)**: Validates that stimulation commands cannot run unbounded.
 
 #### 2.1.3 Temporal Safety & Loop-Yield Verifier
-- **Source Inspection**: `D:\WetLang\compiler\semantic.py` (lines 896–994), `compiler\emitter.py` (lines 873–876).
+- **Source Inspection**: `<WETLANG_ROOT>\compiler\semantic.py` (lines 896–994), `compiler\emitter.py` (lines 873–876).
 - **Evidence**:
   - `_Pass3LoopYieldVisitor` builds a Control-Flow Graph (CFG) across `while`, `for`, and `cycle` blocks, running $O(V+E)$ reachability analysis.
   - If a path executing `stim_biphasic` reaches a loop back-edge without encountering a post-dominating `sync_tick`, compilation fails immediately with `ERR_UNBOUNDED_STIM_LOOP`.
@@ -79,7 +79,7 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
   - Upon successful verification, bit 1 (`verified_loop_yield`) is packed into the binary Safety Manifest section (`SectionType.SAFETY_MANIFEST = 4`).
 
 #### 2.1.4 Project Janus Multi-Target Silicon Emitter
-- **Source Inspection**: `D:\WetLang\compiler\emitter.py` (lines 60–1083), `compiler\compiler_cli.py` (lines 56–108).
+- **Source Inspection**: `<WETLANG_ROOT>\compiler\emitter.py` (lines 60–1083), `compiler\compiler_cli.py` (lines 56–108).
 - **Evidence**:
   - Supports four distinct hardware targets:
     ```python
@@ -102,14 +102,14 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
 **Verdict**: **PASS (with documented architectural divergence DISC-06)**
 
 #### 2.2.1 Clang Build & Binary Inspection
-- **Source Inspection**: `D:\WetLang\native\build.py`, `native\bin\wetvm.dll`.
+- **Source Inspection**: `<WETLANG_ROOT>\native\build.py`, `native\bin\wetvm.dll`.
 - **Evidence**:
   - `native/build.py` compiles 12 C source units using LLVM Clang with `-O3 -shared -DWET_BUILDING_DLL -mno-stack-arg-probe -nostdlib -Xlinker /noentry`.
   - Standalone import libraries (`msvcrt.lib`, `kernel32.lib`) are synthesized via `llvm-dlltool`.
   - Build successfully generated `native/bin/wetvm.dll` with an exact binary size of **92,160 bytes**.
 
 #### 2.2.2 MISRA-C:2012 Static Arena Model & Zero-Malloc Execution
-- **Source Inspection**: `D:\WetLang\native\include\wetvm_api.h` (lines 72–78), `native\src\wetvm_api.c` (lines 112–236), `native\src\wetvm_vm.c` (lines 505–1630).
+- **Source Inspection**: `<WETLANG_ROOT>\native\include\wetvm_api.h` (lines 72–78), `native\src\wetvm_api.c` (lines 112–236), `native\src\wetvm_vm.c` (lines 505–1630).
 - **Evidence**:
   - `wet_create_vm_arena(void* arena_buf, size_t arena_bytes, ...)` partitions memory inside a single caller-supplied memory block.
   - Stacks, locals, and call frames are aligned to 128-byte cache-line boundaries (`WET_CACHELINE_SIZE`) to prevent multi-core cache thrashing and support direct DMA.
@@ -117,19 +117,19 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
   - **Dynamic Allocation Audit**: During runtime simulation steps (`wet_vm_step_internal`), there are **exactly 0 calls** to `malloc`, `calloc`, `realloc`, `free`, or `alloca` across `biophysics.c`, `interlocks.c`, and the opcode execution loop.
 
 #### 2.2.3 Unaligned Memory Access Safety
-- **Source Inspection**: `D:\WetLang\native\src\wetvm_vm.c` (lines 8–32, 606–1748).
+- **Source Inspection**: `<WETLANG_ROOT>\native\src\wetvm_vm.c` (lines 8–32, 606–1748).
 - **Evidence**:
   - The runtime uses dedicated little-endian unaligned readers (`wet_read_u16_le`, `wet_read_i16_le`, `wet_read_u32_le`, `wet_read_i32_le`, `wet_read_f32_le`) utilizing `memcpy()`.
   - Bytecode parsing across the dispatch loop strictly uses these helpers, eliminating unaligned memory faults on strict-alignment microcontrollers (ARM Cortex-M0/M3, RISC-V).
 
 #### 2.2.4 Opcode Dispatch & Instruction Accounting
-- **Source Inspection**: `D:\WetLang\native\include\wetvm_types.h` (lines 78–145), `native\src\wetvm_vm.c` (lines 549–564).
+- **Source Inspection**: `<WETLANG_ROOT>\native\include\wetvm_types.h` (lines 78–145), `native\src\wetvm_vm.c` (lines 549–564).
 - **Evidence**:
   - Complete switch dispatch covering 37 opcodes across 6 functional families.
   - Watchdog cycle accounting enforces `max_ops_per_tick` (default 100,000 ops), zeroing stimulation DACs and tripping `WET_ERR_WATCHDOG_TIMEOUT` if runaway loops occur.
 
 #### 2.2.5 Math Implementation Discrepancy (DISC-06)
-- **Source Inspection**: `D:\WetLang\native\include\wet_crt.h` (lines 52–85).
+- **Source Inspection**: `<WETLANG_ROOT>\native\include\wet_crt.h` (lines 52–85).
 - **Finding**:
   - Verification guidelines cited CORDIC math routines. Inspection revealed that **zero CORDIC routines or lookup tables exist in the codebase**.
   - Instead, the runtime implements freestanding mathematical functions via:
@@ -144,14 +144,14 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
 **Verdict**: **PASS**
 
 #### 2.3.1 COBA-LIF, 4-Class STP & Dale's Principle STDP
-- **Source Inspection**: `D:\WetLang\native\src\biophysics.c` (lines 7–508).
+- **Source Inspection**: `<WETLANG_ROOT>\native\src\biophysics.c` (lines 7–508).
 - **Evidence**:
   - **COBA-LIF Dynamics**: 64 neurons on an 8x8 grid (80% Excitatory / 20% Inhibitory). Integrated via exact Exponential Euler integration at fixed $\Delta t = 0.1\,\text{ms}$. Time constants: $\tau_m = 20\,\text{ms}$, $\tau_{\text{exc}} = 5\,\text{ms}$, $\tau_{\text{inh}} = 10\,\text{ms}$, $\tau_{\text{ahp}} = 80\,\text{ms}$. Hard refractory period is clamped to $2.0\,\text{ms}$ (20 ticks, capping firing at $500\,\text{Hz}$).
   - **4-Class Tsodyks-Markram STP**: Accurately differentiates EE (depressing, $U=0.50$), EI (facilitating, $U=0.15$), IE (depressing, $U=0.25$), and II (depressing, $U=0.30$) synapses. Vesicle depletion ($x$) and release probability ($u$) update without first-spike double-counting.
   - **Dale's Principle STDP**: Strictly limits STDP to excitatory synapses ($E_{\text{exc}} = 0\,\text{mV}$). Inhibitory connections remain fixed. Synaptic weights are clamped in $[0.0, 40.0]\,\text{nS}$. A $1.05\times$ depression bias ($A_+ = 0.20\,\text{nS}, A_- = 0.21\,\text{nS}$) guarantees homeostatic stability against runaway excitation.
 
 #### 2.3.2 Material-Specific Water Windows & 64-Bit attoCoulomb Accumulator
-- **Source Inspection**: `D:\WetLang\native\src\interlocks.c` (lines 22–307).
+- **Source Inspection**: `<WETLANG_ROOT>\native\src\interlocks.c` (lines 22–307).
 - **Evidence**:
   - Electrochemical water windows and Charge Injection Capacity (CIC) limits are enforced across four electrode materials:
     * **Platinum (Pt)**: $[-0.6\,\text{V}, +0.8\,\text{V}]$, $\text{CIC} = 0.10\,\text{mC}/\text{cm}^2$.
@@ -162,14 +162,14 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
   - **64-bit attoCoulomb Accumulator**: Fixed-point integer integration ($\Delta Q_{\text{aC}} = \text{round}(Q_{\text{nC}} \times 10^9)$) tracks sub-picoampere DC leakage without floating-point ULP drift. Trips `WET_ERR_DC_DRIFT` if $|Q_{\text{DC}}| \ge 1.0\,\text{nC}$. Tested over 10M ticks with exact zero drift.
 
 #### 2.3.3 Epileptiform Runaway Breaker
-- **Source Inspection**: `D:\WetLang\native\src\interlocks.c` (lines 314–363).
+- **Source Inspection**: `<WETLANG_ROOT>\native\src\interlocks.c` (lines 314–363).
 - **Evidence**:
   - Continuous sliding window evaluates mean population firing rate.
   - If rate $\ge 150.0\,\text{Hz}$ across $\ge 23$ of 64 channels ($> 35\%$) sustained for 500 consecutive ticks ($50.0\,\text{ms}$), the breaker trips `WET_ERR_EPILEPTIFORM_RUNAWAY`, sets `locked = 1`, and zeroes all stimulation DACs.
   - Focal breaker trips `WET_ERR_FOCAL_EXCITOTOXICITY` if a single channel sustains $\ge 150\,\text{Hz}$ for 2,500 ticks ($250\,\text{ms}$).
 
 #### 2.3.4 Dynamic EIS Impedance Safeguards & Current Density
-- **Source Inspection**: `D:\WetLang\native\src\interlocks.c` (lines 181–243).
+- **Source Inspection**: `<WETLANG_ROOT>\native\src\interlocks.c` (lines 181–243).
 - **Evidence**:
   - Implements dynamic impedance tracking: `interlocks_set_electrode_impedance(il, ch, z_mag, z_phase, tick)`.
   - Sets safe Faradaic current density limit: `interlocks_set_current_density_limit(il, max_ua_cm2)` (default $J = 30.0\,\mu\text{A}/\text{cm}^2$).
@@ -182,14 +182,14 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
 **Verdict**: **PASS**
 
 #### 2.4.1 Root Package & Ergonomic API
-- **Source Inspection**: `D:\WetLang\wetlang\__init__.py` (lines 1–44), `wetlang\vm.py` (lines 18–159).
+- **Source Inspection**: `<WETLANG_ROOT>\wetlang\__init__.py` (lines 1–44), `wetlang\vm.py` (lines 18–159).
 - **Evidence**:
   - Exposes top-level functions: `wl.compile(source, target="sim")`, `wl.load(source_or_file)`, `wl.VirtualMachine`, `wl.gym`, and `wl.tensors`.
   - Full version alignment: `wl.__version__ == "2.1.2"`.
   - Pure Python `ctypes` FFI bindings dynamically bind `wetvm.dll` without binary C-extension compilation dependencies, ensuring portability across Python versions.
 
 #### 2.4.2 Zero-Copy PyTorch & NumPy Tensor Interop
-- **Source Inspection**: `D:\WetLang\wetlang\tensors.py` (lines 20–71), `wetlang\vm.py` (lines 108–123), `bindings\runtime.py` (lines 273–287).
+- **Source Inspection**: `<WETLANG_ROOT>\wetlang\tensors.py` (lines 20–71), `wetlang\vm.py` (lines 108–123), `bindings\runtime.py` (lines 273–287).
 - **Evidence**:
   - `get_spikes_numpy()` constructs an `ndarray` pointing directly to the underlying ctypes telemetry buffer (`self._telem.spikes`).
   - `spikes_tensor()` utilizes `torch.from_numpy()`, resulting in direct pointer parity across C, NumPy, and PyTorch:
@@ -197,7 +197,7 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
   - `get_voltages_numpy()` enforces read-only access (`flags.writeable = False`), ensuring external tensors cannot corrupt VM telemetry state.
 
 #### 2.4.3 16-Byte AER Packet Alignment & Lockless SPSC Ring
-- **Source Inspection**: `D:\WetLang\native\include\wet_aer.h` (lines 34–56), `bindings\aer.py` (lines 43–79).
+- **Source Inspection**: `<WETLANG_ROOT>\native\include\wet_aer.h` (lines 34–56), `bindings\aer.py` (lines 43–79).
 - **Evidence**:
   - `wet_aer_packet_t` is packed with 8-byte natural alignment:
     ```c
@@ -213,7 +213,7 @@ The audit encompassed six comprehensive verification domains (Requirements R1 th
   - Lockless SPSC ring buffer uses 128-byte cache-line padding between `head` and `tail` pointers to eliminate false sharing.
 
 #### 2.4.4 Gymnasium Environment Integration
-- **Source Inspection**: `D:\WetLang\wetlang\gym.py` (lines 6–12), `sandbox\gym_env.py` (lines 17–49).
+- **Source Inspection**: `<WETLANG_ROOT>\wetlang\gym.py` (lines 6–12), `sandbox\gym_env.py` (lines 17–49).
 - **Evidence**:
   - `wl.gym.make("Wetworld-v1")` returns a fully compliant Gymnasium environment.
   - Observation space: 128 continuous dimensions (64 electrode voltages in $[-1.2, 1.2]\,\text{V}$ + 64 binary spike flags).
@@ -229,7 +229,7 @@ Live verification across all 878 platform tests yielded a 100% pass rate:
 - **E2E Test Suite (313 Tests)**: Executed via `python -m unittest discover -s tests/e2e -p "test_*.py"`. Completed in **6.505 seconds** (and **7.032 seconds** on survey run). 313 passed, 0 failed, 0 errors.
 - **Pytest Unit & Integration Suite (564 Non-Soak Tests)**: Executed via `pytest tests/ --ignore=tests/test_soak_10m_ticks.py -q`. Completed in **14.12 seconds** (and **14.68 seconds** on survey run). 564 passed, 1 warning (deprecation), 0 failed.
 - **Dedicated 10M-Tick Soak Test (1 Test)**: Executed via `pytest tests/test_soak_10m_ticks.py -s`. Completed in **170.218 seconds** (2 minutes 50 seconds). 1 passed, 0 failed.
-- **Silicon Targets Test Suite (4 Tests)**: Executed in both `D:\WetLang` and `wetlang_github_release`. 4 passed in 0.07s and 0.09s respectively.
+- **Silicon Targets Test Suite (4 Tests)**: Executed in both `<WETLANG_ROOT>` and `wetlang_github_release`. 4 passed in 0.07s and 0.09s respectively.
 
 #### 2.5.2 Numerical Soak Stress Invariants (10 Million Ticks)
 | Soak Metric / Invariant | Threshold Criterion | Observed Empirical Value | Status |
@@ -259,10 +259,10 @@ Live verification across all 878 platform tests yielded a 100% pass rate:
 
 #### 2.6.2 Repository Synchronization Audit & Remediations
 - **State Analysis**:
-  - `D:\WetLang` is the active development monorepo working tree.
-  - `D:\WetLang\wetlang_github_release` is the official Git repository at commit `2155668` (`feat(janus): deliver Project Janus neuromorphic targets, python wrapper, and dynamic EIS safeguard`).
+  - `<WETLANG_ROOT>` is the active development monorepo working tree.
+  - `<WETLANG_RELEASE_ROOT>` is the official Git repository at commit `2155668` (`feat(janus): deliver Project Janus neuromorphic targets, python wrapper, and dynamic EIS safeguard`).
 - **Remediations Executed**:
-  1. **DISC-01 (Version Mismatch)**: Updated `pyproject.toml` in both `D:\WetLang` and `wetlang_github_release` from `version = "2.1.0"` to `version = "2.1.2"`.
+  1. **DISC-01 (Version Mismatch)**: Updated `pyproject.toml` in both `<WETLANG_ROOT>` and `wetlang_github_release` from `version = "2.1.0"` to `version = "2.1.2"`.
   2. **DISC-03 (Release Desynchronization)**: In `wetlang_github_release`, the duplicate packaged module `wetlang/compiler/emitter.py` was stale (39,419 bytes vs 43,687 bytes), missing `Target` and `compile_to_embedded_header`. Updated `emitter.py`, `compiler_cli.py`, `bindings/ffi.py`, `bindings/runtime.py`, and `bindings/python` in `wetlang_github_release`.
   3. **DISC-04 (Stale Release DLL)**: `wetlang_github_release/bin/wetvm.dll` was an outdated pre-Janus binary (90,624 bytes). Synchronized `native/bin/wetvm.dll` (92,160 bytes) to `wetlang_github_release/bin/wetvm.dll` and `wetlang_github_release/native/bin/wetvm.dll`.
   4. **Post-Remediation Verification**: Re-executed `pytest tests/test_silicon_targets.py` inside `wetlang_github_release`, confirming 100% pass (4 passed in 0.09s), resolving all previous collection errors.
@@ -275,11 +275,11 @@ The following register details all discrepancies discovered during the audit, th
 
 | Discrepancy ID | Subsystem | Severity | Summary | Root Cause & Operational Impact | Resolution / Status |
 |---|---|:---:|---|---|---|
-| **DISC-01** | Packaging & Config | **Medium** | Version mismatch: `pyproject.toml` cited `2.1.0` vs codebase `2.1.2` | `pyproject.toml` was not incremented when v2.1.2 tag and features were implemented. Caused pip builds to report 2.1.0. | **REMEDIATED**: Updated `version = "2.1.2"` in `D:\WetLang\pyproject.toml` and `wetlang_github_release\pyproject.toml`. |
+| **DISC-01** | Packaging & Config | **Medium** | Version mismatch: `pyproject.toml` cited `2.1.0` vs codebase `2.1.2` | `pyproject.toml` was not incremented when v2.1.2 tag and features were implemented. Caused pip builds to report 2.1.0. | **REMEDIATED**: Updated `version = "2.1.2"` in `<WETLANG_ROOT>\pyproject.toml` and `wetlang_github_release\pyproject.toml`. |
 | **DISC-02** | Documentation | **Medium** | Project Janus features missing from Compendium Vols 1–6 & PDF | Compendium generation script and Markdown volumes were authored prior to the delivery of Project Janus targets and dynamic EIS safeguards. | **DOCUMENTED / BACKLOG**: Documented in audit report; flagged for Compendium Volume 7 / v2.2.0 documentation update. |
 | **DISC-03** | Release Packaging | **Critical** | Desynchronization in `wetlang_github_release`: stale `wetlang/compiler/emitter.py` | In commit 2155668, files in root `compiler/` were updated, but duplicated subpackage `wetlang/compiler/` was not updated. Caused `ImportError: cannot import name 'Target'` during pytest collection in release. | **REMEDIATED**: Synchronized `emitter.py`, `compiler_cli.py`, `ffi.py`, `runtime.py`, and `bindings/python` into `wetlang_github_release`. |
 | **DISC-04** | Release Packaging | **Low** | Stale binary DLL in `wetlang_github_release/bin/wetvm.dll` (90,624 bytes) | Pre-Janus binary DLL remained in `bin/` directory without the new dynamic EIS FFI symbols present in `native/bin/wetvm.dll` (92,160 bytes). | **REMEDIATED**: Copied fresh 92,160-byte `wetvm.dll` to `wetlang_github_release/bin/` and `native/bin/`. |
-| **DISC-05** | Repository Structure | **Low** | `D:\WetLang` root directory lacks direct `.git` metadata | Monorepo layout maintains Git tracking inside `wetlang_github_release` (`.git` commit 2155668), leaving root as an unversioned development workspace. | **DOCUMENTED**: Documented architecture; all git synchronization commands target `wetlang_github_release`. |
+| **DISC-05** | Repository Structure | **Low** | `<WETLANG_ROOT>` root directory lacks direct `.git` metadata | Monorepo layout maintains Git tracking inside `wetlang_github_release` (`.git` commit 2155668), leaving root as an unversioned development workspace. | **DOCUMENTED**: Documented architecture; all git synchronization commands target `wetlang_github_release`. |
 | **DISC-06** | C99 Runtime Specification | **Medium** | Math routine divergence: Cody-Waite + Horner vs CORDIC specification | Requirements suggested CORDIC lookup tables. Codebase uses Cody-Waite range reduction with 7th-order polynomial and Newton-Raphson sqrt in `wet_crt.h`. | **DOCUMENTED / CERTIFIED**: Cody-Waite provides higher throughput ($< 10^{-9}$ error) than CORDIC. Formally accepted as approved architectural improvement. |
 
 ---
@@ -288,7 +288,7 @@ The following register details all discrepancies discovered during the audit, th
 
 ### 4.1 E2E Test Suite Execution (313 Tests)
 - **Command**: `python -m unittest discover -s tests/e2e -p "test_*.py"`
-- **Directory**: `D:\WetLang`
+- **Directory**: `<WETLANG_ROOT>`
 - **Output**:
 ```text
 Ran 313 tests in 6.505s
@@ -300,7 +300,7 @@ OK
 
 ### 4.2 Pytest Unit & Integration Suite (564 Non-Soak Tests)
 - **Command**: `pytest tests/ --ignore=tests/test_soak_10m_ticks.py -q`
-- **Directory**: `D:\WetLang`
+- **Directory**: `<WETLANG_ROOT>`
 - **Output**:
 ```text
 ........................................................................ [ 12%]
@@ -312,14 +312,14 @@ OK
 ........................................................................ [ 89%]
 ............................................................             [100%]
 ============================== warnings summary ===============================
-C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\pytest_plugin.py:14
+<site-packages>\anyio\pytest_plugin.py:14
   PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
 564 passed, 1 warning in 14.12s
 ```
 
 ### 4.3 Dedicated 10M-Tick Numerical Soak Test
 - **Command**: `pytest tests/test_soak_10m_ticks.py -s`
-- **Directory**: `D:\WetLang`
+- **Directory**: `<WETLANG_ROOT>`
 - **Output**:
 ```text
 ==========================================================================
@@ -344,7 +344,7 @@ C:\Users\Anikesh\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio
 
 ### 4.4 Silicon Targets Test Suite in Monorepo & Remediated Release
 - **Command**: `pytest tests/test_silicon_targets.py -v`
-- **Monorepo (`D:\WetLang`) Output**:
+- **Monorepo (`<WETLANG_ROOT>`) Output**:
 ```text
 collecting ... collected 4 items
 tests/test_silicon_targets.py::test_target_enum_variants PASSED          [ 25%]
@@ -353,7 +353,7 @@ tests/test_silicon_targets.py::test_emit_c_spinnaker_header PASSED       [ 75%]
 tests/test_silicon_targets.py::test_cli_target_embedded_compilation PASSED [100%]
 ======================== 4 passed, 1 warning in 0.07s =========================
 ```
-- **Remediated Release (`D:\WetLang\wetlang_github_release`) Output**:
+- **Remediated Release (`<WETLANG_RELEASE_ROOT>`) Output**:
 ```text
 collecting ... collected 4 items
 tests/test_silicon_targets.py::test_target_enum_variants PASSED          [ 25%]

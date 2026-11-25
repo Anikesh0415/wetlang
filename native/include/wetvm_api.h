@@ -177,6 +177,17 @@ WET_EXPORT wet_status_t wet_get_telemetry(
 );
 
 /**
+ * Queries per-channel spike counts aggregated across the last `lookback_ticks` ticks
+ * from the static biophysics spike history ring buffer (zero dynamic allocation).
+ */
+WET_EXPORT wet_status_t wet_get_spikes_window(
+    const wet_vm_t* vm,
+    uint32_t lookback_ticks,
+    uint32_t* out_counts,
+    size_t out_capacity
+);
+
+/**
  * Queries current cyber-physical hardware actuator telemetry into caller-allocated struct.
  */
 WET_EXPORT wet_status_t wet_get_actuator_telemetry(

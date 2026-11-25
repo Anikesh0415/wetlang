@@ -30,6 +30,8 @@ class Lexer:
     and performs immediate physical unit suffix binding on numeric literals.
     """
     def __init__(self, source: str):
+        if source.startswith("\ufeff"):
+            source = source[1:]
         self.source: str = source
         self.length: int = len(source)
         self.cursor: int = 0

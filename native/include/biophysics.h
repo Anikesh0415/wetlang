@@ -117,6 +117,7 @@ typedef struct {
     uint16_t spike_count_50ms[BIO_NUM_CHANNELS]; /* Running count over last 500 ticks */
     float    channel_rate_hz[BIO_NUM_CHANNELS];
     float    population_rate_hz;
+    float    g_net_up_ns;                        /* Spontaneous cortical Up-state network conductance (nS) */
 
     /* Biophysical constants */
     float    c_m_pf;          /* Membrane capacitance (200 pF) */

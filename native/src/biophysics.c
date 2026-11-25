@@ -304,6 +304,7 @@ void biophysics_step_tick(bio_state_t* bio) {
     const float decay_thr   = (float)wet_exp(-dt / (double)bio->tau_thresh_ms);
     const float decay_pre   = (float)wet_exp(-dt / (double)bio->tau_stdp_plus_ms);
     const float decay_post  = (float)wet_exp(-dt / (double)bio->tau_stdp_minus_ms);
+    const float decay_net_up = (float)wet_exp(-dt / 35.0);
 
     /* 1. Advance active biphasic stimulation waveforms & compute tick charge (nC) */
     for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
@@ -390,6 +391,20 @@ void biophysics_step_tick(bio_state_t* bio) {
         if (bio->trace_post[i] < 1e-12f) bio->trace_post[i] = 0.0f;
     }
 
+    /* Spontaneous cortical Up-state network barrage (~1.2 Hz Poisson bursts, tau = 35 ms) */
+    bio->g_net_up_ns *= decay_net_up;
+    if (bio->g_net_up_ns < 1e-12f) bio->g_net_up_ns = 0.0f;
+    if (wet_rng_uniform(&bio->rng_state) < (0.0012 * dt)) {
+        bio->g_net_up_ns += 16.0f + (float)wet_rng_uniform(&bio->rng_state) * 10.0f;
+    }
+
+    /* Independent Poisson miniature spontaneous EPSPs (~2.5 Hz per neuron) */
+    for (int i = 0; i < BIO_NUM_NEURONS; ++i) {
+        if (wet_rng_uniform(&bio->rng_state) < (0.0025 * dt)) {
+            bio->g_exc_ns[i] += 18.0f + (float)wet_rng_uniform(&bio->rng_state) * 8.0f;
+        }
+    }
+
     /* Exact Exponential Euler relaxation of Tsodyks-Markram STP variables */
     for (int pre = 0; pre < BIO_NUM_NEURONS; ++pre) {
         for (int post = 0; post < BIO_NUM_NEURONS; ++post) {
@@ -403,6 +418,12 @@ void biophysics_step_tick(bio_state_t* bio) {
     }
 
     /* 3. Integrate COBA-LIF membrane ODE via Exact Exponential Euler */
+    const double dt_safe = (dt > 0.0) ? dt : 0.1;
+    uint32_t refract_calc = (uint32_t)((double)BIO_ABS_REFRACT_MS / dt_safe + 0.5);
+    if (refract_calc == 0U) refract_calc = 1U;
+    if (refract_calc > 65535U) refract_calc = 65535U;
+    const uint16_t abs_refract_ticks = (uint16_t)refract_calc;
+
     for (int i = 0; i < BIO_NUM_NEURONS; ++i) {
         if (bio->refract_ticks[i] > 0) {
             bio->refract_ticks[i]--;
@@ -422,16 +443,17 @@ void biophysics_step_tick(bio_state_t* bio) {
          * scale calibrated so 0.5-1.0 V drives firing. */
         float i_stim_pa = -stim_v_eff * 1500.0f;
 
-        /* Spontaneous cortical tonic + Gaussian background synaptic current (~15-25 Hz baseline) */
-        float i_bg_pa = 215.0f + (float)wet_rng_normal(&bio->rng_state) * 140.0f;
+        /* Subthreshold fluctuating cortical synaptic background current */
+        float i_bg_pa = 80.0f + (float)wet_rng_normal(&bio->rng_state) * 90.0f;
 
         /* Total conductance (nS) */
-        float g_tot = bio->g_leak_ns + bio->g_exc_ns[i] + bio->g_inh_ns[i] + bio->g_ahp_ns[i];
+        float g_exc_eff = bio->g_exc_ns[i] + bio->g_net_up_ns;
+        float g_tot = bio->g_leak_ns + g_exc_eff + bio->g_inh_ns[i] + bio->g_ahp_ns[i];
         if (g_tot < 1e-3f) g_tot = bio->g_leak_ns;
 
         /* Steady-state target potential V_inf (mV): (nS * mV + pA) / nS = mV */
         float num = bio->g_leak_ns * bio->e_leak_mv
-                  + bio->g_exc_ns[i] * bio->e_exc_mv
+                  + g_exc_eff * bio->e_exc_mv
                   + bio->g_inh_ns[i] * bio->e_inh_mv
                   + bio->g_ahp_ns[i] * bio->e_k_mv
                   + i_stim_pa + i_bg_pa;
@@ -448,7 +470,7 @@ void biophysics_step_tick(bio_state_t* bio) {
         if (v_next >= bio->v_thresh_mv[i]) {
             bio->spikes_now[i] = 1;
             bio->v_m_mv[i] = bio->e_reset_mv;
-            bio->refract_ticks[i] = BIO_ABS_REFRACT_TICKS; /* 2.0 ms hard absolute refractory */
+            bio->refract_ticks[i] = abs_refract_ticks;     /* 2.0 ms hard absolute refractory scaled by dt_ms */
             bio->v_thresh_mv[i] += 15.0f;                  /* +15 mV relative refractory jump */
             bio->g_ahp_ns[i]    += 2.0f;                   /* Slow AHP potassium adaptation */
         } else {

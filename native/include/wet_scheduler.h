@@ -90,6 +90,13 @@ typedef struct wet_scheduler wet_scheduler_t;
 
 /* Public C-ABI API Functions */
 WET_EXPORT wet_scheduler_t* wet_scheduler_create(wet_vm_instance_t* vm, const wet_scheduler_config_t* config);
+WET_EXPORT size_t wet_scheduler_arena_size(void);
+WET_EXPORT wet_scheduler_t* wet_scheduler_create_arena(
+    void* arena_buf,
+    size_t arena_bytes,
+    wet_vm_instance_t* vm,
+    const wet_scheduler_config_t* config
+);
 WET_EXPORT wet_status_t wet_scheduler_start(wet_scheduler_t* sched);
 
 /**
@@ -123,7 +130,7 @@ WET_EXPORT wet_status_t wet_scheduler_start(wet_scheduler_t* sched);
  */
 WET_EXPORT wet_status_t wet_scheduler_step(wet_scheduler_t* sched);
 WET_EXPORT wet_status_t wet_scheduler_stop(wet_scheduler_t* sched);
-WET_EXPORT wet_status_t wet_scheduler_get_stats(const wet_scheduler_t* sched, wet_scheduler_stats_t* out_stats);
+WET_EXPORT wet_status_t wet_scheduler_get_stats(wet_scheduler_t* sched, wet_scheduler_stats_t* out_stats);
 WET_EXPORT wet_status_t wet_scheduler_poll_telemetry(wet_scheduler_t* sched, wet_telemetry_t* out_telem);
 WET_EXPORT wet_status_t wet_scheduler_push_stimulus(wet_scheduler_t* sched, const wet_stim_command_t* cmd);
 WET_EXPORT wet_status_t wet_scheduler_benchmark(wet_scheduler_t* sched, uint32_t total_ticks, wet_scheduler_stats_t* out_stats);

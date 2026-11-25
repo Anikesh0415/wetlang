@@ -6,6 +6,7 @@ Provides object-oriented Python interface with zero-copy NumPy array telemetry v
 from pathlib import Path
 from typing import Optional, Tuple, Union
 import ctypes
+import struct
 import numpy as np
 
 from bindings.ffi import (
@@ -93,12 +94,15 @@ class WetVM:
     ):
         self._lib = load_wetvm_lib(Path(lib_path) if lib_path else None)
         self._config = config if config is not None else WetVMConfig()
+        if self._config.dt_ms <= 0.0:
+            raise ValueError(f"Simulation timestep dt_ms must be strictly positive (got {self._config.dt_ms})")
         self._handle = self._lib.wet_create_vm(ctypes.byref(self._config))
         if not self._handle:
             raise MemoryError("Failed to allocate native WetVM instance")
 
         # Persistent telemetry buffer for reuse and zero-copy NumPy mapping
         self._telem = WetTelemetry()
+        self._channel_count = 64
         self._closed = False
         self._is_halted = False
         self._bytecode_loaded = False
@@ -136,6 +140,14 @@ class WetVM:
             code_data = bytes(bytecode)
         else:
             raise TypeError(f"Expected bytes or path, got {type(bytecode).__name__}")
+
+        if len(code_data) >= 32:
+            try:
+                ch_cnt = struct.unpack_from("<I", code_data, 20)[0]
+                if ch_cnt > 0:
+                    self._channel_count = ch_cnt
+            except Exception:
+                pass
 
         err_buf = ctypes.create_string_buffer(512)
         c_bytes = (ctypes.c_uint8 * len(code_data)).from_buffer_copy(code_data)
@@ -272,26 +284,58 @@ class WetVM:
 
     def get_voltages_numpy(self) -> np.ndarray:
         """
-        Returns a zero-copy 1D NumPy array view (float32, 64 elements)
-        mapped directly onto the telemetry voltage buffer.
+        Returns a 1D NumPy array view (float32) of electrode voltages.
+        If channel_count <= 64, returns zero-copy view of the 64 telemetry voltages.
+        If channel_count > 64, returns an array sized to the full channel count.
         """
-        arr = np.ctypeslib.as_array(self._telem.voltages)
-        arr.flags.writeable = False
-        return arr
+        base = np.ctypeslib.as_array(self._telem.voltages)
+        ch_count = getattr(self, "_channel_count", 64)
+        if ch_count > 64:
+            arr = np.zeros(ch_count, dtype=np.float32)
+            arr[:64] = base
+            return arr
+        base.flags.writeable = False
+        return base
+
+    def voltages_numpy(self) -> np.ndarray:
+        """Convenience alias for get_voltages_numpy()."""
+        return self.get_voltages_numpy()
 
     def get_spikes_numpy(self) -> np.ndarray:
         """
-        Returns a zero-copy 1D NumPy array view (uint8, 64 elements)
-        mapped directly onto the telemetry spike raster buffer.
+        Returns a 1D NumPy array view (uint8) of electrode spikes.
+        If channel_count <= 64, returns zero-copy view of the 64 telemetry spikes.
+        If channel_count > 64, returns an array sized to the full channel count.
         """
-        return np.ctypeslib.as_array(self._telem.spikes)
+        base = np.ctypeslib.as_array(self._telem.spikes)
+        ch_count = getattr(self, "_channel_count", 64)
+        if ch_count > 64:
+            arr = np.zeros(ch_count, dtype=np.uint8)
+            arr[:64] = base
+            return arr
+        return base
+
+    def spikes_numpy(self) -> np.ndarray:
+        """Convenience alias for get_spikes_numpy()."""
+        return self.get_spikes_numpy()
 
     def get_charge_numpy(self) -> np.ndarray:
         """
-        Returns a zero-copy 1D NumPy array view (float32, 64 elements)
-        mapped directly onto the telemetry cumulative charge buffer.
+        Returns a 1D NumPy array view (float32) of electrode charges.
+        If channel_count <= 64, returns zero-copy view of the 64 telemetry charges.
+        If channel_count > 64, returns an array sized to the full channel count.
         """
-        return np.ctypeslib.as_array(self._telem.last_charge_nc)
+        base = np.ctypeslib.as_array(self._telem.last_charge_nc)
+        ch_count = getattr(self, "_channel_count", 64)
+        if ch_count > 64:
+            arr = np.zeros(ch_count, dtype=np.float32)
+            arr[:64] = base
+            return arr
+        return base
+
+    def charge_numpy(self) -> np.ndarray:
+        """Convenience alias for get_charge_numpy()."""
+        return self.get_charge_numpy()
 
     def last_error(self) -> str:
         """Returns the last recorded native error message."""
