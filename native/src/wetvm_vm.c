@@ -1858,7 +1858,7 @@ wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, 
                     num_constants++;
                 }
                 if (num_constants != declared_entries) {
-                    if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Constant pool count mismatch: declared %u, parsed %u", declared_entries, num_constants);
+                    if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Constant pool count mismatch: declared %u, parsed %u", declared_entries, (unsigned int)num_constants);
                     return WET_ERR_MALFORMED_SECTION;
                 }
             }

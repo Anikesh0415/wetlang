@@ -356,9 +356,7 @@ typedef struct {
     uint64_t        sequence_errors;
 } aer_thread_worker_t;
 
-#if defined(_WIN32)
-static DWORD __stdcall aer_producer_worker(void* param) {
-    aer_thread_worker_t* w = (aer_thread_worker_t*)param;
+static void run_aer_producer(aer_thread_worker_t* w) {
     uint32_t count = w->num_packets;
     uint32_t tid = w->thread_id;
     wet_aer_ring_t* ring = w->ring;
@@ -375,11 +373,9 @@ static DWORD __stdcall aer_producer_worker(void* param) {
         }
     }
     w->packets_done = count;
-    return 0;
 }
 
-static DWORD __stdcall aer_consumer_worker(void* param) {
-    aer_thread_worker_t* w = (aer_thread_worker_t*)param;
+static void run_aer_consumer(aer_thread_worker_t* w) {
     uint32_t target_count = w->num_packets;
     uint32_t tid = w->thread_id;
     wet_aer_ring_t* ring = w->ring;
@@ -412,7 +408,27 @@ static DWORD __stdcall aer_consumer_worker(void* param) {
         consumed += popped;
     }
     w->packets_done = consumed;
+}
+
+#if defined(_WIN32)
+static DWORD __stdcall aer_producer_worker(void* param) {
+    run_aer_producer((aer_thread_worker_t*)param);
     return 0;
+}
+
+static DWORD __stdcall aer_consumer_worker(void* param) {
+    run_aer_consumer((aer_thread_worker_t*)param);
+    return 0;
+}
+#else
+static void* aer_producer_worker(void* param) {
+    run_aer_producer((aer_thread_worker_t*)param);
+    return NULL;
+}
+
+static void* aer_consumer_worker(void* param) {
+    run_aer_consumer((aer_thread_worker_t*)param);
+    return NULL;
 }
 #endif
 
@@ -453,6 +469,19 @@ WET_EXPORT int wet_run_concurrency_stress(uint32_t total_packets, wet_concurrenc
         if (threads[i]) {
             WaitForSingleObject(threads[i], 30000); /* Max 30 second timeout */
             CloseHandle(threads[i]);
+        }
+    }
+#else
+    pthread_t threads[4];
+    int created[4] = {0, 0, 0, 0};
+    created[0] = (pthread_create(&threads[0], NULL, aer_consumer_worker, &cons1) == 0);
+    created[1] = (pthread_create(&threads[1], NULL, aer_consumer_worker, &cons2) == 0);
+    created[2] = (pthread_create(&threads[2], NULL, aer_producer_worker, &prod1) == 0);
+    created[3] = (pthread_create(&threads[3], NULL, aer_producer_worker, &prod2) == 0);
+
+    for (int i = 0; i < 4; ++i) {
+        if (created[i]) {
+            pthread_join(threads[i], NULL);
         }
     }
 #endif
