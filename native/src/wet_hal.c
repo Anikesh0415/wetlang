@@ -1,3 +1,7 @@
+#if !defined(_WIN32) && !defined(_POSIX_C_SOURCE)
+#define _POSIX_C_SOURCE 200809L
+#endif
+
 #include "../include/wet_crt.h"
 #include "../include/wet_hal.h"
 #include "../include/wetvm_vm.h"
