@@ -17,21 +17,12 @@ from typing import List, Optional, Tuple
 import numpy as np
 
 
+from bindings.ffi import _find_library_path
+
+
 def _find_wetvm_dll() -> str:
-    """Locates the wetvm shared library."""
-    pkg_dir = Path(__file__).resolve().parent
-    candidates = [
-        pkg_dir.parent / "native" / "bin" / "wetvm.dll",
-        pkg_dir.parent / "native" / "wetvm.dll",
-        pkg_dir.parent.parent / "native" / "bin" / "wetvm.dll",
-        pkg_dir.parent.parent / "native" / "wetvm.dll",
-        Path.cwd() / "native" / "bin" / "wetvm.dll",
-        Path.cwd() / "native" / "wetvm.dll",
-    ]
-    for c in candidates:
-        if c.exists():
-            return str(c)
-    raise FileNotFoundError("Could not find wetvm.dll shared library")
+    """Locates the platform-appropriate wetvm shared library (.dll / .so / .dylib)."""
+    return str(_find_library_path())
 
 
 _DLL_PATH = _find_wetvm_dll()

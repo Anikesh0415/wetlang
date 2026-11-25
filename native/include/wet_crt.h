@@ -17,9 +17,13 @@ char* strcat(char* dest, const char* src);
 int   strcmp(const char* s1, const char* s2);
 int   strncmp(const char* s1, const char* s2, size_t count);
 int   sprintf(char* buffer, const char* format, ...);
+#if defined(_WIN32)
 int   _snprintf(char* buffer, size_t count, const char* format, ...);
 #ifndef snprintf
 #define snprintf _snprintf
+#endif
+#else
+int   snprintf(char* buffer, size_t count, const char* format, ...);
 #endif
 
 static inline float wet_fabsf(float x) {

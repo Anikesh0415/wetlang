@@ -198,9 +198,12 @@ def cmd_check(args) -> int:
 
     try:
         if use_stdin:
-            source_text = sys.stdin.read()
-            if source_text.startswith("\ufeff"):
-                source_text = source_text[1:]
+            if hasattr(sys.stdin, "buffer"):
+                source_text = sys.stdin.buffer.read().decode("utf-8-sig")
+            else:
+                source_text = sys.stdin.read()
+                if source_text.startswith("\ufeff"):
+                    source_text = source_text[1:]
         else:
             source_text = Path(args.file).read_text(encoding="utf-8-sig")
 
