@@ -1,9 +1,9 @@
 """
-Wetworld vs. snnTorch Cross-Framework Biophysical Validation
-============================================================
-Benchmarks Wetworld's freestanding C99 Exact Exponential Euler ODE engine
-against Columbia University's gold-standard snnTorch (PyTorch) SNN library.
-Mathematically verifies membrane integration, decay constant tau_m, and spike thresholds.
+WetLang vs. snnTorch Discrete-Time LIF Integration Cross-Check
+=============================================================
+Benchmarks WetLang's Exact Exponential Euler LIF step (LifODESolver) against
+PyTorch snnTorch Leaky Integrate-and-Fire (LIF) passive relaxation behavior
+with matched membrane time constant tau_m and timestep dt_ms.
 """
 
 import numpy as np
@@ -15,11 +15,11 @@ from biophysics.ode_solver import LifODESolver
 
 def run_snntorch_cross_validation(steps: int = 100, dt_ms: float = 0.1) -> dict:
     """
-    Simulates identical current injection on Wetworld Exact Exponential Euler ODE
-    and Columbia University's PyTorch snnTorch Leaky Integrate-and-Fire (LIF) neuron.
-    Returns quantitative mathematical alignment metrics (RMSE, correlation).
+    Simulates identical passive current step and relaxation across WetLang's
+    LifODESolver and PyTorch snnTorch LIF neuron to verify matched discrete
+    membrane decay dynamics (RMSE, correlation).
     """
-    tau_m_ms = 20.0  # 20.0 ms membrane time constant
+    tau_m_ms = 20.0  # 20.0 ms membrane time constant (C_m = 200 pF, g_leak = 10 nS)
     beta = float(np.exp(-dt_ms / tau_m_ms))  # Decay factor per 0.1 ms step: ~0.995012
 
     # 1. snnTorch Reference Model
@@ -39,7 +39,7 @@ def run_snntorch_cross_validation(steps: int = 100, dt_ms: float = 0.1) -> dict:
         _, mem_snntorch = lif_neuron(inp, mem_snntorch)
         snntorch_voltages.append(float(mem_snntorch.item()))
 
-    # 2. Wetworld Exact Exponential Euler LIF Engine
+    # 2. WetLang Exact Exponential Euler LIF Solver
     solver = LifODESolver(dt_ms=dt_ms)
     v_rest_mv = -70.0
     v_m = v_rest_mv
@@ -47,11 +47,10 @@ def run_snntorch_cross_validation(steps: int = 100, dt_ms: float = 0.1) -> dict:
     wetworld_voltages = []
 
     for t in range(steps):
-        # Current in pA: 0.2 normalized unit maps to 200 pA
-        curr_pa = 200.0 if 10 <= t < 30 else 0.0
-        v_inf = v_rest_mv + (curr_pa / 1000.0) / (g_leak_ns / 1.0) * 100.0
-        decay = np.exp(-dt_ms / tau_m_ms)
-        v_m = v_inf + (v_m - v_inf) * decay
+        # Current in pA: 100 pA across 10 nS shifts V_inf by +10 mV (subthreshold vs -50 mV)
+        curr_pa = 100.0 if 10 <= t < 30 else 0.0
+        v_inf = v_rest_mv + (curr_pa / g_leak_ns)
+        v_m = solver.step_passive(v_m, tau_m_ms, v_inf)
         wetworld_voltages.append(float(v_m - v_rest_mv))
 
     snntorch_arr = np.array(snntorch_voltages)

@@ -6,7 +6,6 @@ Validates complete, integrated, realistic application workloads in neural organo
   Scenario 3: Homeostatic Rate Stabilization under Stress (03_homeostatic_stabilization_and_stress.wet)
   Scenario 4: Adversarial Multi-Vector Fault Injection & Interlock Neutralization
   Scenario 5: Long-Horizon Deterministic Telemetry Stream Integrity & Memory Safety
-Authoritative Specification: spec_miner_e2e_3/handoff.md § 6 (5 Scenarios).
 """
 
 import os

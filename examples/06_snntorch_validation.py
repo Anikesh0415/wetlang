@@ -1,13 +1,13 @@
 """
-Example 06: Columbia University snnTorch Cross-Framework Biophysical Validation
-Mathematically benchmarks Wetworld Exact Exponential Euler ODE against PyTorch snnTorch LIF.
+Example 06: snnTorch Discrete-Time LIF Relaxation Cross-Check
+Benchmarks WetLang's Exponential Euler LIF solver against PyTorch snnTorch.
 """
 
 from wetlang.sandbox.snntorch_cross_validation import run_snntorch_cross_validation
 
 
 def main():
-    print("Running snnTorch Cross-Validation against Wetworld C99 Engine...")
+    print("Running snnTorch Passive Relaxation Cross-Check against WetLang LifODESolver...")
     results = run_snntorch_cross_validation(steps=60, dt_ms=0.1)
 
     print("\nQuantitative Convergence Metrics:")

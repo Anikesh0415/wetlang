@@ -1,7 +1,7 @@
 """
-End-to-End Test Suite for Project Janus (Options 1, 3, 4 & C99 Safety Invariants)
-================================================================================
-Validates all acceptance criteria strictly from ORIGINAL_REQUEST.md and PROJECT.md:
+End-to-End Test Suite for Project Janus (Gymnasium, Neuromorphic Backends, Linter & C99 Safety)
+=============================================================================================
+Validates acceptance criteria across all Project Janus subsystems:
   - Option 1: Closed-Loop AI Benchmark Suite (WetworldGymEnv, Encoders, FinalSpark)
   - Option 3: Intel Loihi-2 & SpiNNaker Neuromorphic Silicon Backends
   - Option 4: Official VS Code Language Extension & Single-Source Linter CLI

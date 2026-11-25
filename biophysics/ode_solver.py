@@ -85,8 +85,8 @@ class LifODESolver:
                 v_m = v_reset_mv
             else:
                 # Steady-state voltage under current injection: V_inf = V_rest + I / g_leak
-                # current in pA, g_leak in nS -> V_inf in mV
-                v_inf = v_rest_mv + (current_pA / 1000.0) / (g_leak_ns / 1.0)
+                # current in pA (1e-12 A), g_leak in nS (1e-9 S) -> 1 pA / 1 nS = 1 mV
+                v_inf = v_rest_mv + (current_pA / g_leak_ns)
                 decay = math.exp(-self.dt_ms / tau_m)
                 v_m = v_inf + (v_m - v_inf) * decay
 

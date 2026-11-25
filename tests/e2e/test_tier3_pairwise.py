@@ -2,8 +2,6 @@
 WetLang E2E Test Suite - Tier 3: Cross-Feature Pairwise Combination Tests
 Tests the combinatorial interactions across compiler, native runtime,
 biophysical digital twin sandbox, and biocybersecurity hardware interlocks.
-Features Covered: All 28 features in PROJECT.md paired across module boundaries.
-Authoritative Specification: spec_miner_e2e_3/handoff.md § 5 (28 Pairwise Tests).
 """
 
 import os

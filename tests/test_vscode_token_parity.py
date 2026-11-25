@@ -49,7 +49,7 @@ def test_package_json_manifest_schema():
 
     assert pkg.get("name") == "wetlang"
     assert pkg.get("displayName") == "WetLang"
-    assert pkg.get("publisher") == "finalspark"
+    assert pkg.get("publisher") == "anikesh0415"
     assert pkg.get("version") == "2.1.2"
     assert "onLanguage:wetlang" in pkg.get("activationEvents", [])
 

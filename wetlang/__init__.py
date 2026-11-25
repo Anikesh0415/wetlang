@@ -34,6 +34,7 @@ from compiler.emitter import compile_source, compile_to_embedded_header, Target
 from wetlang.vm import VirtualMachine
 from wetlang import tensors
 from wetlang import gym
+from wetlang.gym import WetworldGymEnv
 
 from bindings.ffi import WetStatus, WetVMConfig, WetTelemetry
 from bindings.runtime import WetRuntime, WetVMError
@@ -56,6 +57,7 @@ __all__ = [
     "compile_to_embedded_header",
     "load",
     "VirtualMachine",
+    "WetworldGymEnv",
     "Target",
     "tensors",
     "gym",

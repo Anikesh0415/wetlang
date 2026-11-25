@@ -423,3 +423,17 @@ def test_native_wetvm_multi_tick_stability():
     assert not np.any(np.isinf(arr_v))
     
     vm.close()
+
+
+def test_lif_ode_solver_continuous_stimulus_units():
+    """Verify LifODESolver uses consistent mV units (1 pA / 1 nS = 1 mV) and enforces <= 500 Hz cap."""
+    from biophysics.ode_solver import LifODESolver
+
+    solver = LifODESolver(dt_ms=0.1)
+    # 300 pA over 10 nS -> V_inf = -70 + 30 = -40 mV (suprathreshold vs -50 mV)
+    spikes_300pa = solver.simulate_continuous_stimulus(current_pA=300.0, duration_ms=100.0)
+    assert len(spikes_300pa) > 0, "Expected action potentials under 300 pA injection"
+
+    # 10,000 pA clamped by 2.0 ms absolute refractory period (<= 50 spikes in 100 ms)
+    spikes_10na = solver.simulate_continuous_stimulus(current_pA=10000.0, duration_ms=100.0)
+    assert 1 <= len(spikes_10na) <= 50, f"Unexpected spike count under 10 nA injection: {len(spikes_10na)}"

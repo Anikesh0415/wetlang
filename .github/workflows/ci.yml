@@ -41,3 +41,29 @@ jobs:
       - name: Run Test Suite
         run: |
           pytest tests -v
+
+      - name: Smoke Test Examples and Benchmarks
+        run: |
+          python demo.py
+          python -m wetlang.cli check examples/01_single_organoid_baseline.wet --format=json
+          python examples/05_gymnasium_active_inference.py
+          python examples/06_snntorch_validation.py
+          python benchmarks/finalspark_validation.py
+
+  vscode-extension:
+    name: VS Code Extension TypeCheck (ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install and TypeCheck Extension
+        working-directory: vscode-wetlang
+        run: |
+          npm install --no-audit --no-fund
+          npx tsc --noEmit

@@ -16,6 +16,7 @@ from wetlang import (
     compile_to_embedded_header,
     load,
     VirtualMachine,
+    WetworldGymEnv,
     Target,
     tensors,
     gym,
