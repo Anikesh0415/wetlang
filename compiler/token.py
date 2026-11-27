@@ -22,6 +22,7 @@ class Dimension(Enum):
     PRESSURE = "PRESSURE"
     RESISTANCE = "RESISTANCE"
     CONDUCTANCE = "CONDUCTANCE"
+    AREA = "AREA"
 
 
 class TokenType(Enum):
@@ -107,6 +108,10 @@ class TokenType(Enum):
     READ_PRESSURE = auto()
     READ_TEMPERATURE = auto()
 
+    # Janus v2.2: Closed-Loop Blanking & Electrode Area
+    SET_BLANKING = auto()
+    ELECTRODE_AREA = auto()
+
     # Boolean Literals
     TRUE = auto()
     FALSE = auto()
@@ -179,6 +184,12 @@ UNIT_SUFFIXES: Dict[str, Tuple[Dimension, float]] = {
     # Length (base: meters)
     "mm": (Dimension.LENGTH, 1e-3),
     "um": (Dimension.LENGTH, 1e-6),
+
+    # Electrode Area (base: cm^2)
+    # 1 cm^2 = 10^8 um^2 = 10^2 mm^2
+    "um2": (Dimension.AREA, 1e-8),   # 1 um^2 = 1e-8 cm^2
+    "mm2": (Dimension.AREA, 1e-2),   # 1 mm^2 = 1e-2 cm^2
+    "cm2": (Dimension.AREA, 1.0),    # 1 cm^2 = 1 cm^2 (base)
 
     # Volume & Microfluidics
     "uL": (Dimension.VOLUME, 1e-9),
@@ -267,6 +278,9 @@ KEYWORDS: Dict[str, TokenType] = {
     "read_temperature": TokenType.READ_TEMPERATURE,
     "true": TokenType.TRUE,
     "false": TokenType.FALSE,
+    # Janus v2.2 additions
+    "set_blanking": TokenType.SET_BLANKING,
+    "electrode_area": TokenType.ELECTRODE_AREA,
 }
 
 

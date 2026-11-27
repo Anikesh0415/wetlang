@@ -2,7 +2,7 @@
   "name": "wetlang",
   "displayName": "WetLang",
   "description": "Official WetLang Language Support & Canonical Linter for Neural Organoid Computing",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "publisher": "anikesh0415",
   "engines": {
     "vscode": "^1.75.0"

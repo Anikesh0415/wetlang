@@ -140,6 +140,11 @@ typedef struct {
     uint16_t stim_blanking_ticks[BIO_NUM_CHANNELS]; /* Post-stimulus amplifier artifact blanking ticks */
     uint16_t default_blanking_ticks; /* Configurable baseline blanking duration in ticks (e.g. 20 = 2.0 ms) */
     uint8_t  spatial_blanking_enabled; /* 1 = propagate attenuated blanking to adjacent MEA channels */
+    uint8_t  blanking_active[BIO_NUM_CHANNELS]; /* 1 if channel blanking was active on the tick just stepped */
+    uint16_t channel_blanking_ticks[BIO_NUM_CHANNELS]; /* Per-channel blanking duration override in ticks */
+    uint8_t  channel_spatial_blanking[BIO_NUM_CHANNELS]; /* Per-channel spatial blanking flag */
+    uint8_t  has_channel_blanking[BIO_NUM_CHANNELS]; /* 1 if per-channel blanking override is configured */
+    uint8_t  noise_enabled; /* 1 = spontaneous Up-state / mini EPSPs / background noise enabled (default 1) */
 
     /* Randles Equivalent Circuit Interface Model (Electrode-Electrolyte Interface) */
     float    r_solution_kohm;        /* Solution bulk resistance Rs (e.g. 2.0 kOhm) */
@@ -186,6 +191,7 @@ void biophysics_schedule_stim_current(
 
 /* Configure post-stimulus blanking window in milliseconds */
 void biophysics_set_blanking_window(bio_state_t* bio, float blanking_ms, uint8_t enable_spatial);
+void biophysics_set_channel_blanking_window(bio_state_t* bio, uint16_t channel, float blanking_ms, uint8_t enable_spatial);
 
 /* Query instantaneous Randles polarization and total electrode potential */
 void biophysics_get_randles_state(

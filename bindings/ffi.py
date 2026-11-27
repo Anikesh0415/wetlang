@@ -47,6 +47,7 @@ class WetStatus(IntEnum):
     WET_ERR_COMPLIANCE_RAILED     = 26
     WET_ERR_BYTECODE_VERIFICATION = 27
     WET_ERR_QUEUE_EMPTY           = 28
+    WET_ERR_INVALID_ARG           = 29
 
 
 class WetHalMode(IntEnum):
@@ -197,6 +198,65 @@ class WetCanFrame(ctypes.Structure):
         ("dlc", c_uint8),
         ("data", c_uint8 * 8),
         ("timestamp_us", c_uint64),
+    ]
+
+
+class WetClosedLoopSnapshot(ctypes.Structure):
+    """Mirror of C wet_closed_loop_snapshot_t."""
+    _fields_ = [
+        ("tick", c_uint64),
+        ("sim_time_ms", c_double),
+        ("num_channels", c_uint32),
+        ("voltages", POINTER(c_float)),
+        ("spikes", POINTER(c_uint8)),
+        ("blanking_active", POINTER(c_uint8)),
+    ]
+
+
+class WetClosedLoopCmd(ctypes.Structure):
+    """Mirror of C wet_closed_loop_cmd_t."""
+    _fields_ = [
+        ("trigger", c_uint8),
+        ("is_current", c_uint8),
+        ("channel", c_uint16),
+        ("amplitude", c_float),
+        ("phase1_ms", c_float),
+        ("phase2_ms", c_float),
+        ("interphase_ms", c_float),
+    ]
+
+
+WET_CLOSED_LOOP_HOOK_TYPE = ctypes.CFUNCTYPE(
+    None,
+    POINTER(WetClosedLoopSnapshot),
+    POINTER(WetClosedLoopCmd),
+    c_void_p,
+)
+
+
+class WetHalSerial(ctypes.Structure):
+    """Mirror of C wet_hal_serial_t."""
+    _fields_ = [
+        ("os_handle", c_size_t),
+        ("fd", c_int32),
+        ("baud_rate", c_uint32),
+        ("timeout_ms", c_uint32),
+        ("is_open", c_uint8),
+        ("is_pipe", c_uint8),
+        ("_reserved", c_uint8 * 2),
+        ("port_name", ctypes.c_char * 256),
+    ]
+
+
+class WetHalTcp(ctypes.Structure):
+    """Mirror of C wet_hal_tcp_t."""
+    _fields_ = [
+        ("sock", c_size_t),
+        ("timeout_ms", c_uint32),
+        ("port", c_uint16),
+        ("is_connected", c_uint8),
+        ("wsa_acquired", c_uint8),
+        ("host", ctypes.c_char * 256),
     ]
 
 
@@ -453,8 +513,28 @@ def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
         lib.wet_life_supervisor_shutdown.argtypes = [c_void_p]
 
     if hasattr(lib, "wet_configure_blanking"):
-        lib.wet_configure_blanking.restype = None
+        lib.wet_configure_blanking.restype = c_int
         lib.wet_configure_blanking.argtypes = [c_void_p, c_float, c_uint8]
+
+    if hasattr(lib, "wet_configure_channel_blanking"):
+        lib.wet_configure_channel_blanking.restype = c_int
+        lib.wet_configure_channel_blanking.argtypes = [c_void_p, c_uint16, c_float, c_uint8]
+
+    if hasattr(lib, "wet_register_closed_loop_hook"):
+        lib.wet_register_closed_loop_hook.restype = c_int
+        lib.wet_register_closed_loop_hook.argtypes = [c_void_p, WET_CLOSED_LOOP_HOOK_TYPE, c_void_p]
+
+    if hasattr(lib, "wet_configure_electrode_area"):
+        lib.wet_configure_electrode_area.restype = c_int
+        lib.wet_configure_electrode_area.argtypes = [c_void_p, c_uint16, c_float]
+
+    if hasattr(lib, "wet_vm_set_rng_seed"):
+        lib.wet_vm_set_rng_seed.restype = c_int
+        lib.wet_vm_set_rng_seed.argtypes = [c_void_p, c_uint64]
+
+    if hasattr(lib, "wet_vm_set_noise_enabled"):
+        lib.wet_vm_set_noise_enabled.restype = c_int
+        lib.wet_vm_set_noise_enabled.argtypes = [c_void_p, c_uint8]
 
     if hasattr(lib, "wet_inject_current_stimulus"):
         lib.wet_inject_current_stimulus.restype = c_int
@@ -721,6 +801,79 @@ def load_wetvm_lib(lib_path: Optional[Path] = None) -> ctypes.CDLL:
         lib.wet_hal_microfluidics_inject_fault.restype = None
         lib.wet_hal_microfluidics_inject_fault.argtypes = [c_void_p, c_uint8, c_uint8, c_uint8]
 
+    if hasattr(lib, "wet_hal_microfluidics_open_serial"):
+        lib.wet_hal_microfluidics_open_serial.restype = c_int
+        lib.wet_hal_microfluidics_open_serial.argtypes = [c_void_p, c_char_p, c_uint32, c_uint32]
+
+    if hasattr(lib, "wet_hal_microfluidics_close_serial"):
+        lib.wet_hal_microfluidics_close_serial.restype = None
+        lib.wet_hal_microfluidics_close_serial.argtypes = [c_void_p]
+
+    # OS Transport APIs (Serial / Named Pipe / POSIX TTY & Non-Blocking TCP)
+    if hasattr(lib, "wet_hal_transport_normalize_port"):
+        lib.wet_hal_transport_normalize_port.restype = c_int
+        lib.wet_hal_transport_normalize_port.argtypes = [c_char_p, c_char_p, c_size_t]
+
+    if hasattr(lib, "wet_hal_serial_init"):
+        lib.wet_hal_serial_init.restype = None
+        lib.wet_hal_serial_init.argtypes = [POINTER(WetHalSerial)]
+
+    if hasattr(lib, "wet_hal_serial_open"):
+        lib.wet_hal_serial_open.restype = c_int
+        lib.wet_hal_serial_open.argtypes = [POINTER(WetHalSerial), c_char_p, c_uint32, c_uint32]
+
+    if hasattr(lib, "wet_hal_serial_close"):
+        lib.wet_hal_serial_close.restype = None
+        lib.wet_hal_serial_close.argtypes = [POINTER(WetHalSerial)]
+
+    if hasattr(lib, "wet_hal_serial_is_open"):
+        lib.wet_hal_serial_is_open.restype = c_int
+        lib.wet_hal_serial_is_open.argtypes = [POINTER(WetHalSerial)]
+
+    if hasattr(lib, "wet_hal_serial_write"):
+        lib.wet_hal_serial_write.restype = c_int
+        lib.wet_hal_serial_write.argtypes = [POINTER(WetHalSerial), c_void_p, c_size_t, POINTER(c_size_t)]
+
+    if hasattr(lib, "wet_hal_serial_read"):
+        lib.wet_hal_serial_read.restype = c_int
+        lib.wet_hal_serial_read.argtypes = [POINTER(WetHalSerial), c_void_p, c_size_t, c_uint32, POINTER(c_size_t)]
+
+    if hasattr(lib, "wet_hal_serial_write_frame"):
+        lib.wet_hal_serial_write_frame.restype = c_int
+        lib.wet_hal_serial_write_frame.argtypes = [POINTER(WetHalSerial), c_char_p, c_size_t]
+
+    if hasattr(lib, "wet_hal_serial_read_frame"):
+        lib.wet_hal_serial_read_frame.restype = c_int
+        lib.wet_hal_serial_read_frame.argtypes = [POINTER(WetHalSerial), c_char_p, c_size_t, c_uint32, POINTER(c_size_t)]
+
+    if hasattr(lib, "wet_hal_tcp_init"):
+        lib.wet_hal_tcp_init.restype = None
+        lib.wet_hal_tcp_init.argtypes = [POINTER(WetHalTcp)]
+
+    if hasattr(lib, "wet_hal_tcp_connect"):
+        lib.wet_hal_tcp_connect.restype = c_int
+        lib.wet_hal_tcp_connect.argtypes = [POINTER(WetHalTcp), c_char_p, c_uint16, c_uint32]
+
+    if hasattr(lib, "wet_hal_tcp_close"):
+        lib.wet_hal_tcp_close.restype = None
+        lib.wet_hal_tcp_close.argtypes = [POINTER(WetHalTcp)]
+
+    if hasattr(lib, "wet_hal_tcp_is_connected"):
+        lib.wet_hal_tcp_is_connected.restype = c_int
+        lib.wet_hal_tcp_is_connected.argtypes = [POINTER(WetHalTcp)]
+
+    if hasattr(lib, "wet_hal_tcp_send_all"):
+        lib.wet_hal_tcp_send_all.restype = c_int
+        lib.wet_hal_tcp_send_all.argtypes = [POINTER(WetHalTcp), c_void_p, c_size_t, c_uint32, POINTER(c_size_t)]
+
+    if hasattr(lib, "wet_hal_tcp_recv"):
+        lib.wet_hal_tcp_recv.restype = c_int
+        lib.wet_hal_tcp_recv.argtypes = [POINTER(WetHalTcp), c_void_p, c_size_t, c_uint32, POINTER(c_size_t)]
+
+    if hasattr(lib, "wet_hal_tcp_recv_frame"):
+        lib.wet_hal_tcp_recv_frame.restype = c_int
+        lib.wet_hal_tcp_recv_frame.argtypes = [POINTER(WetHalTcp), c_char_p, c_size_t, ctypes.c_char, c_uint32, POINTER(c_size_t)]
+
     # Sensirion Flow Meter APIs
     if hasattr(lib, "wet_hal_sensirion_create"):
         lib.wet_hal_sensirion_create.restype = c_void_p
@@ -859,8 +1012,40 @@ class WetVMFFI:
     def life_supervisor_shutdown(self, vm: ctypes.c_void_p) -> None:
         self.lib.wet_life_supervisor_shutdown(vm)
 
-    def configure_blanking(self, vm: ctypes.c_void_p, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
-        self.lib.wet_configure_blanking(vm, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
+    def configure_blanking(self, vm: ctypes.c_void_p, blanking_ms: float = 2.0, enable_spatial: bool = True) -> int:
+        return int(self.lib.wet_configure_blanking(vm, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0)))
+
+    def configure_channel_blanking(
+        self,
+        vm: ctypes.c_void_p,
+        channel: int,
+        blanking_ms: float = 2.0,
+        enable_spatial: bool = True,
+    ) -> int:
+        return int(self.lib.wet_configure_channel_blanking(
+            vm,
+            ctypes.c_uint16(channel),
+            ctypes.c_float(blanking_ms),
+            ctypes.c_uint8(1 if enable_spatial else 0),
+        ))
+
+    def configure_electrode_area(self, vm: ctypes.c_void_p, channel: int, area_cm2: float) -> int:
+        return int(self.lib.wet_configure_electrode_area(vm, ctypes.c_uint16(channel), ctypes.c_float(area_cm2)))
+
+    def register_closed_loop_hook(
+        self,
+        vm: ctypes.c_void_p,
+        hook: Optional[WET_CLOSED_LOOP_HOOK_TYPE],
+        user_data: Optional[ctypes.c_void_p] = None,
+    ) -> int:
+        cb = hook if hook is not None else WET_CLOSED_LOOP_HOOK_TYPE()
+        return int(self.lib.wet_register_closed_loop_hook(vm, cb, user_data))
+
+    def set_rng_seed(self, vm: ctypes.c_void_p, seed: int) -> int:
+        return int(self.lib.wet_vm_set_rng_seed(vm, ctypes.c_uint64(seed)))
+
+    def set_noise_enabled(self, vm: ctypes.c_void_p, enabled: bool) -> int:
+        return int(self.lib.wet_vm_set_noise_enabled(vm, ctypes.c_uint8(1 if enabled else 0)))
 
     def inject_current_stimulus(
         self,
@@ -1131,6 +1316,98 @@ class WetVMFFI:
 
     def microfluidics_inject_fault(self, drv: ctypes.c_void_p, stall: bool = False, can_drop: bool = False, timeout: bool = False) -> None:
         self.lib.wet_hal_microfluidics_inject_fault(drv, ctypes.c_uint8(1 if stall else 0), ctypes.c_uint8(1 if can_drop else 0), ctypes.c_uint8(1 if timeout else 0))
+
+    def microfluidics_open_serial(self, drv: ctypes.c_void_p, port_name: str, baud_rate: int = 115200, timeout_ms: int = 1000) -> int:
+        return int(self.lib.wet_hal_microfluidics_open_serial(
+            drv,
+            port_name.encode("utf-8"),
+            ctypes.c_uint32(baud_rate),
+            ctypes.c_uint32(timeout_ms),
+        ))
+
+    def microfluidics_close_serial(self, drv: ctypes.c_void_p) -> None:
+        self.lib.wet_hal_microfluidics_close_serial(drv)
+
+    # OS Transport Helpers
+    def transport_normalize_port(self, port_name: str, buf_cap: int = 256) -> Tuple[int, str]:
+        buf = ctypes.create_string_buffer(buf_cap)
+        st = int(self.lib.wet_hal_transport_normalize_port(port_name.encode("utf-8"), buf, ctypes.c_size_t(buf_cap)))
+        return st, buf.value.decode("utf-8", errors="replace")
+
+    def serial_init(self, ser: WetHalSerial) -> None:
+        self.lib.wet_hal_serial_init(ctypes.byref(ser))
+
+    def serial_open(self, ser: WetHalSerial, port_name: str, baud_rate: int = 115200, timeout_ms: int = 1000) -> int:
+        return int(self.lib.wet_hal_serial_open(
+            ctypes.byref(ser),
+            port_name.encode("utf-8"),
+            ctypes.c_uint32(baud_rate),
+            ctypes.c_uint32(timeout_ms),
+        ))
+
+    def serial_close(self, ser: WetHalSerial) -> None:
+        self.lib.wet_hal_serial_close(ctypes.byref(ser))
+
+    def serial_is_open(self, ser: WetHalSerial) -> bool:
+        return bool(self.lib.wet_hal_serial_is_open(ctypes.byref(ser)))
+
+    def serial_write(self, ser: WetHalSerial, data: bytes) -> Tuple[int, int]:
+        written = ctypes.c_size_t(0)
+        c_buf = (ctypes.c_uint8 * len(data)).from_buffer_copy(data) if data else None
+        st = int(self.lib.wet_hal_serial_write(ctypes.byref(ser), c_buf, ctypes.c_size_t(len(data)), ctypes.byref(written)))
+        return st, int(written.value)
+
+    def serial_read(self, ser: WetHalSerial, max_len: int, timeout_ms: int = 500) -> Tuple[int, bytes]:
+        buf = (ctypes.c_uint8 * max_len)()
+        got = ctypes.c_size_t(0)
+        st = int(self.lib.wet_hal_serial_read(ctypes.byref(ser), buf, ctypes.c_size_t(max_len), ctypes.c_uint32(timeout_ms), ctypes.byref(got)))
+        return st, bytes(buf[:got.value])
+
+    def serial_write_frame(self, ser: WetHalSerial, frame: str) -> int:
+        raw = frame.encode("utf-8")
+        return int(self.lib.wet_hal_serial_write_frame(ctypes.byref(ser), raw, ctypes.c_size_t(len(raw))))
+
+    def serial_read_frame(self, ser: WetHalSerial, buf_cap: int = 256, timeout_ms: int = 500) -> Tuple[int, str]:
+        buf = ctypes.create_string_buffer(buf_cap)
+        out_len = ctypes.c_size_t(0)
+        st = int(self.lib.wet_hal_serial_read_frame(ctypes.byref(ser), buf, ctypes.c_size_t(buf_cap), ctypes.c_uint32(timeout_ms), ctypes.byref(out_len)))
+        return st, buf.raw[:out_len.value].decode("utf-8", errors="replace")
+
+    def tcp_init(self, tcp: WetHalTcp) -> None:
+        self.lib.wet_hal_tcp_init(ctypes.byref(tcp))
+
+    def tcp_connect(self, tcp: WetHalTcp, host: str, port: int, timeout_ms: int = 1000) -> int:
+        return int(self.lib.wet_hal_tcp_connect(
+            ctypes.byref(tcp),
+            host.encode("utf-8"),
+            ctypes.c_uint16(port),
+            ctypes.c_uint32(timeout_ms),
+        ))
+
+    def tcp_close(self, tcp: WetHalTcp) -> None:
+        self.lib.wet_hal_tcp_close(ctypes.byref(tcp))
+
+    def tcp_is_connected(self, tcp: WetHalTcp) -> bool:
+        return bool(self.lib.wet_hal_tcp_is_connected(ctypes.byref(tcp)))
+
+    def tcp_send_all(self, tcp: WetHalTcp, data: bytes, timeout_ms: int = 1000) -> Tuple[int, int]:
+        sent = ctypes.c_size_t(0)
+        c_buf = (ctypes.c_uint8 * len(data)).from_buffer_copy(data) if data else None
+        st = int(self.lib.wet_hal_tcp_send_all(ctypes.byref(tcp), c_buf, ctypes.c_size_t(len(data)), ctypes.c_uint32(timeout_ms), ctypes.byref(sent)))
+        return st, int(sent.value)
+
+    def tcp_recv(self, tcp: WetHalTcp, max_len: int, timeout_ms: int = 1000) -> Tuple[int, bytes]:
+        buf = (ctypes.c_uint8 * max_len)()
+        got = ctypes.c_size_t(0)
+        st = int(self.lib.wet_hal_tcp_recv(ctypes.byref(tcp), buf, ctypes.c_size_t(max_len), ctypes.c_uint32(timeout_ms), ctypes.byref(got)))
+        return st, bytes(buf[:got.value])
+
+    def tcp_recv_frame(self, tcp: WetHalTcp, buf_cap: int = 256, delim: bytes = b"\n", timeout_ms: int = 1000) -> Tuple[int, str]:
+        buf = ctypes.create_string_buffer(buf_cap)
+        out_len = ctypes.c_size_t(0)
+        d = delim[:1] if delim else b"\n"
+        st = int(self.lib.wet_hal_tcp_recv_frame(ctypes.byref(tcp), buf, ctypes.c_size_t(buf_cap), d, ctypes.c_uint32(timeout_ms), ctypes.byref(out_len)))
+        return st, buf.raw[:out_len.value].decode("utf-8", errors="replace")
 
     # Sensirion Flow Meter Driver
     def sensirion_create(self, mode: int = 2) -> ctypes.c_void_p:

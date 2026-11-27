@@ -103,6 +103,40 @@ static inline double wet_sqrt(double x) {
     return g;
 }
 
+/* Pure C99 deterministic log10(x) without external libm dependency.
+ * Uses IEEE-754 exponent/mantissa extraction + 7-term odd Horner series for ln(m). */
+static inline double wet_log10(double x) {
+    if (!wet_isfinite_d(x) || x <= 0.0) {
+        return -1e300;
+    }
+    uint64_t u = 0ULL;
+    memcpy(&u, &x, sizeof(u));
+    int exp_raw = (int)((u >> 52) & 0x7FFU);
+    int e = 0;
+    if (exp_raw == 0) {
+        /* Subnormal: scale up by 2^54 */
+        x *= 18014398509481984.0;
+        memcpy(&u, &x, sizeof(u));
+        exp_raw = (int)((u >> 52) & 0x7FFU);
+        e = exp_raw - 1023 - 54;
+    } else {
+        e = exp_raw - 1023;
+    }
+    u = (u & 0x000FFFFFFFFFFFFFULL) | (0x3FFULL << 52);
+    double m = 0.0;
+    memcpy(&m, &u, sizeof(m));
+    if (m > 1.4142135623730951) {
+        m *= 0.5;
+        e += 1;
+    }
+    double y = (m - 1.0) / (m + 1.0);
+    double y2 = y * y;
+    double series = 1.0 + y2 * (1.0 / 3.0 + y2 * (1.0 / 5.0 + y2 * (1.0 / 7.0
+                  + y2 * (1.0 / 9.0 + y2 * (1.0 / 11.0 + y2 * (1.0 / 13.0))))));
+    double ln_x = 2.0 * y * series + (double)e * 0.693147180559945309417;
+    return ln_x * 0.434294481903251827651;
+}
+
 /* Deterministic Xorshift64* PRNG for reproducible background noise & network wiring */
 static inline uint64_t wet_rng_next(uint64_t* state) {
     uint64_t x = *state;

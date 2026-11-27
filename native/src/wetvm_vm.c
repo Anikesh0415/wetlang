@@ -123,14 +123,8 @@ static void* arena_alloc_aligned(struct wet_vm_instance* vm, size_t size, size_t
 
 static void cleanup_constants(struct wet_vm_instance* vm) {
     if (vm->constants) {
-        if (!vm->arena_allocated) {
-            for (size_t i = 0; i < vm->num_constants; ++i) {
-                if (vm->constants[i].str_alloc) {
-                    free(vm->constants[i].str_alloc);
-                    vm->constants[i].str_alloc = NULL;
-                }
-            }
-            free(vm->constants);
+        for (size_t i = 0; i < vm->num_constants; ++i) {
+            vm->constants[i].str_alloc = NULL;
         }
         vm->constants = NULL;
         vm->num_constants = 0;
@@ -140,15 +134,10 @@ static void cleanup_constants(struct wet_vm_instance* vm) {
 static void cleanup_bytecode(struct wet_vm_instance* vm) {
     cleanup_constants(vm);
     if (vm->bytecode_raw) {
-        if (!vm->arena_allocated) {
-            free(vm->bytecode_raw);
-        }
         vm->bytecode_raw = NULL;
         vm->bytecode_size = 0;
     }
-    if (vm->arena_allocated) {
-        vm->arena_bump_offset = vm->arena_mark_offset;
-    }
+    vm->arena_bump_offset = vm->arena_mark_offset;
     vm->code = NULL;
     vm->code_size = 0;
 }
@@ -254,13 +243,9 @@ wet_status_t wet_vm_load_bytecode_internal(
         return WET_ERR_MALFORMED_SECTION;
     }
 
-    /* Clean up previous bytecode and allocate buffer for new bytecode */
+    /* Clean up previous bytecode and allocate buffer for new bytecode from VM arena */
     cleanup_bytecode(vm);
-    if (vm->arena_allocated) {
-        vm->bytecode_raw = (uint8_t*)arena_alloc_aligned(vm, size, 16U);
-    } else {
-        vm->bytecode_raw = (uint8_t*)malloc(size);
-    }
+    vm->bytecode_raw = (uint8_t*)arena_alloc_aligned(vm, size, 16U);
     if (!vm->bytecode_raw) {
         snprintf(vm->last_error, sizeof(vm->last_error), "Memory allocation failed for bytecode");
         return WET_ERR_ALLOC_FAILED;
@@ -300,17 +285,14 @@ wet_status_t wet_vm_load_bytecode_internal(
             size_t c_pos = 4;
 
             if (num_consts > 0) {
-                if (vm->arena_allocated) {
-                    if ((size_t)num_consts > (SIZE_MAX / sizeof(wet_constant_entry_t))) {
-                        cleanup_bytecode(vm);
-                        return WET_ERR_ALLOC_FAILED;
-                    }
-                    vm->constants = (wet_constant_entry_t*)arena_alloc_aligned(
-                        vm, (size_t)num_consts * sizeof(wet_constant_entry_t), 16U
-                    );
-                } else {
-                    vm->constants = (wet_constant_entry_t*)calloc(num_consts, sizeof(wet_constant_entry_t));
+                if ((size_t)num_consts > (size_t)(s_size - 4U) / 3U ||
+                    (size_t)num_consts > (SIZE_MAX / sizeof(wet_constant_entry_t))) {
+                    cleanup_bytecode(vm);
+                    return WET_ERR_MALFORMED_SECTION;
                 }
+                vm->constants = (wet_constant_entry_t*)arena_alloc_aligned(
+                    vm, (size_t)num_consts * sizeof(wet_constant_entry_t), 16U
+                );
                 if (!vm->constants) {
                     cleanup_bytecode(vm);
                     return WET_ERR_ALLOC_FAILED;
@@ -342,9 +324,7 @@ wet_status_t wet_vm_load_bytecode_internal(
                     uint16_t str_len = wet_read_u16_le(sec_data + c_pos);
                     c_pos += 2;
                     if (c_pos + str_len > s_size) { cleanup_bytecode(vm); return WET_ERR_MALFORMED_SECTION; }
-                    char* sbuf = vm->arena_allocated
-                        ? (char*)arena_alloc_aligned(vm, (size_t)str_len + 1U, 1U)
-                        : (char*)malloc((size_t)str_len + 1U);
+                    char* sbuf = (char*)arena_alloc_aligned(vm, (size_t)str_len + 1U, 1U);
                     if (!sbuf) { cleanup_bytecode(vm); return WET_ERR_ALLOC_FAILED; }
                     memcpy(sbuf, sec_data + c_pos, str_len);
                     sbuf[str_len] = '\0';
@@ -406,7 +386,31 @@ wet_status_t wet_vm_load_bytecode_internal(
     if (hdr->channel_count > 0) {
         vm->config.channel_count = hdr->channel_count;
     }
-    biophysics_reset(&vm->bio);
+    {
+        uint16_t saved_def_blank = vm->bio.default_blanking_ticks;
+        uint8_t saved_spatial = vm->bio.spatial_blanking_enabled;
+        uint16_t saved_ch_blank[BIO_NUM_CHANNELS];
+        uint8_t saved_ch_spatial[BIO_NUM_CHANNELS];
+        uint8_t saved_has_ch_blank[BIO_NUM_CHANNELS];
+        memcpy(saved_ch_blank, vm->bio.channel_blanking_ticks, sizeof(saved_ch_blank));
+        memcpy(saved_ch_spatial, vm->bio.channel_spatial_blanking, sizeof(saved_ch_spatial));
+        memcpy(saved_has_ch_blank, vm->bio.has_channel_blanking, sizeof(saved_has_ch_blank));
+        uint8_t saved_noise = vm->noise_enabled;
+
+        if (vm->rng_seed_set) {
+            biophysics_init(&vm->bio, vm->config.dt_ms, vm->rng_seed);
+        } else {
+            biophysics_reset(&vm->bio);
+        }
+        vm->bio.noise_enabled = saved_noise ? 1U : 0U;
+        if (saved_def_blank > 0U) {
+            vm->bio.default_blanking_ticks = saved_def_blank;
+            vm->bio.spatial_blanking_enabled = saved_spatial;
+        }
+        memcpy(vm->bio.channel_blanking_ticks, saved_ch_blank, sizeof(saved_ch_blank));
+        memcpy(vm->bio.channel_spatial_blanking, saved_ch_spatial, sizeof(saved_ch_spatial));
+        memcpy(vm->bio.has_channel_blanking, saved_has_ch_blank, sizeof(saved_has_ch_blank));
+    }
     interlocks_init(&vm->interlocks);
     interlocks_set_capabilities(&vm->interlocks, hdr->capabilities, hdr->channel_count);
     memset(vm->discharge_charge_nc, 0, sizeof(vm->discharge_charge_nc));
@@ -422,6 +426,212 @@ wet_status_t wet_vm_load_bytecode_internal(
     memset(vm->last_charge_nc, 0, sizeof(vm->last_charge_nc));
     vm->population_rate_hz = 0.0f;
 
+    return WET_OK;
+}
+
+/* =========================================================================
+ * Unified Safe Stimulation Helpers (Bytecode, FFI & Closed-Loop Hooks)
+ * ========================================================================= */
+
+wet_status_t wet_vm_apply_stim_voltage_internal(
+    struct wet_vm_instance* vm,
+    uint8_t channel,
+    float voltage_v,
+    float p1_ms,
+    float p2_ms,
+    float ip_ms
+) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    if (channel >= vm->config.channel_count || channel >= BIO_NUM_CHANNELS) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Electrode channel %u out of bounds (max %u)",
+                 channel, vm->config.channel_count);
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    if (!wet_isfinite_f(voltage_v) || !wet_isfinite_f(p1_ms) ||
+        !wet_isfinite_f(p2_ms) || !wet_isfinite_f(ip_ms) ||
+        p1_ms < 0.0f || p2_ms < 0.0f || ip_ms < 0.0f) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "ERR_INVALID_ARG: Non-finite or negative stimulation parameters on ch %u", channel);
+        return WET_ERR_INVALID_ARG;
+    }
+    if (vm->interlocks.locked) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return WET_ERR_INTERLOCK_LOCKED;
+    }
+
+    if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage_v, channel)) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Capability denied for voltage stimulation on ch %u (req %.2fV)", channel, (double)voltage_v);
+        return WET_ERR_CAPABILITY_DENIED;
+    }
+
+    /* Runtime Shannon k-limit check when electrode area (cm^2) is configured */
+    {
+        float i_ua_shannon = (wet_fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f;
+        wet_status_t sh_st = interlocks_check_shannon_limit(
+            &vm->interlocks, vm->current_tick, channel, i_ua_shannon, p1_ms, p2_ms
+        );
+        if (sh_st != WET_OK) {
+            if (vm->hal) {
+                wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+            }
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            return sh_st;
+        }
+    }
+
+    /* Legacy Per-Phase Charge Density Limit (0.40 nC) for biphasic pulses */
+    if (p1_ms > 0.0f && p2_ms > 0.0f) {
+        float q_phase1 = (wet_fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * p1_ms;
+        float q_phase2 = (wet_fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * p2_ms;
+        if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+            vm->interlocks.locked = 1;
+            vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+            vm->interlocks.tripped_channel = channel;
+            vm->interlocks.trip_tick = vm->current_tick;
+            vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+            if (vm->hal) {
+                wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+            }
+            snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                     "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+                     channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+        }
+    }
+
+    /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
+    bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
+    if (prev_p->active && prev_p->phase2_ticks_left > 0) {
+        float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
+        vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
+    }
+
+    float clamped_v = interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, voltage_v);
+    if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+        wet_hal_stim_voltage(vm->hal, (uint16_t)channel, clamped_v, p1_ms, p2_ms);
+    }
+    biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
+    vm->voltages[channel] = clamped_v;
+    /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
+    float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
+    vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
+    return WET_OK;
+}
+
+wet_status_t wet_vm_apply_stim_current_internal(
+    struct wet_vm_instance* vm,
+    uint8_t channel,
+    float current_ua,
+    float p1_ms,
+    float p2_ms,
+    float ip_ms
+) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    if (channel >= vm->config.channel_count || channel >= BIO_NUM_CHANNELS) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Electrode channel %u out of bounds (max %u)",
+                 channel, vm->config.channel_count);
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    if (!wet_isfinite_f(current_ua) || !wet_isfinite_f(p1_ms) ||
+        !wet_isfinite_f(p2_ms) || !wet_isfinite_f(ip_ms) ||
+        p1_ms < 0.0f || p2_ms < 0.0f || ip_ms < 0.0f) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "ERR_INVALID_ARG: Non-finite or negative current stimulation parameters on ch %u", channel);
+        return WET_ERR_INVALID_ARG;
+    }
+    if (vm->interlocks.locked) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return WET_ERR_INTERLOCK_LOCKED;
+    }
+
+    if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Capability denied for STIM_CURRENT on ch %u (ref/rec bank restricted or missing CAP_STIMULATION)", channel);
+        return WET_ERR_CAPABILITY_DENIED;
+    }
+
+    /* Randles Interface: V_elec = I * Rs + V_dl */
+    float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+    wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
+    if (comp_st != WET_OK) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+        return comp_st;
+    }
+
+    /* Dynamic EIS Faradaic Current Density Clamp when channel impedance is calibrated */
+    if (channel < INTERLOCK_NUM_CHANNELS &&
+        vm->interlocks.impedance[channel].z_magnitude_ohms > 0.0f &&
+        vm->interlocks.max_faradaic_current_density_ua_cm2 > 0.0f) {
+        float area_um2 = (vm->interlocks.electrode_area_um2 > 0.0f) ? vm->interlocks.electrode_area_um2 : 5000.0f;
+        float i_safe_ua = vm->interlocks.max_faradaic_current_density_ua_cm2 * (area_um2 * 1e-8f);
+        if (i_safe_ua > 0.0f && wet_fabsf(current_ua) > i_safe_ua) {
+            float sign = (current_ua >= 0.0f) ? 1.0f : -1.0f;
+            current_ua = sign * i_safe_ua;
+            vm->interlocks.clamp_events++;
+            vm->interlocks.dynamic_impedance_clamp_events++;
+            v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
+        }
+    }
+
+    /* Runtime Shannon k-limit check when electrode area (cm^2) is configured */
+    {
+        wet_status_t sh_st = interlocks_check_shannon_limit(
+            &vm->interlocks, vm->current_tick, channel, current_ua, p1_ms, p2_ms
+        );
+        if (sh_st != WET_OK) {
+            if (vm->hal) {
+                wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+            }
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            return sh_st;
+        }
+    }
+
+    /* Legacy per-phase charge density check: Q (nC) = I (uA) * t (ms) */
+    if (p1_ms > 0.0f && p2_ms > 0.0f) {
+        float q_phase1 = wet_fabsf(current_ua) * 1e-3f * p1_ms;
+        float q_phase2 = wet_fabsf(current_ua) * 1e-3f * p2_ms;
+        if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
+            vm->interlocks.locked = 1;
+            vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+            vm->interlocks.tripped_channel = channel;
+            vm->interlocks.trip_tick = vm->current_tick;
+            vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
+            if (vm->hal) {
+                wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
+            }
+            snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                     "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
+                     channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+        }
+    }
+
+    if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
+        int32_t cur_pA = (int32_t)(current_ua * 1e6f);
+        uint32_t dur_us = (uint32_t)(p1_ms * 1000.0f);
+        wet_hal_status_t hst = wet_hal_stim_current(vm->hal, (uint16_t)channel, cur_pA, dur_us);
+        if (hst == WET_HAL_ERR_COMPLIANCE_RAILED) {
+            vm->interlocks.locked = 1;
+            vm->interlocks.trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
+            vm->interlocks.tripped_channel = channel;
+            vm->interlocks.trip_tick = vm->current_tick;
+            snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
+                     "ERR_COMPLIANCE_RAILED: Channel %u compliance rail tripped on hardware driver (~7.0V limit)", channel);
+            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+            wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_COMPLIANCE_RAILED);
+            return WET_ERR_COMPLIANCE_RAILED;
+        }
+    }
+
+    biophysics_schedule_stim_current(&vm->bio, channel, current_ua, p1_ms, p2_ms, ip_ms);
+    vm->voltages[channel] = v_elec;
+    vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
     return WET_OK;
 }
 
@@ -554,6 +764,42 @@ static wet_status_t advance_simulation_tick(struct wet_vm_instance* vm, wet_tele
     memcpy(vm->spikes, vm->bio.spikes_now, sizeof(uint8_t) * 64);
     memcpy(vm->last_charge_nc, vm->bio.tick_charge_nc, sizeof(float) * 64);
     vm->population_rate_hz = vm->bio.population_rate_hz;
+
+    /* 5. Pure-C Closed-Loop Hook Execution (zero Python GIL crossings, safety-interlocked) */
+    {
+        wet_closed_loop_hook_fn hook = vm->closed_loop_hook;
+        if (hook != NULL) {
+            void* ud = vm->closed_loop_user_data;
+            wet_closed_loop_snapshot_t snap;
+            snap.tick = vm->current_tick;
+            snap.sim_time_ms = vm->sim_time_ms;
+            snap.num_channels = vm->config.channel_count;
+            snap.voltages = vm->voltages;
+            snap.spikes = vm->spikes;
+            snap.blanking_active = vm->bio.blanking_active;
+
+            wet_closed_loop_cmd_t cmd;
+            memset(&cmd, 0, sizeof(cmd));
+            hook(&snap, &cmd, ud);
+
+            if (cmd.trigger != 0U) {
+                if (cmd.channel >= vm->config.channel_count || cmd.channel >= BIO_NUM_CHANNELS) {
+                    snprintf(vm->last_error, sizeof(vm->last_error),
+                             "Closed-loop hook channel %u out of bounds (max %u)",
+                             cmd.channel, vm->config.channel_count);
+                    populate_telemetry(vm, out_telem);
+                    return WET_ERR_OUT_OF_BOUNDS_CH;
+                }
+                wet_status_t cl_st = cmd.is_current
+                    ? wet_vm_apply_stim_current_internal(vm, (uint8_t)cmd.channel, cmd.amplitude, cmd.phase1_ms, cmd.phase2_ms, cmd.interphase_ms)
+                    : wet_vm_apply_stim_voltage_internal(vm, (uint8_t)cmd.channel, cmd.amplitude, cmd.phase1_ms, cmd.phase2_ms, cmd.interphase_ms);
+                if (cl_st != WET_OK) {
+                    populate_telemetry(vm, out_telem);
+                    return cl_st;
+                }
+            }
+        }
+    }
 
     populate_telemetry(vm, out_telem);
     return WET_OK;
@@ -1163,57 +1409,9 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 float p2_ms = to_float(&v_p2);
                 float ip_ms = to_float(&v_interphase);
 
-                if (vm->interlocks.locked) {
-                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-                    return WET_ERR_INTERLOCK_LOCKED;
-                }
-
-                if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage, channel)) {
-                    snprintf(vm->last_error, sizeof(vm->last_error),
-                             "Capability denied for STIM_BIPHASIC on ch %u (req %.2fV)", channel, voltage);
-                    return WET_ERR_CAPABILITY_DENIED;
-                }
-
-                /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
-                if (p1_ms > 0.0f && p2_ms > 0.0f) {
-                    float q_phase1 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p1_ms;
-                    float q_phase2 = (wet_fabsf(voltage) / vm->bio.electrode_impedance_kohm) * 1000.0f * p2_ms;
-                    if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
-                        vm->interlocks.locked = 1;
-                        vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
-                        vm->interlocks.tripped_channel = channel;
-                        vm->interlocks.trip_tick = vm->current_tick;
-                        vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
-                        if (vm->hal) {
-                            wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
-                        }
-                        snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-                                 "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
-                                 channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
-                        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-                        return WET_ERR_CHARGE_DENSITY_EXCEEDED;
-                    }
-                }
-
-                /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
-                if (channel < 64) {
-                    bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
-                    if (prev_p->active && prev_p->phase2_ticks_left > 0) {
-                        float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
-                        vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
-                    }
-                }
-
-                float clamped_v = interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, voltage);
-                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
-                    wet_hal_stim_voltage(vm->hal, (uint16_t)channel, clamped_v, p1_ms, p2_ms);
-                }
-                if (channel < 64) {
-                    biophysics_schedule_stim_ext(&vm->bio, channel, clamped_v, p1_ms, p2_ms, ip_ms);
-                    vm->voltages[channel] = clamped_v;
-                    /* Accurate impedance-scaled charge: I (mA) = V / Z(kOhm); Q(nC) = I(mA) * dt(ms) */
-                    float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
-                    vm->last_charge_nc[channel] = i_ma * (p1_ms - p2_ms);
+                wet_status_t stim_st = wet_vm_apply_stim_voltage_internal(vm, channel, voltage, p1_ms, p2_ms, ip_ms);
+                if (stim_st != WET_OK) {
+                    return stim_st;
                 }
                 break;
             }
@@ -1591,86 +1789,13 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                     return WET_ERR_OUT_OF_BOUNDS_CH;
                 }
 
-                if (vm->interlocks.locked) {
-                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-                    return WET_ERR_INTERLOCK_LOCKED;
-                }
-
-                if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
-                    snprintf(vm->last_error, sizeof(vm->last_error),
-                             "Capability denied for STIM_CURRENT on ch %u (ref/rec bank restricted or missing CAP_STIMULATION)", channel);
-                    return WET_ERR_CAPABILITY_DENIED;
-                }
-
                 float p1_ms = to_float(&v_p1);
                 float p2_ms = to_float(&v_p2);
                 float ip_ms = to_float(&v_interphase);
 
-                /* Randles Interface: V_elec = I * Rs + V_dl */
-                float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
-                wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
-                if (comp_st != WET_OK) {
-                    snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-                    return comp_st;
-                }
-
-                /* Dynamic EIS Faradaic Current Density Clamp when channel impedance is calibrated */
-                if (channel < INTERLOCK_NUM_CHANNELS &&
-                    vm->interlocks.impedance[channel].z_magnitude_ohms > 0.0f &&
-                    vm->interlocks.max_faradaic_current_density_ua_cm2 > 0.0f) {
-                    float area_um2 = (vm->interlocks.electrode_area_um2 > 0.0f) ? vm->interlocks.electrode_area_um2 : 5000.0f;
-                    float i_safe_ua = vm->interlocks.max_faradaic_current_density_ua_cm2 * (area_um2 * 1e-8f);
-                    if (i_safe_ua > 0.0f && wet_fabsf(current_ua) > i_safe_ua) {
-                        float sign = (current_ua >= 0.0f) ? 1.0f : -1.0f;
-                        current_ua = sign * i_safe_ua;
-                        vm->interlocks.clamp_events++;
-                        vm->interlocks.dynamic_impedance_clamp_events++;
-                        v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
-                    }
-                }
-
-                /* Per-phase charge density check: Q (nC) = I (uA) * t (ms) */
-                if (p1_ms > 0.0f && p2_ms > 0.0f) {
-                    float q_phase1 = wet_fabsf(current_ua) * 1e-3f * p1_ms;
-                    float q_phase2 = wet_fabsf(current_ua) * 1e-3f * p2_ms;
-                    if (q_phase1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_phase2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
-                        vm->interlocks.locked = 1;
-                        vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
-                        vm->interlocks.tripped_channel = channel;
-                        vm->interlocks.trip_tick = vm->current_tick;
-                        vm->interlocks.trip_value = q_phase1 > q_phase2 ? q_phase1 : q_phase2;
-                        if (vm->hal) {
-                            wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_CHARGE_DENSITY);
-                        }
-                        snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-                                 "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
-                                 channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
-                        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-                        return WET_ERR_CHARGE_DENSITY_EXCEEDED;
-                    }
-                }
-
-                if (vm->hal && vm->hal->mode != WET_HAL_MODE_SIMULATED) {
-                    int32_t cur_pA = (int32_t)(current_ua * 1e6f);
-                    uint32_t dur_us = (uint32_t)(p1_ms * 1000.0f);
-                    wet_hal_status_t hst = wet_hal_stim_current(vm->hal, (uint16_t)channel, cur_pA, dur_us);
-                    if (hst == WET_HAL_ERR_COMPLIANCE_RAILED) {
-                        vm->interlocks.locked = 1;
-                        vm->interlocks.trip_reason = INTERLOCK_TRIP_COMPLIANCE_RAILED;
-                        vm->interlocks.tripped_channel = channel;
-                        vm->interlocks.trip_tick = vm->current_tick;
-                        snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-                                 "ERR_COMPLIANCE_RAILED: Channel %u compliance rail tripped on hardware driver (~7.0V limit)", channel);
-                        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-                        wet_hal_emergency_crowbar(vm, INTERLOCK_TRIP_COMPLIANCE_RAILED);
-                        return WET_ERR_COMPLIANCE_RAILED;
-                    }
-                }
-
-                biophysics_schedule_stim_current(&vm->bio, channel, current_ua, p1_ms, p2_ms, ip_ms);
-                if (channel < 64) {
-                    vm->voltages[channel] = v_elec;
-                    vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (p1_ms - p2_ms);
+                wet_status_t stim_st = wet_vm_apply_stim_current_internal(vm, channel, current_ua, p1_ms, p2_ms, ip_ms);
+                if (stim_st != WET_OK) {
+                    return stim_st;
                 }
                 break;
             }
@@ -1741,6 +1866,21 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
                 break;
             }
 
+            case WET_OP_SET_BLANKING: {
+                if (instr_pc + 8 > vm->code_size) {
+                    snprintf(vm->last_error, sizeof(vm->last_error), "Truncated SET_BLANKING operand");
+                    return WET_ERR_INVALID_OPCODE;
+                }
+                uint16_t channel = wet_read_u16_le(vm->code + instr_pc + 1);
+                float blanking_ms = wet_read_f32_le(vm->code + instr_pc + 3);
+                uint8_t enable_spatial = vm->code[instr_pc + 7];
+                vm->pc = instr_pc + 8;
+
+                wet_status_t st = wet_configure_channel_blanking(vm, channel, blanking_ms, enable_spatial);
+                if (st != WET_OK) return st;
+                break;
+            }
+
             default: {
                 snprintf(vm->last_error, sizeof(vm->last_error),
                          "Unrecognized or invalid opcode 0x%02X at pc %zu", op, instr_pc);
@@ -1756,6 +1896,122 @@ wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* o
 /* =========================================================================
  * Phase 3: Standalone C99 Load-Time Bytecode Verifier
  * ========================================================================= */
+
+static wet_status_t wet_decode_instr_len(
+    const uint8_t* code_ptr,
+    size_t code_size,
+    size_t pc,
+    size_t num_constants,
+    size_t* out_ilen,
+    char* err_buf,
+    size_t err_buf_len
+) {
+    uint8_t op = code_ptr[pc];
+    size_t ilen = 1;
+
+    switch ((wet_opcode_t)op) {
+        case WET_OP_NOP:
+        case WET_OP_HALT:
+        case WET_OP_SYNC_TICK:
+        case WET_OP_POP:
+        case WET_OP_DUP:
+        case WET_OP_SWAP:
+        case WET_OP_ADD_I:
+        case WET_OP_SUB_I:
+        case WET_OP_MUL_I:
+        case WET_OP_DIV_I:
+        case WET_OP_ADD_F:
+        case WET_OP_SUB_F:
+        case WET_OP_MUL_F:
+        case WET_OP_DIV_F:
+        case WET_OP_NEG:
+        case WET_OP_MOD_I:
+        case WET_OP_CMP_EQ:
+        case WET_OP_CMP_NE:
+        case WET_OP_CMP_LT:
+        case WET_OP_CMP_LE:
+        case WET_OP_CMP_GT:
+        case WET_OP_CMP_GE:
+        case WET_OP_RET:
+        case WET_OP_GET_POP_RATE:
+        case WET_OP_READ_TEMPERATURE:
+        case WET_OP_READ_PH:
+        case WET_OP_READ_DO:
+        case WET_OP_READ_CO2:
+            ilen = 1;
+            break;
+
+        case WET_OP_STIM_BIPHASIC:
+        case WET_OP_READ_SPIKES:
+        case WET_OP_READ_VOLTAGE:
+        case WET_OP_READ_PRESSURE:
+        case WET_OP_READ_BUBBLE:
+        case WET_OP_READ_FLOW:
+            ilen = 2;
+            break;
+
+        case WET_OP_SLEEP_TICKS:
+        case WET_OP_LOAD_LOCAL:
+        case WET_OP_STORE_LOCAL:
+        case WET_OP_JMP:
+        case WET_OP_JMP_IF_TRUE:
+        case WET_OP_JMP_IF_FALSE:
+        case WET_OP_MODULATE_STDP:
+        case WET_OP_MEA_CONFIG:
+        case WET_OP_VALVE_SET:
+            ilen = 3;
+            break;
+
+        case WET_OP_PUSH_CONST:
+            ilen = 3;
+            if (pc + 3 <= code_size) {
+                uint16_t c_idx = wet_read_u16_le(code_ptr + pc + 1);
+                if (c_idx >= num_constants) {
+                    if (err_buf && err_buf_len > 0)
+                        snprintf(err_buf, err_buf_len, "Constant index %u out of range (%zu)", c_idx, num_constants);
+                    return WET_ERR_BYTECODE_VERIFICATION;
+                }
+            }
+            break;
+
+        case WET_OP_CALL:
+            ilen = 4;
+            break;
+
+        case WET_OP_PUSH_INT:
+        case WET_OP_PUSH_FLOAT:
+            ilen = 5;
+            break;
+
+        case WET_OP_PUMP_SET_RATE:
+        case WET_OP_PUMP_DISPENSE:
+        case WET_OP_STIM_CURRENT:
+            ilen = 6;
+            break;
+
+        case WET_OP_SET_BLANKING:
+            ilen = 8;
+            break;
+
+        case WET_OP_MOTOR_STEP:
+            ilen = 10;
+            break;
+
+        default:
+            if (err_buf && err_buf_len > 0)
+                snprintf(err_buf, err_buf_len, "Invalid opcode 0x%02X at offset %zu", op, pc);
+            return WET_ERR_INVALID_OPCODE;
+    }
+
+    if (pc + ilen > code_size) {
+        if (err_buf && err_buf_len > 0)
+            snprintf(err_buf, err_buf_len, "Truncated instruction (opcode 0x%02X needs %zu bytes, only %zu left)", op, ilen, code_size - pc);
+        return WET_ERR_BYTECODE_VERIFICATION;
+    }
+
+    *out_ilen = ilen;
+    return WET_OK;
+}
 
 wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len) {
     if (!bytecode) {
@@ -1869,149 +2125,66 @@ wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, 
         return WET_OK;
     }
 
-    uint8_t* is_start = (uint8_t*)malloc(code_size);
-    if (!is_start) {
-        if (err_buf && err_buf_len > 0) snprintf(err_buf, err_buf_len, "Failed to allocate verifier bitmap (%zu bytes)", code_size);
-        return WET_ERR_ALLOC_FAILED;
-    }
-    memset(is_start, 0, code_size);
+    /* Zero-malloc instruction boundary bitset on stack (2048 bytes < 4096-byte Windows stack probe limit) */
+    uint8_t start_bits[2048];
+    size_t bits_bytes = (code_size < 16384U) ? ((code_size + 7U) / 8U) : sizeof(start_bits);
+    memset(start_bits, 0, bits_bytes);
 
-    /* Pass 1: Decode opcodes and check instruction sizes */
+    /* Pass 1: Decode opcodes and record instruction start boundaries */
     size_t pc = 0;
     while (pc < code_size) {
-        is_start[pc] = 1;
-        uint8_t op = code_ptr[pc];
-        size_t ilen = 1;
-
-        switch ((wet_opcode_t)op) {
-            case WET_OP_NOP:
-            case WET_OP_HALT:
-            case WET_OP_SYNC_TICK:
-            case WET_OP_POP:
-            case WET_OP_DUP:
-            case WET_OP_SWAP:
-            case WET_OP_ADD_I:
-            case WET_OP_SUB_I:
-            case WET_OP_MUL_I:
-            case WET_OP_DIV_I:
-            case WET_OP_ADD_F:
-            case WET_OP_SUB_F:
-            case WET_OP_MUL_F:
-            case WET_OP_DIV_F:
-            case WET_OP_NEG:
-            case WET_OP_MOD_I:
-            case WET_OP_CMP_EQ:
-            case WET_OP_CMP_NE:
-            case WET_OP_CMP_LT:
-            case WET_OP_CMP_LE:
-            case WET_OP_CMP_GT:
-            case WET_OP_CMP_GE:
-            case WET_OP_RET:
-            case WET_OP_GET_POP_RATE:
-            case WET_OP_READ_TEMPERATURE:
-            case WET_OP_READ_PH:
-            case WET_OP_READ_DO:
-            case WET_OP_READ_CO2:
-                ilen = 1;
-                break;
-
-            case WET_OP_STIM_BIPHASIC:
-            case WET_OP_READ_SPIKES:
-            case WET_OP_READ_VOLTAGE:
-            case WET_OP_READ_PRESSURE:
-            case WET_OP_READ_BUBBLE:
-            case WET_OP_READ_FLOW:
-                ilen = 2;
-                break;
-
-            case WET_OP_SLEEP_TICKS:
-            case WET_OP_LOAD_LOCAL:
-            case WET_OP_STORE_LOCAL:
-            case WET_OP_JMP:
-            case WET_OP_JMP_IF_TRUE:
-            case WET_OP_JMP_IF_FALSE:
-            case WET_OP_MODULATE_STDP:
-            case WET_OP_MEA_CONFIG:
-            case WET_OP_VALVE_SET:
-                ilen = 3;
-                break;
-
-            case WET_OP_PUSH_CONST:
-                ilen = 3;
-                if (pc + 3 <= code_size) {
-                    uint16_t c_idx = wet_read_u16_le(code_ptr + pc + 1);
-                    if (c_idx >= num_constants) {
-                        if (err_buf && err_buf_len > 0)
-                            snprintf(err_buf, err_buf_len, "Constant index %u out of range (%zu)", c_idx, num_constants);
-                        free(is_start);
-                        return WET_ERR_BYTECODE_VERIFICATION;
-                    }
-                }
-                break;
-
-            case WET_OP_CALL:
-                ilen = 4;
-                break;
-
-            case WET_OP_PUSH_INT:
-            case WET_OP_PUSH_FLOAT:
-                ilen = 5;
-                break;
-
-            case WET_OP_PUMP_SET_RATE:
-            case WET_OP_PUMP_DISPENSE:
-            case WET_OP_STIM_CURRENT:
-                ilen = 6;
-                break;
-
-            case WET_OP_MOTOR_STEP:
-                ilen = 10;
-                break;
-
-            default:
-                if (err_buf && err_buf_len > 0)
-                    snprintf(err_buf, err_buf_len, "Invalid opcode 0x%02X at offset %zu", op, pc);
-                free(is_start);
-                return WET_ERR_INVALID_OPCODE;
+        if (pc < 16384U) {
+            start_bits[pc >> 3] |= (uint8_t)(1U << (pc & 7U));
         }
-
-        if (pc + ilen > code_size) {
-            if (err_buf && err_buf_len > 0)
-                snprintf(err_buf, err_buf_len, "Truncated instruction (opcode 0x%02X needs %zu bytes, only %zu left)", op, ilen, code_size - pc);
-            free(is_start);
-            return WET_ERR_BYTECODE_VERIFICATION;
+        size_t ilen = 0;
+        wet_status_t dec_st = wet_decode_instr_len(code_ptr, code_size, pc, num_constants, &ilen, err_buf, err_buf_len);
+        if (dec_st != WET_OK) {
+            return dec_st;
         }
         pc += ilen;
     }
 
-    /* Pass 2: Verify branch target alignment */
+    /* Pass 2: Verify branch target alignment (bitset O(1) for < 16384, decode walk fallback for >= 16384) */
     pc = 0;
     while (pc < code_size) {
         uint8_t op = code_ptr[pc];
+        size_t ilen = 0;
+        wet_status_t dec_st = wet_decode_instr_len(code_ptr, code_size, pc, num_constants, &ilen, err_buf, err_buf_len);
+        if (dec_st != WET_OK) {
+            return dec_st;
+        }
         if (op == WET_OP_JMP || op == WET_OP_JMP_IF_TRUE || op == WET_OP_JMP_IF_FALSE) {
             int16_t offset = wet_read_i16_le(code_ptr + pc + 1);
             int64_t target = (int64_t)pc + offset;
             if (target < 0 || (size_t)target >= code_size) {
                 if (err_buf && err_buf_len > 0)
                     snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld out of code range [0, %zu)", pc, (long long)target, code_size);
-                free(is_start);
                 return WET_ERR_BYTECODE_VERIFICATION;
             }
-            if (!is_start[target]) {
+            size_t t_u = (size_t)target;
+            int aligned = 0;
+            if (t_u < 16384U) {
+                aligned = (start_bits[t_u >> 3] & (uint8_t)(1U << (t_u & 7U))) != 0;
+            } else {
+                size_t w_pc = 0;
+                while (w_pc < t_u) {
+                    size_t w_len = 0;
+                    if (wet_decode_instr_len(code_ptr, code_size, w_pc, num_constants, &w_len, NULL, 0) != WET_OK) {
+                        break;
+                    }
+                    w_pc += w_len;
+                }
+                aligned = (w_pc == t_u);
+            }
+            if (!aligned) {
                 if (err_buf && err_buf_len > 0)
                     snprintf(err_buf, err_buf_len, "Jump at pc %zu target %lld lands in middle of instruction", pc, (long long)target);
-                free(is_start);
                 return WET_ERR_BYTECODE_VERIFICATION;
             }
-            pc += 3;
-        } else {
-            size_t next_pc = pc + 1;
-            while (next_pc < code_size && !is_start[next_pc]) next_pc++;
-            pc = next_pc;
         }
+        pc += ilen;
     }
 
-    free(is_start);
     return WET_OK;
 }
 

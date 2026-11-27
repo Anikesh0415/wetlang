@@ -4,6 +4,10 @@ __pycache__/
 *$py.class
 *.pyc
 
+# NWB benchmark cache (never commit .nwb files)
+.cache/
+*.nwb
+
 # Distribution / Packaging
 build/
 dist/

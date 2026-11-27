@@ -41,6 +41,7 @@ void biophysics_init(bio_state_t* bio, double dt_ms, uint64_t seed) {
     bio->dt_ms = (dt_ms > 0.0) ? dt_ms : 0.1;
     bio->rng_state = (seed != 0) ? seed : 0x574554574F524C44ULL; /* "WETWORLD" */
     bio->stdp_lr_scale = 1.0f;
+    bio->noise_enabled = 1;
 
     /* Biophysical constants (COBA-LIF cortical organoid parameters) */
     bio->c_m_pf            = 200.0f;   /* 200 pF */
@@ -188,10 +189,18 @@ void biophysics_schedule_stim_ext(
     p->phase2_amp_v = v_mag;
 
     /* Set post-stimulus amplifier blanking window with spatial crosstalk neighbor propagation */
-    uint16_t total_blanking = (uint16_t)(p1_ticks + ip_ticks + p2_ticks + bio->default_blanking_ticks);
-    bio->stim_blanking_ticks[channel] = total_blanking;
+    uint16_t post_blank = bio->has_channel_blanking[channel]
+        ? bio->channel_blanking_ticks[channel]
+        : bio->default_blanking_ticks;
+    uint8_t use_spatial = bio->has_channel_blanking[channel]
+        ? bio->channel_spatial_blanking[channel]
+        : bio->spatial_blanking_enabled;
+    uint16_t total_blanking = (uint16_t)(p1_ticks + ip_ticks + p2_ticks + post_blank);
+    if (bio->stim_blanking_ticks[channel] < total_blanking) {
+        bio->stim_blanking_ticks[channel] = total_blanking;
+    }
 
-    if (bio->spatial_blanking_enabled) {
+    if (use_spatial) {
         int r1 = channel / BIO_GRID_COLS;
         int c1 = channel % BIO_GRID_COLS;
         uint16_t neighbor_blank = (total_blanking * 3) / 4;
@@ -228,8 +237,27 @@ void biophysics_set_blanking_window(bio_state_t* bio, float blanking_ms, uint8_t
     if (!bio) return;
     float dt = (float)bio->dt_ms;
     if (dt <= 0.0f) dt = 0.1f;
-    bio->default_blanking_ticks = (uint16_t)(blanking_ms / dt + 0.5f);
-    bio->spatial_blanking_enabled = enable_spatial;
+    uint16_t ticks = (uint16_t)(blanking_ms / dt + 0.5f);
+    if (ticks == 0U) ticks = 1U;
+    bio->default_blanking_ticks = ticks;
+    bio->spatial_blanking_enabled = enable_spatial ? 1U : 0U;
+    memset(bio->has_channel_blanking, 0, sizeof(bio->has_channel_blanking));
+}
+
+void biophysics_set_channel_blanking_window(bio_state_t* bio, uint16_t channel, float blanking_ms, uint8_t enable_spatial) {
+    if (!bio) return;
+    if (channel == 0xFFFFU) {
+        biophysics_set_blanking_window(bio, blanking_ms, enable_spatial);
+        return;
+    }
+    if (channel >= BIO_NUM_CHANNELS) return;
+    float dt = (float)bio->dt_ms;
+    if (dt <= 0.0f) dt = 0.1f;
+    uint16_t ticks = (uint16_t)(blanking_ms / dt + 0.5f);
+    if (ticks == 0U) ticks = 1U;
+    bio->channel_blanking_ticks[channel] = ticks;
+    bio->channel_spatial_blanking[channel] = enable_spatial ? 1U : 0U;
+    bio->has_channel_blanking[channel] = 1U;
 }
 
 void biophysics_get_randles_state(
@@ -268,6 +296,7 @@ void biophysics_zero_all_stim(bio_state_t* bio) {
         bio->ext_stim_v[ch] = 0.0f;
         bio->tick_charge_nc[ch] = 0.0f;
         bio->stim_blanking_ticks[ch] = 0;
+        bio->blanking_active[ch] = 0;
     }
 }
 
@@ -306,6 +335,15 @@ void biophysics_step_tick(bio_state_t* bio) {
     const float decay_post  = (float)wet_exp(-dt / (double)bio->tau_stdp_minus_ms);
     const float decay_net_up = (float)wet_exp(-dt / 35.0);
 
+    /* Capture active pulse & blanking status at start of tick */
+    uint8_t pulse_active_this_tick[BIO_NUM_CHANNELS];
+    uint8_t blank_this_tick[BIO_NUM_CHANNELS];
+    for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
+        pulse_active_this_tick[ch] = bio->stim_pulses[ch].active ? 1U : 0U;
+        blank_this_tick[ch] = (bio->stim_blanking_ticks[ch] > 0U) ? 1U : 0U;
+        bio->blanking_active[ch] = blank_this_tick[ch];
+    }
+
     /* 1. Advance active biphasic stimulation waveforms & compute tick charge (nC) */
     for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
         bio_stim_pulse_t* p = &bio->stim_pulses[ch];
@@ -328,6 +366,8 @@ void biophysics_step_tick(bio_state_t* bio) {
                 float v_high_window = bio->v_water_window_high_v > 0.0f ? bio->v_water_window_high_v : 0.8f;
                 if ((e_mc_v < v_low_window || e_mc_v > v_high_window) && bio->stim_blanking_ticks[ch] < 50) {
                     bio->stim_blanking_ticks[ch] += 10;
+                    blank_this_tick[ch] = 1U;
+                    bio->blanking_active[ch] = 1U;
                 }
             } else if (p->phase2_ticks_left > 0) {
                 v_applied = p->phase2_amp_v;
@@ -336,10 +376,6 @@ void biophysics_step_tick(bio_state_t* bio) {
             if (p->phase1_ticks_left == 0 && p->interphase_ticks_left == 0 && p->phase2_ticks_left == 0) {
                 p->active = 0;
             }
-        }
-
-        if (bio->stim_blanking_ticks[ch] > 0) {
-            bio->stim_blanking_ticks[ch]--;
         }
 
         bio->ext_stim_v[ch] = v_applied;
@@ -394,14 +430,18 @@ void biophysics_step_tick(bio_state_t* bio) {
     /* Spontaneous cortical Up-state network barrage (~1.2 Hz Poisson bursts, tau = 35 ms) */
     bio->g_net_up_ns *= decay_net_up;
     if (bio->g_net_up_ns < 1e-12f) bio->g_net_up_ns = 0.0f;
-    if (wet_rng_uniform(&bio->rng_state) < (0.0012 * dt)) {
-        bio->g_net_up_ns += 16.0f + (float)wet_rng_uniform(&bio->rng_state) * 10.0f;
+    if (bio->noise_enabled) {
+        if (wet_rng_uniform(&bio->rng_state) < (0.0012 * dt)) {
+            bio->g_net_up_ns += 16.0f + (float)wet_rng_uniform(&bio->rng_state) * 10.0f;
+        }
     }
 
     /* Independent Poisson miniature spontaneous EPSPs (~2.5 Hz per neuron) */
-    for (int i = 0; i < BIO_NUM_NEURONS; ++i) {
-        if (wet_rng_uniform(&bio->rng_state) < (0.0025 * dt)) {
-            bio->g_exc_ns[i] += 18.0f + (float)wet_rng_uniform(&bio->rng_state) * 8.0f;
+    if (bio->noise_enabled) {
+        for (int i = 0; i < BIO_NUM_NEURONS; ++i) {
+            if (wet_rng_uniform(&bio->rng_state) < (0.0025 * dt)) {
+                bio->g_exc_ns[i] += 18.0f + (float)wet_rng_uniform(&bio->rng_state) * 8.0f;
+            }
         }
     }
 
@@ -444,7 +484,9 @@ void biophysics_step_tick(bio_state_t* bio) {
         float i_stim_pa = -stim_v_eff * 1500.0f;
 
         /* Subthreshold fluctuating cortical synaptic background current */
-        float i_bg_pa = 80.0f + (float)wet_rng_normal(&bio->rng_state) * 90.0f;
+        float i_bg_pa = bio->noise_enabled
+            ? (80.0f + (float)wet_rng_normal(&bio->rng_state) * 90.0f)
+            : 0.0f;
 
         /* Total conductance (nS) */
         float g_exc_eff = bio->g_exc_ns[i] + bio->g_net_up_ns;
@@ -475,6 +517,13 @@ void biophysics_step_tick(bio_state_t* bio) {
             bio->g_ahp_ns[i]    += 2.0f;                   /* Slow AHP potassium adaptation */
         } else {
             bio->v_m_mv[i] = v_next;
+        }
+    }
+
+    /* Suppress spikes on blanked channels BEFORE Step 4 STP/STDP propagation */
+    for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
+        if (blank_this_tick[ch]) {
+            bio->spikes_now[ch] = 0;
         }
     }
 
@@ -546,7 +595,7 @@ void biophysics_step_tick(bio_state_t* bio) {
         bio->mea_voltage_v[ch] = bio->ext_stim_v[ch] + (v_pick_mv * 1e-3f);
 
         /* Hardware Blanking Suppression: silence artifact and biological false-positives during post-stimulus discharge */
-        if (!bio->stim_pulses[ch].active && bio->stim_blanking_ticks[ch] > 0) {
+        if (!pulse_active_this_tick[ch] && blank_this_tick[ch]) {
             bio->mea_voltage_v[ch] = 0.0f;
             bio->spikes_now[ch] = 0;
         }
@@ -568,6 +617,14 @@ void biophysics_step_tick(bio_state_t* bio) {
 
     bio->spike_history_head = (uint16_t)((head + 1U) % BIO_SPIKE_HISTORY_LEN);
     bio->population_rate_hz = total_rate_sum / (float)BIO_NUM_CHANNELS;
+
+    /* Decrement blanking ticks at tick end so 1-tick (0.1 ms) blanking persists for a full tick */
+    for (int ch = 0; ch < BIO_NUM_CHANNELS; ++ch) {
+        if (bio->stim_blanking_ticks[ch] > 0) {
+            bio->stim_blanking_ticks[ch]--;
+        }
+    }
+
     bio->tick_count++;
 }
 

@@ -124,6 +124,9 @@ class Opcode(IntEnum):
     READ_BUBBLE = 0x60
     READ_FLOW = 0x61
 
+    # Janus v2.2: Closed-Loop Blanking
+    SET_BLANKING = 0x62  # <HfB (uint16 channel [0xFFFF=global], float32 blanking_ms, uint8 enable_spatial)
+
 
 # Opcode metadata: format strings for operands (little-endian)
 # Empty string means no operands.
@@ -179,6 +182,7 @@ OPCODE_OPERAND_FORMATS: Dict[Opcode, str] = {
     Opcode.READ_CO2: "",
     Opcode.READ_BUBBLE: "<B",          # uint8 sensor_id
     Opcode.READ_FLOW: "<B",            # uint8 sensor_id
+    Opcode.SET_BLANKING: "<HfB",       # uint16 channel (0xFFFF=global), float32 blanking_ms, uint8 enable_spatial
 }
 
 OPCODE_NAMES: Dict[int, str] = {op.value: op.name for op in Opcode}

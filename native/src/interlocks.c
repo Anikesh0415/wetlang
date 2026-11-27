@@ -72,6 +72,84 @@ void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, flo
     il->max_cumulative_dc_nc = limit_nc * 2.0f;
 }
 
+wet_status_t interlocks_configure_electrode_area(interlock_state_t* il, uint16_t channel, float area_cm2) {
+    if (!il) return WET_ERR_NULL_PTR;
+    if (!wet_isfinite_f(area_cm2) || area_cm2 <= 0.0f) {
+        snprintf(il->diagnostic, sizeof(il->diagnostic),
+                 "ERR_INVALID_ARG: electrode area must be finite and > 0 cm2");
+        return WET_ERR_INVALID_ARG;
+    }
+    if (channel == 0xFFFFU) {
+        for (int ch = 0; ch < INTERLOCK_NUM_CHANNELS; ++ch) {
+            il->channel_area_cm2[ch] = area_cm2;
+            il->has_channel_area[ch] = 1U;
+        }
+        il->electrode_area_um2 = area_cm2 * 1e8f;
+        return WET_OK;
+    }
+    if (channel >= INTERLOCK_NUM_CHANNELS) {
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    il->channel_area_cm2[channel] = area_cm2;
+    il->has_channel_area[channel] = 1U;
+    return WET_OK;
+}
+
+wet_status_t interlocks_check_shannon_limit(
+    interlock_state_t* il,
+    uint64_t tick,
+    uint8_t channel,
+    float current_ua,
+    float phase1_ms,
+    float phase2_ms
+) {
+    if (!il) return WET_ERR_NULL_PTR;
+    if (channel >= INTERLOCK_NUM_CHANNELS || !il->has_channel_area[channel]) {
+        return WET_OK;
+    }
+    if (!wet_isfinite_f(current_ua) || !wet_isfinite_f(phase1_ms) || !wet_isfinite_f(phase2_ms)) {
+        return WET_ERR_INVALID_ARG;
+    }
+    double area_cm2 = (double)il->channel_area_cm2[channel];
+    if (!wet_isfinite_d(area_cm2) || area_cm2 <= 0.0) {
+        return WET_ERR_INVALID_ARG;
+    }
+
+    double q1_uc = (phase1_ms > 0.0f) ? ((double)wet_fabsf(current_ua) * (double)phase1_ms * 1e-3) : 0.0;
+    double q2_uc = (phase2_ms > 0.0f) ? ((double)wet_fabsf(current_ua) * (double)phase2_ms * 1e-3) : 0.0;
+    double q_uc = (q1_uc >= q2_uc) ? q1_uc : q2_uc;
+    if (q_uc <= 0.0) {
+        return WET_OK;
+    }
+
+    double d_uc_cm2 = q_uc / area_cm2;
+    double prod = d_uc_cm2 * q_uc;
+    double k_val = 0.0;
+    int tripped = 0;
+    if (!wet_isfinite_d(prod)) {
+        tripped = 1;
+        k_val = 999.0;
+    } else if (prod > 0.0) {
+        k_val = wet_log10(prod);
+        if (!wet_isfinite_d(k_val) || k_val > 1.75) {
+            tripped = 1;
+        }
+    }
+
+    if (tripped) {
+        il->locked = 1;
+        il->trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
+        il->tripped_channel = channel;
+        il->trip_tick = tick;
+        il->trip_value = (float)k_val;
+        snprintf(il->diagnostic, sizeof(il->diagnostic),
+                 "ERR_SHANNON_LIMIT_EXCEEDED: ch=%u log10(D*Q)=%.4f > 1.75 (Q=%.6f uC, A=%.6e cm2)",
+                 channel, (double)il->trip_value, q_uc, area_cm2);
+        return WET_ERR_CHARGE_DENSITY_EXCEEDED;
+    }
+    return WET_OK;
+}
+
 void interlocks_active_discharge(interlock_state_t* il, uint8_t channel) {
     if (!il || channel >= INTERLOCK_NUM_CHANNELS) return;
     il->cumulative_unbounded_dc_nc[channel] = 0.0f;

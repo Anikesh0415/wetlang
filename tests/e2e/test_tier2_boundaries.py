@@ -1787,9 +1787,9 @@ class TestTier2BenchmarkBoundaries(WetLangE2ETestCase):
         with open(setup_path, "r", encoding="utf-8") as f:
             setup_txt = f.read()
         self.assertIn('name = "wetlang"', pyproj)
-        self.assertIn('version = "2.1.2"', pyproj)
+        self.assertIn('version = "2.2.0"', pyproj)
         self.assertIn('name="wetlang"', setup_txt)
-        self.assertIn('version="2.1.2"', setup_txt)
+        self.assertIn('version="2.2.0"', setup_txt)
 
     def test_tier2_f28_opaque_box_import_audit(self):
         """[F28] [F28] E2E test files import only public APIs, without private unexported internals."""

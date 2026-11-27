@@ -130,6 +130,7 @@ class SemanticAnalyzer:
         self.node_dimensions: Dict[int, Dimension] = {}
         self.const_int_values: Dict[str, int] = {}
         self.electrode_area_um2: float = 5000.0
+        self.electrode_area_cm2: float = 5000.0 * 1e-8  # cm² (default 5000 µm²)
         self.j_limit_ua_cm2: float = 30.0
         self.z_magnitude_ohms: float = 100000.0
         self.dynamic_eis_clamp_enabled: bool = False
@@ -290,10 +291,16 @@ class _Pass1Visitor(ASTVisitor):
                     if val is not None:
                         self.analyzer.z_magnitude_ohms = val
                         self.analyzer.dynamic_eis_clamp_enabled = True
-                elif "area" in k_lower:
-                    val = self._extract_float_from_node(v)
-                    if val is not None:
-                        self.analyzer.electrode_area_um2 = val
+                elif "area" in k_lower or "electrode_area" in k_lower:
+                    if isinstance(v, PhysicalLiteralNode) and v.dimension == Dimension.AREA:
+                        # si_value already in cm² (from UNIT_SUFFIXES scale factors)
+                        self.analyzer.electrode_area_cm2 = float(v.si_value)
+                        self.analyzer.electrode_area_um2 = float(v.si_value) / 1e-8
+                    else:
+                        val = self._extract_float_from_node(v)
+                        if val is not None:
+                            self.analyzer.electrode_area_um2 = val
+                            self.analyzer.electrode_area_cm2 = val * 1e-8  # assume µm²
                 elif "eis" in k_lower or "clamp" in k_lower:
                     self.analyzer.dynamic_eis_clamp_enabled = True
 
@@ -410,6 +417,11 @@ class _Pass1Visitor(ASTVisitor):
     def visit_ModulateStmtNode(self, node: ModulateStmtNode) -> None:
         for arg in node.args:
             self.visit(arg)
+
+    def visit_SetBlankingStmtNode(self, node: "SetBlankingStmtNode") -> None:  # type: ignore[name-defined]
+        if node.channel is not None:
+            self.visit(node.channel)
+        self.visit(node.duration)
 
     def visit_SyncTickStmtNode(self, node: SyncTickStmtNode) -> None:
         if node.count is not None:
@@ -866,7 +878,7 @@ class _Pass2Visitor(ASTVisitor):
         # 2. Dynamic EIS current density clamp check:
         # Faradaic current density limit J = 30 uA/cm^2, default Area = 5000 um^2 = 5e-5 cm^2
         # I_safe = J * Area = 30e-6 A/cm^2 * 5e-5 cm^2 = 1.5e-9 A (1.5 nA = 0.0015 uA)
-        area_cm2 = self.analyzer.electrode_area_um2 * 1e-8
+        area_cm2 = self.analyzer.electrode_area_cm2
         j_limit_a_cm2 = self.analyzer.j_limit_ua_cm2 * 1e-6
         i_safe_a = j_limit_a_cm2 * area_cm2
 
@@ -949,6 +961,55 @@ class _Pass2Visitor(ASTVisitor):
         if tau1 is not None and tau2 is not None and p1_dim == Dimension.TIME and p2_dim == Dimension.TIME:
             if tau1 > 0.0 and tau2 > 0.0 and abs(tau1 - tau2) > max(tau1, tau2) * 0.5 and dim_val == Dimension.CURRENT and v_val is not None:
                 pass  # already covered by |q1 - q2| above
+
+        # 4. Shannon k-limit check: log10(D * Q) <= 1.75 (Janus v2.2)
+        # D = Q/A [μC/cm²], Q [μC] = I[A] * t[s] * 1e6
+        area_cm2_shannon = self.analyzer.electrode_area_cm2
+        if area_cm2_shannon is not None and area_cm2_shannon > 0:
+            if v_val is not None and tau1 is not None and dim_val == Dimension.CURRENT:
+                import math as _math
+                I_A = abs(v_val)
+                Q_uc = I_A * max(tau1, tau2 if tau2 is not None else tau1) * 1e6  # μC
+                if Q_uc > 0.0:
+                    D = Q_uc / area_cm2_shannon  # μC/cm²
+                    k = _math.log10(D * Q_uc)
+                    if k > 1.75 + 1e-9:
+                        self.analyzer.report_error(
+                            f"Shannon k-limit exceeded: log10(D*Q)={k:.3f} > 1.75 "
+                            f"(Q={Q_uc:.4f} μC, D={D:.2f} μC/cm², A={area_cm2_shannon:.2e} cm²)",
+                            node.line, node.column, "ERR_SHANNON_LIMIT_EXCEEDED"
+                        )
+        elif area_cm2_shannon is not None and area_cm2_shannon <= 0:
+            self.analyzer.report_error(
+                "Electrode area must be positive for Shannon safety check",
+                node.line, node.column, "ERR_SEMANTIC"
+            )
+
+    def visit_SetBlankingStmtNode(self, node: "SetBlankingStmtNode") -> None:  # type: ignore[name-defined]
+        """Pass 2: type-check blanking duration and validate range [0.1, 20.0] ms."""
+        if node.channel is not None:
+            self.visit(node.channel)
+        self.visit(node.duration)
+        dur_si = self._extract_float_si_value(node.duration)
+        if dur_si is not None:
+            import math as _math
+            dur_ms = dur_si * 1e3  # SI seconds to ms
+            if _math.isnan(dur_ms) or _math.isinf(dur_ms):
+                self.analyzer.report_error(
+                    "Blanking duration must be finite",
+                    node.line, node.column, "ERR_INVALID_BLANKING_WINDOW"
+                )
+            elif dur_ms < 0.1 - 1e-9 or dur_ms > 20.0 + 1e-9:
+                self.analyzer.report_error(
+                    f"Blanking duration {dur_ms:.3f} ms out of valid range [0.1, 20.0] ms",
+                    node.line, node.column, "ERR_INVALID_BLANKING_WINDOW"
+                )
+        else:
+            self.analyzer.report_error(
+                "Blanking duration cannot be statically verified — use a physical literal (e.g. 2.0ms)",
+                node.line, node.column, "W_SHANNON_DYNAMIC_UNVERIFIED",
+                severity="warning"
+            )
 
     def visit_BinaryOpNode(self, node: BinaryOpNode) -> None:
         self.visit(node.left)

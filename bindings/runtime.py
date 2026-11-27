@@ -4,7 +4,7 @@ Provides object-oriented Python interface with zero-copy NumPy array telemetry v
 """
 
 from pathlib import Path
-from typing import Optional, Tuple, Union
+from typing import Callable, Optional, Tuple, Union
 import ctypes
 import struct
 import numpy as np
@@ -15,6 +15,9 @@ from bindings.ffi import (
     WetVMConfig,
     WetTelemetry,
     WetActuatorTelemetry,
+    WetClosedLoopSnapshot,
+    WetClosedLoopCmd,
+    WET_CLOSED_LOOP_HOOK_TYPE,
     WetHalMode,
     WetHalConfig,
     WetHalStatus,
@@ -106,6 +109,7 @@ class WetVM:
         self._closed = False
         self._is_halted = False
         self._bytecode_loaded = False
+        self._closed_loop_cb_ref = None
 
     def close(self) -> None:
         """Frees the native VM resources."""
@@ -113,6 +117,7 @@ class WetVM:
             self._lib.wet_free_vm(self._handle)
             self._handle = None
             self._closed = True
+        self._closed_loop_cb_ref = None
 
     def __enter__(self) -> "WetVM":
         return self
@@ -412,7 +417,86 @@ class WetVM:
     def configure_blanking(self, blanking_ms: float = 2.0, enable_spatial: bool = True) -> None:
         """Configures amplifier blanking duration and spatial neighbor crosstalk suppression."""
         self._check_alive()
-        self._lib.wet_configure_blanking(self._handle, ctypes.c_float(blanking_ms), ctypes.c_uint8(1 if enable_spatial else 0))
+        status_code = self._lib.wet_configure_blanking(
+            self._handle,
+            ctypes.c_float(blanking_ms),
+            ctypes.c_uint8(1 if enable_spatial else 0),
+        )
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+    def configure_channel_blanking(
+        self,
+        channel: int,
+        blanking_ms: float = 2.0,
+        enable_spatial: bool = True,
+    ) -> None:
+        """Configures per-channel (or global 0xFFFF) amplifier blanking window."""
+        self._check_alive()
+        status_code = self._lib.wet_configure_channel_blanking(
+            self._handle,
+            ctypes.c_uint16(channel),
+            ctypes.c_float(blanking_ms),
+            ctypes.c_uint8(1 if enable_spatial else 0),
+        )
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+    def configure_electrode_area(self, channel: int, area_cm2: float) -> None:
+        """Configures per-channel (or global 0xFFFF) electrode area (cm^2) for Shannon k-limit checks."""
+        self._check_alive()
+        status_code = self._lib.wet_configure_electrode_area(
+            self._handle,
+            ctypes.c_uint16(channel),
+            ctypes.c_float(area_cm2),
+        )
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+    def register_closed_loop_hook(
+        self,
+        callback: Optional[Callable[[WetClosedLoopSnapshot, WetClosedLoopCmd], None]],
+    ) -> None:
+        """Registers or clears (None) a closed-loop callback invoked natively inside each simulation tick."""
+        self._check_alive()
+        if callback is None:
+            cb_ref = None
+            c_hook = WET_CLOSED_LOOP_HOOK_TYPE()
+        elif isinstance(callback, WET_CLOSED_LOOP_HOOK_TYPE):
+            cb_ref = callback
+            c_hook = callback
+        else:
+            @WET_CLOSED_LOOP_HOOK_TYPE
+            def _trampoline(snap_ptr, cmd_ptr, _user_data):
+                callback(snap_ptr.contents, cmd_ptr.contents)
+
+            cb_ref = _trampoline
+            c_hook = _trampoline
+
+        status_code = self._lib.wet_register_closed_loop_hook(self._handle, c_hook, None)
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+        self._closed_loop_cb_ref = cb_ref
+
+    def set_rng_seed(self, seed: int) -> None:
+        """Sets the deterministic PRNG seed for the VM biophysics engine."""
+        self._check_alive()
+        status_code = self._lib.wet_vm_set_rng_seed(self._handle, ctypes.c_uint64(seed))
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
+
+    def set_noise_enabled(self, enabled: bool) -> None:
+        """Enables or disables spontaneous Up-state / mini EPSP / background noise."""
+        self._check_alive()
+        status_code = self._lib.wet_vm_set_noise_enabled(self._handle, ctypes.c_uint8(1 if enabled else 0))
+        status = WetStatus(status_code)
+        if status != WetStatus.WET_OK:
+            raise WetVMError(status, self.last_error() or self._status_to_string(status))
 
     def inject_current_stimulus(
         self,

@@ -142,6 +142,11 @@ wet_hal_driver_t* wet_hal_microfluidics_create(wet_hal_mode_t mode) {
     state->dead_head_enabled = 1;
     state->max_pressure_kpa = 50.0f; /* 50.0 kPa burst safety limit for PDMS microfluidic bond */
     state->throttled_bypass_active = 0;
+    wet_hal_serial_init(&state->serial_transport);
+    state->serial_configured = 0U;
+    state->serial_baud_rate = 115200U;
+    state->serial_timeout_ms = 1000U;
+    state->last_harvard_prompt = HARVARD_PROMPT_INVALID;
     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
         state->pumps[i].address = (uint8_t)i;
         state->pumps[i].fast_mode = 1;
@@ -162,8 +167,89 @@ wet_hal_driver_t* wet_hal_microfluidics_create(wet_hal_mode_t mode) {
 
 void wet_hal_microfluidics_destroy(wet_hal_driver_t* drv) {
     if (!drv) return;
-    if (drv->context) free(drv->context);
+    if (drv->context) {
+        microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+        wet_hal_serial_close(&state->serial_transport);
+        free(drv->context);
+    }
     free(drv);
+}
+
+static wet_hal_status_t microfluidics_physical_exchange(
+    microfluidic_state_t* state,
+    uint8_t pump_id,
+    const char* cmd_name,
+    const char* args
+) {
+    char cmd_buf[128];
+    int cmd_len = wet_hal_harvard_format_cmd(
+        state->pumps[pump_id].address,
+        state->pumps[pump_id].fast_mode,
+        cmd_name,
+        args,
+        cmd_buf,
+        sizeof(cmd_buf)
+    );
+    if (cmd_len < 0) return WET_HAL_ERR_OUT_OF_BOUNDS;
+
+    wet_hal_status_t wst = wet_hal_serial_write_frame(&state->serial_transport, cmd_buf, (size_t)cmd_len);
+    if (wst != WET_HAL_OK) return wst;
+
+    char rx_buf[256];
+    size_t rx_len = 0U;
+    wet_hal_status_t rst = wet_hal_serial_read_frame(
+        &state->serial_transport,
+        rx_buf,
+        sizeof(rx_buf),
+        state->serial_timeout_ms,
+        &rx_len
+    );
+    if (rst != WET_HAL_OK) return rst;
+
+    size_t copy_len = (rx_len < sizeof(state->last_rx_frame) - 1U) ? rx_len : (sizeof(state->last_rx_frame) - 1U);
+    memcpy(state->last_rx_frame, rx_buf, copy_len);
+    state->last_rx_frame[copy_len] = '\0';
+
+    harvard_prompt_t prompt = wet_hal_harvard_parse_response(rx_buf, rx_len);
+    state->last_harvard_prompt = prompt;
+    if (prompt == HARVARD_PROMPT_STALLED) {
+        state->pumps[pump_id].is_stalled = 1U;
+        state->pumps[pump_id].is_running = 0U;
+        return WET_HAL_ERR_IO;
+    }
+    if (prompt == HARVARD_PROMPT_INVALID) {
+        return WET_HAL_ERR_IO;
+    }
+    return WET_HAL_OK;
+}
+
+wet_hal_status_t wet_hal_microfluidics_open_serial(
+    wet_hal_driver_t* drv,
+    const char* port_name,
+    uint32_t baud_rate,
+    uint32_t timeout_ms
+) {
+    if (!drv || !drv->context || !port_name) return WET_HAL_ERR_NULL_PTR;
+    microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+    if (state->serial_configured && wet_hal_serial_is_open(&state->serial_transport)) {
+        wet_hal_serial_close(&state->serial_transport);
+    }
+    wet_hal_status_t st = wet_hal_serial_open(&state->serial_transport, port_name, baud_rate, timeout_ms);
+    if (st != WET_HAL_OK) {
+        state->serial_configured = 0U;
+        return st;
+    }
+    state->serial_configured = 1U;
+    state->serial_baud_rate = baud_rate ? baud_rate : 115200U;
+    state->serial_timeout_ms = timeout_ms ? timeout_ms : 1000U;
+    return WET_HAL_OK;
+}
+
+void wet_hal_microfluidics_close_serial(wet_hal_driver_t* drv) {
+    if (!drv || !drv->context) return;
+    microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+    wet_hal_serial_close(&state->serial_transport);
+    state->serial_configured = 0U;
 }
 
 wet_hal_status_t wet_hal_pump_set_rate(
@@ -197,6 +283,24 @@ wet_hal_status_t wet_hal_pump_set_rate(
         return WET_HAL_ERR_IO;
     }
 
+    if (state->fault_inject_rs232_timeout) {
+        return WET_HAL_ERR_TIMEOUT;
+    }
+
+    if (drv->mode == WET_HAL_MODE_PHYSICAL &&
+        state->serial_configured &&
+        wet_hal_serial_is_open(&state->serial_transport)) {
+        wet_hal_status_t xst = WET_HAL_OK;
+        if (!run_flag || rate_ul_min <= 0.0) {
+            xst = microfluidics_physical_exchange(state, pump_id, "stp", NULL);
+        } else {
+            char args[64];
+            snprintf(args, sizeof(args), "%.3f u/m", rate_ul_min);
+            xst = microfluidics_physical_exchange(state, pump_id, "irate", args);
+        }
+        if (xst != WET_HAL_OK) return xst;
+    }
+
     state->pumps[pump_id].rate_ul_min = rate_ul_min;
     state->pumps[pump_id].is_running = run_flag ? 1 : 0;
     state->total_rs232_tx++;
@@ -226,6 +330,25 @@ wet_hal_status_t wet_hal_pump_dispense(
         }
     }
 
+    if (state->fault_inject_stall) {
+        state->pumps[pump_id].is_stalled = 1;
+        state->pumps[pump_id].is_running = 0;
+        return WET_HAL_ERR_IO;
+    }
+
+    if (state->fault_inject_rs232_timeout) {
+        return WET_HAL_ERR_TIMEOUT;
+    }
+
+    if (drv->mode == WET_HAL_MODE_PHYSICAL &&
+        state->serial_configured &&
+        wet_hal_serial_is_open(&state->serial_transport)) {
+        char args[64];
+        snprintf(args, sizeof(args), "%.3f u", volume_ul);
+        wet_hal_status_t xst = microfluidics_physical_exchange(state, pump_id, "tvolume", args);
+        if (xst != WET_HAL_OK) return xst;
+    }
+
     state->pumps[pump_id].infused_volume_ul += volume_ul;
     state->total_rs232_tx++;
     return WET_HAL_OK;
@@ -239,6 +362,14 @@ wet_hal_status_t wet_hal_pump_stop(
     if (pump_id >= WET_MAX_PUMPS) return WET_HAL_ERR_OUT_OF_BOUNDS;
 
     microfluidic_state_t* state = (microfluidic_state_t*)drv->context;
+
+    if (drv->mode == WET_HAL_MODE_PHYSICAL &&
+        state->serial_configured &&
+        wet_hal_serial_is_open(&state->serial_transport)) {
+        wet_hal_status_t xst = microfluidics_physical_exchange(state, pump_id, "stp", NULL);
+        if (xst != WET_HAL_OK) return xst;
+    }
+
     state->pumps[pump_id].is_running = 0;
     state->pumps[pump_id].rate_ul_min = 0.0;
     state->total_rs232_tx++;
@@ -423,6 +554,18 @@ static wet_hal_status_t microfluidics_op_emergency_stop(wet_hal_driver_t* drv, u
     for (int i = 0; i < WET_MAX_PUMPS; ++i) {
         state->pumps[i].is_running = 0;
         state->pumps[i].rate_ul_min = 0.0;
+    }
+
+    if (drv->mode == WET_HAL_MODE_PHYSICAL &&
+        state->serial_configured &&
+        wet_hal_serial_is_open(&state->serial_transport)) {
+        char cmd_buf[32];
+        int clen = wet_hal_harvard_format_cmd(
+            state->pumps[0].address, state->pumps[0].fast_mode, "stp", NULL, cmd_buf, sizeof(cmd_buf)
+        );
+        if (clen > 0) {
+            wet_hal_serial_write_frame(&state->serial_transport, cmd_buf, (size_t)clen);
+        }
     }
 
     /* Broadcast CAN emergency stop frame */

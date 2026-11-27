@@ -207,11 +207,82 @@ WET_EXPORT const char* wet_status_to_string(wet_status_t status);
 
 /**
  * Phase 3: Configures post-stimulus amplifier artifact blanking window in ms.
+ * Validates isfinite(blanking_ms) && 0.1f <= blanking_ms <= 20.0f.
  */
-WET_EXPORT void wet_configure_blanking(
+WET_EXPORT wet_status_t wet_configure_blanking(
     wet_vm_t* vm,
     float blanking_ms,
     uint8_t enable_spatial
+);
+
+/**
+ * Configures per-channel (or global 0xFFFF) post-stimulus amplifier blanking window in ms.
+ */
+WET_EXPORT wet_status_t wet_configure_channel_blanking(
+    wet_vm_t* vm,
+    uint16_t channel,
+    float blanking_ms,
+    uint8_t enable_spatial
+);
+
+/**
+ * Pure-C Closed-Loop Callback ABI (zero Python GIL crossings per tick).
+ */
+typedef struct {
+    uint64_t       tick;
+    double         sim_time_ms;
+    uint32_t       num_channels;
+    const float*   voltages;
+    const uint8_t* spikes;
+    const uint8_t* blanking_active;
+} wet_closed_loop_snapshot_t;
+
+typedef struct {
+    uint8_t  trigger;
+    uint8_t  is_current;
+    uint16_t channel;
+    float    amplitude;
+    float    phase1_ms;
+    float    phase2_ms;
+    float    interphase_ms;
+} wet_closed_loop_cmd_t;
+
+typedef void (*wet_closed_loop_hook_fn)(
+    const wet_closed_loop_snapshot_t* snapshot,
+    wet_closed_loop_cmd_t* out_cmd,
+    void* user_data
+);
+
+/**
+ * Registers or clears (hook == NULL) a reentrant C99 closed-loop callback.
+ */
+WET_EXPORT wet_status_t wet_register_closed_loop_hook(
+    wet_vm_t* vm,
+    wet_closed_loop_hook_fn hook,
+    void* user_data
+);
+
+/**
+ * Configures per-channel (or global 0xFFFF) geometric electrode area (cm^2) for Shannon k-limit enforcement.
+ */
+WET_EXPORT wet_status_t wet_configure_electrode_area(
+    wet_vm_t* vm,
+    uint16_t channel,
+    float area_cm2
+);
+
+/**
+ * Determinism / Biophysics Test Hooks (R4.1):
+ * Sets PRNG seed and toggles spontaneous Up-state / mini EPSP / background noise.
+ */
+WET_EXPORT wet_status_t wet_vm_set_rng_seed(
+    wet_vm_t* vm,
+    uint64_t seed
+);
+
+WET_EXPORT wet_status_t wet_vm_set_noise_enabled(
+    wet_vm_t* vm,
+    uint8_t enabled
 );
 
 /**

@@ -38,6 +38,7 @@ ALL_C_FILES = [
     "wet_hal_maxwell.c",
     "wet_hal_pump_valve.c",
     "wet_hal_sensirion.c",
+    "wet_hal_transport.c",
     "wet_scheduler.c",
     "wet_verification.c",
 ]
@@ -45,7 +46,9 @@ ALL_C_FILES = [
 DETERMINISTIC_OBJECTS = [
     "biophysics.c.o",
     "interlocks.c.o",
+    "wetvm_vm.c.o",
     "wet_distributed.c.o",
+    "wet_hal_transport.c.o",
     "wet_scheduler.c.o",
 ]
 
@@ -126,8 +129,8 @@ def compiled_objects():
 
 
 def test_c99_pedantic_compilation_all_13_files(compiled_objects):
-    """Verify that all 13 C files compile with zero warnings and zero errors under -std=c99 -Wall -Wextra -Werror -pedantic."""
-    assert len(compiled_objects) == 13
+    """Verify that all C runtime files compile with zero warnings and zero errors under -std=c99 -Wall -Wextra -Werror -pedantic."""
+    assert len(compiled_objects) == len(ALL_C_FILES)
     for c_file in ALL_C_FILES:
         obj_name = f"{c_file}.o"
         assert obj_name in compiled_objects

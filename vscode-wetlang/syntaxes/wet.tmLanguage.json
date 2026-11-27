@@ -61,7 +61,7 @@
       "patterns": [
         {
           "name": "constant.numeric.physical.wet",
-          "match": "\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?(uL/min|mL/min|ms|us|mV|uV|uA|nA|pA|nC|pC|Hz|mm|um|uL|mL|rpm|degC|kPa|mmHg|Pa|kOhm|MOhm|Ohm|mS|uS|nS|S|V|A|C|s)\\b"
+          "match": "\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?(uL/min|mL/min|cm2|mm2|um2|ms|us|mV|uV|uA|nA|pA|nC|pC|Hz|mm|um|uL|mL|rpm|degC|kPa|mmHg|Pa|kOhm|MOhm|Ohm|mS|uS|nS|S|V|A|C|s)\\b"
         }
       ]
     },
@@ -109,7 +109,7 @@
         },
         {
           "name": "support.function.biophysical.wet",
-          "match": "\\b(stim_biphasic|modulate_stdp|sync_tick|read_spikes|read_voltage|pop_firing_rate|read_population_rate|pump_set_rate|pump_dispense|valve_set|valve_open|valve_close|motor_step|read_pressure|read_temperature)\\b"
+          "match": "\\b(stim_biphasic|modulate_stdp|sync_tick|read_spikes|read_voltage|pop_firing_rate|read_population_rate|pump_set_rate|pump_dispense|valve_set|valve_open|valve_close|motor_step|read_pressure|read_temperature|set_blanking|electrode_area)\\b"
         },
         {
           "name": "support.function.math.wet",

@@ -2,7 +2,7 @@
 Test Suite: Official VS Code Extension & Token Parity Verification (Milestone 3)
 Verifies:
 1. VS Code extension manifest, configuration, and syntax grammar existence and schema validity.
-2. 100% token coverage parity between compiler/token.py (73 canonical tokens) and syntaxes/wet.tmLanguage.json.
+2. 100% token coverage parity between compiler/token.py (75 canonical tokens) and syntaxes/wet.tmLanguage.json.
 3. Physical unit literal coverage across all supported biophysical dimensions.
 """
 
@@ -50,7 +50,7 @@ def test_package_json_manifest_schema():
     assert pkg.get("name") == "wetlang"
     assert pkg.get("displayName") == "WetLang"
     assert pkg.get("publisher") == "anikesh0415"
-    assert pkg.get("version") == "2.1.2"
+    assert pkg.get("version") == "2.2.0"
     assert "onLanguage:wetlang" in pkg.get("activationEvents", [])
 
     contrib = pkg.get("contributes", {})
@@ -108,7 +108,7 @@ def _extract_patterns(grammar_dict):
 def test_token_parity_73_canonical_tokens():
     """
     Verify 100% token coverage parity:
-    57 keywords + 16 operators = 73 canonical tokens.
+    59 keywords + 16 operators = 75 canonical tokens.
     """
     with open(SYNTAX_PATH, "r", encoding="utf-8") as f:
         grammar = json.load(f)
@@ -116,8 +116,8 @@ def test_token_parity_73_canonical_tokens():
     patterns = _extract_patterns(grammar)
     assert len(patterns) > 0, "No regex patterns found in grammar"
 
-    # 1. Verify all 57 keywords
-    assert len(KEYWORDS) == 57, f"Expected 57 keywords in token.py, found {len(KEYWORDS)}"
+    # 1. Verify all 59 keywords
+    assert len(KEYWORDS) == 59, f"Expected 59 keywords in token.py, found {len(KEYWORDS)}"
     unmatched_keywords = []
     for kw in KEYWORDS:
         matched = any(re.search(pat, kw) for pat in patterns)
@@ -138,7 +138,7 @@ def test_token_parity_73_canonical_tokens():
 
     # Total check
     total_tokens = len(KEYWORDS) + len(CANONICAL_OPERATORS)
-    assert total_tokens == 73, f"Expected 73 total canonical tokens, got {total_tokens}"
+    assert total_tokens == 75, f"Expected 75 total canonical tokens, got {total_tokens}"
 
 
 def test_physical_unit_literals_highlighted():

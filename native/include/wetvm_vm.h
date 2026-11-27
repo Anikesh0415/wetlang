@@ -134,6 +134,13 @@ struct wet_vm_instance {
     /* Hardware Abstraction Layer Context (M1 HAL) */
     struct wet_hal_context* hal;
 
+    /* Pure-C Closed-Loop Hook & Determinism Controls (Janus v2.2) */
+    wet_closed_loop_hook_fn closed_loop_hook;
+    void*                   closed_loop_user_data;
+    uint64_t                rng_seed;
+    uint8_t                 rng_seed_set;
+    uint8_t                 noise_enabled;
+
     /* Error reporting buffer */
     char     last_error[256];
 };
@@ -142,6 +149,22 @@ struct wet_vm_instance {
 uint32_t wet_compute_crc32(const uint8_t* data, size_t length, uint32_t initial_crc);
 wet_status_t wet_vm_step_internal(struct wet_vm_instance* vm, wet_telemetry_t* out_telem);
 wet_status_t wet_verify_bytecode_internal(const uint8_t* bytecode, size_t size, char* err_buf, size_t err_buf_len);
+wet_status_t wet_vm_apply_stim_voltage_internal(
+    struct wet_vm_instance* vm,
+    uint8_t channel,
+    float voltage_v,
+    float p1_ms,
+    float p2_ms,
+    float ip_ms
+);
+wet_status_t wet_vm_apply_stim_current_internal(
+    struct wet_vm_instance* vm,
+    uint8_t channel,
+    float current_ua,
+    float p1_ms,
+    float p2_ms,
+    float ip_ms
+);
 
 #ifdef __cplusplus
 }

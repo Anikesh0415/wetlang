@@ -27,6 +27,7 @@ from compiler.ast_nodes import (
     LetStmtNode,
     AssignStmtNode,
     StimStmtNode,
+    SetBlankingStmtNode,
     ModulateStmtNode,
     SyncTickStmtNode,
     IfStmtNode,
@@ -508,6 +509,10 @@ class Parser:
         if curr.type == TokenType.STIM_BIPHASIC:
             return self._parse_stim_statement()
 
+        # set_blanking(duration_ms) or set_blanking(channel, duration_ms)
+        if curr.type == TokenType.SET_BLANKING:
+            return self._parse_set_blanking_statement()
+
         # modulate_stdp(...)
         if curr.type == TokenType.MODULATE_STDP:
             return self._parse_modulate_statement()
@@ -609,6 +614,25 @@ class Parser:
             phase1=phase1,
             phase2=phase2,
             interphase=interphase,
+            line=tok.line,
+            column=tok.column
+        )
+
+    def _parse_set_blanking_statement(self) -> SetBlankingStmtNode:
+        """Parse: set_blanking(duration_ms) or set_blanking(channel, duration_ms)"""
+        tok = self._expect(TokenType.SET_BLANKING, "set_blanking call")
+        self._expect(TokenType.LPAREN, "set_blanking arguments '('")
+        first_arg = self.parse_expression()
+        channel_node = None
+        duration_node = first_arg
+        if self._match(TokenType.COMMA):
+            channel_node = first_arg
+            duration_node = self.parse_expression()
+        self._expect(TokenType.RPAREN, "set_blanking closing ')'")
+        self._expect(TokenType.SEMICOLON, "set_blanking semicolon")
+        return SetBlankingStmtNode(
+            channel=channel_node,
+            duration=duration_node,
             line=tok.line,
             column=tok.column
         )

@@ -132,6 +132,14 @@ class StimStmtNode(ASTNode):
 
 
 @dataclass
+class SetBlankingStmtNode(ASTNode):
+    """Janus v2.2: set_blanking(duration_ms) or set_blanking(channel, duration_ms)."""
+    channel: Optional[ASTNode] = None   # None means global (0xFFFF)
+    duration: ASTNode = None            # duration in ms (physical literal or expression)
+    enable_spatial: int = 1             # 1 = enable spatial blanking by default
+
+
+@dataclass
 class ModulateStmtNode(ASTNode):
     args: List[ASTNode] = field(default_factory=list)
 

@@ -72,7 +72,8 @@ typedef enum {
     WET_ERR_BUBBLE_DETECTED       = 25,
     WET_ERR_COMPLIANCE_RAILED     = 26,
     WET_ERR_BYTECODE_VERIFICATION = 27,
-    WET_ERR_QUEUE_EMPTY           = 28
+    WET_ERR_QUEUE_EMPTY           = 28,
+    WET_ERR_INVALID_ARG           = 29
 } wet_status_t;
 
 /* Opcode Table (30+ Opcodes) matching compiler/isa.py */
@@ -142,7 +143,8 @@ typedef enum {
     WET_OP_READ_DO          = 0x5E,
     WET_OP_READ_CO2         = 0x5F,
     WET_OP_READ_BUBBLE      = 0x60, /* <B (uint8 sensor_id) */
-    WET_OP_READ_FLOW        = 0x61  /* <B (uint8 sensor_id) */
+    WET_OP_READ_FLOW        = 0x61, /* <B (uint8 sensor_id) */
+    WET_OP_SET_BLANKING     = 0x62  /* <HfB (uint16 channel [0xFFFF=global], float32 blanking_ms, uint8 enable_spatial) */
 } wet_opcode_t;
 
 #pragma pack(push, 1)

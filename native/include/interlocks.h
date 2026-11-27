@@ -153,6 +153,10 @@ typedef struct {
     wet_electrode_impedance_t impedance[INTERLOCK_NUM_CHANNELS];
     float    max_faradaic_current_density_ua_cm2; /* Safe Faradaic limit J (default 30.0 uA/cm^2) */
     uint64_t dynamic_impedance_clamp_events;
+
+    /* Project Janus v2.2: Per-Channel Electrode Area (cm^2) & Shannon k-Limit */
+    float    channel_area_cm2[INTERLOCK_NUM_CHANNELS];
+    uint8_t  has_channel_area[INTERLOCK_NUM_CHANNELS];
 } interlock_state_t;
 
 /* Initialize / reset watchdog state */
@@ -162,6 +166,15 @@ void interlocks_set_channel_banks(interlock_state_t* il, uint64_t ref_mask, uint
 
 /* Phase 3 Electrochemical & Hardware Interlock API */
 WET_EXPORT void interlocks_configure_electrode(interlock_state_t* il, uint8_t material, float area_um2);
+wet_status_t interlocks_configure_electrode_area(interlock_state_t* il, uint16_t channel, float area_cm2);
+wet_status_t interlocks_check_shannon_limit(
+    interlock_state_t* il,
+    uint64_t tick,
+    uint8_t channel,
+    float current_ua,
+    float phase1_ms,
+    float phase2_ms
+);
 void interlocks_active_discharge(interlock_state_t* il, uint8_t channel);
 void interlocks_active_discharge_all(interlock_state_t* il);
 void interlocks_enable_dead_head_protection(interlock_state_t* il, uint8_t enable);

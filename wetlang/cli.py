@@ -41,13 +41,19 @@ def cmd_compile(args) -> int:
         target = getattr(args, "target", "sim")
         compiled = compile_source(source_text, filename=str(src_path), target=target)
 
-        if target in ("loihi2", "spinnaker"):
+        if target in ("loihi2", "spinnaker", "cl_sdk", "neuroplatform"):
             if getattr(args, "sign", None):
-                print("Error: --sign is only supported for binary WBC targets, not Python neuromorphic scripts.", file=sys.stderr)
+                print("Error: --sign is only supported for binary WBC targets, not Python scripts.", file=sys.stderr)
                 return 1
             out_path = Path(args.output) if args.output else src_path.with_suffix(".py")
             out_path.write_text(compiled, encoding="utf-8")
-            label = "Intel Lava script" if target == "loihi2" else "SpiNNaker PyNN script"
+            labels = {
+                "loihi2": "Intel Lava script",
+                "spinnaker": "SpiNNaker PyNN script",
+                "cl_sdk": "Cortical Labs cl-sdk script",
+                "neuroplatform": "FinalSpark Neuroplatform protocol script",
+            }
+            label = labels.get(target, "Python script")
             print(f"Successfully compiled '{src_path.name}' -> '{out_path.name}' ({label}, target={target})")
             return 0
         elif target == "embedded":
@@ -238,6 +244,88 @@ def cmd_check(args) -> int:
         return 1
 
 
+def cmd_nwb(args) -> int:
+    try:
+        from wetlang.nwb import read_nwb_recording, iter_nwb_chunks, export_to_nwb
+    except ImportError as e:
+        print(f"NWB Error: {e}", file=sys.stderr)
+        return 1
+
+    if getattr(args, "nwb_cmd", None) == "inspect":
+        file_path = Path(args.file)
+        if not file_path.is_file():
+            print(f"Error: NWB file '{args.file}' not found.", file=sys.stderr)
+            return 1
+        try:
+            series_name = getattr(args, "series", None)
+            rec = read_nwb_recording(str(file_path), series_name=series_name)
+            data = rec["data"]
+            ts = rec["timestamps"]
+            sr = rec.get("sample_rate")
+            sr_str = f"{sr:.1f} Hz" if sr else "N/A"
+            t_min = float(ts[0]) if len(ts) > 0 else 0.0
+            t_max = float(ts[-1]) if len(ts) > 0 else 0.0
+            duration_s = t_max - t_min
+            print(f"--- NWB Recording Info: {file_path.name} ---")
+            print(f"  Series Name    : {rec['series_name']}")
+            print(f"  Sample Rate    : {sr_str}")
+            print(f"  Data Shape     : {data.shape} ({data.dtype})")
+            print(f"  Channels       : {data.shape[1] if data.ndim > 1 else 1}")
+            print(f"  Total Samples  : {data.shape[0]}")
+            print(f"  Duration       : {duration_s:.3f} s (timestamps: [{t_min:.3f}, {t_max:.3f}])")
+            if rec.get("electrodes"):
+                print(f"  Electrodes Meta: {list(rec['electrodes'].keys())}")
+            if rec.get("units"):
+                print(f"  Units Table    : {list(rec['units'].keys())}")
+            return 0
+        except Exception as ex:
+            print(f"NWB Inspect Error: {ex}", file=sys.stderr)
+            return 1
+
+    elif getattr(args, "nwb_cmd", None) == "replay":
+        file_path = Path(args.file)
+        if not file_path.is_file():
+            print(f"Error: NWB file '{args.file}' not found.", file=sys.stderr)
+            return 1
+        try:
+            chunk_size = getattr(args, "chunk_size", 1024) or 1024
+            max_seconds = getattr(args, "max_seconds", None)
+            series_name = getattr(args, "series", None)
+            total_samples = 0
+            total_chunks = 0
+            collected_chunks = []
+            collected_ts = []
+
+            for chunk, ts in iter_nwb_chunks(str(file_path), chunk_size=chunk_size, series_name=series_name):
+                total_samples += len(chunk)
+                total_chunks += 1
+                if getattr(args, "export_nwb", None):
+                    collected_chunks.append(chunk)
+                    collected_ts.append(ts)
+                if max_seconds is not None and len(ts) > 0 and (ts[-1] - ts[0]) >= max_seconds:
+                    break
+
+            print(f"Replay complete: {total_chunks} chunks ({total_samples} samples) processed.")
+            if getattr(args, "export_nwb", None):
+                import numpy as np
+                all_data = np.concatenate(collected_chunks, axis=0) if collected_chunks else np.empty((0, 1))
+                all_ts = np.concatenate(collected_ts, axis=0) if collected_ts else np.empty(0)
+                export_to_nwb(
+                    args.export_nwb,
+                    {"voltages": all_data, "timestamps": all_ts},
+                    session_description=f"Replay export of {file_path.name}"
+                )
+                print(f"Exported replay data to '{args.export_nwb}'.")
+            return 0
+        except Exception as ex:
+            print(f"NWB Replay Error: {ex}", file=sys.stderr)
+            return 1
+
+    else:
+        print("Usage: wetlang nwb [inspect|replay] <file.nwb>", file=sys.stderr)
+        return 1
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="wetlang",
@@ -249,7 +337,7 @@ def main(argv=None) -> int:
     p_comp = subparsers.add_parser("compile", help="Compile WetLang source (.wet) for a target substrate (.wbc, .py, or .h)")
     p_comp.add_argument("source", help="Path to .wet source file")
     p_comp.add_argument("-o", "--output", help="Path to output file (.wbc, .py, or .h)")
-    p_comp.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded", "loihi2"], default="sim", help="Target architecture (default: sim)")
+    p_comp.add_argument("--target", choices=["sim", "finalspark", "spinnaker", "embedded", "loihi2", "cl_sdk", "neuroplatform"], default="sim", help="Target architecture (default: sim)")
     p_comp.add_argument("--sign", help="Optional secret key to cryptographically sign binary")
 
     # run
@@ -279,6 +367,21 @@ def main(argv=None) -> int:
     # version
     subparsers.add_parser("version", help="Print WetLang platform version")
 
+    # nwb
+    p_nwb = subparsers.add_parser("nwb", help="Neurodata Without Borders (NWB) utilities")
+    nwb_subs = p_nwb.add_subparsers(dest="nwb_cmd", help="NWB subcommands")
+
+    p_nwb_insp = nwb_subs.add_parser("inspect", help="Inspect an NWB file metadata, series, and channels")
+    p_nwb_insp.add_argument("file", help="Path to .nwb file")
+    p_nwb_insp.add_argument("--series", default=None, help="Optional ElectricalSeries / TimeSeries name")
+
+    p_nwb_rep = nwb_subs.add_parser("replay", help="Stream / replay an NWB file in chunks")
+    p_nwb_rep.add_argument("file", help="Path to .nwb file")
+    p_nwb_rep.add_argument("--series", default=None, help="Optional ElectricalSeries / TimeSeries name")
+    p_nwb_rep.add_argument("--chunk-size", type=int, default=1024, help="Samples per chunk (default: 1024)")
+    p_nwb_rep.add_argument("--max-seconds", type=float, default=None, help="Stop replay after N seconds")
+    p_nwb_rep.add_argument("--export-nwb", default=None, help="Export replayed data to an output .nwb file")
+
     args = parser.parse_args(argv)
 
     if args.command == "compile":
@@ -291,8 +394,10 @@ def main(argv=None) -> int:
         return cmd_verify(args)
     elif args.command == "check":
         return cmd_check(args)
+    elif args.command == "nwb":
+        return cmd_nwb(args)
     elif args.command == "version":
-        print("WetLang Platform v2.1.2 (Production Wetware Engine & Project Janus)")
+        print("WetLang Platform v2.2.0 (Production Wetware Engine & Project Janus)")
         print("Developed by Anikesh Tiwari (Surat, Gujarat, India) / Wetworld")
         return 0
     else:

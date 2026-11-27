@@ -21,11 +21,13 @@ from compiler.compiler_cli import main as wetc_main
 
 
 def test_target_enum_variants():
-    """Verify all 4 Project Janus targets exist."""
+    """Verify all Project Janus targets exist."""
     assert Target.SIM == "sim"
     assert Target.FINALSPARK == "finalspark"
     assert Target.SPINNAKER == "spinnaker"
     assert Target.EMBEDDED == "embedded"
+    assert Target.CL_SDK == "cl_sdk"
+    assert Target.NEUROPLATFORM == "neuroplatform"
 
 
 def test_emit_c_embedded_header_basic():
@@ -67,3 +69,46 @@ def test_cli_target_embedded_compilation(tmp_path):
     content = out_h.read_text(encoding="utf-8")
     assert "WET_STATIC_ARENA_SIZE" in content
     assert "wet_bytecode_model" in content
+
+
+def test_cl_sdk_target_emission():
+    """Verify --target=cl_sdk generates syntactically valid Python that executes with CLSDKRefSim."""
+    import ast
+    from compiler.cl_sdk_ref_sim import CLSDKRefSim
+
+    src = "grid mea[8, 8]; stim_biphasic(0, 0.4V, 0.2ms, 0.2ms); set_blanking(1.0ms); sync_tick();"
+    py_code = compile_source(src, target="cl_sdk")
+    assert "CLSDKRefSim" in py_code
+    assert "sim.set_blanking" in py_code
+
+    ast.parse(py_code)
+
+    loc = {}
+    exec(py_code, loc)
+    assert "run_closed_loop" in loc
+    res = loc["run_closed_loop"]()
+    assert "snapshots" in res
+    assert len(res["snapshots"]) == 1000
+
+
+def test_neuroplatform_target_emission():
+    """Verify --target=neuroplatform generates valid Python that executes with NeuroplatformRefSim."""
+    import ast
+    import json
+    from compiler.neuroplatform_ref_sim import NeuroplatformRefSim
+
+    src = "grid mea[4, 4]; stim_biphasic(0, 0.4V, 0.2ms, 0.2ms); set_blanking(1.0ms); sync_tick();"
+    py_code = compile_source(src, target="neuroplatform")
+    assert "NeuroplatformRefSim" in py_code
+    assert "sim.stim_biphasic" in py_code
+
+    ast.parse(py_code)
+
+    loc = {}
+    exec(py_code, loc)
+    assert "run_protocol" in loc
+    trace_json = loc["run_protocol"]()
+    trace = json.loads(trace_json)
+    assert trace["format"] == "neuroplatform_trace_v1"
+    assert len(trace["events"]) >= 1
+

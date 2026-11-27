@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "wet_hal.h"
+#include "wet_hal_transport.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -93,6 +94,14 @@ typedef struct {
     uint8_t              fault_inject_stall;
     uint8_t              fault_inject_can_drop;
     uint8_t              fault_inject_rs232_timeout;
+
+    /* Live Physical OS Transport (used when mode == WET_HAL_MODE_PHYSICAL && configured) */
+    wet_hal_serial_t     serial_transport;
+    uint8_t              serial_configured;
+    uint32_t             serial_baud_rate;
+    uint32_t             serial_timeout_ms;
+    harvard_prompt_t     last_harvard_prompt;
+    char                 last_rx_frame[256];
 } microfluidic_state_t;
 
 /* =========================================================================
@@ -220,6 +229,21 @@ WET_EXPORT void wet_hal_microfluidics_inject_fault(
     uint8_t can_drop,
     uint8_t timeout
 );
+
+/**
+ * Opens and binds a live OS serial / Named Pipe / TTY transport for WET_HAL_MODE_PHYSICAL.
+ */
+WET_EXPORT wet_hal_status_t wet_hal_microfluidics_open_serial(
+    wet_hal_driver_t* drv,
+    const char* port_name,
+    uint32_t baud_rate,
+    uint32_t timeout_ms
+);
+
+/**
+ * Closes the live OS serial transport on the microfluidic driver.
+ */
+WET_EXPORT void wet_hal_microfluidics_close_serial(wet_hal_driver_t* drv);
 
 #ifdef __cplusplus
 }

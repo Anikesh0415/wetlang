@@ -39,7 +39,7 @@ from wetlang.gym import WetworldGymEnv
 from bindings.ffi import WetStatus, WetVMConfig, WetTelemetry
 from bindings.runtime import WetRuntime, WetVMError
 
-__version__ = "2.1.2"
+__version__ = "2.2.0"
 
 
 def compile(source: str, target: str = "sim") -> Union[bytes, str]:

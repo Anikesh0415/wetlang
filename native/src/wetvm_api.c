@@ -91,6 +91,7 @@ WET_EXPORT wet_vm_t* wet_create_vm(const wet_vm_config_t* config) {
 
     vm->grid_rows = 8;
     vm->grid_cols = 8;
+    vm->noise_enabled = 1;
     vm->last_error[0] = '\0';
 
     /* Initialize cyber-physical life support actuator states */
@@ -201,6 +202,7 @@ WET_EXPORT wet_vm_t* wet_create_vm_arena(
 
     vm->grid_rows = 8;
     vm->grid_cols = 8;
+    vm->noise_enabled = 1;
     vm->last_error[0] = '\0';
     vm->ambient_temperature_c = 37.0f;
     for (int p = 0; p < 4; ++p) {
@@ -228,21 +230,15 @@ WET_EXPORT void wet_free_vm(wet_vm_t* vm) {
     }
 
     if (!vm->arena_allocated) {
-        if (vm->constants) {
-            for (size_t i = 0; i < vm->num_constants; ++i) {
-                if (vm->constants[i].str_alloc) {
-                    free(vm->constants[i].str_alloc);
-                    vm->constants[i].str_alloc = NULL;
-                }
-            }
-            free(vm->constants);
-            vm->constants = NULL;
+        if (vm->arena_base) {
+            free(vm->arena_base);
+            vm->arena_base = NULL;
+            vm->arena_total_bytes = 0;
         }
-
-        if (vm->bytecode_raw) {
-            free(vm->bytecode_raw);
-            vm->bytecode_raw = NULL;
-        }
+        vm->constants = NULL;
+        vm->num_constants = 0;
+        vm->bytecode_raw = NULL;
+        vm->bytecode_size = 0;
 
         if (vm->stack) {
             free(vm->stack);
@@ -294,6 +290,58 @@ WET_EXPORT wet_status_t wet_load_bytecode(
         }
         return WET_ERR_NULL_PTR;
     }
+
+    if (!vm->arena_allocated && code_bytes != NULL && size >= WET_HEADER_SIZE) {
+        if (size > (SIZE_MAX - 4096U) / 16U) {
+            snprintf(vm->last_error, sizeof(vm->last_error), "Bytecode size overflow");
+            if (err_buf && err_buf_len > 0) {
+                snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+            }
+            return WET_ERR_ALLOC_FAILED;
+        }
+        size_t needed_bytes = size * 16U + 4096U;
+        uint8_t* new_arena = (uint8_t*)calloc(1, needed_bytes);
+        if (!new_arena) {
+            snprintf(vm->last_error, sizeof(vm->last_error), "Memory allocation failed for bytecode arena");
+            if (err_buf && err_buf_len > 0) {
+                snprintf(err_buf, err_buf_len, "%s", vm->last_error);
+            }
+            return WET_ERR_ALLOC_FAILED;
+        }
+
+        uint8_t* old_arena = vm->arena_base;
+        size_t old_total = vm->arena_total_bytes;
+        size_t old_mark = vm->arena_mark_offset;
+        size_t old_bump = vm->arena_bump_offset;
+
+        vm->arena_base = new_arena;
+        vm->arena_total_bytes = needed_bytes;
+        vm->arena_mark_offset = 0;
+        vm->arena_bump_offset = 0;
+
+        wet_status_t st = wet_vm_load_bytecode_internal(vm, code_bytes, size, err_buf, err_buf_len);
+        if (st == WET_OK || vm->bytecode_raw == NULL) {
+            if (old_arena) {
+                free(old_arena);
+            }
+            if (st != WET_OK) {
+                free(new_arena);
+                vm->arena_base = NULL;
+                vm->arena_total_bytes = 0;
+                vm->arena_mark_offset = 0;
+                vm->arena_bump_offset = 0;
+            }
+        } else {
+            /* Validation failed before cleanup_bytecode(); restore previous arena */
+            vm->arena_base = old_arena;
+            vm->arena_total_bytes = old_total;
+            vm->arena_mark_offset = old_mark;
+            vm->arena_bump_offset = old_bump;
+            free(new_arena);
+        }
+        return st;
+    }
+
     return wet_vm_load_bytecode_internal(vm, code_bytes, size, err_buf, err_buf_len);
 }
 
@@ -338,54 +386,7 @@ WET_EXPORT wet_status_t wet_inject_stimulus(
     float phase1_ms,
     float phase2_ms
 ) {
-    if (!vm) return WET_ERR_NULL_PTR;
-    if (channel >= vm->config.channel_count) {
-        snprintf(vm->last_error, sizeof(vm->last_error),
-                 "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
-        return WET_ERR_OUT_OF_BOUNDS_CH;
-    }
-    if (vm->interlocks.locked) {
-        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-        return WET_ERR_INTERLOCK_LOCKED;
-    }
-
-    if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_BIPHASIC, voltage_v, channel)) {
-        snprintf(vm->last_error, sizeof(vm->last_error),
-                 "Capability denied for wet_inject_stimulus on ch %u (req %.2fV)", channel, voltage_v);
-        return WET_ERR_CAPABILITY_DENIED;
-    }
-
-    /* Per-Phase Charge Density Limit (Shannon Model): prevent massive biphasic pulses with net=0 */
-    if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
-        float q_p1 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase1_ms;
-        float q_p2 = (fabsf(voltage_v) / vm->bio.electrode_impedance_kohm) * 1000.0f * phase2_ms;
-        if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
-            vm->interlocks.locked = 1;
-            vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
-            vm->interlocks.tripped_channel = channel;
-            vm->interlocks.trip_tick = vm->current_tick;
-            vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
-            snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-                     "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
-                     channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
-            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-            return WET_ERR_CHARGE_DENSITY_EXCEEDED;
-        }
-    }
-
-    /* Active charge recovery: if previous pulse had pending Phase 2 counter-charge, discharge it */
-    bio_stim_pulse_t* prev_p = &vm->bio.stim_pulses[channel];
-    if (prev_p->active && prev_p->phase2_ticks_left > 0) {
-        float i_ua = (prev_p->phase2_amp_v / vm->bio.electrode_impedance_kohm) * 1000.0f;
-        vm->discharge_charge_nc[channel] += i_ua * (float)vm->bio.dt_ms * (float)prev_p->phase2_ticks_left;
-    }
-
-    float clamped_v = interlocks_clamp_voltage_dynamic(&vm->interlocks, channel, voltage_v);
-    biophysics_schedule_stim(&vm->bio, channel, clamped_v, phase1_ms, phase2_ms);
-    vm->voltages[channel] = clamped_v;
-    float i_ma = clamped_v / vm->bio.electrode_impedance_kohm;
-    vm->last_charge_nc[channel] = i_ma * (phase1_ms - phase2_ms);
-    return WET_OK;
+    return wet_vm_apply_stim_voltage_internal(vm, channel, voltage_v, phase1_ms, phase2_ms, 0.0f);
 }
 
 WET_EXPORT wet_status_t wet_get_telemetry(
@@ -517,6 +518,8 @@ WET_EXPORT const char* wet_status_to_string(wet_status_t status) {
             return "WET_ERR_BYTECODE_VERIFICATION: WBC binary failed static bytecode verifier checks";
         case WET_ERR_QUEUE_EMPTY:
             return "WET_ERR_QUEUE_EMPTY: Telemetry or command queue is empty";
+        case WET_ERR_INVALID_ARG:
+            return "WET_ERR_INVALID_ARG: Invalid argument value";
         default:
             return "WET_ERR_UNKNOWN: Unknown error status";
     }
@@ -551,8 +554,11 @@ WET_EXPORT void wet_active_discharge(wet_vm_t* vm, uint8_t channel) {
     vm->bio.tick_charge_nc[channel] = 0.0f;
     vm->bio.last_stim_current_ua[channel] = 0.0f;
 
-    if (vm->bio.stim_blanking_ticks[channel] < vm->bio.default_blanking_ticks) {
-        vm->bio.stim_blanking_ticks[channel] = vm->bio.default_blanking_ticks;
+    uint16_t post_blank = vm->bio.has_channel_blanking[channel]
+        ? vm->bio.channel_blanking_ticks[channel]
+        : vm->bio.default_blanking_ticks;
+    if (vm->bio.stim_blanking_ticks[channel] < post_blank) {
+        vm->bio.stim_blanking_ticks[channel] = post_blank;
     }
 
     if (hal_st == WET_HAL_OK) {
@@ -585,9 +591,125 @@ WET_EXPORT void wet_life_supervisor_shutdown(wet_vm_t* vm) {
     }
 }
 
-WET_EXPORT void wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
-    if (!vm) return;
+WET_EXPORT wet_status_t wet_configure_blanking(wet_vm_t* vm, float blanking_ms, uint8_t enable_spatial) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    if (!wet_isfinite_f(blanking_ms) || blanking_ms < 0.1f || blanking_ms > 20.0f) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "ERR_INVALID_BLANKING_WINDOW: blanking_ms=%.4f out of valid range [0.1, 20.0] ms",
+                 (double)(wet_isfinite_f(blanking_ms) ? blanking_ms : 0.0f));
+        return WET_ERR_INVALID_ARG;
+    }
     biophysics_set_blanking_window(&vm->bio, blanking_ms, enable_spatial);
+    return WET_OK;
+}
+
+WET_EXPORT wet_status_t wet_configure_channel_blanking(
+    wet_vm_t* vm,
+    uint16_t channel,
+    float blanking_ms,
+    uint8_t enable_spatial
+) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    if (channel == 0xFFFFU) {
+        return wet_configure_blanking(vm, blanking_ms, enable_spatial);
+    }
+    if (channel >= vm->config.channel_count || channel >= BIO_NUM_CHANNELS) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Blanking channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    if (!wet_isfinite_f(blanking_ms) || blanking_ms < 0.1f || blanking_ms > 20.0f) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "ERR_INVALID_BLANKING_WINDOW: ch=%u blanking_ms=%.4f out of valid range [0.1, 20.0] ms",
+                 channel, (double)(wet_isfinite_f(blanking_ms) ? blanking_ms : 0.0f));
+        return WET_ERR_INVALID_ARG;
+    }
+    biophysics_set_channel_blanking_window(&vm->bio, channel, blanking_ms, enable_spatial);
+    return WET_OK;
+}
+
+WET_EXPORT wet_status_t wet_register_closed_loop_hook(
+    wet_vm_t* vm,
+    wet_closed_loop_hook_fn hook,
+    void* user_data
+) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    vm->closed_loop_hook = hook;
+    vm->closed_loop_user_data = (hook != NULL) ? user_data : NULL;
+    return WET_OK;
+}
+
+WET_EXPORT wet_status_t wet_configure_electrode_area(
+    wet_vm_t* vm,
+    uint16_t channel,
+    float area_cm2
+) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    if (channel != 0xFFFFU && (channel >= vm->config.channel_count || channel >= INTERLOCK_NUM_CHANNELS)) {
+        snprintf(vm->last_error, sizeof(vm->last_error),
+                 "Electrode area channel %u out of bounds (max %u)", channel, vm->config.channel_count);
+        return WET_ERR_OUT_OF_BOUNDS_CH;
+    }
+    wet_status_t st = interlocks_configure_electrode_area(&vm->interlocks, channel, area_cm2);
+    if (st != WET_OK) {
+        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
+    }
+    return st;
+}
+
+WET_EXPORT wet_status_t wet_vm_set_rng_seed(wet_vm_t* vm, uint64_t seed) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    vm->rng_seed = seed;
+    vm->rng_seed_set = 1U;
+
+    if (vm->current_tick == 0) {
+        uint8_t saved_noise = vm->noise_enabled;
+        uint16_t saved_def_blank = vm->bio.default_blanking_ticks;
+        uint8_t saved_spatial = vm->bio.spatial_blanking_enabled;
+        uint16_t saved_ch_blank[BIO_NUM_CHANNELS];
+        uint8_t saved_ch_spatial[BIO_NUM_CHANNELS];
+        uint8_t saved_has_ch_blank[BIO_NUM_CHANNELS];
+        float saved_z = vm->bio.electrode_impedance_kohm;
+        float saved_rs = vm->bio.r_solution_kohm;
+        float saved_rct = vm->bio.r_charge_transfer_kohm;
+        float saved_cdl[BIO_NUM_CHANNELS];
+        float saved_comp = vm->bio.max_compliance_voltage_v;
+        float saved_vlow = vm->bio.v_water_window_low_v;
+        float saved_vhigh = vm->bio.v_water_window_high_v;
+
+        memcpy(saved_ch_blank, vm->bio.channel_blanking_ticks, sizeof(saved_ch_blank));
+        memcpy(saved_ch_spatial, vm->bio.channel_spatial_blanking, sizeof(saved_ch_spatial));
+        memcpy(saved_has_ch_blank, vm->bio.has_channel_blanking, sizeof(saved_has_ch_blank));
+        memcpy(saved_cdl, vm->bio.c_double_layer_pf, sizeof(saved_cdl));
+
+        biophysics_init(&vm->bio, vm->config.dt_ms, seed);
+
+        vm->bio.noise_enabled = saved_noise ? 1U : 0U;
+        if (saved_def_blank > 0U) {
+            vm->bio.default_blanking_ticks = saved_def_blank;
+            vm->bio.spatial_blanking_enabled = saved_spatial;
+        }
+        memcpy(vm->bio.channel_blanking_ticks, saved_ch_blank, sizeof(saved_ch_blank));
+        memcpy(vm->bio.channel_spatial_blanking, saved_ch_spatial, sizeof(saved_ch_spatial));
+        memcpy(vm->bio.has_channel_blanking, saved_has_ch_blank, sizeof(saved_has_ch_blank));
+        vm->bio.electrode_impedance_kohm = saved_z;
+        vm->bio.r_solution_kohm = saved_rs;
+        vm->bio.r_charge_transfer_kohm = saved_rct;
+        memcpy(vm->bio.c_double_layer_pf, saved_cdl, sizeof(saved_cdl));
+        vm->bio.max_compliance_voltage_v = saved_comp;
+        vm->bio.v_water_window_low_v = saved_vlow;
+        vm->bio.v_water_window_high_v = saved_vhigh;
+    } else {
+        vm->bio.rng_state = (seed != 0ULL) ? seed : 0x574554574F524C44ULL;
+    }
+    return WET_OK;
+}
+
+WET_EXPORT wet_status_t wet_vm_set_noise_enabled(wet_vm_t* vm, uint8_t enabled) {
+    if (!vm) return WET_ERR_NULL_PTR;
+    vm->noise_enabled = enabled ? 1U : 0U;
+    vm->bio.noise_enabled = vm->noise_enabled;
+    return WET_OK;
 }
 
 WET_EXPORT wet_status_t wet_inject_current_stimulus(
@@ -597,68 +719,7 @@ WET_EXPORT wet_status_t wet_inject_current_stimulus(
     float phase1_ms,
     float phase2_ms
 ) {
-    if (!vm) return WET_ERR_NULL_PTR;
-    if (channel >= vm->config.channel_count) {
-        snprintf(vm->last_error, sizeof(vm->last_error),
-                 "Channel %u out of bounds (max %u)", channel, vm->config.channel_count);
-        return WET_ERR_OUT_OF_BOUNDS_CH;
-    }
-    if (vm->interlocks.locked) {
-        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-        return WET_ERR_INTERLOCK_LOCKED;
-    }
-
-    if (!interlocks_check_capability(&vm->interlocks, WET_OP_STIM_CURRENT, 0.0f, channel)) {
-        snprintf(vm->last_error, sizeof(vm->last_error),
-                 "Capability denied for wet_inject_current_stimulus on ch %u", channel);
-        return WET_ERR_CAPABILITY_DENIED;
-    }
-
-    /* Randles Interface check: V_elec = I * Rs + V_dl */
-    float v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
-    wet_status_t comp_st = interlocks_check_compliance(&vm->interlocks, vm->current_tick, channel, v_elec);
-    if (comp_st != WET_OK) {
-        snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-        return comp_st;
-    }
-
-    /* Dynamic EIS Faradaic Current Density Clamp when channel impedance is calibrated */
-    if (channel < INTERLOCK_NUM_CHANNELS &&
-        vm->interlocks.impedance[channel].z_magnitude_ohms > 0.0f &&
-        vm->interlocks.max_faradaic_current_density_ua_cm2 > 0.0f) {
-        float area_um2 = (vm->interlocks.electrode_area_um2 > 0.0f) ? vm->interlocks.electrode_area_um2 : 5000.0f;
-        float i_safe_ua = vm->interlocks.max_faradaic_current_density_ua_cm2 * (area_um2 * 1e-8f);
-        if (i_safe_ua > 0.0f && fabsf(current_ua) > i_safe_ua) {
-            float sign = (current_ua >= 0.0f) ? 1.0f : -1.0f;
-            current_ua = sign * i_safe_ua;
-            vm->interlocks.clamp_events++;
-            vm->interlocks.dynamic_impedance_clamp_events++;
-            v_elec = (current_ua / 1000.0f) * vm->bio.r_solution_kohm + vm->bio.v_double_layer_v[channel];
-        }
-    }
-
-    /* Shannon charge density limit */
-    if (phase1_ms > 0.0f && phase2_ms > 0.0f) {
-        float q_p1 = fabsf(current_ua) * 1e-3f * phase1_ms;
-        float q_p2 = fabsf(current_ua) * 1e-3f * phase2_ms;
-        if (q_p1 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC || q_p2 > INTERLOCK_CHARGE_DENSITY_LIMIT_NC) {
-            vm->interlocks.locked = 1;
-            vm->interlocks.trip_reason = INTERLOCK_TRIP_CHARGE_DENSITY;
-            vm->interlocks.tripped_channel = channel;
-            vm->interlocks.trip_tick = vm->current_tick;
-            vm->interlocks.trip_value = q_p1 > q_p2 ? q_p1 : q_p2;
-            snprintf(vm->interlocks.diagnostic, sizeof(vm->interlocks.diagnostic),
-                     "ERR_CHARGE_DENSITY_EXCEEDED: ch=%u single phase charge=%.4f nC > %.2f nC (Shannon limit)",
-                     channel, (double)vm->interlocks.trip_value, (double)INTERLOCK_CHARGE_DENSITY_LIMIT_NC);
-            snprintf(vm->last_error, sizeof(vm->last_error), "%s", vm->interlocks.diagnostic);
-            return WET_ERR_CHARGE_DENSITY_EXCEEDED;
-        }
-    }
-
-    biophysics_schedule_stim_current(&vm->bio, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
-    vm->voltages[channel] = v_elec;
-    vm->last_charge_nc[channel] = (current_ua * 1e-3f) * (phase1_ms - phase2_ms);
-    return WET_OK;
+    return wet_vm_apply_stim_current_internal(vm, channel, current_ua, phase1_ms, phase2_ms, 0.0f);
 }
 
 WET_EXPORT wet_status_t wet_verify_bytecode(

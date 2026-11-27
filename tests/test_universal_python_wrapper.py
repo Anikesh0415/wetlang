@@ -21,8 +21,8 @@ from bindings.python import wetlang as wl_mirror
 
 def test_import_and_version():
     """Verify top-level wetlang exports and version."""
-    assert wl.__version__ == "2.1.2"
-    assert wl_mirror.__version__ == "2.1.2"
+    assert wl.__version__ == "2.2.0"
+    assert wl_mirror.__version__ == "2.2.0"
     assert callable(wl.compile)
     assert callable(wl.load)
     assert hasattr(wl, "VirtualMachine")
