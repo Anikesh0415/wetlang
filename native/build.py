@@ -316,11 +316,20 @@ def build_native_runtime() -> Path:
     out_dll = bin_dir / f"wetvm{ext}"
     fallback_dll = native_dir / f"wetvm{ext}"
 
+    def _sync_outputs():
+        shutil.copy2(out_dll, fallback_dll)
+        if sys.platform != "win32":
+            lib_bin = bin_dir / f"libwetvm{ext}"
+            lib_native = native_dir / f"libwetvm{ext}"
+            shutil.copy2(out_dll, lib_bin)
+            shutil.copy2(out_dll, lib_native)
+            print(f"Created Unix library alias: {lib_bin}")
+
     # Search for compilers in order of preference
     # 1. MSVC cl.exe
     cl_exe = find_executable("cl")
     if cl_exe and build_with_msvc(cl_exe, src_files, include_dir, out_dll):
-        shutil.copy2(out_dll, fallback_dll)
+        _sync_outputs()
         print(f"Successfully compiled shared library: {out_dll}")
         return out_dll
 
@@ -333,7 +342,7 @@ def build_native_runtime() -> Path:
     ]
     clang_exe = find_executable("clang", extra_clang_paths)
     if clang_exe and build_with_clang(clang_exe, src_files, include_dir, out_dll):
-        shutil.copy2(out_dll, fallback_dll)
+        _sync_outputs()
         print(f"Successfully compiled shared library: {out_dll}")
         return out_dll
 
@@ -346,7 +355,7 @@ def build_native_runtime() -> Path:
     ]
     gcc_exe = find_executable("gcc", extra_gcc_paths)
     if gcc_exe and build_with_gcc(gcc_exe, src_files, include_dir, out_dll):
-        shutil.copy2(out_dll, fallback_dll)
+        _sync_outputs()
         print(f"Successfully compiled shared library: {out_dll}")
         return out_dll
 

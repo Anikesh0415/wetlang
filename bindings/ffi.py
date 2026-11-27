@@ -370,20 +370,24 @@ def _find_library_path() -> Path:
         return Path(env_path)
 
     ext = ".dll" if sys.platform == "win32" else (".dylib" if sys.platform == "darwin" else ".so")
-    lib_name = f"wetvm{ext}"
+    lib_names = [f"wetvm{ext}", f"libwetvm{ext}"]
 
     # Search candidates
     curr_dir = Path(__file__).resolve().parent
-    candidates = [
-        curr_dir.parent / "bin" / lib_name,
-        curr_dir.parent / "native" / "bin" / lib_name,
-        curr_dir.parent.parent / "bin" / lib_name,
-        curr_dir.parent.parent / "native" / "bin" / lib_name,
-        curr_dir / lib_name,
-        Path.cwd() / "native" / "bin" / lib_name,
-        Path.cwd() / "bin" / lib_name,
-        Path.cwd() / "native" / lib_name,
+    search_dirs = [
+        curr_dir.parent / "bin",
+        curr_dir.parent / "native" / "bin",
+        curr_dir.parent.parent / "bin",
+        curr_dir.parent.parent / "native" / "bin",
+        curr_dir,
+        Path.cwd() / "native" / "bin",
+        Path.cwd() / "bin",
+        Path.cwd() / "native",
     ]
+    candidates = []
+    for sdir in search_dirs:
+        for name in lib_names:
+            candidates.append(sdir / name)
 
     for cand in candidates:
         if cand.is_file():

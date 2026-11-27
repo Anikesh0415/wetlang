@@ -107,6 +107,12 @@ def test_standalone_c99_closed_loop_binary():
                 exe_path,
             ]
         else:
+            ext = ".so" if sys.platform != "darwin" else ".dylib"
+            wetvm_orig = os.path.join(NATIVE_BIN_DIR, f"wetvm{ext}")
+            libwetvm_alias = os.path.join(NATIVE_BIN_DIR, f"libwetvm{ext}")
+            if os.path.isfile(wetvm_orig) and not os.path.isfile(libwetvm_alias):
+                shutil.copy2(wetvm_orig, libwetvm_alias)
+
             cmd = [
                 compiler,
                 "-std=c99",

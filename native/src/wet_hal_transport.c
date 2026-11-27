@@ -901,7 +901,7 @@ wet_hal_status_t wet_hal_serial_open(
         tio.c_cflag &= (tcflag_t)~CRTSCTS;
 #endif
         tio.c_cflag |= (tcflag_t)(CS8 | CLOCAL | CREAD);
-        tio.c_cc[VMIN] = 0;
+        tio.c_cc[VMIN] = 1;
         tio.c_cc[VTIME] = 0;
         cfsetispeed(&tio, spd);
         cfsetospeed(&tio, spd);
@@ -1010,35 +1010,37 @@ wet_hal_status_t wet_hal_serial_read(
     uint64_t deadline_us = wet_hal_get_time_us() + (uint64_t)timeout_ms * 1000ULL;
 
     for (;;) {
+        uint64_t now_us = wet_hal_get_time_us();
+        int rem_ms = 0;
+        if (timeout_ms > 0U) {
+            if (now_us >= deadline_us) {
+                return WET_HAL_ERR_TIMEOUT;
+            }
+            rem_ms = (int)((deadline_us - now_us + 999ULL) / 1000ULL);
+            if (rem_ms <= 0) rem_ms = 1;
+        }
+
+        struct pollfd pfd;
+        pfd.fd = fd;
+        pfd.events = POLLIN;
+        pfd.revents = 0;
+        int prc = poll(&pfd, 1, (timeout_ms > 0U) ? rem_ms : 0);
+        if (prc < 0 && errno == EINTR) continue;
+        if (prc == 0) return WET_HAL_ERR_TIMEOUT;
+        if (prc < 0) return WET_HAL_ERR_IO;
+        if ((pfd.revents & (POLLERR | POLLNVAL)) != 0) {
+            return WET_HAL_ERR_IO;
+        }
+
         ssize_t n = read(fd, buf, max_len);
         if (n > 0) {
             if (out_read) *out_read = (size_t)n;
             return WET_HAL_OK;
         }
-        if (n == 0) {
-            return WET_HAL_ERR_IO;
-        }
-        if (errno == EINTR) {
+        if (n < 0 && errno == EINTR) {
             continue;
         }
-        if (errno == EAGAIN || errno == EWOULDBLOCK) {
-            uint64_t now_us = wet_hal_get_time_us();
-            if (timeout_ms == 0U || now_us >= deadline_us) {
-                return WET_HAL_ERR_TIMEOUT;
-            }
-            int rem_ms = (int)((deadline_us - now_us + 999ULL) / 1000ULL);
-            if (rem_ms <= 0) rem_ms = 1;
-            struct pollfd pfd;
-            pfd.fd = fd;
-            pfd.events = POLLIN;
-            pfd.revents = 0;
-            int prc = poll(&pfd, 1, rem_ms);
-            if (prc < 0 && errno == EINTR) continue;
-            if (prc == 0) return WET_HAL_ERR_TIMEOUT;
-            if (prc < 0) return WET_HAL_ERR_IO;
-            if ((pfd.revents & POLLIN) == 0 && (pfd.revents & (POLLERR | POLLHUP | POLLNVAL)) != 0) {
-                return WET_HAL_ERR_IO;
-            }
+        if (n < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
             continue;
         }
         return WET_HAL_ERR_IO;
